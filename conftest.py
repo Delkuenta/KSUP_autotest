@@ -23,7 +23,7 @@ def browser(request):
         options = webdriver.ChromeOptions()
         options.add_argument("ignore-certificate-errors")
         print("\nstart chrome browser for test..")
-        browser = webdriver.Chrome(chrome_options=options)
+        browser = webdriver.Chrome(options=options)
 
     elif browser_name == "firefox":
         print("\nstart firefox browser for test..")
