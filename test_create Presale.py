@@ -14,8 +14,10 @@ file_path = os.path.join(current_dir, name_file)  # добавляем к это
 Login_Seller = "https://Mr_KSUP_Seller:AsdGhj-5681-Sle@ksup-tst.lanit/_windows/default.aspx?ReturnUrl=%2f_layouts%2f15%2fAuthenticate.aspx%3fSource%3d%252F%255Fwindows%252Fdefault%252Easpx&Source=%2f_windows%2fdefault.aspx"
 # Переменные в форме Закупочная процедура
 name_presale = "t1e1_тест_ПА_тендер_самостПрод_катА"
+Customer = "ООО \"ДЕКОР\""
 Divisions_seller = "ОНЛАНТА"
 DivisionPerformer = "ОНЛАНТА"
+PerformerLegal = "ООО \"ОНЛАНТА\""
 PerformerResponsible = "Бравосов Андрей Игоревич"
 type_presale = "Тендерная заявка"
 SaleLawType = "44-ФЗ"
@@ -33,6 +35,7 @@ PlanDateContractConclusion = "1.07.2020"
 PlanDateContractFinish = "30.12.2020"
 ProjectProbability = "100"
 DescriptionPlainText = "Краткое описание текст"
+Risks = "Текст_риски_тест"
 yeartable = 2020
 quarter1 = "1 квартал"
 quarter2 = "2 квартал"
@@ -79,7 +82,7 @@ def test_create_New_Presale(browser):
     # Ищем поле "Заказчик" и выбираем значение
     browser.find_element(By.XPATH, "//div[@id='div-wcfLookupControl_KsupEgr_Customer']/span/span/span").click()
     # Costumer = browser.find_element_by_xpath('//li[text()="КАЗНАЧЕЙСТВО РОССИИ"]').click
-    browser.find_element(By.XPATH, "//li[contains(text(), 'ООО \"ДЕКОР\"')]").click()
+    browser.find_element(By.XPATH, f"//li[contains(text(), '{Customer}')]").click()
 
     # Ищем поле "Подразделение-продавец" и выбираем значение
     browser.find_element(By.ID, "div-wcfLookupControl_KsupDivisions").click()
@@ -95,7 +98,7 @@ def test_create_New_Presale(browser):
 
     # Ищем поле "Исполнитель (юридическое лицо)" и выбираем значение
     browser.find_element(By.ID, "div-wcfLookupControl_KsupEgr_PerformerLegal").click()
-    browser.find_element(By.XPATH, "//li[contains(text(), 'ООО \"ОНЛАНТА\"')]").click()
+    browser.find_element(By.XPATH, f"//li[contains(text(), '{PerformerLegal}')]").click()
 
     # Ищем поле "Порядок проведения закупочной процедуры" и выбираем значение из выпадающего списка
     SaleLawType_element = Select(
@@ -107,7 +110,7 @@ def test_create_New_Presale(browser):
     time.sleep(2)
 
     # Работаем во фрейме и выбираем категории
-    frame_category = browser.switch_to_active_element()
+    frame_category = browser.switch_to.active_element
     wait.until(EC.frame_to_be_available_and_switch_to_it(frame_category))
     browser.find_element(By.ID, f"{group_category}").click()
     browser.find_element(By.XPATH, f"//*[normalize-space(text()) and normalize-space(.)='{category}']").click()
@@ -115,7 +118,7 @@ def test_create_New_Presale(browser):
                          "ctl00_PlaceHolderDialogBodySection_PlaceHolderDialogBodyFooterMainSection_AddToFieldEditor").click()
     browser.find_element(By.ID, "ctl00_OkButton").click()
     # Возврат к форм создания.
-    browser.switch_to_default_content()
+    browser.switch_to.default_content()
     wait.until(EC.text_to_be_present_in_element((By.CSS_SELECTOR, "span.valid-text"), f"{category}"))
 
     # Ищем поле "Сумма" и вводим значение
@@ -164,11 +167,11 @@ def test_create_New_Presale(browser):
     # Ищем поле "Краткое описание" и вводим значение
     DescriptionPlainText_element = browser.find_element(By.ID,
                                                         "KsupDescriptionPlainText_18b11f3d-f4ae-4a8f-ba29-62366bd13e66_$TextField")
-    DescriptionPlainText_element.send_keys("Краткое описание текст")
+    DescriptionPlainText_element.send_keys(DescriptionPlainText)
 
     # Ищем поле "Риски" и вводим значение
-    Risks = browser.find_element(By.ID, "KsupRisks_32ca3c22-b19a-430b-8a16-dbe340b6867a_$TextField")
-    Risks.send_keys("Текст_риски_тест")
+    Risks_element = browser.find_element(By.ID, "KsupRisks_32ca3c22-b19a-430b-8a16-dbe340b6867a_$TextField")
+    Risks_element.send_keys(Risks)
 
     # Заполнение таблицы Плановых платежей 1 строка
     sumtable1_element = browser.find_element(By.XPATH, "//tr[3]/td[2]/input")
@@ -190,8 +193,8 @@ def test_create_New_Presale(browser):
     quartertable2_element = Select(browser.find_element(By.XPATH, "//tr[4]/td[5]/select"))
     quartertable2_element.select_by_visible_text(quarter4)
 
-    confirm_presale_button = browser.find_element(By.ID,
-                                                  "ctl00_ctl69_g_9d59c0d2_6296_467d_9f94_a040ee8d543e_ctl00_toolBarTbl_RightRptControls_ctl00_ctl00_diidIOSaveItem")
+    confirm_presale_button = browser.find_element(By.CSS_SELECTOR,
+                                                  '[value="Создать"].ms-ButtonHeightWidth')
     confirm_presale_button.click()
 
     # Проверка наличия названия сущности в списке Пресейлов
@@ -217,9 +220,10 @@ def test_create_ZP_Based_On_PreSale(browser):
     # Ожидание прогрузки формы создания Закупочной процедуры, метка прогрузка значения в поле "Заказчики"
     wait.until(EC.text_to_be_present_in_element(
         (By.CSS_SELECTOR, '#select2-wcfLookupControl_KsupEgr_Customer-container.select2-selection__rendered'),
-        'ООО "ДЕКОР"'))
+        f"{Customer}"))
 
     # Провереям автоматическое заполнение строк из пресейла
+
     assert browser.find_element(By.CSS_SELECTOR,
                                 ".select2-selection__rendered#select2-wcfLookupControl_KsupDivisionSeller-container").text == Divisions_seller, \
         'Поле "Подразделение-продавец" не заполнено'
@@ -236,8 +240,16 @@ def test_create_ZP_Based_On_PreSale(browser):
                                 "#select2-wcfLookupControl_KsupPerformerResponsible-container").text == PerformerResponsible, \
         'Поле "Ответственный менеджер подразделения-исполнителя" не заполнено'
 
+    assert browser.find_element(By.CSS_SELECTOR,
+                                "#select2-wcfLookupControl_KsupEgr_Customer-container").text == Customer, \
+        'Поле "Заказчик" не заполнено'
+
     assert browser.find_element(By.CSS_SELECTOR, "span.valid-text").text == category, \
         'Поле "Тип работ и услуг" не заполнено'
+
+    assert browser.find_element(By.CSS_SELECTOR,
+                                "#select2-wcfLookupControl_KsupEgr_PerformerLegal-container").text == f"×\n{PerformerLegal}", \
+        'Поле "Исполнитель (юридическое лицо)" не заполнено'
 
     assert browser.find_element(By.CSS_SELECTOR,
                                 ".select2-selection__choice:nth-child(1)").text == f'×{name_presale}', \
@@ -294,9 +306,8 @@ def test_create_ZP_Based_On_PreSale(browser):
                                                  "fileField_File_Other_NameLink_"), name_file))
 
     # Ищем кнопку "Создать" и нажимаем
-    create_ZP_button = browser.find_element(By.ID,
-                                            "ctl00_ctl69_g_e6f36834_c11b_4bc2_86f3_2c3fd8c74c97_ctl00_toolBarTbl_RightRptControls_ctl00_ctl00_diidIOSaveItem")
-    create_ZP_button.click()
+    confirm_ZP_button = browser.find_element(By.CSS_SELECTOR, '[value="Создать"].ms-ButtonHeightWidth')
+    confirm_ZP_button.click()
 
     # Проверяем название заголовка страницы
     wait.until(EC.title_contains("Закупочные процедуры"))
@@ -307,4 +318,4 @@ def test_create_ZP_Based_On_PreSale(browser):
     find_create_zp = find_create_zp.text
 
     assert find_create_zp == name_zp_basedOn_presale, f"Сущность не создана, не найдено название {name_zp_basedOn_presale}"
-    time.sleep(10)
+
