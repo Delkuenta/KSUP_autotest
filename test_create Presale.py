@@ -198,6 +198,7 @@ def test_create_New_Presale(browser):
     confirm_presale_button.click()
 
     # Проверка наличия названия сущности в списке Пресейлов
+    # #Селектор для поиска по названию сущности в списке //a[@class= 'ms-listlink' and contains(text(),'Подготовка конкурсной заявки АИС Испытания')]
     find_create_presale = browser.find_element_by_css_selector(
         ".ms-listviewtable>tbody:nth-child(4)>tr:nth-child(1)>td:nth-child(2)")
     find_create_presale = find_create_presale.text
@@ -318,4 +319,10 @@ def test_create_ZP_Based_On_PreSale(browser):
     find_create_zp = find_create_zp.text
 
     assert find_create_zp == name_zp_basedOn_presale, f"Сущность не создана, не найдено название {name_zp_basedOn_presale}"
+
+def test1(browser):
+    wait = WebDriverWait(browser, 10)
+    link = "https://Mr_KSUP_Seller:AsdGhj-5681-Sle@ksup-tst.lanit/_windows/default.aspx?ReturnUrl=%2f_layouts%2f15%2fAuthenticate.aspx%3fSource%3d%252F%255Fwindows%252Fdefault%252Easpx&Source=%2f_windows%2fdefault.aspx"
+    browser.get(link)
+    wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, "#idHomePageNewItem")))
 
