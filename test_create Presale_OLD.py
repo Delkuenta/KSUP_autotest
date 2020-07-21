@@ -19,7 +19,7 @@ Divisions_seller = "ОНЛАНТА"
 DivisionPerformer = "ОНЛАНТА"
 PerformerLegal = "ООО \"ОНЛАНТА\""
 PerformerResponsible = "Бравосов Андрей Игоревич"
-type_presale = "Тендерная заявка"
+
 SaleLawType = "44-ФЗ"
 Currency = "Доллар"
 group_category = "TIE_6"
@@ -66,29 +66,29 @@ def test_create_New_Presale(browser):
     button_create_presale.click()
 
     # Ждем загрузки страницы по последнему загружаемому объекту
-    wait.until(EC.text_to_be_present_in_element((By.ID, 'select2-wcfLookupControl_KsupSeller-container'),
+    #wait.until(EC.text_to_be_present_in_element((By.ID, 'select2-wcfLookupControl_KsupSeller-container'),
                                                 f'{PerformerResponsible}'))
 
     # Ищем поле "Предмет контракта" и заполняем
-    name_presale_element = browser.find_element(By.ID,
+    #ame_presale_element = browser.find_element(By.ID,
                                                 "KsupFullName_1cb78896-92f2-4cb9-a3ad-b45e0f9932a6_$TextField")
-    name_presale_element.send_keys(name_presale)
+    #name_presale_element.send_keys(name_presale)
 
     # Ищем поле "Способ определения поставщика" и выбираем значение
-    type_presale_element = Select(
-        browser.find_element(By.ID, "KsupContractorType_c208b1d8-b8f1-417e-83de-32d7be2864be_$DropDownChoice"))
-    type_presale_element.select_by_value(type_presale)
+    #type_presale_element = Select(
+        #browser.find_element(By.ID, "KsupContractorType_c208b1d8-b8f1-417e-83de-32d7be2864be_$DropDownChoice"))
+    #type_presale_element.select_by_value(type_presale)
 
     # Ищем поле "Заказчик" и выбираем значение
-    browser.find_element(By.XPATH, "//div[@id='div-wcfLookupControl_KsupEgr_Customer']/span/span/span").click()
+    #browser.find_element(By.XPATH, "//div[@id='div-wcfLookupControl_KsupEgr_Customer']/span/span/span").click()
     # Costumer = browser.find_element_by_xpath('//li[text()="КАЗНАЧЕЙСТВО РОССИИ"]').click
-    browser.find_element(By.XPATH, f"//li[contains(text(), '{Customer}')]").click()
+    #browser.find_element(By.XPATH, f"//li[contains(text(), '{Customer}')]").click()
 
     # Ищем поле "Подразделение-продавец" и выбираем значение
     browser.find_element(By.ID, "div-wcfLookupControl_KsupDivisions").click()
     browser.find_element(By.XPATH, f"//li[normalize-space(.)='{Divisions_seller}']").click()
 
-    # Ищем поле "подразделение-продавец" и выбираем значение
+    # Ищем поле "подразделение-исполнитель" и выбираем значение
     browser.find_element(By.ID, "div-wcfLookupControl_KsupDivisionPerformer").click()
     browser.find_element(By.XPATH, f"//li[normalize-space(.)='{DivisionPerformer}']").click()
 
@@ -148,7 +148,7 @@ def test_create_New_Presale(browser):
     CompetitionDeadlineFrom_element = browser.find_element(By.ID,
                                                            "KsupCompetitionDeadlineFrom_5b28696f-6ae9-4765-bb8d-b26513cd0e78_$DateTimeFieldDate")
     CompetitionDeadlineFrom_element.send_keys(CompetitionDeadlineFrom)
-
+    # ---------------------------------------
     # Ищем поле "Плановая дата заключения договора/контракта" и вводим значение
     PlanDateContractConclusion_element = browser.find_element(By.ID,
                                                               "KsupPlanDateContractConclusion_536f5d8c-9e22-4878-9d4c-49c433c82c0d_$DateTimeFieldDate")

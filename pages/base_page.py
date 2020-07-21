@@ -29,9 +29,18 @@ class BasePage:
             return False
         return text_in_element
 
+    # Проверка текста с переменной
+    def is_text_to_be_present_in_element(self, how, what, text):
+        try:
+            WebDriverWait(self.browser, 10).until(EC.text_to_be_present_in_element((how, what), text))
+        except:
+            return False
+        return True
+
     # Проверка что элемент отображен на странице
     def is_element_present(self, how, what):
         try:
+            self.browser.implicitly_wait(10)
             self.browser.find_element(how, what)
         except NoSuchElementException:
             return False
@@ -61,3 +70,17 @@ class BasePage:
         except TimeoutException:
             return False
         return True
+
+    # Переключение на активный фрейм
+    def is_frame_to_be_available_and_switch_to_it(self, timeout=5):
+        try:
+            iframe = self.browser.switch_to.active_element
+            WebDriverWait(self.browser, timeout).until(
+                EC.frame_to_be_available_and_switch_to_it(iframe))
+        except TimeoutException:
+            return False
+        return True
+
+    #Переключение на родительский фрейм
+    def is_frame_to_parent (self):
+        self.browser.switch_to.default_content()
