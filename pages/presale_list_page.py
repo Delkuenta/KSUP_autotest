@@ -1,6 +1,8 @@
 from .base_page import BasePage
 from .locators import PresalePageLocators
 from .locators import FormCreatePresaleLocators
+from .locators import FormCreateZpLocators
+from .locators import PresaleElementLocators
 from userdata.user_data import UserData
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.common.by import By
@@ -9,15 +11,17 @@ import time
 
 class PresalePage(BasePage):
 
-    def should_be_clickable_create_button(self):
-        assert self.is_element_clickable(*PresalePageLocators.PRESALE_CREATE_BUTTON), 'Кнопка "Создать" не доступна для нажатия'
-
     def go_to_create_presale(self):
         button_create_presale = self.browser.find_element(*PresalePageLocators.PRESALE_CREATE_BUTTON)
         button_create_presale.click()
 
-    def form_create_presale_tender(self):
+    def go_to_presale_element(self):
+        self.browser.find_element(*PresalePageLocators.FIND_ELEMENT_IN_LIST).click()
 
+    def go_to_create_zp_tender_based_on_presale(self):
+        self.browser.find_element(*PresaleElementLocators.TENDER_APPLICATION_ELEMENT).click()
+
+    def form_create_presale_tender(self):
         # Ждем загрузки страницы по последнему загружаемому объекту
         self.is_text_to_be_present_in_element(*FormCreatePresaleLocators.SELLER_RESPONSIBLE_ELEMENT, UserData.performer_responsible)
         # Ищем поле "Предмет контракта" и заполняем
@@ -135,10 +139,39 @@ class PresalePage(BasePage):
 
         confirm_presale_button = self.browser.find_element(*FormCreatePresaleLocators.CONFIRM_PRESALE_BUTTON)
         confirm_presale_button.click()
+        self.find_element_on_list()
 
+    def form_create_zp_based_on_presale_tender(self):
+        # Ждем загрузки страницы по последнему загружаемому объекту
+        self.is_text_to_be_present_in_element(*FormCreateZpLocators.CUSTOMER_IN_ZP_ELEMENT,
+                                              UserData.customer)
+        # Проверяем предзаполнение
+        assert self.is_element_text(*FormCreateZpLocators.TITLE_ZP) == UserData.type_presale, "Некорректное название формы создания"
+        assert self.is_element_text(*FormCreateZpLocators.DIVISIONS_IN_ZP_ELEMENT) == UserData.divisions_seller, "Некорректная информация в поле Подразделение-продавец"
+        assert self.is_element_text(*FormCreateZpLocators.SELLER_RESPONSIBLE_IN_ZP_ELEMENT) == \
+               UserData.performer_responsible, "Некорректная информация в поле Ответственный менеджер подразделения-продавца"
+        assert self.is_element_text(*FormCreateZpLocators.DIVISIONS_PERFORMER_IN_ZP_ELEMENT) == UserData.division_performer, \
+            "Некорректная информация в поле Подразделение-исполнитель"
+        assert self.is_element_text(*FormCreateZpLocators.PERFORMER_RESPONSIBLE_IN_ZP_ELEMENT) == UserData.performer_responsible, \
+            "Некорректная информация в поле Ответственный менеджер подразделения-исполнителя"
+        assert self.is_element_text(*FormCreateZpLocators.CUSTOMER_IN_ZP_ELEMENT) == UserData.customer, \
+            "Некорректная информация в поле Заказчик"
+        assert self.is_element_text(*FormCreateZpLocators.TYPE_WORK_SERVICES_ELEMENT) == UserData.category, \
+            "Некорректная информация в поле Тип работ и услуг"
+        assert self.is_element_text(*FormCreateZpLocators.PERFORMER_LEGAL_IN_ZP_ELEMENT) == f'×\n{UserData.performer_legal}', \
+            "Некорректная информация в поле Исполнитель Юр.Лицо"
+        assert self.is_element_text(*FormCreateZpLocators.SALES_WITH_OP_FOR_VERIFY) == f'×{UserData.name_presale}', \
+            "Некорректная информация в поле Связанные продажи"
+        self.browser.find_element(*FormCreateZpLocators.SALES_WITH_OP).click()
+        breakpoint()
+
+
+    def should_be_clickable_create_button(self):
+        assert self.is_element_clickable(*PresalePageLocators.PRESALE_CREATE_BUTTON), 'Кнопка "Создать" не доступна для нажатия'
+
+    def should_be_element_on_list(self):
         assert self.is_element_present(*PresalePageLocators.FIND_ELEMENT_IN_LIST), \
             f'Пресейловая активность с именем "{UserData.name_presale}" не найдена в списке'
-
 
 
 

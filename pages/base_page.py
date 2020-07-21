@@ -17,14 +17,14 @@ class BasePage:
         self.browser.get(self.url)
 
     # Проверка, что логин выполнится под правильной УЗ
-    def verify_username(self, user_name, ):
-
+    def verify_username(self, user_name):
         assert self.is_element_text(*BasePageLocators.USER_NAME) == user_name, "User Name is not presented"
 
     # Вывод текста из элемента
     def is_element_text(self, how, what):
         try:
             text_in_element = self.browser.find_element(how, what).text
+            print(text_in_element)
         except NoSuchElementException:
             return False
         return text_in_element

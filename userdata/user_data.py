@@ -1,5 +1,15 @@
+import codecs
+import os
+
 class UserData:
-    #Данные для создания пресейловой активности
+    #name_file = 'Presale_tender_catA_razrabPO.txt'
+    # Скрипт для добавления файлов из текущей директории тестов
+   # current_dir = os.path.abspath(os.path.dirname(__file__))  # получаем путь к директории текущего исполняемого файла
+    #file_path = os.path.join(current_dir, name_file)
+    #with codecs.open(file_path, 'r', encoding='utf-8') as f:
+       # exec(f.read())
+
+    # переменные для пресейловой активности. Тендер, категория А,разработка ПО, Самостоятельная продажа
     name_presale = "t1e1_тест_ПА_тендер_самостПрод_катА"
     type_presale = "Тендерная заявка"
     customer = "ООО \"ДЕКОР\""
