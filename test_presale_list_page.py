@@ -127,5 +127,3 @@ class TestNameUnknown:
         zakup_element_page = ZakupElementPage(browser, browser.current_url)
         zakup_element_page.approval_zakup_kkp()
         zakup_element_page.verify_zakup_successfully_status_approval_kkp()
-        breakpoint()
-
