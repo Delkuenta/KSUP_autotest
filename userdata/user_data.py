@@ -2,12 +2,16 @@ import codecs
 import os
 
 class UserData:
-    #name_file = 'Presale_tender_catA_razrabPO.txt'
+    name_file_for_user_data = 'Presale_tender_catA_razrabPO.txt'
+    name_file_to_link = 'test.jpg'
     # Скрипт для добавления файлов из текущей директории тестов
-   # current_dir = os.path.abspath(os.path.dirname(__file__))  # получаем путь к директории текущего исполняемого файла
-    #file_path = os.path.join(current_dir, name_file)
-    #with codecs.open(file_path, 'r', encoding='utf-8') as f:
-       # exec(f.read())
+    current_dir = os.path.abspath(os.path.dirname(__file__))  # получаем путь к директории текущего исполняемого файла
+    file_path_for_link_file = os.path.join(current_dir, name_file_to_link)
+
+    #Метод чтения переменных из файла txt
+    file_path_for_user_data = os.path.join(current_dir, name_file_for_user_data)
+    with codecs.open(file_path_for_user_data, 'r', encoding='utf-8') as f:
+        exec(f.read())
 
     # переменные для пресейловой активности. Тендер, категория А,разработка ПО, Самостоятельная продажа
     name_presale = "t1e1_тест_ПА_тендер_самостПрод_катА"
@@ -37,3 +41,9 @@ class UserData:
     yeartable_2line = 2020
     quarter_1line = "3 квартал"
     quarter_2line = "4 квартал"
+
+    #переменные в закупочной процедуре(с предзаполнением)
+    name_zp_basedOn_presale = "t1e2_тест_ЗП_тендер_самостПрод_катА"
+    purchase_number = "ZP/0001-AT"
+    purchase_link = "testlink_zakup_proc.com"
+    project_risk_department = "тестовое сообщение_Риски проекта с точки зрения Департамента"

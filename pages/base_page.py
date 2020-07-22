@@ -24,7 +24,6 @@ class BasePage:
     def is_element_text(self, how, what):
         try:
             text_in_element = self.browser.find_element(how, what).text
-            print(text_in_element)
         except NoSuchElementException:
             return False
         return text_in_element
@@ -84,3 +83,19 @@ class BasePage:
     #Переключение на родительский фрейм
     def is_frame_to_parent (self):
         self.browser.switch_to.default_content()
+
+    def go_to_presale_list(self):
+        self.browser.get(BasePageLocators.PRESALE_LIST_LINK)
+        assert self.is_text_to_be_present_in_element(*BasePageLocators.PRESALE_LIST_TITLE, "Пресейловые активности"), \
+            "Титул страницы не соответствует переходу"
+
+    def go_to_zakup_list(self):
+        self.browser.get(BasePageLocators.ZAKUP_LIST_LINK)
+        assert self.is_text_to_be_present_in_element(*BasePageLocators.ZAKUP_LIST_TITLE, "Закупочные процедуры"), \
+            "Титул страницы не соответствует переходу"
+
+    def go_to_contract_list(self):
+        self.browser.get(BasePageLocators.CONTRACT_LIST_LINK)
+        assert self.is_text_to_be_present_in_element(*BasePageLocators.CONTRACT_LIST_TITLE, "Договоры (контракты)"), \
+            "Титул страницы не соответствует переходу"
+

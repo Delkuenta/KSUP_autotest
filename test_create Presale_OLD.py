@@ -6,7 +6,7 @@ from selenium.webdriver.support import expected_conditions as EC
 import os
 import time
 
-name_file = 'test.jpg'
+name_file = 'userdata/test.jpg'
 # Скрипт для добавления файлов из текущей директории тестов
 current_dir = os.path.abspath(os.path.dirname(__file__))  # получаем путь к директории текущего исполняемого файла
 file_path = os.path.join(current_dir, name_file)  # добавляем к этому пути имя файла

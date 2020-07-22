@@ -4,11 +4,17 @@ from selenium.webdriver.common.by import By
 
 class BasePageLocators:
     USER_NAME = (By.CSS_SELECTOR, ".o365cs-me-tile-nophoto-username.o365cs-me-bidi")
+    PRESALE_LIST_LINK = "https://ksup-tst.lanit/SalesManagement/Lists/Sale/All.aspx"
+    PRESALE_LIST_TITLE = (By.CSS_SELECTOR, "#DeltaPlaceHolderPageTitleInTitleArea a")
+    ZAKUP_LIST_LINK = "https://ksup-tst.lanit/SalesManagement/Lists/PresaleActivity/All.aspx"
+    ZAKUP_LIST_TITLE = (By.CSS_SELECTOR, "#DeltaPlaceHolderPageTitleInTitleArea a")
+    CONTRACT_LIST_LINK = "https://ksup-tst.lanit/SalesManagement/Lists/Contract/All.aspx"
+    CONTRACT_LIST_TITLE = (By.CSS_SELECTOR, "#DeltaPlaceHolderPageTitleInTitleArea a")
 
 
 class PresalePageLocators:
     PRESALE_CREATE_BUTTON = (By.CSS_SELECTOR, "#idHomePageNewItem")
-    FIND_ELEMENT_IN_LIST = (By.XPATH, f"//a[@class= 'ms-listlink' and contains(text(),'{UserData.name_presale}')]")
+    FIND_ELEMENT_IN_PRESALE_LIST = (By.XPATH, f"//a[@class= 'ms-listlink' and contains(text(),'{UserData.name_presale}')]")
 
 
 class FormCreatePresaleLocators:
@@ -120,12 +126,16 @@ class FormCreatePresaleLocators:
 class PresaleElementLocators:
     # Кнопка изменения элемента
     EDIT_ITEM_ELEMENT = (By.ID, "Ribbon.ListForm.Display.Manage.EditItem-Large")
+
     # Кнопка "Внести информацию о конкурсе"
     TENDER_APPLICATION_ELEMENT = (By.CSS_SELECTOR, "#createPresaleActivityBasedOnSale_TenderApplication-Large")
+
     # Кнопка "Внести информацию о запросе цен"
     PRESALE_ACT_ELEMENT = (By.CSS_SELECTOR, "#createPresaleActivityBasedOnSale_PresaleAct-Large")
+
     # Кнопка "Внести информацию о коммерческом предложении"
     COMMERCIAL_OFFER_ELEMENT = (By.CSS_SELECTOR, "#createPresaleActivityBasedOnSale_CommercialOffer-Large")
+
     # Кнопка "Внести информацию о договоре/контракте"
     CREATE_CONTRACT_ELEMENT = (By.CSS_SELECTOR, "#CreateContractOnBasedElement\.OnBased-Large")
 
@@ -214,10 +224,10 @@ class FormCreateZpLocators:
     PROJECT_PROBABILITY_ELEMENT = (By.ID, "KsupContractProbability_f7fc8405-e077-4ebf-bf9c-50153beb4378_$NumberField")
 
     # Номер закупки
-    EIS_PURCHASE_NUMBER = (By.CSS_SELECTOR, "#KsupEisPurchaseNumber_8afdb894-e496-4d71-9e54-a1bf0e0a5fb6_$TextField")
+    EIS_PURCHASE_NUMBER = (By.ID, "KsupEisPurchaseNumber_8afdb894-e496-4d71-9e54-a1bf0e0a5fb6_$TextField")
 
     # Ссылка на закупку
-    EIS_PURCHASE_LINK = (By.CSS_SELECTOR, "#KsupEisPurchaseLink_39dc12ef-bb5e-46a5-a469-5d687be8ab91_$TextField")
+    EIS_PURCHASE_LINK = (By.ID, "KsupEisPurchaseLink_39dc12ef-bb5e-46a5-a469-5d687be8ab91_$TextField")
 
     # Связанные продажи
     SALES_WITH_OP = (By.XPATH, "//div[@id='div-wcfLookupControl_KsupSalesWithOp']/span/span/span/ul/li[2]/input")
@@ -228,18 +238,23 @@ class FormCreateZpLocators:
 
     # Тендерная заявка
     FILE_TENDER_REQUEST = (By.XPATH, "// div[ @ id = 'File_TenderRequest'] / div / input")
+    FILE_TENDER_NAME_LINK = (By.CLASS_NAME, "fileField_File_TenderRequest_NameLink_")
 
     # Тендерная документация
     FILE_TENDER_DOCS_FROM_CUSTOMER = (By.XPATH, "//div[@id='File_TenderDocsFromCustomer']/div/input")
+    FILE_TENDER_DOCS_NAME_LINK = (By.CLASS_NAME, "fileField_File_TenderDocsFromCustomer_NameLink_")
 
     # Бюджет проекта
     FILE_BUDGET_OF_PROJECT = (By.XPATH, "//div[@id='File_BudgetOfProject']/div/input")
+    FILE_BUDGET_OF_PROJECT_NAME_LINK = (By.CLASS_NAME, "fileField_File_BudgetOfProject_NameLink_")
 
     # Пояснительная служебная записка
     FILE_EXPLANATORY_MEMORANUM = (By.XPATH, "//div[@id='File_ExplanatoryMemoranum']/div/input")
+    FILE_EXPLANATORY_MEMORANUM_NAME_LINK = (By.CLASS_NAME, "fileField_File_ExplanatoryMemoranum_NameLink_")
 
     # Проект контракта
     FILE_PROJECT_OF_CONTRACT = (By.XPATH, "//div[@id='File_ProjectOfContract']/div/input")
+    FILE_PROJECT_OF_CONTRACT_NAME_LINK = (By.CLASS_NAME, "fileField_File_ProjectOfContract_NameLink_")
 
     # Риски проекта с точки зрения Департамента
     PROJECT_RISK_DEPARTMENT_PERSPEC = (
@@ -247,9 +262,15 @@ class FormCreateZpLocators:
 
     # Документы с описанием рисков
     FILE_RISK_MAP_AND_REGISTRY = (By.XPATH, "//div[@id='File_RiskMapAndRegistry']/div/input")
+    FILE_RISK_MAP_AND_REGISTRY_NAME_LINK = (By.CLASS_NAME, "fileField_File_RiskMapAndRegistry_NameLink_")
 
     # Иное
     FILE_OTHER = (By.XPATH, "//div[@id='File_Other']/div/input")
+    FILE_OTHER_NAME_LINK = (By.CLASS_NAME, "fileField_File_Other_NameLink_")
 
     # Кнопка создания сущности закупочная процедура
     CONFIRM_ZP_BUTTON = (By.CSS_SELECTOR, '[value="Создать"].ms-ButtonHeightWidth')
+
+class ZakupPageLocators:
+    ZAKUP_CREATE_BUTTON = (By.CSS_SELECTOR, "#idHomePageNewItem")
+    FIND_ELEMENT_IN_ZAKUP_LIST = (By.XPATH, f"//a[@class= 'ms-listlink' and contains(text(),'{UserData.name_zp_basedOn_presale}')]")
