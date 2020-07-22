@@ -47,3 +47,12 @@ class UserData:
     purchase_number = "ZP/0001-AT"
     purchase_link = "testlink_zakup_proc.com"
     project_risk_department = "тестовое сообщение_Риски проекта с точки зрения Департамента"
+
+
+    # Комментарии при согласовании и отклонении
+
+    comment_approval_legal = "Успешное согласование за Юридическую службу"
+    comment_approval_count = "Успешное согласование за Бухгалтерию"
+    comment_approval_fin = "Успешное согласование за финансовую службу"
+    comment_approval_udprpo = "Успешное согласование за УДПР ПО"
+    comment_approval_kkp = "Успешное согласование за ККП"

@@ -274,3 +274,33 @@ class FormCreateZpLocators:
 class ZakupPageLocators:
     ZAKUP_CREATE_BUTTON = (By.CSS_SELECTOR, "#idHomePageNewItem")
     FIND_ELEMENT_IN_ZAKUP_LIST = (By.XPATH, f"//a[@class= 'ms-listlink' and contains(text(),'{UserData.name_zp_basedOn_presale}')]")
+
+class ZakupElementLocators:
+    # Послать на согласование закупочную процедуру
+    SEND_APPROVAL_ELEMENT = (By.ID, "ApprovePresaleActivity.ToApprove-Large")
+    # Всплывающее окно подтверждения/отмены отправки закупочной процедуры
+    CONFIRM_SEND_APPROVAL_ELEMENT = (By.XPATH, "(//button[@type='button'])[10]")
+    CANCEL_SEND_APPROVAL_ELEMENT = (By.XPATH, "(//button[@type='button'])[15]")
+
+    # Кнопка согласования и отклонения закупочной процедуры
+    APPROVAL_ZAKUP = (By.ID, "ApprovePresaleActivity.Approve-Large")
+    REJECT_ZAKUP = (By.ID, "ApprovePresaleActivity.Reject-Large")
+
+    # элементы внутри окна подтверждения/отклонения
+    COMMENT_TO_APPROVAL_ZAKUP = (By.XPATH, "//textarea[@id='dialogComment']")
+    FILE_TO_APPROVAL_ZAKUP = (By.XPATH, "//input[@name='filefield']")
+    CONFIRM_APPROVAL_ZAKUP = (By.XPATH, "(//button[@type='button'])[10]")
+    CANCEL_APPROVAL_ZAKUP = (By.XPATH, "(//button[@type='button'])[9]")
+    ClOSE_ALLERT_ZAKUP = (By.CSS_SELECTOR, "#dlgTitleBtns")
+
+    WITHDRAW_FROM_APPROVAL_ELEMENT = (By.ID, "Approve.Cancel-Large")
+    APPROVAL_HISTORY_ELEMENT = (By.CSS_SELECTOR, "#ctl00_ctl69_g_93f2ae31_fc13_4393_9245_5d2f3d13a770_ctl00_ucListItemForm_tabApprovingHistory .tabs__link")
+    APPROVAL_LEGAL_STATUS_ELEMENT = (By.XPATH, "(.//*[normalize-space(text()) and normalize-space(.)='Согласование юридической службой'])[1]/following::span[1]")
+    APPROVAL_COUNT_STATUS_ELEMENT = (By.XPATH, "(.//*[normalize-space(text()) and normalize-space(.)='Согласование бухгалтерией'])[1]/following::span[1]")
+    APPROVAL_FIN_STATUS_ELEMENT = (By.XPATH,
+                                     "(.//*[normalize-space(text()) and normalize-space(.)='Согласование финансовой службой'])[1]/following::span[1]")
+    APPROVAL_UDPRPO_STATUS_ELEMENT = (By.XPATH,
+                                   "(.//*[normalize-space(text()) and normalize-space(.)='Согласование УДПР ПО'])[1]/following::span[1]")
+
+    APPROVAL_KKP_STATUS_ELEMENT = (By.XPATH,
+                                      "(.//*[normalize-space(text()) and normalize-space(.)='Согласование ККП'])[1]/following::span[1]")
