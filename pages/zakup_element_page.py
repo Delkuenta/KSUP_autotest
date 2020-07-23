@@ -6,9 +6,6 @@ from userdata.user_data import UserData
 
 class ZakupElementPage(BasePage):
 
-    def go_to_zakup_element(self):
-        self.browser.find_element(*ZakupPageLocators.FIND_ELEMENT_IN_ZAKUP_LIST).click()
-
     def send_zakup_for_approval(self):
         self.is_element_clickable(*ZakupElementLocators.SEND_APPROVAL_ELEMENT)
         self.browser.find_element(*ZakupElementLocators.SEND_APPROVAL_ELEMENT).click()
@@ -144,3 +141,7 @@ class ZakupElementPage(BasePage):
         self.browser.find_element(*ZakupElementLocators.CONFIRM_APPROVAL_ZAKUP).click()
         self.is_element_present(*ZakupElementLocators.ClOSE_ALLERT_ZAKUP)
         self.browser.find_element(*ZakupElementLocators.ClOSE_ALLERT_ZAKUP).click()
+
+    def go_to_create_contract_based_on_zp(self):
+        self.is_element_present(*ZakupElementLocators.CREATE_CONTRACT_BASED_ON_ZAKUP)
+        self.browser.find_element(*ZakupElementLocators.CREATE_CONTRACT_BASED_ON_ZAKUP).click()

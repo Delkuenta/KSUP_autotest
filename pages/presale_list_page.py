@@ -1,7 +1,7 @@
 from .base_page import BasePage
 from .locators import PresalePageLocators
 from .locators import FormCreatePresaleLocators
-from .locators import FormCreateZpLocators
+from .locators import FormCreateZakupLocators
 
 from userdata.user_data import UserData
 from selenium.webdriver.support.ui import Select

@@ -1,7 +1,7 @@
 from pages.base_page import BasePage
 from .locators import PresalePageLocators
 from .locators import FormCreatePresaleLocators
-from .locators import FormCreateZpLocators
+from .locators import FormCreateZakupLocators
 from userdata.user_data import UserData
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.common.by import By
@@ -12,7 +12,7 @@ class PresaleFormCreate(BasePage):
     # Форма создания пресейла
     def form_create_presale_tender(self):
         # Ждем загрузки страницы по последнему загружаемому объекту
-        self.is_text_to_be_present_in_element(*FormCreatePresaleLocators.SELLER_RESPONSIBLE_ELEMENT, UserData.performer_responsible)
+        self.is_text_to_be_present_in_element(*FormCreatePresaleLocators.SELLER_RESPONSIBLE_ELEMENT, UserData.seller_responsible)
         # Ищем поле "Предмет контракта" и заполняем
         name_presale_element = self.browser.find_element(*FormCreatePresaleLocators.NAME_PRESALE_ELEMENT)
         name_presale_element.send_keys(*UserData.name_presale)
@@ -48,7 +48,7 @@ class PresaleFormCreate(BasePage):
         sale_law_type_element.select_by_value(UserData.sale_law_type)
 
         # Ищем кнопку "Тип работ и услуг"
-        self.browser.find_element(By.CLASS_NAME, "ms-taxonomy-browser-button").click()
+        self.browser.find_element(*FormCreatePresaleLocators.SEARCH_VALID_OPTION_ELEMENT).click()
         time.sleep(2)
 
         # Работаем во фрейме и выбираем категории
@@ -60,7 +60,7 @@ class PresaleFormCreate(BasePage):
         # Возврат к форм создания.
         self.is_frame_to_parent()
         self.is_text_to_be_present_in_element(
-            *FormCreatePresaleLocators.TYPE_WORK_SERVICES_ELEMENT, UserData.category)
+            *FormCreatePresaleLocators.TYPE_WORK_SERVICES_ELEMENT, f'{UserData.category};')
 
         # Ищем поле "Сумма" и вводим значение
         sum_element = self.browser.find_element(*FormCreatePresaleLocators.SUM_ELEMENT)
