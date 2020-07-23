@@ -4,8 +4,9 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import NoSuchElementException, TimeoutException
 from selenium.common.exceptions import NoAlertPresentException  # в начале файла
 import math
+import time
 from .locators import BasePageLocators
-
+import win32com.client
 
 class BasePage:
     def __init__(self, browser: RemoteWebDriver, url, timeout=20):
@@ -98,4 +99,16 @@ class BasePage:
         self.browser.get(BasePageLocators.CONTRACT_LIST_LINK)
         assert self.is_text_to_be_present_in_element(*BasePageLocators.CONTRACT_LIST_TITLE, "Договоры (контракты)"), \
             "Титул страницы не соответствует переходу"
+
+    def login_seller(self):
+        shell = win32com.client.Dispatch("WScript.Shell")
+        shell.Sendkeys("Mr_KSUP_Seller")
+        time.sleep(2)
+        shell.Sendkeys("{TAB}")
+        time.sleep(2)
+        shell.Sendkeys("AsdGhj-5681-Sle")
+        time.sleep(2)
+        shell.Sendkeys("{ENTER}")
+        time.sleep(2)
+
 

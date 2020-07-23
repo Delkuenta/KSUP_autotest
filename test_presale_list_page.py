@@ -17,9 +17,10 @@ class Test1_PaZpDkTenderKatArazrabPO_fullAprovalCycle:
 
     @pytest.mark.repeat(6)
     def test_create_presale(self, browser):
-        link = LoginData.Mr_KSUP_Seller
+        link = "https://ksup-tst.lanit/_windows/default.aspx"
         page = PresalePage(browser, link)
         page.open()  # открываем страницу
+        page.login_seller()
         page.verify_username("Mr_KSUP_Seller")
         page.should_be_clickable_create_button()
         page.go_to_create_presale()
