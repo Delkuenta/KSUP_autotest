@@ -1,5 +1,10 @@
+#Под какими УЗ создаем сущности?:
+login_for_create_presale = ["Lanit\Mr_KSUP_Seller", "AsdGhj-5681-Sle"]
+login_for_create_zakup = ["Lanit\Mr_KSUP_Seller", "AsdGhj-5681-Sle"]
+login_for_create_contract = ["Lanit\Mr_KSUP_Seller", "AsdGhj-5681-Sle"]
+
 # переменные для пресейловой активности. Тендер, категория А,разработка ПО, Самостоятельная продажа
-name_presale = "t1e1_тест_ПА_тендер_самостПрод_катА"  #+ str(time.time())
+name_presale = "t1e1_тест_ПА_тендер_самостПрод_катА"  # + str(time.time())
 type_presale = "Тендерная заявка"
 customer = "ООО \"МОНОЛИТ\""
 divisions_seller = "ОНЛАНТА"

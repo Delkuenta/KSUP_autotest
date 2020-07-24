@@ -20,8 +20,8 @@ class Test1_PaZpDkTenderKatArazrabPO_fullAprovalCycle:
         link = LoginData.link
         login_page = LoginData(browser, link)
         login_page.open()  # открываем страницу
-        login_page.login_seller()
-        login_page.verify_username("Mr_KSUP_Seller")
+        login_page.login(*UserData.login_for_create_presale)
+        login_page.verify_username(UserData.login_for_create_presale[0])
         presale_list_page = PresalePage(browser, link)
         presale_list_page.go_to_presale_list()
         presale_list_page.should_be_clickable_create_button()
@@ -35,8 +35,8 @@ class Test1_PaZpDkTenderKatArazrabPO_fullAprovalCycle:
         login_page = LoginData(browser,
                            link)  # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес
         login_page.open()  # открываем страницу
-        login_page.login_seller()
-        login_page.verify_username("Mr_KSUP_Seller")
+        login_page.login(*UserData.login_for_create_zakup)
+        login_page.verify_username(UserData.login_for_create_zakup[0])
         login_page.go_to_presale_list()
         presale_list_page = PresalePage(browser, browser.current_url)
         presale_list_page.go_to_presale_element()
@@ -52,8 +52,8 @@ class Test1_PaZpDkTenderKatArazrabPO_fullAprovalCycle:
         login_page = LoginData(browser,
                            link)  # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес
         login_page.open()  # открываем страницу
-        login_page.login_seller()
-        login_page.verify_username("Mr_KSUP_Seller")
+        login_page.login(*UserData.login_for_create_zakup)
+        login_page.verify_username(UserData.login_for_create_zakup[0])
         login_page.go_to_zakup_list()
         zakup_list_page = ZakupPage(browser, browser.current_url)
         zakup_list_page.go_to_zakup_element()
@@ -66,8 +66,8 @@ class Test1_PaZpDkTenderKatArazrabPO_fullAprovalCycle:
         login_page = LoginData(browser,
                            link)  # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес
         login_page.open()  # открываем страницу
-        login_page.login_legal()
-        login_page.verify_username("Mr_KSUP_Legal")
+        login_page.login(*UserData.login_legal)
+        login_page.verify_username(UserData.login_legal[0])
         login_page.go_to_zakup_list()
         zakup_list_page = ZakupPage(browser, browser.current_url)
         zakup_list_page.go_to_zakup_element()
@@ -81,8 +81,8 @@ class Test1_PaZpDkTenderKatArazrabPO_fullAprovalCycle:
         login_page = LoginData(browser,
                            link)  # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес
         login_page.open()  # открываем страницу
-        login_page.login_count()
-        login_page.verify_username("Mr_KSUP_Count")
+        login_page.login(*UserData.login_count)
+        login_page.verify_username(UserData.login_count[0])
         login_page.go_to_zakup_list()
         zakup_list_page = ZakupPage(browser, browser.current_url)
         zakup_list_page.go_to_zakup_element()
@@ -96,8 +96,8 @@ class Test1_PaZpDkTenderKatArazrabPO_fullAprovalCycle:
         login_page = LoginData(browser,
                                link)  # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес
         login_page.open()  # открываем страницу
-        login_page.login_fin()
-        login_page.verify_username("Mr_KSUP_Fin")
+        login_page.login(*UserData.login_fin)
+        login_page.verify_username(UserData.login_fin[0])
         login_page.go_to_zakup_list()
         zakup_list_page = ZakupPage(browser, browser.current_url)
         zakup_list_page.go_to_zakup_element()
@@ -111,8 +111,8 @@ class Test1_PaZpDkTenderKatArazrabPO_fullAprovalCycle:
         login_page = LoginData(browser,
                                link)  # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес
         login_page.open()  # открываем страницу
-        login_page.login_udprpo()
-        login_page.verify_username("Mr_KSUP_UDPRPO")
+        login_page.login(*UserData.login_udprpo)
+        login_page.verify_username(UserData.login_udprpo[0])
         login_page.go_to_zakup_list()
         zakup_list_page = ZakupPage(browser, browser.current_url)
         zakup_list_page.go_to_zakup_element()
@@ -126,8 +126,8 @@ class Test1_PaZpDkTenderKatArazrabPO_fullAprovalCycle:
         login_page = LoginData(browser,
                                link)  # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес
         login_page.open()  # открываем страницу
-        login_page.login_kkp()
-        login_page.verify_username("Mr_KSUP_KKP")
+        login_page.login(*UserData.login_kkp)
+        login_page.verify_username(UserData.login_kkp[0])
         login_page.go_to_zakup_list()
         zakup_list_page = ZakupPage(browser, browser.current_url)
         zakup_list_page.go_to_zakup_element()
@@ -140,8 +140,8 @@ class Test1_PaZpDkTenderKatArazrabPO_fullAprovalCycle:
         login_page = LoginData(browser,
                                link)  # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес
         login_page.open()  # открываем страницу
-        login_page.login_seller()
-        login_page.verify_username("Mr_KSUP_Seller")
+        login_page.login(*UserData.login_for_create_contract)
+        login_page.verify_username(UserData.login_for_create_contract[0])
         login_page.go_to_zakup_list()
         zakup_list_page = ZakupPage(browser, browser.current_url)
         zakup_list_page.go_to_zakup_element()
@@ -157,8 +157,8 @@ class Test1_PaZpDkTenderKatArazrabPO_fullAprovalCycle:
         login_page = LoginData(browser,
                                link)  # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес
         login_page.open()  # открываем страницу
-        login_page.login_seller()
-        login_page.verify_username("Mr_KSUP_Seller")
+        login_page.login(*UserData.login_for_create_contract)
+        login_page.verify_username(UserData.login_for_create_contract[0])
         login_page.go_to_contract_list()
         contract_list = ContractPage(browser, browser.current_url)
         contract_list.go_to_contract_element()
@@ -171,8 +171,8 @@ class Test1_PaZpDkTenderKatArazrabPO_fullAprovalCycle:
         login_page = LoginData(browser,
                                link)  # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес
         login_page.open()  # открываем страницу
-        login_page.login_legal()
-        login_page.verify_username("Mr_KSUP_Legal")
+        login_page.login(*UserData.login_legal)
+        login_page.verify_username(UserData.login_legal[0])
         login_page.go_to_contract_list()
         contract_list_page = ContractPage(browser, browser.current_url)
         contract_list_page.go_to_contract_element()
@@ -186,8 +186,8 @@ class Test1_PaZpDkTenderKatArazrabPO_fullAprovalCycle:
         login_page = LoginData(browser,
                                link)  # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес
         login_page.open()  # открываем страницу
-        login_page.login_count()
-        login_page.verify_username("Mr_KSUP_Count")
+        login_page.login(*UserData.login_count)
+        login_page.verify_username(UserData.login_count[0])
         login_page.go_to_contract_list()
         contract_list_page = ContractPage(browser, browser.current_url)
         contract_list_page.go_to_contract_element()
@@ -201,8 +201,8 @@ class Test1_PaZpDkTenderKatArazrabPO_fullAprovalCycle:
         login_page = LoginData(browser,
                                link)  # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес
         login_page.open()  # открываем страницу
-        login_page.login_fin()
-        login_page.verify_username("Mr_KSUP_Fin")
+        login_page.login(*UserData.login_fin)
+        login_page.verify_username(UserData.login_fin[0])
         login_page.go_to_contract_list()
         contract_list_page = ContractPage(browser, browser.current_url)
         contract_list_page.go_to_contract_element()
@@ -216,8 +216,8 @@ class Test1_PaZpDkTenderKatArazrabPO_fullAprovalCycle:
         login_page = LoginData(browser,
                                link)  # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес
         login_page.open()  # открываем страницу
-        login_page.login_udprpo()
-        login_page.verify_username("Mr_KSUP_UDPRPO")
+        login_page.login(*UserData.login_udprpo)
+        login_page.verify_username(UserData.login_udprpo[0])
         login_page.go_to_contract_list()
         contract_list_page = ContractPage(browser, browser.current_url)
         contract_list_page.go_to_contract_element()
