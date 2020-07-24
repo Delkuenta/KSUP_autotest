@@ -16,7 +16,7 @@ from pages.contract_element_page import ContractElementPage
 class Test1_PaZpDkTenderKatArazrabPO_fullAprovalCycle:
 
     #@pytest.mark.repeat(1)
-    def test_create_presale(self, browser):
+    def test_create_presale_tender(self, browser):
         link = LoginData.link
         login_page = LoginData(browser, link)
         login_page.open()  # открываем страницу
@@ -27,7 +27,7 @@ class Test1_PaZpDkTenderKatArazrabPO_fullAprovalCycle:
         presale_list_page.should_be_clickable_create_button()
         presale_list_page.go_to_create_presale()
         presale_create_form = PresaleFormCreate(browser, browser.current_url)
-        presale_create_form.form_create_presale_tender()
+        presale_create_form.form_create_presale_tender_or_zapros_cen_uslug()
         presale_list_page.should_be_element_on_presale_list()
 
     def test_create_zakup_based_on_presale(self, browser):
@@ -47,7 +47,7 @@ class Test1_PaZpDkTenderKatArazrabPO_fullAprovalCycle:
         page_zakup_list = ZakupPage(browser, browser.current_url)
         page_zakup_list.should_be_element_on_zakup_list()
 
-    def test_send_zakup_for_approval(self, browser):
+    def test_send_zakup_tender_for_approval(self, browser):
         link = LoginData.link
         login_page = LoginData(browser,
                            link)  # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес
@@ -224,3 +224,66 @@ class Test1_PaZpDkTenderKatArazrabPO_fullAprovalCycle:
         contract_element_page = ContractElementPage(browser, browser.current_url)
         contract_element_page.approval_contract_legal()
         contract_element_page.verify_contract_successfully_status_approval_udprpo()
+
+class Test2_Pa_ZP_DK_ZaprosCen_KatArazrabPO:
+
+    def test_create_presale_zapros_cen(self, browser):
+        link = LoginData.link
+        login_page = LoginData(browser, link)
+        login_page.open()  # открываем страницу
+        login_page.login(*UserData.login_for_create_presale)
+        login_page.verify_username(UserData.login_for_create_presale[0])
+        presale_list_page = PresalePage(browser, link)
+        presale_list_page.go_to_presale_list()
+        presale_list_page.should_be_clickable_create_button()
+        presale_list_page.go_to_create_presale()
+        presale_create_form = PresaleFormCreate(browser, browser.current_url)
+        presale_create_form.form_create_presale_tender_or_zapros_cen_uslug()
+        presale_list_page.should_be_element_on_presale_list()
+
+    def test_create_zakup_based_on_presale(self, browser):
+        link = LoginData.link
+        login_page = LoginData(browser,
+                           link)  # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес
+        login_page.open()  # открываем страницу
+        login_page.login(*UserData.login_for_create_zakup)
+        login_page.verify_username(UserData.login_for_create_zakup[0])
+        login_page.go_to_presale_list()
+        presale_list_page = PresalePage(browser, browser.current_url)
+        presale_list_page.go_to_presale_element()
+        page_presale_element = PresaleElementPage(browser, browser.current_url)
+        page_presale_element.go_to_create_zp_presale_аct_based_on_presale()
+        zakup_create_form = ZakupFormCreate(browser, browser.current_url)
+        zakup_create_form.form_create_zp_based_on_presale_zaproc_cen()
+        page_zakup_list = ZakupPage(browser, browser.current_url)
+        page_zakup_list.should_be_element_on_zakup_list()
+
+    def test_send_zakup_zaprosCen_for_approval(self, browser):
+        link = LoginData.link
+        login_page = LoginData(browser,
+                           link)  # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес
+        login_page.open()  # открываем страницу
+        login_page.login(*UserData.login_for_create_zakup)
+        login_page.verify_username(UserData.login_for_create_zakup[0])
+        login_page.go_to_zakup_list()
+        zakup_list_page = ZakupPage(browser, browser.current_url)
+        zakup_list_page.go_to_zakup_element()
+        zakup_element_page = ZakupElementPage(browser, browser.current_url)
+        zakup_element_page.send_zakup_for_approval()
+        zakup_element_page.verify_zakup_waiting_status_approval_udprpo()
+
+    def test_approval_zakup_zaprosCen_for_udprpo(self, browser):
+        link = LoginData.link
+        login_page = LoginData(browser,
+                               link)  # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес
+        login_page.open()  # открываем страницу
+        login_page.login(*UserData.login_udprpo)
+        login_page.verify_username(UserData.login_udprpo[0])
+        login_page.go_to_zakup_list()
+        zakup_list_page = ZakupPage(browser, browser.current_url)
+        zakup_list_page.go_to_zakup_element()
+        zakup_element_page = ZakupElementPage(browser, browser.current_url)
+        zakup_element_page.approval_zakup_udprpo()
+        zakup_element_page.verify_zakup_successfully_status_approval_udprpo()
+
+

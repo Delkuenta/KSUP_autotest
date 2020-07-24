@@ -41,14 +41,14 @@ class BasePage:
     # Проверка что элемент отображен на странице
     def is_element_present(self, how, what):
         try:
-            self.browser.implicitly_wait(10)
+            self.browser.implicitly_wait(5)
             self.browser.find_element(how, what)
         except NoSuchElementException:
             return False
         return True
 
     # Проверка, доступен ли элемент к нажатию
-    def is_element_clickable(self, how, what, timeout=10):
+    def is_element_clickable(self, how, what, timeout=5):
         try:
             WebDriverWait(self.browser, timeout).until(EC.element_to_be_clickable((how, what)))
         except TimeoutException:
@@ -102,5 +102,11 @@ class BasePage:
             "Титул страницы не соответствует переходу"
 
 
+    def is_visibility_of_element_located(self, how, what, timeout=4):
+        try:
+            WebDriverWait(self.browser, timeout).until(EC.visibility_of_element_located((how, what)))
+        except TimeoutException:
+            return False
+        return True
 
 

@@ -217,14 +217,31 @@ class FormCreateZakupLocators:
 
     # Размер обеспечения договора/контракта
     CONTRACT_SIZE_IN_ZP_ELEMENT = (By.ID, "KsupContractSize_20253d6d-468d-443e-9179-3f20e0c2533e_$NumberField")
+
+    # --------------------------------------------------------------------------
+    # Поля отображены только в Запрос цен товаров и услуг
+
+    # Срок предоставления ценовой информации
+    PRICE_INFORMATION_DEADLINE_FROM = (By.XPATH, "//input[@id='KsupPriceInformationDeadlineFrom_8ec338f0-a8c3-4c1a-8b36-892c98be55a7_$DateTimeFieldDate']")
+
+    # Предполагаемая дата начала проведения закупки с
+    PURCHASE_START_DATE_FROM = (By.XPATH, "//input[@id='KsupPurchaseStartDateFrom_f6f725b7-1c54-4d4c-a087-39f89853714f_$DateTimeFieldDate']")
+
+    # Предполагаемая дата начала проведения закупки по
+    PURCHASE_START_DATE_TO = (By.XPATH, "//input[@id='KsupPurchaseStartDateTo_c8e972e8-b7ad-4de5-afca-78c2103ca3bb_$DateTimeFieldDate']")
+
+
+    # --------------------------------------------------------------------------
+    # --------------------------------------------------------------------------
+    # Поля отображены только в тендерной заявке
     # Плановый срок подачи на конкурс
     COMPETITION_DEADLINE_IN_ZP_FROM_ELEMENT = (By.XPATH,
-                                               "//input[@id='KsupCompetitionDeadlineFrom_5b28696f-6ae9-4765-bb8d-b26513cd0e78_$DateTimeFieldDate']")
+                                                   "//input[@id='KsupCompetitionDeadlineFrom_5b28696f-6ae9-4765-bb8d-b26513cd0e78_$DateTimeFieldDate']")
 
     # Плановая дата заключения договора/контракта *
     PLAN_DATE_CONTRACT_CONCLUSION_IN_ZP_ELEMENT = (By.XPATH,
                                                    "//input[@id='KsupContractPlanDateFrom_4b3ff310-7fe8-4e4f-b23c-6d570282fedd_$DateTimeFieldDate']")
-
+    # --------------------------------------------------------------------------
     # Плановая дата окончания договора/контракта
     PLAN_DATE_CONTRACT_FINISH_IN_ZP_ELEMENT = (By.XPATH,
                                                "//input[@id='KsupContractPlanFinishDateFrom_ba6c4eb8-f5a5-4a43-8c07-d230571e83dc_$DateTimeFieldDate']")
@@ -232,11 +249,14 @@ class FormCreateZakupLocators:
     # Вероятность заключения договора/контракта
     PROJECT_PROBABILITY_ELEMENT = (By.ID, "KsupContractProbability_f7fc8405-e077-4ebf-bf9c-50153beb4378_$NumberField")
 
+    # --------------------------------------------------------------------------
+    # Поля присутствуют только в тендере
     # Номер закупки
     EIS_PURCHASE_NUMBER = (By.ID, "KsupEisPurchaseNumber_8afdb894-e496-4d71-9e54-a1bf0e0a5fb6_$TextField")
 
     # Ссылка на закупку
     EIS_PURCHASE_LINK = (By.ID, "KsupEisPurchaseLink_39dc12ef-bb5e-46a5-a469-5d687be8ab91_$TextField")
+    # --------------------------------------------------------------------------
 
     # Связанные продажи
     SALES_WITH_OP = (By.XPATH, "//div[@id='div-wcfLookupControl_KsupSalesWithOp']/span/span/span/ul/li[2]/input")
@@ -245,8 +265,19 @@ class FormCreateZakupLocators:
     # Результаты работ
     DESCRIPTION_PLAIN_IN_ZP_ELEMENT = (By.ID, "KsupPaDescription_81c0defa-82c4-4dec-a6f1-556818457fd6_$TextField")
 
+    # --------------------------------------------------------------------------
+    #Поля присутствуют тольков запросе цен работ и услуг
+    # Номер запроса цен на Официальном сайте ЕИС
+    EIS_PRICE_NUMBER = (By.ID, "KsupEisPriceNumber_0c8b9e99-9c3a-421a-8f14-c03b006f4231_$TextField")
+
+    # Ссылка на запрос на Официальном сайте ЕИС
+    EIS_PRICE_LINK = (By.ID, "KsupEisPriceLink_deebb51e-29c0-4543-9290-d801cfafcb4c_$TextField")
+    # --------------------------------------------------------------------------
+
+    # --------------------------------------------------------------------------
+    # Поля файлов присутствуют только в ТЕНДЕРЕ
     # Тендерная заявка
-    FILE_TENDER_REQUEST = (By.XPATH, "// div[ @ id = 'File_TenderRequest'] / div / input")
+    FILE_TENDER_REQUEST = (By.XPATH, "//div[@id='File_TenderRequest']/div/input")
     FILE_TENDER_NAME_LINK = (By.CLASS_NAME, "fileField_File_TenderRequest_NameLink_")
 
     # Тендерная документация
@@ -264,6 +295,18 @@ class FormCreateZakupLocators:
     # Проект контракта
     FILE_PROJECT_OF_CONTRACT = (By.XPATH, "//div[@id='File_ProjectOfContract']/div/input")
     FILE_PROJECT_OF_CONTRACT_NAME_LINK = (By.CLASS_NAME, "fileField_File_ProjectOfContract_NameLink_")
+    # --------------------------------------------------------------------------
+
+
+    # --------------------------------------------------------------------------
+    # Поля файлов присутствуют только в Запрос цен товаров и услуг
+    # Запрос НМЦК
+    FILE_NMCK_REQUEST = (By.XPATH, "//div[@id='File_NMCKRequest']/div/input")
+    FILE_NMCK_REQUEST_NAME_LINK = (By.CLASS_NAME, "fileField_File_NMCKRequest_NameLink_")
+    # Ответ на запрос НМЦК
+    FILE_NMCK_RESPONSE = (By.XPATH, "//div[@id='File_NMCKResponse']/div/input")
+    FILE_NMCK_RESPONSE_NAME_LINK = (By.CLASS_NAME, "fileField_File_NMCKResponse_NameLink_")
+    # --------------------------------------------------------------------------
 
     # Риски проекта с точки зрения Департамента
     PROJECT_RISK_DEPARTMENT_PERSPEC = (
