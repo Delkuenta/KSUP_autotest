@@ -15,26 +15,31 @@ from pages.contract_element_page import ContractElementPage
 
 class Test1_PaZpDkTenderKatArazrabPO_fullAprovalCycle:
 
-    @pytest.mark.repeat(6)
+    @pytest.mark.repeat(1)
     def test_create_presale(self, browser):
-        link = "https://ksup-tst.lanit/_windows/default.aspx"
-        page = PresalePage(browser, link)
-        page.open()  # открываем страницу
-        page.login_seller()
-        page.verify_username("Mr_KSUP_Seller")
-        page.should_be_clickable_create_button()
-        page.go_to_create_presale()
+        link = LoginData.link
+        login_page = LoginData(browser, link)
+        login_page.open()  # открываем страницу
+        login_page.login_seller()
+        login_page.verify_username("Mr_KSUP_Seller")
+        presale_list_page = PresalePage(browser, link)
+        presale_list_page.go_to_presale_list()
+        presale_list_page.should_be_clickable_create_button()
+        presale_list_page.go_to_create_presale()
         presale_create_form = PresaleFormCreate(browser, browser.current_url)
         presale_create_form.form_create_presale_tender()
-        page.should_be_element_on_presale_list()
+        presale_list_page.should_be_element_on_presale_list()
 
     def test_create_zakup_based_on_presale(self, browser):
-        link = LoginData.Mr_KSUP_Seller
-        page = PresalePage(browser,
+        link = LoginData.link
+        login_page = LoginData(browser,
                            link)  # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес
-        page.open()  # открываем страницу
-        page.verify_username("Mr_KSUP_Seller")
-        page.go_to_presale_element()
+        login_page.open()  # открываем страницу
+        login_page.login_seller()
+        login_page.verify_username("Mr_KSUP_Seller")
+        login_page.go_to_presale_list()
+        presale_list_page = PresalePage(browser, browser.current_url)
+        presale_list_page.go_to_presale_element()
         page_presale_element = PresaleElementPage(browser, browser.current_url)
         page_presale_element.go_to_create_zp_tender_based_on_presale()
         zakup_create_form = ZakupFormCreate(browser, browser.current_url)
@@ -43,12 +48,13 @@ class Test1_PaZpDkTenderKatArazrabPO_fullAprovalCycle:
         page_zakup_list.should_be_element_on_zakup_list()
 
     def test_send_zakup_for_approval(self, browser):
-        link = LoginData.Mr_KSUP_Seller
-        page = PresalePage(browser,
+        link = LoginData.link
+        login_page = LoginData(browser,
                            link)  # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес
-        page.open()  # открываем страницу
-        page.verify_username("Mr_KSUP_Seller")
-        page.go_to_zakup_list()
+        login_page.open()  # открываем страницу
+        login_page.login_seller()
+        login_page.verify_username("Mr_KSUP_Seller")
+        login_page.go_to_zakup_list()
         zakup_list_page = ZakupPage(browser, browser.current_url)
         zakup_list_page.go_to_zakup_element()
         zakup_element_page = ZakupElementPage(browser, browser.current_url)
@@ -56,12 +62,13 @@ class Test1_PaZpDkTenderKatArazrabPO_fullAprovalCycle:
         zakup_element_page.verify_zakup_waiting_status_approval_legal()
 
     def test_approval_zakup_for_legal(self, browser):
-        link = LoginData.Mr_KSUP_Legal
-        page = PresalePage(browser,
+        link = LoginData.link
+        login_page = LoginData(browser,
                            link)  # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес
-        page.open()  # открываем страницу
-        page.verify_username("Mr_KSUP_Legal")
-        page.go_to_zakup_list()
+        login_page.open()  # открываем страницу
+        login_page.login_legal()
+        login_page.verify_username("Mr_KSUP_Legal")
+        login_page.go_to_zakup_list()
         zakup_list_page = ZakupPage(browser, browser.current_url)
         zakup_list_page.go_to_zakup_element()
         zakup_element_page = ZakupElementPage(browser, browser.current_url)
@@ -70,12 +77,13 @@ class Test1_PaZpDkTenderKatArazrabPO_fullAprovalCycle:
         zakup_element_page.verify_zakup_waiting_status_approval_count()
 
     def test_approval_zakup_for_count(self, browser):
-        link = LoginData.Mr_KSUP_Count
-        page = PresalePage(browser,
+        link = LoginData.link
+        login_page = LoginData(browser,
                            link)  # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес
-        page.open()  # открываем страницу
-        page.verify_username("Mr_KSUP_Count")
-        page.go_to_zakup_list()
+        login_page.open()  # открываем страницу
+        login_page.login_count()
+        login_page.verify_username("Mr_KSUP_Count")
+        login_page.go_to_zakup_list()
         zakup_list_page = ZakupPage(browser, browser.current_url)
         zakup_list_page.go_to_zakup_element()
         zakup_element_page = ZakupElementPage(browser, browser.current_url)
@@ -84,12 +92,13 @@ class Test1_PaZpDkTenderKatArazrabPO_fullAprovalCycle:
         zakup_element_page.verify_zakup_waiting_status_approval_fin()
 
     def test_approval_zakup_for_fin(self, browser):
-        link = LoginData.Mr_KSUP_Fin
-        page = PresalePage(browser,
-                           link)  # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес
-        page.open()  # открываем страницу
-        page.verify_username("Mr_KSUP_Fin")
-        page.go_to_zakup_list()
+        link = LoginData.link
+        login_page = LoginData(browser,
+                               link)  # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес
+        login_page.open()  # открываем страницу
+        login_page.login_fin()
+        login_page.verify_username("Mr_KSUP_Fin")
+        login_page.go_to_zakup_list()
         zakup_list_page = ZakupPage(browser, browser.current_url)
         zakup_list_page.go_to_zakup_element()
         zakup_element_page = ZakupElementPage(browser, browser.current_url)
@@ -98,12 +107,13 @@ class Test1_PaZpDkTenderKatArazrabPO_fullAprovalCycle:
         zakup_element_page.verify_zakup_waiting_status_approval_udprpo()
 
     def test_approval_zakup_for_udprpo(self, browser):
-        link = LoginData.Mr_KSUP_UDPRPO
-        page = PresalePage(browser,
-                           link)  # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес
-        page.open()  # открываем страницу
-        page.verify_username("Mr_KSUP_UDPRPO")
-        page.go_to_zakup_list()
+        link = LoginData.link
+        login_page = LoginData(browser,
+                               link)  # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес
+        login_page.open()  # открываем страницу
+        login_page.login_udprpo()
+        login_page.verify_username("Mr_KSUP_UDPRPO")
+        login_page.go_to_zakup_list()
         zakup_list_page = ZakupPage(browser, browser.current_url)
         zakup_list_page.go_to_zakup_element()
         zakup_element_page = ZakupElementPage(browser, browser.current_url)
@@ -112,12 +122,13 @@ class Test1_PaZpDkTenderKatArazrabPO_fullAprovalCycle:
         zakup_element_page.verify_zakup_waiting_status_approval_kkp()
 
     def test_approval_zakup_for_kkp(self, browser):
-        link = LoginData.Mr_KSUP_KKP
-        page = PresalePage(browser,
-                           link)  # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес
-        page.open()  # открываем страницу
-        page.verify_username("Mr_KSUP_KKP")
-        page.go_to_zakup_list()
+        link = LoginData.link
+        login_page = LoginData(browser,
+                               link)  # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес
+        login_page.open()  # открываем страницу
+        login_page.login_kkp()
+        login_page.verify_username("Mr_KSUP_KKP")
+        login_page.go_to_zakup_list()
         zakup_list_page = ZakupPage(browser, browser.current_url)
         zakup_list_page.go_to_zakup_element()
         zakup_element_page = ZakupElementPage(browser, browser.current_url)
@@ -125,12 +136,13 @@ class Test1_PaZpDkTenderKatArazrabPO_fullAprovalCycle:
         zakup_element_page.verify_zakup_successfully_status_approval_kkp()
 
     def test_create_contract_based_on_zakup(self, browser):
-        link = LoginData.Mr_KSUP_Seller
-        page = PresalePage(browser,
-                           link)  # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес
-        page.open()  # открываем страницу
-        page.verify_username("Mr_KSUP_Seller")
-        page.go_to_zakup_list()
+        link = LoginData.link
+        login_page = LoginData(browser,
+                               link)  # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес
+        login_page.open()  # открываем страницу
+        login_page.login_seller()
+        login_page.verify_username("Mr_KSUP_Seller")
+        login_page.go_to_zakup_list()
         zakup_list_page = ZakupPage(browser, browser.current_url)
         zakup_list_page.go_to_zakup_element()
         zakup_element_page = ZakupElementPage(browser, browser.current_url)
@@ -141,12 +153,13 @@ class Test1_PaZpDkTenderKatArazrabPO_fullAprovalCycle:
         contract_list_page.should_be_element_on_contract_list()
 
     def test_send_contract_for_approval(self, browser):
-        link = LoginData.Mr_KSUP_Seller
-        page = PresalePage(browser,
-                           link)  # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес
-        page.open()  # открываем страницу
-        page.verify_username("Mr_KSUP_Seller")
-        page.go_to_contract_list()
+        link = LoginData.link
+        login_page = LoginData(browser,
+                               link)  # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес
+        login_page.open()  # открываем страницу
+        login_page.login_seller()
+        login_page.verify_username("Mr_KSUP_Seller")
+        login_page.go_to_contract_list()
         contract_list = ContractPage(browser, browser.current_url)
         contract_list.go_to_contract_element()
         contract_element_page = ContractElementPage(browser, browser.current_url)
@@ -154,12 +167,13 @@ class Test1_PaZpDkTenderKatArazrabPO_fullAprovalCycle:
         contract_element_page.verify_contract_waiting_status_approval_legal()
 
     def test_approval_contract_for_legal(self, browser):
-        link = LoginData.Mr_KSUP_Legal
-        page = PresalePage(browser,
-                           link)  # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес
-        page.open()  # открываем страницу
-        page.verify_username("Mr_KSUP_Legal")
-        page.go_to_contract_list()
+        link = LoginData.link
+        login_page = LoginData(browser,
+                               link)  # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес
+        login_page.open()  # открываем страницу
+        login_page.login_legal()
+        login_page.verify_username("Mr_KSUP_Legal")
+        login_page.go_to_contract_list()
         contract_list_page = ContractPage(browser, browser.current_url)
         contract_list_page.go_to_contract_element()
         contract_element_page = ContractElementPage(browser, browser.current_url)
@@ -168,12 +182,13 @@ class Test1_PaZpDkTenderKatArazrabPO_fullAprovalCycle:
         contract_element_page.verify_contract_waiting_status_approval_count()
 
     def test_approval_contract_for_count(self, browser):
-        link = LoginData.Mr_KSUP_Count
-        page = PresalePage(browser,
-                           link)  # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес
-        page.open()  # открываем страницу
-        page.verify_username("Mr_KSUP_Count")
-        page.go_to_contract_list()
+        link = LoginData.link
+        login_page = LoginData(browser,
+                               link)  # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес
+        login_page.open()  # открываем страницу
+        login_page.login_count()
+        login_page.verify_username("Mr_KSUP_Count")
+        login_page.go_to_contract_list()
         contract_list_page = ContractPage(browser, browser.current_url)
         contract_list_page.go_to_contract_element()
         contract_element_page = ContractElementPage(browser, browser.current_url)
@@ -182,12 +197,13 @@ class Test1_PaZpDkTenderKatArazrabPO_fullAprovalCycle:
         contract_element_page.verify_contract_waiting_status_approval_fin()
 
     def test_approval_contract_for_fin(self, browser):
-        link = LoginData.Mr_KSUP_Fin
-        page = PresalePage(browser,
-                           link)  # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес
-        page.open()  # открываем страницу
-        page.verify_username("Mr_KSUP_Fin")
-        page.go_to_contract_list()
+        link = LoginData.link
+        login_page = LoginData(browser,
+                               link)  # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес
+        login_page.open()  # открываем страницу
+        login_page.login_fin()
+        login_page.verify_username("Mr_KSUP_Fin")
+        login_page.go_to_contract_list()
         contract_list_page = ContractPage(browser, browser.current_url)
         contract_list_page.go_to_contract_element()
         contract_element_page = ContractElementPage(browser, browser.current_url)
@@ -196,12 +212,13 @@ class Test1_PaZpDkTenderKatArazrabPO_fullAprovalCycle:
         contract_element_page.verify_contract_waiting_status_approval_udprpo()
 
     def test_approval_contract_for_udprpo(self, browser):
-        link = LoginData.Mr_KSUP_UDPRPO
-        page = PresalePage(browser,
-                           link)  # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес
-        page.open()  # открываем страницу
-        page.verify_username("Mr_KSUP_UDPRPO")
-        page.go_to_contract_list()
+        link = LoginData.link
+        login_page = LoginData(browser,
+                               link)  # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес
+        login_page.open()  # открываем страницу
+        login_page.login_udprpo()
+        login_page.verify_username("Mr_KSUP_UDPRPO")
+        login_page.go_to_contract_list()
         contract_list_page = ContractPage(browser, browser.current_url)
         contract_list_page.go_to_contract_element()
         contract_element_page = ContractElementPage(browser, browser.current_url)

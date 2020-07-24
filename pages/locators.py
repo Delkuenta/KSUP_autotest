@@ -273,7 +273,7 @@ class FormCreateZakupLocators:
     FILE_OTHER_NAME_LINK = (By.CLASS_NAME, "fileField_File_Other_NameLink_")
 
     # Кнопка создания сущности закупочная процедура
-    CONFIRM_ZP_BUTTON = (By.CSS_SELECTOR, '[value="Создать"].ms-ButtonHeightWidth')
+    CONFIRM_ZP_BUTTON = (By.CSS_SELECTOR, 'co')
 
 
 class ZakupPageLocators:
