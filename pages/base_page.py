@@ -32,7 +32,7 @@ class BasePage:
     # Проверка текста с переменной
     def is_text_to_be_present_in_element(self, how, what, text):
         try:
-            WebDriverWait(self.browser, 10).until(EC.text_to_be_present_in_element((how, what), text))
+            WebDriverWait(self.browser, 5).until(EC.text_to_be_present_in_element((how, what), text))
         except:
             return False
         return True

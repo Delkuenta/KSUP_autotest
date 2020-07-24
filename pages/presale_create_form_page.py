@@ -12,7 +12,7 @@ class PresaleFormCreate(BasePage):
     # Форма создания пресейла
     def form_create_presale_tender(self):
         # Ждем загрузки страницы по последнему загружаемому объекту
-        self.is_text_to_be_present_in_element(*FormCreatePresaleLocators.SELLER_RESPONSIBLE_ELEMENT, UserData.seller_responsible)
+        self.is_text_to_be_present_in_element(*FormCreatePresaleLocators.SELLER_RESPONSIBLE_FOR_VERIFY_ELEMENT, UserData.seller_responsible)
         # Ищем поле "Предмет контракта" и заполняем
         name_presale_element = self.browser.find_element(*FormCreatePresaleLocators.NAME_PRESALE_ELEMENT)
         name_presale_element.send_keys(*UserData.name_presale)
@@ -29,6 +29,10 @@ class PresaleFormCreate(BasePage):
         # Ищем поле "Подразделение-продавец" и выбираем значение
         self.browser.find_element(*FormCreatePresaleLocators.DIVISIONS_ELEMENT).click()
         self.browser.find_element(*FormCreatePresaleLocators.DIVISIONS_DROPDOWN_ELEMENT).click()
+
+        # Ищем поле "Ответственный менеджер подразделения-продавца" и выбираем значение
+        self.browser.find_element(*FormCreatePresaleLocators.SELLER_RESPONSIBLE_ELEMENT).click()
+        self.browser.find_element(*FormCreatePresaleLocators.SELLER_RESPONSIBLE_DROPDOWN_ELEMENT).click()
 
         # Ищем поле "Подразделение-исполнитель" и выбираем значение
         self.browser.find_element(*FormCreatePresaleLocators.DIVISIONS_PERFORMER_ELEMENT).click()
@@ -60,7 +64,7 @@ class PresaleFormCreate(BasePage):
         # Возврат к форм создания.
         self.is_frame_to_parent()
         self.is_text_to_be_present_in_element(
-            *FormCreatePresaleLocators.TYPE_WORK_SERVICES_ELEMENT, f'{UserData.category};')
+            *FormCreatePresaleLocators.TYPE_WORK_SERVICES_ELEMENT, f'{UserData.category}')
 
         # Ищем поле "Сумма" и вводим значение
         sum_element = self.browser.find_element(*FormCreatePresaleLocators.SUM_ELEMENT)

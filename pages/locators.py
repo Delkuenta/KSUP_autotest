@@ -21,8 +21,7 @@ class PresalePageLocators:
 class FormCreatePresaleLocators:
     # Предмет контракта
     NAME_PRESALE_ELEMENT = (By.ID, "KsupFullName_1cb78896-92f2-4cb9-a3ad-b45e0f9932a6_$TextField")
-    # Ответственный менеджер подразделения-продавца (уже предзаполнено)
-    SELLER_RESPONSIBLE_ELEMENT = (By.CSS_SELECTOR, '#select2-wcfLookupControl_KsupSeller-container')
+
     # Способ определения поставщика
     TYPE_PRESALE_ELEMENT = (By.ID, "KsupContractorType_c208b1d8-b8f1-417e-83de-32d7be2864be_$DropDownChoice")
     # Заказчик
@@ -32,6 +31,12 @@ class FormCreatePresaleLocators:
     # Подразделение-продавец
     DIVISIONS_ELEMENT = (By.ID, "div-wcfLookupControl_KsupDivisions")
     DIVISIONS_DROPDOWN_ELEMENT = (By.XPATH, f"//li[normalize-space(.)='{UserData.divisions_seller}']")
+
+    # Ответственный менеджер подразделения-продавца (уже предзаполнено)
+    SELLER_RESPONSIBLE_ELEMENT = (By.ID, "div-wcfLookupControl_KsupSeller")
+    SELLER_RESPONSIBLE_FOR_VERIFY_ELEMENT = (By.CSS_SELECTOR, '#select2-wcfLookupControl_KsupSeller-container')
+    SELLER_RESPONSIBLE_DROPDOWN_ELEMENT = (
+        By.XPATH, f"//li[normalize-space(.)='{UserData.performer_responsible}']")
 
     # Подразделение-исполнитель
     DIVISIONS_PERFORMER_ELEMENT = (By.ID, "div-wcfLookupControl_KsupDivisionPerformer")
@@ -273,7 +278,7 @@ class FormCreateZakupLocators:
     FILE_OTHER_NAME_LINK = (By.CLASS_NAME, "fileField_File_Other_NameLink_")
 
     # Кнопка создания сущности закупочная процедура
-    CONFIRM_ZP_BUTTON = (By.CSS_SELECTOR, 'co')
+    CONFIRM_ZP_BUTTON = (By.CSS_SELECTOR, '[value="Создать"].ms-ButtonHeightWidth')
 
 
 class ZakupPageLocators:
