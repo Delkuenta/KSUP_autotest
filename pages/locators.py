@@ -434,6 +434,18 @@ class FormCreateContractLocators:
     # Чек-бокс Догвоор не заключается
     CONTRACT_IS_NETTING = (By.CSS_SELECTOR, "#KsupContractIsNetting_c8e2c9fe-523c-4d05-913a-eab1b2d18369")
 
+    # Дата заключения договор/контракта
+    CONCLUSION_DATE_CONTRACT = (By.ID, "KsupConclusionDate_1cc85b45-2b12-499b-aeda-bdbdb850a027_$DateTimeFieldDate")
+
+    #Дата завершение договор/контракта
+    DATE_END_CONTRACT = (By.ID, "KsupDateEnd_5714bf19-cc8d-4a00-8acf-1be5513dde9b_$DateTimeFieldDate")
+
+    # Номер закупки
+    EIS_PURCHASE_NUMBER_CONTRACT = (By.ID, "KsupEisPurchaseNumber_8afdb894-e496-4d71-9e54-a1bf0e0a5fb6_$TextField")
+
+    # Ссылка на закупку
+    EIS_PURCHSE_LINK_CONTRACT = (By.ID, "KsupOffEisPurchaseLink_75c016cd-a29d-4b9e-b15b-fe4a8a8c0b27_$TextField")
+
     # Ссылка на договор/контракт на Официальном сайте ЕИС
     EIS_CONTRACT_LINK = (By.ID, "KsupEisContractLink_5155f76b-7bfa-4bca-aacf-a508d08a5bbb_$TextField")
 
