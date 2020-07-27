@@ -308,6 +308,20 @@ class FormCreateZakupLocators:
     FILE_NMCK_RESPONSE_NAME_LINK = (By.CLASS_NAME, "fileField_File_NMCKResponse_NameLink_")
     # --------------------------------------------------------------------------
 
+    # --------------------------------------------------------------------------
+    # Поля файлов присутствуют только в Коммерческое предложение
+
+    # Официальный запрос от Заказчика на КП
+    FILE_KP_REQUEST_FROM_CUSTOMER = (By.XPATH, "//div[@id='File_KPRequestFromCustomer']/div/input")
+    FILE_KP_REQUEST_FROM_CUSTOMER_NAME_LINK = (By.CLASS_NAME, "fileField_File_KPRequestFromCustomer_NameLink_")
+
+    # Коммерческое предложение по официальному запросу
+    FILE_OFFER_BY_REQUEST = (By.XPATH, "//div[@id='File_OfferByRequest']/div/input")
+    FILE_OFFER_BY_REQUEST_NAME_LINK =  (By.CLASS_NAME, "fileField_File_OfferByRequest_NameLink_")
+
+    # --------------------------------------------------------------------------
+
+
     # Риски проекта с точки зрения Департамента
     PROJECT_RISK_DEPARTMENT_PERSPEC = (
         By.ID, "KsupProjectRiskDepartmentPerspec_2c6333aa-aa0b-4e97-aab8-b89e7aa7f0c6_$TextField")

@@ -19,7 +19,6 @@ class BasePage:
 
     # Проверка, что логин выполнится под правильной УЗ
     def verify_username(self, user_name):
-        print(user_name)
         assert self.is_element_text(*BasePageLocators.USER_NAME) in user_name, "User Name is not presented"
 
     # Вывод текста из элемента

@@ -180,6 +180,7 @@ class PresaleFormCreate(BasePage):
 
         assert self.is_visibility_of_element_located(*FormCreatePresaleLocators.SALE_LAW_TYPE_ELEMENT) == False, \
             "Ошибка: При выбранном Способе определения поставщика поле Порядок проведения закупочной процедуры не должно отображаться"
+
         # Ищем кнопку "Тип работ и услуг"
         self.browser.find_element(*FormCreatePresaleLocators.SEARCH_VALID_OPTION_ELEMENT).click()
         time.sleep(2)
