@@ -87,6 +87,13 @@ class ZakupElementPage(BasePage):
                                                      "Согласовано"), \
             'Некорректный статус или отсутствует статус в строке "Согласование c ККП"'
 
+    def verify_zakup_not_require_status_approval(self):
+        self.is_element_present(*ZakupElementLocators.APPROVAL_MAIN_STATUS_ELEMENT)
+        assert self.is_text_to_be_present_in_element(*ZakupElementLocators.APPROVAL_MAIN_STATUS_ELEMENT,
+                                                     "Внутреннее согласование не требуется"), \
+            'Некорректный статус или отсутствует статус в строке "Статус согласования"'
+
+
     def approval_zakup_legal(self):
         self.is_element_clickable(*ZakupElementLocators.APPROVAL_ZAKUP)
         self.browser.find_element(*ZakupElementLocators.APPROVAL_ZAKUP).click()

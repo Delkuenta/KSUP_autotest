@@ -380,6 +380,8 @@ class ZakupElementLocators:
     APPROVAL_KKP_STATUS_ELEMENT = (By.XPATH,
                                    "(.//*[normalize-space(text()) and normalize-space(.)='Согласование ККП'])[1]/following::span[1]")
 
+    APPROVAL_MAIN_STATUS_ELEMENT = (By.CSS_SELECTOR, ".fldKsupPresaleApproveStatus #SPFieldChoice")
+
 
 class ContractPageLocators:
     CONTRACT_CREATE_BUTTON = (By.CSS_SELECTOR, "#idHomePageNewItem")

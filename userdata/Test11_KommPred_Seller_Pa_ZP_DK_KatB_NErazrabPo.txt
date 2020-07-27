@@ -1,0 +1,60 @@
+# Под какими УЗ создаем сущности?:
+login_for_create_presale = ["Lanit\Mr_KSUP_Seller", "AsdGhj-5681-Sle"]
+login_for_create_zakup = ["Lanit\Mr_KSUP_Seller", "AsdGhj-5681-Sle"]
+login_for_create_contract = ["Lanit\Mr_KSUP_Seller", "AsdGhj-5681-Sle"]
+
+# переменные для пресейловой активности. Запрос цен и услуг, категория А,разработка ПО, Самостоятельная продажа
+name_presale = "t11e1_Seller_ПА_КоммПред_самостПрод_катБ_НЕразрабПО"  # + str(time.time())
+type_presale = "Коммерческое предложение"
+customer = "ООО \"БЕЖЕНАР\""
+divisions_seller = "ОНЛАНТА"
+seller_responsible = "Бравосов Андрей Игоревич"
+division_performer = "ОНЛАНТА"
+performer_responsible = "Бравосов Андрей Игоревич"
+performer_legal = "ООО \"ЛАНИТ-ТЕХНОЛОГИИ\""
+sale_law_type = "44-ФЗ"
+group_category = "TIE_5"
+category = "Услуги по обучению"
+sum = 45000000
+currency = "Рубль"
+application_size = "1000"
+contract_size = "2000"
+separate_sale = "Да"
+competition_deadline_From = "15.07.2020"
+plan_date_contract_conclusion = "1.07.2020"
+plan_Date_contract_finish = "30.12.2020"
+project_probability = "70"
+description_plain_text = "Краткое описание текст"
+risks = "Текст_риски_тест"
+yeartable_1line = 2020
+yeartable_2line = 2020
+quarter_1line = "3 квартал"
+quarter_2line = "4 квартал"
+
+# переменные в закупочной процедуре, остальные предзаполняются из ПА
+name_zp_based_on_presale = "t11e2_Seller_ЗП_КоммПред_самостПрод_катБ_НЕразрабПО"
+price_information_deadline = "16.07.2020"  # только в ЗП запросе цен и услуг
+purchase_start_date_from = "17.07.2020"  # только в ЗП запросе цен и услуг
+purchase_start_date_to = "18.07.2020"  # только в ЗП запросе цен и услуг
+eis_price_number = "ZP/0011-AT-Price"
+eis_price_link = "example@link.com"
+project_risk_department = "тестовое сообщение_Риски проекта с точки зрения Департамента"
+
+# Переменные в форме создания Договор/контракт, остальные предзаполняются из ЗП и ПА
+name_contract_based_on_zakup = "t11e3_Seller_ДК_КоммПред_самостПрод_катБ_НЕразраб ПО"
+number_contract = "DK/0011-AT"
+purchase_number = "ZP/0011-AT"
+purchase_link = "testlink_zakup_proc.com"
+eis_contract_link = "test_link_eis@mail.com"
+group_territory = "TIE_3"
+territory = "Вологодская область"
+technologies = "Java"
+quantitative_indicators_project = "тестовый текст в поле Количественные показатели реализации проекта"
+project_unique_code = "2hMuCr11"
+
+# Комментарии при согласовании и отклонении
+comment_approval_legal = "Успешное согласование за Юридическую службу"
+comment_approval_count = "Успешное согласование за Бухгалтерию"
+comment_approval_fin = "Успешное согласование за финансовую службу"
+comment_approval_udprpo = "Успешное согласование за УДПР ПО"
+comment_approval_kkp = "Успешное согласование за ККП"
