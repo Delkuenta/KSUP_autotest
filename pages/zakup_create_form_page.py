@@ -104,7 +104,7 @@ class ZakupFormCreate(BasePage):
         assert UserData.name_presale in self.is_element_text(*FormCreateZakupLocators.SALES_WITH_OP_FOR_VERIFY), \
             "Некорректная информация в поле Связанные продажи"
 
-        #При выборе     # sale_law_type = "44-ФЗ" появляются два дополнительных поля
+        #При выборе     # sale_law_type = "44-ФЗ" появляются четыре дополнительных поля
         # "Предполагаемая дата начала проведения закупки с" и "Предполагаемая дата начала проведения закупки по"
         # проверяем отображения этих полей. При другом типе пропускаем эти проверки
         if UserData.sale_law_type == "44-ФЗ":
@@ -112,6 +112,26 @@ class ZakupFormCreate(BasePage):
                 'Ошибка: Не отображено поле "Предполагаемая дата начала проведения закупки с"'
             assert self.is_visibility_of_element_located(*FormCreateZakupLocators.PURCHASE_START_DATE_TO), \
                 'Ошибка: Не отображено поле "Предполагаемая дата начала проведения закупки с"'
+
+            assert self.is_visibility_of_element_located(*FormCreateZakupLocators.EIS_PRICE_NUMBER), \
+                'Ошибка: Не отображено поле "Номер запроса цен на Официальном сайте ЕИС"'
+
+            assert self.is_visibility_of_element_located(*FormCreateZakupLocators.EIS_PRICE_LINK), \
+                'Ошибка: Не отображено поле "Ссылка на запрос на Официальном сайте ЕИС"'
+
+            # Предполагаемая дата начала проведения закупки с
+            self.browser.find_element(*FormCreateZakupLocators.PURCHASE_START_DATE_FROM).send_keys(
+                UserData.purchase_start_date_from)
+
+            # Предполагаемая дата начала проведения закупки по
+            self.browser.find_element(*FormCreateZakupLocators.PURCHASE_START_DATE_TO).send_keys(
+                UserData.purchase_start_date_to)
+
+            # Номер запроса цен на Официальном сайте ЕИС
+            self.browser.find_element(*FormCreateZakupLocators.EIS_PRICE_NUMBER).send_keys(UserData.eis_price_number)
+
+            # Ссылка на запрос на Официальном сайте ЕИС
+            self.browser.find_element(*FormCreateZakupLocators.EIS_PRICE_LINK).send_keys(UserData.eis_price_link)
 
         # Ищем поле "Предмет контракта" и меняем в нем значение на новое
         name_zp_basedOn_presale_element = self.browser.find_element(*FormCreateZakupLocators.NAME_ZP_ELEMENT)
@@ -121,17 +141,6 @@ class ZakupFormCreate(BasePage):
         # Срок предоставления ценовой информации
         self.browser.find_element(*FormCreateZakupLocators.PRICE_INFORMATION_DEADLINE_FROM).send_keys(UserData.price_information_deadline)
 
-        # Предполагаемая дата начала проведения закупки с
-        self.browser.find_element(*FormCreateZakupLocators.PURCHASE_START_DATE_FROM).send_keys(UserData.purchase_start_date_from)
-
-        # Предполагаемая дата начала проведения закупки по
-        self.browser.find_element(*FormCreateZakupLocators.PURCHASE_START_DATE_TO).send_keys(UserData.purchase_start_date_to)
-
-        # Номер запроса цен на Официальном сайте ЕИС
-        self.browser.find_element(*FormCreateZakupLocators.EIS_PRICE_NUMBER).send_keys(UserData.eis_price_number)
-
-        # Ссылка на запрос на Официальном сайте ЕИС
-        self.browser.find_element(*FormCreateZakupLocators.EIS_PRICE_LINK).send_keys(UserData.eis_price_link)
 
         # Заполняем поле "Риски проекта с точки зрения Департамента"
         project_risk_depatment_element = self.browser.find_element(*FormCreateZakupLocators.PROJECT_RISK_DEPARTMENT_PERSPEC)
