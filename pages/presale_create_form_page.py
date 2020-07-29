@@ -13,7 +13,7 @@ class PresaleFormCreate(BasePage):
     def form_create_presale_all_type(self):
         # Ждем загрузки страницы по последнему загружаемому объекту
         self.is_text_to_be_present_in_element(*FormCreatePresaleLocators.SELLER_RESPONSIBLE_FOR_VERIFY_ELEMENT,
-                                              UserData.seller_responsible)
+                                              UserData.performer_responsible)
         # Ищем поле "Предмет контракта" и заполняем
         name_presale_element = self.browser.find_element(*FormCreatePresaleLocators.NAME_PRESALE_ELEMENT)
         name_presale_element.send_keys(*UserData.name_presale)
@@ -153,5 +153,10 @@ class PresaleFormCreate(BasePage):
         self.browser.find_element(*FormCreatePresaleLocators.APPROVAL_DIRECTION_ELEMENT).click()
         self.browser.find_element(*FormCreatePresaleLocators.DIVISIONS_DROPDOWN_ELEMENT).click()
         self.browser.find_element(*FormCreatePresaleLocators.APPROVAL_CONFIRM_SEND_BUTTON).click()
+
+    def abort_send_presale_to_approval_in_form_create(self):
+        confirm = self.browser.switch_to.alert
+        confirm.dismiss()
+
 
 
