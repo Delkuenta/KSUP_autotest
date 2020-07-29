@@ -29,3 +29,13 @@ class PresaleElementPage(BasePage):
 
     def go_to_create_contract_based_on_presale(self):
         self.browser.find_element(*PresaleElementLocators.CREATE_CONTRACT_ELEMENT).click()
+
+    def verify_self_sale_status_approval(self):
+        assert self.is_element_text(*PresaleElementLocators.STATUS_APPROVAL_ELEMENT) == "Не требуется согласование", \
+            'Некорректный статус сущности с атрибутом "Cамостоятельная продажа"=да'
+
+    def verify_separate_sale_status_was_send_approval(self):
+        assert self.is_element_text(*PresaleElementLocators.STATUS_APPROVAL_ELEMENT) == "На согласовании", \
+            'Некорректный статус сущности с атрибутом "Cамостоятельная продажа"=нет и уже отправленной на согласование'
+
+

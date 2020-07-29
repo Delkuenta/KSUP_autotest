@@ -1,7 +1,7 @@
 import pytest
 
 from pages.presale_list_page import PresalePage
-from userdata.login_data import LoginData
+from pages.login_data import LoginData
 from userdata.user_data import UserData
 from pages.presale_create_form_page import PresaleFormCreate
 from pages.presale_element_page import PresaleElementPage
@@ -27,7 +27,7 @@ class Test1_Tender_Pa_Zp_Dk_KatA_razrabPO:
         presale_list_page.should_be_clickable_create_button()
         presale_list_page.go_to_create_presale()
         presale_create_form = PresaleFormCreate(browser, browser.current_url)
-        presale_create_form.form_create_presale_tender_or_zapros_cen_uslug()
+        presale_create_form.form_create_presale_all_type()
         presale_list_page.should_be_element_on_presale_list()
 
     def test_create_zakup_konkurs_based_on_presale(self, browser):
@@ -240,7 +240,7 @@ class Test2_Tender_Pa_Zp_Dk_KatB_razrabPO:
         presale_list_page.should_be_clickable_create_button()
         presale_list_page.go_to_create_presale()
         presale_create_form = PresaleFormCreate(browser, browser.current_url)
-        presale_create_form.form_create_presale_tender_or_zapros_cen_uslug()
+        presale_create_form.form_create_presale_all_type()
         presale_list_page.should_be_element_on_presale_list()
 
     def test_create_zakup_konkurs_based_on_presale(self, browser):
@@ -438,7 +438,7 @@ class Test3_Tender_Pa_Zp_Dk_KatC_razrabPO:
         presale_list_page.should_be_clickable_create_button()
         presale_list_page.go_to_create_presale()
         presale_create_form = PresaleFormCreate(browser, browser.current_url)
-        presale_create_form.form_create_presale_tender_or_zapros_cen_uslug()
+        presale_create_form.form_create_presale_all_type()
         presale_list_page.should_be_element_on_presale_list()
 
     def test_create_zakup_konkurs_based_on_presale(self, browser):
@@ -606,7 +606,7 @@ class Test4_Tender_Pa_Zp_Dk_KatA_NErazrabPO:
         presale_list_page.should_be_clickable_create_button()
         presale_list_page.go_to_create_presale()
         presale_create_form = PresaleFormCreate(browser, browser.current_url)
-        presale_create_form.form_create_presale_tender_or_zapros_cen_uslug()
+        presale_create_form.form_create_presale_all_type()
         presale_list_page.should_be_element_on_presale_list()
 
     def test_create_zakup_konkurs_based_on_presale(self, browser):
@@ -789,7 +789,7 @@ class Test5_Tender_Pa_Zp_Dk_KatB_NErazrabPO:
         presale_list_page.should_be_clickable_create_button()
         presale_list_page.go_to_create_presale()
         presale_create_form = PresaleFormCreate(browser, browser.current_url)
-        presale_create_form.form_create_presale_tender_or_zapros_cen_uslug()
+        presale_create_form.form_create_presale_all_type()
         presale_list_page.should_be_element_on_presale_list()
 
     def test_create_zakup_konkurs_based_on_presale(self, browser):
@@ -957,7 +957,7 @@ class Test6_Tender_Pa_Zp_Dk_KatC_NErazrabPO:
         presale_list_page.should_be_clickable_create_button()
         presale_list_page.go_to_create_presale()
         presale_create_form = PresaleFormCreate(browser, browser.current_url)
-        presale_create_form.form_create_presale_tender_or_zapros_cen_uslug()
+        presale_create_form.form_create_presale_all_type()
         presale_list_page.should_be_element_on_presale_list()
 
     def test_create_zakup_konkurs_based_on_presale(self, browser):
@@ -1123,7 +1123,7 @@ class Test7_KommPred_Pa_ZP_DK__KatA_razrabPo:
         presale_list_page.should_be_clickable_create_button()
         presale_list_page.go_to_create_presale()
         presale_create_form = PresaleFormCreate(browser, browser.current_url)
-        presale_create_form.form_create_presale_non_type_or_komm_pred()
+        presale_create_form.form_create_presale_all_type()
         presale_list_page.should_be_element_on_presale_list()
 
     def test_create_zakup_based_on_presale(self, browser):
@@ -1286,7 +1286,7 @@ class Test8_KommPred_Pa_ZP_DK__KatB_razrabPo:
         presale_list_page.should_be_clickable_create_button()
         presale_list_page.go_to_create_presale()
         presale_create_form = PresaleFormCreate(browser, browser.current_url)
-        presale_create_form.form_create_presale_non_type_or_komm_pred()
+        presale_create_form.form_create_presale_all_type()
         presale_list_page.should_be_element_on_presale_list()
 
     def test_create_zakup_based_on_presale(self, browser):
@@ -1435,7 +1435,7 @@ class Test9_KommPred_Pa_ZP_DK__KatC_razrabPo:
         presale_list_page.should_be_clickable_create_button()
         presale_list_page.go_to_create_presale()
         presale_create_form = PresaleFormCreate(browser, browser.current_url)
-        presale_create_form.form_create_presale_non_type_or_komm_pred()
+        presale_create_form.form_create_presale_all_type()
         presale_list_page.should_be_element_on_presale_list()
 
     def test_create_zakup_based_on_presale(self, browser):
@@ -1555,7 +1555,7 @@ class Test10_KommPred_Pa_ZP_DK__KatA_NErazrabPo:
         presale_list_page.should_be_clickable_create_button()
         presale_list_page.go_to_create_presale()
         presale_create_form = PresaleFormCreate(browser, browser.current_url)
-        presale_create_form.form_create_presale_non_type_or_komm_pred()
+        presale_create_form.form_create_presale_all_type()
         presale_list_page.should_be_element_on_presale_list()
 
     def test_create_zakup_based_on_presale(self, browser):
@@ -1690,7 +1690,7 @@ class Test11_KommPred_Pa_ZP_DK__KatB_NErazrabPo:
         presale_list_page.should_be_clickable_create_button()
         presale_list_page.go_to_create_presale()
         presale_create_form = PresaleFormCreate(browser, browser.current_url)
-        presale_create_form.form_create_presale_non_type_or_komm_pred()
+        presale_create_form.form_create_presale_all_type()
         presale_list_page.should_be_element_on_presale_list()
 
     def test_create_zakup_based_on_presale(self, browser):
@@ -1810,7 +1810,7 @@ class Test12_KommPred_Pa_ZP_DK__KatC_NErazrabPo:
         presale_list_page.should_be_clickable_create_button()
         presale_list_page.go_to_create_presale()
         presale_create_form = PresaleFormCreate(browser, browser.current_url)
-        presale_create_form.form_create_presale_non_type_or_komm_pred()
+        presale_create_form.form_create_presale_all_type()
         presale_list_page.should_be_element_on_presale_list()
 
     def test_create_zakup_based_on_presale(self, browser):
@@ -1932,7 +1932,7 @@ class Test13_ZaprosCen_Pa_ZP_DK__KatA_razrabPO:
         presale_list_page.should_be_clickable_create_button()
         presale_list_page.go_to_create_presale()
         presale_create_form = PresaleFormCreate(browser, browser.current_url)
-        presale_create_form.form_create_presale_tender_or_zapros_cen_uslug()
+        presale_create_form.form_create_presale_all_type()
         presale_list_page.should_be_element_on_presale_list()
 
     def test_create_zakup_based_on_presale(self, browser):
@@ -2099,7 +2099,7 @@ class Test14_ZaprosCen_Pa_ZP_DK__KatB_razrabPO:
         presale_list_page.should_be_clickable_create_button()
         presale_list_page.go_to_create_presale()
         presale_create_form = PresaleFormCreate(browser, browser.current_url)
-        presale_create_form.form_create_presale_tender_or_zapros_cen_uslug()
+        presale_create_form.form_create_presale_all_type()
         presale_list_page.should_be_element_on_presale_list()
 
     def test_create_zakup_based_on_presale(self, browser):
@@ -2251,7 +2251,7 @@ class Test15_ZaprosCen_Pa_ZP_DK__KatC_razrabPO:
         presale_list_page.should_be_clickable_create_button()
         presale_list_page.go_to_create_presale()
         presale_create_form = PresaleFormCreate(browser, browser.current_url)
-        presale_create_form.form_create_presale_tender_or_zapros_cen_uslug()
+        presale_create_form.form_create_presale_all_type()
         presale_list_page.should_be_element_on_presale_list()
 
     def test_create_zakup_based_on_presale(self, browser):
@@ -2375,7 +2375,7 @@ class Test16_ZaprosCen_Pa_ZP_DK__KatA_NErazrabPO:
         presale_list_page.should_be_clickable_create_button()
         presale_list_page.go_to_create_presale()
         presale_create_form = PresaleFormCreate(browser, browser.current_url)
-        presale_create_form.form_create_presale_tender_or_zapros_cen_uslug()
+        presale_create_form.form_create_presale_all_type()
         presale_list_page.should_be_element_on_presale_list()
 
     def test_create_zakup_based_on_presale(self, browser):
@@ -2512,7 +2512,7 @@ class Test17_ZaprosCen_Pa_ZP_DK__KatB_NErazrabPO:
         presale_list_page.should_be_clickable_create_button()
         presale_list_page.go_to_create_presale()
         presale_create_form = PresaleFormCreate(browser, browser.current_url)
-        presale_create_form.form_create_presale_tender_or_zapros_cen_uslug()
+        presale_create_form.form_create_presale_all_type()
         presale_list_page.should_be_element_on_presale_list()
 
     def test_create_zakup_based_on_presale(self, browser):
@@ -2634,7 +2634,7 @@ class Test18_ZaprosCen_Pa_ZP_DK__KatC_NErazrabPO:
         presale_list_page.should_be_clickable_create_button()
         presale_list_page.go_to_create_presale()
         presale_create_form = PresaleFormCreate(browser, browser.current_url)
-        presale_create_form.form_create_presale_tender_or_zapros_cen_uslug()
+        presale_create_form.form_create_presale_all_type()
         presale_list_page.should_be_element_on_presale_list()
 
     def test_create_zakup_based_on_presale(self, browser):

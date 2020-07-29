@@ -129,6 +129,14 @@ class FormCreatePresaleLocators:
     # Кнопка создания сущности пресейл
     CONFIRM_PRESALE_BUTTON = (By.CSS_SELECTOR, '[value="Создать"].ms-ButtonHeightWidth')
 
+    #Элементы модульного окна при отправке на согласование внутри формы создания ПА
+    # Поле для выбора подразделения
+    iframe = (By.CSS_SELECTOR, ".ms-dlgFrame")
+    APPROVAL_DIRECTION_ELEMENT = (By.XPATH, "//span[@id='select2-directionItems-container']")
+    # Кнопка "Отправить" на согласование
+    APPROVAL_CONFIRM_SEND_BUTTON = (By.ID, "ctl00_PlaceHolderMain_btnSend")
+    #
+    APPROVAL_CANCEL_SEND_BUTTON = (By.ID, "ctl00_PlaceHolderMain_btnCancel")
 
 class PresaleElementLocators:
     # Кнопка изменения элемента
@@ -145,6 +153,8 @@ class PresaleElementLocators:
 
     # Кнопка "Внести информацию о договоре/контракте"
     CREATE_CONTRACT_ELEMENT = (By.ID, "Ribbon.ListForm.Display.ContractGroup-LargeLarge")
+
+    STATUS_APPROVAL_ELEMENT = (By.CSS_SELECTOR, ".fldKsupSaleApproveStatus #SPFieldChoice")
 
 
 class FormCreateZakupLocators:

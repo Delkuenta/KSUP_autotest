@@ -47,7 +47,7 @@ class BasePage:
         return True
 
     # Проверка, доступен ли элемент к нажатию
-    def is_element_clickable(self, how, what, timeout=5):
+    def is_element_clickable(self, how, what, timeout=60):
         try:
             WebDriverWait(self.browser, timeout).until(EC.element_to_be_clickable((how, what)))
         except TimeoutException:
@@ -99,7 +99,6 @@ class BasePage:
         self.browser.get(BasePageLocators.CONTRACT_LIST_LINK)
         assert self.is_text_to_be_present_in_element(*BasePageLocators.CONTRACT_LIST_TITLE, "Договоры (контракты)"), \
             "Титул страницы не соответствует переходу"
-
 
     def is_visibility_of_element_located(self, how, what, timeout=4):
         try:
