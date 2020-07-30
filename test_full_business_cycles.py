@@ -15,7 +15,6 @@ from pages.contract_element_page import ContractElementPage
 
 class Test1_Tender_Pa_Zp_Dk_KatA_razrabPO:
 
-    # @pytest.mark.repeat(1)
     def test_create_presale_tender(self, browser):
         link = LoginData.link
         login_page = LoginData(browser, link)
@@ -1110,7 +1109,7 @@ class Test6_Tender_Pa_Zp_Dk_KatC_NErazrabPO:
         contract_element_page.approval_contract_fin()
         contract_element_page.verify_contract_successfully_status_approval_fin()
 
-#@pytest.mark.skip(reason="bug , не отображена кнопка создания ДК на основе ЗП")
+@pytest.mark.skip(reason="bug , не отображена кнопка создания ДК на основе ЗП")
 class Test7_KommPred_Pa_ZP_DK__KatA_razrabPo:
     def test_create_presale_komm_pred(self, browser):
         link = LoginData.link
@@ -2235,7 +2234,7 @@ class Test14_ZaprosCen_Pa_ZP_DK__KatB_razrabPO:
         contract_list_page.go_to_contract_element()
         contract_element_page = ContractElementPage(browser, browser.current_url)
         contract_element_page.approval_contract_legal()
-        contract_element_page.verify_contract_successfully_status_approval_udprpo() \
+        contract_element_page.verify_contract_successfully_status_approval_udprpo()
 
 
 class Test15_ZaprosCen_Pa_ZP_DK__KatC_razrabPO:
@@ -2499,6 +2498,7 @@ class Test16_ZaprosCen_Pa_ZP_DK__KatA_NErazrabPO:
         contract_element_page.approval_contract_kkp()
         contract_element_page.verify_contract_successfully_status_approval_kkp()
 
+
 class Test17_ZaprosCen_Pa_ZP_DK__KatB_NErazrabPO:
 
     def test_create_presale_zapros_cen(self, browser):
@@ -2620,6 +2620,7 @@ class Test17_ZaprosCen_Pa_ZP_DK__KatB_NErazrabPO:
         contract_element_page = ContractElementPage(browser, browser.current_url)
         contract_element_page.approval_contract_fin()
         contract_element_page.verify_contract_successfully_status_approval_fin()
+
 
 class Test18_ZaprosCen_Pa_ZP_DK__KatC_NErazrabPO:
 

@@ -157,12 +157,18 @@ class PresaleElementLocators:
     STATUS_APPROVAL_ELEMENT = (By.CSS_SELECTOR, ".fldKsupSaleApproveStatus #SPFieldChoice")
 
     # Кнопка отправки на согласование пресейла
-    SEND_APPROVAL_BUTTON = (By.ID, "Approve.ToDirection-Large")
+    SEND_APPROVAL_IN_DIRECTION_BUTTON = (By.ID, "Approve.ToDirection-Large")
+    SEND_APPROVAL_IN_DEPARTMENT_BUTTON = (By.ID, "Approve.ToDepartment-Large")
 
     #Элементы модульного окна при отправке на согласование внутри формы создания ПА
     # Поле для выбора подразделения
     iframe = (By.CSS_SELECTOR, ".ms-dlgFrame")
-    APPROVAL_DIRECTION_ELEMENT = (By.XPATH, "//span[@id='select2-directionItems-container']")
+    UNIT_SELECTION_FIELD_ELEMENT = (By.XPATH, "//span[@id='select2-directionItems-container']")
+
+    #Поле выбора при отправке на согласование пресейла в департамент
+    DIVISIONS_PERFORMER_DROPDOWN_ELEMENT = (By.XPATH, f"//li[normalize-space(.)='{UserData.division_performer}']")
+
+    # Выбор при отправке на согласование пресейла в дирекцию
     DIVISIONS_DROPDOWN_ELEMENT = (By.XPATH, f"//li[normalize-space(.)='{UserData.divisions_seller}']")
     # Кнопка "Отправить" на согласование
     CONFIRM_BUTTON_IN_FRAME = (By.ID, "ctl00_PlaceHolderMain_btnSend")
@@ -179,9 +185,13 @@ class PresaleElementLocators:
     # Поле выбора менеджера в окне согласования
     APPROVAL_MANAGER_ELEMENT = (By.ID, "select2-ctl00_PlaceHolderMain_ddlResponsbileManager-container")
 
-    # Выбор значения
+    # Выбор значения продавца
     CHANGE_SELLER_RESPONSIBLE_DROPDOWN_ELEMENT = (
-        By.XPATH, f"//li[normalize-space(.)='{UserData.seller_responsible}']")
+        By.XPATH, f"//li[normalize-space(.)='{UserData.change_seller_responsible}']")
+
+    # Выбор значения продавца
+    CHANGE_SELLER_PERFORMER_DROPDOWN_ELEMENT = (
+        By.XPATH, f"//li[normalize-space(.)='{UserData.change_performer_responsible}']")
 
     APPROVAL_BUTTON_IN_FRAME = (By.XPATH, "//input[@id='ctl00_PlaceHolderMain_btnApprove']")
 

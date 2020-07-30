@@ -47,7 +47,7 @@ class BasePage:
         return True
 
     # Проверка, доступен ли элемент к нажатию
-    def is_element_clickable(self, how, what, timeout=60):
+    def is_element_clickable(self, how, what, timeout=20):
         try:
             WebDriverWait(self.browser, timeout).until(EC.element_to_be_clickable((how, what)))
         except TimeoutException:
