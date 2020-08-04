@@ -443,7 +443,7 @@ class FormCreateContractLocators:
     NAME_CONTRACT_ELEMENT = (By.ID, "KsupFullName_1cb78896-92f2-4cb9-a3ad-b45e0f9932a6_$TextField")
 
     # Заказчик
-    CUSTOMER_CONTRACT_ELEMENT = (By.CSS_SELECTOR, "#select2-wcfLookupControl_KsupEgr_Customer-container")
+    CUSTOMER_CONTRACT_ELEMENT = (By.CSS_SELECTOR, "#div-wcfLookupControl_KsupEgr_Customer")
     CUSTOMER_DROPDOWN_CONTRACT_ELEMENT = (By.XPATH, f"//li[contains(text(), '{UserData.customer}')]")
 
     # Подразделение-продавец
@@ -455,18 +455,18 @@ class FormCreateContractLocators:
 
     # Подразделение-исполнитель
     DIVISIONS_PERFORMER_CONTRACT_ELEMENT = (
-    By.CSS_SELECTOR, "#select2-wcfLookupControl_KsupDivisionPerformer-container")
+    By.CSS_SELECTOR, "#div-wcfLookupControl_KsupDivisionPerformer")
     DIVISIONS_PERFORMER_CONTRACT_DROPDOWN_ELEMENT = (
         By.XPATH, f"//li[normalize-space(.)='{UserData.division_performer}']")
 
     # Ответственный менеджер подразделения-исполнителя
     PERFORMER_RESPONSIBLE_CONTRACT_ELEMENT = (
-        By.CSS_SELECTOR, "#select2-wcfLookupControl_KsupPerformerResponsible-container")
+        By.CSS_SELECTOR, "#div-wcfLookupControl_KsupPerformerResponsible")
     PERFORMER_RESPONSIBLE_DROPDOWN_CONTRACT_ELEMENT = (
         By.XPATH, f"//li[normalize-space(.)='{UserData.performer_responsible}']")
 
     # Исполнитель (юридическое лицо)
-    PERFORMER_LEGAL_CONTRACT_ELEMENT = (By.CSS_SELECTOR, "#select2-wcfLookupControl_KsupEgr_PerformerLegal-container")
+    PERFORMER_LEGAL_CONTRACT_ELEMENT = (By.CSS_SELECTOR, "#div-wcfLookupControl_KsupEgr_PerformerLegal")
     PERFORMER_LEGAL_DROPDOWN_CONTRACT_ELEMENT = (By.XPATH, f"//li[contains(text(), '{UserData.performer_legal}')]")
 
     # Кнопка поиск допустимого варианта в категории "Тип работ и услуг"
@@ -486,8 +486,15 @@ class FormCreateContractLocators:
     # Строка "Тип работ и услуг"
     TYPE_WORK_SERVICES_ELEMENT = (By.ID, "KsupWorkServicesTypeMetadata_$container")
 
+    # Сумма
+    SUM_ELEMENT = (By.ID, "KsupSum_0270deef-a686-4d0f-8537-95b179e49cc9_$NumberField")
+
+    # Валюта
+    CURRENCY_ELEMENT = (By.ID, "KsupCurrency_9cb5cce6-1d98-4146-a2df-c05c4635dd8d_$DropDownChoice")
+
     PRESALE_SELECT = (By.XPATH, "//div[@id='div-wcfLookupControl_KsupSales']")
     PRESALE_SELECT_DROPDOWN = (By.XPATH, f"(.//*[normalize-space(.)='{UserData.name_presale}'])")
+
 
     ZAKUP_SELECT = (By.XPATH, "//span[@id='select2-wcfLookupControl_KsupPresaleActivity-container']")
     ZAKUP_SELECT_DROPDOWN = (By.XPATH, f".//*[normalize-space(.)='{UserData.name_zp_based_on_presale}']")
@@ -537,11 +544,36 @@ class FormCreateContractLocators:
     # Строка Ключевые технологии
     TYPE_TECHNOLOGIES_ELEMENT = (By.ID, "KsupKeyTechnologies_$containereditableRegion")
 
+    # Поле Цели и задачи
+    DESCRIPTION_PLAIN_TEXT_ELEMENT = (By.ID, "KsupDescriptionPlainText_18b11f3d-f4ae-4a8f-ba29-62366bd13e66_$TextField")
+
     # Количественные показатели реализации проекта
     QUANTITATIVE_INDICATORS_PROJECT_ELEMENT = (By.ID, "KsupQuantitativeIndicatorsProjec_50b9dcc0-2a17-4730-b693-13774456029b_$TextField")
 
     # Уникальный код проекта
     PROJECT_UNIQUE_CODE = (By.ID, "KsupContractProjectUniqueCode_5dc91e1c-28a9-4156-b785-54fa4257f70d_$TextField")
+
+    # --------------------------------------------------------------------
+    # Заполнение плановых платежей
+    # 1 строка Плановых платежей -  Сумма
+    SUMTABLE1_ELEMENT = (By.XPATH, "//tr[3]/td[2]/input")
+
+    # 1 строка Плановых платежей - Год
+    YEARTABLE1 = (By.XPATH, "//td[4]/input")
+
+    # 1 строка Плановых платежей - Квартал
+    QUARTERTABLE1_ELEMENT = (By.XPATH, "//td[5]/select")
+
+    # 2 строка Плановых платежей -  Сумма
+    SUMTABLE2_ELEMENT = (By.XPATH, "//tr[4]/td[2]/input")
+
+    # 2 строка Плановых платежей - Год
+    YEARTABLE2 = (By.XPATH, "//tr[4]/td[4]/input")
+
+    # 2 строка Плановых платежей - Квартал
+    QUARTERTABLE2_ELEMENT = (By.XPATH, "//tr[4]/td[5]/select")
+
+    # --------------------------------------------------------------------
 
     # поле для вставки файла Контракт
     FILE_CONTRACT = (By.XPATH, "//div[@id='File_Contract']/div/input")

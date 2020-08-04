@@ -1,4 +1,4 @@
-#Под какими УЗ создаем сущности?:
+	#Под какими УЗ создаем сущности?:
 login_for_create_presale = ["Lanit\Mr_KSUP_Seller", "AsdGhj-5681-Sle"]
 login_for_create_zakup = ["Lanit\Mr_KSUP_Seller", "AsdGhj-5681-Sle"]
 login_for_create_contract = ["Lanit\Mr_KSUP_Seller", "AsdGhj-5681-Sle"]
@@ -94,3 +94,7 @@ comment_approval_count = "Успешное согласование за Бух�
 comment_approval_fin = "Успешное согласование за финансовую службу"
 comment_approval_udprpo = "Успешное согласование за УДПР ПО"
 comment_approval_kkp = "Успешное согласование за ККП"
+
+# Неиспользуемые поля
+change_seller_responsible = ""
+change_performer_responsible = ""

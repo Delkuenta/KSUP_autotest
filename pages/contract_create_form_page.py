@@ -1,6 +1,8 @@
 from pages.base_page import BasePage
 from pages.locators import FormCreateContractLocators
 from userdata.user_data import UserData
+from selenium.webdriver.support.ui import Select
+
 import time
 
 
@@ -355,3 +357,162 @@ class ContractFormCreate(BasePage):
 
         # Жмем кнопку создать
         self.browser.find_element(*FormCreateContractLocators.CONFIRM_CONTRACT_BUTTON).click()
+
+
+    def form_create_contract_single(self):
+        # Ждем загрузки страницы по последнему загружаемому объекту
+        self.is_text_to_be_present_in_element(*FormCreateContractLocators.SELLER_RESPONSIBLE_CONTRACT_ELEMENT, UserData.seller_responsible)
+
+        # Заполняем имя контракта
+        self.browser.find_element(*FormCreateContractLocators.NAME_CONTRACT_ELEMENT).send_keys(UserData.name_contract_based_on_zakup)
+
+        # Заполняем поле "Заказчик"
+        self.browser.find_element(*FormCreateContractLocators.CUSTOMER_CONTRACT_ELEMENT).click()
+        self.browser.find_element(*FormCreateContractLocators.CUSTOMER_DROPDOWN_CONTRACT_ELEMENT).click()
+
+        # Заполняем поле "Подразделение-продавец"
+        self.browser.find_element(*FormCreateContractLocators.DIVISIONS_CONTRACT_ELEMENT).click()
+        self.browser.find_element(*FormCreateContractLocators.DIVISIONS_DROPDOWN_CONTRACT_ELEMENT).click()
+
+        # Заполняем поле "Подразделение-исполнитель"
+        self.browser.find_element(*FormCreateContractLocators.DIVISIONS_PERFORMER_CONTRACT_ELEMENT).click()
+        self.browser.find_element(*FormCreateContractLocators.DIVISIONS_PERFORMER_CONTRACT_DROPDOWN_ELEMENT).click()
+
+        # Заполняем поле "Ответственный менеджер подразделения-исполнителя"
+        self.browser.find_element(*FormCreateContractLocators.PERFORMER_RESPONSIBLE_CONTRACT_ELEMENT).click()
+        self.browser.find_element(*FormCreateContractLocators.PERFORMER_RESPONSIBLE_DROPDOWN_CONTRACT_ELEMENT).click()
+
+        # Заполняем поле "Исполнитель (юридическое лицо)"
+        self.browser.find_element(*FormCreateContractLocators.PERFORMER_LEGAL_CONTRACT_ELEMENT).click()
+        self.browser.find_element(*FormCreateContractLocators.PERFORMER_LEGAL_DROPDOWN_CONTRACT_ELEMENT).click()
+
+        # Ищем кнопку "Тип работ и услуг"
+        self.browser.find_element(*FormCreateContractLocators.SEARCH_TYPE_AND_SERVICES_ELEMENT).click()
+        time.sleep(2)
+
+        # Работаем во фрейме и выбираем категории
+        self.is_frame_to_be_available_and_switch_to_it()
+        self.browser.find_element(*FormCreateContractLocators.GROUP_CATEGORY_ELEMENT).click()
+        self.browser.find_element(*FormCreateContractLocators.CATEGORY_ELEMENT).click()
+        self.browser.find_element(*FormCreateContractLocators.CHOICE_IFRAME_BUTTON).click()
+        self.browser.find_element(*FormCreateContractLocators.CONFIRM_IFRAME_BUTTON).click()
+        # Возврат к форм создания.
+        self.is_frame_to_parent()
+
+        self.is_text_to_be_present_in_element(
+            *FormCreateContractLocators.TYPE_WORK_SERVICES_ELEMENT, f'{UserData.category}')
+
+        # Ищем поле "Сумма" и вводим значение
+        sum_element = self.browser.find_element(*FormCreateContractLocators.SUM_ELEMENT)
+        sum_element.send_keys(UserData.sum)
+
+        # Ищем поле "Валюта" и выбираем значение
+        currency_element = Select(self.browser.find_element(*FormCreateContractLocators.CURRENCY_ELEMENT))
+        currency_element.select_by_value(UserData.currency)
+
+        # заполняем поле "Номер"
+        self.browser.find_element(*FormCreateContractLocators.NUMBER_CONTRACT_ELEMENT).send_keys(
+            UserData.number_contract)
+
+        # заполняем поле "Дата начала договора"
+        self.browser.find_element(*FormCreateContractLocators.CONCLUSION_DATE_CONTRACT).send_keys(UserData.plan_date_contract_conclusion)
+
+        # заполняем поле "Дата окочания договора"
+        self.browser.find_element(*FormCreateContractLocators.DATE_END_CONTRACT).send_keys(UserData.plan_Date_contract_finish)
+
+        # Заполняем поле Номер закупки
+        self.browser.find_element(*FormCreateContractLocators.EIS_PURCHASE_NUMBER_CONTRACT).send_keys(
+            UserData.purchase_number)
+
+        # Заполняем поле Ссылка на закупку
+        self.browser.find_element(*FormCreateContractLocators.EIS_PURCHSE_LINK_CONTRACT).send_keys(
+            UserData.purchase_link)
+
+        # Заполняем поле Ссылка на договор/контракт на Официальном сайте ЕИС
+        self.browser.find_element(*FormCreateContractLocators.EIS_CONTRACT_LINK).send_keys(UserData.eis_contract_link)
+
+        # Выбираем значение в поле "Территория применения"
+        self.browser.find_element(*FormCreateContractLocators.SEARCH_TERRITORY_ELEMENT).click()
+        time.sleep(2)
+        self.is_frame_to_be_available_and_switch_to_it()
+        self.browser.find_element(*FormCreateContractLocators.GROUP_TERRITORY_ELEMENT).click()
+        self.browser.find_element(*FormCreateContractLocators.TERRITORY_ELEMENT).click()
+        self.browser.find_element(*FormCreateContractLocators.CHOICE_IFRAME_BUTTON).click()
+        self.browser.find_element(*FormCreateContractLocators.CONFIRM_IFRAME_BUTTON).click()
+        # возврат к основной форме
+        self.is_frame_to_parent()
+        self.is_text_to_be_present_in_element(*FormCreateContractLocators.TYPE_TERRITORY_ELEMENT,
+                                              f'{UserData.territory};')
+
+        # Выбираем значение в поле "Ключевые технологии"
+        self.browser.find_element(*FormCreateContractLocators.SEARCH_TECHNOLOGIES_ELEMENT).click()
+        time.sleep(2)
+        self.is_frame_to_be_available_and_switch_to_it()
+        if self.is_element_present(*FormCreateContractLocators.TECHNOLOGIES_ELEMENT):
+            self.browser.find_element(*FormCreateContractLocators.TECHNOLOGIES_ELEMENT).click()
+        else:
+            self.browser.find_element(*FormCreateContractLocators.SCROLL_DOWN_BUTTON).click()
+            assert self.is_element_present(*FormCreateContractLocators.TECHNOLOGIES_ELEMENT) == True, \
+                f"Не найдена технология с именем {UserData.technologies}"
+            self.browser.find_element(*FormCreateContractLocators.TECHNOLOGIES_ELEMENT).click()
+        self.browser.find_element(*FormCreateContractLocators.CHOICE_IFRAME_BUTTON).click()
+        self.browser.find_element(*FormCreateContractLocators.CONFIRM_IFRAME_BUTTON).click()
+        self.is_frame_to_parent()
+        # Проверяем, строку
+        self.is_text_to_be_present_in_element(*FormCreateContractLocators.TYPE_TECHNOLOGIES_ELEMENT,
+                                              f'{UserData.technologies};')
+
+        # Заполняем поле "Цели и задачи"
+        self.browser.find_element(*FormCreateContractLocators.DESCRIPTION_PLAIN_TEXT_ELEMENT).send_keys(UserData.description_plain_text)
+
+        # заполняем поле Количественные показатели реализации проекта
+        self.browser.find_element(*FormCreateContractLocators.QUANTITATIVE_INDICATORS_PROJECT_ELEMENT).send_keys(UserData.quantitative_indicators_project)
+
+        # Уникальный код проекта
+        self.browser.find_element(*FormCreateContractLocators.PROJECT_UNIQUE_CODE).send_keys(UserData.project_unique_code)
+
+        # Заполнение таблицы Плановых платежей 1 строка
+        sumtable1_element = self.browser.find_element(*FormCreateContractLocators.SUMTABLE1_ELEMENT)
+        sumtable1_element.send_keys(int(UserData.sum / 2))
+
+        yeartable1_element = self.browser.find_element(*FormCreateContractLocators.YEARTABLE1)
+        yeartable1_element.send_keys(UserData.yeartable_1line)
+
+        quartertable1_element = Select(self.browser.find_element(*FormCreateContractLocators.QUARTERTABLE1_ELEMENT))
+        quartertable1_element.select_by_visible_text(UserData.quarter_1line)
+
+        # Заполнение таблицы плановых платежей 2 строка
+        sumtable2_element = self.browser.find_element(*FormCreateContractLocators.SUMTABLE2_ELEMENT)
+        sumtable2_element.send_keys(int(UserData.sum / 2))
+
+        yeartable2_element = self.browser.find_element(*FormCreateContractLocators.YEARTABLE2)
+        yeartable2_element.send_keys(UserData.yeartable_2line)
+
+        quartertable2_element = Select(self.browser.find_element(*FormCreateContractLocators.QUARTERTABLE2_ELEMENT))
+        quartertable2_element.select_by_visible_text(UserData.quarter_2line)
+
+        # прикрепляем файл Контракт
+        self.browser.find_element(*FormCreateContractLocators.FILE_CONTRACT).send_keys(UserData.file_path_for_link_file)
+        self.is_text_to_be_present_in_element(*FormCreateContractLocators.FILE_CONTRACT_NAME, UserData.name_file_to_link)
+
+        # прикрепляем файл Бюджет проекта
+        self.browser.find_element(*FormCreateContractLocators.FILE_BUDGET_OF_PROJECT).send_keys(UserData.file_path_for_link_file)
+        self.is_text_to_be_present_in_element(*FormCreateContractLocators.FILE_BUDGET_OF_PROJECT_NAME, UserData.name_file_to_link)
+
+        # прикрепляем файл Пояснительная служебная записка
+        self.browser.find_element(*FormCreateContractLocators.FILE_EXPLANATORY_MEMORANUM).send_keys(UserData.file_path_for_link_file)
+        self.is_text_to_be_present_in_element(*FormCreateContractLocators.FILE_EXPLANATORY_MEMORANUM_NAME, UserData.name_file_to_link)
+
+        # прикрепляем файл Реестр рисков, Карта рисков
+        self.browser.find_element(*FormCreateContractLocators.FILE_RISK_MAP_AND_REGISTERY).send_keys(UserData.file_path_for_link_file)
+        self.is_text_to_be_present_in_element(*FormCreateContractLocators.FILE_RISK_MAP_AND_REGISTERY_NAME, UserData.name_file_to_link)
+
+        # прикрепляем файл Иное
+        self.browser.find_element(*FormCreateContractLocators.FILE_OTHER).send_keys(UserData.file_path_for_link_file)
+        self.is_text_to_be_present_in_element(*FormCreateContractLocators.FILE_OTHER_NAME, UserData.name_file_to_link)
+
+        # Жмем кнопку создать
+        self.browser.find_element(*FormCreateContractLocators.CONFIRM_CONTRACT_BUTTON).click()
+
+
+

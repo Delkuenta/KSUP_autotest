@@ -43,7 +43,7 @@ class Test_single_presale_self_sale:
         presale_element.verify_self_sale_status_approval()
 
 
-# отправка на согласование из формы создания пресейла от департамента
+# создание не самостоятельной продажи и отправка на согласование из формы создания пресейла от департамента
 class Test1_single_presale_separate_sale_department_create:
 
     # single_presale\Test_seller_single_presale_tender_catA_razrabPO_SeparateSale_department_create.txt
@@ -137,7 +137,7 @@ class Test1_single_presale_separate_sale_department_create:
         presale_element.verify_visibility_button_create_contract_based_on_presale()
 
 
-# отправка на согласование из страницы пресейла от дирекции
+# создание не самостоятельной продажи и отправка на согласование из страницы пресейла от дирекции
 class Test2_single_presale_separate_sale_direction_create:
 
     # single_presale\Test_seller2_single_presale_tender_catA_razrabPO_SeparateSale_direction_create.txt
