@@ -1,6 +1,8 @@
-from .base_page import BasePage
-from .locators import PresalePageLocators
-from .locators import PresaleElementLocators
+import random
+
+from pages.base_page import BasePage
+from pages.locators import PresaleElementLocators
+from userdata.user_data import UserData
 
 
 class PresaleElementPage(BasePage):
@@ -28,6 +30,32 @@ class PresaleElementPage(BasePage):
             *PresaleElementLocators.CREATE_CONTRACT_ELEMENT), \
             'Кнопка "Внести информацию о договор/контракте" не доступна для нажатия'
 
+
+    def go_to_create_zp_based_on_presale(self):
+        if UserData.user_data_dict["contractorType"] == "Тендерная заявка":
+            PresaleElementPage.go_to_create_zp_tender_based_on_presale(self)
+        elif UserData.user_data_dict["contractorType"] == "Коммерческое предложение":
+            PresaleElementPage.go_to_create_zp_commercial_offer_based_on_presale(self)
+        elif UserData.user_data_dict["contractorType"] == "Запрос цен товаров, работ, услуг":
+            PresaleElementPage.go_to_create_zp_presale_act_based_on_presale(self)
+        else:
+            number = random.randint(1, 3)
+            print(f"Число в рандоме выпало: {number}")
+            if number == 1:
+                new_contractor_type = {"contractorType": "Тендерная заявка"}
+                UserData.user_data_dict.update(new_contractor_type)
+                print(UserData.user_data_dict)
+                PresaleElementPage.go_to_create_zp_tender_based_on_presale(self)
+            elif number == 2:
+                new_contractor_type = {"contractorType": "Коммерческое предложение"}
+                UserData.user_data_dict.update(new_contractor_type)
+                print(UserData.user_data_dict)
+                PresaleElementPage.go_to_create_zp_commercial_offer_based_on_presale(self)
+            else:
+                new_contractor_type = {"contractorType": "Запрос цен товаров, работ, услуг"}
+                UserData.user_data_dict.update(new_contractor_type)
+                print(UserData.user_data_dict)
+                PresaleElementPage.go_to_create_zp_presale_act_based_on_presale(self)
 
     # Кнопка внутри пресейла для создания ЗП типа тендер (проверяем доступность и нажимаем)
     def go_to_create_zp_tender_based_on_presale(self):
@@ -57,67 +85,3 @@ class PresaleElementPage(BasePage):
             *PresaleElementLocators.CREATE_CONTRACT_ELEMENT), \
             'Кнопка "Внести информацию о договор/контракте" не доступна для нажатия'
         self.browser.find_element(*PresaleElementLocators.CREATE_CONTRACT_ELEMENT).click()
-
-    # Проверка статуса сущности с атрибутом самостоятельная продажа да
-    def verify_self_sale_status_approval(self):
-        assert self.is_element_text(*PresaleElementLocators.STATUS_APPROVAL_ELEMENT) == "Не требуется согласование", \
-            'Некорректный статус сущности с атрибутом "Cамостоятельная продажа"=да'
-
-    # Проверка статуса сущности отправленной на согласование
-    def verify_separate_sale_status_was_send_approval(self):
-        assert self.is_text_to_be_present_in_element(*PresaleElementLocators.STATUS_APPROVAL_ELEMENT, "На согласовании"), \
-            'Некорректный статус сущности с атрибутом "Cамостоятельная продажа"=нет и уже отправленной на согласование'
-
-    # Проверка статуса сущности не отправленной на согласование из формы создания
-    def verify_separate_sale_status_dont_send_approval(self):
-        assert self.is_element_text(*PresaleElementLocators.STATUS_APPROVAL_ELEMENT) == "Не отправлено", \
-            'Некорректный статус сущности с атрибутом "Cамостоятельная продажа"=нет не отправленное на согласование'
-
-    def verify_separate_sale_successfully_status_approval(self):
-        assert self.is_element_text(*PresaleElementLocators.STATUS_APPROVAL_ELEMENT) == "Согласовано", \
-            'Некорректный статус сущности с атрибутом "Cамостоятельная продажа"=нет после успешного согласования'
-
-    def go_to_approval_presale_in_direction(self):
-        assert self.is_element_clickable(
-            *PresaleElementLocators.SEND_APPROVAL_IN_DIRECTION_BUTTON), \
-            'Кнопка "Отправить на согласование" не доступна для нажатия'
-        self.browser.find_element(*PresaleElementLocators.SEND_APPROVAL_IN_DIRECTION_BUTTON).click()
-        self.browser.switch_to.frame(self.browser.find_element(*PresaleElementLocators.iframe))
-        self.browser.find_element(*PresaleElementLocators.UNIT_SELECTION_FIELD_ELEMENT).click()
-        self.browser.find_element(*PresaleElementLocators.DIVISIONS_DROPDOWN_ELEMENT).click()
-        self.browser.find_element(*PresaleElementLocators.CONFIRM_BUTTON_IN_FRAME).click()
-        self.browser.find_element(*PresaleElementLocators.MESSAGE_OK_BUTTON).click()
-        self.is_frame_to_parent()
-
-    def go_to_approval_presale_in_department(self):
-        assert self.is_element_clickable(
-            *PresaleElementLocators.SEND_APPROVAL_IN_DEPARTMENT_BUTTON), \
-            'Кнопка "Отправить на согласование" не доступна для нажатия'
-        self.browser.find_element(*PresaleElementLocators.SEND_APPROVAL_IN_DEPARTMENT_BUTTON).click()
-        self.browser.switch_to.frame(self.browser.find_element(*PresaleElementLocators.iframe))
-        self.browser.find_element(*PresaleElementLocators.UNIT_SELECTION_FIELD_ELEMENT).click()
-        self.browser.find_element(*PresaleElementLocators.DIVISIONS_PERFORMER_DROPDOWN_ELEMENT).click()
-        self.browser.find_element(*PresaleElementLocators.CONFIRM_BUTTON_IN_FRAME).click()
-        self.browser.find_element(*PresaleElementLocators.MESSAGE_OK_BUTTON).click()
-        self.is_frame_to_parent()
-
-    def approval_presale_in_direction(self):
-        self.is_element_clickable(*PresaleElementLocators.CONFIRM_APPROVAL_BUTTON)
-        self.browser.find_element(*PresaleElementLocators.CONFIRM_APPROVAL_BUTTON).click()
-        self.browser.switch_to.frame(self.browser.find_element(*PresaleElementLocators.iframe))
-        self.browser.find_element(*PresaleElementLocators.APPROVAL_MANAGER_ELEMENT).click()
-        self.browser.find_element(*PresaleElementLocators.CHANGE_SELLER_RESPONSIBLE_DROPDOWN_ELEMENT).click()
-        self.browser.find_element(*PresaleElementLocators.APPROVAL_BUTTON_IN_FRAME).click()
-        self.browser.find_element(*PresaleElementLocators.MESSAGE_OK_BUTTON).click()
-
-    def approval_presale_in_department(self):
-        self.is_element_clickable(*PresaleElementLocators.CONFIRM_APPROVAL_BUTTON)
-        self.browser.find_element(*PresaleElementLocators.CONFIRM_APPROVAL_BUTTON).click()
-        self.browser.switch_to.frame(self.browser.find_element(*PresaleElementLocators.iframe))
-        self.browser.find_element(*PresaleElementLocators.APPROVAL_MANAGER_ELEMENT).click()
-        self.browser.find_element(*PresaleElementLocators.CHANGE_SELLER_PERFORMER_DROPDOWN_ELEMENT).click()
-        self.browser.find_element(*PresaleElementLocators.APPROVAL_BUTTON_IN_FRAME).click()
-        self.browser.find_element(*PresaleElementLocators.MESSAGE_OK_BUTTON).click()
-
-
-

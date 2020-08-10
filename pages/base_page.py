@@ -4,7 +4,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import NoSuchElementException, TimeoutException
 from selenium.common.exceptions import NoAlertPresentException  # в начале файла
 import math
-import time
+import json
 from .locators import BasePageLocators
 
 
@@ -100,11 +100,10 @@ class BasePage:
         assert self.is_text_to_be_present_in_element(*BasePageLocators.CONTRACT_LIST_TITLE, "Договоры (контракты)"), \
             "Титул страницы не соответствует переходу"
 
-    def is_visibility_of_element_located(self, how, what, timeout=4):
+    def is_visibility_of_element_located(self, how, what, timeout=5):
         try:
             WebDriverWait(self.browser, timeout).until(EC.visibility_of_element_located((how, what)))
         except TimeoutException:
             return False
         return True
-
 
