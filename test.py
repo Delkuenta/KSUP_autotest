@@ -49,8 +49,7 @@ class TestFullBusinessCycle_PA_ZP_DK:
 
     def test_send_zakup_for_approval(self, browser):
         link = LoginData.link
-        login_page = LoginData(browser,
-                               link)  # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес
+        login_page = LoginData(browser, link)
         login_page.open()  # открываем страницу
         login_page.login(*UserData.login_seller)
         login_page.verify_username(UserData.login_seller[0])
@@ -63,18 +62,16 @@ class TestFullBusinessCycle_PA_ZP_DK:
         if UserData.user_data_dict["contractorType"] == "Тендерная заявка":
             zakup_element_page.verify_zakup_waiting_status_approval_legal()
         elif UserData.user_data_dict["contractorType"] != "Тендерная заявка" \
-                and UserData.user_data_dict["typeOfWorkServices"].count("Разработка заказного ПО") == 1 \
-                and UserData.user_data_dict["price_category"] != "C":
+                and UserData.user_data_dict["price_category"] != "C" \
+                and UserData.user_data_dict["groupTypeWork"] == "Software":
             zakup_element_page.verify_zakup_waiting_status_approval_udprpo()
         else:
-
             zakup_element_page.verify_zakup_not_require_status_approval()
 
     def test_approval_zakup_for_legal(self, browser):
         if UserData.user_data_dict["contractorType"] == "Тендерная заявка":
             link = LoginData.link
-            login_page = LoginData(browser,
-                                   link)  # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес
+            login_page = LoginData(browser, link)
             login_page.open()  # открываем страницу
             login_page.login(*UserData.login_legal)
             login_page.verify_username(UserData.login_legal[0])
@@ -111,8 +108,7 @@ class TestFullBusinessCycle_PA_ZP_DK:
     def test_approval_zakup_for_fin(self, browser):
         if UserData.user_data_dict["contractorType"] == "Тендерная заявка":
             link = LoginData.link
-            login_page = LoginData(browser,
-                                   link)  # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес
+            login_page = LoginData(browser, link)
             login_page.open()  # открываем страницу
             login_page.login(*UserData.login_fin)
             login_page.verify_username(UserData.login_fin[0])
@@ -123,21 +119,20 @@ class TestFullBusinessCycle_PA_ZP_DK:
             zakup_element_page.verify_price_category_zakup()
             zakup_element_page.approval_zakup_fin()
             zakup_element_page.verify_zakup_successfully_status_approval_fin()
-            if UserData.user_data_dict["typeOfWorkServices"].count("Разработка заказного ПО") == 1 \
+            if UserData.user_data_dict["groupTypeWork"] == "Software" \
                     and UserData.user_data_dict["price_category"] != "C":
                 zakup_element_page.verify_zakup_waiting_status_approval_udprpo()
-            elif UserData.user_data_dict["typeOfWorkServices"].count("Разработка заказного ПО") == 0 \
+            elif UserData.user_data_dict["groupTypeWork"] == "Other" \
                     and UserData.user_data_dict["price_category"] == "A":
                 zakup_element_page.verify_zakup_waiting_status_approval_kkp()
         else:
             print("\nВнутреннее согласование закупочной процедуры c финансовой службой не требуется")
 
     def test_approval_zakup_for_udprpo(self, browser):
-        if UserData.user_data_dict["typeOfWorkServices"].count("Разработка заказного ПО") == 1 \
+        if UserData.user_data_dict["groupTypeWork"] == "Software" \
                 and UserData.user_data_dict["price_category"] != "C":
             link = LoginData.link
-            login_page = LoginData(browser,
-                                   link)  # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес
+            login_page = LoginData(browser, link)
             login_page.open()  # открываем страницу
             login_page.login(*UserData.login_udprpo)
             login_page.verify_username(UserData.login_udprpo[0])
@@ -248,17 +243,17 @@ class TestFullBusinessCycle_PA_ZP_DK:
         contract_element_page = ContractElementPage(browser, browser.current_url)
         contract_element_page.approval_contract_fin()
         contract_element_page.verify_contract_successfully_status_approval_fin()
-        if UserData.user_data_dict["typeOfWorkServices"].count("Разработка заказного ПО") == 1 and \
-                UserData.user_data_dict["price_category"] != "C":
+        if UserData.user_data_dict["groupTypeWork"] == "Software"\
+                and UserData.user_data_dict["price_category"] != "C":
             contract_element_page.verify_contract_waiting_status_approval_udprpo()
-        elif UserData.user_data_dict["typeOfWorkServices"].count("Разработка заказного ПО") == 0 and \
-                UserData.user_data_dict["price_category"] == "A" and \
-                UserData.user_data_dict["contractorType"] != "Тендерная заявка":
+        elif UserData.user_data_dict["groupTypeWork"] == "Other" \
+                and UserData.user_data_dict["price_category"] == "A" \
+                and UserData.user_data_dict["contractorType"] != "Тендерная заявка":
             contract_element_page.verify_contract_waiting_status_approval_kkp()
 
     def test_approval_contract_for_udprpo(self, browser):
-        if UserData.user_data_dict["typeOfWorkServices"].count("Разработка заказного ПО") == 1 and \
-                UserData.user_data_dict["price_category"] != "C":
+        if UserData.user_data_dict["groupTypeWork"] == "Software" \
+                and UserData.user_data_dict["price_category"] != "C":
             link = LoginData.link
             login_page = LoginData(browser,
                                    link)  # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес
@@ -271,15 +266,15 @@ class TestFullBusinessCycle_PA_ZP_DK:
             contract_element_page = ContractElementPage(browser, browser.current_url)
             contract_element_page.approval_contract_udprpo()
             contract_element_page.verify_contract_successfully_status_approval_udprpo()
-            if UserData.user_data_dict["contractorType"] != "Тендерная заявка" and \
-                    UserData.user_data_dict["price_category"] == "A":
+            if UserData.user_data_dict["contractorType"] != "Тендерная заявка" \
+                    and UserData.user_data_dict["price_category"] == "A":
                 contract_element_page.verify_contract_waiting_status_approval_kkp()
         else:
             print("\nВнутреннее согласование контракта со службой УДПР ПО не требуется")
 
     def test_approval_contract_for_kkp(self, browser):
-        if UserData.user_data_dict["contractorType"] != "Тендерная заявка" and \
-                    UserData.user_data_dict["price_category"] == "A":
+        if UserData.user_data_dict["contractorType"] != "Тендерная заявка" \
+                and UserData.user_data_dict["price_category"] == "A":
             link = LoginData.link
             login_page = LoginData(browser,
                                    link)  # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес

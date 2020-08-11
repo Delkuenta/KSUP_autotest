@@ -3,6 +3,7 @@ import os
 
 
 class UserData:
+    # Группа файлов и их путей для прикрепления
     # Значение пути в переменную для прикрепляемых файлов
     current_dir = os.path.abspath(os.path.dirname(__file__))  # получаем путь к директории текущего исполняемого файла
     name_jpg_to_link = 'test_jpg.jpg'
@@ -15,9 +16,22 @@ class UserData:
     file_path_for_link_excel = os.path.join(current_dir, name_excel_to_link)
     file_path_for_link_mp4 = os.path.join(current_dir, name_mp4_to_link)
 
+    # Список категорий которые входят в группу "Программное обеспечение"
+    group_software = ["Аутсорсинг разработки (включая аутстаффинг)",
+                      "Внедрение готовых программных продуктов и решений (типа CRM, PLM)",
+                      "Информационная безопасность в части ПО",
+                      "Поддержка пользователей информационных систем",
+                      "Поставка лицензий на ПО",
+                      "Проектирование и иная разработка документации для ПО",
+                      "Прочие работы и услуги в части ПО",
+                      "Разработка заказного ПО",
+                      "Тестирование ПО",
+                      "Техническая поддержка ПО"]
 
+    # Ссылка на ресурс
     link = "https://Mr_KSUP_Seller:AsdGhj-5681-Sle@ksup-tst.lanit/_trust"
-    # УЗ для согласования, статичные.
+
+    # Учетные записи, статичные.
     login_seller = [r"Lanit\Mr_KSUP_Seller", "AsdGhj-5681-Sle"]
     login_dir = [r"Lanit\Mr_KSUP_Dir", "AsdGhj-5681-Dri"]
     login_seller2 = [r"Lanit\Mr_KSUP_Seller2", "AsdGhj-5681-2Les"]
@@ -35,10 +49,10 @@ class UserData:
     comment_approval_udprpo = "Успешное согласование за УДПР ПО"
     comment_approval_kkp = "Успешное согласование за ККП"
 
-    name_data_file = "5_[АТест_Seller] ПА+ЗП+ДК, Тендерная заявка, категория B, НЕразработка заказного ПО, Самостоятельная продажа.json"
+    # Чтение json и присвоение словаря в переменную
+    name_data_file = "7_[АТест_Seller] ПА+ЗП+ДК, Коммерческое предложение, категория A, разработка заказного ПО, Самостоятельная продажа.json"
     file_path_for_data = os.path.join(current_dir, name_data_file)
     with open(file_path_for_data, "r", encoding='utf-8') as file:
         data = json.load(file)
-
     user_data_dict = dict(data['main_data'])
 

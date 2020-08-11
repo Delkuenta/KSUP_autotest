@@ -2,9 +2,6 @@ from selenium.webdriver import Remote as RemoteWebDriver
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import NoSuchElementException, TimeoutException
-from selenium.common.exceptions import NoAlertPresentException  # в начале файла
-import math
-import json
 from .locators import BasePageLocators
 
 
@@ -81,7 +78,7 @@ class BasePage:
             return False
         return True
 
-    #Переключение на родительский фрейм
+    # Переключение на родительский фрейм
     def is_frame_to_parent (self):
         self.browser.switch_to.default_content()
 

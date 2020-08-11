@@ -14,6 +14,7 @@ def pytest_addoption(parser):
                      default=None,
                      help='Choose language:ru, en,....')
 
+
 # pytest -s -v --browser_name=chrome test_parser.py
 # pytest -s -v --browser_name=firefox test_parser.py
 
@@ -37,6 +38,7 @@ def browser(request):
     print("\nquit browser..")
     browser.quit()
 
+
 @pytest.fixture(autouse=True)
 def calc_price_category():
     price_category = ""
@@ -56,4 +58,18 @@ def calc_price_category():
 
     # Добавляем в словарь ценовую категорию
     price_category_dict = {"price_category": price_category}
-    UserData.user_data_dict_with_category = UserData.user_data_dict.update(price_category_dict)
+    UserData.user_data_dict.update(price_category_dict)
+
+
+@pytest.fixture(autouse=True)
+def calc_group_type_work():
+    i = 0
+    for item in UserData.user_data_dict["typeOfWorkServices"]:
+        if item in UserData.group_software:
+            i += 1
+    if i >= 1:
+        group_type_dict = {"groupTypeWork": "Software"}
+
+    else:
+        group_type_dict = {"groupTypeWork": "Other"}
+    UserData.user_data_dict.update(group_type_dict)
