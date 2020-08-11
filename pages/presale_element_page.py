@@ -32,30 +32,13 @@ class PresaleElementPage(BasePage):
 
 
     def go_to_create_zp_based_on_presale(self):
-        if UserData.user_data_dict["contractorType"] == "Тендерная заявка":
+        if UserData.user_data_dict["contractorType"] == "Тендерная заявка" or \
+                UserData.user_data_dict["contractorType"] == "Информация отсутствует":
             PresaleElementPage.go_to_create_zp_tender_based_on_presale(self)
         elif UserData.user_data_dict["contractorType"] == "Коммерческое предложение":
             PresaleElementPage.go_to_create_zp_commercial_offer_based_on_presale(self)
         elif UserData.user_data_dict["contractorType"] == "Запрос цен товаров, работ, услуг":
             PresaleElementPage.go_to_create_zp_presale_act_based_on_presale(self)
-        else:
-            number = random.randint(1, 3)
-            print(f"Число в рандоме выпало: {number}")
-            if number == 1:
-                new_contractor_type = {"contractorType": "Тендерная заявка"}
-                UserData.user_data_dict.update(new_contractor_type)
-                print(UserData.user_data_dict)
-                PresaleElementPage.go_to_create_zp_tender_based_on_presale(self)
-            elif number == 2:
-                new_contractor_type = {"contractorType": "Коммерческое предложение"}
-                UserData.user_data_dict.update(new_contractor_type)
-                print(UserData.user_data_dict)
-                PresaleElementPage.go_to_create_zp_commercial_offer_based_on_presale(self)
-            else:
-                new_contractor_type = {"contractorType": "Запрос цен товаров, работ, услуг"}
-                UserData.user_data_dict.update(new_contractor_type)
-                print(UserData.user_data_dict)
-                PresaleElementPage.go_to_create_zp_presale_act_based_on_presale(self)
 
     # Кнопка внутри пресейла для создания ЗП типа тендер (проверяем доступность и нажимаем)
     def go_to_create_zp_tender_based_on_presale(self):

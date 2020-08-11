@@ -1,3 +1,4 @@
+import json
 import os
 
 
@@ -27,69 +28,17 @@ class UserData:
     login_udprpo = [r"Lanit\Mr_KSUP_UDPRPO", "lPRvCNi9m9zU8gb"]
     login_kkp = [r"Lanit\Mr_KSUP_KKP", "su@rMpuYu{^}bOI5Z"]
 
-    user_data_dict = {
-        "fullName": "[АТест] ПА+ЗП+ДК, Тендер, категория Б, разработка ПО, Самостоятельная продажа",
-        "contractorType": "Тендерная заявка",
-        "customer": "КАЗНАЧЕЙСТВО РОССИИ",
-        "salesUnit": "ОНЛАНТА",
-        "salesManager": "Бравосов Андрей Игоревич",
-        "executiveUnit": "ОНЛАНТА",
-        "executiveManager": "Бравосов Андрей Игоревич",
-        "executiveUnitLegal": "ООО \"ОНЛАНТА\"",
-        "saleLawType": "44-ФЗ",
-        "typeOfWorkServices": ["Разработка заказного ПО", "Тестирование ПО"],
-        "sum": 642800,
-        "currency": "Доллар",
-        "applicationSize": "1000,00",
-        "contractSize": "2000,00",
-        "separateSale": "Да",
-        "competitionDeadlineFrom": "15.07.2020",
-        "startDate": "1.07.2020",
-        "endDate": "01.07.2021",
-        "projectProbability": 100,
-        "descriptionText": "Краткое описание текст",
-        "risksText": "Текст_риски_тест",
-        "purchase_number": "ZP/0001-AT",
-        "purchase_link": "testlink_zakup_proc.com",
-        "project_risk_department": "тестовое сообщение_Риски проекта с точки зрения Департамента",
-        "price_information_deadline": "16.07.2020",
-        "purchase_start_date_from": "17.07.2020",
-        "purchase_start_date_to": "18.07.2020",
-        "eis_price_number": "ZP/0013-AT-Price",
-        "eis_price_link": "example@link.com",
-        "number_contract": "DK/0013-AT",
-        "eis_contract_link": "test_link_eis@mail.com",
-        "territory": "Архангельская область",
-        "technologies": "Jira",
-        "quantitative_indicators_project": "тестовый текст в поле Количественные показатели реализации проекта",
-        "project_unique_code": "2hMuCr13",
-        "payments": [
-            {
-                "sum": 200000,
-                "year": 2020,
-                "quarter": 3
-            },
-            {
-                "sum": 100000,
-                "year": 2020,
-                "quarter": 4
-            },
-            {
-                "sum": 70000,
-                "year": 2021,
-                "quarter": 1
-            },
-            {
-                "sum": 200000,
-                "year": 2021,
-                "quarter": 2
-            },
-            {
-                "sum": 72800,
-                "year": 2021,
-                "quarter": 3
-            }
+    # Комментарии при согласовании и отклонении
+    comment_approval_legal = "Успешное согласование за Юридическую службу"
+    comment_approval_count = "Успешное согласование за Бухгалтерию"
+    comment_approval_fin = "Успешное согласование за финансовую службу"
+    comment_approval_udprpo = "Успешное согласование за УДПР ПО"
+    comment_approval_kkp = "Успешное согласование за ККП"
 
+    name_data_file = "[АТест_Seller] ПА+ЗП+ДК, Тендерная заявка, категория A, разработка заказного ПО, Самостоятельная продажа.json"
+    file_path_for_data = os.path.join(current_dir, name_data_file)
+    with open(file_path_for_data, "r", encoding='utf-8') as file:
+        data = json.load(file)
 
-        ]
-    }
+    user_data_dict = dict(data['main_data'])
+

@@ -1,6 +1,6 @@
 {
 	"main_data": {
-		"fullName": "[АТест] ПА+ЗП+ДК, Тендер, категория Б, разработка ПО, Самостоятельная продажа",
+        "fullName": "[АТест_Seller] ПА+ЗП+ДК, Тендерная заявка, категория B, разработка заказного ПО, Самостоятельная продажа",
         "contractorType": "Тендерная заявка",
         "customer": "КАЗНАЧЕЙСТВО РОССИИ",
         "salesUnit": "ОНЛАНТА",
@@ -10,8 +10,9 @@
         "executiveUnitLegal": "ООО \"ОНЛАНТА\"",
         "saleLawType": "44-ФЗ",
         "typeOfWorkServices": ["Разработка заказного ПО", "Тестирование ПО"],
-        "sum": 642800,
-        "currency": "Доллар",
+        "sum": 45000000,
+        "currency": "Рубль",
+        "price_category": "",
         "applicationSize": "1000,00",
         "contractSize": "2000,00",
         "separateSale": "Да",
@@ -21,46 +22,41 @@
         "projectProbability": 100,
         "descriptionText": "Краткое описание текст",
         "risksText": "Текст_риски_тест",
-        "purchase_number": "ZP/0001-AT",
+        "purchase_number": "ZP/0002-AT",
         "purchase_link": "testlink_zakup_proc.com",
         "project_risk_department": "тестовое сообщение_Риски проекта с точки зрения Департамента",
         "price_information_deadline": "16.07.2020",
         "purchase_start_date_from": "17.07.2020",
         "purchase_start_date_to": "18.07.2020",
-        "eis_price_number": "ZP/0013-AT-Price",
+        "eis_price_number": "ZP/0002-AT-Price",
         "eis_price_link": "example@link.com",
-        "number_contract": "DK/0013-AT",
+        "number_contract": "DK/0002-AT",
         "eis_contract_link": "test_link_eis@mail.com",
         "territory": "Архангельская область",
         "technologies": "Jira",
         "quantitative_indicators_project": "тестовый текст в поле Количественные показатели реализации проекта",
-        "project_unique_code": "2hMuCr13",
+        "project_unique_code": "2hMuCr02",
         "payments": [
             {
-                "sum": 200000,
+                "sum": 25000000,
                 "year": 2020,
                 "quarter": 3
             },
             {
-                "sum": 100000,
+                "sum": 10000000,
                 "year": 2020,
                 "quarter": 4
             },
             {
-                "sum": 700000,
+                "sum": 6000000,
                 "year": 2021,
                 "quarter": 1
             },
             {
-                "sum": 200000,
+                "sum": 4000000,
                 "year": 2021,
                 "quarter": 2
-            },
-            {
-                "sum": 72800,
-                "year": 2021,
-                "quarter": 3
             }
-			]
-	}
+        ]
+    }
 }

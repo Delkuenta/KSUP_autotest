@@ -1,6 +1,8 @@
 import pytest
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+from userdata.user_data import UserData
+
 
 def pytest_addoption(parser):
     parser.addoption('--browser_name',
@@ -34,3 +36,24 @@ def browser(request):
     yield browser
     print("\nquit browser..")
     browser.quit()
+
+@pytest.fixture(autouse=True)
+def calc_price_category():
+    price_category = ""
+    if UserData.user_data_dict["currency"] == "Доллар":
+        sum_in_rub = UserData.user_data_dict["sum"] * 70
+    elif UserData.user_data_dict["currency"] == "Евро":
+        sum_in_rub = UserData.user_data_dict["sum"] * 80
+    else:
+        sum_in_rub = UserData.user_data_dict["sum"]
+
+    if sum_in_rub >= 50000000:
+        price_category = "A"
+    elif 30000000 <= sum_in_rub < 50000000:
+        price_category = "B"
+    elif sum_in_rub < 30000000:
+        price_category = "C"
+
+    # Добавляем в словарь ценовую категорию
+    price_category_dict = {"price_category": price_category}
+    UserData.user_data_dict_with_category = UserData.user_data_dict.update(price_category_dict)
