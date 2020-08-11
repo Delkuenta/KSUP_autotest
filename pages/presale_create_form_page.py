@@ -81,8 +81,17 @@ class PresaleFormCreate(BasePage):
 
         # Выбираем нужный элемент
         for item in UserData.user_data_dict["typeOfWorkServices"]:
-            self.browser.find_element(By.XPATH, f"//*[normalize-space(text()) and normalize-space(.)='{item}']").click()
-            self.browser.find_element(*FormCreatePresaleLocators.CHOICE_IFRAME_BUTTON).click()
+            if self.is_element_present(By.XPATH, f"//*[normalize-space(text()) and normalize-space(.)='{item}']"):
+                self.browser.find_element(By.XPATH, f"//*[normalize-space(text()) and normalize-space(.)='{item}']").click()
+                self.browser.find_element(*FormCreatePresaleLocators.CHOICE_IFRAME_BUTTON).click()
+            else:
+                self.browser.find_element(*FormCreatePresaleLocators.SCROLL_DOWN_BUTTON).click()
+                assert self.is_element_present(By.XPATH, f"//*[normalize-space(text()) and normalize-space(.)='{item}']") == True, \
+                    f"Не найден тип работ и услуг с именем {item}"
+                self.browser.find_element(By.XPATH,
+                                          f"//*[normalize-space(text()) and normalize-space(.)='{item}']").click()
+                self.browser.find_element(*FormCreatePresaleLocators.CHOICE_IFRAME_BUTTON).click()
+
         self.browser.find_element(*FormCreatePresaleLocators.CONFIRM_IFRAME_BUTTON).click()
         # Возврат к форм создания.
         self.is_frame_to_parent()

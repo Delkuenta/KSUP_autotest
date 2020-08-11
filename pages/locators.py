@@ -69,6 +69,8 @@ class FormCreatePresaleLocators:
     GROUP_CATEGORY_ELEMENT4 = (By.ID, "TIE_6")
     GROUP_CATEGORY_ELEMENT5 = (By.ID, "TIE_7")
 
+    # Кнопка прокрутки вниз у категории Программное обеспечение
+    SCROLL_DOWN_BUTTON = (By.ID, "PGD_6")
     # Категория
     CATEGORY_ELEMENT = (By.XPATH,
                         f"//*[normalize-space(.)='{UserData.user_data_dict['typeOfWorkServices']}']")
@@ -509,7 +511,7 @@ class FormCreateContractLocators:
     SEARCH_TECHNOLOGIES_ELEMENT = (
         By.CSS_SELECTOR, r"#KsupKeyTechnologies_\$containercontrolHolder .ms-taxonomy-browser-button")
 
-    # Кнопка прокрутки
+    # Кнопка прокрутки в технологиях
     SCROLL_DOWN_BUTTON = (By.ID, "PGD_1")
 
     # Выбор технологии
