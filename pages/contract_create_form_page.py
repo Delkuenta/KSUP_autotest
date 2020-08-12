@@ -69,12 +69,12 @@ class ContractFormCreate(BasePage):
                 scrolls = 0
                 # максимум возможных перелистываний
                 max_scrolls = 7
-                while self.is_element_present(*TERRITORY_ELEMENT) == False and scrolls <= max_scrolls:
+                while self.is_element_present(*TERRITORY_ELEMENT) is False and scrolls <= max_scrolls:
                     self.browser.find_element(*FormCreateContractLocators.SCROLL_DOWN_BUTTON_TERRITORY).click()
                     scrolls += 1
                 self.browser.find_element(*TERRITORY_ELEMENT).click()
                 self.browser.find_element(*FormCreateContractLocators.CHOICE_IFRAME_BUTTON).click()
-                if self.is_element_present(*TERRITORY_ELEMENT) == False and scrolls == max_scrolls:
+                if self.is_element_present(*TERRITORY_ELEMENT) is False and scrolls == max_scrolls:
                     print(f"Не найдена территория  с именем {territory}")
 
         self.browser.find_element(*FormCreateContractLocators.CONFIRM_IFRAME_BUTTON).click()
@@ -97,13 +97,13 @@ class ContractFormCreate(BasePage):
                 scrolls = 0
                 # максимум возможных перелистываний
                 max_scrolls = 3
-                while self.is_element_present(*TECHNOLOGIES_ELEMENT) == False and scrolls <= max_scrolls:
+                while self.is_element_present(*TECHNOLOGIES_ELEMENT) is False and scrolls <= max_scrolls:
                     self.browser.find_element(*FormCreateContractLocators.SCROLL_DOWN_BUTTON_TECHNOLOGIES).click()
                     scrolls += 1
 
                 self.browser.find_element(*TECHNOLOGIES_ELEMENT).click()
                 self.browser.find_element(*FormCreateContractLocators.CHOICE_IFRAME_BUTTON).click()
-                if self.is_element_present(*TECHNOLOGIES_ELEMENT) == False and scrolls == max_scrolls:
+                if self.is_element_present(*TECHNOLOGIES_ELEMENT) is False and scrolls == max_scrolls:
                     print(f"Не найдена технология с именем {technologies}")
 
         self.browser.find_element(*FormCreateContractLocators.CONFIRM_IFRAME_BUTTON).click()
