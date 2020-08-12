@@ -10,10 +10,11 @@ from pages.login_data import LoginData
 from pages.presale_create_form_page import PresaleFormCreate
 from pages.zakup_list_page import ZakupListPage
 
-
+# До первой ошибки --maxfail=1
 class TestFullBusinessCycle_PA_ZP_DK:
 
     def test_create_presale(self, browser):
+        print(UserData.user_data_dict)
         link = LoginData.link
         login_page = LoginData(browser, link)
         login_page.open()  # открываем страницу

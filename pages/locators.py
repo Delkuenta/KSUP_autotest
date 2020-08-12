@@ -504,6 +504,8 @@ class FormCreateContractLocators:
     TERRITORY_ELEMENT = (
         By.XPATH, f"//*[normalize-space(text()) and normalize-space(.)='{UserData.user_data_dict['territory']}']")
 
+    SCROLL_DOWN_BUTTON_TERRITORY = (By.ID, "PGD_3")
+
     # Строка Территория применения
     TYPE_TERRITORY_ELEMENT = (By.ID, "KsupApplicationTerritory_$containereditableRegion")
 
@@ -512,7 +514,7 @@ class FormCreateContractLocators:
         By.CSS_SELECTOR, r"#KsupKeyTechnologies_\$containercontrolHolder .ms-taxonomy-browser-button")
 
     # Кнопка прокрутки в технологиях
-    SCROLL_DOWN_BUTTON = (By.ID, "PGD_1")
+    SCROLL_DOWN_BUTTON_TECHNOLOGIES = (By.ID, "PGD_1")
 
     # Выбор технологии
     TECHNOLOGIES_ELEMENT = (

@@ -1,5 +1,7 @@
 import time
 
+from selenium.webdriver.common.by import By
+
 from pages.base_page import BasePage
 from pages.locators import FormCreateContractLocators
 from userdata.user_data import UserData
@@ -57,8 +59,24 @@ class ContractFormCreate(BasePage):
         time.sleep(2)
         self.is_frame_to_be_available_and_switch_to_it()
         self.browser.find_element(*FormCreateContractLocators.GROUP_TERRITORY_ELEMENT).click()
-        self.browser.find_element(*FormCreateContractLocators.TERRITORY_ELEMENT).click()
-        self.browser.find_element(*FormCreateContractLocators.CHOICE_IFRAME_BUTTON).click()
+        for territory in UserData.user_data_dict["territory"]:
+            TERRITORY_ELEMENT = (By.XPATH, f"//*[normalize-space(text()) and normalize-space(.)='{territory}']")
+            if self.is_element_present(*TERRITORY_ELEMENT):
+                self.browser.find_element(*TERRITORY_ELEMENT).click()
+                self.browser.find_element(*FormCreateContractLocators.CHOICE_IFRAME_BUTTON).click()
+            else:
+                # количество перелистываний
+                scrolls = 0
+                # максимум возможных перелистываний
+                max_scrolls = 7
+                while self.is_element_present(*TERRITORY_ELEMENT) == False and scrolls <= max_scrolls:
+                    self.browser.find_element(*FormCreateContractLocators.SCROLL_DOWN_BUTTON_TERRITORY).click()
+                    scrolls += 1
+                self.browser.find_element(*TERRITORY_ELEMENT).click()
+                self.browser.find_element(*FormCreateContractLocators.CHOICE_IFRAME_BUTTON).click()
+                if self.is_element_present(*TERRITORY_ELEMENT) == False and scrolls == max_scrolls:
+                    print(f"Не найдена территория  с именем {territory}")
+
         self.browser.find_element(*FormCreateContractLocators.CONFIRM_IFRAME_BUTTON).click()
         # возврат к основной форме
         self.is_frame_to_parent()
@@ -69,14 +87,25 @@ class ContractFormCreate(BasePage):
         self.browser.find_element(*FormCreateContractLocators.SEARCH_TECHNOLOGIES_ELEMENT).click()
         time.sleep(2)
         self.is_frame_to_be_available_and_switch_to_it()
-        if self.is_element_present(*FormCreateContractLocators.TECHNOLOGIES_ELEMENT):
-            self.browser.find_element(*FormCreateContractLocators.TECHNOLOGIES_ELEMENT).click()
-        else:
-            self.browser.find_element(*FormCreateContractLocators.SCROLL_DOWN_BUTTON).click()
-            assert self.is_element_present(*FormCreateContractLocators.TECHNOLOGIES_ELEMENT) == True, \
-                f"Не найдена технология с именем {UserData.user_data_dict['technologies']}"
-            self.browser.find_element(*FormCreateContractLocators.TECHNOLOGIES_ELEMENT).click()
-        self.browser.find_element(*FormCreateContractLocators.CHOICE_IFRAME_BUTTON).click()
+        for technologies in UserData.user_data_dict["technologies"]:
+            TECHNOLOGIES_ELEMENT = (By.XPATH, f"//*[normalize-space(text()) and normalize-space(.)='{technologies}']")
+            if self.is_element_present(*TECHNOLOGIES_ELEMENT):
+                self.browser.find_element(*TECHNOLOGIES_ELEMENT).click()
+                self.browser.find_element(*FormCreateContractLocators.CHOICE_IFRAME_BUTTON).click()
+            else:
+                # количество перелистываний
+                scrolls = 0
+                # максимум возможных перелистываний
+                max_scrolls = 3
+                while self.is_element_present(*TECHNOLOGIES_ELEMENT) == False and scrolls <= max_scrolls:
+                    self.browser.find_element(*FormCreateContractLocators.SCROLL_DOWN_BUTTON_TECHNOLOGIES).click()
+                    scrolls += 1
+
+                self.browser.find_element(*TECHNOLOGIES_ELEMENT).click()
+                self.browser.find_element(*FormCreateContractLocators.CHOICE_IFRAME_BUTTON).click()
+                if self.is_element_present(*TECHNOLOGIES_ELEMENT) == False and scrolls == max_scrolls:
+                    print(f"Не найдена технология с именем {technologies}")
+
         self.browser.find_element(*FormCreateContractLocators.CONFIRM_IFRAME_BUTTON).click()
         self.is_frame_to_parent()
         # Проверяем, строку
