@@ -120,6 +120,12 @@ class ContractFormCreate(BasePage):
         self.browser.find_element(*FormCreateContractLocators.PROJECT_UNIQUE_CODE).send_keys(
             UserData.user_data_dict["project_unique_code"])
 
+        # Выбираем связанный проект
+        self.browser.find_element(*FormCreateContractLocators.PROJECT_ELEMENT).click()
+        self.browser.find_element(*FormCreateContractLocators.PROJECT_FIND_ELEMENT).send_keys(
+            UserData.user_data_dict["project"])
+        self.browser.find_element(*FormCreateContractLocators.PROJECT_DROPDOWN_ELEMENT).click()
+
         # прикрепляем файл Контракт
         self.browser.find_element(*FormCreateContractLocators.FILE_CONTRACT).send_keys(UserData.file_path_for_link_doc)
         self.is_text_to_be_present_in_element(*FormCreateContractLocators.FILE_CONTRACT_NAME, UserData.name_doc_to_link)
@@ -148,3 +154,6 @@ class ContractFormCreate(BasePage):
 
         # Жмем кнопку создать
         self.browser.find_element(*FormCreateContractLocators.CONFIRM_CONTRACT_BUTTON).click()
+        # Подтверждаем внесение изменений  в связанный проект
+        self.browser.find_element(*FormCreateContractLocators.CONFIRM_CHANGE_PROJECT_BUTTON).click()
+

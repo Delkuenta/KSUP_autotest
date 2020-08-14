@@ -382,8 +382,7 @@ class ZakupElementLocators:
     ClOSE_ALLERT_ZAKUP = (By.CSS_SELECTOR, "#dlgTitleBtns")
 
     WITHDRAW_FROM_APPROVAL_ELEMENT = (By.ID, "Approve.Cancel-Large")
-    APPROVAL_HISTORY_ELEMENT = (By.CSS_SELECTOR,
-                                "#ctl00_ctl69_g_93f2ae31_fc13_4393_9245_5d2f3d13a770_ctl00_ucListItemForm_tabApprovingHistory .tabs__link")
+    APPROVAL_HISTORY_ELEMENT = (By.XPATH, "//a[contains(@href, '#tabApprovingHistory')]")
     APPROVAL_LEGAL_STATUS_ELEMENT = (By.XPATH,
                                      "(.//*[normalize-space(text()) and normalize-space(.)='Согласование юридической службой'])[1]/following::span[1]")
     APPROVAL_COUNT_STATUS_ELEMENT = (By.XPATH,
@@ -534,6 +533,11 @@ class FormCreateContractLocators:
     # Уникальный код проекта
     PROJECT_UNIQUE_CODE = (By.ID, "KsupContractProjectUniqueCode_5dc91e1c-28a9-4156-b785-54fa4257f70d_$TextField")
 
+    # Поле "Связанный проект"
+    PROJECT_ELEMENT = (By.ID, "div-wcfLookupControl_KsupProject")
+    PROJECT_FIND_ELEMENT = (By.CSS_SELECTOR, "span.select2-search.select2-search--dropdown > input.select2-search__field")
+    PROJECT_DROPDOWN_ELEMENT = (By.XPATH, f"//li[normalize-space(.)='{UserData.user_data_dict['project']}']")
+
     # 1 строка Плановых платежей
     SUMTABLE1 = (By.XPATH, "//tr[3]/td[2]/input")
     YEARTABLE1 = (By.XPATH, "//td[4]/input")
@@ -582,6 +586,12 @@ class FormCreateContractLocators:
     # Кнопка создания ДК
     CONFIRM_CONTRACT_BUTTON = (By.CSS_SELECTOR, '[value="Создать"].ms-ButtonHeightWidth')
 
+    # Кнопка подтверждения внесения правок в Связанный проект
+    CONFIRM_CHANGE_PROJECT_BUTTON = (By.XPATH, "//input[@value='OK']")
+
+    # Кнопка "Отмена" в окне подтверждения внесения правок в Связанный проект
+    CANCEL_CHANGE_PROJECT_BUTTON = (By.XPATH, "xpath=(//input[@value='Отмена'])[3]")
+
 
 class ContractPageLocators:
     CONTRACT_CREATE_BUTTON = (By.CSS_SELECTOR, "#idHomePageNewItem")
@@ -596,9 +606,7 @@ class ContractElementLocators:
     CONFIRM_SEND_APPROVAL_ELEMENT = (By.XPATH, "//*[@type = 'button' and (text() = 'Отправить')]")
     CANCEL_SEND_APPROVAL_ELEMENT = (By.XPATH, "//*[@type = 'button' and (text() = 'Отмена')]")
 
-    APPROVAL_HISTORY_CONTRACT_ELEMENT = (
-        By.CSS_SELECTOR,
-        "#ctl00_ctl69_g_60a709d4_9014_40a8_94da_2f1f700162a2_ctl00_ucListItemForm_tabApprovingHistory .tabs__link")
+    APPROVAL_HISTORY_CONTRACT_ELEMENT = (By.XPATH, "//a[contains(@href, '#tabApprovingHistory')]")
 
     APPROVAL_LEGAL_STATUS_ELEMENT = (
         By.XPATH,

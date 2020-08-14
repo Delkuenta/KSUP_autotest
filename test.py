@@ -1,3 +1,4 @@
+
 from pages.contract_create_form_page import ContractFormCreate
 from pages.contract_element_page import ContractElementPage
 from pages.contract_list_page import ContractPage
@@ -10,8 +11,10 @@ from pages.login_data import LoginData
 from pages.presale_create_form_page import PresaleFormCreate
 from pages.zakup_list_page import ZakupListPage
 
+
 # До первой ошибки --maxfail=1
 class TestFullBusinessCycle_PA_ZP_DK:
+    
 
     def test_create_presale(self, browser):
         print(UserData.user_data_dict)
@@ -244,8 +247,7 @@ class TestFullBusinessCycle_PA_ZP_DK:
         contract_element_page = ContractElementPage(browser, browser.current_url)
         contract_element_page.approval_contract_fin()
         contract_element_page.verify_contract_successfully_status_approval_fin()
-        if UserData.user_data_dict["groupTypeWork"] == "Software"\
-                and UserData.user_data_dict["price_category"] != "C":
+        if UserData.user_data_dict["groupTypeWork"] == "Software" and UserData.user_data_dict["price_category"] != "C":
             contract_element_page.verify_contract_waiting_status_approval_udprpo()
         elif UserData.user_data_dict["groupTypeWork"] == "Other" \
                 and UserData.user_data_dict["price_category"] == "A" \
