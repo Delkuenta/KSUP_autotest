@@ -18,7 +18,8 @@ class ContractElementPage(BasePage):
         self.is_element_present(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_ELEMENT)
         self.browser.find_element(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_ELEMENT).click()
 
-        assert self.is_text_to_be_present_in_element(*ContractElementLocators.APPROVAL_LEGAL_STATUS_ELEMENT, "Ожидает согласования"), \
+        assert self.is_text_to_be_present_in_element(
+            *ContractElementLocators.APPROVAL_LEGAL_STATUS_ELEMENT, "Ожидает согласования"), \
             'Некорректный статус или отсутствует статус в строке "Согласование юридической службой"'
 
     def verify_contract_successfully_status_approval_legal(self):

@@ -1,5 +1,3 @@
-import random
-
 from pages.base_page import BasePage
 from pages.locators import PresaleElementLocators
 from userdata.user_data import UserData
@@ -29,7 +27,6 @@ class PresaleElementPage(BasePage):
         assert self.is_visibility_of_element_located(
             *PresaleElementLocators.CREATE_CONTRACT_ELEMENT), \
             'Кнопка "Внести информацию о договор/контракте" не доступна для нажатия'
-
 
     def go_to_create_zp_based_on_presale(self):
         if UserData.user_data_dict["contractorType"] == "Тендерная заявка" or \

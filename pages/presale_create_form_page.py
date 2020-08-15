@@ -11,7 +11,7 @@ from userdata.user_data import UserData
 class PresaleFormCreate(BasePage):
     # Форма создания пресейла
     def form_create_presale_all_type(self):
-        global payments_sum
+        payments_sum = 0
 
         # Ждем загрузки страницы по последнему загружаемому объекту
         self.is_text_to_be_present_in_element(*FormCreatePresaleLocators.SALES_MANAGER_ELEMENT,

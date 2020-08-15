@@ -2,6 +2,7 @@ from pages.base_page import BasePage
 from pages.locators import ZakupListLocators
 from userdata.user_data import UserData
 
+
 class ZakupListPage(BasePage):
 
     def should_be_element_on_zakup_list(self):

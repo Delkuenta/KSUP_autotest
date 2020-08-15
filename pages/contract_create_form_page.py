@@ -17,7 +17,8 @@ class ContractFormCreate(BasePage):
         assert self.is_element_text(*FormCreateContractLocators.CONTRACT_TITLE) == "Договор (контракт)"
 
         # Проверяем автоматическое предзаполнение от пресейла
-        assert UserData.user_data_dict["customer"] in self.is_element_text(*FormCreateContractLocators.CUSTOMER_CONTRACT_ELEMENT), \
+        assert UserData.user_data_dict["customer"] in self.is_element_text(
+            *FormCreateContractLocators.CUSTOMER_CONTRACT_ELEMENT), \
             "Некорректная информация в поле Заказчик"
 
         assert UserData.user_data_dict["salesUnit"] in self.is_element_text(
@@ -40,7 +41,8 @@ class ContractFormCreate(BasePage):
             *FormCreateContractLocators.EXECUTIVE_UNIT_LEGAL_CONTRACT_ELEMENT), \
             "Некорректная информация в поле Исполнитель (юридическое лицо)"
 
-        assert UserData.user_data_dict["fullName"] in self.is_element_text(*FormCreateContractLocators.PRESALE_SELECT), \
+        assert UserData.user_data_dict["fullName"] in self.is_element_text(
+            *FormCreateContractLocators.PRESALE_SELECT), \
             "Некорректная информация в поле Пресейловые активности"
 
         assert UserData.user_data_dict["fullName"] in self.is_element_text(*FormCreateContractLocators.ZAKUP_SELECT), \
@@ -156,4 +158,3 @@ class ContractFormCreate(BasePage):
         self.browser.find_element(*FormCreateContractLocators.CONFIRM_CONTRACT_BUTTON).click()
         # Подтверждаем внесение изменений  в связанный проект
         self.browser.find_element(*FormCreateContractLocators.CONFIRM_CHANGE_PROJECT_BUTTON).click()
-

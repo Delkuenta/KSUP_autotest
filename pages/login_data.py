@@ -14,4 +14,3 @@ class LoginData(BasePage):
         shell.Sendkeys(password)
         time.sleep(2)
         shell.Sendkeys("{ENTER}")
-

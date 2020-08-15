@@ -1,4 +1,3 @@
-
 from pages.contract_create_form_page import ContractFormCreate
 from pages.contract_element_page import ContractElementPage
 from pages.contract_list_page import ContractPage
@@ -13,8 +12,7 @@ from pages.zakup_list_page import ZakupListPage
 
 
 # До первой ошибки --maxfail=1
-class TestFullBusinessCycle_PA_ZP_DK:
-    
+class TestFullBusinessCyclePaZpDk:
 
     def test_create_presale(self, browser):
         print(UserData.user_data_dict)
@@ -93,8 +91,7 @@ class TestFullBusinessCycle_PA_ZP_DK:
     def test_approval_zakup_for_count(self, browser):
         if UserData.user_data_dict["contractorType"] == "Тендерная заявка":
             link = LoginData.link
-            login_page = LoginData(browser,
-                                   link)  # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес
+            login_page = LoginData(browser, link)
             login_page.open()  # открываем страницу
             login_page.login(*UserData.login_count)
             login_page.verify_username(UserData.login_count[0])
@@ -156,8 +153,7 @@ class TestFullBusinessCycle_PA_ZP_DK:
         if UserData.user_data_dict["contractorType"] == "Тендерная заявка" \
                 and UserData.user_data_dict["price_category"] == "A":
             link = LoginData.link
-            login_page = LoginData(browser,
-                                   link)  # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес
+            login_page = LoginData(browser, link)
             login_page.open()  # открываем страницу
             login_page.login(*UserData.login_kkp)
             login_page.verify_username(UserData.login_kkp[0])
@@ -172,9 +168,8 @@ class TestFullBusinessCycle_PA_ZP_DK:
 
     def test_create_contract_based_on_zakup(self, browser):
         link = LoginData.link
-        login_page = LoginData(browser,
-                               link)  # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес
-        login_page.open()  # открываем страницу
+        login_page = LoginData(browser, link)
+        login_page.open()
         login_page.login(*UserData.login_seller)
         login_page.verify_username(UserData.login_seller[0])
         login_page.go_to_zakup_list()
@@ -192,9 +187,8 @@ class TestFullBusinessCycle_PA_ZP_DK:
 
     def test_send_contract_for_approval(self, browser):
         link = LoginData.link
-        login_page = LoginData(browser,
-                               link)  # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес
-        login_page.open()  # открываем страницу
+        login_page = LoginData(browser, link)
+        login_page.open()
         login_page.login(*UserData.login_seller)
         login_page.verify_username(UserData.login_seller[0])
         login_page.go_to_contract_list()
@@ -206,8 +200,7 @@ class TestFullBusinessCycle_PA_ZP_DK:
 
     def test_approval_contract_for_legal(self, browser):
         link = LoginData.link
-        login_page = LoginData(browser,
-                               link)  # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес
+        login_page = LoginData(browser, link)
         login_page.open()  # открываем страницу
         login_page.login(*UserData.login_legal)
         login_page.verify_username(UserData.login_legal[0])
@@ -221,8 +214,7 @@ class TestFullBusinessCycle_PA_ZP_DK:
 
     def test_approval_contract_for_count(self, browser):
         link = LoginData.link
-        login_page = LoginData(browser,
-                               link)  # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес
+        login_page = LoginData(browser, link)
         login_page.open()  # открываем страницу
         login_page.login(*UserData.login_count)
         login_page.verify_username(UserData.login_count[0])
@@ -236,9 +228,8 @@ class TestFullBusinessCycle_PA_ZP_DK:
 
     def test_approval_contract_for_fin(self, browser):
         link = LoginData.link
-        login_page = LoginData(browser,
-                               link)  # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес
-        login_page.open()  # открываем страницу
+        login_page = LoginData(browser, link)
+        login_page.open()
         login_page.login(*UserData.login_fin)
         login_page.verify_username(UserData.login_fin[0])
         login_page.go_to_contract_list()
@@ -258,8 +249,7 @@ class TestFullBusinessCycle_PA_ZP_DK:
         if UserData.user_data_dict["groupTypeWork"] == "Software" \
                 and UserData.user_data_dict["price_category"] != "C":
             link = LoginData.link
-            login_page = LoginData(browser,
-                                   link)  # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес
+            login_page = LoginData(browser, link)
             login_page.open()  # открываем страницу
             login_page.login(*UserData.login_udprpo)
             login_page.verify_username(UserData.login_udprpo[0])
@@ -280,8 +270,8 @@ class TestFullBusinessCycle_PA_ZP_DK:
                 and UserData.user_data_dict["price_category"] == "A":
             link = LoginData.link
             login_page = LoginData(browser,
-                                   link)  # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес
-            login_page.open()  # открываем страницу
+                                   link)
+            login_page.open()
             login_page.login(*UserData.login_kkp)
             login_page.verify_username(UserData.login_kkp[0])
             login_page.go_to_contract_list()

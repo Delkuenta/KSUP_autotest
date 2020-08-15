@@ -75,8 +75,8 @@ class FormCreatePresaleLocators:
     CATEGORY_ELEMENT = (By.XPATH,
                         f"//*[normalize-space(.)='{UserData.user_data_dict['typeOfWorkServices']}']")
     # Кнопка "Выбор"
-    CHOICE_IFRAME_BUTTON = (By.ID,
-                            "ctl00_PlaceHolderDialogBodySection_PlaceHolderDialogBodyFooterMainSection_AddToFieldEditor")
+    CHOICE_IFRAME_BUTTON = (
+        By.ID, "ctl00_PlaceHolderDialogBodySection_PlaceHolderDialogBodyFooterMainSection_AddToFieldEditor")
     # Кнопка подтверждения (ОК)
     CONFIRM_IFRAME_BUTTON = (By.ID, "ctl00_OkButton")
     # Строка "Тип работ и услуг"
@@ -220,8 +220,8 @@ class FormCreateZakupLocators:
     CATEGORY_ELEMENT = (By.XPATH,
                         f"//*[normalize-space(.)='{UserData.user_data_dict['typeOfWorkServices']}']")
     # Кнопка "Выбор"
-    CHOICE_IFRAME_BUTTON = (By.ID,
-                            "ctl00_PlaceHolderDialogBodySection_PlaceHolderDialogBodyFooterMainSection_AddToFieldEditor")
+    CHOICE_IFRAME_BUTTON = (
+        By.ID, "ctl00_PlaceHolderDialogBodySection_PlaceHolderDialogBodyFooterMainSection_AddToFieldEditor")
     # Кнопка подтверждения (ОК)
     CONFIRM_IFRAME_BUTTON = (By.ID, "ctl00_OkButton")
     # Строка "Тип работ и услуг"
@@ -261,8 +261,8 @@ class FormCreateZakupLocators:
 
     # Общие поля для типа "Тендерная заявка" и "Коммчерческое предложение"
     # Плановая дата заключения договора/контракта *
-    PLAN_DATE_CONTRACT_CONCLUSION_IN_ZP_ELEMENT = (By.XPATH,
-                                                   "//input[@id='KsupContractPlanDateFrom_4b3ff310-7fe8-4e4f-b23c-6d570282fedd_$DateTimeFieldDate']")
+    PLAN_DATE_CONTRACT_CONCLUSION_IN_ZP_ELEMENT = (
+        By.XPATH, "//input[@id='KsupContractPlanDateFrom_4b3ff310-7fe8-4e4f-b23c-6d570282fedd_$DateTimeFieldDate']")
     # Бюджет проекта
     FILE_BUDGET_OF_PROJECT = (By.XPATH, "//div[@id='File_BudgetOfProject']/div/input")
     FILE_BUDGET_OF_PROJECT_NAME_LINK = (By.CLASS_NAME, "fileField_File_BudgetOfProject_NameLink_")
@@ -294,8 +294,8 @@ class FormCreateZakupLocators:
         By.CSS_SELECTOR, "#KsupPresaleJointBidding_d87bbac9-74b3-46c4-9372-38feb12d67f9_$BooleanField")
 
     # Срок подачи на конкурс
-    COMPETITION_DEADLINE_IN_ZP_FROM_ELEMENT = (By.XPATH,
-                                               "//input[@id='KsupCompetitionDeadlineFrom_5b28696f-6ae9-4765-bb8d-b26513cd0e78_$DateTimeFieldDate']")
+    COMPETITION_DEADLINE_IN_ZP_FROM_ELEMENT = (
+        By.XPATH, "//input[@id='KsupCompetitionDeadlineFrom_5b28696f-6ae9-4765-bb8d-b26513cd0e78_$DateTimeFieldDate']")
     # Номер закупки
     EIS_PURCHASE_NUMBER = (By.ID, "KsupEisPurchaseNumber_8afdb894-e496-4d71-9e54-a1bf0e0a5fb6_$TextField")
 
@@ -323,16 +323,16 @@ class FormCreateZakupLocators:
     # Уникальные поля для типа "Запрос цена, товаров и услуг"
 
     # Срок предоставления ценовой информации
-    PRICE_INFORMATION_DEADLINE_FROM = (By.XPATH,
-                                       "//input[@id='KsupPriceInformationDeadlineFrom_8ec338f0-a8c3-4c1a-8b36-892c98be55a7_$DateTimeFieldDate']")
+    PRICE_INFORMATION_DEADLINE_FROM = (
+        By.XPATH, "//input[@id='KsupPriceInformationDeadlineFrom_8ec338f0-a8c3-4c1a-8b36-892c98be55a7_$DateTimeFieldDate']")
 
     # Предполагаемая дата начала проведения закупки с
-    PURCHASE_START_DATE_FROM = (By.XPATH,
-                                "//input[@id='KsupPurchaseStartDateFrom_f6f725b7-1c54-4d4c-a087-39f89853714f_$DateTimeFieldDate']")
+    PURCHASE_START_DATE_FROM = (
+        By.XPATH, "//input[@id='KsupPurchaseStartDateFrom_f6f725b7-1c54-4d4c-a087-39f89853714f_$DateTimeFieldDate']")
 
     # Предполагаемая дата начала проведения закупки по
-    PURCHASE_START_DATE_TO = (By.XPATH,
-                              "//input[@id='KsupPurchaseStartDateTo_c8e972e8-b7ad-4de5-afca-78c2103ca3bb_$DateTimeFieldDate']")
+    PURCHASE_START_DATE_TO = (
+        By.XPATH, "//input[@id='KsupPurchaseStartDateTo_c8e972e8-b7ad-4de5-afca-78c2103ca3bb_$DateTimeFieldDate']")
 
     # Номер запроса цен на Официальном сайте ЕИС
     EIS_PRICE_NUMBER = (By.ID, "KsupEisPriceNumber_0c8b9e99-9c3a-421a-8f14-c03b006f4231_$TextField")
@@ -383,17 +383,17 @@ class ZakupElementLocators:
 
     WITHDRAW_FROM_APPROVAL_ELEMENT = (By.ID, "Approve.Cancel-Large")
     APPROVAL_HISTORY_ELEMENT = (By.XPATH, "//a[contains(@href, '#tabApprovingHistory')]")
-    APPROVAL_LEGAL_STATUS_ELEMENT = (By.XPATH,
-                                     "(.//*[normalize-space(text()) and normalize-space(.)='Согласование юридической службой'])[1]/following::span[1]")
-    APPROVAL_COUNT_STATUS_ELEMENT = (By.XPATH,
-                                     "(.//*[normalize-space(text()) and normalize-space(.)='Согласование бухгалтерией'])[1]/following::span[1]")
-    APPROVAL_FIN_STATUS_ELEMENT = (By.XPATH,
-                                   "(.//*[normalize-space(text()) and normalize-space(.)='Согласование финансовой службой'])[1]/following::span[1]")
-    APPROVAL_UDPRPO_STATUS_ELEMENT = (By.XPATH,
-                                      "(.//*[normalize-space(text()) and normalize-space(.)='Согласование УДПР ПО'])[1]/following::span[1]")
+    APPROVAL_LEGAL_STATUS_ELEMENT = (
+        By.XPATH, "(.//*[normalize-space(text()) and normalize-space(.)='Согласование юридической службой'])[1]/following::span[1]")
+    APPROVAL_COUNT_STATUS_ELEMENT = (
+        By.XPATH, "(.//*[normalize-space(text()) and normalize-space(.)='Согласование бухгалтерией'])[1]/following::span[1]")
+    APPROVAL_FIN_STATUS_ELEMENT = (
+        By.XPATH, "(.//*[normalize-space(text()) and normalize-space(.)='Согласование финансовой службой'])[1]/following::span[1]")
+    APPROVAL_UDPRPO_STATUS_ELEMENT = (
+        By.XPATH, "(.//*[normalize-space(text()) and normalize-space(.)='Согласование УДПР ПО'])[1]/following::span[1]")
 
-    APPROVAL_KKP_STATUS_ELEMENT = (By.XPATH,
-                                   "(.//*[normalize-space(text()) and normalize-space(.)='Согласование ККП'])[1]/following::span[1]")
+    APPROVAL_KKP_STATUS_ELEMENT = (
+        By.XPATH, "(.//*[normalize-space(text()) and normalize-space(.)='Согласование ККП'])[1]/following::span[1]")
 
     APPROVAL_MAIN_STATUS_ELEMENT = (By.CSS_SELECTOR, ".fldKsupPresaleApproveStatus #SPFieldChoice")
 
@@ -535,7 +535,8 @@ class FormCreateContractLocators:
 
     # Поле "Связанный проект"
     PROJECT_ELEMENT = (By.ID, "div-wcfLookupControl_KsupProject")
-    PROJECT_FIND_ELEMENT = (By.CSS_SELECTOR, "span.select2-search.select2-search--dropdown > input.select2-search__field")
+    PROJECT_FIND_ELEMENT = (
+        By.CSS_SELECTOR, "span.select2-search.select2-search--dropdown > input.select2-search__field")
     PROJECT_DROPDOWN_ELEMENT = (By.XPATH, f"//li[normalize-space(.)='{UserData.user_data_dict['project']}']")
 
     # 1 строка Плановых платежей
