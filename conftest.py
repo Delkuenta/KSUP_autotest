@@ -32,7 +32,7 @@ def browser(request):
     elif browser_name == "firefox":
         print("\nstart firefox browser for test..")
         browser = webdriver.Firefox()
-        browser.maximize_window()
+        # browser.maximize_window()
 
     else:
         raise pytest.UsageError("--browser_name should be chrome or firefox")

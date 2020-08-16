@@ -12,10 +12,23 @@ class PresaleFormCreate(BasePage):
     # Форма создания пресейла
     def form_create_presale_all_type(self):
         payments_sum = 0
-
-        # Ждем загрузки страницы по последнему загружаемому объекту
-        self.is_text_to_be_present_in_element(*FormCreatePresaleLocators.SALES_MANAGER_ELEMENT,
-                                              UserData.user_data_dict["salesManager"])
+        if UserData.user_data_dict["separateSale"] == "Да":
+            # Ждем загрузки страницы по последнему загружаемому объекту
+            # Если это Самостоятельная продажа, то смотрим в поле "Ответственный менеджер подразделения-продавца"
+            # значение из переменной "salesManager"
+            self.is_text_to_be_present_in_element(*FormCreatePresaleLocators.SALES_MANAGER_ELEMENT,
+                                                  UserData.user_data_dict["salesManager"])
+        else:
+            # Ждем загрузки страницы по последнему загружаемому объекту
+            # Если это НЕ самостоятельная продажа, то смотрим в поле "Ответственный менеджер подразделения-продавца"
+            # значение из переменной "executiveManager" так как в поле "salesManager"
+            if UserData.user_data_dict["create_account"] == "Mr_KSUP_Seller":
+                self.is_text_to_be_present_in_element(*FormCreatePresaleLocators.SALES_MANAGER_ELEMENT,
+                                                      UserData.user_data_dict["executiveManager"])
+            else:
+                if UserData.user_data_dict["create_account"] == "Mr_KSUP_Seller2":
+                    self.is_text_to_be_present_in_element(*FormCreatePresaleLocators.SALES_MANAGER_ELEMENT,
+                                                          UserData.user_data_dict["salesManager"])
         # Ищем поле "Предмет контракта" и заполняем
         self.browser.find_element(*FormCreatePresaleLocators.NAME_PRESALE_ELEMENT).send_keys(
             UserData.user_data_dict["fullName"])
@@ -34,7 +47,14 @@ class PresaleFormCreate(BasePage):
 
         # Ищем поле "Ответственный менеджер подразделения-продавца" и выбираем значение
         self.browser.find_element(*FormCreatePresaleLocators.SALES_MANAGER_ELEMENT).click()
-        self.browser.find_element(*FormCreatePresaleLocators.SALES_MANAGER_DROPDOWN_ELEMENT).click()
+        if UserData.user_data_dict["separateSale"] == "Да":
+            self.browser.find_element(*FormCreatePresaleLocators.SALES_MANAGER_DROPDOWN_ELEMENT).click()
+        else:
+            if UserData.user_data_dict["create_account"] == "Mr_KSUP_Seller" or \
+                    UserData.user_data_dict["create_account"] == "Mr_KSUP_Dir":
+                self.browser.find_element(*FormCreatePresaleLocators.EXECUTIVE_MANAGER_DROPDOWN_ELEMENT).click()
+            else:
+                self.browser.find_element(*FormCreatePresaleLocators.SALES_MANAGER_DROPDOWN_ELEMENT).click()
 
         # Ищем поле "Подразделение-исполнитель" и выбираем значение
         self.browser.find_element(*FormCreatePresaleLocators.EXECUTIVE_UNIT_ELEMENT).click()
@@ -42,7 +62,14 @@ class PresaleFormCreate(BasePage):
 
         # Ищем поле "Ответственный менеджер подразделения-исполнителя" и выбираем значение
         self.browser.find_element(*FormCreatePresaleLocators.EXECUTIVE_MANAGER_ELEMENT).click()
-        self.browser.find_element(*FormCreatePresaleLocators.EXECUTIVE_MANAGER_DROPDOWN_ELEMENT).click()
+        if UserData.user_data_dict["separateSale"] == "Да":
+            self.browser.find_element(*FormCreatePresaleLocators.EXECUTIVE_MANAGER_DROPDOWN_ELEMENT).click()
+        else:
+            if UserData.user_data_dict["create_account"] == "Mr_KSUP_Seller" or \
+                    UserData.user_data_dict["create_account"] == "Mr_KSUP_Dir":
+                self.browser.find_element(*FormCreatePresaleLocators.EXECUTIVE_MANAGER_DROPDOWN_ELEMENT).click()
+            else:
+                self.browser.find_element(*FormCreatePresaleLocators.SALES_MANAGER_DROPDOWN_ELEMENT).click()
 
         # Ищем поле "Исполнитель (юридическое лицо)" и выбираем значение
         self.browser.find_element(*FormCreatePresaleLocators.EXECUTIVE_UNIT_LEGAL_ELEMENT).click()
@@ -248,13 +275,35 @@ class PresaleFormCreate(BasePage):
                 f"{line1['quarter']} квартал")
             payments_sum = line1["sum"]
 
+        # Если сумма платежей не совпадает появляется алерт, при подтверждении сущность создается
+        # Баг - отображено два одинаковых алерта, убрать один после фикса
         if payments_sum != UserData.user_data_dict["sum"]:
             confirm_presale_button = self.browser.find_element(*FormCreatePresaleLocators.CONFIRM_PRESALE_BUTTON)
             confirm_presale_button.click()
             time.sleep(1)
             alert = self.browser.switch_to.alert
             alert.accept()
-            alert.accept()
+            if UserData.user_data_dict["separateSale"] == "Да":
+                alert.accept()
+            else:
+                # Алерт отправки на согласование в дирекции или департамент
+                self.browser.switch_to.alert.accept()
+                self.browser.switch_to.frame(self.browser.find_element(*FormCreatePresaleLocators.iframe))
+                self.browser.find_element(*FormCreatePresaleLocators.APPROVAL_DEPARTMENT_ELEMENT).click()
+                self.browser.find_element(*FormCreatePresaleLocators.SALES_UNIT_DROPDOWN_ELEMENT).click()
+                self.browser.find_element(*FormCreatePresaleLocators.APPROVAL_CONFIRM_SEND_BUTTON).click()
+                # Дублирующий алерт некорректных платежей
+                alert.accept()
         else:
             confirm_presale_button = self.browser.find_element(*FormCreatePresaleLocators.CONFIRM_PRESALE_BUTTON)
             confirm_presale_button.click()
+            if UserData.user_data_dict["separateSale"] == "Нет":
+                self.browser.switch_to.alert.accept()
+                self.browser.switch_to.frame(self.browser.find_element(*FormCreatePresaleLocators.iframe))
+                self.browser.find_element(*FormCreatePresaleLocators.APPROVAL_DEPARTMENT_ELEMENT).click()
+                if UserData.user_data_dict["create_account"] == "Mr_KSUP_Seller" \
+                    or UserData.user_data_dict["create_account"] == "Mr_KSUP_Dir":
+                    self.browser.find_element(*FormCreatePresaleLocators.SALES_UNIT_DROPDOWN_ELEMENT).click()
+                else:
+                    self.browser.find_element(*FormCreatePresaleLocators.EXECUTIVE_UNIT_DROPDOWN_ELEMENT).click()
+                self.browser.find_element(*FormCreatePresaleLocators.APPROVAL_CONFIRM_SEND_BUTTON).click()

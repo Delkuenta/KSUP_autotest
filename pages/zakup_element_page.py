@@ -9,6 +9,10 @@ class ZakupElementPage(BasePage):
         assert self.is_element_text(*ZakupElementLocators.PRICE_CATEGORY_ELEMENT_IN_ZP) == \
                UserData.user_data_dict["price_category"], "Ценовая категория закупочной процедуры не корректна"
 
+    def verify_visibility_approval_button_zp(self):
+        assert self.is_visibility_of_element_located(*ZakupElementLocators.SEND_APPROVAL_ELEMENT), \
+            'Кнопка "Отправить на согласование" не отобрежена'
+
     def send_zakup_for_approval(self):
         self.is_element_clickable(*ZakupElementLocators.SEND_APPROVAL_ELEMENT)
         self.browser.find_element(*ZakupElementLocators.SEND_APPROVAL_ELEMENT).click()

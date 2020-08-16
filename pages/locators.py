@@ -148,6 +148,15 @@ class FormCreatePresaleLocators:
     # Кнопка создания сущности пресейл
     CONFIRM_PRESALE_BUTTON = (By.CSS_SELECTOR, '[value="Создать"].ms-ButtonHeightWidth')
 
+    # Элементы модульного окна при отправке на согласование внутри формы создания ПА
+    # Поле для выбора подразделения
+    iframe = (By.CSS_SELECTOR, ".ms-dlgFrame")
+    APPROVAL_DEPARTMENT_ELEMENT = (By.XPATH, "//span[@id='select2-directionItems-container']")
+    # Кнопка "Отправить" на согласование
+    APPROVAL_CONFIRM_SEND_BUTTON = (By.ID, "ctl00_PlaceHolderMain_btnSend")
+    #
+    APPROVAL_CANCEL_SEND_BUTTON = (By.ID, "ctl00_PlaceHolderMain_btnCancel")
+
 
 class PresaleElementLocators:
     # Кнопка изменения элемента
@@ -165,6 +174,37 @@ class PresaleElementLocators:
     # Кнопка "Внести информацию о договоре/контракте"
     CREATE_CONTRACT_ELEMENT = (By.ID, "Ribbon.ListForm.Display.ContractGroup-LargeLarge")
 
+    # Поле "Статус согласования с подразделением"
+    PRESALE_APPROVAL_STATUS = (By.CSS_SELECTOR, ".fldKsupSaleApproveStatus #SPFieldChoice")
+
+    # Кнопка согласования пресейла
+    CONFIRM_APPROVAL_BUTTON = (By.XPATH, "//a[@id='Approve.Approve-Large']")
+    # Кнопка  отклонения согласования
+    CANCEL_APPROVAL_BUTTON = (By.XPATH, "//a[@id='Approve.Reject-Large']")
+
+    # Окно iframe
+    iframe = (By.CSS_SELECTOR, ".ms-dlgFrame")
+
+    # Поле выбора менеджера в окне согласования
+    APPROVAL_MANAGER_ELEMENT = (By.ID, "select2-ctl00_PlaceHolderMain_ddlResponsbileManager-container")
+
+    # Поле выбора при отправке на согласование пресейла в департамент
+    MANAGER_DROPDOWN_ELEMENT = (By.XPATH, f"//li[normalize-space(.)='{UserData.user_data_dict['executiveUnit']}']")
+
+    # Выбор значения продавца
+    CHANGE_SELLER_RESPONSIBLE_DROPDOWN_ELEMENT = (
+        By.XPATH, f"//li[normalize-space(.)='{''}']")
+
+    # Выбор значения продавца
+    CHANGE_SELLER_PERFORMER_DROPDOWN_ELEMENT = (
+        By.XPATH, f"//li[normalize-space(.)='{''}']")
+
+    APPROVAL_BUTTON_IN_FRAME = (By.XPATH, "//input[@id='ctl00_PlaceHolderMain_btnApprove']")
+
+    # Кнопка "Отмена"
+    CANCEL_BUTTON_IN_FRAME = (By.ID, "ctl00_PlaceHolderMain_btnCancel")
+
+    MESSAGE_OK_BUTTON = (By.XPATH, "//input[@value='OK']")
 
 class FormCreateZakupLocators:
     # Общие поля для всех типов

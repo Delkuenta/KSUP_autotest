@@ -1,3 +1,5 @@
+import pytest
+
 from pages.contract_create_form_page import ContractFormCreate
 from pages.contract_element_page import ContractElementPage
 from pages.contract_list_page import ContractPage
@@ -12,15 +14,15 @@ from pages.zakup_list_page import ZakupListPage
 
 
 # До первой ошибки --maxfail=1
-class TestFullBusinessCyclePaZpDk:
+class TestUnitSaleFullBusinessCyclePaZpDk:
 
     def test_create_presale(self, browser):
         print(UserData.user_data_dict)
         link = LoginData.link
         login_page = LoginData(browser, link)
-        login_page.open()  # открываем страницу
-        login_page.login(*UserData.login_seller)
-        login_page.verify_username(UserData.login_seller[0])
+        login_page.open()
+        login_page.login(UserData.user_data_dict["create_account"])
+        login_page.verify_username(UserData.user_data_dict["create_account"])
         presale_list_page = PresalePage(browser, link)
         presale_list_page.go_to_presale_list()
         presale_list_page.should_be_clickable_create_button()
@@ -32,9 +34,9 @@ class TestFullBusinessCyclePaZpDk:
     def test_create_zakup_based_on_presale(self, browser):
         link = LoginData.link
         login_page = LoginData(browser, link)
-        login_page.open()  # открываем страницу
-        login_page.login(*UserData.login_seller)
-        login_page.verify_username(UserData.login_seller[0])
+        login_page.open()
+        login_page.login(UserData.user_data_dict["create_account"])
+        login_page.verify_username(UserData.user_data_dict["create_account"])
         presale_list_page = PresalePage(browser, browser.current_url)
         presale_list_page.go_to_presale_list()
         presale_list_page.should_be_element_on_presale_list()
@@ -52,9 +54,9 @@ class TestFullBusinessCyclePaZpDk:
     def test_send_zakup_for_approval(self, browser):
         link = LoginData.link
         login_page = LoginData(browser, link)
-        login_page.open()  # открываем страницу
-        login_page.login(*UserData.login_seller)
-        login_page.verify_username(UserData.login_seller[0])
+        login_page.open()
+        login_page.login(UserData.user_data_dict["create_account"])
+        login_page.verify_username(UserData.user_data_dict["create_account"])
         login_page.go_to_zakup_list()
         zakup_list_page = ZakupListPage(browser, browser.current_url)
         zakup_list_page.go_to_zakup_element()
@@ -74,9 +76,9 @@ class TestFullBusinessCyclePaZpDk:
         if UserData.user_data_dict["contractorType"] == "Тендерная заявка":
             link = LoginData.link
             login_page = LoginData(browser, link)
-            login_page.open()  # открываем страницу
-            login_page.login(*UserData.login_legal)
-            login_page.verify_username(UserData.login_legal[0])
+            login_page.open()
+            login_page.login("Mr_KSUP_Legal")
+            login_page.verify_username("Mr_KSUP_Legal")
             login_page.go_to_zakup_list()
             zakup_list_page = ZakupListPage(browser, browser.current_url)
             zakup_list_page.go_to_zakup_element()
@@ -92,9 +94,9 @@ class TestFullBusinessCyclePaZpDk:
         if UserData.user_data_dict["contractorType"] == "Тендерная заявка":
             link = LoginData.link
             login_page = LoginData(browser, link)
-            login_page.open()  # открываем страницу
-            login_page.login(*UserData.login_count)
-            login_page.verify_username(UserData.login_count[0])
+            login_page.open()
+            login_page.login("Mr_KSUP_Count")
+            login_page.verify_username("Mr_KSUP_Count")
             login_page.go_to_zakup_list()
             zakup_list_page = ZakupListPage(browser, browser.current_url)
             zakup_list_page.go_to_zakup_element()
@@ -110,9 +112,9 @@ class TestFullBusinessCyclePaZpDk:
         if UserData.user_data_dict["contractorType"] == "Тендерная заявка":
             link = LoginData.link
             login_page = LoginData(browser, link)
-            login_page.open()  # открываем страницу
-            login_page.login(*UserData.login_fin)
-            login_page.verify_username(UserData.login_fin[0])
+            login_page.open()
+            login_page.login("Mr_KSUP_Fin")
+            login_page.verify_username("Mr_KSUP_Fin")
             login_page.go_to_zakup_list()
             zakup_list_page = ZakupListPage(browser, browser.current_url)
             zakup_list_page.go_to_zakup_element()
@@ -134,9 +136,9 @@ class TestFullBusinessCyclePaZpDk:
                 and UserData.user_data_dict["price_category"] != "C":
             link = LoginData.link
             login_page = LoginData(browser, link)
-            login_page.open()  # открываем страницу
-            login_page.login(*UserData.login_udprpo)
-            login_page.verify_username(UserData.login_udprpo[0])
+            login_page.open()
+            login_page.login("Mr_KSUP_UDPRPO")
+            login_page.verify_username("Mr_KSUP_UDPRPO")
             login_page.go_to_zakup_list()
             zakup_list_page = ZakupListPage(browser, browser.current_url)
             zakup_list_page.go_to_zakup_element()
@@ -154,9 +156,9 @@ class TestFullBusinessCyclePaZpDk:
                 and UserData.user_data_dict["price_category"] == "A":
             link = LoginData.link
             login_page = LoginData(browser, link)
-            login_page.open()  # открываем страницу
-            login_page.login(*UserData.login_kkp)
-            login_page.verify_username(UserData.login_kkp[0])
+            login_page.open()
+            login_page.login("Mr_KSUP_KKP")
+            login_page.verify_username("Mr_KSUP_KKP")
             login_page.go_to_zakup_list()
             zakup_list_page = ZakupListPage(browser, browser.current_url)
             zakup_list_page.go_to_zakup_element()
@@ -170,8 +172,8 @@ class TestFullBusinessCyclePaZpDk:
         link = LoginData.link
         login_page = LoginData(browser, link)
         login_page.open()
-        login_page.login(*UserData.login_seller)
-        login_page.verify_username(UserData.login_seller[0])
+        login_page.login(UserData.user_data_dict["create_account"])
+        login_page.verify_username(UserData.user_data_dict["create_account"])
         login_page.go_to_zakup_list()
         zakup_list_page = ZakupListPage(browser, browser.current_url)
         zakup_list_page.go_to_zakup_element()
@@ -189,8 +191,8 @@ class TestFullBusinessCyclePaZpDk:
         link = LoginData.link
         login_page = LoginData(browser, link)
         login_page.open()
-        login_page.login(*UserData.login_seller)
-        login_page.verify_username(UserData.login_seller[0])
+        login_page.login(UserData.user_data_dict["create_account"])
+        login_page.verify_username(UserData.user_data_dict["create_account"])
         login_page.go_to_contract_list()
         contract_list = ContractPage(browser, browser.current_url)
         contract_list.go_to_contract_element()
@@ -201,9 +203,9 @@ class TestFullBusinessCyclePaZpDk:
     def test_approval_contract_for_legal(self, browser):
         link = LoginData.link
         login_page = LoginData(browser, link)
-        login_page.open()  # открываем страницу
-        login_page.login(*UserData.login_legal)
-        login_page.verify_username(UserData.login_legal[0])
+        login_page.open()
+        login_page.login("Mr_KSUP_Legal")
+        login_page.verify_username("Mr_KSUP_Legal")
         login_page.go_to_contract_list()
         contract_list_page = ContractPage(browser, browser.current_url)
         contract_list_page.go_to_contract_element()
@@ -215,9 +217,9 @@ class TestFullBusinessCyclePaZpDk:
     def test_approval_contract_for_count(self, browser):
         link = LoginData.link
         login_page = LoginData(browser, link)
-        login_page.open()  # открываем страницу
-        login_page.login(*UserData.login_count)
-        login_page.verify_username(UserData.login_count[0])
+        login_page.open()
+        login_page.login("Mr_KSUP_Count")
+        login_page.verify_username("Mr_KSUP_Count")
         login_page.go_to_contract_list()
         contract_list_page = ContractPage(browser, browser.current_url)
         contract_list_page.go_to_contract_element()
@@ -230,8 +232,8 @@ class TestFullBusinessCyclePaZpDk:
         link = LoginData.link
         login_page = LoginData(browser, link)
         login_page.open()
-        login_page.login(*UserData.login_fin)
-        login_page.verify_username(UserData.login_fin[0])
+        login_page.login("Mr_KSUP_Fin")
+        login_page.verify_username("Mr_KSUP_Fin")
         login_page.go_to_contract_list()
         contract_list_page = ContractPage(browser, browser.current_url)
         contract_list_page.go_to_contract_element()
@@ -250,9 +252,9 @@ class TestFullBusinessCyclePaZpDk:
                 and UserData.user_data_dict["price_category"] != "C":
             link = LoginData.link
             login_page = LoginData(browser, link)
-            login_page.open()  # открываем страницу
-            login_page.login(*UserData.login_udprpo)
-            login_page.verify_username(UserData.login_udprpo[0])
+            login_page.open()
+            login_page.login("Mr_KSUP_UDPRPO")
+            login_page.verify_username("Mr_KSUP_UDPRPO")
             login_page.go_to_contract_list()
             contract_list_page = ContractPage(browser, browser.current_url)
             contract_list_page.go_to_contract_element()
@@ -269,11 +271,10 @@ class TestFullBusinessCyclePaZpDk:
         if UserData.user_data_dict["contractorType"] != "Тендерная заявка" \
                 and UserData.user_data_dict["price_category"] == "A":
             link = LoginData.link
-            login_page = LoginData(browser,
-                                   link)
+            login_page = LoginData(browser, link)
             login_page.open()
-            login_page.login(*UserData.login_kkp)
-            login_page.verify_username(UserData.login_kkp[0])
+            login_page.login("Mr_KSUP_KKP")
+            login_page.verify_username("Mr_KSUP_KKP")
             login_page.go_to_contract_list()
             contract_list_page = ContractPage(browser, browser.current_url)
             contract_list_page.go_to_contract_element()
@@ -282,3 +283,167 @@ class TestFullBusinessCyclePaZpDk:
             contract_element_page.verify_contract_successfully_status_approval_kkp()
         else:
             print("\nВнутреннее согласование контракта со службой ККП не требуется")
+
+
+class TestSeparatePresale:
+
+    def test_create_presale(self, browser):
+        print(UserData.user_data_dict)
+        link = LoginData.link
+        login_page = LoginData(browser, link)
+        login_page.open()
+        login_page.login(UserData.user_data_dict["create_account"])
+        login_page.verify_username(UserData.user_data_dict["create_account"])
+        presale_list_page = PresalePage(browser, link)
+        presale_list_page.go_to_presale_list()
+        presale_list_page.should_be_clickable_create_button()
+        presale_list_page.go_to_create_presale()
+        create_presale_page = PresaleFormCreate(browser, link)
+        create_presale_page.form_create_presale_all_type()
+        presale_list_page.should_be_element_on_presale_list()
+        presale_list_page.go_to_presale_element()
+        presale_element_page = PresaleElementPage(browser, link)
+        presale_element_page.verify_presale_approval_waiting_status()
+
+    def test_approval_presale(self, browser):
+        link = LoginData.link
+        login_page = LoginData(browser, link)
+        login_page.open()
+        if UserData.user_data_dict["create_account"] == "Mr_KSUP_Seller" \
+                or UserData.user_data_dict["create_account"] == "Mr_KSUP_Dir":
+            login_page.login("Mr_KSUP_Dir2")
+            login_page.verify_username("Mr_KSUP_Dir2")
+        else:
+            login_page.login("Mr_KSUP_Dir")
+            login_page.verify_username("Mr_KSUP_Dir")
+        presale_list_page = PresalePage(browser, link)
+        presale_list_page.go_to_presale_list()
+        presale_list_page.go_to_presale_element()
+        presale_element_page = PresaleElementPage(browser, link)
+        presale_element_page.approval_presale()
+        presale_element_page.verify_presale_approval_successfully_status()
+
+    def test_verify_visibility_zakup_button_salesManager(self, browser):
+        link = LoginData.link
+        login_page = LoginData(browser, link)
+        login_page.open()
+        login_page.login("Mr_KSUP_Seller2")
+        presale_list_page = PresalePage(browser, link)
+        presale_list_page.go_to_presale_list()
+        presale_list_page.go_to_presale_element()
+        presale_element_page = PresaleElementPage(browser, link)
+        presale_element_page.verify_visibility_button_create_contract_based_on_presale()
+        presale_element_page.verify_visibility_button_create_zp_commercial_offer_based_on_presale()
+        presale_element_page.verify_visibility_button_create_zp_presale_act_based_on_presale()
+        presale_element_page.verify_visibility_button_create_zp_tender_based_on_presale()
+
+    def test_verify_visibility_zakup_button_salesUnit(self, browser):
+        link = LoginData.link
+        login_page = LoginData(browser, link)
+        login_page.open()
+        login_page.login("Mr_KSUP_Dir2")
+        presale_list_page = PresalePage(browser, link)
+        presale_list_page.go_to_presale_list()
+        presale_list_page.go_to_presale_element()
+        presale_element_page = PresaleElementPage(browser, link)
+        presale_element_page.verify_visibility_button_create_contract_based_on_presale()
+        presale_element_page.verify_visibility_button_create_zp_commercial_offer_based_on_presale()
+        presale_element_page.verify_visibility_button_create_zp_presale_act_based_on_presale()
+        presale_element_page.verify_visibility_button_create_zp_tender_based_on_presale()
+
+    def test_verify_visibility_zakup_button_executiveUnit(self, browser):
+        link = LoginData.link
+        login_page = LoginData(browser, link)
+        login_page.open()
+        login_page.login("Mr_KSUP_Dir")
+        presale_list_page = PresalePage(browser, link)
+        presale_list_page.go_to_presale_list()
+        presale_list_page.go_to_presale_element()
+        presale_element_page = PresaleElementPage(browser, link)
+        presale_element_page.verify_visibility_button_create_contract_based_on_presale()
+        presale_element_page.verify_visibility_button_create_zp_commercial_offer_based_on_presale()
+        presale_element_page.verify_visibility_button_create_zp_presale_act_based_on_presale()
+        presale_element_page.verify_visibility_button_create_zp_tender_based_on_presale()
+
+    def test_verify_visibility_zakup_button_executiveManager(self, browser):
+        link = LoginData.link
+        login_page = LoginData(browser, link)
+        login_page.open()
+        login_page.login("Mr_KSUP_Seller")
+        presale_list_page = PresalePage(browser, link)
+        presale_list_page.go_to_presale_list()
+        presale_list_page.go_to_presale_element()
+        presale_element_page = PresaleElementPage(browser, link)
+        presale_element_page.verify_visibility_button_create_contract_based_on_presale()
+        presale_element_page.verify_visibility_button_create_zp_commercial_offer_based_on_presale()
+        presale_element_page.verify_visibility_button_create_zp_presale_act_based_on_presale()
+        presale_element_page.verify_visibility_button_create_zp_tender_based_on_presale()
+
+    def test_create_zakup_based_on_presale(self, browser):
+        link = LoginData.link
+        login_page = LoginData(browser, link)
+        login_page.open()
+        login_page.login(UserData.user_data_dict["create_account"])
+        login_page.verify_username(UserData.user_data_dict["create_account"])
+        presale_list_page = PresalePage(browser, browser.current_url)
+        presale_list_page.go_to_presale_list()
+        presale_list_page.should_be_element_on_presale_list()
+        presale_list_page.go_to_presale_element()
+        presale_element_page = PresaleElementPage(browser, browser.current_url)
+        presale_element_page.go_to_create_zp_based_on_presale()
+        zakup_form_create_page = ZakupFormCreate(browser, browser.current_url)
+        zakup_form_create_page.form_create_zakup_all_type()
+        zakup_list_page = ZakupListPage(browser, browser.current_url)
+        zakup_list_page.should_be_element_on_zakup_list()
+        zakup_list_page.go_to_zakup_element()
+        zakup_element_page = ZakupElementPage(browser, browser.current_url)
+        zakup_element_page.verify_price_category_zakup()
+
+    def test_verify_visibility_approval_button_salesManager(self, browser):
+        link = LoginData.link
+        login_page = LoginData(browser, link)
+        login_page.open()
+        login_page.login("Mr_KSUP_Seller2")
+        zakup_list_page = ZakupListPage(browser, link)
+        zakup_list_page.go_to_zakup_list()
+        zakup_list_page.go_to_zakup_element()
+        zakup_element_page = ZakupElementPage(browser, link)
+        zakup_element_page.verify_price_category_zakup()
+        zakup_element_page.verify_visibility_approval_button_zp()
+        breakpoint()
+
+    def test_verify_visibility_approval_button_salesUnit(self, browser):
+        link = LoginData.link
+        login_page = LoginData(browser, link)
+        login_page.open()
+        login_page.login("Mr_KSUP_Dir2")
+        zakup_list_page = ZakupListPage(browser, link)
+        zakup_list_page.go_to_zakup_list()
+        zakup_list_page.go_to_zakup_element()
+        zakup_element_page = ZakupElementPage(browser, link)
+        zakup_element_page.verify_price_category_zakup()
+        zakup_element_page.verify_visibility_approval_button_zp()
+
+    def test_verify_visibility_approval_button_executiveUnit(self, browser):
+        link = LoginData.link
+        login_page = LoginData(browser, link)
+        login_page.open()
+        login_page.login("Mr_KSUP_Dir")
+        zakup_list_page = ZakupListPage(browser, link)
+        zakup_list_page.go_to_zakup_list()
+        zakup_list_page.go_to_zakup_element()
+        zakup_element_page = ZakupElementPage(browser, link)
+        zakup_element_page.verify_price_category_zakup()
+        zakup_element_page.verify_visibility_approval_button_zp()
+
+    def test_verify_visibility_approval_button_executiveManager(self, browser):
+        link = LoginData.link
+        login_page = LoginData(browser, link)
+        login_page.open()
+        login_page.login("Mr_KSUP_Seller")
+        zakup_list_page = ZakupListPage(browser, link)
+        zakup_list_page.go_to_zakup_list()
+        zakup_list_page.go_to_zakup_element()
+        zakup_element_page = ZakupElementPage(browser, link)
+        zakup_element_page.verify_price_category_zakup()
+        zakup_element_page.verify_visibility_approval_button_zp()
