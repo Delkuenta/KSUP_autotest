@@ -14,6 +14,11 @@ class ContractElementPage(BasePage):
         self.is_element_present(*ContractElementLocators.CONFIRM_SEND_APPROVAL_ELEMENT)
         self.browser.find_element(*ContractElementLocators.CONFIRM_SEND_APPROVAL_ELEMENT).click()
 
+    def verify_visibility_button_send_to_approval_contract(self):
+        assert self.is_visibility_of_element_located(
+            *ContractElementLocators.SEND_APPROVAL_CONTRACT_ELEMENT), \
+            'Кнопка "Отправить на согласование(Договор/контракт)" не отобрежена'
+
     def verify_contract_waiting_status_approval_legal(self):
         self.is_element_present(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_ELEMENT)
         self.browser.find_element(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_ELEMENT).click()

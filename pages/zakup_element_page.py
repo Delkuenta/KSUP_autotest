@@ -13,6 +13,11 @@ class ZakupElementPage(BasePage):
         assert self.is_visibility_of_element_located(*ZakupElementLocators.SEND_APPROVAL_ELEMENT), \
             'Кнопка "Отправить на согласование" не отобрежена'
 
+    def verify_visibility_button_create_contract(self):
+        assert self.is_visibility_of_element_located(
+            *ZakupElementLocators.CREATE_CONTRACT_BASED_ON_ZAKUP), \
+            'Кнопка "Внести информацию о договоре/контракте" не отобрежена'
+
     def send_zakup_for_approval(self):
         self.is_element_clickable(*ZakupElementLocators.SEND_APPROVAL_ELEMENT)
         self.browser.find_element(*ZakupElementLocators.SEND_APPROVAL_ELEMENT).click()
