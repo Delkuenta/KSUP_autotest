@@ -9,12 +9,26 @@ class ContractElementPage(BasePage):
                UserData.user_data_dict["price_category"], "Ценовая категория контракта не корректна"
 
     def send_contract_for_approval(self):
+        count_refresh_page = 0
+        while count_refresh_page <= 3:
+            if self.is_visibility_of_element_located(*ContractElementLocators.SEND_APPROVAL_CONTRACT_ELEMENT) is True:
+                break
+            else:
+                self.browser.refresh()
+                count_refresh_page += 1
         self.is_element_clickable(*ContractElementLocators.SEND_APPROVAL_CONTRACT_ELEMENT)
         self.browser.find_element(*ContractElementLocators.SEND_APPROVAL_CONTRACT_ELEMENT).click()
         self.is_element_present(*ContractElementLocators.CONFIRM_SEND_APPROVAL_ELEMENT)
         self.browser.find_element(*ContractElementLocators.CONFIRM_SEND_APPROVAL_ELEMENT).click()
 
     def verify_visibility_button_send_to_approval_contract(self):
+        count_refresh_page = 0
+        while count_refresh_page <= 3:
+            if self.is_visibility_of_element_located(*ContractElementLocators.SEND_APPROVAL_CONTRACT_ELEMENT) is True:
+                break
+            else:
+                self.browser.refresh()
+                count_refresh_page += 1
         assert self.is_visibility_of_element_located(
             *ContractElementLocators.SEND_APPROVAL_CONTRACT_ELEMENT), \
             'Кнопка "Отправить на согласование(Договор/контракт)" не отобрежена'
@@ -95,6 +109,13 @@ class ContractElementPage(BasePage):
             'Некорректный статус или отсутствует статус в строке "Согласование c ККП"'
 
     def approval_contract_legal(self):
+        count_refresh_page = 0
+        while count_refresh_page <= 3:
+            if self.is_visibility_of_element_located(*ContractElementLocators.APPROVAL_CONTRACT) is True:
+                break
+            else:
+                self.browser.refresh()
+                count_refresh_page += 1
         self.is_element_clickable(*ContractElementLocators.APPROVAL_CONTRACT)
         self.browser.find_element(*ContractElementLocators.APPROVAL_CONTRACT).click()
         self.browser.find_element(*ContractElementLocators.COMMENT_TO_APPROVAL_CONTRACT).send_keys(
@@ -106,6 +127,13 @@ class ContractElementPage(BasePage):
         self.browser.find_element(*ContractElementLocators.ClOSE_ALLERT_CONTRACT).click()
 
     def approval_contract_count(self):
+        count_refresh_page = 0
+        while count_refresh_page <= 3:
+            if self.is_visibility_of_element_located(*ContractElementLocators.APPROVAL_CONTRACT) is True:
+                break
+            else:
+                self.browser.refresh()
+                count_refresh_page += 1
         self.is_element_clickable(*ContractElementLocators.APPROVAL_CONTRACT)
         self.browser.find_element(*ContractElementLocators.APPROVAL_CONTRACT).click()
         self.browser.find_element(*ContractElementLocators.COMMENT_TO_APPROVAL_CONTRACT).send_keys(
@@ -117,6 +145,13 @@ class ContractElementPage(BasePage):
         self.browser.find_element(*ContractElementLocators.ClOSE_ALLERT_CONTRACT).click()
 
     def approval_contract_fin(self):
+        count_refresh_page = 0
+        while count_refresh_page <= 3:
+            if self.is_visibility_of_element_located(*ContractElementLocators.APPROVAL_CONTRACT) is True:
+                break
+            else:
+                self.browser.refresh()
+                count_refresh_page += 1
         self.is_element_clickable(*ContractElementLocators.APPROVAL_CONTRACT)
         self.browser.find_element(*ContractElementLocators.APPROVAL_CONTRACT).click()
         self.browser.find_element(*ContractElementLocators.COMMENT_TO_APPROVAL_CONTRACT).send_keys(
@@ -128,6 +163,13 @@ class ContractElementPage(BasePage):
         self.browser.find_element(*ContractElementLocators.ClOSE_ALLERT_CONTRACT).click()
 
     def approval_contract_udprpo(self):
+        count_refresh_page = 0
+        while count_refresh_page <= 3:
+            if self.is_visibility_of_element_located(*ContractElementLocators.APPROVAL_CONTRACT) is True:
+                break
+            else:
+                self.browser.refresh()
+                count_refresh_page += 1
         self.is_element_clickable(*ContractElementLocators.APPROVAL_CONTRACT)
         self.browser.find_element(*ContractElementLocators.APPROVAL_CONTRACT).click()
         self.browser.find_element(*ContractElementLocators.COMMENT_TO_APPROVAL_CONTRACT).send_keys(
@@ -139,6 +181,13 @@ class ContractElementPage(BasePage):
         self.browser.find_element(*ContractElementLocators.ClOSE_ALLERT_CONTRACT).click()
 
     def approval_contract_kkp(self):
+        count_refresh_page = 0
+        while count_refresh_page <= 3:
+            if self.is_visibility_of_element_located(*ContractElementLocators.APPROVAL_CONTRACT) is True:
+                break
+            else:
+                self.browser.refresh()
+                count_refresh_page += 1
         self.is_element_clickable(*ContractElementLocators.APPROVAL_CONTRACT)
         self.browser.find_element(*ContractElementLocators.APPROVAL_CONTRACT).click()
         self.browser.find_element(*ContractElementLocators.COMMENT_TO_APPROVAL_CONTRACT).send_keys(

@@ -52,6 +52,19 @@ class ContractFormCreate(BasePage):
         self.browser.find_element(*FormCreateContractLocators.NUMBER_CONTRACT_ELEMENT).send_keys(
             UserData.user_data_dict["number_contract"])
 
+        # Заполняем поле "Дата заключения"
+        # Для типа "Тендерная заявка" и "Коммерческое предложение" поле "Дата заключения" предзаполняется
+        if UserData.user_data_dict["contractorType"] == "Запрос цен товаров, работ, услуг":
+            self.browser.find_element(*FormCreateContractLocators.START_DATE_CONTRACT).send_keys(
+                UserData.user_data_dict["startDate"])
+
+        # Заполняем поле "Номер закупки"
+        self.browser.find_element(*FormCreateContractLocators.EIS_PURCHASE_NUMBER_CONTRACT).send_keys(UserData.user_data_dict["eis_price_number"])
+
+        # Заполняем поле " Ссылка на закупку "
+        self.browser.find_element(*FormCreateContractLocators.EIS_PURCHSE_LINK_CONTRACT).send_keys(
+            UserData.user_data_dict["eis_price_link"])
+
         # Заполняем поле Ссылка на договор/контракт на Официальном сайте ЕИС
         self.browser.find_element(*FormCreateContractLocators.EIS_CONTRACT_LINK).send_keys(
             UserData.user_data_dict["eis_contract_link"])

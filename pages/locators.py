@@ -519,10 +519,10 @@ class FormCreateContractLocators:
     CONTRACT_IS_NETTING = (By.CSS_SELECTOR, "#KsupContractIsNetting_c8e2c9fe-523c-4d05-913a-eab1b2d18369")
 
     # Дата заключения договор/контракта
-    CONCLUSION_DATE_CONTRACT = (By.ID, "KsupConclusionDate_1cc85b45-2b12-499b-aeda-bdbdb850a027_$DateTimeFieldDate")
+    START_DATE_CONTRACT = (By.ID, "KsupConclusionDate_1cc85b45-2b12-499b-aeda-bdbdb850a027_$DateTimeFieldDate")
 
     # Дата завершение договор/контракта
-    DATE_END_CONTRACT = (By.ID, "KsupDateEnd_5714bf19-cc8d-4a00-8acf-1be5513dde9b_$DateTimeFieldDate")
+    END_DATE_CONTRACT = (By.ID, "KsupDateEnd_5714bf19-cc8d-4a00-8acf-1be5513dde9b_$DateTimeFieldDate")
 
     # Номер закупки
     EIS_PURCHASE_NUMBER_CONTRACT = (By.ID, "KsupEisPurchaseNumber_8afdb894-e496-4d71-9e54-a1bf0e0a5fb6_$TextField")

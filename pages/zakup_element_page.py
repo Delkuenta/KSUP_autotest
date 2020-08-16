@@ -106,6 +106,13 @@ class ZakupElementPage(BasePage):
             'Некорректный статус или отсутствует статус в строке "Статус согласования"'
 
     def approval_zakup_legal(self):
+        count_refresh_page = 0
+        while count_refresh_page < 3:
+            if self.is_visibility_of_element_located(*ZakupElementLocators.APPROVAL_ZAKUP) is True:
+                break
+            else:
+                self.browser.refresh()
+                count_refresh_page += 1
         self.is_element_clickable(*ZakupElementLocators.APPROVAL_ZAKUP)
         self.browser.find_element(*ZakupElementLocators.APPROVAL_ZAKUP).click()
         self.browser.find_element(*ZakupElementLocators.COMMENT_TO_APPROVAL_ZAKUP).send_keys(
@@ -117,6 +124,13 @@ class ZakupElementPage(BasePage):
         self.browser.find_element(*ZakupElementLocators.ClOSE_ALLERT_ZAKUP).click()
 
     def approval_zakup_count(self):
+        count_refresh_page = 0
+        while count_refresh_page < 3:
+            if self.is_visibility_of_element_located(*ZakupElementLocators.APPROVAL_ZAKUP) is True:
+                break
+            else:
+                self.browser.refresh()
+                count_refresh_page += 1
         self.is_element_clickable(*ZakupElementLocators.APPROVAL_ZAKUP)
         self.browser.find_element(*ZakupElementLocators.APPROVAL_ZAKUP).click()
         self.browser.find_element(*ZakupElementLocators.COMMENT_TO_APPROVAL_ZAKUP).send_keys(
@@ -128,6 +142,13 @@ class ZakupElementPage(BasePage):
         self.browser.find_element(*ZakupElementLocators.ClOSE_ALLERT_ZAKUP).click()
 
     def approval_zakup_fin(self):
+        count_refresh_page = 0
+        while count_refresh_page < 3:
+            if self.is_visibility_of_element_located(*ZakupElementLocators.APPROVAL_ZAKUP) is True:
+                break
+            else:
+                self.browser.refresh()
+                count_refresh_page += 1
         self.is_element_clickable(*ZakupElementLocators.APPROVAL_ZAKUP)
         self.browser.find_element(*ZakupElementLocators.APPROVAL_ZAKUP).click()
         self.browser.find_element(*ZakupElementLocators.COMMENT_TO_APPROVAL_ZAKUP).send_keys(
@@ -139,6 +160,13 @@ class ZakupElementPage(BasePage):
         self.browser.find_element(*ZakupElementLocators.ClOSE_ALLERT_ZAKUP).click()
 
     def approval_zakup_udprpo(self):
+        count_refresh_page = 0
+        while count_refresh_page < 3:
+            if self.is_visibility_of_element_located(*ZakupElementLocators.APPROVAL_ZAKUP) is True:
+                break
+            else:
+                self.browser.refresh()
+                count_refresh_page += 1
         self.is_element_clickable(*ZakupElementLocators.APPROVAL_ZAKUP)
         self.browser.find_element(*ZakupElementLocators.APPROVAL_ZAKUP).click()
         self.browser.find_element(*ZakupElementLocators.COMMENT_TO_APPROVAL_ZAKUP).send_keys(
@@ -150,6 +178,13 @@ class ZakupElementPage(BasePage):
         self.browser.find_element(*ZakupElementLocators.ClOSE_ALLERT_ZAKUP).click()
 
     def approval_zakup_kkp(self):
+        count_refresh_page = 0
+        while count_refresh_page < 3:
+            if self.is_visibility_of_element_located(*ZakupElementLocators.APPROVAL_ZAKUP) is True:
+                break
+            else:
+                self.browser.refresh()
+                count_refresh_page += 1
         self.is_element_clickable(*ZakupElementLocators.APPROVAL_ZAKUP)
         self.browser.find_element(*ZakupElementLocators.APPROVAL_ZAKUP).click()
         self.browser.find_element(*ZakupElementLocators.COMMENT_TO_APPROVAL_ZAKUP).send_keys(
@@ -161,5 +196,12 @@ class ZakupElementPage(BasePage):
         self.browser.find_element(*ZakupElementLocators.ClOSE_ALLERT_ZAKUP).click()
 
     def go_to_create_contract_based_on_zp(self):
+        count_refresh_page = 0
+        while count_refresh_page <= 3:
+            if self.is_visibility_of_element_located(*ZakupElementLocators.CREATE_CONTRACT_BASED_ON_ZAKUP) is True:
+                break
+            else:
+                self.browser.refresh()
+                count_refresh_page += 1
         self.is_element_present(*ZakupElementLocators.CREATE_CONTRACT_BASED_ON_ZAKUP)
         self.browser.find_element(*ZakupElementLocators.CREATE_CONTRACT_BASED_ON_ZAKUP).click()
