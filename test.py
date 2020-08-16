@@ -15,7 +15,7 @@ from pages.zakup_list_page import ZakupListPage
 
 # До первой ошибки --maxfail=1
 class TestUnitSaleFullBusinessCyclePaZpDk:
-    @pytest.mark.skip
+
     def test_create_presale(self, browser):
         print(UserData.user_data_dict)
         link = LoginData.link
@@ -775,3 +775,36 @@ class TestSeparateSaleFullBusinessCyclePaZpDk:
             contract_element_page.verify_contract_successfully_status_approval_kkp()
         else:
             print("\nВнутреннее согласование контракта со службой ККП не требуется")
+
+
+class TestDkFullBusinessCycle:
+
+    def test_create_contract(self, browser):
+        print(UserData.user_data_dict)
+        link = LoginData.link
+        login_page = LoginData(browser, link)
+        login_page.open()
+        login_page.login(UserData.user_data_dict["create_account"])
+        login_page.verify_username(UserData.user_data_dict["create_account"])
+        login_page.go_to_contract_list()
+        contract_page = ContractPage(browser, browser.current_url)
+        contract_page.go_to_create_contract()
+        create_contract_page = ContractFormCreate(browser, link)
+        create_contract_page.form_create_contract()
+        contract_page.go_to_contract_element()
+        contract_element_page = ContractElementPage(browser, browser.current_url)
+        contract_element_page.verify_price_category_contract()
+
+    def test_send_contract_for_approval(self, browser):
+        link = LoginData.link
+        login_page = LoginData(browser, link)
+        login_page.open()
+        login_page.login(UserData.user_data_dict["create_account"])
+        login_page.verify_username(UserData.user_data_dict["create_account"])
+        login_page.go_to_contract_list()
+        contract_list = ContractPage(browser, browser.current_url)
+        contract_list.go_to_contract_element()
+        contract_element_page = ContractElementPage(browser, browser.current_url)
+        contract_element_page.send_contract_for_approval()
+        contract_element_page.verify_contract_waiting_status_approval_legal()
+

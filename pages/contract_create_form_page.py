@@ -1,6 +1,7 @@
 import time
 
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.select import Select
 
 from pages.base_page import BasePage
 from pages.locators import FormCreateContractLocators
@@ -59,7 +60,8 @@ class ContractFormCreate(BasePage):
                 UserData.user_data_dict["startDate"])
 
         # Заполняем поле "Номер закупки"
-        self.browser.find_element(*FormCreateContractLocators.EIS_PURCHASE_NUMBER_CONTRACT).send_keys(UserData.user_data_dict["eis_price_number"])
+        self.browser.find_element(*FormCreateContractLocators.EIS_PURCHASE_NUMBER_CONTRACT).send_keys(
+            UserData.user_data_dict["eis_price_number"])
 
         # Заполняем поле " Ссылка на закупку "
         self.browser.find_element(*FormCreateContractLocators.EIS_PURCHSE_LINK_CONTRACT).send_keys(
@@ -171,3 +173,318 @@ class ContractFormCreate(BasePage):
         self.browser.find_element(*FormCreateContractLocators.CONFIRM_CONTRACT_BUTTON).click()
         # Подтверждаем внесение изменений  в связанный проект
         self.browser.find_element(*FormCreateContractLocators.CONFIRM_CHANGE_PROJECT_BUTTON).click()
+
+    def form_create_contract(self):
+        # Ждем загрузки формы по последнему загруженному элементу
+        self.is_text_to_be_present_in_element(*FormCreateContractLocators.SALES_MANAGER_CONTRACT_ELEMENT,
+                                              UserData.user_data_dict["salesManager"])
+
+        # Заполняем поле "Предмет контракта"
+        self.browser.find_element(*FormCreateContractLocators.NAME_CONTRACT_ELEMENT).send_keys(
+            UserData.user_data_dict["fullName"])
+
+        # Заполняем поле "Заказчик"
+        self.browser.find_element(*FormCreateContractLocators.CUSTOMER_CONTRACT_ELEMENT).click()
+        self.browser.find_element(*FormCreateContractLocators.CUSTOMER_DROPDOWN_CONTRACT_ELEMENT).click()
+
+        # Заполняем поле "Подразделение-продавец"
+        self.browser.find_element(*FormCreateContractLocators.SALES_UNIT_CONTRACT_ELEMENT).click()
+        self.browser.find_element(*FormCreateContractLocators.SALES_UNIT_DROPDOWN_CONTRACT_ELEMENT).click()
+
+        # Заполняем поле "Ответственный менеджер подразделения-продавца"
+        self.browser.find_element(*FormCreateContractLocators.SALES_MANAGER_CONTRACT_ELEMENT).click()
+        self.browser.find_element(*FormCreateContractLocators.SALES_MANAGER_CONTRACT_DROPDOWN_ELEMENT).click()
+
+        # Заполняем поле "Подразделение-исполнитель"
+        self.browser.find_element(*FormCreateContractLocators.EXECUTIVE_UNIT_CONTRACT_ELEMENT).click()
+        self.browser.find_element(*FormCreateContractLocators.EXECUTIVE_UNIT_CONTRACT_DROPDOWN_ELEMENT).click()
+
+        # Заполняем поле "Ответственный менеджер подразделения-исполнителя"
+        self.browser.find_element(*FormCreateContractLocators.EXECUTIVE_MANAGER_CONTRACT_ELEMENT).click()
+        self.browser.find_element(*FormCreateContractLocators.EXECUTIVE_MANAGER_DROPDOWN_CONTRACT_ELEMENT).click()
+
+        # Заполняем поле "Исполнитель (юридическое лицо)"
+        self.browser.find_element(*FormCreateContractLocators.EXECUTIVE_UNIT_LEGAL_CONTRACT_ELEMENT).click()
+        self.browser.find_element(*FormCreateContractLocators.EXECUTIVE_UNIT_LEGAL_DROPDOWN_CONTRACT_ELEMENT).click()
+
+        # Ищем кнопку "Тип работ и услуг"
+        self.browser.find_element(*FormCreateContractLocators.SEARCH_TYPE_AND_SERVICES_ELEMENT).click()
+        time.sleep(2)
+
+        # Работаем во фрейме и выбираем категории
+        self.is_frame_to_be_available_and_switch_to_it()
+
+        # Открываем все доступные категории
+        self.browser.find_element(*FormCreateContractLocators.GROUP_CATEGORY_ELEMENT1).click()
+        self.browser.find_element(*FormCreateContractLocators.GROUP_CATEGORY_ELEMENT2).click()
+        self.browser.find_element(*FormCreateContractLocators.GROUP_CATEGORY_ELEMENT3).click()
+        self.browser.find_element(*FormCreateContractLocators.GROUP_CATEGORY_ELEMENT4).click()
+        self.browser.find_element(*FormCreateContractLocators.GROUP_CATEGORY_ELEMENT5).click()
+
+        # Выбираем нужный элемент
+        for item in UserData.user_data_dict["typeOfWorkServices"]:
+            WORK_SERVICE_ELEMENT = (By.XPATH, f"//*[normalize-space(text()) and normalize-space(.)='{item}']")
+            if self.is_element_present(*WORK_SERVICE_ELEMENT):
+                self.browser.find_element(*WORK_SERVICE_ELEMENT).click()
+                self.browser.find_element(*FormCreateContractLocators.CHOICE_IFRAME_BUTTON).click()
+            else:
+                self.browser.find_element(*FormCreateContractLocators.SCROLL_DOWN_BUTTON).click()
+                assert self.is_element_present(*WORK_SERVICE_ELEMENT) is True, \
+                    f"Не найден тип работ и услуг с именем {item}"
+                self.browser.find_element(*WORK_SERVICE_ELEMENT).click()
+                self.browser.find_element(*FormCreateContractLocators.CHOICE_IFRAME_BUTTON).click()
+
+        self.browser.find_element(*FormCreateContractLocators.CONFIRM_IFRAME_BUTTON).click()
+
+        # Возврат к форм создания.
+        self.is_frame_to_parent()
+        time.sleep(2)
+
+        # Заполняем поле "Сумма договора/контракта"
+        self.browser.find_element(*FormCreateContractLocators.SUM_ELEMENT).send_keys(UserData.user_data_dict["sum"])
+
+        # Заполняем поле "Валюта договора/контракта "
+        Select(self.browser.find_element(*FormCreateContractLocators.CURRENCY_ELEMENT)).select_by_value(
+            UserData.user_data_dict["currency"])
+
+        # Заполняем поле "Номер"
+        self.browser.find_element(*FormCreateContractLocators.NUMBER_CONTRACT_ELEMENT).send_keys(
+            UserData.user_data_dict["number_contract"])
+
+        # Заполняем поле "Дата заключения"
+        self.browser.find_element(*FormCreateContractLocators.START_DATE_CONTRACT).send_keys(
+            UserData.user_data_dict["startDate"])
+
+        # Заполняем поле "Дата окончания"
+        self.browser.find_element(*FormCreateContractLocators.END_DATE_CONTRACT).send_keys(
+            UserData.user_data_dict["endDate"])
+
+        # Заполняем поле "Номер закупки"
+        self.browser.find_element(*FormCreateContractLocators.EIS_PURCHASE_NUMBER_CONTRACT).send_keys(
+            UserData.user_data_dict["eis_price_number"])
+
+        # Заполняем поле " Ссылка на закупку "
+        self.browser.find_element(*FormCreateContractLocators.EIS_PURCHSE_LINK_CONTRACT).send_keys(
+            UserData.user_data_dict["eis_price_link"])
+
+        # Заполняем поле Ссылка на договор/контракт на Официальном сайте ЕИС
+        self.browser.find_element(*FormCreateContractLocators.EIS_CONTRACT_LINK).send_keys(
+            UserData.user_data_dict["eis_contract_link"])
+
+        # Выбираем значение в поле "Территория применения"
+        self.browser.find_element(*FormCreateContractLocators.SEARCH_TERRITORY_ELEMENT).click()
+        time.sleep(2)
+        self.is_frame_to_be_available_and_switch_to_it()
+        self.browser.find_element(*FormCreateContractLocators.GROUP_TERRITORY_ELEMENT).click()
+        for territory in UserData.user_data_dict["territory"]:
+            TERRITORY_ELEMENT = (By.XPATH, f"//*[normalize-space(text()) and normalize-space(.)='{territory}']")
+            if self.is_element_present(*TERRITORY_ELEMENT):
+                self.browser.find_element(*TERRITORY_ELEMENT).click()
+                self.browser.find_element(*FormCreateContractLocators.CHOICE_IFRAME_BUTTON).click()
+            else:
+                # количество перелистываний
+                scrolls = 0
+                # максимум возможных перелистываний
+                max_scrolls = 7
+                while self.is_element_present(*TERRITORY_ELEMENT) is False and scrolls <= max_scrolls:
+                    self.browser.find_element(*FormCreateContractLocators.SCROLL_DOWN_BUTTON_TERRITORY).click()
+                    scrolls += 1
+                self.browser.find_element(*TERRITORY_ELEMENT).click()
+                self.browser.find_element(*FormCreateContractLocators.CHOICE_IFRAME_BUTTON).click()
+                if self.is_element_present(*TERRITORY_ELEMENT) is False and scrolls == max_scrolls:
+                    print(f"Не найдена территория  с именем {territory}")
+
+        self.browser.find_element(*FormCreateContractLocators.CONFIRM_IFRAME_BUTTON).click()
+        # возврат к основной форме
+        self.is_frame_to_parent()
+        self.is_text_to_be_present_in_element(*FormCreateContractLocators.TYPE_TERRITORY_ELEMENT,
+                                              f'{UserData.user_data_dict["territory"]};')
+
+        # Выбираем значение в поле "Ключевые технологии"
+        self.browser.find_element(*FormCreateContractLocators.SEARCH_TECHNOLOGIES_ELEMENT).click()
+        time.sleep(2)
+        self.is_frame_to_be_available_and_switch_to_it()
+        for technologies in UserData.user_data_dict["technologies"]:
+            TECHNOLOGIES_ELEMENT = (By.XPATH, f"//*[normalize-space(text()) and normalize-space(.)='{technologies}']")
+            if self.is_element_present(*TECHNOLOGIES_ELEMENT):
+                self.browser.find_element(*TECHNOLOGIES_ELEMENT).click()
+                self.browser.find_element(*FormCreateContractLocators.CHOICE_IFRAME_BUTTON).click()
+            else:
+                # количество перелистываний
+                scrolls = 0
+                # максимум возможных перелистываний
+                max_scrolls = 3
+                while self.is_element_present(*TECHNOLOGIES_ELEMENT) is False and scrolls <= max_scrolls:
+                    self.browser.find_element(*FormCreateContractLocators.SCROLL_DOWN_BUTTON_TECHNOLOGIES).click()
+                    scrolls += 1
+
+                self.browser.find_element(*TECHNOLOGIES_ELEMENT).click()
+                self.browser.find_element(*FormCreateContractLocators.CHOICE_IFRAME_BUTTON).click()
+                if self.is_element_present(*TECHNOLOGIES_ELEMENT) is False and scrolls == max_scrolls:
+                    print(f"Не найдена технология с именем {technologies}")
+
+        self.browser.find_element(*FormCreateContractLocators.CONFIRM_IFRAME_BUTTON).click()
+        self.is_frame_to_parent()
+        # Проверяем, строку
+        self.is_text_to_be_present_in_element(*FormCreateContractLocators.TYPE_TECHNOLOGIES_ELEMENT,
+                                              f"{UserData.user_data_dict['technologies']};")
+
+        # Заполняем поле "Цели и задачи"
+        self.browser.find_element(*FormCreateContractLocators.DESCRIPTION_PLAIN_TEXT_ELEMENT).send_keys(
+            UserData.user_data_dict["descriptionText"])
+
+        # заполняем поле Количественные показатели реализации проекта
+        self.browser.find_element(*FormCreateContractLocators.QUANTITATIVE_INDICATORS_PROJECT_ELEMENT).send_keys(
+            UserData.user_data_dict["quantitative_indicators_project"])
+
+        # Уникальный код проекта
+        self.browser.find_element(*FormCreateContractLocators.PROJECT_UNIQUE_CODE).send_keys(
+            UserData.user_data_dict["project_unique_code"])
+
+        # Выбираем связанный проект
+        self.browser.find_element(*FormCreateContractLocators.PROJECT_ELEMENT).click()
+        self.browser.find_element(*FormCreateContractLocators.PROJECT_FIND_ELEMENT).send_keys(
+            UserData.user_data_dict["project"])
+        self.browser.find_element(*FormCreateContractLocators.PROJECT_DROPDOWN_ELEMENT).click()
+
+        payments_sum = 0
+        payments = UserData.user_data_dict["payments"]
+        count_payments_line = len(UserData.user_data_dict["payments"])
+        print(f'\nКоличество строчек плановых платежей: {count_payments_line}')
+
+        if count_payments_line == 5:
+            line1 = dict(payments[0])
+            self.browser.find_element(*FormCreateContractLocators.SUMTABLE1).send_keys(line1["sum"])
+            self.browser.find_element(*FormCreateContractLocators.YEARTABLE1).send_keys(line1["year"])
+            Select(self.browser.find_element(*FormCreateContractLocators.QUARTERTABLE1)).select_by_visible_text(
+                f"{line1['quarter']} квартал")
+
+            line2 = dict(payments[1])
+            self.browser.find_element(*FormCreateContractLocators.SUMTABLE2).send_keys(line2["sum"])
+            self.browser.find_element(*FormCreateContractLocators.YEARTABLE2).send_keys(line2["year"])
+            Select(self.browser.find_element(*FormCreateContractLocators.QUARTERTABLE2)).select_by_visible_text(
+                f"{line2['quarter']} квартал")
+
+            line3 = dict(payments[2])
+            self.browser.find_element(*FormCreateContractLocators.SUMTABLE3).send_keys(line3["sum"])
+            self.browser.find_element(*FormCreateContractLocators.YEARTABLE3).send_keys(line3["year"])
+            Select(self.browser.find_element(*FormCreateContractLocators.QUARTERTABLE3)).select_by_visible_text(
+                f"{line3['quarter']} квартал")
+
+            line4 = dict(payments[3])
+            self.browser.find_element(*FormCreateContractLocators.SUMTABLE4).send_keys(line4["sum"])
+            self.browser.find_element(*FormCreateContractLocators.YEARTABLE4).send_keys(line4["year"])
+            Select(self.browser.find_element(*FormCreateContractLocators.QUARTERTABLE4)).select_by_visible_text(
+                f"{line4['quarter']} квартал")
+
+            line5 = dict(payments[4])
+            self.browser.find_element(*FormCreateContractLocators.SUMTABLE5).send_keys(line5["sum"])
+            self.browser.find_element(*FormCreateContractLocators.YEARTABLE5).send_keys(line5["year"])
+            Select(self.browser.find_element(*FormCreateContractLocators.QUARTERTABLE5)).select_by_visible_text(
+                f"{line5['quarter']} квартал")
+            payments_sum = line1["sum"] + line2["sum"] + line3["sum"] + line4["sum"] + line5["sum"]
+
+        elif count_payments_line == 4:
+            line1 = dict(payments[0])
+            self.browser.find_element(*FormCreateContractLocators.SUMTABLE1).send_keys(line1["sum"])
+            self.browser.find_element(*FormCreateContractLocators.YEARTABLE1).send_keys(line1["year"])
+            Select(self.browser.find_element(*FormCreateContractLocators.QUARTERTABLE1)).select_by_visible_text(
+                f"{line1['quarter']} квартал")
+
+            line2 = dict(payments[1])
+            self.browser.find_element(*FormCreateContractLocators.SUMTABLE2).send_keys(line2["sum"])
+            self.browser.find_element(*FormCreateContractLocators.YEARTABLE2).send_keys(line2["year"])
+            Select(self.browser.find_element(*FormCreateContractLocators.QUARTERTABLE2)).select_by_visible_text(
+                f"{line2['quarter']} квартал")
+
+            line3 = dict(payments[2])
+            self.browser.find_element(*FormCreateContractLocators.SUMTABLE3).send_keys(line3["sum"])
+            self.browser.find_element(*FormCreateContractLocators.YEARTABLE3).send_keys(line3["year"])
+            Select(self.browser.find_element(*FormCreateContractLocators.QUARTERTABLE3)).select_by_visible_text(
+                f"{line3['quarter']} квартал")
+
+            line4 = dict(payments[3])
+            self.browser.find_element(*FormCreateContractLocators.SUMTABLE4).send_keys(line4["sum"])
+            self.browser.find_element(*FormCreateContractLocators.YEARTABLE4).send_keys(line4["year"])
+            Select(self.browser.find_element(*FormCreateContractLocators.QUARTERTABLE4)).select_by_visible_text(
+                f"{line4['quarter']} квартал")
+            payments_sum = line1["sum"] + line2["sum"] + line3["sum"] + line4["sum"]
+
+        elif count_payments_line == 3:
+            line1 = dict(payments[0])
+            self.browser.find_element(*FormCreateContractLocators.SUMTABLE1).send_keys(line1["sum"])
+            self.browser.find_element(*FormCreateContractLocators.YEARTABLE1).send_keys(line1["year"])
+            Select(self.browser.find_element(*FormCreateContractLocators.QUARTERTABLE1)).select_by_visible_text(
+                f"{line1['quarter']} квартал")
+
+            line2 = dict(payments[1])
+            self.browser.find_element(*FormCreateContractLocators.SUMTABLE2).send_keys(line2["sum"])
+            self.browser.find_element(*FormCreateContractLocators.YEARTABLE2).send_keys(line2["year"])
+            Select(self.browser.find_element(*FormCreateContractLocators.QUARTERTABLE2)).select_by_visible_text(
+                f"{line2['quarter']} квартал")
+
+            line3 = dict(payments[2])
+            self.browser.find_element(*FormCreateContractLocators.SUMTABLE3).send_keys(line3["sum"])
+            self.browser.find_element(*FormCreateContractLocators.YEARTABLE3).send_keys(line3["year"])
+            Select(self.browser.find_element(*FormCreateContractLocators.QUARTERTABLE3)).select_by_visible_text(
+                f"{line3['quarter']} квартал")
+            payments_sum = line1["sum"] + line2["sum"] + line3["sum"]
+
+        elif count_payments_line == 2:
+            line1 = dict(payments[0])
+            self.browser.find_element(*FormCreateContractLocators.SUMTABLE1).send_keys(line1["sum"])
+            self.browser.find_element(*FormCreateContractLocators.YEARTABLE1).send_keys(line1["year"])
+            Select(self.browser.find_element(*FormCreateContractLocators.QUARTERTABLE1)).select_by_visible_text(
+                f"{line1['quarter']} квартал")
+
+            line2 = dict(payments[1])
+            self.browser.find_element(*FormCreateContractLocators.SUMTABLE2).send_keys(line2["sum"])
+            self.browser.find_element(*FormCreateContractLocators.YEARTABLE2).send_keys(line2["year"])
+            Select(self.browser.find_element(*FormCreateContractLocators.QUARTERTABLE2)).select_by_visible_text(
+                f"{line2['quarter']} квартал")
+            payments_sum = line1["sum"] + line2["sum"]
+
+        elif count_payments_line == 1:
+            line1 = dict(payments[0])
+            self.browser.find_element(*FormCreateContractLocators.SUMTABLE1).send_keys(line1["sum"])
+            self.browser.find_element(*FormCreateContractLocators.YEARTABLE1).send_keys(line1["year"])
+            Select(self.browser.find_element(*FormCreateContractLocators.QUARTERTABLE1)).select_by_visible_text(
+                f"{line1['quarter']} квартал")
+            payments_sum = line1["sum"]
+
+        # прикрепляем файл Контракт
+        self.browser.find_element(*FormCreateContractLocators.FILE_CONTRACT).send_keys(UserData.file_path_for_link_doc)
+        self.is_text_to_be_present_in_element(*FormCreateContractLocators.FILE_CONTRACT_NAME, UserData.name_doc_to_link)
+
+        # прикрепляем файл Бюджет проекта
+        self.browser.find_element(*FormCreateContractLocators.FILE_BUDGET_OF_PROJECT).send_keys(
+            UserData.file_path_for_link_jpg)
+        self.is_text_to_be_present_in_element(
+            *FormCreateContractLocators.FILE_BUDGET_OF_PROJECT_NAME, UserData.name_jpg_to_link)
+
+        # прикрепляем файл Пояснительная служебная записка
+        self.browser.find_element(*FormCreateContractLocators.FILE_EXPLANATORY_MEMORANUM).send_keys(
+            UserData.file_path_for_link_excel)
+        self.is_text_to_be_present_in_element(
+            *FormCreateContractLocators.FILE_EXPLANATORY_MEMORANUM_NAME, UserData.name_excel_to_link)
+
+        # прикрепляем файл Реестр рисков, Карта рисков
+        self.browser.find_element(*FormCreateContractLocators.FILE_RISK_MAP_AND_REGISTERY).send_keys(
+            UserData.file_path_for_link_jpg)
+        self.is_text_to_be_present_in_element(
+            *FormCreateContractLocators.FILE_RISK_MAP_AND_REGISTERY_NAME, UserData.name_jpg_to_link)
+
+        # прикрепляем файл Иное
+        self.browser.find_element(*FormCreateContractLocators.FILE_OTHER).send_keys(UserData.file_path_for_link_mp4)
+        self.is_text_to_be_present_in_element(*FormCreateContractLocators.FILE_OTHER_NAME, UserData.name_mp4_to_link)
+
+        # Жмем кнопку создать
+        self.browser.find_element(*FormCreateContractLocators.CONFIRM_CONTRACT_BUTTON).click()
+
+        # Подтверждаем внесение изменений  в связанный проект
+        self.browser.find_element(*FormCreateContractLocators.CONFIRM_CHANGE_PROJECT_BUTTON).click()
+
+        # Если сумма платежей не совпадает появляется алерт, при подтверждении сущность создается
+        if payments_sum != UserData.user_data_dict["sum"]:
+            alert = self.browser.switch_to.alert
+            alert.accept()

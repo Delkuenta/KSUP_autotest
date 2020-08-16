@@ -480,14 +480,17 @@ class FormCreateContractLocators:
         By.CSS_SELECTOR, r"#KsupWorkServicesTypeMetadata_\$containercontrolHolder .ms-taxonomy-browser-button")
 
     # Элементы во фрейме "Тип работ и услуг"
-    # Группа категории
     # Группы категорий
     GROUP_CATEGORY_ELEMENT1 = (By.ID, "TIE_3")
     GROUP_CATEGORY_ELEMENT2 = (By.ID, "TIE_4")
     GROUP_CATEGORY_ELEMENT3 = (By.ID, "TIE_5")
     GROUP_CATEGORY_ELEMENT4 = (By.ID, "TIE_6")
     GROUP_CATEGORY_ELEMENT5 = (By.ID, "TIE_7")
-    # Позиция в группе
+
+    # Кнопка прокрутки вниз у категории Программное обеспечение
+    SCROLL_DOWN_BUTTON = (By.ID, "PGD_6")
+
+    # Категория
     CATEGORY_ELEMENT = (
         By.XPATH, f"//*[normalize-space(.)='{UserData.user_data_dict['typeOfWorkServices']}']")
     # Кнопка "Выбор"

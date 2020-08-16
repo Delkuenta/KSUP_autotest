@@ -1,0 +1,69 @@
+{
+	"main_data": {
+        "fullName": "18[АТест_Seller] ПА+ЗП+ДК, Запрос цен товаров, работ, услуг, категория B, НЕразработка заказного ПО, Самостоятельная продажа",
+        "contractorType": "Запрос цен товаров, работ, услуг",
+        "customer": "ООО \"СЕЛЬЭНЕРГО-2\"",
+        "salesUnit": "ОНЛАНТА",
+        "salesManager": "Бравосов Андрей Игоревич",
+        "executiveUnit": "ОНЛАНТА",
+        "executiveManager": "Бравосов Андрей Игоревич",
+        "executiveUnitLegal": "ООО \"ДМИТРОВСКИЙ ТЕХНОПАРК\"",
+        "saleLawType": "223-ФЗ",
+        "typeOfWorkServices": ["Эксплуатация ИТ систем"],
+        "sum": 250000,
+        "currency": "Евро",
+        "price_category": "",
+        "applicationSize": "5000,00",
+        "contractSize": "6000,00",
+        "separateSale": "Да",
+        "competitionDeadlineFrom": "15.07.2020",
+        "startDate": "1.07.2020",
+        "endDate": "01.07.2021",
+        "projectProbability": 100,
+        "descriptionText": "Краткое описание текст",
+        "risksText": "Текст_риски_тест",
+        "purchase_number": "ZP/0018-AT",
+        "purchase_link": "testlink_zakup_proc.com",
+        "project_risk_department": "тестовое сообщение Риски проекта с точки зрения Департамента",
+        "price_information_deadline": "16.07.2020",
+        "purchase_start_date_from": "17.07.2020",
+        "purchase_start_date_to": "18.07.2020",
+        "eis_price_number": "ZP/0018-AT-Price",
+        "eis_price_link": "example@link.com",
+        "number_contract": "DK/0018-AT",
+        "eis_contract_link": "test_link_eis@mail.com",
+        "territory": ["г. Севастополь"],
+        "technologies": ["Microsoft Visual C++"],
+        "quantitative_indicators_project": "тестовый текст в поле Количественные показатели реализации проекта",
+        "project_unique_code": "2hMuCr18",
+		"project": "Тестовый проект",
+		"create_account": "Mr_KSUP_Seller",
+        "payments": [
+            {
+                "sum": 100000,
+                "year": 2020,
+                "quarter": 3
+            },
+            {
+                "sum": 50000,
+                "year": 2020,
+                "quarter": 4
+            },
+            {
+                "sum": 40000,
+                "year": 2021,
+                "quarter": 1
+            },
+            {
+                "sum": 30000,
+                "year": 2021,
+                "quarter": 2
+            },
+            {
+                "sum": 30000,
+                "year": 2021,
+                "quarter": 3
+            }
+        ]
+    }
+}
