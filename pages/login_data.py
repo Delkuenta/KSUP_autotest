@@ -1,5 +1,7 @@
 from pages.base_page import BasePage
 import win32com.client
+import win32api
+import pyautogui
 import time
 from userdata.user_data import UserData
 
@@ -8,6 +10,7 @@ class LoginData(BasePage):
     link = "https://ksup-tst.lanit"
 
     def login(self, login):
+        pyautogui.hotkey('alt', 'shift', '7')
         account = ""
         shell = win32com.client.Dispatch("WScript.Shell")
         if login == "Mr_KSUP_Seller":
@@ -30,8 +33,5 @@ class LoginData(BasePage):
             account = UserData.login_kkp
         else:
             print("Не корректное значение переменной 'create_account' в файле json")
-        shell.Sendkeys(account[0])
-        shell.Sendkeys("{TAB}")
-        shell.Sendkeys(account[1])
         time.sleep(2)
-        shell.Sendkeys("{ENTER}")
+        shell.SendKeys(account[0] + "{TAB}" + account[1] + "{TAB}" + "{ENTER}")

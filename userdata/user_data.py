@@ -50,7 +50,7 @@ class UserData:
     comment_approval_kkp = "Успешное согласование за ККП"
 
     # Чтение json и присвоение словаря в переменную
-    name_data_file = r"UnitSale\Seller\19_[АТест_Seller] ДК, категория A, разработка заказного ПО.json"
+    name_data_file = r"UnitSale\Seller\6_[АТест_Seller] ПА+ЗП+ДК, Тендерная заявка, категория C, НЕразработка заказного ПО, Самостоятельная продажа.json"
     file_path_for_data = os.path.join(current_dir, name_data_file)
     with open(file_path_for_data, "r", encoding='utf-8') as file:
         data = json.load(file)
