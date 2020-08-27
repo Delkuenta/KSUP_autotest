@@ -1,3 +1,4 @@
+import pyautogui
 import pytest
 from selenium import webdriver
 from userdata.user_data import UserData
@@ -24,9 +25,10 @@ def browser(request):
     if browser_name == "chrome":
         options = webdriver.ChromeOptions()
         options.add_argument("ignore-certificate-errors")
+        options.add_argument("start-maximized")
         print("\nstart chrome browser for test..")
         browser = webdriver.Chrome(options=options)
-        # browser.maximize_window()
+        #browser.maximize_window()
 
     elif browser_name == "firefox":
         print("\nstart firefox browser for test..")

@@ -199,3 +199,4 @@ class ZakupFormCreate(BasePage):
 
         # Нажимаем кнопку "Создать"
         self.browser.find_element(*FormCreateZakupLocators.CONFIRM_ZP_BUTTON).click()
+        self.browser.find_element(*FormCreateZakupLocators.CONFIRM_ZP_BUTTON).click()

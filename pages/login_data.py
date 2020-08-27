@@ -10,7 +10,6 @@ class LoginData(BasePage):
     link = "https://ksup-tst.lanit"
 
     def login(self, login):
-        pyautogui.hotkey('alt', 'shift', '7')
         account = ""
         shell = win32com.client.Dispatch("WScript.Shell")
         if login == "Mr_KSUP_Seller":
@@ -34,4 +33,9 @@ class LoginData(BasePage):
         else:
             print("Не корректное значение переменной 'create_account' в файле json")
         time.sleep(2)
-        shell.SendKeys(account[0] + "{TAB}" + account[1] + "{TAB}" + "{ENTER}")
+        shell.SendKeys(account[0])
+        time.sleep(1)
+        shell.SendKeys("{TAB}")
+        shell.SendKeys(account[1])
+        time.sleep(1)
+        shell.SendKeys("{ENTER}")

@@ -52,7 +52,7 @@ class BasePage:
         return True
 
     # упадет, как только увидит искомый элемент. Не появился: успех, тест зеленый.
-    def is_not_element_present(self, how, what, timeout=4):
+    def is_not_element_present(self, how, what, timeout=3):
         try:
             WebDriverWait(self.browser, timeout).until(ec.presence_of_element_located((how, what)))
         except TimeoutException:
@@ -60,7 +60,7 @@ class BasePage:
         return False
 
     # is_disappeared: будет ждать до тех пор, пока элемент не исчезнет
-    def is_disappeared(self, how, what, timeout=4):
+    def is_disappeared(self, how, what, timeout=3):
         try:
             WebDriverWait(self.browser, timeout, 1, TimeoutException).until_not(
                 ec.presence_of_element_located((how, what)))
@@ -69,7 +69,7 @@ class BasePage:
         return True
 
     # Переключение на активный фрейм
-    def is_frame_to_be_available_and_switch_to_it(self, timeout=5):
+    def is_frame_to_be_available_and_switch_to_it(self, timeout=3):
         try:
             iframe = self.browser.switch_to.active_element
             WebDriverWait(self.browser, timeout).until(ec.frame_to_be_available_and_switch_to_it(iframe))

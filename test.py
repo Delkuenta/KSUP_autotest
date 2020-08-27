@@ -15,7 +15,6 @@ from pages.zakup_list_page import ZakupListPage
 
 # До первой ошибки --maxfail=1
 class TestUnitSaleFullBusinessCyclePaZpDk:
-
     def test_create_presale(self, browser):
         print(UserData.user_data_dict)
         link = LoginData.link
