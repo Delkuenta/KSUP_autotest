@@ -1,4 +1,3 @@
-import pyautogui
 import pytest
 from selenium import webdriver
 from userdata.user_data import UserData

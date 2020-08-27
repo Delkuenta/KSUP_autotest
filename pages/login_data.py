@@ -1,7 +1,5 @@
 from pages.base_page import BasePage
 import win32com.client
-import win32api
-import pyautogui
 import time
 from userdata.user_data import UserData
 

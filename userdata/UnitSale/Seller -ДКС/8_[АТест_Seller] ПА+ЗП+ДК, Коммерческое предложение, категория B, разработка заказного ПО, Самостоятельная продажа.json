@@ -1,0 +1,69 @@
+{
+	"main_data": {
+        "fullName": "8[АТест_Seller] ПА+ЗП+ДК, Коммерческое предложение, категория В, разработка заказного ПО, Самостоятельная продажа",
+        "contractorType": "Коммерческое предложение",
+        "customer": "ООО \"СИБУР\"",
+        "salesUnit": "Департамент корпоративных систем",
+        "salesManager": "Бравосов Андрей Игоревич",
+        "executiveUnit": "Департамент корпоративных систем",
+        "executiveManager": "Бравосов Андрей Игоревич",
+        "executiveUnitLegal": "ООО \"ОНЛАНТА\"",
+        "saleLawType": "44-ФЗ",
+        "typeOfWorkServices": ["Поставка лицензий на ПО"],
+        "sum": 710000,
+        "currency": "Доллар",
+        "price_category": "",
+        "applicationSize": "5000,00",
+        "contractSize": "10000,00",
+        "separateSale": "Да",
+        "competitionDeadlineFrom": "15.07.2020",
+        "startDate": "1.07.2020",
+        "endDate": "01.07.2021",
+        "projectProbability": 100,
+        "descriptionText": "Краткое описание текст",
+        "risksText": "Текст_риски_тест",
+        "purchase_number": "ZP/0008-AT",
+        "purchase_link": "testlink_zakup_proc.com",
+        "project_risk_department": "тестовое сообщение_Риски проекта с точки зрения Департамента",
+        "price_information_deadline": "16.07.2020",
+        "purchase_start_date_from": "17.07.2020",
+        "purchase_start_date_to": "18.07.2020",
+        "eis_price_number": "ZP/0008-AT-Price",
+        "eis_price_link": "example@link.com",
+        "number_contract": "DK/0008-AT",
+        "eis_contract_link": "test_link_eis@mail.com",
+        "territory": ["Республика Марий Эл", "Ярославская область"],
+        "technologies": ["Java", "Microsoft Visual Studio"],
+        "quantitative_indicators_project": "тестовый текст в поле Количественные показатели реализации проекта",
+        "project_unique_code": "2hMuCr08",
+		"project": "Тестовый проект",
+		"create_account": "Mr_KSUP_Seller",
+        "payments": [
+            {
+                "sum": 400000,
+                "year": 2020,
+                "quarter": 3
+            },
+            {
+                "sum": 200000,
+                "year": 2020,
+                "quarter": 4
+            },
+            {
+                "sum": 70000,
+                "year": 2021,
+                "quarter": 1
+            },
+            {
+                "sum": 30000,
+                "year": 2021,
+                "quarter": 2
+            },
+            {
+                "sum": 10000,
+                "year": 2021,
+                "quarter": 3
+            }
+        ]
+    }
+}
