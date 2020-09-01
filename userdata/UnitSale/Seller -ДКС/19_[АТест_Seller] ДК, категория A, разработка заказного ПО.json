@@ -7,7 +7,7 @@
         "salesManager": "Бравосов Андрей Игоревич",
         "executiveUnit": "Департамент корпоративных систем",
         "executiveManager": "Бравосов Андрей Игоревич",
-        "executiveUnitLegal": "ООО \"ОНЛАНТА\"",
+        "executiveUnitLegal": "ООО \"ЛАНИТ-ТЕХНОЛОГИИ\"",
         "saleLawType": "",
         "typeOfWorkServices": ["Разработка заказного ПО", "Тестирование ПО"],
         "sum": 52000000,
@@ -37,7 +37,7 @@
         "quantitative_indicators_project": "тестовый текст в поле Количественные показатели реализации проекта",
         "project_unique_code": "2hMuCr19",
 		"project": "Тестовый проект",
-				"create_account": "Mr_KSUP_Seller",
+		"create_account": "Mr_KSUP_Seller",
         "payments": [
             {
                 "sum": 20000000,

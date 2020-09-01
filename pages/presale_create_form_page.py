@@ -100,11 +100,16 @@ class PresaleFormCreate(BasePage):
         self.is_frame_to_be_available_and_switch_to_it()
 
         # Открываем все доступные категории
-        self.browser.find_element(*FormCreatePresaleLocators.GROUP_CATEGORY_ELEMENT1).click()
-        self.browser.find_element(*FormCreatePresaleLocators.GROUP_CATEGORY_ELEMENT2).click()
-        self.browser.find_element(*FormCreatePresaleLocators.GROUP_CATEGORY_ELEMENT3).click()
-        self.browser.find_element(*FormCreatePresaleLocators.GROUP_CATEGORY_ELEMENT4).click()
-        self.browser.find_element(*FormCreatePresaleLocators.GROUP_CATEGORY_ELEMENT5).click()
+        if self.is_element_present(*FormCreatePresaleLocators.GROUP_CATEGORY_ELEMENT1) is True:
+            self.browser.find_element(*FormCreatePresaleLocators.GROUP_CATEGORY_ELEMENT1).click()
+        if self.is_element_present(*FormCreatePresaleLocators.GROUP_CATEGORY_ELEMENT2) is True:
+            self.browser.find_element(*FormCreatePresaleLocators.GROUP_CATEGORY_ELEMENT2).click()
+        if self.is_element_present(*FormCreatePresaleLocators.GROUP_CATEGORY_ELEMENT3) is True:
+            self.browser.find_element(*FormCreatePresaleLocators.GROUP_CATEGORY_ELEMENT3).click()
+        if self.is_element_present(*FormCreatePresaleLocators.GROUP_CATEGORY_ELEMENT4) is True:
+            self.browser.find_element(*FormCreatePresaleLocators.GROUP_CATEGORY_ELEMENT4).click()
+        if self.is_element_present(*FormCreatePresaleLocators.GROUP_CATEGORY_ELEMENT5) is True:
+            self.browser.find_element(*FormCreatePresaleLocators.GROUP_CATEGORY_ELEMENT5).click()
 
         # Выбираем нужный элемент
         for item in UserData.user_data_dict["typeOfWorkServices"]:
