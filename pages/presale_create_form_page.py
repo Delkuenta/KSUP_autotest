@@ -100,15 +100,15 @@ class PresaleFormCreate(BasePage):
         self.is_frame_to_be_available_and_switch_to_it()
 
         # Открываем все доступные категории
-        if self.is_element_present(*FormCreatePresaleLocators.GROUP_CATEGORY_ELEMENT1) is True:
+        if len(self.browser.find_elements(*FormCreatePresaleLocators.GROUP_CATEGORY_ELEMENT1)) == 1:
             self.browser.find_element(*FormCreatePresaleLocators.GROUP_CATEGORY_ELEMENT1).click()
-        if self.is_element_present(*FormCreatePresaleLocators.GROUP_CATEGORY_ELEMENT2) is True:
+        if len(self.browser.find_elements(*FormCreatePresaleLocators.GROUP_CATEGORY_ELEMENT2)) == 1:
             self.browser.find_element(*FormCreatePresaleLocators.GROUP_CATEGORY_ELEMENT2).click()
-        if self.is_element_present(*FormCreatePresaleLocators.GROUP_CATEGORY_ELEMENT3) is True:
+        if len(self.browser.find_elements(*FormCreatePresaleLocators.GROUP_CATEGORY_ELEMENT3)) == 1:
             self.browser.find_element(*FormCreatePresaleLocators.GROUP_CATEGORY_ELEMENT3).click()
-        if self.is_element_present(*FormCreatePresaleLocators.GROUP_CATEGORY_ELEMENT4) is True:
+        if len(self.browser.find_elements(*FormCreatePresaleLocators.GROUP_CATEGORY_ELEMENT4)) == 1:
             self.browser.find_element(*FormCreatePresaleLocators.GROUP_CATEGORY_ELEMENT4).click()
-        if self.is_element_present(*FormCreatePresaleLocators.GROUP_CATEGORY_ELEMENT5) is True:
+        if len(self.browser.find_elements(*FormCreatePresaleLocators.GROUP_CATEGORY_ELEMENT5)) == 1:
             self.browser.find_element(*FormCreatePresaleLocators.GROUP_CATEGORY_ELEMENT5).click()
 
         # Выбираем нужный элемент

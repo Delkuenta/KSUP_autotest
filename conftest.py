@@ -64,10 +64,10 @@ def calc_price_category():
 
 
 @pytest.fixture(autouse=True)
-def calc_group_type_work():
+def identification_group_type_work():
     i = 0
-    for item in UserData.user_data_dict["typeOfWorkServices"]:
-        if item in UserData.group_software:
+    for category in UserData.user_data_dict["typeOfWorkServices"]:
+        if category in UserData.group_software:
             i += 1
     if i >= 1:
         group_type_dict = {"groupTypeWork": "Software"}
@@ -75,3 +75,7 @@ def calc_group_type_work():
     else:
         group_type_dict = {"groupTypeWork": "Other"}
     UserData.user_data_dict.update(group_type_dict)
+
+@pytest.fixture(autouse=True)
+def sort_territory_list():
+    UserData.user_data_dict["territory"].sort()

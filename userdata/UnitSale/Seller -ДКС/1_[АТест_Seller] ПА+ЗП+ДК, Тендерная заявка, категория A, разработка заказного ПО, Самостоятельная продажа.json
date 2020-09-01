@@ -32,7 +32,7 @@
         "eis_price_link": "example@link.com",
         "number_contract": "DK/0001-AT",
         "eis_contract_link": "test_link_eis@mail.com",
-        "territory": ["Архангельская область"],
+        "territory": ["Волгоградская область", "Архангельская область"],
         "technologies": ["Jira"],
         "quantitative_indicators_project": "тестовый текст в поле Количественные показатели реализации проекта",
         "project_unique_code": "2hMuCr01",

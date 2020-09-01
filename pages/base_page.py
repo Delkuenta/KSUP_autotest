@@ -34,7 +34,7 @@ class BasePage:
             return False
         return True
 
-    # Проверка что элемент отображен на странице
+    # Проверка что элемент присутствует в DOM(не явное ожидание)
     def is_element_present(self, how, what):
         try:
             self.browser.implicitly_wait(5)
@@ -81,21 +81,25 @@ class BasePage:
     def is_frame_to_parent(self):
         self.browser.switch_to.default_content()
 
+    # Переход на страницу "Пресейловая активность"
     def go_to_presale_list(self):
         self.browser.get(BasePageLocators.PRESALE_LIST_LINK)
         assert self.is_text_to_be_present_in_element(*BasePageLocators.PRESALE_LIST_TITLE, "Пресейловые активности"), \
             "Титул страницы не соответствует переходу"
 
+    # Переход на страницу "Закупочная процедура"
     def go_to_zakup_list(self):
         self.browser.get(BasePageLocators.ZAKUP_LIST_LINK)
         assert self.is_text_to_be_present_in_element(*BasePageLocators.ZAKUP_LIST_TITLE, "Закупочные процедуры"), \
             "Титул страницы не соответствует переходу"
 
+    # Переход на страницу "Договор/контракт"
     def go_to_contract_list(self):
         self.browser.get(BasePageLocators.CONTRACT_LIST_LINK)
         assert self.is_text_to_be_present_in_element(*BasePageLocators.CONTRACT_LIST_TITLE, "Договоры (контракты)"), \
             "Титул страницы не соответствует переходу"
 
+    # Проверка что элемент отображен и имеет размер
     def is_visibility_of_element_located(self, how, what, timeout=5):
         try:
             WebDriverWait(self.browser, timeout).until(ec.visibility_of_element_located((how, what)))
