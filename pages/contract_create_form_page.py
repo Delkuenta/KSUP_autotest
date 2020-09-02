@@ -216,7 +216,7 @@ class ContractFormCreate(BasePage):
         # Работаем во фрейме и выбираем категории
         self.is_frame_to_be_available_and_switch_to_it()
 
-        # Открываем все доступные категории
+
         # Открываем все доступные категории
         if len(self.browser.find_elements(*FormCreateContractLocators.GROUP_CATEGORY_ELEMENT1)) == 1:
             self.browser.find_element(*FormCreateContractLocators.GROUP_CATEGORY_ELEMENT1).click()
@@ -283,7 +283,9 @@ class ContractFormCreate(BasePage):
         self.browser.find_element(*FormCreateContractLocators.SEARCH_TERRITORY_ELEMENT).click()
         time.sleep(2)
         self.is_frame_to_be_available_and_switch_to_it()
-        self.browser.find_element(*FormCreateContractLocators.GROUP_TERRITORY_ELEMENT).click()
+        # Развернуть узел "Все субъекты если кнопка отображена"
+        if len(self.browser.find_elements(*FormCreateContractLocators.GROUP_TERRITORY_ELEMENT)) == 1:
+            self.browser.find_element(*FormCreateContractLocators.GROUP_TERRITORY_ELEMENT).click()
         for territory in UserData.user_data_dict["territory"]:
             TERRITORY_ELEMENT = (By.XPATH, f"//*[normalize-space(text()) and normalize-space(.)='{territory}']")
             if self.is_element_present(*TERRITORY_ELEMENT):

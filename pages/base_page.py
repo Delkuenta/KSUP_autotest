@@ -37,14 +37,14 @@ class BasePage:
     # Проверка что элемент присутствует в DOM(не явное ожидание)
     def is_element_present(self, how, what):
         try:
-            self.browser.implicitly_wait(5)
+            self.browser.implicitly_wait(3)
             self.browser.find_element(how, what)
         except NoSuchElementException:
             return False
         return True
 
     # Проверка, доступен ли элемент к нажатию
-    def is_element_clickable(self, how, what, timeout=10):
+    def is_element_clickable(self, how, what, timeout=5):
         try:
             WebDriverWait(self.browser, timeout).until(ec.element_to_be_clickable((how, what)))
         except TimeoutException:

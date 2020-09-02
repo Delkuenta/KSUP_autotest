@@ -17,7 +17,6 @@ from pages.zakup_list_page import ZakupListPage
 class TestUnitSaleFullBusinessCyclePaZpDk:
     def test_create_presale(self, browser):
         print(UserData.user_data_dict)
-        """
         link = LoginData.link
         login_page = LoginData(browser, link)
         login_page.open()
@@ -30,7 +29,6 @@ class TestUnitSaleFullBusinessCyclePaZpDk:
         create_presale_page = PresaleFormCreate(browser, link)
         create_presale_page.form_create_presale_all_type()
         presale_list_page.should_be_element_on_presale_list()
-                """
 
     def test_create_zakup_based_on_presale(self, browser):
         link = LoginData.link
