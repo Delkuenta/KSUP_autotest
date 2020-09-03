@@ -206,6 +206,7 @@ class PresaleElementLocators:
 
     MESSAGE_OK_BUTTON = (By.XPATH, "//input[@value='OK']")
 
+
 class FormCreateZakupLocators:
     # Общие поля для всех типов
     TITLE_ZP = (By.CSS_SELECTOR, "#DeltaPlaceHolderPageTitleInTitleArea .die")
@@ -413,6 +414,9 @@ class ZakupElementLocators:
     # Кнопка согласования и отклонения закупочной процедуры
     APPROVAL_ZAKUP = (By.ID, "ApprovePresaleActivity.Approve-Large")
     REJECT_ZAKUP = (By.ID, "ApprovePresaleActivity.Reject-Large")
+    ESCALATE_ZAKUP = (By.ID, "ApprovePresaleActivity.Escalate-Large")
+    REVISION_ZAKUP = (By.ID, "ApprovePresaleActivity.Revision-Large")
+    WITHDRAW_FROM_APPROVAL_ELEMENT = (By.ID, "Approve.Cancel-Large")
 
     # элементы внутри окна подтверждения/отклонения
     COMMENT_TO_APPROVAL_ZAKUP = (By.XPATH, "//textarea[@id='dialogComment']")
@@ -421,8 +425,12 @@ class ZakupElementLocators:
     CANCEL_APPROVAL_ZAKUP = (By.XPATH, "(//button[@type='button'])[9]")
     ClOSE_ALLERT_ZAKUP = (By.CSS_SELECTOR, "#dlgTitleBtns")
 
-    WITHDRAW_FROM_APPROVAL_ELEMENT = (By.ID, "Approve.Cancel-Large")
+    # Вкладки в карточке
+    GENERAL_INFORMATION_ELEMENT = (By.XPATH, "//a[contains(@href, '#tabCommon')]")
+    ATTACHED_FILES_ELEMENT = (By.XPATH, "//a[contains(@href, '#tabFiles')]")
     APPROVAL_HISTORY_ELEMENT = (By.XPATH, "//a[contains(@href, '#tabApprovingHistory')]")
+
+    # Строки согласования
     APPROVAL_LEGAL_STATUS_ELEMENT = (
         By.XPATH, "(.//*[normalize-space(text()) and normalize-space(.)='Согласование юридической службой'])[1]/following::span[1]")
     APPROVAL_COUNT_STATUS_ELEMENT = (
@@ -431,7 +439,6 @@ class ZakupElementLocators:
         By.XPATH, "(.//*[normalize-space(text()) and normalize-space(.)='Согласование финансовой службой'])[1]/following::span[1]")
     APPROVAL_UDPRPO_STATUS_ELEMENT = (
         By.XPATH, "(.//*[normalize-space(text()) and normalize-space(.)='Согласование УДПР ПО'])[1]/following::span[1]")
-
     APPROVAL_KKP_STATUS_ELEMENT = (
         By.XPATH, "(.//*[normalize-space(text()) and normalize-space(.)='Согласование ККП'])[1]/following::span[1]")
 
