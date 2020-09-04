@@ -48,7 +48,7 @@ class TestUnitSaleFullBusinessCyclePaZpDk:
         zakup_list_page.should_be_element_on_zakup_list()
         zakup_list_page.go_to_zakup_element()
         zakup_element_page = ZakupElementPage(browser, browser.current_url)
-        zakup_element_page.verify_price_category_zakup()
+        zakup_element_page.verify_general_information_in_zakup()
         zakup_element_page.verify_draft_status_zakup()
 
     def test_send_zakup_for_approval(self, browser):
@@ -61,7 +61,7 @@ class TestUnitSaleFullBusinessCyclePaZpDk:
         zakup_list_page = ZakupListPage(browser, browser.current_url)
         zakup_list_page.go_to_zakup_element()
         zakup_element_page = ZakupElementPage(browser, browser.current_url)
-        zakup_element_page.verify_price_category_zakup()
+        zakup_element_page.verify_general_information_in_zakup()
         zakup_element_page.verify_draft_status_zakup()
         zakup_element_page.send_zakup_for_approval()
         if UserData.user_data_dict["contractorType"] == "Тендерная заявка":
@@ -84,7 +84,7 @@ class TestUnitSaleFullBusinessCyclePaZpDk:
             zakup_list_page = ZakupListPage(browser, browser.current_url)
             zakup_list_page.go_to_zakup_element()
             zakup_element_page = ZakupElementPage(browser, browser.current_url)
-            zakup_element_page.verify_price_category_zakup()
+            zakup_element_page.verify_general_information_in_zakup()
             zakup_element_page.approval_zakup_legal()
             zakup_element_page.verify_zakup_successfully_status_approval_legal()
             zakup_element_page.verify_zakup_waiting_status_approval_count()
@@ -102,7 +102,7 @@ class TestUnitSaleFullBusinessCyclePaZpDk:
             zakup_list_page = ZakupListPage(browser, browser.current_url)
             zakup_list_page.go_to_zakup_element()
             zakup_element_page = ZakupElementPage(browser, browser.current_url)
-            zakup_element_page.verify_price_category_zakup()
+            zakup_element_page.verify_general_information_in_zakup()
             zakup_element_page.approval_zakup_count()
             zakup_element_page.verify_zakup_successfully_status_approval_count()
             zakup_element_page.verify_zakup_waiting_status_approval_fin()
@@ -120,7 +120,7 @@ class TestUnitSaleFullBusinessCyclePaZpDk:
             zakup_list_page = ZakupListPage(browser, browser.current_url)
             zakup_list_page.go_to_zakup_element()
             zakup_element_page = ZakupElementPage(browser, browser.current_url)
-            zakup_element_page.verify_price_category_zakup()
+            zakup_element_page.verify_general_information_in_zakup()
             zakup_element_page.approval_zakup_fin()
             zakup_element_page.verify_zakup_successfully_status_approval_fin()
             if UserData.user_data_dict["groupTypeWork"] == "Software" \
@@ -398,7 +398,7 @@ class TestSeparateSaleFullBusinessCyclePaZpDk:
         zakup_list_page.should_be_element_on_zakup_list()
         zakup_list_page.go_to_zakup_element()
         zakup_element_page = ZakupElementPage(browser, browser.current_url)
-        zakup_element_page.verify_price_category_zakup()
+        zakup_element_page.verify_general_information_in_zakup()
         zakup_element_page.verify_draft_status_zakup()
 
     def test_verify_visibility_zp_approval_button_salesManager(self, browser):
@@ -410,7 +410,7 @@ class TestSeparateSaleFullBusinessCyclePaZpDk:
         zakup_list_page.go_to_zakup_list()
         zakup_list_page.go_to_zakup_element()
         zakup_element_page = ZakupElementPage(browser, link)
-        zakup_element_page.verify_price_category_zakup()
+        zakup_element_page.verify_general_information_in_zakup()
         zakup_element_page.verify_visibility_approval_button_zp()
 
     def test_verify_visibility_zp_approval_button_salesUnit(self, browser):
@@ -422,7 +422,7 @@ class TestSeparateSaleFullBusinessCyclePaZpDk:
         zakup_list_page.go_to_zakup_list()
         zakup_list_page.go_to_zakup_element()
         zakup_element_page = ZakupElementPage(browser, link)
-        zakup_element_page.verify_price_category_zakup()
+        zakup_element_page.verify_general_information_in_zakup()
         zakup_element_page.verify_visibility_approval_button_zp()
 
     def test_verify_visibility_zp_approval_button_executiveUnit(self, browser):
@@ -434,7 +434,7 @@ class TestSeparateSaleFullBusinessCyclePaZpDk:
         zakup_list_page.go_to_zakup_list()
         zakup_list_page.go_to_zakup_element()
         zakup_element_page = ZakupElementPage(browser, link)
-        zakup_element_page.verify_price_category_zakup()
+        zakup_element_page.verify_general_information_in_zakup()
         zakup_element_page.verify_visibility_approval_button_zp()
 
     def test_verify_visibility_zp_approval_button_executiveManager(self, browser):
@@ -446,7 +446,7 @@ class TestSeparateSaleFullBusinessCyclePaZpDk:
         zakup_list_page.go_to_zakup_list()
         zakup_list_page.go_to_zakup_element()
         zakup_element_page = ZakupElementPage(browser, link)
-        zakup_element_page.verify_price_category_zakup()
+        zakup_element_page.verify_general_information_in_zakup()
         zakup_element_page.verify_visibility_approval_button_zp()
 
     def test_send_zakup_for_approval(self, browser):
@@ -459,7 +459,7 @@ class TestSeparateSaleFullBusinessCyclePaZpDk:
         zakup_list_page = ZakupListPage(browser, browser.current_url)
         zakup_list_page.go_to_zakup_element()
         zakup_element_page = ZakupElementPage(browser, browser.current_url)
-        zakup_element_page.verify_price_category_zakup()
+        zakup_element_page.verify_general_information_in_zakup()
         zakup_element_page.send_zakup_for_approval()
         if UserData.user_data_dict["contractorType"] == "Тендерная заявка":
             zakup_element_page.verify_zakup_waiting_status_approval_legal()
@@ -481,7 +481,7 @@ class TestSeparateSaleFullBusinessCyclePaZpDk:
             zakup_list_page = ZakupListPage(browser, browser.current_url)
             zakup_list_page.go_to_zakup_element()
             zakup_element_page = ZakupElementPage(browser, browser.current_url)
-            zakup_element_page.verify_price_category_zakup()
+            zakup_element_page.verify_general_information_in_zakup()
             zakup_element_page.approval_zakup_legal()
             zakup_element_page.verify_zakup_successfully_status_approval_legal()
             zakup_element_page.verify_zakup_waiting_status_approval_count()
@@ -499,7 +499,7 @@ class TestSeparateSaleFullBusinessCyclePaZpDk:
             zakup_list_page = ZakupListPage(browser, browser.current_url)
             zakup_list_page.go_to_zakup_element()
             zakup_element_page = ZakupElementPage(browser, browser.current_url)
-            zakup_element_page.verify_price_category_zakup()
+            zakup_element_page.verify_general_information_in_zakup()
             zakup_element_page.approval_zakup_count()
             zakup_element_page.verify_zakup_successfully_status_approval_count()
             zakup_element_page.verify_zakup_waiting_status_approval_fin()
@@ -517,7 +517,7 @@ class TestSeparateSaleFullBusinessCyclePaZpDk:
             zakup_list_page = ZakupListPage(browser, browser.current_url)
             zakup_list_page.go_to_zakup_element()
             zakup_element_page = ZakupElementPage(browser, browser.current_url)
-            zakup_element_page.verify_price_category_zakup()
+            zakup_element_page.verify_general_information_in_zakup()
             zakup_element_page.approval_zakup_fin()
             zakup_element_page.verify_zakup_successfully_status_approval_fin()
             if UserData.user_data_dict["groupTypeWork"] == "Software" \
@@ -575,7 +575,7 @@ class TestSeparateSaleFullBusinessCyclePaZpDk:
         zakup_list_page.go_to_zakup_list()
         zakup_list_page.go_to_zakup_element()
         zakup_element_page = ZakupElementPage(browser, link)
-        zakup_element_page.verify_price_category_zakup()
+        zakup_element_page.verify_general_information_in_zakup()
         zakup_element_page.verify_visibility_button_create_contract()
 
     def test_verify_visibility_create_contract_button_salesUnit(self, browser):
@@ -587,7 +587,7 @@ class TestSeparateSaleFullBusinessCyclePaZpDk:
         zakup_list_page.go_to_zakup_list()
         zakup_list_page.go_to_zakup_element()
         zakup_element_page = ZakupElementPage(browser, link)
-        zakup_element_page.verify_price_category_zakup()
+        zakup_element_page.verify_general_information_in_zakup()
         zakup_element_page.verify_visibility_button_create_contract()
 
     def test_verify_visibility_create_contract_button_executiveUnit(self, browser):
@@ -599,7 +599,7 @@ class TestSeparateSaleFullBusinessCyclePaZpDk:
         zakup_list_page.go_to_zakup_list()
         zakup_list_page.go_to_zakup_element()
         zakup_element_page = ZakupElementPage(browser, link)
-        zakup_element_page.verify_price_category_zakup()
+        zakup_element_page.verify_general_information_in_zakup()
         zakup_element_page.verify_visibility_button_create_contract()
 
     def test_verify_visibility_create_contract_button_executiveManager(self, browser):
@@ -611,7 +611,7 @@ class TestSeparateSaleFullBusinessCyclePaZpDk:
         zakup_list_page.go_to_zakup_list()
         zakup_list_page.go_to_zakup_element()
         zakup_element_page = ZakupElementPage(browser, link)
-        zakup_element_page.verify_price_category_zakup()
+        zakup_element_page.verify_general_information_in_zakup()
         zakup_element_page.verify_visibility_button_create_contract()
 
     def test_create_contract_based_on_zakup(self, browser):
@@ -930,7 +930,7 @@ class TestRejectEscalationZakup:
         zakup_list_page.should_be_element_on_zakup_list()
         zakup_list_page.go_to_zakup_element()
         zakup_element_page = ZakupElementPage(browser, browser.current_url)
-        zakup_element_page.verify_price_category_zakup()
+        zakup_element_page.verify_general_information_in_zakup()
         zakup_element_page.verify_draft_status_zakup()
 
     def test_send_zakup_for_approval_cycle1(self, browser):
@@ -943,7 +943,7 @@ class TestRejectEscalationZakup:
         zakup_list_page = ZakupListPage(browser, browser.current_url)
         zakup_list_page.go_to_zakup_element()
         zakup_element_page = ZakupElementPage(browser, browser.current_url)
-        zakup_element_page.verify_price_category_zakup()
+        zakup_element_page.verify_general_information_in_zakup()
         zakup_element_page.send_zakup_for_approval()
         if UserData.user_data_dict["contractorType"] == "Тендерная заявка":
             zakup_element_page.verify_zakup_waiting_status_approval_legal()
@@ -977,7 +977,7 @@ class TestRejectEscalationZakup:
         zakup_list_page = ZakupListPage(browser, browser.current_url)
         zakup_list_page.go_to_zakup_element()
         zakup_element_page = ZakupElementPage(browser, browser.current_url)
-        zakup_element_page.verify_price_category_zakup()
+        zakup_element_page.verify_general_information_in_zakup()
         zakup_element_page.send_zakup_for_approval()
         if UserData.user_data_dict["contractorType"] == "Тендерная заявка":
             zakup_element_page.verify_zakup_waiting_status_approval_legal()
@@ -999,7 +999,7 @@ class TestRejectEscalationZakup:
             zakup_list_page = ZakupListPage(browser, browser.current_url)
             zakup_list_page.go_to_zakup_element()
             zakup_element_page = ZakupElementPage(browser, browser.current_url)
-            zakup_element_page.verify_price_category_zakup()
+            zakup_element_page.verify_general_information_in_zakup()
             zakup_element_page.approval_zakup_legal()
             zakup_element_page.verify_zakup_successfully_status_approval_legal()
             zakup_element_page.verify_zakup_waiting_status_approval_count()
@@ -1016,7 +1016,7 @@ class TestRejectEscalationZakup:
         zakup_list_page = ZakupListPage(browser, browser.current_url)
         zakup_list_page.go_to_zakup_element()
         zakup_element_page = ZakupElementPage(browser, browser.current_url)
-        zakup_element_page.verify_price_category_zakup()
+        zakup_element_page.verify_general_information_in_zakup()
         zakup_element_page.reject_zakup_count()
         zakup_element_page.verify_zakup_reject_status_approval_count()
 
@@ -1030,7 +1030,7 @@ class TestRejectEscalationZakup:
         zakup_list_page = ZakupListPage(browser, browser.current_url)
         zakup_list_page.go_to_zakup_element()
         zakup_element_page = ZakupElementPage(browser, browser.current_url)
-        zakup_element_page.verify_price_category_zakup()
+        zakup_element_page.verify_general_information_in_zakup()
         zakup_element_page.send_zakup_for_approval()
         if UserData.user_data_dict["contractorType"] == "Тендерная заявка":
             zakup_element_page.verify_zakup_waiting_status_approval_legal()
@@ -1052,7 +1052,7 @@ class TestRejectEscalationZakup:
             zakup_list_page = ZakupListPage(browser, browser.current_url)
             zakup_list_page.go_to_zakup_element()
             zakup_element_page = ZakupElementPage(browser, browser.current_url)
-            zakup_element_page.verify_price_category_zakup()
+            zakup_element_page.verify_general_information_in_zakup()
             zakup_element_page.approval_zakup_legal()
             zakup_element_page.verify_zakup_successfully_status_approval_legal()
             zakup_element_page.verify_zakup_waiting_status_approval_count()
@@ -1070,7 +1070,7 @@ class TestRejectEscalationZakup:
             zakup_list_page = ZakupListPage(browser, browser.current_url)
             zakup_list_page.go_to_zakup_element()
             zakup_element_page = ZakupElementPage(browser, browser.current_url)
-            zakup_element_page.verify_price_category_zakup()
+            zakup_element_page.verify_general_information_in_zakup()
             zakup_element_page.approval_zakup_count()
             zakup_element_page.verify_zakup_successfully_status_approval_count()
             zakup_element_page.verify_zakup_waiting_status_approval_fin()
@@ -1087,7 +1087,7 @@ class TestRejectEscalationZakup:
         zakup_list_page = ZakupListPage(browser, browser.current_url)
         zakup_list_page.go_to_zakup_element()
         zakup_element_page = ZakupElementPage(browser, browser.current_url)
-        zakup_element_page.verify_price_category_zakup()
+        zakup_element_page.verify_general_information_in_zakup()
         zakup_element_page.reject_zakup_fin()
         zakup_element_page.verify_zakup_reject_status_approval_fin()
 
@@ -1101,7 +1101,7 @@ class TestRejectEscalationZakup:
         zakup_list_page = ZakupListPage(browser, browser.current_url)
         zakup_list_page.go_to_zakup_element()
         zakup_element_page = ZakupElementPage(browser, browser.current_url)
-        zakup_element_page.verify_price_category_zakup()
+        zakup_element_page.verify_general_information_in_zakup()
         zakup_element_page.send_zakup_for_approval()
         if UserData.user_data_dict["contractorType"] == "Тендерная заявка":
             zakup_element_page.verify_zakup_waiting_status_approval_legal()
@@ -1123,7 +1123,7 @@ class TestRejectEscalationZakup:
             zakup_list_page = ZakupListPage(browser, browser.current_url)
             zakup_list_page.go_to_zakup_element()
             zakup_element_page = ZakupElementPage(browser, browser.current_url)
-            zakup_element_page.verify_price_category_zakup()
+            zakup_element_page.verify_general_information_in_zakup()
             zakup_element_page.approval_zakup_legal()
             zakup_element_page.verify_zakup_successfully_status_approval_legal()
             zakup_element_page.verify_zakup_waiting_status_approval_count()
@@ -1141,7 +1141,7 @@ class TestRejectEscalationZakup:
             zakup_list_page = ZakupListPage(browser, browser.current_url)
             zakup_list_page.go_to_zakup_element()
             zakup_element_page = ZakupElementPage(browser, browser.current_url)
-            zakup_element_page.verify_price_category_zakup()
+            zakup_element_page.verify_general_information_in_zakup()
             zakup_element_page.approval_zakup_count()
             zakup_element_page.verify_zakup_successfully_status_approval_count()
             zakup_element_page.verify_zakup_waiting_status_approval_fin()
@@ -1159,7 +1159,7 @@ class TestRejectEscalationZakup:
             zakup_list_page = ZakupListPage(browser, browser.current_url)
             zakup_list_page.go_to_zakup_element()
             zakup_element_page = ZakupElementPage(browser, browser.current_url)
-            zakup_element_page.verify_price_category_zakup()
+            zakup_element_page.verify_general_information_in_zakup()
             zakup_element_page.approval_zakup_fin()
             zakup_element_page.verify_zakup_successfully_status_approval_fin()
             if UserData.user_data_dict["groupTypeWork"] == "Software" \
@@ -1194,7 +1194,7 @@ class TestRejectEscalationZakup:
         zakup_list_page = ZakupListPage(browser, browser.current_url)
         zakup_list_page.go_to_zakup_element()
         zakup_element_page = ZakupElementPage(browser, browser.current_url)
-        zakup_element_page.verify_price_category_zakup()
+        zakup_element_page.verify_general_information_in_zakup()
         zakup_element_page.escalate_on_kkp()
         zakup_element_page.verify_zakup_waiting_status_approval_kkp()
 
@@ -1221,7 +1221,7 @@ class TestRejectEscalationZakup:
         zakup_list_page = ZakupListPage(browser, browser.current_url)
         zakup_list_page.go_to_zakup_element()
         zakup_element_page = ZakupElementPage(browser, browser.current_url)
-        zakup_element_page.verify_price_category_zakup()
+        zakup_element_page.verify_general_information_in_zakup()
         zakup_element_page.send_zakup_for_approval()
         if UserData.user_data_dict["contractorType"] == "Тендерная заявка":
             zakup_element_page.verify_zakup_waiting_status_approval_legal()
@@ -1242,7 +1242,7 @@ class TestRejectEscalationZakup:
             zakup_list_page = ZakupListPage(browser, browser.current_url)
             zakup_list_page.go_to_zakup_element()
             zakup_element_page = ZakupElementPage(browser, browser.current_url)
-            zakup_element_page.verify_price_category_zakup()
+            zakup_element_page.verify_general_information_in_zakup()
             zakup_element_page.approval_zakup_legal()
             zakup_element_page.verify_zakup_successfully_status_approval_legal()
             zakup_element_page.verify_zakup_waiting_status_approval_count()
@@ -1258,7 +1258,7 @@ class TestRejectEscalationZakup:
             zakup_list_page = ZakupListPage(browser, browser.current_url)
             zakup_list_page.go_to_zakup_element()
             zakup_element_page = ZakupElementPage(browser, browser.current_url)
-            zakup_element_page.verify_price_category_zakup()
+            zakup_element_page.verify_general_information_in_zakup()
             zakup_element_page.approval_zakup_count()
             zakup_element_page.verify_zakup_successfully_status_approval_count()
             zakup_element_page.verify_zakup_waiting_status_approval_fin()
@@ -1276,7 +1276,7 @@ class TestRejectEscalationZakup:
             zakup_list_page = ZakupListPage(browser, browser.current_url)
             zakup_list_page.go_to_zakup_element()
             zakup_element_page = ZakupElementPage(browser, browser.current_url)
-            zakup_element_page.verify_price_category_zakup()
+            zakup_element_page.verify_general_information_in_zakup()
             zakup_element_page.approval_zakup_fin()
             zakup_element_page.verify_zakup_successfully_status_approval_fin()
             if UserData.user_data_dict["groupTypeWork"] == "Software" \
@@ -1331,7 +1331,7 @@ class TestRejectEscalationZakup:
         zakup_list_page = ZakupListPage(browser, browser.current_url)
         zakup_list_page.go_to_zakup_element()
         zakup_element_page = ZakupElementPage(browser, browser.current_url)
-        zakup_element_page.verify_price_category_zakup()
+        zakup_element_page.verify_general_information_in_zakup()
         zakup_element_page.verify_unvisibility_approval_button()
 
 

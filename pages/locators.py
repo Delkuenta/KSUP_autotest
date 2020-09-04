@@ -400,8 +400,8 @@ class ZakupListLocators:
 
 
 class ZakupElementLocators:
-    PRICE_CATEGORY_ELEMENT_IN_ZP = (By.CSS_SELECTOR, ".fldKsupProjectCategoryBySum #SPFieldChoice")
-
+    # Титул в карточке "Закупочная процедура"
+    TITLE_IN_ZP = (By.CSS_SELECTOR, "#pageTitle")
     # Послать на согласование закупочную процедуру
     SEND_APPROVAL_ELEMENT = (By.ID, "ApprovePresaleActivity.ToApprove-Large")
     # Всплывающее окно подтверждения/отмены отправки закупочной процедуры
@@ -442,7 +442,73 @@ class ZakupElementLocators:
     APPROVAL_KKP_STATUS_ELEMENT = (
         By.XPATH, "(.//*[normalize-space(text()) and normalize-space(.)='Согласование ККП'])[1]/following::span[1]")
 
-    APPROVAL_MAIN_STATUS_ELEMENT = (By.CSS_SELECTOR, ".fldKsupPresaleApproveStatus #SPFieldChoice")
+    # Элементы на вкладке "Общие сведения"
+    # Поле "Статус согласования"
+    APPROVAL_MAIN_STATUS_IN_ZP = (By.CSS_SELECTOR, ".fldKsupPresaleApproveStatus #SPFieldChoice")
+    # Поле "Тип закупочной процедуры"
+    CONTRACTOR_TYPE_IN_ZP = (
+        By.CSS_SELECTOR, "#ctl00_ctl70_g_93f2ae31_fc13_4393_9245_5d2f3d13a770_ctl00_ucListItemForm_tdContentTypeFieldDisplay")
+    # Поле "Подразделение-продавец"
+    SALES_UNIT_IN_ZP = (By.CSS_SELECTOR, ".fldKsupDivisionSeller #SPFieldWcfLookup")
+    # Поле "Ответственный менеджер подразделения-продавца"
+    SALES_MANAGER_IN_ZP = (By.CSS_SELECTOR, ".fldKsupSeller #SPFieldWcfLookup")
+    # Поле "Подразделение-исполнитель"
+    EXECUTIVE_UNIT_IN_ZP = (By.CSS_SELECTOR, ".fldKsupDivisionPerformer #SPFieldWcfLookup")
+    # Поле "Ответственный менеджер подразделения-исполнителя"
+    EXECUTIVE_MANAGER_IN_ZP = (By.CSS_SELECTOR, ".fldKsupPerformerResponsible #SPFieldWcfLookup")
+    # Поле "Заказчик"
+    CUSTOMER_IN_ZP = (By.CSS_SELECTOR, ".fldKsupEgr_Customer #SPFieldWcfLookup")
+    # Поле "Тип работ и услуг"
+    TYPE_OF_WORK_SERVCICES_IN_ZP = (By.CSS_SELECTOR, "#SPFieldTaxonomyFieldTypeMulti")
+    # Поле "Исполнитель (юридическое лицо)"
+    EXECUTIVE_UNIT_LEGAL_IN_ZP =(By.CSS_SELECTOR, ".fldKsupEgr_PerformerLegal  # SPFieldWcfLookup")
+    # Поле "Начальная (максимальная) цена контракта"
+    SUM_IN_ZP = (By.CSS_SELECTOR, ".fldKsupContractSum #SPFieldNumber")
+    # Поле "Валюта договора/контракта"
+    CURRENCY_IN_ZP = (By.CSS_SELECTOR, ".fldKsupCurrency #SPFieldChoice")
+    # Поле "Категория проекта" (ценовая)
+    PRICE_CATEGORY_IN_ZP = (By.CSS_SELECTOR, ".fldKsupProjectCategoryBySum #SPFieldChoice")
+    # Поле "Порядок проведения закупочной процедуры"
+    SALE_LAW_TYPE_IN_ZP = (By.CSS_SELECTOR, ".fldKsupTenderLowType #SPFieldChoice")
+    # Поле "Размер обеспечения заявки"
+    APPLICATION_SIZE_IN_ZP = (By.CSS_SELECTOR, ".fldKsupApplicationSize #SPFieldNumber")
+    # Поле "Размер обеспечения договора/контракта"
+    CONTRACT_SIZE_IN_ZP = (By.CSS_SELECTOR, ".fldKsupContractSize #SPFieldNumber")
+    # Поле "Срок подачи на конкурс"
+    COMPETITION_DEAD_LINE_FROM_IN_ZP = (By.CSS_SELECTOR, ".fldKsupCompetitionDeadlineFrom #SPFieldDateTime")
+    # Поле "Срок представления ценовой информации"
+    PRICE_INFORMATION_DEAD_LINE_FROM_IN_ZP =(By.CSS_SELECTOR, ".fldKsupPriceInformationDeadlineFrom #SPFieldDateTime")
+    # Поле "Предполагаемая дата начала проведения закупки с"
+    PURCHASE_START_DATE_FROM = (By.CSS_SELECTOR, ".fldKsupPurchaseStartDateFrom #SPFieldDateTime")
+    # Поле "Предполагаемая дата начала проведения закупки по"
+    PURCHASE_START_DATE_TO = (By.CSS_SELECTOR, ".fldKsupPurchaseStartDateTo #SPFieldDateTime")
+    # Поле "Плановая дата заключения договора/контракта"
+    START_DATE_IN_ZP = (By.CSS_SELECTOR, ".fldKsupContractPlanDateFrom #SPFieldDateTime")
+    # Поле "Плановая дата окончания договора/контракта"
+    END_DATE_IN_ZP = (By.CSS_SELECTOR, ".fldKsupContractPlanFinishDateFrom #SPFieldDateTime")
+    # Поле "Вероятность заключения договора/контракта"
+    PROJECT_PROBABILITY_IN_ZP = (By.CSS_SELECTOR, ".fldKsupContractProbability #SPFieldNumber")
+    # Поле "Номер закупки"
+    PURCHASE_NUMBER_IN_ZP = (By.CSS_SELECTOR, ".fldKsupEisPurchaseNumber #SPFieldText")
+    # Поле "Номер запроса цен на Официальном сайте ЕИС"
+    EIS_PRICE_NUMBER_IN_ZP = (By.CSS_SELECTOR, ".fldKsupEisPriceNumber #SPFieldText")
+    # Поле "Связанные продажи"
+    RELATED_SALES_IN_ZP = (By.CSS_SELECTOR, ".fldKsupSalesWithOp #SPFieldWcfLookup")
+    # Поле "Статус продажи"
+    PRESALE_STATUS_IN_ZP = (By.CSS_SELECTOR, ".fldKsupPaSaleStatus #SPFieldChoice")
+    # Поле "Ссылка на закупку"
+    PURCHASE_LINK_IN_ZP = (By.CSS_SELECTOR, ".fldKsupEisPurchaseLink #SPFieldNote")
+    # Поле "Результаты работ"
+    DESCRIPTION_TEXT_IN_ZP = (By.CSS_SELECTOR, ".fldKsupPaDescription #SPFieldNote")
+    # Поле "Риски"
+    RISKS_TEXT_IN_ZP = (By.CSS_SELECTOR, ".fldKsupPaDescription #SPFieldNote")
+    # Поле "Риски проекта с точки зрения Департамента"
+    PROJECT_RISKS_DEPARTMENT_IN_ZP = (By.CSS_SELECTOR, ".fldKsupProjectRiskDepartmentPerspec #SPFieldNote")
+    # Поле "Ссылка на запрос на Официальном сайте ЕИС"
+    EIS_PRICE_LINK_IN_ZP = (By.CSS_SELECTOR, ".fldKsupEisPriceLink #SPFieldNote")
+
+
+
 
 
 class FormCreateContractLocators:
