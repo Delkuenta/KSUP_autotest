@@ -46,8 +46,83 @@ class ZakupElementPage(BasePage):
             f'\nНекорректное значение в поле "Заказчик".' \
             f'\nОжидаемый результат:{UserData.user_data_dict["customer"]}'
 
+        # Проверяем поле "Тип работ и услуг"
+        work_services_value = ''
+        for category in UserData.user_data_dict["typeOfWorkServices"]:
+            work_services_value = work_services_value + category + '; '
+        work_services_value = work_services_value.rstrip()
+        assert self.is_element_text(*ZakupElementLocators.TYPE_OF_WORK_SERVCICES_IN_ZP) == work_services_value, \
+            f'\nНекорректное значение в поле "Ответственный менеджер подразделения-исполнителя".' \
+            f'\n Ожидаемый результат: {work_services_value}'
+
+        # Проверяем поле "Исполнитель (юридическое лицо)"
+        assert self.is_element_text(*ZakupElementLocators.EXECUTIVE_UNIT_LEGAL_IN_ZP) == UserData.user_data_dict["executiveUnitLegal"], \
+            f'\nНекорректное значение в поле "Исполнитель (юридическое лицо)".' \
+            f'\nОжидаемый результат:{UserData.user_data_dict["executiveUnitLegal"]}'
+
+        # Проверяем поле "Начальная (максимальная) цена контракта"
+        sum_value = str(UserData.user_data_dict["sum"])
+        if sum_value.find('.') > 0:
+            # Преобразование значения с плавающей точкой под необходимый шаблон
+            print("Заглушка")
+        else:
+            # Преобразование целого значения с разделителями пробелами и припиской валюты
+            if UserData.user_data_dict["currency"] == "Доллар":
+                sum_value = ('{:,d}'.format(UserData.user_data_dict["sum"])).replace(",", " ") + ',00 $'
+            elif UserData.user_data_dict["currency"] == "Евро":
+                sum_value = ('{:,d}'.format(UserData.user_data_dict["sum"])).replace(",", " ") + ',00 €'
+            else:
+                sum_value = ('{:,d}'.format(UserData.user_data_dict["sum"])).replace(",", " ") + ',00 ₽'
+            assert self.is_element_text(*ZakupElementLocators.SUM_IN_ZP) == sum_value, \
+                f'\nНекорректное значение в поле "Начальная (максимальная) цена контракта" ' \
+                f'\nОжидаемый результат: {sum_value}"'
+        # Проверяем поле "Валюта договора/контракта"
+        assert self.is_element_text(*ZakupElementLocators.CURRENCY_IN_ZP) == UserData.user_data_dict["currency"], \
+            f'\nНекорректное значение в поле "Валюта договора/контракта".' \
+            f'\nОжидаемый результат:{UserData.user_data_dict["currency"]}'
+
+        # Проверяем поле "Категория проекта"
         assert self.is_element_text(*ZakupElementLocators.PRICE_CATEGORY_IN_ZP) == \
                UserData.user_data_dict["price_category"], "Ценовая категория закупочной процедуры не корректна"
+
+        # Проверяем поле "Порядок проведения закупочной процедуры"
+        assert self.is_element_text(*ZakupElementLocators.SALE_LAW_TYPE_IN_ZP) == UserData.user_data_dict["saleLawType"], \
+            f'\nНекорректное значение в поле "Порядок проведения закупочной процедуры".' \
+            f'\nОжидаемый результат:{UserData.user_data_dict["saleLawType"]}'
+
+        # Проверяем поле "Размер обеспечения заявки"
+        application_size = str(UserData.user_data_dict["applicationSize"])
+        if application_size.find('.') > 0:
+            # Преобразование значения с плавающей точкой под необходимый шаблон
+            print("Заглушка")
+        else:
+            # Преобразование целого значения с разделителями пробелами и припиской валюты
+            if UserData.user_data_dict["currency"] == "Доллар":
+                application_size = ('{:,d}'.format(UserData.user_data_dict["applicationSize"])).replace(",", " ") + ',00 $'
+            elif UserData.user_data_dict["currency"] == "Евро":
+                application_size = ('{:,d}'.format(UserData.user_data_dict["applicationSize"])).replace(",", " ") + ',00 €'
+            else:
+                application_size = ('{:,d}'.format(UserData.user_data_dict["applicationSize"])).replace(",", " ") + ',00 ₽'
+            assert self.is_element_text(*ZakupElementLocators.APPLICATION_SIZE_IN_ZP) == application_size, \
+                f'\nНекорректное значение в поле "Размер обеспечения заявки" ' \
+                f'\nОжидаемый результат: {application_size}"'
+
+            # Проверяем поле "Размер обеспечения договора/контракта"
+            contract_size = str(UserData.user_data_dict["contractSize"])
+            if contract_size.find('.') > 0:
+                # Преобразование значения с плавающей точкой под необходимый шаблон
+                print("Заглушка")
+            else:
+                # Преобразование целого значения с разделителями пробелами и припиской валюты
+                if UserData.user_data_dict["currency"] == "Доллар":
+                    contract_size = ('{:,d}'.format(UserData.user_data_dict["contractSize"])).replace(",", " ") + ',00 $'
+                elif UserData.user_data_dict["currency"] == "Евро":
+                    contract_size = ('{:,d}'.format(UserData.user_data_dict["contractSize"])).replace(",", " ") + ',00 €'
+                else:
+                    contract_size = ('{:,d}'.format(UserData.user_data_dict["contractSize"])).replace(",", " ") + ',00 ₽'
+                assert self.is_element_text(*ZakupElementLocators.CONTRACT_SIZE_IN_ZP) == contract_size, \
+                    f'\nНекорректное значение в поле "Размер обеспечения договора/контракта" ' \
+                    f'\nОжидаемый результат: {contract_size}"'
 
     def verify_draft_status_zakup(self):
         self.is_element_present(*ZakupElementLocators.APPROVAL_MAIN_STATUS_IN_ZP)

@@ -461,7 +461,7 @@ class ZakupElementLocators:
     # Поле "Тип работ и услуг"
     TYPE_OF_WORK_SERVCICES_IN_ZP = (By.CSS_SELECTOR, "#SPFieldTaxonomyFieldTypeMulti")
     # Поле "Исполнитель (юридическое лицо)"
-    EXECUTIVE_UNIT_LEGAL_IN_ZP =(By.CSS_SELECTOR, ".fldKsupEgr_PerformerLegal  # SPFieldWcfLookup")
+    EXECUTIVE_UNIT_LEGAL_IN_ZP =(By.CSS_SELECTOR, ".fldKsupEgr_PerformerLegal #SPFieldWcfLookup")
     # Поле "Начальная (максимальная) цена контракта"
     SUM_IN_ZP = (By.CSS_SELECTOR, ".fldKsupContractSum #SPFieldNumber")
     # Поле "Валюта договора/контракта"

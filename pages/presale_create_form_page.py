@@ -287,6 +287,7 @@ class PresaleFormCreate(BasePage):
             confirm_presale_button.click()
             time.sleep(1)
             alert = self.browser.switch_to.alert
+            # Дублирующий алерт некорректных платежей
             alert.accept()
             if UserData.user_data_dict["separateSale"] == "Да":
                 alert.accept()

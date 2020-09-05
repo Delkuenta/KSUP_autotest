@@ -51,6 +51,18 @@ class TestUnitSaleFullBusinessCyclePaZpDk:
         zakup_element_page.verify_general_information_in_zakup()
         zakup_element_page.verify_draft_status_zakup()
 
+    def test_send_zakup_for_approval_new(self, browser):
+        link = LoginData.link
+        login_page = LoginData(browser, link)
+        login_page.open()
+        login_page.login(UserData.user_data_dict["create_account"])
+        login_page.verify_username(UserData.user_data_dict["create_account"])
+        login_page.go_to_zakup_list()
+        zakup_list_page = ZakupListPage(browser, browser.current_url)
+        zakup_list_page.go_to_zakup_element()
+        zakup_element_page = ZakupElementPage(browser, browser.current_url)
+        zakup_element_page.verify_general_information_in_zakup()
+
     def test_send_zakup_for_approval(self, browser):
         link = LoginData.link
         login_page = LoginData(browser, link)
@@ -63,6 +75,7 @@ class TestUnitSaleFullBusinessCyclePaZpDk:
         zakup_element_page = ZakupElementPage(browser, browser.current_url)
         zakup_element_page.verify_general_information_in_zakup()
         zakup_element_page.verify_draft_status_zakup()
+        breakpoint()
         zakup_element_page.send_zakup_for_approval()
         if UserData.user_data_dict["contractorType"] == "Тендерная заявка":
             zakup_element_page.verify_zakup_waiting_status_approval_legal()

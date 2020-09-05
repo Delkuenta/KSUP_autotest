@@ -43,14 +43,18 @@ def browser(request):
 
 @pytest.fixture(autouse=True)
 def calc_price_category():
-    price_category = ""
-    if UserData.user_data_dict["currency"] == "Доллар":
-        sum_in_rub = UserData.user_data_dict["sum"] * 70
-    elif UserData.user_data_dict["currency"] == "Евро":
-        sum_in_rub = UserData.user_data_dict["sum"] * 80
-    else:
-        sum_in_rub = UserData.user_data_dict["sum"]
 
+    # Определяем валюту и переводим в рубли
+    raw_sum = UserData.user_data_dict["sum"]
+    if UserData.user_data_dict["currency"] == "Доллар":
+        sum_in_rub = raw_sum * 70
+    elif UserData.user_data_dict["currency"] == "Евро":
+        sum_in_rub = raw_sum * 80
+    else:
+        sum_in_rub = raw_sum
+
+    # Присваиваем категорию на основе суммы в рублях
+    price_category = ""
     if sum_in_rub >= 50000000:
         price_category = "A"
     elif 30000000 <= sum_in_rub < 50000000:
