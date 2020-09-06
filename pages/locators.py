@@ -468,8 +468,10 @@ class ZakupElementLocators:
     CURRENCY_IN_ZP = (By.CSS_SELECTOR, ".fldKsupCurrency #SPFieldChoice")
     # Поле "Категория проекта" (ценовая)
     PRICE_CATEGORY_IN_ZP = (By.CSS_SELECTOR, ".fldKsupProjectCategoryBySum #SPFieldChoice")
-    # Поле "Порядок проведения закупочной процедуры"
-    SALE_LAW_TYPE_IN_ZP = (By.CSS_SELECTOR, ".fldKsupTenderLowType #SPFieldChoice")
+    # Поле "Порядок проведения закупочной процедуры" для Тендер
+    SALE_LAW_TYPE_TENDER_ZP = (By.CSS_SELECTOR, ".fldKsupTenderLowType #SPFieldChoice")
+    # Поле "Порядок проведения закупочной процедуры" для Запрос цен
+    SALE_LAW_TYPE_ZAPROS_ZP = (By.CSS_SELECTOR, ".fldKsupRequestLowType #SPFieldChoice")
     # Поле "Размер обеспечения заявки"
     APPLICATION_SIZE_IN_ZP = (By.CSS_SELECTOR, ".fldKsupApplicationSize #SPFieldNumber")
     # Поле "Размер обеспечения договора/контракта"
@@ -477,7 +479,7 @@ class ZakupElementLocators:
     # Поле "Срок подачи на конкурс"
     COMPETITION_DEAD_LINE_FROM_IN_ZP = (By.CSS_SELECTOR, ".fldKsupCompetitionDeadlineFrom #SPFieldDateTime")
     # Поле "Срок представления ценовой информации"
-    PRICE_INFORMATION_DEAD_LINE_FROM_IN_ZP =(By.CSS_SELECTOR, ".fldKsupPriceInformationDeadlineFrom #SPFieldDateTime")
+    PRICE_INFORMATION_DEAD_LINE_FROM_IN_ZP = (By.CSS_SELECTOR, ".fldKsupPriceInformationDeadlineFrom #SPFieldDateTime")
     # Поле "Предполагаемая дата начала проведения закупки с"
     PURCHASE_START_DATE_FROM = (By.CSS_SELECTOR, ".fldKsupPurchaseStartDateFrom #SPFieldDateTime")
     # Поле "Предполагаемая дата начала проведения закупки по"
@@ -500,15 +502,10 @@ class ZakupElementLocators:
     PURCHASE_LINK_IN_ZP = (By.CSS_SELECTOR, ".fldKsupEisPurchaseLink #SPFieldNote")
     # Поле "Результаты работ"
     DESCRIPTION_TEXT_IN_ZP = (By.CSS_SELECTOR, ".fldKsupPaDescription #SPFieldNote")
-    # Поле "Риски"
-    RISKS_TEXT_IN_ZP = (By.CSS_SELECTOR, ".fldKsupPaDescription #SPFieldNote")
     # Поле "Риски проекта с точки зрения Департамента"
     PROJECT_RISKS_DEPARTMENT_IN_ZP = (By.CSS_SELECTOR, ".fldKsupProjectRiskDepartmentPerspec #SPFieldNote")
     # Поле "Ссылка на запрос на Официальном сайте ЕИС"
     EIS_PRICE_LINK_IN_ZP = (By.CSS_SELECTOR, ".fldKsupEisPriceLink #SPFieldNote")
-
-
-
 
 
 class FormCreateContractLocators:
