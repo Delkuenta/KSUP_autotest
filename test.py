@@ -29,6 +29,9 @@ class TestUnitSaleFullBusinessCyclePaZpDk:
         create_presale_page = PresaleFormCreate(browser, link)
         create_presale_page.form_create_presale_all_type()
         presale_list_page.should_be_element_on_presale_list()
+        presale_list_page.go_to_presale_element()
+        presale_element_page = PresaleElementPage(browser, browser.current_url)
+        presale_element_page.verify_general_information_in_presale()
 
     def test_create_zakup_based_on_presale(self, browser):
         link = LoginData.link
@@ -305,6 +308,7 @@ class TestSeparateSaleFullBusinessCyclePaZpDk:
         presale_list_page.go_to_presale_element()
         presale_element_page = PresaleElementPage(browser, link)
         presale_element_page.verify_presale_approval_waiting_status()
+        presale_element_page.verify_general_information_in_presale()
 
     def test_approval_presale(self, browser):
         link = LoginData.link
@@ -323,6 +327,7 @@ class TestSeparateSaleFullBusinessCyclePaZpDk:
         presale_element_page = PresaleElementPage(browser, link)
         presale_element_page.approval_presale()
         presale_element_page.verify_presale_approval_successfully_status()
+        presale_element_page.verify_general_information_in_presale()
 
     def test_verify_visibility_zakup_button_salesManager(self, browser):
         link = LoginData.link

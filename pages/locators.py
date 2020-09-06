@@ -159,6 +159,9 @@ class FormCreatePresaleLocators:
 
 
 class PresaleElementLocators:
+    # Титул в карточке "Пресейловая активность"
+    TITLE_IN_PRESALE = (By.CSS_SELECTOR, "#pageTitle")
+
     # Кнопка изменения элемента
     EDIT_ITEM_ELEMENT = (By.ID, "Ribbon.ListForm.Display.Manage.EditItem-Large")
 
@@ -173,9 +176,6 @@ class PresaleElementLocators:
 
     # Кнопка "Внести информацию о договоре/контракте"
     CREATE_CONTRACT_ELEMENT = (By.ID, "Ribbon.ListForm.Display.ContractGroup-LargeLarge")
-
-    # Поле "Статус согласования с подразделением"
-    PRESALE_APPROVAL_STATUS = (By.CSS_SELECTOR, ".fldKsupSaleApproveStatus #SPFieldChoice")
 
     # Кнопка согласования пресейла
     CONFIRM_APPROVAL_BUTTON = (By.XPATH, "//a[@id='Approve.Approve-Large']")
@@ -206,6 +206,50 @@ class PresaleElementLocators:
 
     MESSAGE_OK_BUTTON = (By.XPATH, "//input[@value='OK']")
 
+    # Элементы на вкладке "Общие сведения"
+    CONTRACTOR_TYPE_IN_PRESALE = (By.CSS_SELECTOR, ".fldKsupContractorType #SPFieldChoice")
+    # Поле "Заказчик"
+    CUSTOMER_IN_PRESALE = (By.CSS_SELECTOR, ".fldKsupEgr_Customer #SPFieldWcfLookup")
+    # Поле "Подразделение-продавец"
+    SALES_UNIT_IN_PRESALE = (By.CSS_SELECTOR, ".fldKsupDivisions #SPFieldWcfLookup")
+    # Поле "Ответственный менеджер подразделения-продавца"
+    SALES_MANAGER_IN_PRESALE = (By.CSS_SELECTOR, ".fldKsupSeller #SPFieldWcfLookup")
+    # Поле "Подразделение-исполнитель"
+    EXECUTIVE_UNIT_IN_PRESALE = (By.CSS_SELECTOR, ".fldKsupDivisionPerformer #SPFieldWcfLookup")
+    # Поле "Ответственный менеджер подразделения-исполнителя"
+    EXECUTIVE_MANAGER_IN_PRESALE = (By.CSS_SELECTOR, ".fldKsupPerformerResponsible #SPFieldWcfLookup")
+    # Поле "Исполнитель (юридическое лицо)"
+    EXECUTIVE_UNIT_LEGAL_IN_PRESALE =(By.CSS_SELECTOR, ".fldKsupEgr_PerformerLegal #SPFieldWcfLookup")
+    # Поле "Порядок проведения закупочной процедуры" для Тендер
+    SALE_LAW_TYPE_TENDER_PRESALE = (By.CSS_SELECTOR, ".fldKsupSaleLawType  #SPFieldChoice")
+    # Поле "Тип работ и услуг"
+    TYPE_OF_WORK_SERVCICES_IN_PRESALE = (By.CSS_SELECTOR, "#SPFieldTaxonomyFieldTypeMulti")
+    # Поле "Начальная (максимальная) цена контракта"
+    SUM_IN_PRESALE = (By.CSS_SELECTOR, ".fldKsupSumPlan #SPFieldNumber")
+    # Поле "Валюта договора/контракта"
+    CURRENCY_IN_PRESALE = (By.CSS_SELECTOR, ".fldKsupCurrency #SPFieldChoice")
+    # Поле "Размер обеспечения заявки"
+    APPLICATION_SIZE_IN_PRESALE = (By.CSS_SELECTOR, ".fldKsupApplicationSize #SPFieldNumber")
+    # Поле "Размер обеспечения договора/контракта"
+    CONTRACT_SIZE_IN_PRESALE = (By.CSS_SELECTOR, ".fldKsupContractSize #SPFieldNumber")
+    # Поле "Статус продажи"
+    PRESALE_STATUS = (By.CSS_SELECTOR, ".fldKsupSaleStatus #SPFieldChoice")
+    # Поле "Самостоятельная продажа"
+    SEPARATE_SALE_IN_PRESALE = (By.CSS_SELECTOR, ".fldKsupSeparateSale #SPFieldChoice")
+    # Поле "Плановый срок подачи на конкурс"
+    COMPETITION_DEAD_LINE_FROM_IN_PRESALE = (By.CSS_SELECTOR, ".fldKsupCompetitionDeadlineFrom #SPFieldDateTime")
+    # Поле "Плановая дата заключения договора/контракта"
+    START_DATE_IN_PRESALE = (By.CSS_SELECTOR, ".fldKsupPlanDateContractConclusion #SPFieldDateTime")
+    # Поле "Плановая дата окончания договора/контракта"
+    END_DATE_IN_PRESALE = (By.CSS_SELECTOR, ".fldKsupPlanDateContractFinish #SPFieldDateTime")
+    # Поле "Вероятность заключения договора/контракта"
+    PROJECT_PROBABILITY_IN_PRESALE = (By.CSS_SELECTOR, ".fldKsupProjectProbability  #SPFieldNumber")
+    # Поле "Статус согласования с подразделением"
+    PRESALE_APPROVAL_STATUS = (By.CSS_SELECTOR, ".fldKsupSaleApproveStatus #SPFieldChoice")
+    # Поле "Краткое описание"
+    DESCRIPTION_TEXT_IN_PRESALE = (By.CSS_SELECTOR, ".fldKsupDescriptionPlainText #SPFieldNote")
+    # Поле "Риски"
+    RISKS_IN_PRESALE = (By.CSS_SELECTOR, ".fldKsupRisks #SPFieldNote")
 
 class FormCreateZakupLocators:
     # Общие поля для всех типов
