@@ -251,6 +251,7 @@ class PresaleElementLocators:
     # Поле "Риски"
     RISKS_IN_PRESALE = (By.CSS_SELECTOR, ".fldKsupRisks #SPFieldNote")
 
+
 class FormCreateZakupLocators:
     # Общие поля для всех типов
     TITLE_ZP = (By.CSS_SELECTOR, "#DeltaPlaceHolderPageTitleInTitleArea .die")
@@ -758,37 +759,95 @@ class ContractPageLocators:
 
 
 class ContractElementLocators:
-    PRICE_CATEGORY_ELEMENT_IN_CONTRACT = (By.CSS_SELECTOR, ".fldKsupProjectCategoryBySum #SPFieldChoice")
+    # Титул в карточке "Пресейловая активность"
+    TITLE_IN_CONTRACT = (By.CSS_SELECTOR, "#pageTitle")
 
+    # Кнопки на риббоне SP
     SEND_APPROVAL_CONTRACT_ELEMENT = (By.ID, "Ribbon.ListForm.Display.ApprovalGroup-LargeLarge")
     CONFIRM_SEND_APPROVAL_ELEMENT = (By.XPATH, "//*[@type = 'button' and (text() = 'Отправить')]")
     CANCEL_SEND_APPROVAL_ELEMENT = (By.XPATH, "//*[@type = 'button' and (text() = 'Отмена')]")
-
-    APPROVAL_HISTORY_CONTRACT_ELEMENT = (By.XPATH, "//a[contains(@href, '#tabApprovingHistory')]")
-
-    APPROVAL_LEGAL_STATUS_ELEMENT = (
-        By.XPATH,
-        "(.//*[normalize-space(text()) and normalize-space(.)='Согласование юридической службой'])[1]/following::span[1]")
-
-    APPROVAL_COUNT_STATUS_ELEMENT = (
-        By.XPATH,
-        "(.//*[normalize-space(text()) and normalize-space(.)='Согласование бухгалтерией'])[1]/following::span[1]")
-    APPROVAL_FIN_STATUS_ELEMENT = (
-        By.XPATH,
-        "(.//*[normalize-space(text()) and normalize-space(.)='Согласование финансовой службой'])[1]/following::span[1]")
-    APPROVAL_UDPRPO_STATUS_ELEMENT = (
-        By.XPATH, "(.//*[normalize-space(text()) and normalize-space(.)='Согласование УДПР ПО'])[1]/following::span[1]")
-
-    APPROVAL_KKP_STATUS_ELEMENT = (
-        By.XPATH, "(.//*[normalize-space(text()) and normalize-space(.)='Согласование ККП'])[1]/following::span[1]")
-
     # Кнопка согласования и отклонения закупочной процедуры
     APPROVAL_CONTRACT = (By.ID, "Approve.Approve-Large")
     REJECT_CONTRACT = (By.ID, "Approve.Reject-Large")
 
-    # элементы внутри окна подтверждения/отклонения
+    # Элементы на вкладке "Статус Согласования"
+    # Вкладка "Статус согласования"
+    APPROVAL_HISTORY_CONTRACT_ELEMENT = (By.XPATH, "//a[contains(@href, '#tabApprovingHistory')]")
+    # Строка согласование с юридической службой
+    APPROVAL_LEGAL_STATUS_ELEMENT = (
+        By.XPATH,
+        "(.//*[normalize-space(text()) and normalize-space(.)='Согласование юридической службой'])[1]/following::span[1]")
+    # Строка согласование с бухгалтерией
+    APPROVAL_COUNT_STATUS_ELEMENT = (
+        By.XPATH,
+        "(.//*[normalize-space(text()) and normalize-space(.)='Согласование бухгалтерией'])[1]/following::span[1]")
+    # Строка согласование с финансовой службой
+    APPROVAL_FIN_STATUS_ELEMENT = (
+        By.XPATH,
+        "(.//*[normalize-space(text()) and normalize-space(.)='Согласование финансовой службой'])[1]/following::span[1]")
+    # Строка согласование с УДПР ПО
+    APPROVAL_UDPRPO_STATUS_ELEMENT = (
+        By.XPATH, "(.//*[normalize-space(text()) and normalize-space(.)='Согласование УДПР ПО'])[1]/following::span[1]")
+    # Строка согласование с ККП
+    APPROVAL_KKP_STATUS_ELEMENT = (
+        By.XPATH, "(.//*[normalize-space(text()) and normalize-space(.)='Согласование ККП'])[1]/following::span[1]")
+
+    # Элементы внутри окна подтверждения/отклонения
     COMMENT_TO_APPROVAL_CONTRACT = (By.XPATH, "//textarea[@id='dialogComment']")
     FILE_TO_APPROVAL_CONTRACT = (By.XPATH, "//input[@name='filefield']")
     CONFIRM_APPROVAL_CONTRACT = (By.XPATH, "(//button[@type='button'])[10]")
     CANCEL_APPROVAL_CONTRACT = (By.XPATH, "(//button[@type='button'])[9]")
     ClOSE_ALLERT_CONTRACT = (By.CSS_SELECTOR, "#dlgTitleBtns")
+
+    # Элементы на вкладке "Общие сведения"
+    # Поле "Заказчик"
+    CUSTOMER_IN_CONTRACT = (By.CSS_SELECTOR, ".fldKsupEgr_Customer #SPFieldWcfLookup")
+    # Поле "Подразделение-продавец"
+    SALES_UNIT_IN_CONTRACT = (By.CSS_SELECTOR, ".fldKsupDivisions #SPFieldWcfLookup")
+    # Поле "Ответственный менеджер подразделения-продавца"
+    SALES_MANAGER_IN_CONTRACT = (By.CSS_SELECTOR, ".fldKsupSeller #SPFieldWcfLookup")
+    # Поле "Подразделение-исполнитель"
+    EXECUTIVE_UNIT_IN_CONTRACT = (By.CSS_SELECTOR, ".fldKsupDivisionPerformer #SPFieldWcfLookup")
+    # Поле "Ответственный менеджер подразделения-исполнителя"
+    EXECUTIVE_MANAGER_IN_CONTRACT = (By.CSS_SELECTOR, ".fldKsupPerformerResponsible #SPFieldWcfLookup")
+    # Поле "Исполнитель (юридическое лицо)"
+    EXECUTIVE_UNIT_LEGAL_IN_CONTRACT =(By.CSS_SELECTOR, ".fldKsupEgr_PerformerLegal #SPFieldWcfLookup")
+    # Поле "Тип работ и услуг"
+    TYPE_OF_WORK_SERVCICES_IN_CONTRACT = (By.CSS_SELECTOR, ".fldKsupWorkServicesTypeMetadata #SPFieldTaxonomyFieldTypeMulti")
+    # Поле "Начальная (максимальная) цена контракта"
+    SUM_IN_CONTRACT = (By.CSS_SELECTOR, ".fldKsupSum #SPFieldNumber")
+    # Поле "Валюта договора/контракта"
+    CURRENCY_IN_CONTRACT = (By.CSS_SELECTOR, ".fldKsupCurrency #SPFieldChoice")
+    # Поле "Категория проекта(ценовая)"
+    PRICE_CATEGORY_IN_CONTRACT = (By.CSS_SELECTOR, ".fldKsupProjectCategoryBySum #SPFieldChoice")
+    # Поле "Номер"
+    CONTRACT_NUMBER_IN_CONTRACT = (By.CSS_SELECTOR, ".fldKsupContractNumber #SPFieldText")
+    # Поле "Дата заключения договора/контракта"
+    START_DATE_IN_CONTRACT = (By.CSS_SELECTOR, ".fldKsupConclusionDate #SPFieldDateTime")
+    # Поле "Дата окончания договора/контракта"
+    END_DATE_IN_CONTRACT = (By.CSS_SELECTOR, ".fldKsupDateEnd #SPFieldDateTime")
+    # Поле "Номер закупки"
+    PURCHASE_NUMBER_IN_CONTRACT = (By.CSS_SELECTOR, ".fldKsupEisPurchaseNumber #SPFieldText")
+    # Поле "Статус контракта"
+    CONTRACT_STATUS = (By.CSS_SELECTOR, ".fldKsupContractStatus #SPFieldChoice")
+    # Поле "Территория применения"
+    TERRITORY_IN_CONTRACT = (By.CSS_SELECTOR, ".fldKsupApplicationTerritory #SPFieldTaxonomyFieldType")
+    # Поле "Ключевые технологии"
+    TECHNOLOGIES_IN_CONTRACT = (By.CSS_SELECTOR, ".fldKsupKeyTechnologies #SPFieldTaxonomyFieldTypeMulti")
+    # Поле "Уникальный код проекта"
+    PROJECT_UNIQUE_CODE_IN_CONTRACT = (By.CSS_SELECTOR, ".fldKsupContractProjectUniqueCode #SPFieldText")
+    # Поле "Связанный проект"
+    PROJECT_IN_CONTRACT = (By.CSS_SELECTOR, ".fldKsupProject #SPFieldWcfLookup")
+    # Поле "Ссылка на закупку"
+    PURCHASE_LINK_IN_CONTRACT = (By.CSS_SELECTOR, ".fldKsupOffEisPurchaseLink #SPFieldNote")
+    # Поле "Ссылка на договор/контракт на Официальном сайте ЕИС"
+    EIS_CONTRACT_LINK_IN_CONTRACT = (By.CSS_SELECTOR, ".fldKsupEisContractLink #SPFieldNote")
+    # Поле "Цели и задачи"
+    DESCRIPTION_TEXT_IN_CONTRACT = (By.CSS_SELECTOR, ".fldKsupDescriptionPlainText #SPFieldNote")
+    # Поле "Количественные показатели реализации проекта"
+    QUANTITATIVE_INDICATORS_PROJECT = (By.CSS_SELECTOR, ".fldKsupQuantitativeIndicatorsProjec #SPFieldNote")
+
+
+
+
+

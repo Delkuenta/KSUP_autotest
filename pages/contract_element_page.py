@@ -4,9 +4,224 @@ from userdata.user_data import UserData
 
 
 class ContractElementPage(BasePage):
-    def verify_price_category_contract(self):
-        assert self.is_element_text(*ContractElementLocators.PRICE_CATEGORY_ELEMENT_IN_CONTRACT) == \
+    def verify_general_information_contract(self):
+        # Проверяем титул карточки который соответствует названию сущности
+        assert self.is_element_text(*ContractElementLocators.TITLE_IN_CONTRACT) == UserData.user_data_dict["fullName"], \
+            'Название карточки "Договор/контракт" не соответствует входным данным'
+        print('Название карточки "Договор/контракт" успешно проверено')
+
+        # Проверяем поле "Заказчик"
+        assert self.is_element_text(*ContractElementLocators.CUSTOMER_IN_CONTRACT) == UserData.user_data_dict[
+            "customer"], \
+            f'\nНекорректное значение в поле "Заказчик".' \
+            f'\nОжидаемый результат:{UserData.user_data_dict["customer"]}'
+        print('Значение в поле "Заказчик" успешно проверено')
+
+        # Проверяем поле "Подразделение-продавец"
+        assert self.is_element_text(*ContractElementLocators.SALES_UNIT_IN_CONTRACT) == UserData.user_data_dict[
+            "salesUnit"], \
+            f'\nНекорректное значение в поле "Подразделение-продавец". ' \
+            f'\nОжидаемый результат:{UserData.user_data_dict["salesUnit"]}'
+        print('Значение в поле "Подразделение-продавец" успешно проверено')
+
+        # Проверяем поле "Ответственный менеджер подразделения-продавца"
+        assert self.is_element_text(*ContractElementLocators.SALES_MANAGER_IN_CONTRACT) == UserData.user_data_dict[
+            "salesManager"], \
+            f'\nНекорректное значение в поле "Ответственный менеджер подразделения-продавца".' \
+            f'\nОжидаемый результат:{UserData.user_data_dict["salesManager"]}'
+        print('Значение в поле "Ответственный менеджер подразделения-продавца" успешно проверено')
+
+        # Проверяем поле "Подразделение-исполнитель"
+        assert self.is_element_text(*ContractElementLocators.EXECUTIVE_UNIT_IN_CONTRACT) == UserData.user_data_dict[
+            "executiveUnit"], \
+            f'\nНекорректное значение в поле "Подразделение-исполнитель". ' \
+            f'\nОжидаемый результат:{UserData.user_data_dict["executiveUnit"]}'
+        print('Значение в поле "Подразделение-исполнитель" успешно проверено')
+
+        # Проверяем поле "Ответственный менеджер подразделения-исполнителя"
+        assert self.is_element_text(*ContractElementLocators.EXECUTIVE_MANAGER_IN_CONTRACT) == UserData.user_data_dict[
+            "executiveManager"], \
+            f'\nНекорректное значение в поле "Ответственный менеджер подразделения-исполнителя".' \
+            f'\nОжидаемый результат:{UserData.user_data_dict["executiveManager"]}'
+        print('Значение в поле "Ответственный менеджер подразделения-исполнителя" успешно проверено')
+
+        # Проверяем поле "Исполнитель (юридическое лицо)"
+        assert self.is_element_text(*ContractElementLocators.EXECUTIVE_UNIT_LEGAL_IN_CONTRACT) == \
+               UserData.user_data_dict["executiveUnitLegal"], \
+            f'\nНекорректное значение в поле "Исполнитель (юридическое лицо)".' \
+            f'\nОжидаемый результат:{UserData.user_data_dict["executiveUnitLegal"]}'
+        print('Значение в поле "Исполнитель (юридическое лицо)" успешно проверено')
+
+        # Проверяем поле "Тип работ и услуг"
+        work_services_value = ''
+        for category in UserData.user_data_dict["typeOfWorkServices"]:
+            work_services_value = work_services_value + category + '; '
+        work_services_value = work_services_value.strip()
+        assert self.is_element_text(*ContractElementLocators.TYPE_OF_WORK_SERVCICES_IN_CONTRACT) == work_services_value, \
+            f'\nНекорректное значение в поле "Тип работ и услуг".' \
+            f'\n Ожидаемый результат: {work_services_value}'
+        print('Значение в поле "Тип работ и услуг" успешно проверено')
+
+        assert self.is_element_text(*ContractElementLocators.PRICE_CATEGORY_IN_CONTRACT) == \
                UserData.user_data_dict["price_category"], "Ценовая категория контракта не корректна"
+
+        # Проверяем поле "Сумма договора/контракта"
+        sum_value = str(UserData.user_data_dict["sum"])
+        if sum_value.find('.') > 0:
+            # Преобразование значения с плавающей точкой под необходимый шаблон
+            print("Заглушка")
+        else:
+            # Преобразование целого значения с разделителями пробелами и припиской валюты
+            if UserData.user_data_dict["currency"] == "Доллар":
+                sum_value = ('{:,d}'.format(UserData.user_data_dict["sum"])).replace(",", " ") + ',00 $'
+            elif UserData.user_data_dict["currency"] == "Евро":
+                sum_value = ('{:,d}'.format(UserData.user_data_dict["sum"])).replace(",", " ") + ',00 €'
+            else:
+                sum_value = ('{:,d}'.format(UserData.user_data_dict["sum"])).replace(",", " ") + ',00 ₽'
+            assert self.is_element_text(*ContractElementLocators.SUM_IN_CONTRACT) == sum_value, \
+                f'\nНекорректное значение в поле "Начальная (максимальная) цена контракта" ' \
+                f'\nОжидаемый результат: {sum_value}"'
+            print('Значение в поле "Сумма договора/контракта" успешно проверено')
+
+        # Проверяем поле "Валюта договора/контракта"
+        assert self.is_element_text(*ContractElementLocators.CURRENCY_IN_CONTRACT) == UserData.user_data_dict[
+            "currency"], \
+            f'\nНекорректное значение в поле "Валюта договора/контракта".' \
+            f'\nОжидаемый результат:{UserData.user_data_dict["currency"]}'
+        print('Значение в поле "Валюта договора/контракта" успешно проверено')
+
+        # Проверяем поле "Категория проекта"
+        assert self.is_element_text(*ContractElementLocators.PRICE_CATEGORY_IN_CONTRACT) == \
+               UserData.user_data_dict["price_category"], \
+            f'Ценовая категория договор/контракта не корректна.' \
+            f'\n Ожидаемый результат: {UserData.user_data_dict["price_category"]}'
+        print('Значение в поле "Категория проекта" успешно проверено')
+
+        # Проверяем поле "Номер"
+        if len(str(UserData.user_data_dict["number_contract"])) > 0:
+            assert self.is_element_text(*ContractElementLocators.CONTRACT_NUMBER_IN_CONTRACT) == \
+                   UserData.user_data_dict["number_contract"], \
+                f'Значение в поле "Номер" не корректно.' \
+                f'\n Ожидаемый результат: {UserData.user_data_dict["number_contract"]}'
+            print('Значение в поле "Категория проекта" успешно проверено')
+        else:
+            assert len(self.browser.find_elements(*ContractElementLocators.CONTRACT_NUMBER_IN_CONTRACT)) == 0, \
+                'Отображено пустое поле "Номер"'
+            print('Пустое поле "Номер" успешно не отображено')
+
+        # Проверяем поле "Дата заключения"
+        assert UserData.user_data_dict["startDate"] in \
+               str(self.is_element_text(*ContractElementLocators.START_DATE_IN_CONTRACT)).strip(), \
+            f'\nНекорректное значение в поле "Дата заключения договора/контракта".' \
+            f'\nОжидаемый результат: {UserData.user_data_dict["startDate"]}'
+        print('Значение в поле "Дата заключения договора/контракта" успешно проверено')
+
+        # Проверяем поле "Дата окончания"
+        assert UserData.user_data_dict["endDate"] in \
+               str(self.is_element_text(*ContractElementLocators.END_DATE_IN_CONTRACT)).strip(), \
+            f'\nНекорректное значение в поле "Дата окончания договора/контракта".' \
+            f'\nОжидаемый результат: {UserData.user_data_dict["endDate"]}'
+        print('Значение в поле "Дата окончания договора/контракта" успешно проверено')
+
+        # Проверяем поле "Номер закупки"
+        if len(str(UserData.user_data_dict["purchase_number"])) > 0:
+            assert self.is_element_text(*ContractElementLocators.PURCHASE_NUMBER_IN_CONTRACT) == \
+                   UserData.user_data_dict["purchase_number"], \
+                f'\nНекорректное значение в поле "Номер закупки".' \
+                f'\nОжидаемый результат:{UserData.user_data_dict["purchase_number"]}'
+            print('Значение в поле "Номер закупки" успешно проверено')
+        else:
+            assert len(self.browser.find_elements(*ContractElementLocators.PURCHASE_NUMBER_IN_CONTRACT)) == 0, \
+                'Отображено пустое поле "Номер закупки"'
+            print('Пустое поле "Номер закупки" успешно не отображено')
+
+        # Проверяем поле "Статус контракта"
+        assert "Проект" in self.is_element_text(*ContractElementLocators.CONTRACT_STATUS), \
+            f'\nНекорректное значение в поле "Статус контракта".' \
+            f'\nОжидаемый результат: Проект'
+        print('Значение в поле "Статус контракта" успешно проверено')
+
+        # Проверяем поле "Территория применения"
+        territory_value = ''
+        for territory in UserData.user_data_dict["territory"]:
+            territory_value = territory_value + territory + '; '
+        territory_value = territory_value.strip()
+        assert self.is_element_text(*ContractElementLocators.TERRITORY_IN_CONTRACT) == territory_value, \
+            f'\nНекорректное значение в поле "Территория применения".' \
+            f'\n Ожидаемый результат: {territory_value}'
+        print('Значение в поле "Территория применения" успешно проверено')
+
+        # Проверяем поле "Ключевые технологии"
+        technologies_value = ''
+        for technologies in UserData.user_data_dict["technologies"]:
+            technologies_value = technologies_value + technologies + '; '
+        technologies_value = technologies_value.strip()
+        assert self.is_element_text(*ContractElementLocators.TECHNOLOGIES_IN_CONTRACT) == technologies_value, \
+            f'\nНекорректное значение в поле "Ключевые технологии".' \
+            f'\n Ожидаемый результат: {technologies_value}'
+        print('Значение в поле "Ключевые технологии" успешно проверено')
+
+        # Проверяем поле "Уникальный код проекта"
+        if len(str(UserData.user_data_dict["project_unique_code"])) > 0:
+            assert self.is_element_text(*ContractElementLocators.PROJECT_UNIQUE_CODE_IN_CONTRACT) == \
+                   UserData.user_data_dict["project_unique_code"], \
+                f'\nНекорректное значение в поле "Уникальный код проекта".' \
+                f'\nОжидаемый результат:{UserData.user_data_dict["project_unique_code"]}'
+            print('Значение в поле "Уникальный код проекта" успешно проверено')
+        else:
+            assert len(self.browser.find_elements(*ContractElementLocators.PROJECT_UNIQUE_CODE_IN_CONTRACT)) == 0, \
+                'Отображено пустое поле "Уникальный код проекта"'
+            print('Пустое поле "Уникальный код проекта" успешно не отображено')
+
+        # Проверяем поле "Связанный проект"
+        assert self.is_element_text(*ContractElementLocators.PROJECT_IN_CONTRACT) == \
+               UserData.user_data_dict["project"], \
+            f'Значение в поле "Связанный проект" не корректно.' \
+            f'\n Ожидаемый результат: {UserData.user_data_dict["project"]}'
+        print('Значение в поле "Связанный проект" успешно проверено')
+
+        # Проверяем поле "Ссылка на закупку"
+        if len(str(UserData.user_data_dict["purchase_link"])) > 0:
+            assert self.is_element_text(*ContractElementLocators.PURCHASE_LINK_IN_CONTRACT) == \
+                   UserData.user_data_dict["purchase_link"], \
+                f'Значение в поле "Ссылка на закупку" не корректно.' \
+                f'\n Ожидаемый результат: {UserData.user_data_dict["purchase_link"]}'
+            print('Значение в поле "Ссылка на закупку" успешно проверено')
+        else:
+            assert len(self.browser.find_elements(*ContractElementLocators.PURCHASE_LINK_IN_CONTRACT)) == 0, \
+                'Отображено пустое поле "Ссылка на закупку"'
+            print('Пустое поле "Ссылка на закупку" успешно не отображено')
+
+        # Проверяем поле "Ссылка на договор/контракт на Официальном сайте ЕИС"
+        if len(str(UserData.user_data_dict["eis_contract_link"])) > 0:
+            assert self.is_element_text(*ContractElementLocators.EIS_CONTRACT_LINK_IN_CONTRACT) == \
+                   UserData.user_data_dict["eis_contract_link"], \
+                f'Значение в поле "Ссылка на договор/контракт на Официальном сайте ЕИС" не корректно.' \
+                f'\n Ожидаемый результат: {UserData.user_data_dict["eis_contract_link"]}'
+            print('Значение в поле "Ссылка на договор/контракт на Официальном сайте ЕИС" успешно проверено')
+        else:
+            assert len(self.browser.find_elements(*ContractElementLocators.EIS_CONTRACT_LINK_IN_CONTRACT)) == 0, \
+                'Отображено пустое поле "Ссылка на договор/контракт на Официальном сайте ЕИС"'
+            print('Пустое поле "Ссылка на договор/контракт на Официальном сайте ЕИС" успешно не отображено')
+
+        # Проверяем поле "Цели и задачи"
+        assert self.is_element_text(*ContractElementLocators.DESCRIPTION_TEXT_IN_CONTRACT) == \
+               UserData.user_data_dict["descriptionText"], \
+            f'Значение в поле "Цели и задачи" не корректно.' \
+            f'\n Ожидаемый результат: {UserData.user_data_dict["descriptionText"]}'
+        print('Значение в поле "Цели и задачи" успешно проверено')
+
+        # Проверяем поле "Количественные показатели реализации проекта"
+        if len(str(UserData.user_data_dict["quantitative_indicators_project"])) > 0:
+            assert self.is_element_text(*ContractElementLocators.QUANTITATIVE_INDICATORS_PROJECT) == \
+                   UserData.user_data_dict["quantitative_indicators_project"], \
+                f'Значение в поле "Количественные показатели реализации проекта" не корректно.' \
+                f'\n Ожидаемый результат: {UserData.user_data_dict["quantitative_indicators_project"]}'
+            print('Значение в поле "Количественные показатели реализации проекта" успешно проверено')
+        else:
+            assert len(self.browser.find_elements(*ContractElementLocators.QUANTITATIVE_INDICATORS_PROJECT)) == 0, \
+                'Отображено пустое поле "Количественные показатели реализации проекта"'
+            print('Пустое поле "Количественные показатели реализации проекта" успешно не отображено')
 
     def send_contract_for_approval(self):
         count_refresh_page = 0

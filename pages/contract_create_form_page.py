@@ -269,11 +269,11 @@ class ContractFormCreate(BasePage):
 
         # Заполняем поле "Номер закупки"
         self.browser.find_element(*FormCreateContractLocators.EIS_PURCHASE_NUMBER_CONTRACT).send_keys(
-            UserData.user_data_dict["eis_price_number"])
+            UserData.user_data_dict["purchase_number"])
 
         # Заполняем поле " Ссылка на закупку "
         self.browser.find_element(*FormCreateContractLocators.EIS_PURCHSE_LINK_CONTRACT).send_keys(
-            UserData.user_data_dict["eis_price_link"])
+            UserData.user_data_dict["purchase_link"])
 
         # Заполняем поле Ссылка на договор/контракт на Официальном сайте ЕИС
         self.browser.find_element(*FormCreateContractLocators.EIS_CONTRACT_LINK).send_keys(

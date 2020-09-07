@@ -205,7 +205,7 @@ class PresaleElementPage(BasePage):
             work_services_value = work_services_value + category + '; '
         work_services_value = work_services_value.rstrip()
         assert self.is_element_text(*PresaleElementLocators.TYPE_OF_WORK_SERVCICES_IN_PRESALE) == work_services_value, \
-            f'\nНекорректное значение в поле "Ответственный менеджер подразделения-исполнителя".' \
+            f'\nНекорректное значение в поле "Тип работ и услуг".' \
             f'\n Ожидаемый результат: {work_services_value}'
         print('Значение в поле "Тип работ и услуг" успешно проверено')
 

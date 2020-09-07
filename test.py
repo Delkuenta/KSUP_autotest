@@ -189,7 +189,7 @@ class TestUnitSaleFullBusinessCyclePaZpDk:
         contract_list_page.should_be_element_on_contract_list()
         contract_list_page.go_to_contract_element()
         contract_element_page = ContractElementPage(browser, browser.current_url)
-        contract_element_page.verify_price_category_contract()
+        contract_element_page.verify_general_information_contract()
 
     def test_send_contract_for_approval(self, browser):
         link = LoginData.link
@@ -636,7 +636,7 @@ class TestSeparateSaleFullBusinessCyclePaZpDk:
         contract_list_page.should_be_element_on_contract_list()
         contract_list_page.go_to_contract_element()
         contract_element_page = ContractElementPage(browser, browser.current_url)
-        contract_element_page.verify_price_category_contract()
+        contract_element_page.verify_general_information_contract()
 
     def test_verify_visibility_contract_approval_button_salesManager(self, browser):
         link = LoginData.link
@@ -647,7 +647,7 @@ class TestSeparateSaleFullBusinessCyclePaZpDk:
         contract_list_page.go_to_contract_list()
         contract_list_page.go_to_contract_element()
         contract_element_page = ContractElementPage(browser, link)
-        contract_element_page.verify_price_category_contract()
+        contract_element_page.verify_general_information_contract()
         contract_element_page.verify_visibility_button_send_to_approval_contract()
 
     def test_verify_visibility_contract_approval_button_salesUnit(self, browser):
@@ -659,7 +659,7 @@ class TestSeparateSaleFullBusinessCyclePaZpDk:
         contract_list_page.go_to_contract_list()
         contract_list_page.go_to_contract_element()
         contract_element_page = ContractElementPage(browser, link)
-        contract_element_page.verify_price_category_contract()
+        contract_element_page.verify_general_information_contract()
         contract_element_page.verify_visibility_button_send_to_approval_contract()
 
     def test_verify_visibility_contract_approval_button_executiveUnit(self, browser):
@@ -671,7 +671,7 @@ class TestSeparateSaleFullBusinessCyclePaZpDk:
         contract_list_page.go_to_contract_list()
         contract_list_page.go_to_contract_element()
         contract_element_page = ContractElementPage(browser, link)
-        contract_element_page.verify_price_category_contract()
+        contract_element_page.verify_general_information_contract()
         contract_element_page.verify_visibility_button_send_to_approval_contract()
 
     def test_verify_visibility_contract_approval_button_executiveManager(self, browser):
@@ -683,7 +683,7 @@ class TestSeparateSaleFullBusinessCyclePaZpDk:
         contract_list_page.go_to_contract_list()
         contract_list_page.go_to_contract_element()
         contract_element_page = ContractElementPage(browser, link)
-        contract_element_page.verify_price_category_contract()
+        contract_element_page.verify_general_information_contract()
         contract_element_page.verify_visibility_button_send_to_approval_contract()
 
     def test_send_contract_for_approval(self, browser):
@@ -800,7 +800,7 @@ class TestDkFullBusinessCycle:
         create_contract_page.form_create_contract()
         contract_page.go_to_contract_element()
         contract_element_page = ContractElementPage(browser, browser.current_url)
-        contract_element_page.verify_price_category_contract()
+        contract_element_page.verify_general_information_contract()
 
     def test_send_contract_for_approval(self, browser):
         link = LoginData.link
