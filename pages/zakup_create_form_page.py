@@ -7,57 +7,56 @@ from userdata.user_data import UserData
 
 class ZakupFormCreate(BasePage):
 
-    def form_create_zakup_all_type(self):
-        self.is_text_to_be_present_in_element(*FormCreateZakupLocators.CUSTOMER_IN_ZP_ELEMENT,
-                                              UserData.user_data_dict["customer"])
+    def form_create_zakup_all_type(self, user_data_dict):
+        self.is_text_to_be_present_in_element(*FormCreateZakupLocators.CUSTOMER_IN_ZP_ELEMENT, user_data_dict["customer"])
         # Проверка заголовка формы создания Закупочной процедуры на основе типа в пользовательских данных
-        if UserData.user_data_dict["contractorType"] == "Тендерная заявка" or \
-                UserData.user_data_dict["contractorType"] == "Информация отсутствует":
+        if user_data_dict["contractorType"] == "Тендерная заявка" or \
+                user_data_dict["contractorType"] == "Информация отсутствует":
             # Проверяем заголовок страницы
             assert "Тендерная заявка" in self.is_element_text(*FormCreateZakupLocators.TITLE_ZP), \
                 "Некорректное название формы создания закупочной процедуры"
-        elif UserData.user_data_dict["contractorType"] == "Коммерческое предложение":
+        elif user_data_dict["contractorType"] == "Коммерческое предложение":
             assert "Коммерческое предложение" in self.is_element_text(*FormCreateZakupLocators.TITLE_ZP), \
                 "Некорректное название формы создания закупочной процедуры"
-        elif UserData.user_data_dict["contractorType"] == "Запрос цен товаров, работ, услуг":
+        elif user_data_dict["contractorType"] == "Запрос цен товаров, работ, услуг":
             assert "Запрос цен товаров, работ, услуг" in self.is_element_text(*FormCreateZakupLocators.TITLE_ZP), \
                 "Некорректное название формы создания закупочной процедуры"
 
         # Проверки заполнения общих полей для всех типов
-        assert UserData.user_data_dict["salesUnit"] in self.is_element_text(
+        assert user_data_dict["salesUnit"] in self.is_element_text(
             *FormCreateZakupLocators.SALES_UNIT_IN_ZP_ELEMENT), "Некорректная информация в поле Подразделение-продавец"
-        assert UserData.user_data_dict["salesManager"] in self.is_element_text(
+        assert user_data_dict["salesManager"] in self.is_element_text(
             *FormCreateZakupLocators.SALES_MANAGER_IN_ZP_ELEMENT), \
             "Некорректная информация в поле Ответственный менеджер подразделения-продавца"
-        assert UserData.user_data_dict["executiveUnit"] in self.is_element_text(
+        assert user_data_dict["executiveUnit"] in self.is_element_text(
             *FormCreateZakupLocators.EXECUTIVE_UNIT_IN_ZP_ELEMENT), \
             "Некорректная информация в поле Подразделение-исполнитель"
-        assert UserData.user_data_dict["executiveManager"] in self.is_element_text(
+        assert user_data_dict["executiveManager"] in self.is_element_text(
             *FormCreateZakupLocators.EXECUTIVE_MANAGER_IN_ZP_ELEMENT), \
             "Некорректная информация в поле Ответственный менеджер подразделения-исполнителя"
-        assert UserData.user_data_dict["customer"] in self.is_element_text(
+        assert user_data_dict["customer"] in self.is_element_text(
             *FormCreateZakupLocators.CUSTOMER_IN_ZP_ELEMENT), "Некорректная информация в поле Заказчик"
-        assert UserData.user_data_dict["executiveUnitLegal"] in self.is_element_text(
+        assert user_data_dict["executiveUnitLegal"] in self.is_element_text(
             *FormCreateZakupLocators.EXECUTIVE_LEGAL_IN_ZP_ELEMENT), "Некорректная информация в поле Исполнитель Юр.Лицо"
-        assert UserData.user_data_dict["fullName"] in self.is_element_text(*FormCreateZakupLocators.SALES_WITH_OP_FOR_VERIFY), \
+        assert user_data_dict["fullName"] in self.is_element_text(*FormCreateZakupLocators.SALES_WITH_OP_FOR_VERIFY), \
             "Некорректная информация в поле Связанные продажи"
 
-        if UserData.user_data_dict["contractorType"] == "Тендерная заявка":
+        if user_data_dict["contractorType"] == "Тендерная заявка":
             # Заполняем поле "Порядок проведения закупочной процедуры"
             Select(self.browser.find_element(*FormCreateZakupLocators.CONTRACTOR_TYPE_TENDER_ZP)).select_by_value(
-                UserData.user_data_dict["saleLawType"])
-            if UserData.user_data_dict["saleLawType"] == "44-ФЗ" or UserData.user_data_dict["saleLawType"] == "223-ФЗ":
+                user_data_dict["saleLawType"])
+            if user_data_dict["saleLawType"] == "44-ФЗ" or user_data_dict["saleLawType"] == "223-ФЗ":
                 assert self.is_visibility_of_element_located(*FormCreateZakupLocators.EIS_PURCHASE_NUMBER), \
                     'Ошибка: Не отображено поле "Номер закупки"'
                 # Заполняем поле "Номер закупки *"
                 self.browser.find_element(*FormCreateZakupLocators.EIS_PURCHASE_NUMBER).send_keys(
-                    UserData.user_data_dict["purchase_number"])
+                    user_data_dict["purchase_number"])
             # Заполняем поле "Ссылка на закупку *"
             self.browser.find_element(*FormCreateZakupLocators.EIS_PURCHASE_LINK).send_keys(
-                UserData.user_data_dict["purchase_link"])
+                user_data_dict["purchase_link"])
             # Заполняем поле "Риски проекта с точки зрения Департамента"
             self.browser.find_element(*FormCreateZakupLocators.PROJECT_RISK_DEPARTMENT_PERSPEC).\
-                send_keys(UserData.user_data_dict["project_risk_department"])
+                send_keys(user_data_dict["project_risk_department"])
             # Добавляем файл в поле "Тендерная заявка"
             self.browser.find_element(*FormCreateZakupLocators.FILE_TENDER_REQUEST).send_keys(
                 UserData.file_path_for_link_doc)
@@ -93,10 +92,10 @@ class ZakupFormCreate(BasePage):
             self.is_text_to_be_present_in_element(*FormCreateZakupLocators.FILE_OTHER_NAME_LINK,
                                                   UserData.name_mp4_to_link)
 
-        elif UserData.user_data_dict["contractorType"] == "Коммерческое предложение":
+        elif user_data_dict["contractorType"] == "Коммерческое предложение":
             # Заполняем поле "Риски проекта с точки зрения Департамента"
             self.browser.find_element(*FormCreateZakupLocators.PROJECT_RISK_DEPARTMENT_PERSPEC).\
-                send_keys(UserData.user_data_dict["project_risk_department"])
+                send_keys(user_data_dict["project_risk_department"])
             # Добавляем файл в поле  "Официальный запрос от Заказчика на КП *"
             self.browser.find_element(*FormCreateZakupLocators.FILE_KP_REQUEST_FROM_CUSTOMER).send_keys(
                 UserData.file_path_for_link_doc)
@@ -132,18 +131,18 @@ class ZakupFormCreate(BasePage):
             self.is_text_to_be_present_in_element(*FormCreateZakupLocators.FILE_OTHER_NAME_LINK,
                                                   UserData.name_mp4_to_link)
 
-        elif UserData.user_data_dict["contractorType"] == "Запрос цен товаров, работ, услуг":
+        elif user_data_dict["contractorType"] == "Запрос цен товаров, работ, услуг":
             Select(self.browser.find_element(*FormCreateZakupLocators.CONTRACTOR_TYPE_ZAPROS_CEN_ZP)).select_by_value(
-                UserData.user_data_dict["saleLawType"])
+                user_data_dict["saleLawType"])
             # Заполняем поле "Срок предоставления ценовой информации"
             self.browser.find_element(*FormCreateZakupLocators.PRICE_INFORMATION_DEADLINE_FROM).send_keys(
-                UserData.user_data_dict["price_information_deadline"])
+                user_data_dict["price_information_deadline"])
 
             # Проверяем отображение полей "Предполагаемая дата начала проведения закупки с/по",
             # поля "Номер запроса цен на Официальном сайте ЕИС" и
             # "Ссылка на запрос на Официальном сайте ЕИС" если порядок закупки 44-ФЗ
 
-            if UserData.user_data_dict["saleLawType"] == "44-ФЗ":
+            if user_data_dict["saleLawType"] == "44-ФЗ":
                 assert self.is_visibility_of_element_located(*FormCreateZakupLocators.PURCHASE_START_DATE_FROM), \
                     'Ошибка: Не отображено поле "Предполагаемая дата начала проведения закупки с"'
                 assert self.is_visibility_of_element_located(*FormCreateZakupLocators.PURCHASE_START_DATE_TO), \
@@ -157,23 +156,23 @@ class ZakupFormCreate(BasePage):
 
                 # Предполагаемая дата начала проведения закупки с
                 self.browser.find_element(*FormCreateZakupLocators.PURCHASE_START_DATE_FROM).send_keys(
-                    UserData.user_data_dict["purchase_start_date_from"])
+                    user_data_dict["purchase_start_date_from"])
 
                 # Предполагаемая дата начала проведения закупки по
                 self.browser.find_element(*FormCreateZakupLocators.PURCHASE_START_DATE_TO).send_keys(
-                    UserData.user_data_dict["purchase_start_date_to"])
+                    user_data_dict["purchase_start_date_to"])
 
                 # Номер запроса цен на Официальном сайте ЕИС
                 self.browser.find_element(*FormCreateZakupLocators.EIS_PRICE_NUMBER).send_keys(
-                    UserData.user_data_dict["eis_price_number"])
+                    user_data_dict["eis_price_number"])
 
                 # Ссылка на запрос на Официальном сайте ЕИС
                 self.browser.find_element(*FormCreateZakupLocators.EIS_PRICE_LINK).send_keys(
-                    UserData.user_data_dict["eis_price_link"])
+                    user_data_dict["eis_price_link"])
 
             # Заполняем поле "Риски проекта с точки зрения Департамента"
             self.browser.find_element(*FormCreateZakupLocators.PROJECT_RISK_DEPARTMENT_PERSPEC).\
-                send_keys(UserData.user_data_dict["project_risk_department"])
+                send_keys(user_data_dict["project_risk_department"])
 
             # Прикрепляем файл в поле Запрос НМЦК
             self.browser.find_element(*FormCreateZakupLocators.FILE_NMCK_REQUEST).send_keys(

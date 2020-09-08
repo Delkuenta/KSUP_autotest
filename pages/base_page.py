@@ -1,11 +1,17 @@
+import json
+import os
+
 from selenium.webdriver import Remote as RemoteWebDriver
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
 from selenium.common.exceptions import NoSuchElementException, TimeoutException
+
+from userdata.user_data import UserData
 from .locators import BasePageLocators
 
 
 class BasePage:
+
     def __init__(self, browser: RemoteWebDriver, url, timeout=10):
         self.browser = browser
         self.url = url
@@ -106,3 +112,52 @@ class BasePage:
         except TimeoutException:
             return False
         return True
+
+    def read_json(self, name_file):
+        path_file = r"D:\WORK\Git\KSUP_autotest\userdata"
+        full_path_file = os.path.join(path_file, name_file)
+        print(full_path_file)
+        with open(full_path_file, "r", encoding='utf-8') as file:
+            data = json.load(file)
+        user_data_dict = dict(data['main_data'])
+        return user_data_dict
+
+    def dict_preparation(self, user_data_dict):
+
+        # Определяем валюту и переводим в рубли
+        raw_sum = user_data_dict["sum"]
+        if user_data_dict["currency"] == "Доллар":
+            sum_in_rub = raw_sum * 70
+        elif user_data_dict["currency"] == "Евро":
+            sum_in_rub = raw_sum * 80
+        else:
+            sum_in_rub = raw_sum
+
+        # Присваиваем категорию на основе суммы в рублях
+        price_category = ""
+        if sum_in_rub >= 50000000:
+            price_category = "A"
+        elif 30000000 <= sum_in_rub < 50000000:
+            price_category = "B"
+        elif sum_in_rub < 30000000:
+            price_category = "C"
+
+        # Добавляем в словарь ценовую категорию
+        price_category_dict = {"price_category": price_category}
+        user_data_dict.update(price_category_dict)
+
+        # Определяем входит ли элемент в категорию "Разработка ПО"
+        i = 0
+        for category in user_data_dict["typeOfWorkServices"]:
+            if category in UserData.group_software:
+                i += 1
+        if i >= 1:
+            group_type_dict = {"groupTypeWork": "Software"}
+
+        else:
+            group_type_dict = {"groupTypeWork": "Other"}
+        user_data_dict.update(group_type_dict)
+
+        # Сортировка списка территорий по алфавиту
+        user_data_dict["territory"].sort()
+        return user_data_dict

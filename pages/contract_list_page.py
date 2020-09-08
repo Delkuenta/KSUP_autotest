@@ -6,18 +6,18 @@ from userdata.user_data import UserData
 class ContractPage(BasePage):
 
     # Поиск сущности в списке
-    def should_be_element_on_contract_list(self):
+    def should_be_element_on_contract_list(self,user_data_dict):
         how, what = ContractPageLocators.FIND_ELEMENT_IN_CONTRACT_LIST
-        what = what.replace("Test_name", UserData.user_data_dict["fullName"])
+        what = what.replace("Test_name", user_data_dict["fullName"])
         assert self.is_element_present(how, what), \
-            f'Пресейловая активность с именем "{UserData.user_data_dict["fullName"]}" не найдена в списке'
+            f'Пресейловая активность с именем "{user_data_dict["fullName"]}" не найдена в списке'
 
     # Зайти внутрь сущности пресейла по названию.имя берется из файла или user_data.
-    def go_to_contract_element(self):
+    def go_to_contract_element(self, user_data_dict):
         how, what = ContractPageLocators.FIND_ELEMENT_IN_CONTRACT_LIST
-        what = what.replace("Test_name", UserData.user_data_dict["fullName"])
+        what = what.replace("Test_name", user_data_dict["fullName"])
         assert self.is_element_present(how, what), \
-            f'Cущность с названием {UserData.user_data_dict["fullName"]} не найдена'
+            f'Cущность с названием {user_data_dict["fullName"]} не найдена'
         self.browser.find_element(how, what).click()
 
     # Кнопка создания пресейла на странице пресейла

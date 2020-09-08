@@ -35,7 +35,7 @@ class PresaleElementPage(BasePage):
             *PresaleElementLocators.CREATE_CONTRACT_ELEMENT), \
             'Кнопка "Внести информацию о договор/контракте" не доступна для нажатия'
 
-    def go_to_create_zp_based_on_presale(self):
+    def go_to_create_zp_based_on_presale(self, user_data_dict):
         count_refresh_page = 0
         while count_refresh_page <= 3:
             if self.is_visibility_of_element_located(*PresaleElementLocators.TENDER_APPLICATION_ELEMENT) is True:
@@ -43,12 +43,12 @@ class PresaleElementPage(BasePage):
             else:
                 self.browser.refresh()
                 count_refresh_page += 1
-        if UserData.user_data_dict["contractorType"] == "Тендерная заявка" or \
-                UserData.user_data_dict["contractorType"] == "Информация отсутствует":
+        if user_data_dict["contractorType"] == "Тендерная заявка" or \
+                user_data_dict["contractorType"] == "Информация отсутствует":
             PresaleElementPage.go_to_create_zp_tender_based_on_presale(self)
-        elif UserData.user_data_dict["contractorType"] == "Коммерческое предложение":
+        elif user_data_dict["contractorType"] == "Коммерческое предложение":
             PresaleElementPage.go_to_create_zp_commercial_offer_based_on_presale(self)
-        elif UserData.user_data_dict["contractorType"] == "Запрос цен товаров, работ, услуг":
+        elif user_data_dict["contractorType"] == "Запрос цен товаров, работ, услуг":
             PresaleElementPage.go_to_create_zp_presale_act_based_on_presale(self)
 
     # Кнопка внутри пресейла для создания ЗП типа тендер (проверяем доступность и нажимаем)
@@ -80,7 +80,7 @@ class PresaleElementPage(BasePage):
             'Кнопка "Внести информацию о договор/контракте" не доступна для нажатия'
         self.browser.find_element(*PresaleElementLocators.CREATE_CONTRACT_ELEMENT).click()
 
-    def approval_presale(self):
+    def approval_presale(self, user_data_dict):
         count_refresh_page = 0
         while count_refresh_page <= 3:
             if self.is_visibility_of_element_located(*PresaleElementLocators.CONFIRM_APPROVAL_BUTTON) is True:
@@ -92,14 +92,14 @@ class PresaleElementPage(BasePage):
         self.browser.find_element(*PresaleElementLocators.CONFIRM_APPROVAL_BUTTON).click()
         self.browser.switch_to.frame(self.browser.find_element(*PresaleElementLocators.iframe))
         self.browser.find_element(*PresaleElementLocators.APPROVAL_MANAGER_ELEMENT).click()
-        if UserData.user_data_dict["create_account"] == "Mr_KSUP_Seller" or UserData.user_data_dict["create_account"] == "Mr_KSUP_Dir":
+        if user_data_dict["create_account"] == "Mr_KSUP_Seller" or user_data_dict["create_account"] == "Mr_KSUP_Dir":
             how, what = PresaleElementLocators.CHANGE_SELLER_RESPONSIBLE_DROPDOWN_ELEMENT
-            what = what.replace("salesManager", UserData.user_data_dict["salesManager"])
+            what = what.replace("salesManager", user_data_dict["salesManager"])
             self.browser.find_element(how, what).click()
         else:
             how, what = PresaleElementLocators.CHANGE_SELLER_PERFORMER_DROPDOWN_ELEMENT
-            what = what.replace("executiveManager", UserData.user_data_dict["executiveManager"])
-            self.browser.find_element(*PresaleElementLocators.CHANGE_SELLER_PERFORMER_DROPDOWN_ELEMENT).click()
+            what = what.replace("executiveManager", user_data_dict["executiveManager"])
+            self.browser.find_element(how, what).click()
         self.browser.find_element(*PresaleElementLocators.APPROVAL_BUTTON_IN_FRAME).click()
         self.browser.find_element(*PresaleElementLocators.MESSAGE_OK_BUTTON).click()
         self.browser.refresh()
@@ -114,98 +114,99 @@ class PresaleElementPage(BasePage):
                                                      "Согласовано"), \
             'Некорректный статус или отсутствует статус в поле "Статус согласования с подразделением"'
 
-    def verify_general_information_in_presale(self):
+    def verify_general_information_in_presale(self, user_data_dict):
 
         # Проверяем титул карточки который соответствует названию сущности
-        assert self.is_element_text(*PresaleElementLocators.TITLE_IN_PRESALE) == UserData.user_data_dict["fullName"], \
+        assert self.is_element_text(*PresaleElementLocators.TITLE_IN_PRESALE) == user_data_dict["fullName"], \
             'Название карточки "Пресейловой активности" не соответствует входным данным'
         print('Название карточки "Пресейловой активности" успешно проверено')
 
         # Проверяем поле "Тип закупочной процедуры"
-        assert self.is_element_text(*PresaleElementLocators.CONTRACTOR_TYPE_IN_PRESALE) == UserData.user_data_dict[
+        assert self.is_element_text(*PresaleElementLocators.CONTRACTOR_TYPE_IN_PRESALE) == user_data_dict[
             "contractorType"], \
             f'\nНекорректное значение в поле "Тип закупочной процедуры". ' \
-            f'\nОжидаемый результат:{UserData.user_data_dict["contractorType"]}'
+            f'\nОжидаемый результат:{user_data_dict["contractorType"]}'
         print('Значение в поле "Тип закупочной процедуры" успешно проверено')
 
         # Проверяем поле "Заказчик"
-        assert self.is_element_text(*PresaleElementLocators.CUSTOMER_IN_PRESALE) == UserData.user_data_dict[
+        assert self.is_element_text(*PresaleElementLocators.CUSTOMER_IN_PRESALE) == user_data_dict[
             "customer"], \
             f'\nНекорректное значение в поле "Заказчик".' \
-            f'\nОжидаемый результат:{UserData.user_data_dict["customer"]}'
+            f'\nОжидаемый результат:{user_data_dict["customer"]}'
         print('Значение в поле "Заказчик" успешно проверено')
 
         # Проверяем поле "Подразделение-продавец"
-        assert self.is_element_text(*PresaleElementLocators.SALES_UNIT_IN_PRESALE) == UserData.user_data_dict[
+        assert self.is_element_text(*PresaleElementLocators.SALES_UNIT_IN_PRESALE) == user_data_dict[
             "salesUnit"], \
             f'\nНекорректное значение в поле "Подразделение-продавец". ' \
-            f'\nОжидаемый результат:{UserData.user_data_dict["salesUnit"]}'
+            f'\nОжидаемый результат:{user_data_dict["salesUnit"]}'
         print('Значение в поле "Подразделение-продавец" успешно проверено')
 
         # Проверяем поле "Ответственный менеджер подразделения-продавца"
-        if (UserData.user_data_dict["create_account"] == "Mr_KSUP_Seller" or
-            UserData.user_data_dict["create_account"] == "Mr_KSUP_Dir") \
-                and UserData.user_data_dict["separateSale"] == "Нет" \
+        if (user_data_dict["create_account"] == "Mr_KSUP_Seller" or
+            user_data_dict["create_account"] == "Mr_KSUP_Dir") \
+                and user_data_dict["separateSale"] == "Нет" \
                 and self.is_element_text(*PresaleElementLocators.PRESALE_APPROVAL_STATUS) == "На согласовании":
             assert self.is_element_text(*PresaleElementLocators.SALES_MANAGER_IN_PRESALE) == \
-                   UserData.user_data_dict["executiveManager"], \
+                   user_data_dict["executiveManager"], \
                 f'\nНекорректное значение в поле "Ответственный менеджер подразделения-продавца".' \
-                f'\nОжидаемый результат:{UserData.user_data_dict["executiveManager"]}'
+                f'\nОжидаемый результат:{user_data_dict["executiveManager"]}'
             print('Значение в поле "Ответственный менеджер подразделения-продавца" успешно проверено')
         else:
             assert self.is_element_text(*PresaleElementLocators.SALES_MANAGER_IN_PRESALE) == \
-                   UserData.user_data_dict["salesManager"], \
+                   user_data_dict["salesManager"], \
                 f'\nНекорректное значение в поле "Ответственный менеджер подразделения-продавца".' \
-                f'\nОжидаемый результат:{UserData.user_data_dict["salesManager"]}'
+                f'\nОжидаемый результат:{user_data_dict["salesManager"]}'
             print('Значение в поле "Ответственный менеджер подразделения-продавца" успешно проверено')
 
         # Проверяем поле "Подразделение-исполнитель"
-        assert self.is_element_text(*PresaleElementLocators.EXECUTIVE_UNIT_IN_PRESALE) == UserData.user_data_dict[
+        assert self.is_element_text(*PresaleElementLocators.EXECUTIVE_UNIT_IN_PRESALE) == user_data_dict[
             "executiveUnit"], \
             f'\nНекорректное значение в поле "Подразделение-исполнитель". ' \
-            f'\nОжидаемый результат:{UserData.user_data_dict["executiveUnit"]}'
+            f'\nОжидаемый результат:{user_data_dict["executiveUnit"]}'
         print('Значение в поле "Подразделение-исполнитель" успешно проверено')
 
         # Проверяем поле "Ответственный менеджер подразделения-исполнителя"
-        if (UserData.user_data_dict["create_account"] == "Mr_KSUP_Seller2" or
-            UserData.user_data_dict["create_account"] == "Mr_KSUP_Dir2") \
-                and UserData.user_data_dict["separateSale"] == "Нет" \
+        if (user_data_dict["create_account"] == "Mr_KSUP_Seller2" or
+            user_data_dict["create_account"] == "Mr_KSUP_Dir2") \
+                and user_data_dict["separateSale"] == "Нет" \
                 and self.is_element_text(*PresaleElementLocators.PRESALE_APPROVAL_STATUS) == "На согласовании":
             assert self.is_element_text(*PresaleElementLocators.EXECUTIVE_MANAGER_IN_PRESALE) == \
-                   UserData.user_data_dict["salesManager"], \
+                   user_data_dict["salesManager"], \
                 f'\nНекорректное значение в поле "Ответственный менеджер подразделения-исполнителя".' \
-                f'\nОжидаемый результат:{UserData.user_data_dict["salesManager"]}'
+                f'\nОжидаемый результат:{user_data_dict["salesManager"]}'
             print('Значение в поле "Ответственный менеджер подразделения-исполнителя" успешно проверено')
         else:
             assert self.is_element_text(*PresaleElementLocators.EXECUTIVE_MANAGER_IN_PRESALE) == \
-                   UserData.user_data_dict["executiveManager"], \
+                   user_data_dict["executiveManager"], \
                 f'\nНекорректное значение в поле "Ответственный менеджер подразделения-исполнителя".' \
-                f'\nОжидаемый результат:{UserData.user_data_dict["executiveManager"]}'
+                f'\nОжидаемый результат:{user_data_dict["executiveManager"]}'
             print('Значение в поле "Ответственный менеджер подразделения-исполнителя" успешно проверено')
 
         # Проверяем поле "Исполнитель (юридическое лицо)"
-        if len(UserData.user_data_dict["executiveUnitLegal"]) > 0:
+        if len(user_data_dict["executiveUnitLegal"]) > 0:
             assert self.is_element_text(*PresaleElementLocators.EXECUTIVE_UNIT_LEGAL_IN_PRESALE) == \
-                   UserData.user_data_dict["executiveUnitLegal"], \
+                   user_data_dict["executiveUnitLegal"], \
                 f'\nНекорректное значение в поле "Исполнитель (юридическое лицо)".' \
-                f'\nОжидаемый результат:{UserData.user_data_dict["executiveUnitLegal"]}'
+                f'\nОжидаемый результат:{user_data_dict["executiveUnitLegal"]}'
             print('Значение в поле "Исполнитель (юридическое лицо)" успешно проверено')
         else:
-            assert self.browser.find_element(*PresaleElementLocators.EXECUTIVE_UNIT_LEGAL_IN_PRESALE).is_displayed() is False, \
+            assert self.browser.find_element(
+                *PresaleElementLocators.EXECUTIVE_UNIT_LEGAL_IN_PRESALE).is_displayed() is False, \
                 'Отображено пустое поле "Исполнитель (юридическое лицо)"'
             print('Пустое поле "Исполнитель (юридическое лицо)" успешно не отображено')
 
         # Проверяем поле "Порядок проведения закупочной процедуры"
-        if UserData.user_data_dict["contractorType"] == "Тендерная заявка":
+        if user_data_dict["contractorType"] == "Тендерная заявка":
             assert self.is_element_text(*PresaleElementLocators.SALE_LAW_TYPE_TENDER_PRESALE) == \
-                   UserData.user_data_dict["saleLawType"], \
+                   user_data_dict["saleLawType"], \
                 f'\nНекорректное значение в поле "Порядок проведения закупочной процедуры".' \
-                f'\nОжидаемый результат:{UserData.user_data_dict["saleLawType"]}'
+                f'\nОжидаемый результат:{user_data_dict["saleLawType"]}'
             print('Значение в поле "Порядок проведения закупочной процедуры" успешно проверено')
 
         # Проверяем поле "Тип работ и услуг"
         work_services_value = ''
-        for category in UserData.user_data_dict["typeOfWorkServices"]:
+        for category in user_data_dict["typeOfWorkServices"]:
             work_services_value = work_services_value + category + '; '
         work_services_value = work_services_value.rstrip()
         assert self.is_element_text(*PresaleElementLocators.TYPE_OF_WORK_SERVCICES_IN_PRESALE) == work_services_value, \
@@ -214,70 +215,64 @@ class PresaleElementPage(BasePage):
         print('Значение в поле "Тип работ и услуг" успешно проверено')
 
         # Проверяем поле "Плановая сумма договора/контракт"
-        sum_value = str(UserData.user_data_dict["sum"])
+        sum_value = str(user_data_dict["sum"])
         if sum_value.find('.') > 0:
             # Преобразование значения с плавающей точкой под необходимый шаблон
             print("Заглушка")
         else:
             # Преобразование целого значения с разделителями пробелами и припиской валюты
-            if UserData.user_data_dict["currency"] == "Доллар":
-                sum_value = ('{:,d}'.format(UserData.user_data_dict["sum"])).replace(",", " ") + ',00 $'
-            elif UserData.user_data_dict["currency"] == "Евро":
-                sum_value = ('{:,d}'.format(UserData.user_data_dict["sum"])).replace(",", " ") + ',00 €'
+            if user_data_dict["currency"] == "Доллар":
+                sum_value = ('{:,d}'.format(user_data_dict["sum"])).replace(",", " ") + ',00 $'
+            elif user_data_dict["currency"] == "Евро":
+                sum_value = ('{:,d}'.format(user_data_dict["sum"])).replace(",", " ") + ',00 €'
             else:
-                sum_value = ('{:,d}'.format(UserData.user_data_dict["sum"])).replace(",", " ") + ',00 ₽'
+                sum_value = ('{:,d}'.format(user_data_dict["sum"])).replace(",", " ") + ',00 ₽'
             assert self.is_element_text(*PresaleElementLocators.SUM_IN_PRESALE) == sum_value, \
                 f'\nНекорректное значение в поле "Начальная (максимальная) цена контракта" ' \
                 f'\nОжидаемый результат: {sum_value}"'
             print('Значение в поле "Сумма договора/контракта" успешно проверено')
 
         # Проверяем поле "Валюта договора/контракта"
-        assert self.is_element_text(*PresaleElementLocators.CURRENCY_IN_PRESALE) == UserData.user_data_dict["currency"], \
+        assert self.is_element_text(*PresaleElementLocators.CURRENCY_IN_PRESALE) == user_data_dict["currency"], \
             f'\nНекорректное значение в поле "Валюта договора/контракта".' \
-            f'\nОжидаемый результат:{UserData.user_data_dict["currency"]}'
+            f'\nОжидаемый результат:{user_data_dict["currency"]}'
         print('Значение в поле "Валюта договора/контракта" успешно проверено')
 
         # Проверяем поле "Размер обеспечения заявки"
-        if UserData.user_data_dict["contractorType"] != "Коммерческое предложение" and \
-                len(str(UserData.user_data_dict["applicationSize"])) > 0:
-            application_size = str(UserData.user_data_dict["applicationSize"])
+        if user_data_dict["contractorType"] != "Коммерческое предложение" and \
+                len(str(user_data_dict["applicationSize"])) > 0:
+            application_size = str(user_data_dict["applicationSize"])
             if application_size.find('.') > 0:
                 # Преобразование значения с плавающей точкой под необходимый шаблон
                 print("Заглушка")
             else:
                 # Преобразование целого значения с разделителями пробелами и припиской валюты
-                if UserData.user_data_dict["currency"] == "Доллар":
-                    application_size = ('{:,d}'.format(UserData.user_data_dict["applicationSize"])).replace(",",
-                                                                                                            " ") + ',00 $'
-                elif UserData.user_data_dict["currency"] == "Евро":
-                    application_size = ('{:,d}'.format(UserData.user_data_dict["applicationSize"])).replace(",",
-                                                                                                            " ") + ',00 €'
+                if user_data_dict["currency"] == "Доллар":
+                    application_size = ('{:,d}'.format(user_data_dict["applicationSize"])).replace(",", " ") + ',00 $'
+                elif user_data_dict["currency"] == "Евро":
+                    application_size = ('{:,d}'.format(user_data_dict["applicationSize"])).replace(",", " ") + ',00 €'
                 else:
-                    application_size = ('{:,d}'.format(UserData.user_data_dict["applicationSize"])).replace(",",
-                                                                                                            " ") + ',00 ₽'
+                    application_size = ('{:,d}'.format(user_data_dict["applicationSize"])).replace(",", " ") + ',00 ₽'
                 assert self.is_element_text(*PresaleElementLocators.APPLICATION_SIZE_IN_PRESALE) == application_size, \
                     f'\nНекорректное значение в поле "Размер обеспечения заявки" ' \
                     f'\nОжидаемый результат: {application_size}"'
                 print('Значение в поле "Размер обеспечения заявки" успешно проверено')
 
         # Проверяем поле "Размер обеспечения договора/контракта"
-        if UserData.user_data_dict["contractorType"] != "Коммерческое предложение" and \
-                len(str(UserData.user_data_dict["contractSize"])) > 0:
-            contract_size = str(UserData.user_data_dict["contractSize"])
+        if user_data_dict["contractorType"] != "Коммерческое предложение" and \
+                len(str(user_data_dict["contractSize"])) > 0:
+            contract_size = str(user_data_dict["contractSize"])
             if contract_size.find('.') > 0:
                 # Преобразование значения с плавающей точкой под необходимый шаблон
                 print("Заглушка")
             else:
                 # Преобразование целого значения с разделителями пробелами и припиской валюты
-                if UserData.user_data_dict["currency"] == "Доллар":
-                    contract_size = ('{:,d}'.format(UserData.user_data_dict["contractSize"])).replace(",",
-                                                                                                      " ") + ',00 $'
-                elif UserData.user_data_dict["currency"] == "Евро":
-                    contract_size = ('{:,d}'.format(UserData.user_data_dict["contractSize"])).replace(",",
-                                                                                                      " ") + ',00 €'
+                if user_data_dict["currency"] == "Доллар":
+                    contract_size = ('{:,d}'.format(user_data_dict["contractSize"])).replace(",", " ") + ',00 $'
+                elif user_data_dict["currency"] == "Евро":
+                    contract_size = ('{:,d}'.format(user_data_dict["contractSize"])).replace(",", " ") + ',00 €'
                 else:
-                    contract_size = ('{:,d}'.format(UserData.user_data_dict["contractSize"])).replace(",",
-                                                                                                      " ") + ',00 ₽'
+                    contract_size = ('{:,d}'.format(user_data_dict["contractSize"])).replace(",", " ") + ',00 ₽'
                 assert self.is_element_text(*PresaleElementLocators.CONTRACT_SIZE_IN_PRESALE) == contract_size, \
                     f'\nНекорректное значение в поле "Размер обеспечения договора/контракта" ' \
                     f'\nОжидаемый результат: {contract_size}"'
@@ -290,30 +285,31 @@ class PresaleElementPage(BasePage):
         print('Значение в поле "Статус продажи" успешно проверено')
 
         # Проверяем поле "Срок подачи на конкурс"
-        if len(UserData.user_data_dict["competitionDeadlineFrom"]) > 0:
-            assert UserData.user_data_dict["competitionDeadlineFrom"] in \
+        if len(user_data_dict["competitionDeadlineFrom"]) > 0:
+            assert user_data_dict["competitionDeadlineFrom"] in \
                    str(self.is_element_text(*PresaleElementLocators.COMPETITION_DEAD_LINE_FROM_IN_PRESALE)).strip(), \
                 f'\nНекорректное значение в поле "Срок подачи на конкурс".' \
-                f'\nОжидаемый результат: {UserData.user_data_dict["competitionDeadlineFrom"]}'
+                f'\nОжидаемый результат: {user_data_dict["competitionDeadlineFrom"]}'
             print('Значение в поле "Срок подачи на конкурс" успешно проверено')
         else:
-            assert self.browser.find_element(*PresaleElementLocators.COMPETITION_DEAD_LINE_FROM_IN_PRESALE).is_displayed() is False, \
+            assert self.browser.find_element(
+                *PresaleElementLocators.COMPETITION_DEAD_LINE_FROM_IN_PRESALE).is_displayed() is False, \
                 'Отображено пустое поле "Срок подачи на конкурс"'
             print('Пустое поле "Срок подачи на конкурс" успешно не отображено')
 
         # Проверяем поле "Плановая дата заключения договора/контракта"
-        assert UserData.user_data_dict["startDate"] in \
-            str(self.is_element_text(*PresaleElementLocators.START_DATE_IN_PRESALE)).strip(), \
+        assert user_data_dict["startDate"] in \
+               str(self.is_element_text(*PresaleElementLocators.START_DATE_IN_PRESALE)).strip(), \
             f'\nНекорректное значение в поле "Плановая дата заключения договора/контракта".' \
-            f'\nОжидаемый результат: {UserData.user_data_dict["startDate"]}'
+            f'\nОжидаемый результат: {user_data_dict["startDate"]}'
         print('Значение в поле "Плановая дата заключения договора/контракта" успешно проверено')
 
         # Проверяем поле "Плановая дата окончания договора/контракта"
-        if len(str(UserData.user_data_dict["endDate"])) > 0:
-            assert UserData.user_data_dict["endDate"] in \
+        if len(str(user_data_dict["endDate"])) > 0:
+            assert user_data_dict["endDate"] in \
                    str(self.is_element_text(*PresaleElementLocators.END_DATE_IN_PRESALE)).strip(), \
-                    f'\nНекорректное значение в поле "Плановая дата окончания договора/контракта".' \
-                    f'\nОжидаемый результат: {UserData.user_data_dict["endDate"]}'
+                f'\nНекорректное значение в поле "Плановая дата окончания договора/контракта".' \
+                f'\nОжидаемый результат: {user_data_dict["endDate"]}'
             print('Значение в поле "Плановая дата окончания договора/контракта" успешно проверено')
         else:
             assert self.browser.find_element(*PresaleElementLocators.END_DATE_IN_PRESALE).is_displayed() is False, \
@@ -322,28 +318,28 @@ class PresaleElementPage(BasePage):
 
         # Проверяем поле "Вероятность заключения договора/контракта"
         assert self.is_element_text(*PresaleElementLocators.PROJECT_PROBABILITY_IN_PRESALE) == \
-               str(UserData.user_data_dict["projectProbability"]) + "%", \
+               str(user_data_dict["projectProbability"]) + "%", \
             f'\nНекорректное значение в поле "Вероятность заключения договора/контракта".' \
-            f'\nОжидаемый результат:{UserData.user_data_dict["projectProbability"]}'
+            f'\nОжидаемый результат:{user_data_dict["projectProbability"]}'
         print('Значение в поле "Вероятность заключения договора/контракта" успешно проверено')
 
         # Проверяем поле "Статус согласования с подразделением"
-        if UserData.user_data_dict["separateSale"] == "Да":
+        if user_data_dict["separateSale"] == "Да":
             assert "Не требуется согласование" in self.is_element_text(*PresaleElementLocators.PRESALE_APPROVAL_STATUS), \
                 f'\nНекорректное значение в поле "Статус согласования с подразделением".' \
                 f'\n Ожидаемый результат: "Не требуется согласование"'
 
         # Провеоряем поле "Краткое описание"
         assert self.is_element_text(*PresaleElementLocators.DESCRIPTION_TEXT_IN_PRESALE) == \
-               UserData.user_data_dict["descriptionText"], \
+               user_data_dict["descriptionText"], \
             f'\nНекорректное значение в поле "Краткое описание".' \
-            f'\nОжидаемый результат:{UserData.user_data_dict["descriptionText"]}'
+            f'\nОжидаемый результат:{user_data_dict["descriptionText"]}'
         print('Значение в поле "Краткое описание" успешно проверено')
 
         # Проверяем поле "Риски"
-        if len(str(UserData.user_data_dict["risksText"])) > 0:
+        if len(str(user_data_dict["risksText"])) > 0:
             assert self.is_element_text(*PresaleElementLocators.RISKS_IN_PRESALE) == \
-                   UserData.user_data_dict["risksText"], \
+                   user_data_dict["risksText"], \
                 f'\nНекорректное значение в поле "Риски".' \
-                f'\nОжидаемый результат:{UserData.user_data_dict["risksText"]}'
+                f'\nОжидаемый результат:{user_data_dict["risksText"]}'
             print('Значение в поле "Риски" успешно проверено')

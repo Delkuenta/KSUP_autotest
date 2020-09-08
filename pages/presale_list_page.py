@@ -16,14 +16,14 @@ class PresalePage(BasePage):
             'Кнопка "Создать" не доступна для нажатия'
 
     # Проверка есть ли элемент в списке по названию. название берется из user_data или txt
-    def should_be_element_on_presale_list(self):
+    def should_be_element_on_presale_list(self, user_data_dict):
         how, what = PresaleListLocators.FIND_ELEMENT_IN_PRESALE_LIST
-        what = what.replace("Test_name", UserData.user_data_dict["fullName"])
+        what = what.replace("Test_name", user_data_dict["fullName"])
         assert self.is_element_present(how, what), \
-            f'Пресейловая активность с именем "{UserData.user_data_dict["fullName"]}" не найдена в списке'
+            f'Пресейловая активность с именем "{user_data_dict["fullName"]}" не найдена в списке'
 
     # Зайти внутрь сущности пресейла по названию.имя берется из файла.
-    def go_to_presale_element(self):
+    def go_to_presale_element(self, user_data_dict):
         how, what = PresaleListLocators.FIND_ELEMENT_IN_PRESALE_LIST
-        what = what.replace("Test_name", UserData.user_data_dict["fullName"])
+        what = what.replace("Test_name", user_data_dict["fullName"])
         self.browser.find_element(how, what).click()

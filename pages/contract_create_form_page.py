@@ -9,69 +9,69 @@ from userdata.user_data import UserData
 
 
 class ContractFormCreate(BasePage):
-    def form_create_contract_based_on_zakup(self):
+    def form_create_contract_based_on_zakup(self, user_data_dict):
         # Ждем загрузки страницы по последнему загружаемому объекту
         self.is_text_to_be_present_in_element(*FormCreateContractLocators.CUSTOMER_CONTRACT_ELEMENT,
-                                              UserData.user_data_dict["customer"])
+                                              user_data_dict["customer"])
 
         # Проверяем заголовок страницы
         assert self.is_element_text(*FormCreateContractLocators.CONTRACT_TITLE) == "Договор (контракт)"
 
         # Проверяем автоматическое предзаполнение от пресейла
-        assert UserData.user_data_dict["customer"] in self.is_element_text(
+        assert user_data_dict["customer"] in self.is_element_text(
             *FormCreateContractLocators.CUSTOMER_CONTRACT_ELEMENT), \
             "Некорректная информация в поле Заказчик"
 
-        assert UserData.user_data_dict["salesUnit"] in self.is_element_text(
+        assert user_data_dict["salesUnit"] in self.is_element_text(
             *FormCreateContractLocators.SALES_UNIT_CONTRACT_ELEMENT), \
             "Некорректная информация в поле Подразделение-продавец"
 
-        assert UserData.user_data_dict["salesManager"] in \
+        assert user_data_dict["salesManager"] in \
             self.is_element_text(*FormCreateContractLocators.SALES_MANAGER_CONTRACT_ELEMENT), \
             "Некорректная информация в поле Ответственный менеджер подразделения-продавца"
 
-        assert UserData.user_data_dict["executiveUnit"] in self.is_element_text(
+        assert user_data_dict["executiveUnit"] in self.is_element_text(
             *FormCreateContractLocators.EXECUTIVE_UNIT_CONTRACT_ELEMENT), \
             "Некорректная информация в поле Подразделение-исполнитель"
 
-        assert UserData.user_data_dict["executiveManager"] in self.is_element_text(
+        assert user_data_dict["executiveManager"] in self.is_element_text(
             *FormCreateContractLocators.EXECUTIVE_MANAGER_CONTRACT_ELEMENT), \
             "Некорректная информация в поле Ответственный менеджер подразделения-исполнителя"
 
-        assert UserData.user_data_dict["executiveUnitLegal"] in self.is_element_text(
+        assert user_data_dict["executiveUnitLegal"] in self.is_element_text(
             *FormCreateContractLocators.EXECUTIVE_UNIT_LEGAL_CONTRACT_ELEMENT), \
             "Некорректная информация в поле Исполнитель (юридическое лицо)"
 
-        assert UserData.user_data_dict["fullName"] in self.is_element_text(
+        assert user_data_dict["fullName"] in self.is_element_text(
             *FormCreateContractLocators.PRESALE_SELECT), \
             "Некорректная информация в поле Пресейловые активности"
 
-        assert UserData.user_data_dict["fullName"] in self.is_element_text(*FormCreateContractLocators.ZAKUP_SELECT), \
+        assert user_data_dict["fullName"] in self.is_element_text(*FormCreateContractLocators.ZAKUP_SELECT), \
             "Некорректная информация в поле Связанная закупочная процедура"
 
         # Заполняем поле Номер
         self.browser.find_element(*FormCreateContractLocators.NUMBER_CONTRACT_ELEMENT).send_keys(
-            UserData.user_data_dict["number_contract"])
+            user_data_dict["number_contract"])
 
         # Заполняем поле "Дата заключения"
         # Для типа "Тендерная заявка" и "Коммерческое предложение" поле "Дата заключения" предзаполняется
-        if UserData.user_data_dict["contractorType"] == "Запрос цен товаров, работ, услуг":
+        if user_data_dict["contractorType"] == "Запрос цен товаров, работ, услуг":
             self.browser.find_element(*FormCreateContractLocators.START_DATE_CONTRACT).send_keys(
-                UserData.user_data_dict["startDate"])
+                user_data_dict["startDate"])
 
         # Для типа "Тендерная заявка" поля "номер закупки" и "Ссылка на закупку" предзаполняются
-        if UserData.user_data_dict["contractorType"] != "Тендерная заявка":
+        if user_data_dict["contractorType"] != "Тендерная заявка":
             # Заполняем поле "Номер закупки"
             self.browser.find_element(*FormCreateContractLocators.EIS_PURCHASE_NUMBER_CONTRACT).send_keys(
-                UserData.user_data_dict["purchase_number"])
+                user_data_dict["purchase_number"])
 
             # Заполняем поле "Ссылка на закупку"
             self.browser.find_element(*FormCreateContractLocators.EIS_PURCHSE_LINK_CONTRACT).send_keys(
-                UserData.user_data_dict["purchase_link"])
+                user_data_dict["purchase_link"])
 
         # Заполняем поле Ссылка на договор/контракт на Официальном сайте ЕИС
         self.browser.find_element(*FormCreateContractLocators.EIS_CONTRACT_LINK).send_keys(
-            UserData.user_data_dict["eis_contract_link"])
+            user_data_dict["eis_contract_link"])
 
         # Выбираем значение в поле "Территория применения"
         self.browser.find_element(*FormCreateContractLocators.SEARCH_TERRITORY_ELEMENT).click()
@@ -82,7 +82,7 @@ class ContractFormCreate(BasePage):
         if len(self.browser.find_elements(*FormCreateContractLocators.GROUP_TERRITORY_ELEMENT)) == 1:
             self.browser.find_element(*FormCreateContractLocators.GROUP_TERRITORY_ELEMENT).click()
         # Выбираем территории из списка
-        for territory in UserData.user_data_dict["territory"]:
+        for territory in user_data_dict["territory"]:
             how, what = FormCreateContractLocators.TERRITORY_ELEMENT
             what = what.replace("territory_name", territory)
             if self.is_element_present(how, what):
@@ -106,7 +106,7 @@ class ContractFormCreate(BasePage):
         # возврат к основной форме
         self.is_frame_to_parent()
         territory_value = ''
-        for territory in UserData.user_data_dict["territory"]:
+        for territory in user_data_dict["territory"]:
             territory_value = territory_value + territory + '; '
         territory_value = territory_value.strip()
 
@@ -116,7 +116,7 @@ class ContractFormCreate(BasePage):
         self.browser.find_element(*FormCreateContractLocators.SEARCH_TECHNOLOGIES_ELEMENT).click()
         time.sleep(2)
         self.is_frame_to_be_available_and_switch_to_it()
-        for technologies in UserData.user_data_dict["technologies"]:
+        for technologies in user_data_dict["technologies"]:
             how, what = FormCreateContractLocators.TECHNOLOGIES_ELEMENT
             what = what.replace("technologies_name", technologies)
             if self.is_element_present(how, what):
@@ -140,25 +140,25 @@ class ContractFormCreate(BasePage):
         self.is_frame_to_parent()
         # Проверяем, строку
         technologies_value = ''
-        for technologies in UserData.user_data_dict["technologies"]:
+        for technologies in user_data_dict["technologies"]:
             technologies_value = technologies_value + technologies + '; '
         technologies_value = technologies_value.strip()
         self.is_text_to_be_present_in_element(*FormCreateContractLocators.TYPE_TECHNOLOGIES_ELEMENT, technologies_value)
 
         # заполняем поле Количественные показатели реализации проекта
         self.browser.find_element(*FormCreateContractLocators.QUANTITATIVE_INDICATORS_PROJECT_ELEMENT).send_keys(
-            UserData.user_data_dict["quantitative_indicators_project"])
+            user_data_dict["quantitative_indicators_project"])
 
         # Уникальный код проекта
         self.browser.find_element(*FormCreateContractLocators.PROJECT_UNIQUE_CODE).send_keys(
-            UserData.user_data_dict["project_unique_code"])
+            user_data_dict["project_unique_code"])
 
         # Выбираем связанный проект
         self.browser.find_element(*FormCreateContractLocators.PROJECT_ELEMENT).click()
         #self.browser.find_element(*FormCreateContractLocators.PROJECT_FIND_ELEMENT).send_keys(
-           # UserData.user_data_dict["project"])
+           # user_data_dict["project"])
         how, what = FormCreateContractLocators.PROJECT_DROPDOWN_ELEMENT
-        what = what.replace("project_name", UserData.user_data_dict["project"])
+        what = what.replace("project_name", user_data_dict["project"])
         self.browser.find_element(how, what).click()
 
         # прикрепляем файл Контракт
@@ -192,49 +192,49 @@ class ContractFormCreate(BasePage):
         # Подтверждаем внесение изменений  в связанный проект
         self.browser.find_element(*FormCreateContractLocators.CONFIRM_CHANGE_PROJECT_BUTTON).click()
 
-    def form_create_contract(self):
+    def form_create_contract(self, user_data_dict):
         # Ждем загрузки формы по последнему загруженному элементу
         self.is_text_to_be_present_in_element(*FormCreateContractLocators.SALES_MANAGER_CONTRACT_ELEMENT,
-                                              UserData.user_data_dict["salesManager"])
+                                              user_data_dict["salesManager"])
 
         # Заполняем поле "Предмет контракта"
         self.browser.find_element(*FormCreateContractLocators.NAME_CONTRACT_ELEMENT).send_keys(
-            UserData.user_data_dict["fullName"])
+            user_data_dict["fullName"])
 
         # Заполняем поле "Заказчик"
         self.browser.find_element(*FormCreateContractLocators.CUSTOMER_CONTRACT_ELEMENT).click()
         how, what = FormCreateContractLocators.CUSTOMER_DROPDOWN_CONTRACT_ELEMENT
-        what = what.replace("customer_name", UserData.user_data_dict["customer"])
+        what = what.replace("customer_name", user_data_dict["customer"])
         self.browser.find_element(how, what).click()
 
         # Заполняем поле "Подразделение-продавец"
         self.browser.find_element(*FormCreateContractLocators.SALES_UNIT_CONTRACT_ELEMENT).click()
         how, what = FormCreateContractLocators.SALES_UNIT_DROPDOWN_CONTRACT_ELEMENT
-        what = what.replace("salesUnit_name", UserData.user_data_dict["salesUnit"])
+        what = what.replace("salesUnit_name", user_data_dict["salesUnit"])
         self.browser.find_element(how, what).click()
 
         # Заполняем поле "Ответственный менеджер подразделения-продавца"
         self.browser.find_element(*FormCreateContractLocators.SALES_MANAGER_CONTRACT_ELEMENT).click()
         how, what = FormCreateContractLocators.SALES_MANAGER_CONTRACT_DROPDOWN_ELEMENT
-        what = what.replace("salesManager_name", UserData.user_data_dict["salesManager"])
+        what = what.replace("salesManager_name", user_data_dict["salesManager"])
         self.browser.find_element(how, what).click()
 
         # Заполняем поле "Подразделение-исполнитель"
         self.browser.find_element(*FormCreateContractLocators.EXECUTIVE_UNIT_CONTRACT_ELEMENT).click()
         how, what = FormCreateContractLocators.EXECUTIVE_UNIT_CONTRACT_DROPDOWN_ELEMENT
-        what = what.replace("executiveUnit_name", UserData.user_data_dict["executiveUnit"])
+        what = what.replace("executiveUnit_name", user_data_dict["executiveUnit"])
         self.browser.find_element(how, what).click()
 
         # Заполняем поле "Ответственный менеджер подразделения-исполнителя"
         self.browser.find_element(*FormCreateContractLocators.EXECUTIVE_MANAGER_CONTRACT_ELEMENT).click()
         how, what = FormCreateContractLocators.EXECUTIVE_MANAGER_DROPDOWN_CONTRACT_ELEMENT
-        what = what.replace("executiveManager_name", UserData.user_data_dict["executiveManager"])
+        what = what.replace("executiveManager_name", user_data_dict["executiveManager"])
         self.browser.find_element(how, what).click()
 
         # Заполняем поле "Исполнитель (юридическое лицо)"
         self.browser.find_element(*FormCreateContractLocators.EXECUTIVE_UNIT_LEGAL_CONTRACT_ELEMENT).click()
         how, what = FormCreateContractLocators.EXECUTIVE_UNIT_LEGAL_DROPDOWN_CONTRACT_ELEMENT
-        what = what.replace("executiveUnitLegal_name", UserData.user_data_dict["executiveUnitLegal"])
+        what = what.replace("executiveUnitLegal_name", user_data_dict["executiveUnitLegal"])
         self.browser.find_element(how, what).click()
 
         # Ищем кнопку "Тип работ и услуг"
@@ -258,7 +258,7 @@ class ContractFormCreate(BasePage):
             self.browser.find_element(*FormCreateContractLocators.GROUP_CATEGORY_ELEMENT5).click()
 
         # Выбираем нужный элемент
-        for item in UserData.user_data_dict["typeOfWorkServices"]:
+        for item in user_data_dict["typeOfWorkServices"]:
             WORK_SERVICE_ELEMENT = (By.XPATH, f"//*[normalize-space(text()) and normalize-space(.)='{item}']")
             if self.is_element_present(*WORK_SERVICE_ELEMENT):
                 self.browser.find_element(*WORK_SERVICE_ELEMENT).click()
@@ -277,35 +277,35 @@ class ContractFormCreate(BasePage):
         time.sleep(2)
 
         # Заполняем поле "Сумма договора/контракта"
-        self.browser.find_element(*FormCreateContractLocators.SUM_ELEMENT).send_keys(UserData.user_data_dict["sum"])
+        self.browser.find_element(*FormCreateContractLocators.SUM_ELEMENT).send_keys(user_data_dict["sum"])
 
         # Заполняем поле "Валюта договора/контракта "
         Select(self.browser.find_element(*FormCreateContractLocators.CURRENCY_ELEMENT)).select_by_value(
-            UserData.user_data_dict["currency"])
+            user_data_dict["currency"])
 
         # Заполняем поле "Номер"
         self.browser.find_element(*FormCreateContractLocators.NUMBER_CONTRACT_ELEMENT).send_keys(
-            UserData.user_data_dict["number_contract"])
+            user_data_dict["number_contract"])
 
         # Заполняем поле "Дата заключения"
         self.browser.find_element(*FormCreateContractLocators.START_DATE_CONTRACT).send_keys(
-            UserData.user_data_dict["startDate"])
+            user_data_dict["startDate"])
 
         # Заполняем поле "Дата окончания"
         self.browser.find_element(*FormCreateContractLocators.END_DATE_CONTRACT).send_keys(
-            UserData.user_data_dict["endDate"])
+            user_data_dict["endDate"])
 
         # Заполняем поле "Номер закупки"
         self.browser.find_element(*FormCreateContractLocators.EIS_PURCHASE_NUMBER_CONTRACT).send_keys(
-            UserData.user_data_dict["purchase_number"])
+            user_data_dict["purchase_number"])
 
         # Заполняем поле " Ссылка на закупку "
         self.browser.find_element(*FormCreateContractLocators.EIS_PURCHSE_LINK_CONTRACT).send_keys(
-            UserData.user_data_dict["purchase_link"])
+            user_data_dict["purchase_link"])
 
         # Заполняем поле Ссылка на договор/контракт на Официальном сайте ЕИС
         self.browser.find_element(*FormCreateContractLocators.EIS_CONTRACT_LINK).send_keys(
-            UserData.user_data_dict["eis_contract_link"])
+            user_data_dict["eis_contract_link"])
 
         # Выбираем значение в поле "Территория применения"
         self.browser.find_element(*FormCreateContractLocators.SEARCH_TERRITORY_ELEMENT).click()
@@ -314,7 +314,7 @@ class ContractFormCreate(BasePage):
         # Развернуть узел "Все субъекты если кнопка отображена"
         if len(self.browser.find_elements(*FormCreateContractLocators.GROUP_TERRITORY_ELEMENT)) == 1:
             self.browser.find_element(*FormCreateContractLocators.GROUP_TERRITORY_ELEMENT).click()
-        for territory in UserData.user_data_dict["territory"]:
+        for territory in user_data_dict["territory"]:
             how, what = FormCreateContractLocators.TERRITORY_ELEMENT
             what = what.replace("territory_name", territory)
             TERRITORY_ELEMENT = (By.XPATH, f"//*[normalize-space(text()) and normalize-space(.)='{territory}']")
@@ -338,13 +338,13 @@ class ContractFormCreate(BasePage):
         # возврат к основной форме
         self.is_frame_to_parent()
         self.is_text_to_be_present_in_element(*FormCreateContractLocators.TYPE_TERRITORY_ELEMENT,
-                                              f'{UserData.user_data_dict["territory"]};')
+                                              f'{user_data_dict["territory"]};')
 
         # Выбираем значение в поле "Ключевые технологии"
         self.browser.find_element(*FormCreateContractLocators.SEARCH_TECHNOLOGIES_ELEMENT).click()
         time.sleep(2)
         self.is_frame_to_be_available_and_switch_to_it()
-        for technologies in UserData.user_data_dict["technologies"]:
+        for technologies in user_data_dict["technologies"]:
             how, what = FormCreateContractLocators.TECHNOLOGIES_ELEMENT
             what = what.replace("technologies_name", technologies)
             if self.is_element_present(how, what):
@@ -368,32 +368,32 @@ class ContractFormCreate(BasePage):
         self.is_frame_to_parent()
         # Проверяем, строку
         self.is_text_to_be_present_in_element(*FormCreateContractLocators.TYPE_TECHNOLOGIES_ELEMENT,
-                                              f"{UserData.user_data_dict['technologies']};")
+                                              f"{user_data_dict['technologies']};")
 
         # Заполняем поле "Цели и задачи"
         self.browser.find_element(*FormCreateContractLocators.DESCRIPTION_PLAIN_TEXT_ELEMENT).send_keys(
-            UserData.user_data_dict["descriptionText"])
+            user_data_dict["descriptionText"])
 
         # заполняем поле Количественные показатели реализации проекта
         self.browser.find_element(*FormCreateContractLocators.QUANTITATIVE_INDICATORS_PROJECT_ELEMENT).send_keys(
-            UserData.user_data_dict["quantitative_indicators_project"])
+            user_data_dict["quantitative_indicators_project"])
 
         # Уникальный код проекта
         self.browser.find_element(*FormCreateContractLocators.PROJECT_UNIQUE_CODE).send_keys(
-            UserData.user_data_dict["project_unique_code"])
+            user_data_dict["project_unique_code"])
 
         # Выбираем связанный проект
 
         self.browser.find_element(*FormCreateContractLocators.PROJECT_ELEMENT).click()
         #self.browser.find_element(*FormCreateContractLocators.PROJECT_FIND_ELEMENT).send_keys(
-            #UserData.user_data_dict["project"])
+            #user_data_dict["project"])
         how, what = FormCreateContractLocators.PROJECT_DROPDOWN_ELEMENT
-        what = what.replace("project_name", UserData.user_data_dict["project"])
+        what = what.replace("project_name", user_data_dict["project"])
         self.browser.find_element(how, what).click()
 
         payments_sum = 0
-        payments = UserData.user_data_dict["payments"]
-        count_payments_line = len(UserData.user_data_dict["payments"])
+        payments = user_data_dict["payments"]
+        count_payments_line = len(user_data_dict["payments"])
         print(f'\nКоличество строчек плановых платежей: {count_payments_line}')
 
         if count_payments_line == 5:
@@ -529,6 +529,6 @@ class ContractFormCreate(BasePage):
         self.browser.find_element(*FormCreateContractLocators.CONFIRM_CHANGE_PROJECT_BUTTON).click()
 
         # Если сумма платежей не совпадает появляется алерт, при подтверждении сущность создается
-        if payments_sum != UserData.user_data_dict["sum"]:
+        if payments_sum != user_data_dict["sum"]:
             alert = self.browser.switch_to.alert
             alert.accept()
