@@ -93,10 +93,13 @@ class PresaleElementPage(BasePage):
         self.browser.switch_to.frame(self.browser.find_element(*PresaleElementLocators.iframe))
         self.browser.find_element(*PresaleElementLocators.APPROVAL_MANAGER_ELEMENT).click()
         if UserData.user_data_dict["create_account"] == "Mr_KSUP_Seller" or UserData.user_data_dict["create_account"] == "Mr_KSUP_Dir":
-            self.browser.find_element(By.XPATH, f"//li[normalize-space(.)='{UserData.user_data_dict['salesManager']}']").click()
+            how, what = PresaleElementLocators.CHANGE_SELLER_RESPONSIBLE_DROPDOWN_ELEMENT
+            what = what.replace("salesManager", UserData.user_data_dict["salesManager"])
+            self.browser.find_element(how, what).click()
         else:
-            self.browser.find_element(By.XPATH,
-                                      f"//li[normalize-space(.)='{UserData.user_data_dict['executiveManager']}']").click()
+            how, what = PresaleElementLocators.CHANGE_SELLER_PERFORMER_DROPDOWN_ELEMENT
+            what = what.replace("executiveManager", UserData.user_data_dict["executiveManager"])
+            self.browser.find_element(*PresaleElementLocators.CHANGE_SELLER_PERFORMER_DROPDOWN_ELEMENT).click()
         self.browser.find_element(*PresaleElementLocators.APPROVAL_BUTTON_IN_FRAME).click()
         self.browser.find_element(*PresaleElementLocators.MESSAGE_OK_BUTTON).click()
         self.browser.refresh()
@@ -188,8 +191,9 @@ class PresaleElementPage(BasePage):
                 f'\nОжидаемый результат:{UserData.user_data_dict["executiveUnitLegal"]}'
             print('Значение в поле "Исполнитель (юридическое лицо)" успешно проверено')
         else:
-            assert len(self.browser.find_elements(*PresaleElementLocators.EXECUTIVE_UNIT_LEGAL_IN_PRESALE)) == 0, \
+            assert self.browser.find_element(*PresaleElementLocators.EXECUTIVE_UNIT_LEGAL_IN_PRESALE).is_displayed() is False, \
                 'Отображено пустое поле "Исполнитель (юридическое лицо)"'
+            print('Пустое поле "Исполнитель (юридическое лицо)" успешно не отображено')
 
         # Проверяем поле "Порядок проведения закупочной процедуры"
         if UserData.user_data_dict["contractorType"] == "Тендерная заявка":
@@ -293,8 +297,9 @@ class PresaleElementPage(BasePage):
                 f'\nОжидаемый результат: {UserData.user_data_dict["competitionDeadlineFrom"]}'
             print('Значение в поле "Срок подачи на конкурс" успешно проверено')
         else:
-            assert len(self.browser.find_elements(*PresaleElementLocators.COMPETITION_DEAD_LINE_FROM_IN_PRESALE)) == 0, \
+            assert self.browser.find_element(*PresaleElementLocators.COMPETITION_DEAD_LINE_FROM_IN_PRESALE).is_displayed() is False, \
                 'Отображено пустое поле "Срок подачи на конкурс"'
+            print('Пустое поле "Срок подачи на конкурс" успешно не отображено')
 
         # Проверяем поле "Плановая дата заключения договора/контракта"
         assert UserData.user_data_dict["startDate"] in \
@@ -311,8 +316,9 @@ class PresaleElementPage(BasePage):
                     f'\nОжидаемый результат: {UserData.user_data_dict["endDate"]}'
             print('Значение в поле "Плановая дата окончания договора/контракта" успешно проверено')
         else:
-            assert len(self.browser.find_elements(*PresaleElementLocators.END_DATE_IN_PRESALE)) == 0, \
+            assert self.browser.find_element(*PresaleElementLocators.END_DATE_IN_PRESALE).is_displayed() is False, \
                 'Отображено пустое поле "Плановая дата окончания договора/контракта"'
+            print('Пустое поле "Плановая дата окончания договора/контракта" успешно не отображено')
 
         # Проверяем поле "Вероятность заключения договора/контракта"
         assert self.is_element_text(*PresaleElementLocators.PROJECT_PROBABILITY_IN_PRESALE) == \

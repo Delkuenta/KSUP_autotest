@@ -105,7 +105,7 @@ class ContractElementPage(BasePage):
                 f'\n Ожидаемый результат: {UserData.user_data_dict["number_contract"]}'
             print('Значение в поле "Категория проекта" успешно проверено')
         else:
-            assert len(self.browser.find_elements(*ContractElementLocators.CONTRACT_NUMBER_IN_CONTRACT)) == 0, \
+            assert self.browser.find_element(*ContractElementLocators.CONTRACT_NUMBER_IN_CONTRACT).is_displayed() is False, \
                 'Отображено пустое поле "Номер"'
             print('Пустое поле "Номер" успешно не отображено')
 
@@ -131,7 +131,7 @@ class ContractElementPage(BasePage):
                 f'\nОжидаемый результат:{UserData.user_data_dict["purchase_number"]}'
             print('Значение в поле "Номер закупки" успешно проверено')
         else:
-            assert len(self.browser.find_elements(*ContractElementLocators.PURCHASE_NUMBER_IN_CONTRACT)) == 0, \
+            assert self.browser.find_element(*ContractElementLocators.PURCHASE_NUMBER_IN_CONTRACT).is_displayed() is False, \
                 'Отображено пустое поле "Номер закупки"'
             print('Пустое поле "Номер закупки" успешно не отображено')
 
@@ -169,7 +169,7 @@ class ContractElementPage(BasePage):
                 f'\nОжидаемый результат:{UserData.user_data_dict["project_unique_code"]}'
             print('Значение в поле "Уникальный код проекта" успешно проверено')
         else:
-            assert len(self.browser.find_elements(*ContractElementLocators.PROJECT_UNIQUE_CODE_IN_CONTRACT)) == 0, \
+            assert self.browser.find_element(*ContractElementLocators.PROJECT_UNIQUE_CODE_IN_CONTRACT).is_displayed() is False, \
                 'Отображено пустое поле "Уникальный код проекта"'
             print('Пустое поле "Уникальный код проекта" успешно не отображено')
 
@@ -188,7 +188,7 @@ class ContractElementPage(BasePage):
                 f'\n Ожидаемый результат: {UserData.user_data_dict["purchase_link"]}'
             print('Значение в поле "Ссылка на закупку" успешно проверено')
         else:
-            assert len(self.browser.find_elements(*ContractElementLocators.PURCHASE_LINK_IN_CONTRACT)) == 0, \
+            assert self.browser.find_element(*ContractElementLocators.PURCHASE_LINK_IN_CONTRACT).is_displayed() is False, \
                 'Отображено пустое поле "Ссылка на закупку"'
             print('Пустое поле "Ссылка на закупку" успешно не отображено')
 
@@ -200,7 +200,7 @@ class ContractElementPage(BasePage):
                 f'\n Ожидаемый результат: {UserData.user_data_dict["eis_contract_link"]}'
             print('Значение в поле "Ссылка на договор/контракт на Официальном сайте ЕИС" успешно проверено')
         else:
-            assert len(self.browser.find_elements(*ContractElementLocators.EIS_CONTRACT_LINK_IN_CONTRACT)) == 0, \
+            assert self.browser.find_element(*ContractElementLocators.EIS_CONTRACT_LINK_IN_CONTRACT).is_displayed() is False, \
                 'Отображено пустое поле "Ссылка на договор/контракт на Официальном сайте ЕИС"'
             print('Пустое поле "Ссылка на договор/контракт на Официальном сайте ЕИС" успешно не отображено')
 
@@ -219,7 +219,7 @@ class ContractElementPage(BasePage):
                 f'\n Ожидаемый результат: {UserData.user_data_dict["quantitative_indicators_project"]}'
             print('Значение в поле "Количественные показатели реализации проекта" успешно проверено')
         else:
-            assert len(self.browser.find_elements(*ContractElementLocators.QUANTITATIVE_INDICATORS_PROJECT)) == 0, \
+            assert self.browser.find_element(*ContractElementLocators.QUANTITATIVE_INDICATORS_PROJECT).is_displayed() is False, \
                 'Отображено пустое поле "Количественные показатели реализации проекта"'
             print('Пустое поле "Количественные показатели реализации проекта" успешно не отображено')
 

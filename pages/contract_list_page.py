@@ -7,14 +7,18 @@ class ContractPage(BasePage):
 
     # Поиск сущности в списке
     def should_be_element_on_contract_list(self):
-        assert self.is_element_present(*ContractPageLocators.FIND_ELEMENT_IN_CONTRACT_LIST), \
+        how, what = ContractPageLocators.FIND_ELEMENT_IN_CONTRACT_LIST
+        what = what.replace("Test_name", UserData.user_data_dict["fullName"])
+        assert self.is_element_present(how, what), \
             f'Пресейловая активность с именем "{UserData.user_data_dict["fullName"]}" не найдена в списке'
 
     # Зайти внутрь сущности пресейла по названию.имя берется из файла или user_data.
     def go_to_contract_element(self):
-        assert self.is_element_present(*ContractPageLocators.FIND_ELEMENT_IN_CONTRACT_LIST), \
+        how, what = ContractPageLocators.FIND_ELEMENT_IN_CONTRACT_LIST
+        what = what.replace("Test_name", UserData.user_data_dict["fullName"])
+        assert self.is_element_present(how, what), \
             f'Cущность с названием {UserData.user_data_dict["fullName"]} не найдена'
-        self.browser.find_element(*ContractPageLocators.FIND_ELEMENT_IN_CONTRACT_LIST).click()
+        self.browser.find_element(how, what).click()
 
     # Кнопка создания пресейла на странице пресейла
     def go_to_create_contract(self):

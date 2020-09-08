@@ -1,4 +1,3 @@
-from userdata.user_data import UserData
 from selenium.webdriver.common.by import By
 
 
@@ -15,7 +14,7 @@ class BasePageLocators:
 class PresaleListLocators:
     PRESALE_CREATE_BUTTON = (By.CSS_SELECTOR, "#idHomePageNewItem")
     FIND_ELEMENT_IN_PRESALE_LIST = (
-        By.XPATH, f"//a[@class= 'ms-listlink' and contains(text(),'{UserData.user_data_dict['fullName']}')]")
+        By.XPATH, f"//a[@class= 'ms-listlink' and contains(text(),'Test_name')]")
 
 
 class FormCreatePresaleLocators:
@@ -27,31 +26,27 @@ class FormCreatePresaleLocators:
 
     # Заказчик *
     CUSTOMER_ELEMENT = (By.XPATH, "//div[@id='div-wcfLookupControl_KsupEgr_Customer']/span/span/span")
-    CUSTOMER_DROPDOWN_ELEMENT = (By.XPATH, f"//li[contains(text(), '{UserData.user_data_dict['customer']}')]")
+    CUSTOMER_DROPDOWN_ELEMENT = (By.XPATH, "//li[contains(text(), 'customer_name')]")
 
     # Подразделение-продавец *
     SALES_UNIT_ELEMENT = (By.ID, "div-wcfLookupControl_KsupDivisions")
-    SALES_UNIT_DROPDOWN_ELEMENT = (By.XPATH, f"//li[normalize-space(.)='{UserData.user_data_dict['salesUnit']}']")
+    SALES_UNIT_DROPDOWN_ELEMENT = (By.XPATH, f"//li[normalize-space(.)='salesUnit_name']")
 
     # Ответственный менеджер подразделения-продавца *
     SALES_MANAGER_ELEMENT = (By.ID, "div-wcfLookupControl_KsupSeller")
-    SALES_MANAGER_DROPDOWN_ELEMENT = (
-        By.XPATH, f"//li[normalize-space(.)='{UserData.user_data_dict['salesManager']}']")
+    SALES_MANAGER_DROPDOWN_ELEMENT = (By.XPATH, f"//li[normalize-space(.)='salesManager_name']")
 
     # Подразделение-исполнитель
     EXECUTIVE_UNIT_ELEMENT = (By.ID, "div-wcfLookupControl_KsupDivisionPerformer")
-    EXECUTIVE_UNIT_DROPDOWN_ELEMENT = (
-        By.XPATH, f"//li[normalize-space(.)='{UserData.user_data_dict['executiveUnit']}']")
+    EXECUTIVE_UNIT_DROPDOWN_ELEMENT = (By.XPATH, f"//li[normalize-space(.)='executiveUnit_name']")
 
     # Ответственный менеджер подразделения-исполнителя
     EXECUTIVE_MANAGER_ELEMENT = (By.ID, "div-wcfLookupControl_KsupPerformerResponsible")
-    EXECUTIVE_MANAGER_DROPDOWN_ELEMENT = (
-        By.XPATH, f"//li[normalize-space(.)='{UserData.user_data_dict['executiveManager']}']")
+    EXECUTIVE_MANAGER_DROPDOWN_ELEMENT = (By.XPATH, f"//li[normalize-space(.)='executiveManager_name']")
 
     # Исполнитель (юридическое лицо)
     EXECUTIVE_UNIT_LEGAL_ELEMENT = (By.ID, "div-wcfLookupControl_KsupEgr_PerformerLegal")
-    EXECUTIVE_UNIT_LEGAL_DROPDOWN_ELEMENT = (
-        By.XPATH, f"//li[contains(text(), '{UserData.user_data_dict['executiveUnitLegal']}')]")
+    EXECUTIVE_UNIT_LEGAL_DROPDOWN_ELEMENT = (By.XPATH, f"//li[contains(text(), 'executiveUnitLegal_name')]")
 
     # Порядок проведения закупочной процедуры
     SALE_LAW_TYPE_ELEMENT = (By.ID, "KsupSaleLawType_59c9adb5-ad0e-4308-b136-1f1006e5f9f6_$DropDownChoice")
@@ -72,8 +67,7 @@ class FormCreatePresaleLocators:
     # Кнопка прокрутки вниз у категории Программное обеспечение
     SCROLL_DOWN_BUTTON = (By.ID, "PGD_6")
     # Категория
-    CATEGORY_ELEMENT = (By.XPATH,
-                        f"//*[normalize-space(.)='{UserData.user_data_dict['typeOfWorkServices']}']")
+    CATEGORY_ELEMENT = ""
     # Кнопка "Выбор"
     CHOICE_IFRAME_BUTTON = (
         By.ID, "ctl00_PlaceHolderDialogBodySection_PlaceHolderDialogBodyFooterMainSection_AddToFieldEditor")
@@ -188,16 +182,11 @@ class PresaleElementLocators:
     # Поле выбора менеджера в окне согласования
     APPROVAL_MANAGER_ELEMENT = (By.ID, "select2-ctl00_PlaceHolderMain_ddlResponsbileManager-container")
 
-    # Поле выбора при отправке на согласование пресейла в департамент
-    MANAGER_DROPDOWN_ELEMENT = (By.XPATH, f"//li[normalize-space(.)='{UserData.user_data_dict['executiveUnit']}']")
+    # Выбор значения продавца
+    CHANGE_SELLER_RESPONSIBLE_DROPDOWN_ELEMENT = (By.XPATH, "//li[normalize-space(.)='salesManager']")
 
     # Выбор значения продавца
-    CHANGE_SELLER_RESPONSIBLE_DROPDOWN_ELEMENT = (
-        By.XPATH, f"//li[normalize-space(.)='{''}']")
-
-    # Выбор значения продавца
-    CHANGE_SELLER_PERFORMER_DROPDOWN_ELEMENT = (
-        By.XPATH, f"//li[normalize-space(.)='{''}']")
+    CHANGE_SELLER_PERFORMER_DROPDOWN_ELEMENT = (By.XPATH, "//li[normalize-space(.)='executiveManager']")
 
     APPROVAL_BUTTON_IN_FRAME = (By.XPATH, "//input[@id='ctl00_PlaceHolderMain_btnApprove']")
 
@@ -264,30 +253,27 @@ class FormCreateZakupLocators:
 
     # Подразделение-продавец
     SALES_UNIT_IN_ZP_ELEMENT = (By.CSS_SELECTOR, "#select2-wcfLookupControl_KsupDivisionSeller-container")
-    SALES_UNIT_IN_ZP_DROPDOWN_ELEMENT = (By.XPATH, f"//li[normalize-space(.)='{UserData.user_data_dict['salesUnit']}']")
+    SALES_UNIT_IN_ZP_DROPDOWN_ELEMENT = (By.XPATH, f"//li[normalize-space(.)='salesUnit_name']")
 
     # Ответственный менеджер подразделения-продавца
     SALES_MANAGER_IN_ZP_ELEMENT = (By.CSS_SELECTOR, '#select2-wcfLookupControl_KsupSeller-container')
 
     # Подразделение-исполнитель
     EXECUTIVE_UNIT_IN_ZP_ELEMENT = (By.CSS_SELECTOR, "#select2-wcfLookupControl_KsupDivisionPerformer-container")
-    EXECUTIVE_UNIT_IN_ZP_DROPDOWN_ELEMENT = (
-        By.XPATH, f"//li[normalize-space(.)='{UserData.user_data_dict['executiveUnit']}']")
+    EXECUTIVE_UNIT_IN_ZP_DROPDOWN_ELEMENT = (By.XPATH, f"//li[normalize-space(.)='executiveUnit_name']")
 
     # Ответственный менеджер подразделения-исполнителя
     EXECUTIVE_MANAGER_IN_ZP_ELEMENT = (
         By.CSS_SELECTOR, "#select2-wcfLookupControl_KsupPerformerResponsible-container")
-    EXECUTIVE_MANAGER_IN_ZP_DROPDOWN_ELEMENT = (
-        By.XPATH, f"//li[normalize-space(.)='{UserData.user_data_dict['executiveManager']}']")
+    EXECUTIVE_MANAGER_IN_ZP_DROPDOWN_ELEMENT = (By.XPATH, f"//li[normalize-space(.)='executiveManager_name']")
 
     # Заказчик
     CUSTOMER_IN_ZP_ELEMENT = (By.CSS_SELECTOR, "#select2-wcfLookupControl_KsupEgr_Customer-container")
-    CUSTOMER_IN_ZP_DROPDOWN_ELEMENT = (By.XPATH, f"//li[contains(text(), '{UserData.user_data_dict['customer']}')]")
+    CUSTOMER_IN_ZP_DROPDOWN_ELEMENT = (By.XPATH, f"//li[contains(text(), 'customer_name')]")
 
     # Исполнитель (юридическое лицо)
     EXECUTIVE_LEGAL_IN_ZP_ELEMENT = (By.ID, "div-wcfLookupControl_KsupEgr_PerformerLegal")
-    EXECUTIVE_LEGAL_DROPDOWN_IN_ZP_ELEMENT = (
-        By.XPATH, f"//li[contains(text(), '{UserData.user_data_dict['executiveUnitLegal']}')]")
+    EXECUTIVE_LEGAL_DROPDOWN_IN_ZP_ELEMENT = (By.XPATH, f"//li[contains(text(), 'executiveUnitLegal_name')]")
 
     # Кнопка поиск допустимого варианта в категории "Тип работ и услуг"
     SEARCH_VALID_OPTION_ELEMENT = (
@@ -303,8 +289,7 @@ class FormCreateZakupLocators:
     GROUP_CATEGORY_ELEMENT5 = (By.ID, "TIE_7")
 
     # Категория
-    CATEGORY_ELEMENT = (By.XPATH,
-                        f"//*[normalize-space(.)='{UserData.user_data_dict['typeOfWorkServices']}']")
+    CATEGORY_ELEMENT = ""
     # Кнопка "Выбор"
     CHOICE_IFRAME_BUTTON = (
         By.ID, "ctl00_PlaceHolderDialogBodySection_PlaceHolderDialogBodyFooterMainSection_AddToFieldEditor")
@@ -441,7 +426,7 @@ class FormCreateZakupLocators:
 class ZakupListLocators:
     ZAKUP_CREATE_BUTTON = (By.CSS_SELECTOR, "#idHomePageNewItem")
     FIND_ELEMENT_IN_ZAKUP_LIST = (
-        By.XPATH, f"//a[@class= 'ms-listlink' and contains(text(),'{UserData.user_data_dict['fullName']}')]")
+        By.XPATH, f"//a[@class= 'ms-listlink' and contains(text(),'Test_name')]")
 
 
 class ZakupElementLocators:
@@ -560,35 +545,31 @@ class FormCreateContractLocators:
 
     # Заказчик
     CUSTOMER_CONTRACT_ELEMENT = (By.CSS_SELECTOR, "#div-wcfLookupControl_KsupEgr_Customer")
-    CUSTOMER_DROPDOWN_CONTRACT_ELEMENT = (By.XPATH, f"//li[contains(text(), '{UserData.user_data_dict['customer']}')]")
+    CUSTOMER_DROPDOWN_CONTRACT_ELEMENT = (By.XPATH, f"//li[contains(text(), 'customer_name')]")
 
     # Подразделение-продавец
     SALES_UNIT_CONTRACT_ELEMENT = (By.ID, "div-wcfLookupControl_KsupDivisions")
-    SALES_UNIT_DROPDOWN_CONTRACT_ELEMENT = (
-        By.XPATH, f"//li[normalize-space(.)='{UserData.user_data_dict['salesUnit']}']")
+    SALES_UNIT_DROPDOWN_CONTRACT_ELEMENT = (By.XPATH, f"//li[normalize-space(.)='salesUnit_name']")
 
     # Ответственный менеджер подразделения-продавца
     SALES_MANAGER_CONTRACT_ELEMENT = (By.CSS_SELECTOR, '#div-wcfLookupControl_KsupSeller')
-    SALES_MANAGER_CONTRACT_DROPDOWN_ELEMENT = (
-        By.XPATH, f"//li[normalize-space(.)='{UserData.user_data_dict['salesManager']}']")
+    SALES_MANAGER_CONTRACT_DROPDOWN_ELEMENT = (By.XPATH, f"//li[normalize-space(.)='salesManager_name']")
 
     # Подразделение-исполнитель
     EXECUTIVE_UNIT_CONTRACT_ELEMENT = (
         By.CSS_SELECTOR, "#div-wcfLookupControl_KsupDivisionPerformer")
-    EXECUTIVE_UNIT_CONTRACT_DROPDOWN_ELEMENT = (
-        By.XPATH, f"//li[normalize-space(.)='{UserData.user_data_dict['executiveUnit']}']")
+    EXECUTIVE_UNIT_CONTRACT_DROPDOWN_ELEMENT = (By.XPATH, f"//li[normalize-space(.)='executiveUnit_name']")
 
     # Ответственный менеджер подразделения-исполнителя
     EXECUTIVE_MANAGER_CONTRACT_ELEMENT = (
         By.CSS_SELECTOR, "#div-wcfLookupControl_KsupPerformerResponsible")
-    EXECUTIVE_MANAGER_DROPDOWN_CONTRACT_ELEMENT = (
-        By.XPATH, f"//li[normalize-space(.)='{UserData.user_data_dict['executiveManager']}']")
+    EXECUTIVE_MANAGER_DROPDOWN_CONTRACT_ELEMENT = (By.XPATH, f"//li[normalize-space(.)='executiveManager_name']")
 
     # Исполнитель (юридическое лицо)
     EXECUTIVE_UNIT_LEGAL_CONTRACT_ELEMENT = (
         By.CSS_SELECTOR, "#div-wcfLookupControl_KsupEgr_PerformerLegal")
     EXECUTIVE_UNIT_LEGAL_DROPDOWN_CONTRACT_ELEMENT = (
-        By.XPATH, f"//li[contains(text(), '{UserData.user_data_dict['executiveUnitLegal']}')]")
+        By.XPATH, f"//li[contains(text(), 'executiveUnitLegal_name')]")
 
     # Кнопка поиск допустимого варианта в категории "Тип работ и услуг"
     SEARCH_TYPE_AND_SERVICES_ELEMENT = (
@@ -606,8 +587,7 @@ class FormCreateContractLocators:
     SCROLL_DOWN_BUTTON = (By.ID, "PGD_6")
 
     # Категория
-    CATEGORY_ELEMENT = (
-        By.XPATH, f"//*[normalize-space(.)='{UserData.user_data_dict['typeOfWorkServices']}']")
+    CATEGORY_ELEMENT = ""
     # Кнопка "Выбор"
     CHOICE_IFRAME_BUTTON = (
         By.ID, "ctl00_PlaceHolderDialogBodySection_PlaceHolderDialogBodyFooterMainSection_AddToFieldEditor")
@@ -624,11 +604,11 @@ class FormCreateContractLocators:
 
     # связанная Пресейловые активности
     PRESALE_SELECT = (By.XPATH, "//div[@id='div-wcfLookupControl_KsupSales']")
-    PRESALE_SELECT_DROPDOWN = (By.XPATH, f"(.//*[normalize-space(.)='{UserData.user_data_dict['fullName']}'])")
+    PRESALE_SELECT_DROPDOWN = (By.XPATH, f"(.//*[normalize-space(.)='fullName_name'])")
 
     # Связанная закупочная процедура
     ZAKUP_SELECT = (By.XPATH, "//span[@id='select2-wcfLookupControl_KsupPresaleActivity-container']")
-    ZAKUP_SELECT_DROPDOWN = (By.XPATH, f".//*[normalize-space(.)='{UserData.user_data_dict['fullName']}']")
+    ZAKUP_SELECT_DROPDOWN = (By.XPATH, f".//*[normalize-space(.)='fullName']")
 
     # Номер договора
     NUMBER_CONTRACT_ELEMENT = (By.CSS_SELECTOR, "#KsupContractNumber_01736dbc-f5d8-49d4-86ca-2fae900a7d2c")
@@ -658,8 +638,7 @@ class FormCreateContractLocators:
     # Группа территорий во фрейме
     GROUP_TERRITORY_ELEMENT = (By.ID, "TIE_3")
     # Элемент территории
-    TERRITORY_ELEMENT = (
-        By.XPATH, f"//*[normalize-space(text()) and normalize-space(.)='{UserData.user_data_dict['territory']}']")
+    TERRITORY_ELEMENT = (By.XPATH, f"//*[normalize-space(text()) and normalize-space(.)='territory_name']")
 
     SCROLL_DOWN_BUTTON_TERRITORY = (By.ID, "PGD_3")
 
@@ -674,8 +653,7 @@ class FormCreateContractLocators:
     SCROLL_DOWN_BUTTON_TECHNOLOGIES = (By.ID, "PGD_1")
 
     # Выбор технологии
-    TECHNOLOGIES_ELEMENT = (
-        By.XPATH, f"//*[normalize-space(text()) and normalize-space(.)='{UserData.user_data_dict['technologies']}']")
+    TECHNOLOGIES_ELEMENT = (By.XPATH, f"//*[normalize-space(text()) and normalize-space(.)='technologies_name']")
 
     # Строка Ключевые технологии
     TYPE_TECHNOLOGIES_ELEMENT = (By.ID, "KsupKeyTechnologies_$containereditableRegion")
@@ -695,7 +673,7 @@ class FormCreateContractLocators:
     PROJECT_ELEMENT = (By.ID, "div-wcfLookupControl_KsupProject")
     PROJECT_FIND_ELEMENT = (
         By.CSS_SELECTOR, "span.select2-search.select2-search--dropdown > input.select2-search__field")
-    PROJECT_DROPDOWN_ELEMENT = (By.XPATH, f"//li[normalize-space(.)='{UserData.user_data_dict['project']}']")
+    PROJECT_DROPDOWN_ELEMENT = (By.XPATH, f"//li[normalize-space(.)='project_name']")
 
     # 1 строка Плановых платежей
     SUMTABLE1 = (By.XPATH, "//tr[3]/td[2]/input")
@@ -754,8 +732,7 @@ class FormCreateContractLocators:
 
 class ContractPageLocators:
     CONTRACT_CREATE_BUTTON = (By.CSS_SELECTOR, "#idHomePageNewItem")
-    FIND_ELEMENT_IN_CONTRACT_LIST = (
-        By.XPATH, f"//a[@class= 'ms-listlink' and contains(text(),'{UserData.user_data_dict['fullName']}')]")
+    FIND_ELEMENT_IN_CONTRACT_LIST = (By.XPATH, f"//a[@class= 'ms-listlink' and contains(text(),'Test_name')]")
 
 
 class ContractElementLocators:

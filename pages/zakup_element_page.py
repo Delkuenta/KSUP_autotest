@@ -74,8 +74,9 @@ class ZakupElementPage(BasePage):
                 f'\nОжидаемый результат:{UserData.user_data_dict["executiveUnitLegal"]}'
             print('Значение в поле "Исполнитель (юридическое лицо)" успешно проверено')
         else:
-            assert len(self.browser.find_elements(*ZakupElementLocators.EXECUTIVE_UNIT_LEGAL_IN_ZP)) == 0, \
+            assert self.browser.find_element(*ZakupElementLocators.EXECUTIVE_UNIT_LEGAL_IN_ZP).is_displayed() is False, \
                 'Отображено пустое поле "Исполнитель (юридическое лицо)"'
+            print('Пустое поле "Исполнитель (юридическое лицо)" успешно не отображено')
 
         # Проверяем поле "Начальная (максимальная) цена контракта"
         sum_value = str(UserData.user_data_dict["sum"])
@@ -290,7 +291,7 @@ class ZakupElementPage(BasePage):
                 f'\nОжидаемый результат:{UserData.user_data_dict["descriptionText"]}'
             print('Значение в поле "Результаты работ')
         else:
-            assert len(self.browser.find_elements(*ZakupElementLocators.DESCRIPTION_TEXT_IN_ZP)) == 0, \
+            assert self.browser.find_element(*ZakupElementLocators.DESCRIPTION_TEXT_IN_ZP).is_displayed() is False, \
                 'Отображено пустое поле "Результаты работ"'
             print('Пустое поле "Результаты работ" успешно не отображено')
 
@@ -302,9 +303,10 @@ class ZakupElementPage(BasePage):
                 f'\nОжидаемый результат:{UserData.user_data_dict["project_risk_department"]}'
             print('Значение в поле "Риски проекта с точки зрения Департамента')
         else:
-            assert len(self.browser.find_elements(*ZakupElementLocators.PROJECT_RISKS_DEPARTMENT_IN_ZP)) == 0, \
+            assert self.browser.find_element(*ZakupElementLocators.PROJECT_RISKS_DEPARTMENT_IN_ZP).is_displayed() is False, \
                 'Отображено пустое поле "Риски проекта с точки зрения Департамента"'
-            print('Пустое поле "Риски проекта с точки зрения Департамента')
+            print('Пустое поле "Риски проекта с точки зрения Департамента" успешно отображено')
+
 
     def verify_draft_status_zakup(self):
         self.is_element_present(*ZakupElementLocators.APPROVAL_MAIN_STATUS_IN_ZP)

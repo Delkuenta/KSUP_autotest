@@ -58,7 +58,7 @@ class UserData:
     comment_revision_kkp = "Отправка на доработку создателю сущности"
 
     # Чтение json и присвоение словаря в переменную
-    name_data_file = r"SeparateSale\Dir - ДКС\1[АТест_Dir] ПА+ЗП+ДК, Тендерная заявка, категория A, разработка заказного ПО, НЕсамостоятельная продажа.json"
+    name_data_file = r"UnitSale\Dir - ДКС\19_[АТест_Dir] ДК, категория A, разработка заказного ПО.json"
     file_path_for_data = os.path.join(current_dir, name_data_file)
     with open(file_path_for_data, "r", encoding='utf-8') as file:
         data = json.load(file)

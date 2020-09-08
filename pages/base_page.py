@@ -6,7 +6,7 @@ from .locators import BasePageLocators
 
 
 class BasePage:
-    def __init__(self, browser: RemoteWebDriver, url, timeout=20):
+    def __init__(self, browser: RemoteWebDriver, url, timeout=10):
         self.browser = browser
         self.url = url
         self.browser.implicitly_wait(timeout)  # неявное ожидание
@@ -100,7 +100,7 @@ class BasePage:
             "Титул страницы не соответствует переходу"
 
     # Проверка что элемент отображен и имеет размер
-    def is_visibility_of_element_located(self, how, what, timeout=5):
+    def is_visibility_of_element_located(self, how, what, timeout=1):
         try:
             WebDriverWait(self.browser, timeout).until(ec.visibility_of_element_located((how, what)))
         except TimeoutException:

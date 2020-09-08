@@ -11,7 +11,7 @@ from userdata.user_data import UserData
 class PresaleFormCreate(BasePage):
     # Форма создания пресейла
     def form_create_presale_all_type(self):
-        payments_sum = 0
+
         if UserData.user_data_dict["separateSale"] == "Да":
             # Ждем загрузки страницы по последнему загружаемому объекту
             # Если это Самостоятельная продажа, то смотрим в поле "Ответственный менеджер подразделения-продавца"
@@ -38,42 +38,62 @@ class PresaleFormCreate(BasePage):
             UserData.user_data_dict["contractorType"])
 
         # Ищем поле "Заказчик" и выбираем значение
+        how, what = FormCreatePresaleLocators.CUSTOMER_DROPDOWN_ELEMENT
+        what = what.replace("customer_name", UserData.user_data_dict["customer"])
         self.browser.find_element(*FormCreatePresaleLocators.CUSTOMER_ELEMENT).click()
-        self.browser.find_element(*FormCreatePresaleLocators.CUSTOMER_DROPDOWN_ELEMENT).click()
+        self.browser.find_element(how, what).click()
 
         # Ищем поле "Подразделение-продавец" и выбираем значение
+        how, what = FormCreatePresaleLocators.SALES_UNIT_DROPDOWN_ELEMENT
+        what = what.replace("salesUnit_name", UserData.user_data_dict["salesUnit"])
         self.browser.find_element(*FormCreatePresaleLocators.SALES_UNIT_ELEMENT).click()
-        self.browser.find_element(*FormCreatePresaleLocators.SALES_UNIT_DROPDOWN_ELEMENT).click()
+        self.browser.find_element(how, what).click()
 
         # Ищем поле "Ответственный менеджер подразделения-продавца" и выбираем значение
         self.browser.find_element(*FormCreatePresaleLocators.SALES_MANAGER_ELEMENT).click()
         if UserData.user_data_dict["separateSale"] == "Да":
-            self.browser.find_element(*FormCreatePresaleLocators.SALES_MANAGER_DROPDOWN_ELEMENT).click()
+            how, what = FormCreatePresaleLocators.SALES_MANAGER_DROPDOWN_ELEMENT
+            what = what.replace("salesManager_name", UserData.user_data_dict["salesManager"])
+            self.browser.find_element(how, what).click()
         else:
             if UserData.user_data_dict["create_account"] == "Mr_KSUP_Seller" or \
                     UserData.user_data_dict["create_account"] == "Mr_KSUP_Dir":
-                self.browser.find_element(*FormCreatePresaleLocators.EXECUTIVE_MANAGER_DROPDOWN_ELEMENT).click()
+                how, what = FormCreatePresaleLocators.EXECUTIVE_MANAGER_DROPDOWN_ELEMENT
+                what = what.replace("executiveManager_name", UserData.user_data_dict["executiveManager"])
+                self.browser.find_element(how, what).click()
             else:
-                self.browser.find_element(*FormCreatePresaleLocators.SALES_MANAGER_DROPDOWN_ELEMENT).click()
+                how, what = FormCreatePresaleLocators.SALES_MANAGER_DROPDOWN_ELEMENT
+                what = what.replace("salesManager_name", UserData.user_data_dict["salesManager"])
+                self.browser.find_element(how, what).click()
 
         # Ищем поле "Подразделение-исполнитель" и выбираем значение
         self.browser.find_element(*FormCreatePresaleLocators.EXECUTIVE_UNIT_ELEMENT).click()
-        self.browser.find_element(*FormCreatePresaleLocators.EXECUTIVE_UNIT_DROPDOWN_ELEMENT).click()
+        how, what = FormCreatePresaleLocators.EXECUTIVE_UNIT_DROPDOWN_ELEMENT
+        what = what.replace("executiveUnit_name", UserData.user_data_dict["executiveUnit"])
+        self.browser.find_element(how, what).click()
 
         # Ищем поле "Ответственный менеджер подразделения-исполнителя" и выбираем значение
         self.browser.find_element(*FormCreatePresaleLocators.EXECUTIVE_MANAGER_ELEMENT).click()
         if UserData.user_data_dict["separateSale"] == "Да":
-            self.browser.find_element(*FormCreatePresaleLocators.EXECUTIVE_MANAGER_DROPDOWN_ELEMENT).click()
+            how, what = FormCreatePresaleLocators.EXECUTIVE_MANAGER_DROPDOWN_ELEMENT
+            what = what.replace("executiveManager_name", UserData.user_data_dict["executiveManager"])
+            self.browser.find_element(how, what).click()
         else:
             if UserData.user_data_dict["create_account"] == "Mr_KSUP_Seller" or \
                     UserData.user_data_dict["create_account"] == "Mr_KSUP_Dir":
-                self.browser.find_element(*FormCreatePresaleLocators.EXECUTIVE_MANAGER_DROPDOWN_ELEMENT).click()
+                how, what = FormCreatePresaleLocators.EXECUTIVE_MANAGER_DROPDOWN_ELEMENT
+                what = what.replace("executiveManager_name", UserData.user_data_dict["executiveManager"])
+                self.browser.find_element(how, what).click()
             else:
-                self.browser.find_element(*FormCreatePresaleLocators.SALES_MANAGER_DROPDOWN_ELEMENT).click()
+                how, what = FormCreatePresaleLocators.SALES_MANAGER_DROPDOWN_ELEMENT
+                what = what.replace("salesManager_name", UserData.user_data_dict["salesManager"])
+                self.browser.find_element(how, what).click()
 
         # Ищем поле "Исполнитель (юридическое лицо)" и выбираем значение
         self.browser.find_element(*FormCreatePresaleLocators.EXECUTIVE_UNIT_LEGAL_ELEMENT).click()
-        self.browser.find_element(*FormCreatePresaleLocators.EXECUTIVE_UNIT_LEGAL_DROPDOWN_ELEMENT).click()
+        how, what = FormCreatePresaleLocators.EXECUTIVE_UNIT_LEGAL_DROPDOWN_ELEMENT
+        what = what.replace("executiveUnitLegal_name", UserData.user_data_dict["executiveUnitLegal"])
+        self.browser.find_element(how, what).click()
 
         # Проверка отображения поля Порядок проведения закупочной процедуры
         if UserData.user_data_dict["contractorType"] == "Тендерная заявка" \
@@ -127,7 +147,7 @@ class PresaleFormCreate(BasePage):
         self.browser.find_element(*FormCreatePresaleLocators.CONFIRM_IFRAME_BUTTON).click()
         # Возврат к форм создания.
         self.is_frame_to_parent()
-        time.sleep(2)
+        time.sleep(1)
 
         # Ищем поле "Сумма" и вводим значение
         self.browser.find_element(*FormCreatePresaleLocators.SUM_ELEMENT).send_keys(UserData.user_data_dict["sum"])
@@ -176,6 +196,7 @@ class PresaleFormCreate(BasePage):
         risks_element = self.browser.find_element(*FormCreatePresaleLocators.RISKS_ELEMENT)
         risks_element.send_keys(UserData.user_data_dict["risksText"])
 
+        payments_sum = 0
         payments = UserData.user_data_dict["payments"]
         count_payments_line = len(UserData.user_data_dict["payments"])
         print(f'\nКоличество строчек плановых платежей: {count_payments_line}')
