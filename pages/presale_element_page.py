@@ -107,12 +107,14 @@ class PresaleElementPage(BasePage):
     def verify_presale_approval_waiting_status(self):
         assert self.is_text_to_be_present_in_element(*PresaleElementLocators.PRESALE_APPROVAL_STATUS,
                                                      "На согласовании"), \
-            'Некорректный статус или отсутствует статус в поле "Статус согласования с подразделением"'
+            'Некорректный статус или отсутствует статус в поле "Статус согласования с подразделением".' \
+            '\nОжидаемый результат: "На согласовании"'
 
     def verify_presale_approval_successfully_status(self):
         assert self.is_text_to_be_present_in_element(*PresaleElementLocators.PRESALE_APPROVAL_STATUS,
                                                      "Согласовано"), \
-            'Некорректный статус или отсутствует статус в поле "Статус согласования с подразделением"'
+            'Некорректный статус или отсутствует статус в поле "Статус согласования с подразделением"' \
+            '\nОжидаемый результат: "Согласовано"'
 
     def verify_general_information_in_presale(self, user_data_dict):
 

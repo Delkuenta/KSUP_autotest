@@ -3,8 +3,6 @@ import os
 
 
 class UserData:
-    # Ссылка на ресурс
-    link = "https://Mr_KSUP_Seller:AsdGhj-5681-Sle@ksup-tst.lanit/_trust"
 
     # Учетные записи, статичные.
     login_seller = [r"Lanit\Mr_KSUP_Seller", "AsdGhj-5681-Sle"]

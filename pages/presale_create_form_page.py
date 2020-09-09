@@ -330,7 +330,11 @@ class PresaleFormCreate(BasePage):
                 self.browser.find_element(*FormCreatePresaleLocators.APPROVAL_DEPARTMENT_ELEMENT).click()
                 if user_data_dict["create_account"] == "Mr_KSUP_Seller" or \
                         user_data_dict["create_account"] == "Mr_KSUP_Dir":
-                    self.browser.find_element(*FormCreatePresaleLocators.SALES_UNIT_DROPDOWN_ELEMENT).click()
+                    how, what = FormCreatePresaleLocators.SALES_UNIT_DROPDOWN_ELEMENT
+                    what = what.replace("salesUnit_name", user_data_dict["salesUnit"])
+                    self.browser.find_element(how, what).click()
                 else:
-                    self.browser.find_element(*FormCreatePresaleLocators.EXECUTIVE_UNIT_DROPDOWN_ELEMENT).click()
+                    how, what = FormCreatePresaleLocators.EXECUTIVE_UNIT_DROPDOWN_ELEMENT
+                    what = what.replace("executiveUnit_name", user_data_dict["executiveUnit"])
+                    self.browser.find_element(how, what).click()
                 self.browser.find_element(*FormCreatePresaleLocators.APPROVAL_CONFIRM_SEND_BUTTON).click()

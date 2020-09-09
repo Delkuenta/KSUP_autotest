@@ -12,55 +12,55 @@ from pages.login_data import LoginData
 from pages.presale_create_form_page import PresaleFormCreate
 from pages.zakup_list_page import ZakupListPage
 
-# UnitSale\Seller -ДКС
+# UnitSale\Seller -DKS
 """
-1_[АТест_Seller] ПА+ЗП+ДК, Тендерная заявка, категория A, разработка заказного ПО, Самостоятельная продажа.json
-2_[АТест_Seller] ПА+ЗП+ДК, Тендерная заявка, категория B, разработка заказного ПО, Самостоятельная продажа.json
-3_[АТест_Seller] ПА+ЗП+ДК, Тендерная заявка, категория C, разработка заказного ПО, Самостоятельная продажа.json
-4_[АТест_Seller] ПА+ЗП+ДК, Тендерная заявка, категория A, НЕразработка заказного ПО, Самостоятельная продажа.json
-5_[АТест_Seller] ПА+ЗП+ДК, Тендерная заявка, категория B, НЕразработка заказного ПО, Самостоятельная продажа.json
-6_[АТест_Seller] ПА+ЗП+ДК, Тендерная заявка, категория C, НЕразработка заказного ПО, Самостоятельная продажа.json
-7_[АТест_Seller] ПА+ЗП+ДК, Коммерческое предложение, категория A, разработка заказного ПО, Самостоятельная продажа.json
-8_[АТест_Seller] ПА+ЗП+ДК, Коммерческое предложение, категория B, разработка заказного ПО, Самостоятельная продажа.json
-9_[АТест_Seller] ПА+ЗП+ДК, Коммерческое предложение, категория C, разработка заказного ПО, Самостоятельная продажа.json
-10_[АТест_Seller] ПА+ЗП+ДК, Коммерческое предложение, категория A, НЕразработка заказного ПО, Самостоятельная продажа.json
-11_[АТест_Seller] ПА+ЗП+ДК, Коммерческое предложение, категория B, НЕразработка заказного ПО, Самостоятельная продажа.json
-12_[АТест_Seller] ПА+ЗП+ДК, Коммерческое предложение, категория C, НЕразработка заказного ПО, Самостоятельная продажа.json
-13_[АТест_Seller] ПА+ЗП+ДК, Запрос цен товаров, работ, услуг, категория A, разработка заказного ПО, Самостоятельная продажа.json
-14_[АТест_Seller] ПА+ЗП+ДК, Запрос цен товаров, работ, услуг, категория B, разработка заказного ПО, Самостоятельная продажа.json
-15_[АТест_Seller] ПА+ЗП+ДК, Запрос цен товаров, работ, услуг, категория C, разработка заказного ПО, Самостоятельная продажа.json
-16_[АТест_Seller] ПА+ЗП+ДК, Запрос цен товаров, работ, услуг, категория A, НЕразработка заказного ПО, Самостоятельная продажа.json
-17_[АТест_Seller] ПА+ЗП+ДК, Запрос цен товаров, работ, услуг, категория B, НЕразработка заказного ПО, Самостоятельная продажа.json
-18_[АТест_Seller] ПА+ЗП+ДК, Запрос цен товаров, работ, услуг, категория C, НЕразработка заказного ПО, Самостоятельная продажа.json
-"""
-
-# UnitSale\Dir - ДКС
-"""
-1_[АТест_Dir] ПА+ЗП+ДК, Тендерная заявка, категория A, разработка заказного ПО, Самостоятельная продажа.json
-2_[АТест_Dir] ПА+ЗП+ДК, Тендерная заявка, категория B, разработка заказного ПО, Самостоятельная продажа.json
-3_[АТест_Dir] ПА+ЗП+ДК, Тендерная заявка, категория C, разработка заказного ПО, Самостоятельная продажа.json
-4_[АТест_Dir] ПА+ЗП+ДК, Тендерная заявка, категория A, НЕразработка заказного ПО, Самостоятельная продажа.json
-5_[АТест_Dir] ПА+ЗП+ДК, Тендерная заявка, категория B, НЕразработка заказного ПО, Самостоятельная продажа.json
-6_[АТест_Dir] ПА+ЗП+ДК, Тендерная заявка, категория C, НЕразработка заказного ПО, Самостоятельная продажа.json
-7_[АТест_Dir] ПА+ЗП+ДК, Коммерческое предложение, категория A, разработка заказного ПО, Самостоятельная продажа.json
-8_[АТест_Dir] ПА+ЗП+ДК, Коммерческое предложение, категория B, разработка заказного ПО, Самостоятельная продажа.json
-9_[АТест_Dir] ПА+ЗП+ДК, Коммерческое предложение, категория C, разработка заказного ПО, Самостоятельная продажа.json
-10_[АТест_Dir] ПА+ЗП+ДК, Коммерческое предложение, категория A, НЕразработка заказного ПО, Самостоятельная продажа.json
-11_[АТест_Dir] ПА+ЗП+ДК, Коммерческое предложение, категория B, НЕразработка заказного ПО, Самостоятельная продажа.json
-12_[АТест_Dir] ПА+ЗП+ДК, Коммерческое предложение, категория C, НЕразработка заказного ПО, Самостоятельная продажа.json
-13_[АТест_Dir] ПА+ЗП+ДК, Запрос цен товаров, работ, услуг, категория A, разработка заказного ПО, Самостоятельная продажа.json
-14_[АТест_Dir] ПА+ЗП+ДК, Запрос цен товаров, работ, услуг, категория B, разработка заказного ПО, Самостоятельная продажа.json
-15_[АТест_Dir] ПА+ЗП+ДК, Запрос цен товаров, работ, услуг, категория C, разработка заказного ПО, Самостоятельная продажа.json
-16_[АТест_Dir] ПА+ЗП+ДК, Запрос цен товаров, работ, услуг, категория A, НЕразработка заказного ПО, Самостоятельная продажа.json
-17_[АТест_Dir] ПА+ЗП+ДК, Запрос цен товаров, работ, услуг, категория B, НЕразработка заказного ПО, Самостоятельная продажа.json
-18_[АТест_Dir] ПА+ЗП+ДК, Запрос цен товаров, работ, услуг, категория C, НЕразработка заказного ПО, Самостоятельная продажа.json
+1_[Atest_Seller] PA+ZP+DK,Tender, categoryA, softwareDev, UnitSale.json
+2_[Atest_Seller] PA+ZP+DK,Tender, categoryB, softwareDev, UnitSale.json
+3_[Atest_Seller] PA+ZP+DK,Tender, categoryC, softwareDev, UnitSale.json
+4_[Atest_Seller] PA+ZP+DK,Tender, categoryA, OtherType, UnitSale.json
+5_[Atest_Seller] PA+ZP+DK,Tender, categoryB, OtherType, UnitSale.json
+6_[Atest_Seller] PA+ZP+DK,Tender, categoryC, OtherType, UnitSale.json
+7_[Аtest_Seller2] PA+ZP+DK, CommercialOffer, categoryA, softwareDev, UnitSale.json
+8_[Аtest_Seller] PA+ZP+DK, CommercialOffer, categoryB, softwareDev, UnitSale.json
+9_[Аtest_Seller] PA+ZP+DK, CommercialOffer, categoryC, softwareDev, UnitSale.json
+10_[Аtest_Seller] PA+ZP+DK, CommercialOffer, categoryA, OtherType, UnitSale.json
+11_[Аtest_Seller] PA+ZP+DK, CommercialOffer, categoryB, OtherType, UnitSale.json
+12_[Аtest_Seller] PA+ZP+DK, CommercialOffer, categoryC, OtherType, UnitSale.json
+13_[Atest_Seller] PA+ZP+DK, RequestPrice, categoryA, softwareDev, UnitSale.json
+14_[Atest_Seller] PA+ZP+DK, RequestPrice, categoryB, softwareDev, UnitSale.json
+15_[Atest_Seller] PA+ZP+DK, RequestPrice, categoryC, softwareDev, UnitSale.json
+16_[Atest_Seller] PA+ZP+DK, RequestPrice, categoryA, OtherType, UnitSale.json
+17_[Atest_Seller] PA+ZP+DK, RequestPrice, categoryB, OtherType, UnitSale.json
+18_[Atest_Seller] PA+ZP+DK, RequestPrice, categoryC, OtherType, UnitSale.json
 """
 
-# UnitSale\Seller2 - ДирГС
+# UnitSale\Dir - DKS
 """
-1_[АТест_Seller2] ПА+ЗП+ДК, Тендерная заявка, категория A, разработка заказного ПО, Самостоятельная продажа.json
-2_[АТест_Seller2] ПА+ЗП+ДК, Тендерная заявка, категория B, разработка заказного ПО, Самостоятельная продажа.json
-3_[АТест_Seller2] ПА+ЗП+ДК, Тендерная заявка, категория C, разработка заказного ПО, Самостоятельная продажа.json
+1_[Atest_Dir] PA+ZP+DK,Tender, categoryA, softwareDev, UnitSale.json
+2_[Atest_Dir] PA+ZP+DK,Tender, categoryB, softwareDev, UnitSale.json
+3_[Atest_Dir] PA+ZP+DK,Tender, categoryC, softwareDev, UnitSale.json
+4_[Atest_Dir] PA+ZP+DK,Tender, categoryA, OtherType, UnitSale.json
+5_[Atest_Dir] PA+ZP+DK,Tender, categoryB, OtherType, UnitSale.json
+6_[Atest_Dir] PA+ZP+DK,Tender, categoryC, OtherType, UnitSale.json
+7_[Аtest_Dir] PA+ZP+DK, CommercialOffer, categoryA, softwareDev, UnitSale.json
+8_[Аtest_Dir] PA+ZP+DK, CommercialOffer, categoryB, softwareDev, UnitSale.json
+9_[Аtest_Dir] PA+ZP+DK, CommercialOffer, categoryС, softwareDev, UnitSale.json
+10_[Аtest_Dir] PA+ZP+DK, CommercialOffer, categoryA, OtherType, UnitSale.json
+11_[Аtest_Dir] PA+ZP+DK, CommercialOffer, categoryB, OtherType, UnitSale.json
+12_[Аtest_Dir] PA+ZP+DK, CommercialOffer, categoryC, OtherType, UnitSale.json
+13_[Atest_Dir] PA+ZP+DK, RequestPrice, categoryA, softwareDev, UnitSale.json
+14_[Atest_Dir] PA+ZP+DK, RequestPrice, categoryB, softwareDev, UnitSale.json
+15_[Atest_Dir] PA+ZP+DK, RequestPrice, categoryC, softwareDev, UnitSale.json
+16_[Atest_Dir] PA+ZP+DK, RequestPrice, categoryA, OtherType, UnitSale.json
+17_[Atest_Dir] PA+ZP+DK, RequestPrice, categoryB, OtherType, UnitSale.json.json
+18_[Atest_Dir] PA+ZP+DK, RequestPrice, categoryC, OtherType, UnitSale.json.json
+"""
+
+# UnitSale\Seller2 - DirGS
+"""
+1_[Atest_Seller2] PA+ZP+DK,Tender, categoryA, softwareDev, UnitSale.json
+2_[Atest_Seller2] PA+ZP+DK,Tender, categoryB, softwareDev, UnitSale.json
+3_[Atest_Seller2] PA+ZP+DK,Tender, categoryС, softwareDev, UnitSale.json
 """
 
 # До первой ошибки --maxfail=1

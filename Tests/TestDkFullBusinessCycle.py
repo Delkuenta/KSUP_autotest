@@ -6,7 +6,13 @@ from pages.contract_element_page import ContractElementPage
 from pages.contract_list_page import ContractPage
 from pages.login_data import LoginData
 
-
+# UnitSale\Dir - DKS
+"""
+19_[Atest_Dir] DK, categoryA, softwareDev.json
+"""
+# До первой ошибки --maxfail=1
+@pytest.mark.parametrize('path_data_file', [
+    r"UnitSale\Dir - DKS\19_[Atest_Dir] DK, categoryA, softwareDev.json"])
 class TestDkFullBusinessCycle:
 
     def test_create_contract(self, browser, path_data_file):

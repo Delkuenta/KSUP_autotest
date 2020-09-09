@@ -11,20 +11,30 @@ from pages.login_data import LoginData
 from pages.presale_create_form_page import PresaleFormCreate
 from pages.zakup_list_page import ZakupListPage
 
-# SeparateSale\Seller - ДКС
-# 1[АТест_Seller] ПА+ЗП+ДК, Тендерная заявка, категория A, разработка заказного ПО, НЕсамостоятельная продажа.json
-# 2[АТест_Seller] ПА+ЗП+ДК, Коммерческое предложение, категория A, разработка заказного ПО, НЕсамостоятельная продажa.json
-# 4[АТест_Seller2] ПА+ЗП+ДК, Тендерная заявка, категория A, разработка заказного ПО, НЕсамостоятельная продажа.json
+# SeparateSale\Seller - DKS
+"""
+1[Atest_Seller] PA+ZP+DK, Tender, categoryA,  SoftwareDev, SeparateSale.json
+2[Atest_Seller] PA+ZP+DK, CommercialOffer, categoryA, SoftwareDev, SeparateSale.json
+3[Atest_Seller] PA+ZP+DK, RequestPrice, categoryA, softwareDev, SeparateSale.json
+4[Atest_Seller2] PA+ZP+DK, Tender, categoryA,  SoftwareDev, SeparateSale.json
+5[Atest_Seller2] PA+ZP+DK, CommercialOffer, categoryA, SoftwareDev, SeparateSale.json
+6[Atest_Seller2] PA+ZP+DK, RequestPrice, categoryA, softwareDev, SeparateSale.json
+"""
 
-# SeparateSale\Dir - ДКС
-# 1[АТест_Dir] ПА+ЗП+ДК, Тендерная заявка, категория A, разработка заказного ПО, НЕсамостоятельная продажа.json
-# 2[АТест_Dir] ПА+ЗП+ДК, Коммерческое предложение, категория A, разработка заказного ПО, НЕсамостоятельная продажa.json
-# 3[АТест_Dir] ПА+ЗП+ДК, Запрос цен товаров, услуг, работ, категория A, разработка заказного ПО, НЕсамостоятельная продажa.json
+# SeparateSale\Dir - DKS
+"""
+1[Atest_Dir] PA+ZP+DK, Tender, categoryA,  SoftwareDev, SeparateSale.json
+2[Atest_Dir] PA+ZP+DK, CommercialOffer, categoryA, SoftwareDev, SeparateSale.json
+3[Atest_Dir] PA+ZP+DK, RequestPrice, categoryA, softwareDev, SeparateSale.json
+4[Atest_Dir2] PA+ZP+DK, Tender, categoryA,  SoftwareDev, SeparateSale.json
+5[Atest_Dir2] PA+ZP+DK, CommercialOffer, categoryA, SoftwareDev, SeparateSale.json
+6[Atest_Dir2] PA+ZP+DK, RequestPrice, categoryA, softwareDev, SeparateSale.json
+"""
 
 
 # До первой ошибки --maxfail=1
 @pytest.mark.parametrize('path_data_file', [
-    r"SeparateSale\Seller\1[АТест_Seller] ПА+ЗП+ДК, Тендерная заявка, категория A, разработка заказного ПО, НЕсамостоятельная продажа.json"])
+    r"SeparateSale\Dir - DKS\1[Atest_Dir] PA+ZP+DK, Tender, categoryA,  SoftwareDev, SeparateSale.json"])
 class TestSeparateSaleFullBusinessCyclePaZpDk:
 
     def test_create_presale(self, browser, path_data_file):
