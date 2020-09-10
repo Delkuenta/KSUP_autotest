@@ -65,7 +65,7 @@ from pages.zakup_list_page import ZakupListPage
 
 # До первой ошибки --maxfail=1
 @pytest.mark.parametrize('path_data_file', [
-    r"UnitSale\Dir - ДКС\1_[АТест_Dir] ПА+ЗП+ДК, Тендерная заявка, категория A, разработка заказного ПО, Самостоятельная продажа.json"])
+    r"UnitSale\Dir - DKS\13_[Atest_Dir] PA+ZP+DK, RequestPrice, categoryA, softwareDev, UnitSale.json"])
 class TestUnitSaleFullBusinessCyclePaZpDk:
     def test_create_presale(self, browser, path_data_file):
         user_data_dict = BasePage.read_json(browser, path_data_file)

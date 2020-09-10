@@ -94,11 +94,11 @@ class PresaleElementPage(BasePage):
         self.browser.find_element(*PresaleElementLocators.APPROVAL_MANAGER_ELEMENT).click()
         if user_data_dict["create_account"] == "Mr_KSUP_Seller" or user_data_dict["create_account"] == "Mr_KSUP_Dir":
             how, what = PresaleElementLocators.CHANGE_SELLER_RESPONSIBLE_DROPDOWN_ELEMENT
-            what = what.replace("salesManager", user_data_dict["salesManager"])
+            what = what.replace("salesManager_name", user_data_dict["salesManager"])
             self.browser.find_element(how, what).click()
         else:
             how, what = PresaleElementLocators.CHANGE_SELLER_PERFORMER_DROPDOWN_ELEMENT
-            what = what.replace("executiveManager", user_data_dict["executiveManager"])
+            what = what.replace("executiveManager_name", user_data_dict["executiveManager"])
             self.browser.find_element(how, what).click()
         self.browser.find_element(*PresaleElementLocators.APPROVAL_BUTTON_IN_FRAME).click()
         self.browser.find_element(*PresaleElementLocators.MESSAGE_OK_BUTTON).click()

@@ -183,10 +183,10 @@ class PresaleElementLocators:
     APPROVAL_MANAGER_ELEMENT = (By.ID, "select2-ctl00_PlaceHolderMain_ddlResponsbileManager-container")
 
     # Выбор значения продавца
-    CHANGE_SELLER_RESPONSIBLE_DROPDOWN_ELEMENT = (By.XPATH, "//li[normalize-space(.)='salesManager']")
+    CHANGE_SELLER_RESPONSIBLE_DROPDOWN_ELEMENT = (By.XPATH, "//li[normalize-space(.)='salesManager_name']")
 
     # Выбор значения продавца
-    CHANGE_SELLER_PERFORMER_DROPDOWN_ELEMENT = (By.XPATH, "//li[normalize-space(.)='executiveManager']")
+    CHANGE_SELLER_PERFORMER_DROPDOWN_ELEMENT = (By.XPATH, "//li[normalize-space(.)='executiveManager_name']")
 
     APPROVAL_BUTTON_IN_FRAME = (By.XPATH, "//input[@id='ctl00_PlaceHolderMain_btnApprove']")
 

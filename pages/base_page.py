@@ -106,7 +106,7 @@ class BasePage:
             "Титул страницы не соответствует переходу"
 
     # Проверка что элемент отображен и имеет размер
-    def is_visibility_of_element_located(self, how, what, timeout=1):
+    def is_visibility_of_element_located(self, how, what, timeout=3):
         try:
             WebDriverWait(self.browser, timeout).until(ec.visibility_of_element_located((how, what)))
         except TimeoutException:
