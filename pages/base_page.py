@@ -113,9 +113,8 @@ class BasePage:
             return False
         return True
 
-    def read_json(self, name_file):
-        path_file = r"D:\WORK\Git\KSUP_autotest\userdata"
-        full_path_file = os.path.join(path_file, name_file)
+    def read_json(self, path_file):
+        full_path_file = os.path.join(UserData.current_dir, path_file)
         with open(full_path_file, "r", encoding='utf-8') as file:
             data = json.load(file)
         user_data_dict = dict(data['main_data'])
