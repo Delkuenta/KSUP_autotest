@@ -12,7 +12,7 @@ from .locators import BasePageLocators
 
 class BasePage:
 
-    def __init__(self, browser: RemoteWebDriver, url, timeout=10):
+    def __init__(self, browser: RemoteWebDriver, url, timeout=20):
         self.browser = browser
         self.url = url
         self.browser.implicitly_wait(timeout)  # неявное ожидание
@@ -43,7 +43,7 @@ class BasePage:
     # Проверка что элемент присутствует в DOM(не явное ожидание)
     def is_element_present(self, how, what):
         try:
-            self.browser.implicitly_wait(3)
+            self.browser.implicitly_wait(5)
             self.browser.find_element(how, what)
         except NoSuchElementException:
             return False
@@ -116,7 +116,6 @@ class BasePage:
     def read_json(self, name_file):
         path_file = r"D:\WORK\Git\KSUP_autotest\userdata"
         full_path_file = os.path.join(path_file, name_file)
-        print(full_path_file)
         with open(full_path_file, "r", encoding='utf-8') as file:
             data = json.load(file)
         user_data_dict = dict(data['main_data'])
