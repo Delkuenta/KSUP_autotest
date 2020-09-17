@@ -17,6 +17,7 @@ class BasePage:
         self.url = url
         self.browser.implicitly_wait(timeout)  # неявное ожидание
 
+
     def open(self):
         self.browser.get(self.url)
 
@@ -106,7 +107,7 @@ class BasePage:
             "Титул страницы не соответствует переходу"
 
     # Проверка что элемент отображен и имеет размер
-    def is_visibility_of_element_located(self, how, what, timeout=3):
+    def is_visibility_of_element_located(self, how, what, timeout=5):
         try:
             WebDriverWait(self.browser, timeout).until(ec.visibility_of_element_located((how, what)))
         except TimeoutException:

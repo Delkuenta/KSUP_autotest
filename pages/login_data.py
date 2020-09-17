@@ -5,7 +5,7 @@ from userdata.user_data import UserData
 
 
 class LoginData(BasePage):
-    link = "https://ksup-tst.lanit"
+    link = "https://ksup-tst.lanit/"
 
     def login(self, login):
         account = ""

@@ -42,12 +42,12 @@ from pages.zakup_list_page import ZakupListPage
 4_[Atest_Dir] PA+ZP+DK,Tender, categoryA, OtherType, UnitSale.json
 5_[Atest_Dir] PA+ZP+DK,Tender, categoryB, OtherType, UnitSale.json
 6_[Atest_Dir] PA+ZP+DK,Tender, categoryC, OtherType, UnitSale.json
-7_[Аtest_Dir] PA+ZP+DK, CommercialOffer, categoryA, softwareDev, UnitSale.json
-8_[Аtest_Dir] PA+ZP+DK, CommercialOffer, categoryB, softwareDev, UnitSale.json
-9_[Аtest_Dir] PA+ZP+DK, CommercialOffer, categoryС, softwareDev, UnitSale.json
-10_[Аtest_Dir] PA+ZP+DK, CommercialOffer, categoryA, OtherType, UnitSale.json
-11_[Аtest_Dir] PA+ZP+DK, CommercialOffer, categoryB, OtherType, UnitSale.json
-12_[Аtest_Dir] PA+ZP+DK, CommercialOffer, categoryC, OtherType, UnitSale.json
+7_[Atest_Dir] PA+ZP+DK, CommercialOffer, categoryA, softwareDev, UnitSale.json
+8_[Atest_Dir] PA+ZP+DK, CommercialOffer, categoryB, softwareDev, UnitSale.json
+9_[Atest_Dir] PA+ZP+DK, CommercialOffer, categoryС, softwareDev, UnitSale.json
+10_[Atest_Dir] PA+ZP+DK, CommercialOffer, categoryA, OtherType, UnitSale.json
+11_[Atest_Dir] PA+ZP+DK, CommercialOffer, categoryB, OtherType, UnitSale.json
+12_[Atest_Dir] PA+ZP+DK, CommercialOffer, categoryC, OtherType, UnitSale.json
 13_[Atest_Dir] PA+ZP+DK, RequestPrice, categoryA, softwareDev, UnitSale.json
 14_[Atest_Dir] PA+ZP+DK, RequestPrice, categoryB, softwareDev, UnitSale.json
 15_[Atest_Dir] PA+ZP+DK, RequestPrice, categoryC, softwareDev, UnitSale.json
@@ -64,8 +64,12 @@ from pages.zakup_list_page import ZakupListPage
 """
 
 # До первой ошибки --maxfail=1
+# Браузер для запуска --browser_name=firefox
 @pytest.mark.parametrize('path_data_file', [
-    r"UnitSale\Dir - DKS\13_[Atest_Dir] PA+ZP+DK, RequestPrice, categoryA, softwareDev, UnitSale.json"])
+    r"UnitSale\Dir - DKS\1_[Atest_Dir] PA+ZP+DK,Tender, categoryA, softwareDev, UnitSale.json"
+    #r"UnitSale\Dir - DKS\7_[Atest_Dir] PA+ZP+DK, CommercialOffer, categoryA, softwareDev, UnitSale.json",
+    #r"UnitSale\Dir - DKS\13_[Atest_Dir] PA+ZP+DK, RequestPrice, categoryA, softwareDev, UnitSale.json"
+    ])
 class TestUnitSaleFullBusinessCyclePaZpDk:
     def test_create_presale(self, browser, path_data_file):
         user_data_dict = BasePage.read_json(browser, path_data_file)

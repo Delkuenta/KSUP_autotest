@@ -294,7 +294,6 @@ class ZakupElementPage(BasePage):
                 'Отображено пустое поле "Риски проекта с точки зрения Департамента"'
             print('Пустое поле "Риски проекта с точки зрения Департамента" успешно отображено')
 
-
     def verify_draft_status_zakup(self):
         self.is_element_present(*ZakupElementLocators.APPROVAL_MAIN_STATUS_IN_ZP)
         assert self.is_text_to_be_present_in_element(*ZakupElementLocators.APPROVAL_MAIN_STATUS_IN_ZP,
@@ -880,12 +879,6 @@ class ZakupElementPage(BasePage):
         self.browser.find_element(*ZakupElementLocators.ClOSE_ALLERT_ZAKUP).click()
 
     def go_to_create_contract_based_on_zp(self):
-        count_refresh_page = 0
-        while count_refresh_page <= 3:
-            if self.is_visibility_of_element_located(*ZakupElementLocators.CREATE_CONTRACT_BASED_ON_ZAKUP) is True:
-                break
-            else:
-                self.browser.refresh()
-                count_refresh_page += 1
-        self.is_element_present(*ZakupElementLocators.CREATE_CONTRACT_BASED_ON_ZAKUP)
+        assert self.is_visibility_of_element_located(*ZakupElementLocators.CREATE_CONTRACT_BASED_ON_ZAKUP), \
+            'Кнопка "Внести информацию о конкурсе" не отображена'
         self.browser.find_element(*ZakupElementLocators.CREATE_CONTRACT_BASED_ON_ZAKUP).click()
