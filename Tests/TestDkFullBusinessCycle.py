@@ -22,8 +22,8 @@ class TestDkFullBusinessCycle:
         link = LoginData.link
         login_page = LoginData(browser, link)
         login_page.open()
-        login_page.login(user_data_dict["create_account"])
-        login_page.verify_username(user_data_dict["create_account"])
+        login_page.login(user_data_dict["createAccount"])
+        login_page.verify_username(user_data_dict["createAccount"])
         login_page.go_to_contract_list()
         contract_page = ContractPage(browser, browser.current_url)
         contract_page.go_to_create_contract()
@@ -39,8 +39,8 @@ class TestDkFullBusinessCycle:
         link = LoginData.link
         login_page = LoginData(browser, link)
         login_page.open()
-        login_page.login(user_data_dict["create_account"])
-        login_page.verify_username(user_data_dict["create_account"])
+        login_page.login(user_data_dict["createAccount"])
+        login_page.verify_username(user_data_dict["createAccount"])
         login_page.go_to_contract_list()
         contract_list = ContractPage(browser, browser.current_url)
         contract_list.go_to_contract_element(user_data_dict)
@@ -94,10 +94,10 @@ class TestDkFullBusinessCycle:
         contract_element_page = ContractElementPage(browser, browser.current_url)
         contract_element_page.approval_contract_fin()
         contract_element_page.verify_contract_successfully_status_approval_fin()
-        if user_data_dict["groupTypeWork"] == "Software" and user_data_dict["price_category"] != "C":
+        if user_data_dict["groupTypeWork"] == "Software" and user_data_dict["priceCategory"] != "C":
             contract_element_page.verify_contract_waiting_status_approval_udprpo()
         elif user_data_dict["groupTypeWork"] == "Other" \
-                and user_data_dict["price_category"] == "A" \
+                and user_data_dict["priceCategory"] == "A" \
                 and user_data_dict["contractorType"] != "Тендерная заявка":
             contract_element_page.verify_contract_waiting_status_approval_kkp()
 
@@ -105,7 +105,7 @@ class TestDkFullBusinessCycle:
         user_data_dict = BasePage.read_json(browser, path_data_file)
         user_data_dict = BasePage.dict_preparation(browser, user_data_dict)
         if user_data_dict["groupTypeWork"] == "Software" \
-                and user_data_dict["price_category"] != "C":
+                and user_data_dict["priceCategory"] != "C":
             link = LoginData.link
             login_page = LoginData(browser, link)
             login_page.open()
@@ -118,7 +118,7 @@ class TestDkFullBusinessCycle:
             contract_element_page.approval_contract_udprpo()
             contract_element_page.verify_contract_successfully_status_approval_udprpo()
             if user_data_dict["contractorType"] != "Тендерная заявка" \
-                    and user_data_dict["price_category"] == "A":
+                    and user_data_dict["priceCategory"] == "A":
                 contract_element_page.verify_contract_waiting_status_approval_kkp()
         else:
             print("\nВнутреннее согласование контракта со службой УДПР ПО не требуется")
@@ -127,7 +127,7 @@ class TestDkFullBusinessCycle:
         user_data_dict = BasePage.read_json(browser, path_data_file)
         user_data_dict = BasePage.dict_preparation(browser, user_data_dict)
         if user_data_dict["contractorType"] != "Тендерная заявка" \
-                and user_data_dict["price_category"] == "A":
+                and user_data_dict["priceCategory"] == "A":
             link = LoginData.link
             login_page = LoginData(browser, link)
             login_page.open()

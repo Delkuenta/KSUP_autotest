@@ -34,7 +34,8 @@ from pages.zakup_list_page import ZakupListPage
 
 # До первой ошибки --maxfail=1
 @pytest.mark.parametrize('path_data_file', [
-    r"SeparateSale\Dir - DKS\4[Atest_Dir2] PA+ZP+DK, Tender, categoryA,  SoftwareDev, SeparateSale.json"])
+    r"SeparateSale\Dir - DKS\1[Atest_Dir] PA+ZP+DK, Tender, categoryA,  SoftwareDev, SeparateSale.json"
+    ])
 class TestSeparateSaleFullBusinessCyclePaZpDk:
 
     def test_create_presale(self, browser, path_data_file):
@@ -44,8 +45,8 @@ class TestSeparateSaleFullBusinessCyclePaZpDk:
         link = LoginData.link
         login_page = LoginData(browser, link)
         login_page.open()
-        login_page.login(user_data_dict["create_account"])
-        login_page.verify_username(user_data_dict["create_account"])
+        login_page.login(user_data_dict["createAccount"])
+        login_page.verify_username(user_data_dict["createAccount"])
         presale_list_page = PresalePage(browser, link)
         presale_list_page.go_to_presale_list()
         presale_list_page.should_be_clickable_create_button()
@@ -64,8 +65,8 @@ class TestSeparateSaleFullBusinessCyclePaZpDk:
         link = LoginData.link
         login_page = LoginData(browser, link)
         login_page.open()
-        if user_data_dict["create_account"] == "Mr_KSUP_Seller" \
-                or user_data_dict["create_account"] == "Mr_KSUP_Dir":
+        if user_data_dict["createAccount"] == "Mr_KSUP_Seller" \
+                or user_data_dict["createAccount"] == "Mr_KSUP_Dir":
             login_page.login("Mr_KSUP_Dir2")
             login_page.verify_username("Mr_KSUP_Dir2")
         else:
@@ -149,8 +150,8 @@ class TestSeparateSaleFullBusinessCyclePaZpDk:
         link = LoginData.link
         login_page = LoginData(browser, link)
         login_page.open()
-        login_page.login(user_data_dict["create_account"])
-        login_page.verify_username(user_data_dict["create_account"])
+        login_page.login(user_data_dict["createAccount"])
+        login_page.verify_username(user_data_dict["createAccount"])
         presale_list_page = PresalePage(browser, browser.current_url)
         presale_list_page.go_to_presale_list()
         presale_list_page.should_be_element_on_presale_list(user_data_dict)
@@ -228,8 +229,8 @@ class TestSeparateSaleFullBusinessCyclePaZpDk:
         link = LoginData.link
         login_page = LoginData(browser, link)
         login_page.open()
-        login_page.login(user_data_dict["create_account"])
-        login_page.verify_username(user_data_dict["create_account"])
+        login_page.login(user_data_dict["createAccount"])
+        login_page.verify_username(user_data_dict["createAccount"])
         login_page.go_to_zakup_list()
         zakup_list_page = ZakupListPage(browser, browser.current_url)
         zakup_list_page.go_to_zakup_element(user_data_dict)
@@ -239,7 +240,7 @@ class TestSeparateSaleFullBusinessCyclePaZpDk:
         if user_data_dict["contractorType"] == "Тендерная заявка":
             zakup_element_page.verify_zakup_waiting_status_approval_legal()
         elif user_data_dict["contractorType"] != "Тендерная заявка" \
-                and user_data_dict["price_category"] != "C" \
+                and user_data_dict["priceCategory"] != "C" \
                 and user_data_dict["groupTypeWork"] == "Software":
             zakup_element_page.verify_zakup_waiting_status_approval_udprpo()
         else:
@@ -302,10 +303,10 @@ class TestSeparateSaleFullBusinessCyclePaZpDk:
             zakup_element_page.approval_zakup_fin()
             zakup_element_page.verify_zakup_successfully_status_approval_fin(user_data_dict)
             if user_data_dict["groupTypeWork"] == "Software" \
-                    and user_data_dict["price_category"] != "C":
+                    and user_data_dict["priceCategory"] != "C":
                 zakup_element_page.verify_zakup_waiting_status_approval_udprpo()
             elif user_data_dict["groupTypeWork"] == "Other" \
-                    and user_data_dict["price_category"] == "A":
+                    and user_data_dict["priceCategory"] == "A":
                 zakup_element_page.verify_zakup_waiting_status_approval_kkp()
         else:
             print("\nВнутреннее согласование закупочной процедуры c финансовой службой не требуется")
@@ -314,7 +315,7 @@ class TestSeparateSaleFullBusinessCyclePaZpDk:
         user_data_dict = BasePage.read_json(browser, path_data_file)
         user_data_dict = BasePage.dict_preparation(browser, user_data_dict)
         if user_data_dict["groupTypeWork"] == "Software" \
-                and user_data_dict["price_category"] != "C":
+                and user_data_dict["priceCategory"] != "C":
             link = LoginData.link
             login_page = LoginData(browser, link)
             login_page.open()
@@ -327,7 +328,7 @@ class TestSeparateSaleFullBusinessCyclePaZpDk:
             zakup_element_page.approval_zakup_udprpo()
             zakup_element_page.verify_zakup_successfully_status_approval_udprpo(user_data_dict)
             if user_data_dict["contractorType"] == "Тендерная заявка" \
-                    and user_data_dict["price_category"] == "A":
+                    and user_data_dict["priceCategory"] == "A":
                 zakup_element_page.verify_zakup_waiting_status_approval_kkp()
         else:
             print("\nВнутреннее согласование закупочной процедуры со службой УДПР ПО не требуется")
@@ -336,7 +337,7 @@ class TestSeparateSaleFullBusinessCyclePaZpDk:
         user_data_dict = BasePage.read_json(browser, path_data_file)
         user_data_dict = BasePage.dict_preparation(browser, user_data_dict)
         if user_data_dict["contractorType"] == "Тендерная заявка" \
-                and user_data_dict["price_category"] == "A":
+                and user_data_dict["priceCategory"] == "A":
             link = LoginData.link
             login_page = LoginData(browser, link)
             login_page.open()
@@ -413,8 +414,8 @@ class TestSeparateSaleFullBusinessCyclePaZpDk:
         link = LoginData.link
         login_page = LoginData(browser, link)
         login_page.open()
-        login_page.login(user_data_dict["create_account"])
-        login_page.verify_username(user_data_dict["create_account"])
+        login_page.login(user_data_dict["createAccount"])
+        login_page.verify_username(user_data_dict["createAccount"])
         login_page.go_to_zakup_list()
         zakup_list_page = ZakupListPage(browser, browser.current_url)
         zakup_list_page.go_to_zakup_element(user_data_dict)
@@ -490,8 +491,8 @@ class TestSeparateSaleFullBusinessCyclePaZpDk:
         link = LoginData.link
         login_page = LoginData(browser, link)
         login_page.open()
-        login_page.login(user_data_dict["create_account"])
-        login_page.verify_username(user_data_dict["create_account"])
+        login_page.login(user_data_dict["createAccount"])
+        login_page.verify_username(user_data_dict["createAccount"])
         login_page.go_to_contract_list()
         contract_list = ContractPage(browser, browser.current_url)
         contract_list.go_to_contract_element(user_data_dict)
@@ -545,10 +546,10 @@ class TestSeparateSaleFullBusinessCyclePaZpDk:
         contract_element_page = ContractElementPage(browser, browser.current_url)
         contract_element_page.approval_contract_fin()
         contract_element_page.verify_contract_successfully_status_approval_fin()
-        if user_data_dict["groupTypeWork"] == "Software" and user_data_dict["price_category"] != "C":
+        if user_data_dict["groupTypeWork"] == "Software" and user_data_dict["priceCategory"] != "C":
             contract_element_page.verify_contract_waiting_status_approval_udprpo()
         elif user_data_dict["groupTypeWork"] == "Other" \
-                and user_data_dict["price_category"] == "A" \
+                and user_data_dict["priceCategory"] == "A" \
                 and user_data_dict["contractorType"] != "Тендерная заявка":
             contract_element_page.verify_contract_waiting_status_approval_kkp()
 
@@ -556,7 +557,7 @@ class TestSeparateSaleFullBusinessCyclePaZpDk:
         user_data_dict = BasePage.read_json(browser, path_data_file)
         user_data_dict = BasePage.dict_preparation(browser, user_data_dict)
         if user_data_dict["groupTypeWork"] == "Software" \
-                and user_data_dict["price_category"] != "C":
+                and user_data_dict["priceCategory"] != "C":
             link = LoginData.link
             login_page = LoginData(browser, link)
             login_page.open()
@@ -569,7 +570,7 @@ class TestSeparateSaleFullBusinessCyclePaZpDk:
             contract_element_page.approval_contract_udprpo()
             contract_element_page.verify_contract_successfully_status_approval_udprpo()
             if user_data_dict["contractorType"] != "Тендерная заявка" \
-                    and user_data_dict["price_category"] == "A":
+                    and user_data_dict["priceCategory"] == "A":
                 contract_element_page.verify_contract_waiting_status_approval_kkp()
         else:
             print("\nВнутреннее согласование контракта со службой УДПР ПО не требуется")
@@ -578,7 +579,7 @@ class TestSeparateSaleFullBusinessCyclePaZpDk:
         user_data_dict = BasePage.read_json(browser, path_data_file)
         user_data_dict = BasePage.dict_preparation(browser, user_data_dict)
         if user_data_dict["contractorType"] != "Тендерная заявка" \
-                and user_data_dict["price_category"] == "A":
+                and user_data_dict["priceCategory"] == "A":
             link = LoginData.link
             login_page = LoginData(browser, link)
             login_page.open()

@@ -50,13 +50,13 @@ class ZakupFormCreate(BasePage):
                     'Ошибка: Не отображено поле "Номер закупки"'
                 # Заполняем поле "Номер закупки *"
                 self.browser.find_element(*FormCreateZakupLocators.EIS_PURCHASE_NUMBER).send_keys(
-                    user_data_dict["purchase_number"])
+                    user_data_dict["purchaseNumber"])
             # Заполняем поле "Ссылка на закупку *"
             self.browser.find_element(*FormCreateZakupLocators.EIS_PURCHASE_LINK).send_keys(
-                user_data_dict["purchase_link"])
+                user_data_dict["purchaseLink"])
             # Заполняем поле "Риски проекта с точки зрения Департамента"
             self.browser.find_element(*FormCreateZakupLocators.PROJECT_RISK_DEPARTMENT_PERSPEC).\
-                send_keys(user_data_dict["project_risk_department"])
+                send_keys(user_data_dict["projectRiskDepartment"])
             # Добавляем файл в поле "Тендерная заявка"
             self.browser.find_element(*FormCreateZakupLocators.FILE_TENDER_REQUEST).send_keys(
                 UserData.file_path_for_link_doc)
@@ -95,7 +95,7 @@ class ZakupFormCreate(BasePage):
         elif user_data_dict["contractorType"] == "Коммерческое предложение":
             # Заполняем поле "Риски проекта с точки зрения Департамента"
             self.browser.find_element(*FormCreateZakupLocators.PROJECT_RISK_DEPARTMENT_PERSPEC).\
-                send_keys(user_data_dict["project_risk_department"])
+                send_keys(user_data_dict["projectRiskDepartment"])
             # Добавляем файл в поле  "Официальный запрос от Заказчика на КП *"
             self.browser.find_element(*FormCreateZakupLocators.FILE_KP_REQUEST_FROM_CUSTOMER).send_keys(
                 UserData.file_path_for_link_doc)
@@ -136,7 +136,7 @@ class ZakupFormCreate(BasePage):
                 user_data_dict["saleLawType"])
             # Заполняем поле "Срок предоставления ценовой информации"
             self.browser.find_element(*FormCreateZakupLocators.PRICE_INFORMATION_DEADLINE_FROM).send_keys(
-                user_data_dict["price_information_deadline"])
+                user_data_dict["priceInformationDeadline"])
 
             # Проверяем отображение полей "Предполагаемая дата начала проведения закупки с/по",
             # поля "Номер запроса цен на Официальном сайте ЕИС" и
@@ -156,23 +156,23 @@ class ZakupFormCreate(BasePage):
 
                 # Предполагаемая дата начала проведения закупки с
                 self.browser.find_element(*FormCreateZakupLocators.PURCHASE_START_DATE_FROM).send_keys(
-                    user_data_dict["purchase_start_date_from"])
+                    user_data_dict["purchaseStartDateFrom"])
 
                 # Предполагаемая дата начала проведения закупки по
                 self.browser.find_element(*FormCreateZakupLocators.PURCHASE_START_DATE_TO).send_keys(
-                    user_data_dict["purchase_start_date_to"])
+                    user_data_dict["purchaseStartDateTo"])
 
                 # Номер запроса цен на Официальном сайте ЕИС
                 self.browser.find_element(*FormCreateZakupLocators.EIS_PRICE_NUMBER).send_keys(
-                    user_data_dict["eis_price_number"])
+                    user_data_dict["eisPriceNumber"])
 
                 # Ссылка на запрос на Официальном сайте ЕИС
                 self.browser.find_element(*FormCreateZakupLocators.EIS_PRICE_LINK).send_keys(
-                    user_data_dict["eis_price_link"])
+                    user_data_dict["eisPriceLink"])
 
             # Заполняем поле "Риски проекта с точки зрения Департамента"
             self.browser.find_element(*FormCreateZakupLocators.PROJECT_RISK_DEPARTMENT_PERSPEC).\
-                send_keys(user_data_dict["project_risk_department"])
+                send_keys(user_data_dict["projectRiskDepartment"])
 
             # Прикрепляем файл в поле Запрос НМЦК
             self.browser.find_element(*FormCreateZakupLocators.FILE_NMCK_REQUEST).send_keys(

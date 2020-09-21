@@ -53,15 +53,13 @@ class PresaleElementPage(BasePage):
     # Кнопка внутри пресейла для создания ЗП типа "Внести информацию о коммерческом предложении" (проверяем
     # доступность и нажимаем)
     def go_to_create_zp_commercial_offer_based_on_presale(self):
-        assert self.is_visibility_of_element_located(
-            *PresaleElementLocators.COMMERCIAL_OFFER_ELEMENT), \
+        assert self.is_visibility_of_element_located(*PresaleElementLocators.COMMERCIAL_OFFER_ELEMENT), \
             'Кнопка "Внести информацию о коммерческом предложении" не отображена'
         self.browser.find_element(*PresaleElementLocators.COMMERCIAL_OFFER_ELEMENT).click()
 
     # Кнопка создания контракта на основне Пресейла
     def go_to_create_contract_based_on_presale(self):
-        assert self.is_visibility_of_element_located(
-            *PresaleElementLocators.CREATE_CONTRACT_ELEMENT), \
+        assert self.is_visibility_of_element_located(*PresaleElementLocators.CREATE_CONTRACT_ELEMENT), \
             'Кнопка "Внести информацию о договор/контракте" не отображена'
         self.browser.find_element(*PresaleElementLocators.CREATE_CONTRACT_ELEMENT).click()
 
@@ -70,7 +68,7 @@ class PresaleElementPage(BasePage):
         self.browser.find_element(*PresaleElementLocators.CONFIRM_APPROVAL_BUTTON).click()
         self.browser.switch_to.frame(self.browser.find_element(*PresaleElementLocators.iframe))
         self.browser.find_element(*PresaleElementLocators.APPROVAL_MANAGER_ELEMENT).click()
-        if user_data_dict["create_account"] == "Mr_KSUP_Seller" or user_data_dict["create_account"] == "Mr_KSUP_Dir":
+        if user_data_dict["createAccount"] == "Mr_KSUP_Seller" or user_data_dict["createAccount"] == "Mr_KSUP_Dir":
             how, what = PresaleElementLocators.CHANGE_SELLER_RESPONSIBLE_DROPDOWN_ELEMENT
             what = what.replace("salesManager_name", user_data_dict["salesManager"])
             self.browser.find_element(how, what).click()
@@ -89,8 +87,7 @@ class PresaleElementPage(BasePage):
             '\nОжидаемый результат: "На согласовании"'
 
     def verify_presale_approval_successfully_status(self):
-        assert self.is_text_to_be_present_in_element(*PresaleElementLocators.PRESALE_APPROVAL_STATUS,
-                                                     "Согласовано"), \
+        assert self.is_text_to_be_present_in_element(*PresaleElementLocators.PRESALE_APPROVAL_STATUS, "Согласовано"), \
             'Некорректный статус или отсутствует статус в поле "Статус согласования с подразделением"' \
             '\nОжидаемый результат: "Согласовано"'
 
@@ -109,22 +106,20 @@ class PresaleElementPage(BasePage):
         print('Значение в поле "Тип закупочной процедуры" успешно проверено')
 
         # Проверяем поле "Заказчик"
-        assert self.is_element_text(*PresaleElementLocators.CUSTOMER_IN_PRESALE) == user_data_dict[
-            "customer"], \
+        assert self.is_element_text(*PresaleElementLocators.CUSTOMER_IN_PRESALE) == user_data_dict["customer"], \
             f'\nНекорректное значение в поле "Заказчик".' \
             f'\nОжидаемый результат:{user_data_dict["customer"]}'
         print('Значение в поле "Заказчик" успешно проверено')
 
         # Проверяем поле "Подразделение-продавец"
-        assert self.is_element_text(*PresaleElementLocators.SALES_UNIT_IN_PRESALE) == user_data_dict[
-            "salesUnit"], \
+        assert self.is_element_text(*PresaleElementLocators.SALES_UNIT_IN_PRESALE) == user_data_dict["salesUnit"], \
             f'\nНекорректное значение в поле "Подразделение-продавец". ' \
             f'\nОжидаемый результат:{user_data_dict["salesUnit"]}'
         print('Значение в поле "Подразделение-продавец" успешно проверено')
 
         # Проверяем поле "Ответственный менеджер подразделения-продавца"
-        if (user_data_dict["create_account"] == "Mr_KSUP_Seller" or
-            user_data_dict["create_account"] == "Mr_KSUP_Dir") \
+        if (user_data_dict["createAccount"] == "Mr_KSUP_Seller" or
+            user_data_dict["createAccount"] == "Mr_KSUP_Dir") \
                 and user_data_dict["separateSale"] == "Нет" \
                 and self.is_element_text(*PresaleElementLocators.PRESALE_APPROVAL_STATUS) == "На согласовании":
             assert self.is_element_text(*PresaleElementLocators.SALES_MANAGER_IN_PRESALE) == \
@@ -147,8 +142,8 @@ class PresaleElementPage(BasePage):
         print('Значение в поле "Подразделение-исполнитель" успешно проверено')
 
         # Проверяем поле "Ответственный менеджер подразделения-исполнителя"
-        if (user_data_dict["create_account"] == "Mr_KSUP_Seller2" or
-            user_data_dict["create_account"] == "Mr_KSUP_Dir2") \
+        if (user_data_dict["createAccount"] == "Mr_KSUP_Seller2" or
+            user_data_dict["createAccount"] == "Mr_KSUP_Dir2") \
                 and user_data_dict["separateSale"] == "Нет" \
                 and self.is_element_text(*PresaleElementLocators.PRESALE_APPROVAL_STATUS) == "На согласовании":
             assert self.is_element_text(*PresaleElementLocators.EXECUTIVE_MANAGER_IN_PRESALE) == \

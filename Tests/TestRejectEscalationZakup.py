@@ -25,8 +25,8 @@ class TestRejectEscalationZakup:
         link = LoginData.link
         login_page = LoginData(browser, link)
         login_page.open()
-        login_page.login(user_data_dict["create_account"])
-        login_page.verify_username(user_data_dict["create_account"])
+        login_page.login(user_data_dict["createAccount"])
+        login_page.verify_username(user_data_dict["createAccount"])
         presale_list_page = PresalePage(browser, link)
         presale_list_page.go_to_presale_list()
         presale_list_page.should_be_clickable_create_button()
@@ -41,8 +41,8 @@ class TestRejectEscalationZakup:
         link = LoginData.link
         login_page = LoginData(browser, link)
         login_page.open()
-        login_page.login(user_data_dict["create_account"])
-        login_page.verify_username(user_data_dict["create_account"])
+        login_page.login(user_data_dict["createAccount"])
+        login_page.verify_username(user_data_dict["createAccount"])
         presale_list_page = PresalePage(browser, browser.current_url)
         presale_list_page.go_to_presale_list()
         presale_list_page.should_be_element_on_presale_list(user_data_dict)
@@ -64,8 +64,8 @@ class TestRejectEscalationZakup:
         link = LoginData.link
         login_page = LoginData(browser, link)
         login_page.open()
-        login_page.login(user_data_dict["create_account"])
-        login_page.verify_username(user_data_dict["create_account"])
+        login_page.login(user_data_dict["createAccount"])
+        login_page.verify_username(user_data_dict["createAccount"])
         login_page.go_to_zakup_list()
         zakup_list_page = ZakupListPage(browser, browser.current_url)
         zakup_list_page.go_to_zakup_element(user_data_dict)
@@ -75,7 +75,7 @@ class TestRejectEscalationZakup:
         if user_data_dict["contractorType"] == "Тендерная заявка":
             zakup_element_page.verify_zakup_waiting_status_approval_legal()
         elif user_data_dict["contractorType"] != "Тендерная заявка" \
-                and user_data_dict["price_category"] != "C" \
+                and user_data_dict["priceCategory"] != "C" \
                 and user_data_dict["groupTypeWork"] == "Software":
             zakup_element_page.verify_zakup_waiting_status_approval_udprpo()
         else:
@@ -102,8 +102,8 @@ class TestRejectEscalationZakup:
         link = LoginData.link
         login_page = LoginData(browser, link)
         login_page.open()
-        login_page.login(user_data_dict["create_account"])
-        login_page.verify_username(user_data_dict["create_account"])
+        login_page.login(user_data_dict["createAccount"])
+        login_page.verify_username(user_data_dict["createAccount"])
         login_page.go_to_zakup_list()
         zakup_list_page = ZakupListPage(browser, browser.current_url)
         zakup_list_page.go_to_zakup_element(user_data_dict)
@@ -113,7 +113,7 @@ class TestRejectEscalationZakup:
         if user_data_dict["contractorType"] == "Тендерная заявка":
             zakup_element_page.verify_zakup_waiting_status_approval_legal()
         elif user_data_dict["contractorType"] != "Тендерная заявка" \
-                and user_data_dict["price_category"] != "C" \
+                and user_data_dict["priceCategory"] != "C" \
                 and user_data_dict["groupTypeWork"] == "Software":
             zakup_element_page.verify_zakup_waiting_status_approval_udprpo()
         else:
@@ -161,8 +161,8 @@ class TestRejectEscalationZakup:
         link = LoginData.link
         login_page = LoginData(browser, link)
         login_page.open()
-        login_page.login(user_data_dict["create_account"])
-        login_page.verify_username(user_data_dict["create_account"])
+        login_page.login(user_data_dict["createAccount"])
+        login_page.verify_username(user_data_dict["createAccount"])
         login_page.go_to_zakup_list()
         zakup_list_page = ZakupListPage(browser, browser.current_url)
         zakup_list_page.go_to_zakup_element(user_data_dict)
@@ -172,7 +172,7 @@ class TestRejectEscalationZakup:
         if user_data_dict["contractorType"] == "Тендерная заявка":
             zakup_element_page.verify_zakup_waiting_status_approval_legal()
         elif user_data_dict["contractorType"] != "Тендерная заявка" \
-                and user_data_dict["price_category"] != "C" \
+                and user_data_dict["priceCategory"] != "C" \
                 and user_data_dict["groupTypeWork"] == "Software":
             zakup_element_page.verify_zakup_waiting_status_approval_udprpo()
         else:
@@ -240,8 +240,8 @@ class TestRejectEscalationZakup:
         link = LoginData.link
         login_page = LoginData(browser, link)
         login_page.open()
-        login_page.login(user_data_dict["create_account"])
-        login_page.verify_username(user_data_dict["create_account"])
+        login_page.login(user_data_dict["createAccount"])
+        login_page.verify_username(user_data_dict["createAccount"])
         login_page.go_to_zakup_list()
         zakup_list_page = ZakupListPage(browser, browser.current_url)
         zakup_list_page.go_to_zakup_element(user_data_dict)
@@ -251,7 +251,7 @@ class TestRejectEscalationZakup:
         if user_data_dict["contractorType"] == "Тендерная заявка":
             zakup_element_page.verify_zakup_waiting_status_approval_legal()
         elif user_data_dict["contractorType"] != "Тендерная заявка" \
-                and user_data_dict["price_category"] != "C" \
+                and user_data_dict["priceCategory"] != "C" \
                 and user_data_dict["groupTypeWork"] == "Software":
             zakup_element_page.verify_zakup_waiting_status_approval_udprpo()
         else:
@@ -314,10 +314,10 @@ class TestRejectEscalationZakup:
             zakup_element_page.approval_zakup_fin()
             zakup_element_page.verify_zakup_successfully_status_approval_fin(user_data_dict)
             if user_data_dict["groupTypeWork"] == "Software" \
-                    and user_data_dict["price_category"] != "C":
+                    and user_data_dict["priceCategory"] != "C":
                 zakup_element_page.verify_zakup_waiting_status_approval_udprpo()
             elif user_data_dict["groupTypeWork"] == "Other" \
-                    and user_data_dict["price_category"] == "A":
+                    and user_data_dict["priceCategory"] == "A":
                 zakup_element_page.verify_zakup_waiting_status_approval_kkp()
         else:
             print("\nВнутреннее согласование закупочной процедуры c финансовой службой не требуется")
@@ -343,8 +343,8 @@ class TestRejectEscalationZakup:
         link = LoginData.link
         login_page = LoginData(browser, link)
         login_page.open()
-        login_page.login(user_data_dict["create_account"])
-        login_page.verify_username(user_data_dict["create_account"])
+        login_page.login(user_data_dict["createAccount"])
+        login_page.verify_username(user_data_dict["createAccount"])
         login_page.go_to_zakup_list()
         zakup_list_page = ZakupListPage(browser, browser.current_url)
         zakup_list_page.go_to_zakup_element(user_data_dict)
@@ -374,8 +374,8 @@ class TestRejectEscalationZakup:
         link = LoginData.link
         login_page = LoginData(browser, link)
         login_page.open()
-        login_page.login(user_data_dict["create_account"])
-        login_page.verify_username(user_data_dict["create_account"])
+        login_page.login(user_data_dict["createAccount"])
+        login_page.verify_username(user_data_dict["createAccount"])
         login_page.go_to_zakup_list()
         zakup_list_page = ZakupListPage(browser, browser.current_url)
         zakup_list_page.go_to_zakup_element(user_data_dict)
@@ -385,7 +385,7 @@ class TestRejectEscalationZakup:
         if user_data_dict["contractorType"] == "Тендерная заявка":
             zakup_element_page.verify_zakup_waiting_status_approval_legal()
         elif user_data_dict["contractorType"] != "Тендерная заявка" \
-                and user_data_dict["price_category"] != "C" \
+                and user_data_dict["priceCategory"] != "C" \
                 and user_data_dict["groupTypeWork"] == "Software":
             zakup_element_page.verify_zakup_waiting_status_approval_udprpo()
         else:
@@ -445,10 +445,10 @@ class TestRejectEscalationZakup:
             zakup_element_page.approval_zakup_fin()
             zakup_element_page.verify_zakup_successfully_status_approval_fin(user_data_dict)
             if user_data_dict["groupTypeWork"] == "Software" \
-                    and user_data_dict["price_category"] != "C":
+                    and user_data_dict["priceCategory"] != "C":
                 zakup_element_page.verify_zakup_waiting_status_approval_udprpo()
             elif user_data_dict["groupTypeWork"] == "Other" \
-                    and user_data_dict["price_category"] == "A":
+                    and user_data_dict["priceCategory"] == "A":
                 zakup_element_page.verify_zakup_waiting_status_approval_kkp()
         else:
             print("\nВнутреннее согласование закупочной процедуры c финансовой службой не требуется")
@@ -457,7 +457,7 @@ class TestRejectEscalationZakup:
         user_data_dict = BasePage.read_json(browser, path_data_file)
         user_data_dict = BasePage.dict_preparation(browser, user_data_dict)
         if user_data_dict["groupTypeWork"] == "Software" \
-                and user_data_dict["price_category"] != "C":
+                and user_data_dict["priceCategory"] != "C":
             link = LoginData.link
             login_page = LoginData(browser, link)
             login_page.open()
@@ -470,7 +470,7 @@ class TestRejectEscalationZakup:
             zakup_element_page.approval_zakup_udprpo()
             zakup_element_page.verify_zakup_successfully_status_approval_udprpo(user_data_dict)
             if user_data_dict["contractorType"] == "Тендерная заявка" \
-                    and user_data_dict["price_category"] == "A":
+                    and user_data_dict["priceCategory"] == "A":
                 zakup_element_page.verify_zakup_waiting_status_approval_kkp()
         else:
             print("\nВнутреннее согласование закупочной процедуры со службой УДПР ПО не требуется")
@@ -496,8 +496,8 @@ class TestRejectEscalationZakup:
         link = LoginData.link
         login_page = LoginData(browser, link)
         login_page.open()
-        login_page.login(user_data_dict["create_account"])
-        login_page.verify_username(user_data_dict["create_account"])
+        login_page.login(user_data_dict["createAccount"])
+        login_page.verify_username(user_data_dict["createAccount"])
         login_page.go_to_zakup_list()
         zakup_list_page = ZakupListPage(browser, browser.current_url)
         zakup_list_page.go_to_zakup_element(user_data_dict)

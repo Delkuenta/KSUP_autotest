@@ -98,7 +98,7 @@ class ZakupElementPage(BasePage):
 
         # Проверяем поле "Категория проекта"
         assert self.is_element_text(*ZakupElementLocators.PRICE_CATEGORY_IN_ZP) == \
-               user_data_dict["price_category"], "Ценовая категория закупочной процедуры не корректна"
+               user_data_dict["priceCategory"], "Ценовая категория закупочной процедуры не корректна"
         print('Значение в поле "Категория проекта" успешно проверено')
 
         # Проверяем поле "Порядок проведения закупочной процедуры"
@@ -165,28 +165,28 @@ class ZakupElementPage(BasePage):
         # Проверяем поле "Предполагаемая дата начала проведения закупки с"
         if user_data_dict["contractorType"] == "Запрос цен товаров, работ, услуг" and \
                 user_data_dict["saleLawType"] == "44-ФЗ":
-            assert user_data_dict["purchase_start_date_from"] in \
+            assert user_data_dict["purchaseStartDateFrom"] in \
                    str(self.is_element_text(*ZakupElementLocators.PURCHASE_START_DATE_FROM)).strip(), \
                 f'\nНекорректное значение в поле "Предполагаемая дата начала проведения закупки с".' \
-                f'\nОжидаемый результат: {user_data_dict["purchase_start_date_from"]}'
+                f'\nОжидаемый результат: {user_data_dict["purchaseStartDateFrom"]}'
             print('Значение в поле "Предполагаемая дата начала проведения закупки с" успешно проверено')
 
         # Проверяем поле "Предполагаемая дата начала проведения закупки по"
         if user_data_dict["contractorType"] == "Запрос цен товаров, работ, услуг" and \
                 user_data_dict["saleLawType"] == "44-ФЗ":
-            assert user_data_dict["purchase_start_date_to"] in \
+            assert user_data_dict["purchaseStartDateTo"] in \
                    str(self.is_element_text(*ZakupElementLocators.PURCHASE_START_DATE_TO)).strip(), \
                 f'\nНекорректное значение в поле "Предполагаемая дата начала проведения закупки по".' \
-                f'\nОжидаемый результат: {user_data_dict["purchase_start_date_to"]}'
+                f'\nОжидаемый результат: {user_data_dict["purchaseStartDateTo"]}'
             print('Значение в поле "Предполагаемая дата начала проведения закупки по" успешно проверено')
 
         # Проверяем поле "Срок предоставления ценовой информации"
         if user_data_dict["contractorType"] == "Запрос цен товаров, работ, услуг" and \
-                len(str(user_data_dict["price_information_deadline"])) > 0:
-            assert user_data_dict["price_information_deadline"] in \
+                len(str(user_data_dict["priceInformationDeadline"])) > 0:
+            assert user_data_dict["priceInformationDeadline"] in \
                    str(self.is_element_text(*ZakupElementLocators.PRICE_INFORMATION_DEAD_LINE_FROM_IN_ZP)).strip(), \
                 f'\nНекорректное значение в поле "Срок предоставления ценовой информации".' \
-                f'\nОжидаемый результат: {user_data_dict["price_information_deadline"]}'
+                f'\nОжидаемый результат: {user_data_dict["priceInformationDeadline"]}'
             print('Значение в поле "Срок предоставления ценовой информации" успешно проверено')
 
         # Проверяем поле "Плановая дата заключения договора/контракта"
@@ -222,27 +222,27 @@ class ZakupElementPage(BasePage):
         # Проверяем поле "Номер закупки"
         if user_data_dict["contractorType"] == "Тендерная заявка":
             assert self.is_element_text(*ZakupElementLocators.PURCHASE_NUMBER_IN_ZP) == \
-                   user_data_dict["purchase_number"], \
+                   user_data_dict["purchaseNumber"], \
                 f'\nНекорректное значение в поле "Номер закупки".' \
-                f'\nОжидаемый результат:{user_data_dict["purchase_number"]}'
+                f'\nОжидаемый результат:{user_data_dict["purchaseNumber"]}'
             print('Значение в поле "Номер закупки" успешно проверено')
 
         # Проверяем поле "Номер запроса цен на Официальном сайте ЕИС"
         if user_data_dict["contractorType"] == "Запрос цен товаров, работ, услуг" and \
                 user_data_dict["saleLawType"] == "44-ФЗ":
-            assert user_data_dict["eis_price_number"] in \
+            assert user_data_dict["eisPriceNumber"] in \
                    str(self.is_element_text(*ZakupElementLocators.EIS_PRICE_NUMBER_IN_ZP)).strip(), \
                 f'\nНекорректное значение в поле "Номер запроса цен на Официальном сайте ЕИС".' \
-                f'\nОжидаемый результат: {user_data_dict["eis_price_number"]}'
+                f'\nОжидаемый результат: {user_data_dict["eisPriceNumber"]}'
             print('Значение в поле "Номер запроса цен на Официальном сайте ЕИС" успешно проверено')
 
         # Проверяем поле "Ссылка на запрос на Официальном сайте ЕИС"
         if user_data_dict["contractorType"] == "Запрос цен товаров, работ, услуг" and \
                 user_data_dict["saleLawType"] == "44-ФЗ":
-            assert user_data_dict["eis_price_link"] in \
+            assert user_data_dict["eisPriceLink"] in \
                    str(self.is_element_text(*ZakupElementLocators.EIS_PRICE_LINK_IN_ZP)).strip(), \
                 f'\nНекорректное значение в поле "Ссылка на запрос на Официальном сайте ЕИС".' \
-                f'\nОжидаемый результат: {user_data_dict["eis_price_link"]}'
+                f'\nОжидаемый результат: {user_data_dict["eisPriceLink"]}'
             print('Значение в поле "Ссылка на запрос на Официальном сайте ЕИС" успешно проверено')
 
         # Проверяем поле "Связанные продажи"
@@ -265,9 +265,9 @@ class ZakupElementPage(BasePage):
         # Проверяем поле "Ссылка на закупку"
         if user_data_dict["contractorType"] == "Тендерная заявка":
             assert self.is_element_text(*ZakupElementLocators.PURCHASE_LINK_IN_ZP) == \
-                   user_data_dict["purchase_link"], \
+                   user_data_dict["purchaseLink"], \
                 f'\nНекорректное значение в поле "Ссылка на закупку".' \
-                f'\nОжидаемый результат:{user_data_dict["purchase_link"]}'
+                f'\nОжидаемый результат:{user_data_dict["purchaseLink"]}'
             print('Значение в поле "Ссылка на закупку" успешно проверено')
 
         # Проверяем поле "Результаты работ"
@@ -283,11 +283,11 @@ class ZakupElementPage(BasePage):
             print('Пустое поле "Результаты работ" успешно не отображено')
 
         # Проверяем поле "Риски проекта с точки зрения Департамента"
-        if len(user_data_dict["project_risk_department"]) > 0:
+        if len(user_data_dict["projectRiskDepartment"]) > 0:
             assert self.is_element_text(*ZakupElementLocators.PROJECT_RISKS_DEPARTMENT_IN_ZP) == \
-                   user_data_dict["project_risk_department"], \
+                   user_data_dict["projectRiskDepartment"], \
                 f'\nНекорректное значение в поле "Риски проекта с точки зрения Департамента".' \
-                f'\nОжидаемый результат:{user_data_dict["project_risk_department"]}'
+                f'\nОжидаемый результат:{user_data_dict["projectRiskDepartment"]}'
             print('Значение в поле "Риски проекта с точки зрения Департамента')
         else:
             assert self.browser.find_element(*ZakupElementLocators.PROJECT_RISKS_DEPARTMENT_IN_ZP).is_displayed() is False, \
@@ -305,8 +305,7 @@ class ZakupElementPage(BasePage):
             'Кнопка "Отправить на согласование" не отобрежена'
 
     def verify_visibility_button_create_contract(self):
-        assert self.is_visibility_of_element_located(
-            *ZakupElementLocators.CREATE_CONTRACT_BASED_ON_ZAKUP), \
+        assert self.is_visibility_of_element_located(*ZakupElementLocators.CREATE_CONTRACT_BASED_ON_ZAKUP), \
             'Кнопка "Внести информацию о договоре/контракте" не отобрежена'
 
     def verify_unvisibility_approval_button(self):
@@ -466,10 +465,9 @@ class ZakupElementPage(BasePage):
 
     def verify_zakup_successfully_status_approval_fin(self, user_data_dict):
         # Проверяем успешный статус согласования во вкладке "Общие сведения"
-        if (user_data_dict["contractorType"] == "Тендерная заявка" and user_data_dict[
-            "price_category"] == "C") or \
+        if (user_data_dict["contractorType"] == "Тендерная заявка" and user_data_dict["priceCategory"] == "C") or \
                 (user_data_dict["contractorType"] == "Тендерная заявка"
-                 and user_data_dict["price_category"] == "B"
+                 and user_data_dict["priceCategory"] == "B"
                  and user_data_dict["groupTypeWork"] == "Other"):
             self.browser.find_element(*ZakupElementLocators.GENERAL_INFORMATION_ELEMENT).click()
             self.is_element_present(*ZakupElementLocators.APPROVAL_MAIN_STATUS_IN_ZP)
@@ -539,10 +537,10 @@ class ZakupElementPage(BasePage):
         # Проверяем успешный статус согласования во вкладке "Общие сведения"
         if (user_data_dict["contractorType"] == "Тендерная заявка"
             and user_data_dict["groupTypeWork"] == "Software"
-            and user_data_dict["price_category"] == "B") \
+            and user_data_dict["priceCategory"] == "B") \
                 or (user_data_dict["contractorType"] != "Тендерная заявка"
                     and user_data_dict["groupTypeWork"] == "Software"
-                    and user_data_dict["price_category"] != "C"):
+                    and user_data_dict["priceCategory"] != "C"):
             self.browser.find_element(*ZakupElementLocators.GENERAL_INFORMATION_ELEMENT).click()
             self.is_element_present(*ZakupElementLocators.APPROVAL_MAIN_STATUS_IN_ZP)
             assert self.is_text_to_be_present_in_element(*ZakupElementLocators.APPROVAL_MAIN_STATUS_IN_ZP,
@@ -611,7 +609,7 @@ class ZakupElementPage(BasePage):
     def verify_zakup_successfully_status_approval_kkp(self, user_data_dict):
         # Проверяем успешный статус согласования во вкладке "Общие сведения"
         if (user_data_dict["contractorType"] == "Тендерная заявка"
-                and user_data_dict["price_category"] != "A"):
+                and user_data_dict["priceCategory"] != "A"):
             self.browser.find_element(*ZakupElementLocators.GENERAL_INFORMATION_ELEMENT).click()
             self.is_element_present(*ZakupElementLocators.APPROVAL_MAIN_STATUS_IN_ZP)
             assert self.is_text_to_be_present_in_element(*ZakupElementLocators.APPROVAL_MAIN_STATUS_IN_ZP,

@@ -22,11 +22,11 @@ class PresaleFormCreate(BasePage):
             # Ждем загрузки страницы по последнему загружаемому объекту
             # Если это НЕ самостоятельная продажа, то смотрим в поле "Ответственный менеджер подразделения-продавца"
             # значение из переменной "executiveManager" так как в поле "salesManager"
-            if user_data_dict["create_account"] == "Mr_KSUP_Seller":
+            if user_data_dict["createAccount"] == "Mr_KSUP_Seller":
                 self.is_text_to_be_present_in_element(*FormCreatePresaleLocators.SALES_MANAGER_ELEMENT,
                                                       user_data_dict["executiveManager"])
             else:
-                if user_data_dict["create_account"] == "Mr_KSUP_Seller2":
+                if user_data_dict["createAccount"] == "Mr_KSUP_Seller2":
                     self.is_text_to_be_present_in_element(*FormCreatePresaleLocators.SALES_MANAGER_ELEMENT,
                                                           user_data_dict["salesManager"])
         # Ищем поле "Предмет контракта" и заполняем
@@ -56,8 +56,8 @@ class PresaleFormCreate(BasePage):
             what = what.replace("salesManager_name", user_data_dict["salesManager"])
             self.browser.find_element(how, what).click()
         else:
-            if user_data_dict["create_account"] == "Mr_KSUP_Seller" or \
-                    user_data_dict["create_account"] == "Mr_KSUP_Dir":
+            if user_data_dict["createAccount"] == "Mr_KSUP_Seller" or \
+                    user_data_dict["createAccount"] == "Mr_KSUP_Dir":
                 how, what = FormCreatePresaleLocators.EXECUTIVE_MANAGER_DROPDOWN_ELEMENT
                 what = what.replace("executiveManager_name", user_data_dict["executiveManager"])
                 self.browser.find_element(how, what).click()
@@ -79,8 +79,8 @@ class PresaleFormCreate(BasePage):
             what = what.replace("executiveManager_name", user_data_dict["executiveManager"])
             self.browser.find_element(how, what).click()
         else:
-            if user_data_dict["create_account"] == "Mr_KSUP_Seller" or \
-                    user_data_dict["create_account"] == "Mr_KSUP_Dir":
+            if user_data_dict["createAccount"] == "Mr_KSUP_Seller" or \
+                    user_data_dict["createAccount"] == "Mr_KSUP_Dir":
                 how, what = FormCreatePresaleLocators.EXECUTIVE_MANAGER_DROPDOWN_ELEMENT
                 what = what.replace("executiveManager_name", user_data_dict["executiveManager"])
                 self.browser.find_element(how, what).click()
@@ -328,8 +328,8 @@ class PresaleFormCreate(BasePage):
                 self.browser.switch_to.alert.accept()
                 self.browser.switch_to.frame(self.browser.find_element(*FormCreatePresaleLocators.iframe))
                 self.browser.find_element(*FormCreatePresaleLocators.APPROVAL_DEPARTMENT_ELEMENT).click()
-                if user_data_dict["create_account"] == "Mr_KSUP_Seller" or \
-                        user_data_dict["create_account"] == "Mr_KSUP_Dir":
+                if user_data_dict["createAccount"] == "Mr_KSUP_Seller" or \
+                        user_data_dict["createAccount"] == "Mr_KSUP_Dir":
                     how, what = FormCreatePresaleLocators.SALES_UNIT_DROPDOWN_ELEMENT
                     what = what.replace("salesUnit_name", user_data_dict["salesUnit"])
                     self.browser.find_element(how, what).click()

@@ -51,7 +51,7 @@ class ContractFormCreate(BasePage):
 
         # Заполняем поле Номер
         self.browser.find_element(*FormCreateContractLocators.NUMBER_CONTRACT_ELEMENT).send_keys(
-            user_data_dict["number_contract"])
+            user_data_dict["numberContract"])
 
         # Заполняем поле "Дата заключения"
         # Для типа "Тендерная заявка" и "Коммерческое предложение" поле "Дата заключения" предзаполняется
@@ -63,15 +63,15 @@ class ContractFormCreate(BasePage):
         if user_data_dict["contractorType"] != "Тендерная заявка":
             # Заполняем поле "Номер закупки"
             self.browser.find_element(*FormCreateContractLocators.EIS_PURCHASE_NUMBER_CONTRACT).send_keys(
-                user_data_dict["purchase_number"])
+                user_data_dict["purchaseNumber"])
 
             # Заполняем поле "Ссылка на закупку"
             self.browser.find_element(*FormCreateContractLocators.EIS_PURCHSE_LINK_CONTRACT).send_keys(
-                user_data_dict["purchase_link"])
+                user_data_dict["purchaseLink"])
 
         # Заполняем поле Ссылка на договор/контракт на Официальном сайте ЕИС
         self.browser.find_element(*FormCreateContractLocators.EIS_CONTRACT_LINK).send_keys(
-            user_data_dict["eis_contract_link"])
+            user_data_dict["eisContractLink"])
 
         # Выбираем значение в поле "Территория применения"
         self.browser.find_element(*FormCreateContractLocators.SEARCH_TERRITORY_ELEMENT).click()
@@ -147,11 +147,11 @@ class ContractFormCreate(BasePage):
 
         # заполняем поле Количественные показатели реализации проекта
         self.browser.find_element(*FormCreateContractLocators.QUANTITATIVE_INDICATORS_PROJECT_ELEMENT).send_keys(
-            user_data_dict["quantitative_indicators_project"])
+            user_data_dict["quantitativeIndicatorsProject"])
 
         # Уникальный код проекта
         self.browser.find_element(*FormCreateContractLocators.PROJECT_UNIQUE_CODE).send_keys(
-            user_data_dict["project_unique_code"])
+            user_data_dict["projectUniqueCode"])
 
         # Выбираем связанный проект
         self.browser.find_element(*FormCreateContractLocators.PROJECT_ELEMENT).click()
@@ -285,7 +285,7 @@ class ContractFormCreate(BasePage):
 
         # Заполняем поле "Номер"
         self.browser.find_element(*FormCreateContractLocators.NUMBER_CONTRACT_ELEMENT).send_keys(
-            user_data_dict["number_contract"])
+            user_data_dict["numberContract"])
 
         # Заполняем поле "Дата заключения"
         self.browser.find_element(*FormCreateContractLocators.START_DATE_CONTRACT).send_keys(
@@ -297,15 +297,15 @@ class ContractFormCreate(BasePage):
 
         # Заполняем поле "Номер закупки"
         self.browser.find_element(*FormCreateContractLocators.EIS_PURCHASE_NUMBER_CONTRACT).send_keys(
-            user_data_dict["purchase_number"])
+            user_data_dict["purchaseNumber"])
 
         # Заполняем поле " Ссылка на закупку "
         self.browser.find_element(*FormCreateContractLocators.EIS_PURCHSE_LINK_CONTRACT).send_keys(
-            user_data_dict["purchase_link"])
+            user_data_dict["purchaseLink"])
 
         # Заполняем поле Ссылка на договор/контракт на Официальном сайте ЕИС
         self.browser.find_element(*FormCreateContractLocators.EIS_CONTRACT_LINK).send_keys(
-            user_data_dict["eis_contract_link"])
+            user_data_dict["eisContractLink"])
 
         # Выбираем значение в поле "Территория применения"
         self.browser.find_element(*FormCreateContractLocators.SEARCH_TERRITORY_ELEMENT).click()
@@ -317,7 +317,6 @@ class ContractFormCreate(BasePage):
         for territory in user_data_dict["territory"]:
             how, what = FormCreateContractLocators.TERRITORY_ELEMENT
             what = what.replace("territory_name", territory)
-            TERRITORY_ELEMENT = (By.XPATH, f"//*[normalize-space(text()) and normalize-space(.)='{territory}']")
             if self.is_element_present(how, what):
                 self.browser.find_element(how, what).click()
                 self.browser.find_element(*FormCreateContractLocators.CHOICE_IFRAME_BUTTON).click()
@@ -337,8 +336,8 @@ class ContractFormCreate(BasePage):
         self.browser.find_element(*FormCreateContractLocators.CONFIRM_IFRAME_BUTTON).click()
         # возврат к основной форме
         self.is_frame_to_parent()
-        self.is_text_to_be_present_in_element(*FormCreateContractLocators.TYPE_TERRITORY_ELEMENT,
-                                              f'{user_data_dict["territory"]};')
+        time.sleep(2)
+
 
         # Выбираем значение в поле "Ключевые технологии"
         self.browser.find_element(*FormCreateContractLocators.SEARCH_TECHNOLOGIES_ELEMENT).click()
@@ -366,9 +365,7 @@ class ContractFormCreate(BasePage):
 
         self.browser.find_element(*FormCreateContractLocators.CONFIRM_IFRAME_BUTTON).click()
         self.is_frame_to_parent()
-        # Проверяем, строку
-        self.is_text_to_be_present_in_element(*FormCreateContractLocators.TYPE_TECHNOLOGIES_ELEMENT,
-                                              f"{user_data_dict['technologies']};")
+        time.sleep(2)
 
         # Заполняем поле "Цели и задачи"
         self.browser.find_element(*FormCreateContractLocators.DESCRIPTION_PLAIN_TEXT_ELEMENT).send_keys(
@@ -376,11 +373,11 @@ class ContractFormCreate(BasePage):
 
         # заполняем поле Количественные показатели реализации проекта
         self.browser.find_element(*FormCreateContractLocators.QUANTITATIVE_INDICATORS_PROJECT_ELEMENT).send_keys(
-            user_data_dict["quantitative_indicators_project"])
+            user_data_dict["quantitativeIndicatorsProject"])
 
         # Уникальный код проекта
         self.browser.find_element(*FormCreateContractLocators.PROJECT_UNIQUE_CODE).send_keys(
-            user_data_dict["project_unique_code"])
+            user_data_dict["projectUniqueCode"])
 
         # Выбираем связанный проект
 

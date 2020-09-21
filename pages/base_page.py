@@ -133,16 +133,16 @@ class BasePage:
             sum_in_rub = raw_sum
 
         # Присваиваем категорию на основе суммы в рублях
-        price_category = ""
+        priceCategory = ""
         if sum_in_rub >= 50000000:
-            price_category = "A"
+            priceCategory = "A"
         elif 30000000 <= sum_in_rub < 50000000:
-            price_category = "B"
+            priceCategory = "B"
         elif sum_in_rub < 30000000:
-            price_category = "C"
+            priceCategory = "C"
 
         # Добавляем в словарь ценовую категорию
-        price_category_dict = {"price_category": price_category}
+        price_category_dict = {"priceCategory": priceCategory}
         user_data_dict.update(price_category_dict)
 
         # Определяем входит ли элемент в категорию "Разработка ПО"
