@@ -12,11 +12,10 @@ from .locators import BasePageLocators
 
 class BasePage:
 
-    def __init__(self, browser: RemoteWebDriver, url, timeout=20):
+    def __init__(self, browser: RemoteWebDriver, url, timeout=5):
         self.browser = browser
         self.url = url
         self.browser.implicitly_wait(timeout)  # неявное ожидание
-
 
     def open(self):
         self.browser.get(self.url)
@@ -41,15 +40,6 @@ class BasePage:
             return False
         return True
 
-    # Проверка что элемент присутствует в DOM(не явное ожидание)
-    def is_element_present(self, how, what):
-        try:
-            self.browser.implicitly_wait(5)
-            self.browser.find_element(how, what)
-        except NoSuchElementException:
-            return False
-        return True
-
     # Проверка, доступен ли элемент к нажатию
     def is_element_clickable(self, how, what, timeout=5):
         try:
@@ -59,7 +49,7 @@ class BasePage:
         return True
 
     # упадет, как только увидит искомый элемент. Не появился: успех, тест зеленый.
-    def is_not_element_present(self, how, what, timeout=3):
+    def is_not_element_present(self, how, what, timeout=5):
         try:
             WebDriverWait(self.browser, timeout).until(ec.presence_of_element_located((how, what)))
         except TimeoutException:
@@ -67,10 +57,18 @@ class BasePage:
         return False
 
     # is_disappeared: будет ждать до тех пор, пока элемент не исчезнет
-    def is_disappeared(self, how, what, timeout=3):
+    def is_disappeared(self, how, what, timeout=5):
         try:
             WebDriverWait(self.browser, timeout, 1, TimeoutException).until_not(
                 ec.presence_of_element_located((how, what)))
+        except TimeoutException:
+            return False
+        return True
+
+    # Проверка что элемент отображен и имеет размер
+    def is_visibility_of_element_located(self, how, what, timeout=3):
+        try:
+            WebDriverWait(self.browser, timeout).until(ec.visibility_of_element_located((how, what)))
         except TimeoutException:
             return False
         return True
@@ -106,13 +104,12 @@ class BasePage:
         assert self.is_text_to_be_present_in_element(*BasePageLocators.CONTRACT_LIST_TITLE, "Договоры (контракты)"), \
             "Титул страницы не соответствует переходу"
 
-    # Проверка что элемент отображен и имеет размер
-    def is_visibility_of_element_located(self, how, what, timeout=5):
-        try:
-            WebDriverWait(self.browser, timeout).until(ec.visibility_of_element_located((how, what)))
-        except TimeoutException:
-            return False
-        return True
+    def go_to_knowledge_search(self):
+        self.browser.get(BasePageLocators.KNOWLEDGE_SEARCH_LINK)
+        assert self.is_text_to_be_present_in_element(*BasePageLocators.KNOWLEDGE_SEARCH_TITLE, "Поиск по базе знаний"), \
+            "Титул страницы не соответствует переходу"
+
+
 
     def read_json(self, path_file):
         full_path_file = os.path.join(UserData.current_dir, path_file)

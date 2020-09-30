@@ -1,6 +1,7 @@
 from pages.base_page import BasePage
 import win32com.client
 import time
+from pages.locators import BasePageLocators
 from userdata.user_data import UserData
 
 
@@ -37,3 +38,7 @@ class LoginData(BasePage):
         shell.SendKeys(account[1])
         time.sleep(1)
         shell.SendKeys("{ENTER}")
+
+    def logout(self):
+        self.browser.find_element(*BasePageLocators.USER_NAME).click()
+        self.browser.find_element(*BasePageLocators.LOGOUT_BUTTON).click()

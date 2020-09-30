@@ -3,12 +3,15 @@ from selenium.webdriver.common.by import By
 
 class BasePageLocators:
     USER_NAME = (By.CSS_SELECTOR, ".o365cs-me-tile-nophoto-username.o365cs-me-bidi")
+    LOGOUT_BUTTON = (By.CSS_SELECTOR, "#O365_SubLink_ShellSignout")
     PRESALE_LIST_LINK = "https://ksup-tst.lanit/SalesManagement/Lists/Sale/All.aspx"
     PRESALE_LIST_TITLE = (By.CSS_SELECTOR, "#DeltaPlaceHolderPageTitleInTitleArea a")
     ZAKUP_LIST_LINK = "https://ksup-tst.lanit/SalesManagement/Lists/PresaleActivity/All.aspx"
     ZAKUP_LIST_TITLE = (By.CSS_SELECTOR, "#DeltaPlaceHolderPageTitleInTitleArea a")
     CONTRACT_LIST_LINK = "https://ksup-tst.lanit/SalesManagement/Lists/Contract/All.aspx"
     CONTRACT_LIST_TITLE = (By.CSS_SELECTOR, "#DeltaPlaceHolderPageTitleInTitleArea a")
+    KNOWLEDGE_SEARCH_LINK = "https://ksup-tst.lanit/Pages/KnowledgeBaseSearch.aspx"
+    KNOWLEDGE_SEARCH_TITLE = (By.CSS_SELECTOR, ".title.title--main")
 
 
 class PresaleListLocators:
@@ -825,6 +828,16 @@ class ContractElementLocators:
     QUANTITATIVE_INDICATORS_PROJECT = (By.CSS_SELECTOR, ".fldKsupQuantitativeIndicatorsProjec #SPFieldNote")
 
 
+class KnowledgeSearchLocators:
+    ALL_TITLE_IN_FAST_FILTER = (By.CSS_SELECTOR, ".search-filter h3")
+    ALL_TITLE_IN_FOUND_ELEMENT = (By.CSS_SELECTOR, ".search-result__title h6")
 
-
+    # Чек-бокс "Проект" в блоке "Нужно найти"
+    PROJECT_CHECKBOX = (By.XPATH, "//label[(text() = 'Проект' or .='Проект')]")
+    CONTRACT_CHECKBOX = (By.XPATH, "//label[(text() = 'Договор (контракт)' or . = 'Договор (контракт)')]")
+    DIVISION_CHECKBOX = (By.XPATH, "//label[(text() = 'Подразделение' or . = 'Подразделение')]")
+    TECHNOLOGY_CHECKBOX = (By.XPATH, "//label[(text() = 'Технологию' or . = 'Технологию')]")
+    LEGAL_CHECKBOX = (By.XPATH, "//label[(text() = 'Юр.лицо/ИП' or . = 'Юр.лицо/ИП')]")
+    LOAD_MORE_BUTTON = (By.XPATH, "//a[contains(text(),'Загрузить еще')]")
+    END_LOAD_BUTTON = (By.XPATH, "//a[contains(text(),'Конец поисковой выдачи')]")
 

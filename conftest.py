@@ -20,7 +20,7 @@ def pytest_addoption(parser):
 # pytest -s -v --browser_name=firefox test_parser.py
 
 @pytest.fixture()
-def browser(request):
+def browser_function(request):
     browser_name = request.config.getoption("browser_name")
 
     if browser_name == "chrome":
@@ -35,7 +35,29 @@ def browser(request):
         print("\nstart firefox browser for test..")
         browser = webdriver.Firefox()
         # browser.maximize_window()
+    else:
+        raise pytest.UsageError("--browser_name should be chrome or firefox")
+    yield browser
+    print("\nquit browser..")
+    browser.quit()
 
+
+@pytest.fixture(scope="session")
+def browser_session(request):
+    browser_name = request.config.getoption("browser_name")
+
+    if browser_name == "chrome":
+        options = webdriver.ChromeOptions()
+        options.add_argument("ignore-certificate-errors")
+        options.add_argument("start-maximized")
+        print("\nstart chrome browser for test..")
+        browser = webdriver.Chrome(options=options)
+        # browser.maximize_window()
+
+    elif browser_name == "firefox":
+        print("\nstart firefox browser for test..")
+        browser = webdriver.Firefox()
+        # browser.maximize_window()
     else:
         raise pytest.UsageError("--browser_name should be chrome or firefox")
     yield browser

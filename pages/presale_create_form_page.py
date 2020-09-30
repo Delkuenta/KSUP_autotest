@@ -134,12 +134,12 @@ class PresaleFormCreate(BasePage):
         # Выбираем нужный элемент
         for item in user_data_dict["typeOfWorkServices"]:
             WORK_SERVICE_ELEMENT = (By.XPATH, f"//*[normalize-space(text()) and normalize-space(.)='{item}']")
-            if self.is_element_present(*WORK_SERVICE_ELEMENT):
+            if self.is_visibility_of_element_located(*WORK_SERVICE_ELEMENT):
                 self.browser.find_element(*WORK_SERVICE_ELEMENT).click()
                 self.browser.find_element(*FormCreatePresaleLocators.CHOICE_IFRAME_BUTTON).click()
             else:
                 self.browser.find_element(*FormCreatePresaleLocators.SCROLL_DOWN_BUTTON).click()
-                assert self.is_element_present(*WORK_SERVICE_ELEMENT) is True, \
+                assert self.is_visibility_of_element_located(*WORK_SERVICE_ELEMENT) is True, \
                     f"Не найден тип работ и услуг с именем {item}"
                 self.browser.find_element(*WORK_SERVICE_ELEMENT).click()
                 self.browser.find_element(*FormCreatePresaleLocators.CHOICE_IFRAME_BUTTON).click()
