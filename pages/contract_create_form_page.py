@@ -27,7 +27,7 @@ class ContractFormCreate(BasePage):
             "Некорректная информация в поле Подразделение-продавец"
 
         assert user_data_dict["salesManager"] in \
-            self.is_element_text(*FormCreateContractLocators.SALES_MANAGER_CONTRACT_ELEMENT), \
+               self.is_element_text(*FormCreateContractLocators.SALES_MANAGER_CONTRACT_ELEMENT), \
             "Некорректная информация в поле Ответственный менеджер подразделения-продавца"
 
         assert user_data_dict["executiveUnit"] in self.is_element_text(
@@ -155,8 +155,8 @@ class ContractFormCreate(BasePage):
 
         # Выбираем связанный проект
         self.browser.find_element(*FormCreateContractLocators.PROJECT_ELEMENT).click()
-        #self.browser.find_element(*FormCreateContractLocators.PROJECT_FIND_ELEMENT).send_keys(
-           # user_data_dict["project"])
+        # self.browser.find_element(*FormCreateContractLocators.PROJECT_FIND_ELEMENT).send_keys(
+        # user_data_dict["project"])
         how, what = FormCreateContractLocators.PROJECT_DROPDOWN_ELEMENT
         what = what.replace("project_name", user_data_dict["project"])
         self.browser.find_element(how, what).click()
@@ -384,116 +384,149 @@ class ContractFormCreate(BasePage):
         # Выбираем связанный проект
 
         self.browser.find_element(*FormCreateContractLocators.PROJECT_ELEMENT).click()
-        #self.browser.find_element(*FormCreateContractLocators.PROJECT_FIND_ELEMENT).send_keys(
-            #user_data_dict["project"])
+        # self.browser.find_element(*FormCreateContractLocators.PROJECT_FIND_ELEMENT).send_keys(
+        # user_data_dict["project"])
         how, what = FormCreateContractLocators.PROJECT_DROPDOWN_ELEMENT
         what = what.replace("project_name", user_data_dict["project"])
         self.browser.find_element(how, what).click()
 
         payments_sum = 0
-        payments = user_data_dict["payments"]
         count_payments_line = len(user_data_dict["payments"])
         print(f'\nКоличество строчек плановых платежей: {count_payments_line}')
 
         if count_payments_line == 5:
-            line1 = dict(payments[0])
-            self.browser.find_element(*FormCreateContractLocators.SUMTABLE1).send_keys(line1["sum"])
-            self.browser.find_element(*FormCreateContractLocators.YEARTABLE1).send_keys(line1["year"])
+            # Заполняем 1ую строку из 5
+            self.browser.find_element(*FormCreateContractLocators.SUMTABLE1).send_keys(
+                user_data_dict["payments"][0]["sum"])
+            self.browser.find_element(*FormCreateContractLocators.YEARTABLE1).send_keys(
+                user_data_dict["payments"][0]["year"])
             Select(self.browser.find_element(*FormCreateContractLocators.QUARTERTABLE1)).select_by_visible_text(
-                f"{line1['quarter']} квартал")
+                f'{user_data_dict["payments"][0]["quarter"]} квартал')
 
-            line2 = dict(payments[1])
-            self.browser.find_element(*FormCreateContractLocators.SUMTABLE2).send_keys(line2["sum"])
-            self.browser.find_element(*FormCreateContractLocators.YEARTABLE2).send_keys(line2["year"])
+            # Заполняем 2ую строку из 5и
+            self.browser.find_element(*FormCreateContractLocators.SUMTABLE2).send_keys(
+                user_data_dict["payments"][1]["sum"])
+            self.browser.find_element(*FormCreateContractLocators.YEARTABLE2).send_keys(
+                user_data_dict["payments"][1]["year"])
             Select(self.browser.find_element(*FormCreateContractLocators.QUARTERTABLE2)).select_by_visible_text(
-                f"{line2['quarter']} квартал")
+                f'{user_data_dict["payments"][1]["quarter"]} квартал')
 
-            line3 = dict(payments[2])
-            self.browser.find_element(*FormCreateContractLocators.SUMTABLE3).send_keys(line3["sum"])
-            self.browser.find_element(*FormCreateContractLocators.YEARTABLE3).send_keys(line3["year"])
+            # Заполняем 3ью строку из 5и
+            self.browser.find_element(*FormCreateContractLocators.SUMTABLE3).send_keys(
+                user_data_dict["payments"][2]["sum"])
+            self.browser.find_element(*FormCreateContractLocators.YEARTABLE3).send_keys(
+                user_data_dict["payments"][2]["year"])
             Select(self.browser.find_element(*FormCreateContractLocators.QUARTERTABLE3)).select_by_visible_text(
-                f"{line3['quarter']} квартал")
+                f'{user_data_dict["payments"][2]["quarter"]} квартал')
 
-            line4 = dict(payments[3])
-            self.browser.find_element(*FormCreateContractLocators.SUMTABLE4).send_keys(line4["sum"])
-            self.browser.find_element(*FormCreateContractLocators.YEARTABLE4).send_keys(line4["year"])
+            # Заполняем 4ую строку из 5и
+            self.browser.find_element(*FormCreateContractLocators.SUMTABLE4).send_keys(
+                user_data_dict["payments"][3]["sum"])
+            self.browser.find_element(*FormCreateContractLocators.YEARTABLE4).send_keys(
+                user_data_dict["payments"][3]["year"])
             Select(self.browser.find_element(*FormCreateContractLocators.QUARTERTABLE4)).select_by_visible_text(
-                f"{line4['quarter']} квартал")
+                f'{user_data_dict["payments"][2]["quarter"]} квартал')
 
-            line5 = dict(payments[4])
-            self.browser.find_element(*FormCreateContractLocators.SUMTABLE5).send_keys(line5["sum"])
-            self.browser.find_element(*FormCreateContractLocators.YEARTABLE5).send_keys(line5["year"])
+            # Заполняем 5ую строку из 5и
+            self.browser.find_element(*FormCreateContractLocators.SUMTABLE5).send_keys(
+                user_data_dict["payments"][4]["sum"])
+            self.browser.find_element(*FormCreateContractLocators.YEARTABLE5).send_keys(
+                user_data_dict["payments"][4]["year"])
             Select(self.browser.find_element(*FormCreateContractLocators.QUARTERTABLE5)).select_by_visible_text(
-                f"{line5['quarter']} квартал")
-            payments_sum = line1["sum"] + line2["sum"] + line3["sum"] + line4["sum"] + line5["sum"]
+                f'{user_data_dict["payments"][4]["quarter"]} квартал')
+            payments_sum = user_data_dict["payments"][0]["sum"] + user_data_dict["payments"][1]["sum"] + \
+                           user_data_dict["payments"][2]["sum"] + user_data_dict["payments"][3]["sum"] + \
+                           user_data_dict["payments"][4]["sum"]
 
         elif count_payments_line == 4:
-            line1 = dict(payments[0])
-            self.browser.find_element(*FormCreateContractLocators.SUMTABLE1).send_keys(line1["sum"])
-            self.browser.find_element(*FormCreateContractLocators.YEARTABLE1).send_keys(line1["year"])
+            # Заполняем 1ую строку из 4х
+            self.browser.find_element(*FormCreateContractLocators.SUMTABLE1).send_keys(
+                user_data_dict["payments"][0]["sum"])
+            self.browser.find_element(*FormCreateContractLocators.YEARTABLE1).send_keys(
+                user_data_dict["payments"][0]["year"])
             Select(self.browser.find_element(*FormCreateContractLocators.QUARTERTABLE1)).select_by_visible_text(
-                f"{line1['quarter']} квартал")
+                f'{user_data_dict["payments"][0]["quarter"]} квартал')
 
-            line2 = dict(payments[1])
-            self.browser.find_element(*FormCreateContractLocators.SUMTABLE2).send_keys(line2["sum"])
-            self.browser.find_element(*FormCreateContractLocators.YEARTABLE2).send_keys(line2["year"])
+            # Заполняем 2ую строку из 4х
+            self.browser.find_element(*FormCreateContractLocators.SUMTABLE2).send_keys(
+                user_data_dict["payments"][1]["sum"])
+            self.browser.find_element(*FormCreateContractLocators.YEARTABLE2).send_keys(
+                user_data_dict["payments"][1]["year"])
             Select(self.browser.find_element(*FormCreateContractLocators.QUARTERTABLE2)).select_by_visible_text(
-                f"{line2['quarter']} квартал")
+                f'{user_data_dict["payments"][1]["quarter"]} квартал')
 
-            line3 = dict(payments[2])
-            self.browser.find_element(*FormCreateContractLocators.SUMTABLE3).send_keys(line3["sum"])
-            self.browser.find_element(*FormCreateContractLocators.YEARTABLE3).send_keys(line3["year"])
+            # Заполняем 3ью строку из 4х
+            self.browser.find_element(*FormCreateContractLocators.SUMTABLE3).send_keys(
+                user_data_dict["payments"][2]["sum"])
+            self.browser.find_element(*FormCreateContractLocators.YEARTABLE3).send_keys(
+                user_data_dict["payments"][2]["year"])
             Select(self.browser.find_element(*FormCreateContractLocators.QUARTERTABLE3)).select_by_visible_text(
-                f"{line3['quarter']} квартал")
+                f'{user_data_dict["payments"][2]["quarter"]} квартал')
 
-            line4 = dict(payments[3])
-            self.browser.find_element(*FormCreateContractLocators.SUMTABLE4).send_keys(line4["sum"])
-            self.browser.find_element(*FormCreateContractLocators.YEARTABLE4).send_keys(line4["year"])
+            # Заполняем 4ую строку из 4х
+            self.browser.find_element(*FormCreateContractLocators.SUMTABLE4).send_keys(
+                user_data_dict["payments"][3]["sum"])
+            self.browser.find_element(*FormCreateContractLocators.YEARTABLE4).send_keys(
+                user_data_dict["payments"][3]["year"])
             Select(self.browser.find_element(*FormCreateContractLocators.QUARTERTABLE4)).select_by_visible_text(
-                f"{line4['quarter']} квартал")
-            payments_sum = line1["sum"] + line2["sum"] + line3["sum"] + line4["sum"]
+                f'{user_data_dict["payments"][2]["quarter"]} квартал')
+            payments_sum = user_data_dict["payments"][0]["sum"] + user_data_dict["payments"][1]["sum"] + \
+                           user_data_dict["payments"][2]["sum"] + user_data_dict["payments"][3]["sum"]
 
         elif count_payments_line == 3:
-            line1 = dict(payments[0])
-            self.browser.find_element(*FormCreateContractLocators.SUMTABLE1).send_keys(line1["sum"])
-            self.browser.find_element(*FormCreateContractLocators.YEARTABLE1).send_keys(line1["year"])
+            # Заполняем 1ую строку из 3х
+            self.browser.find_element(*FormCreateContractLocators.SUMTABLE1).send_keys(
+                user_data_dict["payments"][0]["sum"])
+            self.browser.find_element(*FormCreateContractLocators.YEARTABLE1).send_keys(
+                user_data_dict["payments"][0]["year"])
             Select(self.browser.find_element(*FormCreateContractLocators.QUARTERTABLE1)).select_by_visible_text(
-                f"{line1['quarter']} квартал")
+                f'{user_data_dict["payments"][0]["quarter"]} квартал')
 
-            line2 = dict(payments[1])
-            self.browser.find_element(*FormCreateContractLocators.SUMTABLE2).send_keys(line2["sum"])
-            self.browser.find_element(*FormCreateContractLocators.YEARTABLE2).send_keys(line2["year"])
+            # Заполняем 2ую строку из 3х
+            self.browser.find_element(*FormCreateContractLocators.SUMTABLE2).send_keys(
+                user_data_dict["payments"][1]["sum"])
+            self.browser.find_element(*FormCreateContractLocators.YEARTABLE2).send_keys(
+                user_data_dict["payments"][1]["year"])
             Select(self.browser.find_element(*FormCreateContractLocators.QUARTERTABLE2)).select_by_visible_text(
-                f"{line2['quarter']} квартал")
+                f'{user_data_dict["payments"][1]["quarter"]} квартал')
 
-            line3 = dict(payments[2])
-            self.browser.find_element(*FormCreateContractLocators.SUMTABLE3).send_keys(line3["sum"])
-            self.browser.find_element(*FormCreateContractLocators.YEARTABLE3).send_keys(line3["year"])
+            # Заполняем 3ью строку из 3х
+            self.browser.find_element(*FormCreateContractLocators.SUMTABLE3).send_keys(
+                user_data_dict["payments"][2]["sum"])
+            self.browser.find_element(*FormCreateContractLocators.YEARTABLE3).send_keys(
+                user_data_dict["payments"][2]["year"])
             Select(self.browser.find_element(*FormCreateContractLocators.QUARTERTABLE3)).select_by_visible_text(
-                f"{line3['quarter']} квартал")
-            payments_sum = line1["sum"] + line2["sum"] + line3["sum"]
+                f'{user_data_dict["payments"][2]["quarter"]} квартал')
+            payments_sum = user_data_dict["payments"][0]["sum"] + user_data_dict["payments"][1]["sum"] + \
+                           user_data_dict["payments"][2]["sum"]
 
         elif count_payments_line == 2:
-            line1 = dict(payments[0])
-            self.browser.find_element(*FormCreateContractLocators.SUMTABLE1).send_keys(line1["sum"])
-            self.browser.find_element(*FormCreateContractLocators.YEARTABLE1).send_keys(line1["year"])
+            # Заполняем 1ую строку из 2х
+            self.browser.find_element(*FormCreateContractLocators.SUMTABLE1).send_keys(
+                user_data_dict["payments"][0]["sum"])
+            self.browser.find_element(*FormCreateContractLocators.YEARTABLE1).send_keys(
+                user_data_dict["payments"][0]["year"])
             Select(self.browser.find_element(*FormCreateContractLocators.QUARTERTABLE1)).select_by_visible_text(
-                f"{line1['quarter']} квартал")
+                f'{user_data_dict["payments"][0]["quarter"]} квартал')
 
-            line2 = dict(payments[1])
-            self.browser.find_element(*FormCreateContractLocators.SUMTABLE2).send_keys(line2["sum"])
-            self.browser.find_element(*FormCreateContractLocators.YEARTABLE2).send_keys(line2["year"])
+            # Заполняем 2ую строку из 2х
+            self.browser.find_element(*FormCreateContractLocators.SUMTABLE2).send_keys(
+                user_data_dict["payments"][1]["sum"])
+            self.browser.find_element(*FormCreateContractLocators.YEARTABLE2).send_keys(
+                user_data_dict["payments"][1]["year"])
             Select(self.browser.find_element(*FormCreateContractLocators.QUARTERTABLE2)).select_by_visible_text(
-                f"{line2['quarter']} квартал")
-            payments_sum = line1["sum"] + line2["sum"]
+                f'{user_data_dict["payments"][1]["quarter"]} квартал')
+            payments_sum = user_data_dict["payments"][0]["sum"] + user_data_dict["payments"][1]["sum"]
 
         elif count_payments_line == 1:
-            line1 = dict(payments[0])
-            self.browser.find_element(*FormCreateContractLocators.SUMTABLE1).send_keys(line1["sum"])
-            self.browser.find_element(*FormCreateContractLocators.YEARTABLE1).send_keys(line1["year"])
+            # Заполняем 1ую строку из 1ой
+            self.browser.find_element(*FormCreateContractLocators.SUMTABLE1).send_keys(
+                user_data_dict["payments"][0]["sum"])
+            self.browser.find_element(*FormCreateContractLocators.YEARTABLE1).send_keys(
+                user_data_dict["payments"][0]["year"])
             Select(self.browser.find_element(*FormCreateContractLocators.QUARTERTABLE1)).select_by_visible_text(
-                f"{line1['quarter']} квартал")
-            payments_sum = line1["sum"]
+                f'{user_data_dict["payments"][0]["quarter"]} квартал')
+            payments_sum = user_data_dict["payments"][0]["sum"]
 
         # Переходим в низ страницы к кнопке "Создать"
         self.browser.execute_script("return arguments[0].scrollIntoView(true);",
