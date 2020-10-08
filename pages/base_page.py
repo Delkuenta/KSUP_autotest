@@ -66,7 +66,7 @@ class BasePage:
         return True
 
     # Проверка что элемент отображен и имеет размер
-    def is_visibility_of_element_located(self, how, what, timeout=3):
+    def is_visibility_of_element_located(self, how, what, timeout=5):
         try:
             WebDriverWait(self.browser, timeout).until(ec.visibility_of_element_located((how, what)))
         except TimeoutException:
@@ -104,12 +104,16 @@ class BasePage:
         assert self.is_text_to_be_present_in_element(*BasePageLocators.CONTRACT_LIST_TITLE, "Договоры (контракты)"), \
             "Титул страницы не соответствует переходу"
 
+    # Переход на страницу База знаний
     def go_to_knowledge_search(self):
         self.browser.get(BasePageLocators.KNOWLEDGE_SEARCH_LINK)
         assert self.is_text_to_be_present_in_element(*BasePageLocators.KNOWLEDGE_SEARCH_TITLE, "Поиск по базе знаний"), \
             "Титул страницы не соответствует переходу"
 
-
+    def go_to_project_list(self):
+        self.browser.get(BasePageLocators.PROJECT_LIST_LINK)
+        assert self.is_text_to_be_present_in_element(*BasePageLocators.PROJECT_TITLE, "Проекты"), \
+            "Титул страницы не соответствует переходу"
 
     def read_json(self, path_file):
         full_path_file = os.path.join(UserData.current_dir, path_file)

@@ -12,7 +12,7 @@ from pages.login_data import LoginData
 from pages.presale_create_form_page import PresaleFormCreate
 from pages.zakup_list_page import ZakupListPage
 
-# UnitSale\Seller - DKS
+# UnitSale\Seller_DKS - Seller2_DirGS
 """
 1_[Atest_Seller] PA+ZP+DK,Tender, categoryA, softwareDev, UnitSale.json
 2_[Atest_Seller] PA+ZP+DK,Tender, categoryB, softwareDev, UnitSale.json
@@ -34,7 +34,7 @@ from pages.zakup_list_page import ZakupListPage
 18_[Atest_Seller] PA+ZP+DK, RequestPrice, categoryC, OtherType, UnitSale.json
 """
 
-# UnitSale\Dir - DKS
+# UnitSale\Dir_DKS - Dir2_DirGS
 """
 1_[Atest_Dir] PA+ZP+DK,Tender, categoryA, softwareDev, UnitSale.json
 2_[Atest_Dir] PA+ZP+DK,Tender, categoryB, softwareDev, UnitSale.json

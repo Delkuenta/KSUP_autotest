@@ -12,6 +12,8 @@ class BasePageLocators:
     CONTRACT_LIST_TITLE = (By.CSS_SELECTOR, "#DeltaPlaceHolderPageTitleInTitleArea a")
     KNOWLEDGE_SEARCH_LINK = "https://ksup-tst.lanit/Pages/KnowledgeBaseSearch.aspx"
     KNOWLEDGE_SEARCH_TITLE = (By.CSS_SELECTOR, ".title.title--main")
+    PROJECT_LIST_LINK = "https://ksup-tst.lanit/KnowledgeBase/Project/Forms/All.aspx"
+    PROJECT_TITLE = (By.CSS_SELECTOR, "#DeltaPlaceHolderPageTitleInTitleArea")
 
 
 class PresaleListLocators:
@@ -211,7 +213,7 @@ class PresaleElementLocators:
     # Поле "Ответственный менеджер подразделения-исполнителя"
     EXECUTIVE_MANAGER_IN_PRESALE = (By.CSS_SELECTOR, ".fldKsupPerformerResponsible #SPFieldWcfLookup")
     # Поле "Исполнитель (юридическое лицо)"
-    EXECUTIVE_UNIT_LEGAL_IN_PRESALE =(By.CSS_SELECTOR, ".fldKsupEgr_PerformerLegal #SPFieldWcfLookup")
+    EXECUTIVE_UNIT_LEGAL_IN_PRESALE = (By.CSS_SELECTOR, ".fldKsupEgr_PerformerLegal #SPFieldWcfLookup")
     # Поле "Порядок проведения закупочной процедуры" для Тендер
     SALE_LAW_TYPE_TENDER_PRESALE = (By.CSS_SELECTOR, ".fldKsupSaleLawType  #SPFieldChoice")
     # Поле "Тип работ и услуг"
@@ -398,7 +400,8 @@ class FormCreateZakupLocators:
 
     # Срок предоставления ценовой информации
     PRICE_INFORMATION_DEADLINE_FROM = (
-        By.XPATH, "//input[@id='KsupPriceInformationDeadlineFrom_8ec338f0-a8c3-4c1a-8b36-892c98be55a7_$DateTimeFieldDate']")
+        By.XPATH,
+        "//input[@id='KsupPriceInformationDeadlineFrom_8ec338f0-a8c3-4c1a-8b36-892c98be55a7_$DateTimeFieldDate']")
 
     # Предполагаемая дата начала проведения закупки с
     PURCHASE_START_DATE_FROM = (
@@ -465,11 +468,14 @@ class ZakupElementLocators:
 
     # Строки согласования
     APPROVAL_LEGAL_STATUS_ELEMENT = (
-        By.XPATH, "(.//*[normalize-space(text()) and normalize-space(.)='Согласование юридической службой'])[1]/following::span[1]")
+        By.XPATH,
+        "(.//*[normalize-space(text()) and normalize-space(.)='Согласование юридической службой'])[1]/following::span[1]")
     APPROVAL_COUNT_STATUS_ELEMENT = (
-        By.XPATH, "(.//*[normalize-space(text()) and normalize-space(.)='Согласование бухгалтерией'])[1]/following::span[1]")
+        By.XPATH,
+        "(.//*[normalize-space(text()) and normalize-space(.)='Согласование бухгалтерией'])[1]/following::span[1]")
     APPROVAL_FIN_STATUS_ELEMENT = (
-        By.XPATH, "(.//*[normalize-space(text()) and normalize-space(.)='Согласование финансовой службой'])[1]/following::span[1]")
+        By.XPATH,
+        "(.//*[normalize-space(text()) and normalize-space(.)='Согласование финансовой службой'])[1]/following::span[1]")
     APPROVAL_UDPRPO_STATUS_ELEMENT = (
         By.XPATH, "(.//*[normalize-space(text()) and normalize-space(.)='Согласование УДПР ПО'])[1]/following::span[1]")
     APPROVAL_KKP_STATUS_ELEMENT = (
@@ -480,7 +486,8 @@ class ZakupElementLocators:
     APPROVAL_MAIN_STATUS_IN_ZP = (By.CSS_SELECTOR, ".fldKsupPresaleApproveStatus #SPFieldChoice")
     # Поле "Тип закупочной процедуры"
     CONTRACTOR_TYPE_IN_ZP = (
-        By.CSS_SELECTOR, "#ctl00_ctl70_g_93f2ae31_fc13_4393_9245_5d2f3d13a770_ctl00_ucListItemForm_tdContentTypeFieldDisplay")
+        By.CSS_SELECTOR,
+        "#ctl00_ctl70_g_93f2ae31_fc13_4393_9245_5d2f3d13a770_ctl00_ucListItemForm_tdContentTypeFieldDisplay")
     # Поле "Подразделение-продавец"
     SALES_UNIT_IN_ZP = (By.CSS_SELECTOR, ".fldKsupDivisionSeller #SPFieldWcfLookup")
     # Поле "Ответственный менеджер подразделения-продавца"
@@ -494,7 +501,7 @@ class ZakupElementLocators:
     # Поле "Тип работ и услуг"
     TYPE_OF_WORK_SERVCICES_IN_ZP = (By.CSS_SELECTOR, "#SPFieldTaxonomyFieldTypeMulti")
     # Поле "Исполнитель (юридическое лицо)"
-    EXECUTIVE_UNIT_LEGAL_IN_ZP =(By.CSS_SELECTOR, ".fldKsupEgr_PerformerLegal #SPFieldWcfLookup")
+    EXECUTIVE_UNIT_LEGAL_IN_ZP = (By.CSS_SELECTOR, ".fldKsupEgr_PerformerLegal #SPFieldWcfLookup")
     # Поле "Начальная (максимальная) цена контракта"
     SUM_IN_ZP = (By.CSS_SELECTOR, ".fldKsupContractSum #SPFieldNumber")
     # Поле "Валюта договора/контракта"
@@ -791,9 +798,10 @@ class ContractElementLocators:
     # Поле "Ответственный менеджер подразделения-исполнителя"
     EXECUTIVE_MANAGER_IN_CONTRACT = (By.CSS_SELECTOR, ".fldKsupPerformerResponsible #SPFieldWcfLookup")
     # Поле "Исполнитель (юридическое лицо)"
-    EXECUTIVE_UNIT_LEGAL_IN_CONTRACT =(By.CSS_SELECTOR, ".fldKsupEgr_PerformerLegal #SPFieldWcfLookup")
+    EXECUTIVE_UNIT_LEGAL_IN_CONTRACT = (By.CSS_SELECTOR, ".fldKsupEgr_PerformerLegal #SPFieldWcfLookup")
     # Поле "Тип работ и услуг"
-    TYPE_OF_WORK_SERVCICES_IN_CONTRACT = (By.CSS_SELECTOR, ".fldKsupWorkServicesTypeMetadata #SPFieldTaxonomyFieldTypeMulti")
+    TYPE_OF_WORK_SERVCICES_IN_CONTRACT = (
+    By.CSS_SELECTOR, ".fldKsupWorkServicesTypeMetadata #SPFieldTaxonomyFieldTypeMulti")
     # Поле "Начальная (максимальная) цена контракта"
     SUM_IN_CONTRACT = (By.CSS_SELECTOR, ".fldKsupSum #SPFieldNumber")
     # Поле "Валюта договора/контракта"
@@ -840,4 +848,58 @@ class KnowledgeSearchLocators:
     LEGAL_CHECKBOX = (By.XPATH, "//label[(text() = 'Юр.лицо/ИП' or . = 'Юр.лицо/ИП')]")
     LOAD_MORE_BUTTON = (By.XPATH, "//a[contains(text(),'Загрузить еще')]")
     END_LOAD_BUTTON = (By.XPATH, "//a[contains(text(),'Конец поисковой выдачи')]")
+
+
+class ProjectPageLocators:
+    PROJECT_CREATE_BUTTON = (By.CSS_SELECTOR, "#QCB1_Button1")
+
+    FIND_ELEMENT_IN_PROJECT_LIST = (
+        By.XPATH, f"//a[contains(text(),'Test_name')]")
+
+
+class FormCreateProjectLocators:
+    # Название проекта
+    NAME_PROJECT_ELEMENT = (By.ID, "KsupProjectFullName_6da07182-599d-48a1-9a8f-2c8b53a37767_$TextField")
+
+    # Ссылка на закупку на Официальном сайте ЕИС
+    EIS_PURCHSE_LINK_CONTRACT = (By.ID, "KsupLinkPurchase_fc1dd9f8-1072-4ff2-84a9-9d508615913d_$TextField")
+
+    # Заказчик
+    CUSTOMER_ELEMENT = (By.XPATH, "//div[@id='div-wcfLookupControl_KsupEgr_Customers']/span/span/span")
+    CUSTOMER_DROPDOWN_ELEMENT = (By.XPATH, f"//li[contains(text(), 'customer_name')]")
+
+    # Кнопка "Поиск допустимого варианта" у поля "Отрасль"
+    SEARCH_INDUSTRY_ELEMENT = (By.CSS_SELECTOR, "#KsupIndustry_\$container .ms-taxonomy-browser-button")
+    # Элемент внутри списка "Отрасль"
+    INDUSTRY_ELEMENT = (By.XPATH, f"//*[normalize-space(text()) and normalize-space(.)='industry_name']")
+
+    # Кнопка прокрутки вниз
+    SCROLL_DOWN_BUTTON_INDUSTRY = (By.ID, "PGD_1")
+
+    # Кнопка "Выбор" в окне "Отрасль"
+    CHOICE_IFRAME_BUTTON = (By.ID, "ctl00_PlaceHolderDialogBodySection_PlaceHolderDialogBodyFooterMainSection_AddToFieldEditor")
+    # Кнопка "Ок" в окне "Отрасль"
+    CONFIRM_IFRAME_BUTTON = (By.XPATH, "//*[@type = 'button' and @value = 'ОК']")
+
+    # Кнопка поиск допустимого варианта в категории "Тип работ и услуг"
+    SEARCH_TYPE_AND_SERVICES_ELEMENT = (
+        By.CSS_SELECTOR, r"#KsupWorkServicesTypeMetadata_\$containercontrolHolder .ms-taxonomy-browser-button")
+
+    # Элементы во фрейме "Тип работ и услуг"
+    # Группы категорий
+    GROUP_CATEGORY_ELEMENT1 = (By.ID, "TIE_3")
+    GROUP_CATEGORY_ELEMENT2 = (By.ID, "TIE_4")
+    GROUP_CATEGORY_ELEMENT3 = (By.ID, "TIE_5")
+    GROUP_CATEGORY_ELEMENT4 = (By.ID, "TIE_6")
+    GROUP_CATEGORY_ELEMENT5 = (By.ID, "TIE_7")
+
+    # Кнопка прокрутки вниз у категории Программное обеспечение
+    SCROLL_DOWN_BUTTON = (By.ID, "PGD_6")
+
+    # Элемент внутри списка "Отрасль"
+    WORK_AND_SERVICIES_ELEMENT = (By.XPATH, f"//*[normalize-space(text()) and normalize-space(.)='work_and_services_name']")
+
+    # Строка "Тип работ и услуг"
+    TYPE_WORK_SERVICES_ELEMENT = (By.ID, "KsupWorkServicesTypeMetadata_$containereditableRegion")
+
 

@@ -37,7 +37,7 @@
         "quantitativeIndicatorsProject": "тестовый текст в поле Количественные показатели реализации проекта",
         "projectUniqueCode": "2hMuCr01",
 		"project": "Тестовый проект",
-				"createAccount": "Mr_KSUP_Dir",
+		"createAccount": "Mr_KSUP_Dir",
         "payments": [
             {
                 "sum": 20000000,

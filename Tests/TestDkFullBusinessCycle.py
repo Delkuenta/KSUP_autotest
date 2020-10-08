@@ -6,7 +6,7 @@ from pages.contract_element_page import ContractElementPage
 from pages.contract_list_page import ContractPage
 from pages.login_data import LoginData
 
-# UnitSale\Dir - DKS
+# UnitSale\Dir_DKS - Dir2_DirGS
 """
 19_[Atest_Dir] DK, categoryA, softwareDev.json
 """

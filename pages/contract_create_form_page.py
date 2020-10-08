@@ -194,7 +194,8 @@ class ContractFormCreate(BasePage):
         # Жмем кнопку создать
         self.browser.find_element(*FormCreateContractLocators.CONFIRM_CONTRACT_BUTTON).click()
         # Подтверждаем внесение изменений  в связанный проект
-        self.browser.find_element(*FormCreateContractLocators.CONFIRM_CHANGE_PROJECT_BUTTON).click()
+        # Не работает до фикса KSUP-1045
+        #self.browser.find_element(*FormCreateContractLocators.CONFIRM_CHANGE_PROJECT_BUTTON).click()
 
     def form_create_contract(self, user_data_dict):
         # Ждем загрузки формы по последнему загруженному элементу
@@ -562,7 +563,8 @@ class ContractFormCreate(BasePage):
         self.browser.find_element(*FormCreateContractLocators.CONFIRM_CONTRACT_BUTTON).click()
 
         # Подтверждаем внесение изменений  в связанный проект
-        self.browser.find_element(*FormCreateContractLocators.CONFIRM_CHANGE_PROJECT_BUTTON).click()
+        #  # Не работает до фикса KSUP-1045
+        # self.browser.find_element(*FormCreateContractLocators.CONFIRM_CHANGE_PROJECT_BUTTON).click()
 
         # Если сумма платежей не совпадает появляется алерт, при подтверждении сущность создается
         if payments_sum != user_data_dict["sum"]:
