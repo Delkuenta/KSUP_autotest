@@ -21,3 +21,9 @@ class ProjectPage(BasePage):
         assert self.is_visibility_of_element_located(how, what), \
             f'Пресейловая активность с именем "{user_data_dict["fullName"]}" не найдена в списке'
 
+    # Зайти внутрь сущности пресейла по названию.имя берется из файла.
+    def go_to_project_element(self, user_data_dict):
+        how, what = ProjectPageLocators.FIND_ELEMENT_IN_PROJECT_LIST
+        what = what.replace("Test_name", user_data_dict["fullName"])
+        self.browser.find_element(how, what).click()
+

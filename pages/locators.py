@@ -576,10 +576,8 @@ class FormCreateContractLocators:
     EXECUTIVE_MANAGER_DROPDOWN_CONTRACT_ELEMENT = (By.XPATH, f"//li[normalize-space(.)='executiveManager_name']")
 
     # Исполнитель (юридическое лицо)
-    EXECUTIVE_UNIT_LEGAL_CONTRACT_ELEMENT = (
-        By.CSS_SELECTOR, "#div-wcfLookupControl_KsupEgr_PerformerLegal")
-    EXECUTIVE_UNIT_LEGAL_DROPDOWN_CONTRACT_ELEMENT = (
-        By.XPATH, f"//li[contains(text(), 'executiveUnitLegal_name')]")
+    EXECUTIVE_UNIT_LEGAL_CONTRACT_ELEMENT = (By.CSS_SELECTOR, "#div-wcfLookupControl_KsupEgr_PerformerLegal")
+    EXECUTIVE_UNIT_LEGAL_DROPDOWN_CONTRACT_ELEMENT = (By.XPATH, f"//li[contains(text(), 'executiveUnitLegal_name')]")
 
     # Кнопка поиск допустимого варианта в категории "Тип работ и услуг"
     SEARCH_TYPE_AND_SERVICES_ELEMENT = (
@@ -801,7 +799,7 @@ class ContractElementLocators:
     EXECUTIVE_UNIT_LEGAL_IN_CONTRACT = (By.CSS_SELECTOR, ".fldKsupEgr_PerformerLegal #SPFieldWcfLookup")
     # Поле "Тип работ и услуг"
     TYPE_OF_WORK_SERVCICES_IN_CONTRACT = (
-    By.CSS_SELECTOR, ".fldKsupWorkServicesTypeMetadata #SPFieldTaxonomyFieldTypeMulti")
+        By.CSS_SELECTOR, ".fldKsupWorkServicesTypeMetadata #SPFieldTaxonomyFieldTypeMulti")
     # Поле "Начальная (максимальная) цена контракта"
     SUM_IN_CONTRACT = (By.CSS_SELECTOR, ".fldKsupSum #SPFieldNumber")
     # Поле "Валюта договора/контракта"
@@ -853,8 +851,7 @@ class KnowledgeSearchLocators:
 class ProjectPageLocators:
     PROJECT_CREATE_BUTTON = (By.CSS_SELECTOR, "#QCB1_Button1")
 
-    FIND_ELEMENT_IN_PROJECT_LIST = (
-        By.XPATH, f"//a[contains(text(),'Test_name')]")
+    FIND_ELEMENT_IN_PROJECT_LIST = (By.XPATH, f"//a[contains(text(),'Test_name')]")
 
 
 class FormCreateProjectLocators:
@@ -869,7 +866,7 @@ class FormCreateProjectLocators:
     CUSTOMER_DROPDOWN_ELEMENT = (By.XPATH, f"//li[contains(text(), 'customer_name')]")
 
     # Кнопка "Поиск допустимого варианта" у поля "Отрасль"
-    SEARCH_INDUSTRY_ELEMENT = (By.CSS_SELECTOR, "#KsupIndustry_\$container .ms-taxonomy-browser-button")
+    SEARCH_INDUSTRY_ELEMENT = (By.CSS_SELECTOR, r"#KsupIndustry_\$container .ms-taxonomy-browser-button")
     # Элемент внутри списка "Отрасль"
     INDUSTRY_ELEMENT = (By.XPATH, f"//*[normalize-space(text()) and normalize-space(.)='industry_name']")
 
@@ -902,4 +899,159 @@ class FormCreateProjectLocators:
     # Строка "Тип работ и услуг"
     TYPE_WORK_SERVICES_ELEMENT = (By.ID, "KsupWorkServicesTypeMetadata_$containereditableRegion")
 
+    # Исполнитель (юридическое лицо)
+    EXECUTIVE_UNIT_LEGAL_PROJECT_ELEMENT = (By.XPATH, "//div[@id='div-wcfLookupControl_KsupEgr_PerformerLegal']/span/span/span")
+    EXECUTIVE_UNIT_LEGAL_DROPDOWN_PROJECT_ELEMENT = (By.XPATH, f"//li[contains(text(), 'executiveUnitLegal_name')]")
 
+    # Подразделение-исполнитель
+    EXECUTIVE_UNIT_PROJECT_ELEMENT = (By.XPATH, "//div[@id='div-wcfLookupControl_KsupPerformerDivision']/span/span/span")
+    EXECUTIVE_UNIT_PROJECT_DROPDOWN_ELEMENT = (By.XPATH, f"//li[normalize-space(.)='executiveUnit_name']")
+
+    # Cоисполнители
+    SALES_UNIT_ELEMENT = (By.XPATH, "//div[@id='div-wcfLookupControl_KsupPerformerDivisions']/span/span/span")
+    SALES_UNIT_DROPDOWN_ELEMENT = (By.XPATH, f"//li[normalize-space(.)='salesUnit_name']")
+
+    PROJECT_STAGE_ELEMENT = (By.CSS_SELECTOR, r"#KsupProjectStage_0773d15c-11ee-448d-8e22-c4ae0f3c39b8_\$DropDownChoice")
+
+    # Связанный договор/контракт
+    CONTRACTS_ELEMENT = (By.XPATH, "//div[@id='div-wcfLookupControl_KsupContracts']/span/span/span")
+    CONTRACTS_DROPDOWN_ELEMENT = (By.XPATH, "//li[normalize-space(.)='contract_name']")
+
+    # Срок начала
+    START_DATE_ELEMENT = (By.CSS_SELECTOR, r"#KsupStartDatePlan_8a09abb1-cbf6-4bc5-a68d-6a6c088dbb60_\$DateTimeFieldDate")
+
+    # Кнопка "Поиск допустимого варианта" у поля "Вендоры"
+    SEARCH_VENDORS_ELEMENT = (By.CSS_SELECTOR, r"#KsupVendors_\$container .ms-taxonomy-browser-button")
+
+    # Элемент Вендор в модульном окне "Вендоры"
+    VENDOR_ELEMENT = (By.XPATH, f"//*[normalize-space(text()) and normalize-space(.)='vendor_name']")
+
+    # Кнопка "Поиск допустимого варианта" у поля "Теги"
+    SEARCH_TAGS_ELEMENT = (By.CSS_SELECTOR, r"#KsupTag_\$container .ms-taxonomy-browser-button")
+
+    # Элемент Тег в модульном окне "Теги"
+    TAG_ELEMENT = (By.XPATH, f"//*[normalize-space(text()) and normalize-space(.)='tag_name']")
+
+    # Менеджеры проекта
+    SALES_MANAGER_ELEMENT = (By.XPATH, "//div[@id='div-wcfLookupControl_KsupSellers']/span/span/span")
+    SALES_MANAGER_DROPDOWN_ELEMENT = (By.XPATH, "//li[normalize-space(.)='manager_name']")
+
+    # Контактное лицо от ЛАНИТ
+    RP_LANIT_ELEMENT = (By.CSS_SELECTOR, r"#KsupRpLanit_c9f28b10-e6a1-4b8e-b4b0-f5dc0565045e_\$ClientPeoplePicker_EditorInput")
+    RP_LANIT_DROPDOWN_ELEMENT = (By.XPATH, "//*[(text() = 'name' or . = 'name')]")
+
+    # Дата реализации
+    END_DATE_ELEMENT = (By.CSS_SELECTOR, r"#KsupDuePlan_1b0a9fb3-7a1a-4039-b25f-d2764f2f5d21_\$DateTimeFieldDate")
+
+    # Сумма по всем договорам/контрактам
+    SUM_ELEMENT = (By.ID, "KsupPrice_x0421_ategory_1fd6a848-0f56-4ba2-85d2-6a40f0086b05_$DropDownChoice")
+
+    # Кнопка "Поиск допустимого варианта" у поля "Территория применения"
+    SEARCH_TERRITORY_ELEMENT = (By.CSS_SELECTOR, r"#KsupApplicationTerritory_\$containercontrolHolder .ms-taxonomy-browser-button")
+
+    # Группа территорий во фрейме
+    GROUP_TERRITORY_ELEMENT = (By.ID, "TIE_3")
+
+    # Элемент территории
+    TERRITORY_ELEMENT = (By.XPATH, f"//*[normalize-space(text()) and normalize-space(.)='territory_name']")
+
+    SCROLL_DOWN_BUTTON_TERRITORY = (By.ID, "PGD_3")
+
+    # Кнопка поиск вариантов у поля "Технологии"
+    SEARCH_TECHNOLOGIES_ELEMENT = (
+        By.CSS_SELECTOR, r"#KsupTechnology_\$container .ms-taxonomy-browser-button")
+
+    # Кнопка прокрутки в технологиях
+    SCROLL_DOWN_BUTTON_TECHNOLOGIES = (By.ID, "PGD_1")
+
+    # Выбор технологии
+    TECHNOLOGIES_ELEMENT = (By.XPATH, f"//*[normalize-space(text()) and normalize-space(.)='technologies_name']")
+
+    # Категория
+    PROJECT_CATEGORY_ELEMENT = (By.ID, "KsupProjectCategory_038d97ca-e862-46ce-b363-1d12156b4749_$DropDownChoice")
+
+    # Цели и задачи
+    DESCRIPTION_TEXT_ELEMENT = (By.ID, "KsupServices_561cef35-9fbc-464d-9cd9-d8902e9b8934_$TextField")
+
+    # Ожидаемые результаты проекта
+    PROJECT_RESULT_ELEMENT = (By.ID, "KsupProjectResult_656ba0b0-3427-4901-9742-7ddf9d1f350b_$TextField")
+
+    # Информация о заинтересованности
+    INTEREST_INFORMATION_ELEMENT = (By.ID, "KsupInterestInformation_bac54c15-b35d-424d-b924-2f64b0a1ddca_$TextField")
+
+    # Описание
+    DESCRIPTION_ELEMENT = (By.ID, "KsupDescription_4d5ebadf-de91-444a-9272-6483acf5c3a0_$TextField")
+
+    CONFIRM_PROJECT_BUTTON = (By.XPATH, "//*[@type = 'submit' and @value = 'Сохранить']")
+
+
+class ProjectElementLocators:
+    TITLE_VALUE = (By.CSS_SELECTOR, ".title.title--main")
+
+    SLIDE_CONTENT_ELEMENT = (By.CSS_SELECTOR, ".slide-content__toggler")
+
+    # Значение в поле "Заказчик"
+    CUSTOMER_VALUE = (By.CSS_SELECTOR, ".fldKsupEgr_Customers #SPFieldWcfLookup")
+
+    # Значение в поле "Отрасль"
+    INDUSTRY_VALUE = (By.CSS_SELECTOR, ".fldKsupIndustry #SPFieldTaxonomyFieldTypeMulti")
+
+    # Значение в поле "Тип работ и услуг"
+    WORK_SERVICES_TYPE_VALUE = (By.CSS_SELECTOR, ".fldKsupWorkServicesTypeMetadata #SPFieldTaxonomyFieldTypeMulti")
+
+    # Значение в поле "Исполнитель основной"
+    PERFOMER_DIVISION_VALUE = (By.CSS_SELECTOR, ".fldKsupPerformerDivision #SPFieldWcfLookup")
+
+    # Значение в поле "Стадия проекта"
+    PROJECT_STAGE_VALUE = (By.CSS_SELECTOR, ".fldKsupProjectStage #SPFieldChoice")
+
+    # Значение в поле "Контактное лицо от ЛАНИТ"
+    RP_LANIT_VALUE = (By.CSS_SELECTOR, ".fldKsupRpLanit #SPFieldUser")
+
+    # Значение в поле "Территория применения"
+    TERRITORY_VALUE = (By.CSS_SELECTOR, ".fldKsupApplicationTerritory #SPFieldTaxonomyFieldType")
+
+    # Значение в поле "Технологии"
+    TECHNOLOGIES_VALUE = (By.CSS_SELECTOR, ".fldKsupTechnology #SPFieldTaxonomyFieldTypeMulti")
+
+    # Значение в поле "Исполнитель (юридическое лицо)"
+    PERFORMER_LEGAL_VALUE = (By.CSS_SELECTOR, ".fldKsupEgr_PerformerLegal #SPFieldWcfLookup")
+
+    # Значение в поле "Соисполнители"
+    PERFOMER_DIVISIONS_VALUE = (By.CSS_SELECTOR, ".fldKsupPerformerDivisions #SPFieldWcfLookup")
+
+    # Значение в поле "Связанные договоры/контракты"
+    CONTRACTS_VALUE = (By.CSS_SELECTOR, ".fldKsupContracts #SPFieldWcfLookup")
+
+    # Значение в поле "Срок начала"
+    START_DATE_VALUE = (By.CSS_SELECTOR, ".fldKsupStartDatePlan #SPFieldDateTime")
+
+    # Значение в поле "Вендоры"
+    VENDORS_VALUE = (By.CSS_SELECTOR, ".fldKsupVendors #SPFieldTaxonomyFieldType")
+
+    # Значение в поле "Теги"
+    TAGS_VALUE = (By.CSS_SELECTOR, ".fldKsupTag  #SPFieldTaxonomyFieldType")
+
+    # Значение в поле "Менеджеры проекта"
+    MANAGERS_PROJECT_VALUE = (By.CSS_SELECTOR, ".fldKsupSellers #SPFieldWcfLookup")
+
+    # Значение в поле "Дата реализации"
+    END_DATE_VALUE = (By.CSS_SELECTOR, ".fldKsupDuePlan #SPFieldDateTime")
+
+    # Значение в поле "Сумма по всем договорам/контрактам"
+    SUM_VALUE = (By.CSS_SELECTOR, ".fldKsupPrice_x0421_ategory #SPFieldChoice")
+
+    # Значение в поле "Категория"
+    PROJECT_CATEGORY_VALUE = (By.CSS_SELECTOR, ".fldKsupProjectCategory #SPFieldChoice")
+
+    # Значение в поле "Цели и задачи"
+    SERVICES_VALUE = (By.CSS_SELECTOR, ".fldKsupServices #SPFieldNote")
+
+    # Значение в поле "Ожидаемые результаты проекта"
+    PROJECT_RESULT_VALUE = (By.CSS_SELECTOR, ".fldKsupProjectResult #SPFieldNote")
+
+    # Значение в поле "Информация о заинтересованности"
+    INTEREST_INFORMATION_VALUE = (By.CSS_SELECTOR, ".fldKsupInterestInformation #SPFieldNote")
+
+    # Значение в поле "Описание"
+    DESCRIPTION_VALUE = (By.CSS_SELECTOR, ".fldKsupDescription #SPFieldNote")

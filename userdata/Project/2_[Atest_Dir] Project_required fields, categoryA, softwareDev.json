@@ -1,0 +1,29 @@
+{
+	"main_data": {
+        "fullName": "[АТест_Dir] Проект только обязательные поля,категория A, разработка заказного ПО",
+		"eisPriceLink": "",
+        "customers": ["КАЗНАЧЕЙСТВО РОССИИ", "БАНК РОССИИ"],
+		"industry": ["IT-сектор", "Автопром"],
+		"typeOfWorkServices": ["Разработка заказного ПО", "Тестирование ПО"],
+		"executiveUnitLegal": "ООО \"ЛАНИТ-ТЕХНОЛОГИИ\"",
+        "executiveUnit": "Департамент корпоративных систем",
+        "salesUnit": ["Департамент корпоративных систем"],
+		"projectStage": "Активный",
+		"contracts": [],
+        "startDate": "01.07.2020",
+		"vendors": [], 
+		"tags": [],
+        "salesManager": ["Батарова Татьяна Андреевна"],
+		"rpLanit": "Mr_KSUP_Seller@LANIT",
+        "endDate": "",
+		"sum": "От 50 млн. до 100 млн. руб.",
+        "territory": ["Архангельская область", "Волгоградская область", "Воронежская область"],
+        "technologies": ["Jira"],
+		"projectCategory": "Крупный",
+        "descriptionText": "Краткое описание текст Цели и задачи",
+		"quantitativeIndicatorsProject": "",
+		"interestInformation": "",
+		"description": "",
+		"createAccount": "Mr_KSUP_Dir"
+    }
+}
