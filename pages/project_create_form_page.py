@@ -293,6 +293,10 @@ class ProjectFormCreate(BasePage):
         # Жмем кнопку "Создать"
         self.browser.find_element(*FormCreateProjectLocators.CONFIRM_PROJECT_BUTTON).click()
 
+        # Ждем пока исчезнет надпись "Мы работаем над этим"
+        time.sleep(5)
+
+
 
 
 

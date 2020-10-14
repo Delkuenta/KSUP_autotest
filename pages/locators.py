@@ -835,18 +835,36 @@ class ContractElementLocators:
 
 
 class KnowledgeSearchLocators:
+    # Элемент "Названия блока фильтра" в быстрых фильтрах (множественный результат)
     ALL_TITLE_IN_FAST_FILTER = (By.CSS_SELECTOR, ".search-filter h3")
-    ALL_TITLE_IN_FOUND_ELEMENT = (By.CSS_SELECTOR, ".search-result__title h6")
 
-    # Чек-бокс "Проект" в блоке "Нужно найти"
-    PROJECT_CHECKBOX = (By.XPATH, "//label[(text() = 'Проект' or .='Проект')]")
-    CONTRACT_CHECKBOX = (By.XPATH, "//label[(text() = 'Договор (контракт)' or . = 'Договор (контракт)')]")
-    DIVISION_CHECKBOX = (By.XPATH, "//label[(text() = 'Подразделение' or . = 'Подразделение')]")
-    TECHNOLOGY_CHECKBOX = (By.XPATH, "//label[(text() = 'Технологию' or . = 'Технологию')]")
-    LEGAL_CHECKBOX = (By.XPATH, "//label[(text() = 'Юр.лицо/ИП' or . = 'Юр.лицо/ИП')]")
+    # Элемент "Тип сущности" в результатах поиска (множественный результат)
+    TYPES_ON_ALL_FOUND_ELEMENT = (By.CSS_SELECTOR, ".search-result__title h6")
+
+    # Элемент "Название сущности" в результатах поиска (множественный результат)
+    NAME_ON_ALL_FOUND_ELEMENT = (By.CSS_SELECTOR, ".search-result__title h2")
+
+    # Чек-боксы в блоке "Нужно найти"
+    PROJECT_CHECKBOX = (By.XPATH, "//*[@role = 'checkbox' and (text() = 'Проект' or . = 'Проект')]")
+    CONTRACT_CHECKBOX = (By.XPATH, "//*[@role = 'checkbox' and (text() = 'Договор (контракт)' or . = 'Договор (контракт)')]")
+    DIVISION_CHECKBOX = (By.XPATH, "//*[@role = 'checkbox' and (text() = 'Подразделение' or . = 'Подразделение')]")
+    TECHNOLOGY_CHECKBOX = (By.XPATH, "//*[@role = 'checkbox' and (text() = 'Технологию' or . = 'Технологию')]")
+    LEGAL_CHECKBOX = (By.XPATH, "//*[@role = 'checkbox' and (text() = 'Юр.лицо/ИП' or . = 'Юр.лицо/ИП')]")
+
+    # Кнопка "загрузить еще" в результатах поиска
     LOAD_MORE_BUTTON = (By.XPATH, "//a[contains(text(),'Загрузить еще')]")
+
+    # Надпись "Конец поисковой выдачи" в результатах поиска
     END_LOAD_BUTTON = (By.XPATH, "//a[contains(text(),'Конец поисковой выдачи')]")
 
+    # Строка поиска
+    SEARCH_LINE = (By.XPATH, "//input[@name='searchText']")
+
+    # Кнопка очистки строки поиска
+    CLEAR_LINE_BUTTON = (By.XPATH, "//*[@class = 'clearable__clear']")
+
+    # Кнопка "Сбросить"
+    RESET_BUTTON = (By.XPATH, "//*[@type = 'button' and (text() = 'Сбросить' or . = 'Сбросить')]")
 
 class ProjectPageLocators:
     PROJECT_CREATE_BUTTON = (By.CSS_SELECTOR, "#QCB1_Button1")
