@@ -835,21 +835,104 @@ class ContractElementLocators:
 
 
 class KnowledgeSearchLocators:
+
+    # Локаторы в области "Быстрые фильтры"
     # Элемент "Названия блока фильтра" в быстрых фильтрах (множественный результат)
     ALL_TITLE_IN_FAST_FILTER = (By.CSS_SELECTOR, ".search-filter h3")
 
+    # Шаблон для поиска значения чек-бокса
+    TEMPLATE_CHECKBOX = (By.XPATH, "//*[@role = 'checkbox' and (text() = 'name' or . = 'name')]")
+
+    # Кнопка "Сбросить"
+    RESET_BUTTON = (By.XPATH, "//*[@type = 'button' and (text() = 'Сбросить' or . = 'Сбросить')]")
+
+    # Кнопка "Весь список" в блоке "Заказчик"
+    ALL_LIST_CUSTOMER_BLOCK = (By.XPATH, "//h3[contains(text(), 'Заказчик')]/following::*[1]")
+
+    # Кнопка "Весь список" в блоке "Юр.лицо-исполнитель"
+    ALL_LIST_LEGAL_BLOCK = (By.XPATH, "//h3[contains(text(), 'Юр.лицо-исполнитель')]/following::*[1]")
+
+    # Кнопка "Весь список" в блоке "Подразделение-исполнитель"
+    ALL_LIST_PERFORMER_BLOCK = (By.XPATH, "//h3[contains(text(), 'Подразделение-исполнитель')]/following::*[1]")
+
+    # Кнопка "Весь список" в блоке "Тип работ и услуг"
+    ALL_LIST_TYPEWORKS_BLOCK = (By.XPATH, "//h3[contains(text(), 'Тип работ и услуг')]/following::*[1]")
+
+    # Кнопка "Весь список" в блоке "Технологии"
+    ALL_LIST_TECHNOLOGIES_BLOCK = (By.XPATH, "//h3[contains(text(), 'Технологии')]/following::*[1]")
+
+    # Cтрока поиска  вблоке фильтра
+    SEARCH_LINE_IN_BLOCK_FILTER = (By.XPATH, "//input[@class = 'options-filter__input']")
+
+    # Поле "Стоимость проекта (руб.) ОТ"
+    SUM_FROM = (By.XPATH, "//input[@name='projectSum_number-from']")
+
+    # Поле "Стоимость проекта (руб.) ДО"
+    SUM_TO = (By.XPATH, "//input[@name='projectSum_number-to']")
+
+    # Поле "Дата заключения ОТ"
+    START_DATE_FROM = (By.XPATH, "//input[@id='rw_31_input']']")
+
+    # Поле "Дата заключения ДО"
+    START_DATE_TO = (By.XPATH, "//input[@id='rw_32_input']']")
+
+    # Поле "Дата завершения ОТ"
+    END_DATE_FROM = (By.XPATH, "//input[@id='rw_33_input']']")
+
+    # Поле "Дата завершения ДО"
+    END_DATE_TO = (By.XPATH, "//input[@id='rw_34_input']']")
+
+
+    # Локаторы в строке поиска и около того
+    # Строка поиска
+    SEARCH_LINE = (By.XPATH, "//input[@name='searchText']")
+
+    # Кнопка очистки строки поиска
+    CLEAR_LINE_BUTTON = (By.XPATH, "//*[@class = 'clearable__clear']")
+
+
+    # Локаторы в области результатов поиска
     # Элемент "Тип сущности" в результатах поиска (множественный результат)
-    TYPES_ON_ALL_FOUND_ELEMENT = (By.CSS_SELECTOR, ".search-result__title h6")
+    TYPES_OF_ALL_FOUND_ELEMENT = (By.CSS_SELECTOR, ".search-result__title h6")
 
     # Элемент "Название сущности" в результатах поиска (множественный результат)
-    NAME_ON_ALL_FOUND_ELEMENT = (By.CSS_SELECTOR, ".search-result__title h2")
+    NAMES_OF_ALL_FOUND_ELEMENT = (By.CSS_SELECTOR, ".search-result__title h2")
 
-    # Чек-боксы в блоке "Нужно найти"
-    PROJECT_CHECKBOX = (By.XPATH, "//*[@role = 'checkbox' and (text() = 'Проект' or . = 'Проект')]")
-    CONTRACT_CHECKBOX = (By.XPATH, "//*[@role = 'checkbox' and (text() = 'Договор (контракт)' or . = 'Договор (контракт)')]")
-    DIVISION_CHECKBOX = (By.XPATH, "//*[@role = 'checkbox' and (text() = 'Подразделение' or . = 'Подразделение')]")
-    TECHNOLOGY_CHECKBOX = (By.XPATH, "//*[@role = 'checkbox' and (text() = 'Технологию' or . = 'Технологию')]")
-    LEGAL_CHECKBOX = (By.XPATH, "//*[@role = 'checkbox' and (text() = 'Юр.лицо/ИП' or . = 'Юр.лицо/ИП')]")
+    # Значение в поле "Заказчик"
+    CUSTOMER_VALUE_IN_RESULT = (
+        By.XPATH, "(.//*[normalize-space(text()) and normalize-space(.)='Заказчик'])/following::p[1]")
+
+    # Значение в поле "Подразделение"
+    PERFORMER_VALUE_IN_RESULT = (
+        By.XPATH, "(.//*[normalize-space(text()) and normalize-space(.)='Подразделение'])/following::p[1]")
+
+    TECHNOLOGIES_VALUE_IN_RESULT = (
+        By.XPATH, "(.//*[normalize-space(text()) and normalize-space(.)='Технологии'])/following::p[1]")
+
+    # Значения в карточке "Договор(контракт)" (множественный результат)
+    # Значение в поле "Исполнитель"
+    LEGAL_VALUE_IN_RESULT = (
+        By.XPATH, "(.//*[normalize-space(text()) and normalize-space(.)='Исполнитель'])/following::p[1]")
+
+    # Значение в поле "Сумма контракта (руб.)"
+    SUM_VALUE_IN_RESULT = (
+        By.XPATH, "(.//*[normalize-space(text()) and normalize-space(.)='Сумма контракта (руб.)'])/following::p[1]")
+
+    # Значение в поле "Тип работ и услуг"
+    TYPE_WORKS_VALUE_IN_RESULT = (
+        By.XPATH, "(.//*[normalize-space(text()) and normalize-space(.)='Тип работ и услуг'])/following::p[1]")
+
+    # Значение в поле "Дата заключения"
+    START_DATE_VALUE_IN_RESULT = (
+        By.XPATH, "(.//*[normalize-space(text()) and normalize-space(.)='Дата заключения'])/following::p[1]")
+
+    # Значение в поле "Дата завершения"
+    END_DATE_VALUE_IN_RESULT = (
+        By.XPATH, "(.//*[normalize-space(text()) and normalize-space(.)='Дата завершения'])/following::p[1]")
+
+    # Значение в поле "Номер контракта"
+    CONTRACT_NUMBER_VALE_IN_RESULT = (
+        By.XPATH, "(.//*[normalize-space(text()) and normalize-space(.)='Номер контракта'])/following::p[1]")
 
     # Кнопка "загрузить еще" в результатах поиска
     LOAD_MORE_BUTTON = (By.XPATH, "//a[contains(text(),'Загрузить еще')]")
@@ -857,14 +940,6 @@ class KnowledgeSearchLocators:
     # Надпись "Конец поисковой выдачи" в результатах поиска
     END_LOAD_BUTTON = (By.XPATH, "//a[contains(text(),'Конец поисковой выдачи')]")
 
-    # Строка поиска
-    SEARCH_LINE = (By.XPATH, "//input[@name='searchText']")
-
-    # Кнопка очистки строки поиска
-    CLEAR_LINE_BUTTON = (By.XPATH, "//*[@class = 'clearable__clear']")
-
-    # Кнопка "Сбросить"
-    RESET_BUTTON = (By.XPATH, "//*[@type = 'button' and (text() = 'Сбросить' or . = 'Сбросить')]")
 
 class ProjectPageLocators:
     PROJECT_CREATE_BUTTON = (By.CSS_SELECTOR, "#QCB1_Button1")

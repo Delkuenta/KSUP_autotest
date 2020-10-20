@@ -49,7 +49,7 @@ def browser_session(request):
     if browser_name == "chrome":
         options = webdriver.ChromeOptions()
         options.add_argument("ignore-certificate-errors")
-        options.add_argument("start-maximized")
+        #options.add_argument("start-maximized")
         print("\nstart chrome browser for test..")
         browser = webdriver.Chrome(options=options)
         # browser.maximize_window()

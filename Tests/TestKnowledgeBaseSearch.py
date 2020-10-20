@@ -63,23 +63,82 @@ class TestKnowledgeBaseSearch:
         login_page.login("Mr_KSUP_Seller")
         login_page.verify_username("Mr_KSUP_Seller")
 
+    """
     def test_default_block_filter(self, browser_session):
         link = browser_session.current_url
         knowledge_page = KnowledgeSearchPage(browser_session, link)
         knowledge_page.go_to_knowledge_search()
-        knowledge_page.test_default_fast_filter()
-        knowledge_page.test_fast_filter_project()
-        knowledge_page.test_fast_filter_contract()
-        knowledge_page.test_fast_filter_division()
-        knowledge_page.test_fast_filter_technology()
-        knowledge_page.test_fast_filter_legal()
+        knowledge_page.verify_default_fast_filter()
+        knowledge_page.verify_fast_filter_project()
+        knowledge_page.verify_fast_filter_contract()
+        knowledge_page.verify_fast_filter_division()
+        knowledge_page.verify_fast_filter_technology()
+        knowledge_page.verify_fast_filter_legal()
         delayed_assert.assert_expectations()
 
     def test_search_line_project(self, browser_session):
         project_data_dict = BasePage.read_json(browser_session, project_path_file)
-        print(project_data_dict)
+        link = browser_session.current_url
+        knowledge_page = KnowledgeSearchPage(browser_session, link)
+        # knowledge_page.go_to_knowledge_search()
+        knowledge_page.search_line(project_data_dict)
+
+    def test_search_line_contract(self, browser_session):
+        contract_data_dict = BasePage.read_json(browser_session, contract_path_file)
+        link = browser_session.current_url
+        knowledge_page = KnowledgeSearchPage(browser_session, link)
+        # knowledge_page.go_to_knowledge_search()
+        knowledge_page.search_line(contract_data_dict)
+
+    def test_search_with_customer_block_filter_in_project(self, browser_session):
+        project_data_dict = BasePage.read_json(browser_session, project_path_file)
+        link = browser_session.current_url
+        knowledge_page = KnowledgeSearchPage(browser_session, link)
+        # knowledge_page.go_to_knowledge_search()
+        knowledge_page.search_with_customer_block_filter(project_data_dict)
+
+    def test_search_with_legal_block_filter_in_project(self, browser_session):
+        project_data_dict = BasePage.read_json(browser_session, project_path_file)
+        link = browser_session.current_url
+        knowledge_page = KnowledgeSearchPage(browser_session, link)
+        # knowledge_page.go_to_knowledge_search()
+        knowledge_page.search_with_legal_block_filter(project_data_dict)
+
+    def test_search_with_performer_block_filter_in_project(self, browser_session):
+        project_data_dict = BasePage.read_json(browser_session, project_path_file)
+        link = browser_session.current_url
+        knowledge_page = KnowledgeSearchPage(browser_session, link)
+        # knowledge_page.go_to_knowledge_search()
+        knowledge_page.search_with_performer_block_filter(project_data_dict)
+
+    def test_search_with_type_works_block_filter_in_project(self, browser_session):
+        project_data_dict = BasePage.read_json(browser_session, project_path_file)
+        link = browser_session.current_url
+        knowledge_page = KnowledgeSearchPage(browser_session, link)
+        # knowledge_page.go_to_knowledge_search()
+        knowledge_page.search_with_type_works_block_filter(project_data_dict)
+
+    def test_search_with_technologies_block_filter_in_project(self, browser_session):
+        project_data_dict = BasePage.read_json(browser_session, project_path_file)
+        link = browser_session.current_url
+        knowledge_page = KnowledgeSearchPage(browser_session, link)
+        # knowledge_page.go_to_knowledge_search()
+        knowledge_page.search_with_technologies_block_filter(project_data_dict)
+
+    def test_search_with_all_fast_filter_in_project(self, browser_session):
+        project_data_dict = BasePage.read_json(browser_session, project_path_file)
+        link = browser_session.current_url
+        knowledge_page = KnowledgeSearchPage(browser_session, link)
+        # knowledge_page.go_to_knowledge_search()
+        knowledge_page.search_with_all_fast_filter_on_project(project_data_dict)
+"""
+    def test_search_with_sum_block_filter_in_contract(self, browser_session):
+        contract_data_dict = BasePage.read_json(browser_session, contract_path_file)
+        contract_data_dict = BasePage.dict_preparation(browser_session, contract_data_dict)
+        print(contract_data_dict)
         link = browser_session.current_url
         knowledge_page = KnowledgeSearchPage(browser_session, link)
         knowledge_page.go_to_knowledge_search()
-        knowledge_page.test_search_line(project_data_dict)
+        knowledge_page.search_with_sum_block_filter(contract_data_dict)
+
 

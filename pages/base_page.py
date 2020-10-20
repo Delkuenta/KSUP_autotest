@@ -66,7 +66,7 @@ class BasePage:
         return True
 
     # Проверка что элемент отображен и имеет размер
-    def is_visibility_of_element_located(self, how, what, timeout=5):
+    def is_visibility_of_element_located(self, how, what, timeout=3):
         try:
             WebDriverWait(self.browser, timeout).until(ec.visibility_of_element_located((how, what)))
         except TimeoutException:
@@ -132,6 +132,9 @@ class BasePage:
             sum_in_rub = raw_sum * 80
         else:
             sum_in_rub = raw_sum
+
+        sum_in_rub_dict = {"sumInRub": sum_in_rub}
+        user_data_dict.update(sum_in_rub_dict)
 
         # Присваиваем категорию на основе суммы в рублях
         priceCategory = ""
