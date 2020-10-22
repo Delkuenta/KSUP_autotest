@@ -15,6 +15,40 @@ class BasePageLocators:
     PROJECT_LIST_LINK = "https://ksup-tst.lanit/KnowledgeBase/Project/Forms/All.aspx"
     PROJECT_TITLE = (By.CSS_SELECTOR, "#DeltaPlaceHolderPageTitleInTitleArea")
 
+    # Локаторы во фрейме "Тип работ и услуг"
+    # Группы категорий
+    GROUP_CATEGORY_ELEMENT1 = (By.ID, "TIE_3")
+    GROUP_CATEGORY_ELEMENT2 = (By.ID, "TIE_4")
+    GROUP_CATEGORY_ELEMENT3 = (By.ID, "TIE_5")
+    GROUP_CATEGORY_ELEMENT4 = (By.ID, "TIE_6")
+    GROUP_CATEGORY_ELEMENT5 = (By.ID, "TIE_7")
+
+    # Кнопка прокрутки вниз у категории Программное обеспечение
+    SCROLL_DOWN_SOFTWARE_BUTTON = (By.ID, "PGD_6")
+
+    # Кнопка  элемента
+    WORK_SERVICE_ELEMENT = (By.XPATH, f"//*[normalize-space(text()) and normalize-space(.)='name_type_works']")
+
+    # Кнопка "Выбор"
+    CHOICE_IFRAME_BUTTON = (
+        By.ID, "ctl00_PlaceHolderDialogBodySection_PlaceHolderDialogBodyFooterMainSection_AddToFieldEditor")
+    # Кнопка подтверждения (ОК)
+    CONFIRM_IFRAME_BUTTON = (By.ID, "ctl00_OkButton")
+
+    # Локаторы во фрейме "Территория применения"
+    # Группа территорий во фрейме
+    GROUP_TERRITORY_ELEMENT = (By.ID, "TIE_3")
+    # Элемент территории
+    TERRITORY_ELEMENT = (By.XPATH, f"//*[normalize-space(text()) and normalize-space(.)='territory_name']")
+
+    SCROLL_DOWN_BUTTON_TERRITORY = (By.ID, "PGD_3")
+
+    # Кнопка прокрутки в технологиях
+    SCROLL_DOWN_BUTTON = (By.ID, "PGD_1")
+
+    # Выбор технологии
+    ELEMENT_IN_FRAME = (By.XPATH, f"//*[normalize-space(text()) and normalize-space(.)='name']")
+
 
 class PresaleListLocators:
     PRESALE_CREATE_BUTTON = (By.CSS_SELECTOR, "#idHomePageNewItem")
@@ -61,23 +95,6 @@ class FormCreatePresaleLocators:
         By.CSS_SELECTOR, r"#KsupWorkServicesTypeMetadata_\$containercontrolHolder .ms-taxonomy-browser-button")
 
     # Элементы во фрейме "Тип работ и услуг"
-
-    # Группы категорий
-    GROUP_CATEGORY_ELEMENT1 = (By.ID, "TIE_3")
-    GROUP_CATEGORY_ELEMENT2 = (By.ID, "TIE_4")
-    GROUP_CATEGORY_ELEMENT3 = (By.ID, "TIE_5")
-    GROUP_CATEGORY_ELEMENT4 = (By.ID, "TIE_6")
-    GROUP_CATEGORY_ELEMENT5 = (By.ID, "TIE_7")
-
-    # Кнопка прокрутки вниз у категории Программное обеспечение
-    SCROLL_DOWN_BUTTON = (By.ID, "PGD_6")
-    # Категория
-    CATEGORY_ELEMENT = ""
-    # Кнопка "Выбор"
-    CHOICE_IFRAME_BUTTON = (
-        By.ID, "ctl00_PlaceHolderDialogBodySection_PlaceHolderDialogBodyFooterMainSection_AddToFieldEditor")
-    # Кнопка подтверждения (ОК)
-    CONFIRM_IFRAME_BUTTON = (By.ID, "ctl00_OkButton")
     # Строка "Тип работ и услуг"
     TYPE_WORK_SERVICES_ELEMENT = (By.ID, "KsupWorkServicesTypeMetadata_$containereditableRegion")
 
@@ -643,12 +660,6 @@ class FormCreateContractLocators:
     SEARCH_TERRITORY_ELEMENT = (
         By.CSS_SELECTOR, r"#KsupApplicationTerritory_\$containercontrolHolder .ms-taxonomy-browser-button")
 
-    # Группа территорий во фрейме
-    GROUP_TERRITORY_ELEMENT = (By.ID, "TIE_3")
-    # Элемент территории
-    TERRITORY_ELEMENT = (By.XPATH, f"//*[normalize-space(text()) and normalize-space(.)='territory_name']")
-
-    SCROLL_DOWN_BUTTON_TERRITORY = (By.ID, "PGD_3")
 
     # Строка Территория применения
     TYPE_TERRITORY_ELEMENT = (By.ID, "KsupApplicationTerritory_$containereditableRegion")
@@ -657,11 +668,6 @@ class FormCreateContractLocators:
     SEARCH_TECHNOLOGIES_ELEMENT = (
         By.CSS_SELECTOR, r"#KsupKeyTechnologies_\$containercontrolHolder .ms-taxonomy-browser-button")
 
-    # Кнопка прокрутки в технологиях
-    SCROLL_DOWN_BUTTON_TECHNOLOGIES = (By.ID, "PGD_1")
-
-    # Выбор технологии
-    TECHNOLOGIES_ELEMENT = (By.XPATH, f"//*[normalize-space(text()) and normalize-space(.)='technologies_name']")
 
     # Строка Ключевые технологии
     TYPE_TECHNOLOGIES_ELEMENT = (By.ID, "KsupKeyTechnologies_$containereditableRegion")

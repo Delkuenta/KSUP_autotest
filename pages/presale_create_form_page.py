@@ -116,38 +116,8 @@ class PresaleFormCreate(BasePage):
         self.browser.find_element(*FormCreatePresaleLocators.SEARCH_VALID_OPTION_ELEMENT).click()
         time.sleep(2)
 
-        # Работаем во фрейме и выбираем категории
-        self.is_frame_to_be_available_and_switch_to_it()
-
-        # Открываем все доступные категории
-        if len(self.browser.find_elements(*FormCreatePresaleLocators.GROUP_CATEGORY_ELEMENT1)) == 1:
-            self.browser.find_element(*FormCreatePresaleLocators.GROUP_CATEGORY_ELEMENT1).click()
-        if len(self.browser.find_elements(*FormCreatePresaleLocators.GROUP_CATEGORY_ELEMENT2)) == 1:
-            self.browser.find_element(*FormCreatePresaleLocators.GROUP_CATEGORY_ELEMENT2).click()
-        if len(self.browser.find_elements(*FormCreatePresaleLocators.GROUP_CATEGORY_ELEMENT3)) == 1:
-            self.browser.find_element(*FormCreatePresaleLocators.GROUP_CATEGORY_ELEMENT3).click()
-        if len(self.browser.find_elements(*FormCreatePresaleLocators.GROUP_CATEGORY_ELEMENT4)) == 1:
-            self.browser.find_element(*FormCreatePresaleLocators.GROUP_CATEGORY_ELEMENT4).click()
-        if len(self.browser.find_elements(*FormCreatePresaleLocators.GROUP_CATEGORY_ELEMENT5)) == 1:
-            self.browser.find_element(*FormCreatePresaleLocators.GROUP_CATEGORY_ELEMENT5).click()
-
-        # Выбираем нужный элемент
-        for item in user_data_dict["typeOfWorkServices"]:
-            WORK_SERVICE_ELEMENT = (By.XPATH, f"//*[normalize-space(text()) and normalize-space(.)='{item}']")
-            if self.is_visibility_of_element_located(*WORK_SERVICE_ELEMENT, 3):
-                self.browser.find_element(*WORK_SERVICE_ELEMENT).click()
-                self.browser.find_element(*FormCreatePresaleLocators.CHOICE_IFRAME_BUTTON).click()
-            else:
-                self.browser.find_element(*FormCreatePresaleLocators.SCROLL_DOWN_BUTTON).click()
-                assert self.is_visibility_of_element_located(*WORK_SERVICE_ELEMENT, 3) is True, \
-                    f"Не найден тип работ и услуг с именем {item}"
-                self.browser.find_element(*WORK_SERVICE_ELEMENT).click()
-                self.browser.find_element(*FormCreatePresaleLocators.CHOICE_IFRAME_BUTTON).click()
-
-        self.browser.find_element(*FormCreatePresaleLocators.CONFIRM_IFRAME_BUTTON).click()
-        # Возврат к форм создания.
-        self.is_frame_to_parent()
-        time.sleep(1)
+        # Выбираем элементы во фрейме "Тип работ и услуг"
+        self.select_in_frame_type_work_and_services(user_data_dict["typeOfWorkServices"])
 
         # Ищем поле "Сумма" и вводим значение
         self.browser.find_element(*FormCreatePresaleLocators.SUM_ELEMENT).send_keys(user_data_dict["sum"])

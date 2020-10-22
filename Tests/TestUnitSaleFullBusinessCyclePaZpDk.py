@@ -81,8 +81,7 @@ from pages.zakup_list_page import ZakupListPage
 # До первой ошибки --maxfail=1
 # Браузер для запуска --browser_name=firefox
 @pytest.mark.parametrize('path_data_file', [
-    r"UnitSale\Dir - DKS\2_[Atest_Dir] PA+ZP+DK,Tender, categoryB, softwareDev, UnitSale.json"
-    ])
+    r"UnitSale\Seller2 - DirGS\12_[Аtest_Seller2] PA+ZP+DK, CommercialOffer, categoryC, OtherType, UnitSale.json"])
 class TestUnitSaleFullBusinessCyclePaZpDk:
     def test_create_presale(self, browser_function, path_data_file):
         user_data_dict = BasePage.read_json(browser_function, path_data_file)

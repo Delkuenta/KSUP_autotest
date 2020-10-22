@@ -23,73 +23,18 @@ class ProjectFormCreate(BasePage):
             what = what.replace("customer_name", customer)
             self.browser.find_element(how, what).click()
 
-        # Выбираем значение в поле "Отрасль *"
+        # Жмем кнопку "Поиск допустимого вариант" у поля "Отрасль *"
         self.browser.find_element(*FormCreateProjectLocators.SEARCH_INDUSTRY_ELEMENT).click()
         time.sleep(2)
-        self.is_frame_to_be_available_and_switch_to_it()
 
-        for industry in user_data_dict["industry"]:
-            how, what = FormCreateProjectLocators.INDUSTRY_ELEMENT
-            what = what.replace("industry_name", industry)
-            if self.is_visibility_of_element_located(how, what, 2):
-                self.browser.find_element(how, what).click()
-                self.browser.find_element(*FormCreateProjectLocators.CHOICE_IFRAME_BUTTON).click()
-            else:
-                # количество перелистываний
-                scrolls = 0
-                # максимум возможных перелистываний
-                max_scrolls = 3
-                while self.is_visibility_of_element_located(how, what, 2) is False and scrolls <= max_scrolls:
-                    self.browser.find_element(*FormCreateProjectLocators.SCROLL_DOWN_BUTTON_INDUSTRY).click()
-                    scrolls += 1
-                self.browser.find_element(how, what).click()
-                self.browser.find_element(*FormCreateProjectLocators.CHOICE_IFRAME_BUTTON).click()
-                if self.is_visibility_of_element_located(how, what, 2) is False and scrolls == max_scrolls:
-                    print(f"Не найдена территория  с именем {industry}")
-
-        self.browser.find_element(*FormCreateProjectLocators.CONFIRM_IFRAME_BUTTON).click()
-        # возврат к основной форме
-        self.is_frame_to_parent()
-        time.sleep(2)
+        # Работаем во фрейме "Отрасль"
+        self.select_elements_in_frame(user_data_dict["industry"], 3)
 
         # Ищем кнопку "Тип работ и услуг *"
         self.browser.find_element(*FormCreateProjectLocators.SEARCH_TYPE_AND_SERVICES_ELEMENT).click()
         time.sleep(2)
-
-        # Работаем во фрейме и выбираем категории
-        self.is_frame_to_be_available_and_switch_to_it()
-
-        # Открываем все доступные категории
-        if len(self.browser.find_elements(*FormCreateProjectLocators.GROUP_CATEGORY_ELEMENT1)) == 1:
-            self.browser.find_element(*FormCreateProjectLocators.GROUP_CATEGORY_ELEMENT1).click()
-        if len(self.browser.find_elements(*FormCreateProjectLocators.GROUP_CATEGORY_ELEMENT2)) == 1:
-            self.browser.find_element(*FormCreateProjectLocators.GROUP_CATEGORY_ELEMENT2).click()
-        if len(self.browser.find_elements(*FormCreateProjectLocators.GROUP_CATEGORY_ELEMENT3)) == 1:
-            self.browser.find_element(*FormCreateProjectLocators.GROUP_CATEGORY_ELEMENT3).click()
-        if len(self.browser.find_elements(*FormCreateProjectLocators.GROUP_CATEGORY_ELEMENT4)) == 1:
-            self.browser.find_element(*FormCreateProjectLocators.GROUP_CATEGORY_ELEMENT4).click()
-        if len(self.browser.find_elements(*FormCreateProjectLocators.GROUP_CATEGORY_ELEMENT5)) == 1:
-            self.browser.find_element(*FormCreateProjectLocators.GROUP_CATEGORY_ELEMENT5).click()
-
-        # Выбираем нужный элемент
-        for work_and_services in user_data_dict["typeOfWorkServices"]:
-            how, what = FormCreateProjectLocators.WORK_AND_SERVICIES_ELEMENT
-            what = what.replace("work_and_services_name", work_and_services)
-            if self.is_visibility_of_element_located(how, what, 2):
-                self.browser.find_element(how, what).click()
-                self.browser.find_element(*FormCreateProjectLocators.CHOICE_IFRAME_BUTTON).click()
-            else:
-                self.browser.find_element(*FormCreateProjectLocators.SCROLL_DOWN_BUTTON).click()
-                assert self.is_visibility_of_element_located(how, what, 2) is True, \
-                    f"Не найден тип работ и услуг с именем {work_and_services}"
-                self.browser.find_element(how, what).click()
-                self.browser.find_element(*FormCreateProjectLocators.CHOICE_IFRAME_BUTTON).click()
-
-        self.browser.find_element(*FormCreateProjectLocators.CONFIRM_IFRAME_BUTTON).click()
-
-        # Возврат к форм создания.
-        self.is_frame_to_parent()
-        time.sleep(2)
+        # Работаем во фрейме "Тип работ и услуг"
+        self.select_in_frame_type_work_and_services(user_data_dict["typeOfWorkServices"])
 
         # Ищем и заполняем поле "Исполнитель (юридическое лицо) *"
         self.browser.find_element(*FormCreateProjectLocators.EXECUTIVE_UNIT_LEGAL_PROJECT_ELEMENT).click()
@@ -129,62 +74,13 @@ class ProjectFormCreate(BasePage):
         # Выбираем значение в поле "Вендоры"
         if len(user_data_dict["vendors"]) > 0:
             self.browser.find_element(*FormCreateProjectLocators.SEARCH_VENDORS_ELEMENT).click()
-            time.sleep(2)
-            self.is_frame_to_be_available_and_switch_to_it()
-
-            for vendor in user_data_dict["vendors"]:
-                how, what = FormCreateProjectLocators.VENDOR_ELEMENT
-                what = what.replace("vendor_name", vendor)
-                if self.is_visibility_of_element_located(how, what, 2):
-                    self.browser.find_element(how, what).click()
-                    self.browser.find_element(*FormCreateProjectLocators.CHOICE_IFRAME_BUTTON).click()
-                else:
-                    # количество перелистываний
-                    scrolls = 0
-                    # максимум возможных перелистываний
-                    max_scrolls = 10
-                    while self.is_visibility_of_element_located(how, what, 2) is False and scrolls <= max_scrolls:
-                        self.browser.find_element(*FormCreateProjectLocators.SCROLL_DOWN_BUTTON_INDUSTRY).click()
-                        scrolls += 1
-                    self.browser.find_element(how, what).click()
-                    self.browser.find_element(*FormCreateProjectLocators.CHOICE_IFRAME_BUTTON).click()
-                    if self.is_visibility_of_element_located(how, what, 2) is False and scrolls == max_scrolls:
-                        print(f"Не найдена территория  с именем {vendor}")
-
-            self.browser.find_element(*FormCreateProjectLocators.CONFIRM_IFRAME_BUTTON).click()
-            # возврат к основной форме
-            self.is_frame_to_parent()
-            time.sleep(2)
+            self.select_elements_in_frame(user_data_dict["vendors"], 10)
 
         # Выбираем значение в поле "Теги"
         if len(user_data_dict["tags"]) > 0:
             self.browser.find_element(*FormCreateProjectLocators.SEARCH_TAGS_ELEMENT).click()
             time.sleep(2)
-            self.is_frame_to_be_available_and_switch_to_it()
-
-            for tag in user_data_dict["tags"]:
-                how, what = FormCreateProjectLocators.TAG_ELEMENT
-                what = what.replace("tag_name", tag)
-                if self.is_visibility_of_element_located(how, what, 2):
-                    self.browser.find_element(how, what).click()
-                    self.browser.find_element(*FormCreateProjectLocators.CHOICE_IFRAME_BUTTON).click()
-                else:
-                    # количество перелистываний
-                    scrolls = 0
-                    # максимум возможных перелистываний
-                    max_scrolls = 1
-                    while self.is_visibility_of_element_located(how, what, 2) is False and scrolls <= max_scrolls:
-                        self.browser.find_element(*FormCreateProjectLocators.SCROLL_DOWN_BUTTON_INDUSTRY).click()
-                        scrolls += 1
-                    self.browser.find_element(how, what).click()
-                    self.browser.find_element(*FormCreateProjectLocators.CHOICE_IFRAME_BUTTON).click()
-                    if self.is_visibility_of_element_located(how, what, 2) is False and scrolls == max_scrolls:
-                        print(f"Не найдена территория  с именем {tag}")
-
-            self.browser.find_element(*FormCreateProjectLocators.CONFIRM_IFRAME_BUTTON).click()
-            # возврат к основной форме
-            self.is_frame_to_parent()
-            time.sleep(2)
+            self.select_elements_in_frame(user_data_dict["tags"], 1)
 
         # Ищем поле "Менеджеры проекта *" и заполняем его
         for manager in user_data_dict["salesManager"]:
@@ -210,61 +106,12 @@ class ProjectFormCreate(BasePage):
         # Выбираем значение в поле "Территория применения"
         self.browser.find_element(*FormCreateProjectLocators.SEARCH_TERRITORY_ELEMENT).click()
         time.sleep(2)
-        self.is_frame_to_be_available_and_switch_to_it()
-        # Развернуть узел "Все субъекты если кнопка отображена"
-        if len(self.browser.find_elements(*FormCreateProjectLocators.GROUP_TERRITORY_ELEMENT)) == 1:
-            self.browser.find_element(*FormCreateProjectLocators.GROUP_TERRITORY_ELEMENT).click()
-        for territory in user_data_dict["territory"]:
-            how, what = FormCreateProjectLocators.TERRITORY_ELEMENT
-            what = what.replace("territory_name", territory)
-            if self.is_visibility_of_element_located(how, what, 2):
-                self.browser.find_element(how, what).click()
-                self.browser.find_element(*FormCreateProjectLocators.CHOICE_IFRAME_BUTTON).click()
-            else:
-                # количество перелистываний
-                scrolls = 0
-                # максимум возможных перелистываний
-                max_scrolls = 7
-                while self.is_visibility_of_element_located(how, what, 2) is False and scrolls <= max_scrolls:
-                    self.browser.find_element(*FormCreateProjectLocators.SCROLL_DOWN_BUTTON_TERRITORY).click()
-                    scrolls += 1
-                self.browser.find_element(how, what).click()
-                self.browser.find_element(*FormCreateProjectLocators.CHOICE_IFRAME_BUTTON).click()
-                if self.is_visibility_of_element_located(how, what, 2) is False and scrolls == max_scrolls:
-                    print(f"Не найдена территория  с именем {territory}")
-
-        self.browser.find_element(*FormCreateProjectLocators.CONFIRM_IFRAME_BUTTON).click()
-        # возврат к основной форме
-        self.is_frame_to_parent()
-        time.sleep(2)
+        self.select_elements_in_frame_territory(user_data_dict["territory"])
 
         # Выбираем значение в поле "Ключевые технологии"
         self.browser.find_element(*FormCreateProjectLocators.SEARCH_TECHNOLOGIES_ELEMENT).click()
         time.sleep(2)
-        self.is_frame_to_be_available_and_switch_to_it()
-        for technologies in user_data_dict["technologies"]:
-            how, what = FormCreateProjectLocators.TECHNOLOGIES_ELEMENT
-            what = what.replace("technologies_name", technologies)
-            if self.is_visibility_of_element_located(how, what, 2):
-                self.browser.find_element(how, what).click()
-                self.browser.find_element(*FormCreateProjectLocators.CHOICE_IFRAME_BUTTON).click()
-            else:
-                # количество перелистываний
-                scrolls = 0
-                # максимум возможных перелистываний
-                max_scrolls = 3
-                while self.is_visibility_of_element_located(how, what, 2) is False and scrolls <= max_scrolls:
-                    self.browser.find_element(*FormCreateProjectLocators.SCROLL_DOWN_BUTTON_TECHNOLOGIES).click()
-                    scrolls += 1
-
-                self.browser.find_element(how, what).click()
-                self.browser.find_element(*FormCreateProjectLocators.CHOICE_IFRAME_BUTTON).click()
-                if self.is_visibility_of_element_located(how, what, 2) is False and scrolls == max_scrolls:
-                    print(f"Не найдена технология с именем {technologies}")
-
-        self.browser.find_element(*FormCreateProjectLocators.CONFIRM_IFRAME_BUTTON).click()
-        self.is_frame_to_parent()
-        time.sleep(2)
+        self.select_elements_in_frame(user_data_dict["technologies"], 2)
 
         # Ищем поле "Категория" и выбираем значение
         Select(self.browser.find_element(*FormCreateProjectLocators.PROJECT_CATEGORY_ELEMENT)).select_by_value(
@@ -289,7 +136,7 @@ class ProjectFormCreate(BasePage):
         if len(user_data_dict["description"]) > 0:
             self.browser.find_element(*FormCreateProjectLocators.DESCRIPTION_ELEMENT).send_keys(
                 user_data_dict["description"])
-
+        breakpoint()
         # Жмем кнопку "Создать"
         self.browser.find_element(*FormCreateProjectLocators.CONFIRM_PROJECT_BUTTON).click()
 

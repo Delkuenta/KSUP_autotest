@@ -1,5 +1,6 @@
 import json
 import os
+import time
 
 from selenium.webdriver import Remote as RemoteWebDriver
 from selenium.webdriver.support.wait import WebDriverWait
@@ -164,3 +165,99 @@ class BasePage:
         # Сортировка списка территорий по алфавиту
         user_data_dict["territory"].sort()
         return user_data_dict
+
+    def select_in_frame_type_work_and_services(self, list_type_work):
+        self.browser.implicitly_wait(2)
+        # Работаем во фрейме и выбираем категории
+        self.is_frame_to_be_available_and_switch_to_it()
+
+        # Открываем все доступные категории
+        if len(self.browser.find_elements(*BasePageLocators.GROUP_CATEGORY_ELEMENT1)) == 1:
+            self.browser.find_element(*BasePageLocators.GROUP_CATEGORY_ELEMENT1).click()
+        if len(self.browser.find_elements(*BasePageLocators.GROUP_CATEGORY_ELEMENT2)) == 1:
+            self.browser.find_element(*BasePageLocators.GROUP_CATEGORY_ELEMENT2).click()
+        if len(self.browser.find_elements(*BasePageLocators.GROUP_CATEGORY_ELEMENT3)) == 1:
+            self.browser.find_element(*BasePageLocators.GROUP_CATEGORY_ELEMENT3).click()
+        if len(self.browser.find_elements(*BasePageLocators.GROUP_CATEGORY_ELEMENT4)) == 1:
+            self.browser.find_element(*BasePageLocators.GROUP_CATEGORY_ELEMENT4).click()
+        if len(self.browser.find_elements(*BasePageLocators.GROUP_CATEGORY_ELEMENT5)) == 1:
+            self.browser.find_element(*BasePageLocators.GROUP_CATEGORY_ELEMENT5).click()
+
+        # Выбираем нужный элемент
+        for element in list_type_work:
+            how, what = BasePageLocators.WORK_SERVICE_ELEMENT
+            what = what.replace("name_type_works", element)
+            if self.is_visibility_of_element_located(how, what, 3):
+                self.browser.find_element(how, what).click()
+                self.browser.find_element(*BasePageLocators.CHOICE_IFRAME_BUTTON).click()
+            else:
+                self.browser.find_element(*BasePageLocators.SCROLL_DOWN_SOFTWARE_BUTTON).click()
+                assert self.is_visibility_of_element_located(how, what, 3) is True, \
+                    f"Не найден тип работ и услуг с именем {element}"
+                self.browser.find_element(how, what).click()
+                self.browser.find_element(*BasePageLocators.CHOICE_IFRAME_BUTTON).click()
+
+        self.browser.find_element(*BasePageLocators.CONFIRM_IFRAME_BUTTON).click()
+        # Возврат к форм создания.
+        self.is_frame_to_parent()
+        time.sleep(1)
+
+    def select_elements_in_frame_territory(self, list_territories):
+        self.browser.implicitly_wait(2)
+        self.is_frame_to_be_available_and_switch_to_it()
+        # Развернуть узел "Все субъекты если кнопка отображена"
+        if len(self.browser.find_elements(*BasePageLocators.GROUP_TERRITORY_ELEMENT)) == 1:
+            self.browser.find_element(*BasePageLocators.GROUP_TERRITORY_ELEMENT).click()
+        # Выбираем территории из списка
+        for territory in list_territories:
+            how, what = BasePageLocators.TERRITORY_ELEMENT
+            what = what.replace("territory_name", territory)
+            if self.is_visibility_of_element_located(how, what, 1):
+                self.browser.find_element(how, what).click()
+                self.browser.find_element(*BasePageLocators.CHOICE_IFRAME_BUTTON).click()
+            else:
+                # количество перелистываний
+                scrolls = 0
+                # максимум возможных перелистываний
+                max_scrolls = 7
+                while self.is_visibility_of_element_located(how, what, 1) is False and scrolls <= max_scrolls:
+                    self.browser.find_element(*BasePageLocators.SCROLL_DOWN_BUTTON_TERRITORY).click()
+                    scrolls += 1
+                self.browser.find_element(how, what).click()
+                self.browser.find_element(*BasePageLocators.CHOICE_IFRAME_BUTTON).click()
+                if self.is_visibility_of_element_located(how, what, 1) is False and scrolls == max_scrolls:
+                    print(f"Не найдена территория  с именем {territory}")
+
+        self.browser.find_element(*BasePageLocators.CONFIRM_IFRAME_BUTTON).click()
+
+        # возврат к основной форме
+        self.is_frame_to_parent()
+        time.sleep(2)
+
+    def select_elements_in_frame(self, list_elements, max_scrolls):
+        self.browser.implicitly_wait(2)
+        # Выбираем значение в поле "Ключевые технологии"
+        self.is_frame_to_be_available_and_switch_to_it()
+        for element in list_elements:
+            how, what = BasePageLocators.ELEMENT_IN_FRAME
+            what = what.replace("name", element)
+            if self.is_visibility_of_element_located(how, what, 1):
+                self.browser.find_element(how, what).click()
+                self.browser.find_element(*BasePageLocators.CHOICE_IFRAME_BUTTON).click()
+            else:
+                # количество перелистываний
+                scrolls = 0
+                # максимум возможных перелистываний
+                while self.is_visibility_of_element_located(how, what, 1) is False and scrolls <= max_scrolls:
+                    self.browser.find_element(*BasePageLocators.SCROLL_DOWN_BUTTON).click()
+                    scrolls += 1
+
+                self.browser.find_element(how, what).click()
+                self.browser.find_element(*BasePageLocators.CHOICE_IFRAME_BUTTON).click()
+                if self.is_visibility_of_element_located(how, what, 1) is False and scrolls == max_scrolls:
+                    print(f"Не найдена технология с именем {element}")
+
+        self.browser.find_element(*BasePageLocators.CONFIRM_IFRAME_BUTTON).click()
+        self.is_frame_to_parent()
+        time.sleep(2)
+
