@@ -66,7 +66,7 @@ class BasePage:
         return True
 
     # Проверка что элемент отображен и имеет размер
-    def is_visibility_of_element_located(self, how, what, timeout=3):
+    def is_visibility_of_element_located(self, how, what, timeout):
         try:
             WebDriverWait(self.browser, timeout).until(ec.visibility_of_element_located((how, what)))
         except TimeoutException:

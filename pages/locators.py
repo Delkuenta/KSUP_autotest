@@ -861,26 +861,21 @@ class KnowledgeSearchLocators:
     # Кнопка "Весь список" в блоке "Технологии"
     ALL_LIST_TECHNOLOGIES_BLOCK = (By.XPATH, "//h3[contains(text(), 'Технологии')]/following::*[1]")
 
-    # Cтрока поиска  вблоке фильтра
+    # Cтрока поиска  в блоке фильтра
     SEARCH_LINE_IN_BLOCK_FILTER = (By.XPATH, "//input[@class = 'options-filter__input']")
 
-    # Поле "Стоимость проекта (руб.) ОТ"
+    # Поле "Стоимость проекта (руб.) ОТ" в блоке фильтрации
     SUM_FROM = (By.XPATH, "//input[@name='projectSum_number-from']")
 
-    # Поле "Стоимость проекта (руб.) ДО"
+    # Поле "Стоимость проекта (руб.) ДО" в блоке фильтрации
     SUM_TO = (By.XPATH, "//input[@name='projectSum_number-to']")
 
-    # Поле "Дата заключения ОТ"
-    START_DATE_FROM = (By.XPATH, "//input[@id='rw_31_input']']")
+    # Поле "Дата заключения" в блоке фильтрации(множественный резульатат: 2 элемента От И До).
+    START_DATE = (By.XPATH, "//div[3]/div/div/div/div/input")
 
-    # Поле "Дата заключения ДО"
-    START_DATE_TO = (By.XPATH, "//input[@id='rw_32_input']']")
+    # Поле "Дата завершения" в блоке фильтрации (множественный резульатат: 2 элемента От И До).
+    END_DATE = (By.XPATH, "//div[4]/div/div/div/div/input")
 
-    # Поле "Дата завершения ОТ"
-    END_DATE_FROM = (By.XPATH, "//input[@id='rw_33_input']']")
-
-    # Поле "Дата завершения ДО"
-    END_DATE_TO = (By.XPATH, "//input[@id='rw_34_input']']")
 
 
     # Локаторы в строке поиска и около того
@@ -939,6 +934,8 @@ class KnowledgeSearchLocators:
 
     # Надпись "Конец поисковой выдачи" в результатах поиска
     END_LOAD_BUTTON = (By.XPATH, "//a[contains(text(),'Конец поисковой выдачи')]")
+
+    NOT_FOUND_RESULT = (By.XPATH, "//a[contains(text(),'Результаты не найдены')]")
 
 
 class ProjectPageLocators:

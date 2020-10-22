@@ -8,24 +8,22 @@ from userdata.user_data import UserData
 class PresaleElementPage(BasePage):
     # Проверка отображения кнопки "Внести информацию о запросе цен"
     def verify_visibility_button_create_zp_tender_based_on_presale(self):
-        assert self.is_visibility_of_element_located(*PresaleElementLocators.TENDER_APPLICATION_ELEMENT), \
+        assert self.is_visibility_of_element_located(*PresaleElementLocators.TENDER_APPLICATION_ELEMENT, 5), \
             'Кнопка "Внести информацию о конкурсе" не отобрежена'
 
     # Проверка отображения кнопки "Внести информацию о запросе цен"
     def verify_visibility_button_create_zp_presale_act_based_on_presale(self):
-        assert self.is_visibility_of_element_located(*PresaleElementLocators.PRESALE_ACT_ELEMENT), \
+        assert self.is_visibility_of_element_located(*PresaleElementLocators.PRESALE_ACT_ELEMENT, 5), \
             'Кнопка Внести информацию о запросе цен" не отображена'
 
     # Проверка отображения кнопки "Внести информацию о коммерческом предложении"
     def verify_visibility_button_create_zp_commercial_offer_based_on_presale(self):
-        assert self.is_visibility_of_element_located(
-            *PresaleElementLocators.COMMERCIAL_OFFER_ELEMENT), \
+        assert self.is_visibility_of_element_located(*PresaleElementLocators.COMMERCIAL_OFFER_ELEMENT, 5), \
             'Кнопка "Внести информацию о коммерческом предложении" не отображена'
 
     # Проверка отображения кнопки создания контракта на основне Пресейла
     def verify_visibility_button_create_contract_based_on_presale(self):
-        assert self.is_visibility_of_element_located(
-            *PresaleElementLocators.CREATE_CONTRACT_ELEMENT), \
+        assert self.is_visibility_of_element_located(*PresaleElementLocators, 5), \
             'Кнопка "Внести информацию о договор/контракте" не доступна для нажатия'
 
     def go_to_create_zp_based_on_presale(self, user_data_dict):
@@ -39,27 +37,26 @@ class PresaleElementPage(BasePage):
 
     # Кнопка внутри пресейла для создания ЗП типа тендер (проверяем доступность и нажимаем)
     def go_to_create_zp_tender_based_on_presale(self):
-        assert self.is_visibility_of_element_located(*PresaleElementLocators.TENDER_APPLICATION_ELEMENT), \
+        assert self.is_visibility_of_element_located(*PresaleElementLocators.TENDER_APPLICATION_ELEMENT, 5), \
             'Кнопка "Внести информацию о конкурсе" не отображена'
         self.browser.find_element(*PresaleElementLocators.TENDER_APPLICATION_ELEMENT).click()
 
     # Кнопка внутри пресейла для создания ЗП типа "Внести информацию о запросе цен" (проверяем доступность и нажимаем)
     def go_to_create_zp_presale_act_based_on_presale(self):
-        assert self.is_visibility_of_element_located(
-            *PresaleElementLocators.PRESALE_ACT_ELEMENT), \
+        assert self.is_visibility_of_element_located(*PresaleElementLocators.PRESALE_ACT_ELEMENT, 5), \
             'Кнопка Внести информацию о запросе цен" не отображена'
         self.browser.find_element(*PresaleElementLocators.PRESALE_ACT_ELEMENT).click()
 
     # Кнопка внутри пресейла для создания ЗП типа "Внести информацию о коммерческом предложении" (проверяем
     # доступность и нажимаем)
     def go_to_create_zp_commercial_offer_based_on_presale(self):
-        assert self.is_visibility_of_element_located(*PresaleElementLocators.COMMERCIAL_OFFER_ELEMENT), \
+        assert self.is_visibility_of_element_located(*PresaleElementLocators.COMMERCIAL_OFFER_ELEMENT, 5), \
             'Кнопка "Внести информацию о коммерческом предложении" не отображена'
         self.browser.find_element(*PresaleElementLocators.COMMERCIAL_OFFER_ELEMENT).click()
 
     # Кнопка создания контракта на основне Пресейла
     def go_to_create_contract_based_on_presale(self):
-        assert self.is_visibility_of_element_located(*PresaleElementLocators.CREATE_CONTRACT_ELEMENT), \
+        assert self.is_visibility_of_element_located(*PresaleElementLocators.CREATE_CONTRACT_ELEMENT, 5), \
             'Кнопка "Внести информацию о договор/контракте" не отображена'
         self.browser.find_element(*PresaleElementLocators.CREATE_CONTRACT_ELEMENT).click()
 

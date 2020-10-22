@@ -98,7 +98,7 @@ class PresaleFormCreate(BasePage):
         # Проверка отображения поля Порядок проведения закупочной процедуры
         if user_data_dict["contractorType"] == "Тендерная заявка" \
                 or user_data_dict["contractorType"] == "Запрос цен товаров, работ, услуг":
-            assert self.is_visibility_of_element_located(*FormCreatePresaleLocators.SALE_LAW_TYPE_ELEMENT), \
+            assert self.is_visibility_of_element_located(*FormCreatePresaleLocators.SALE_LAW_TYPE_ELEMENT, 3), \
                 "Ошибка: При выбранном способе определения поставщика не отображено поле Порядок проведения " \
                 "закупочной процедуры "
 
@@ -109,7 +109,7 @@ class PresaleFormCreate(BasePage):
 
         if user_data_dict["contractorType"] == "Коммерческое предложение" \
                 or user_data_dict["contractorType"] == "Информация отсутствует":
-            assert self.is_visibility_of_element_located(*FormCreatePresaleLocators.SALE_LAW_TYPE_ELEMENT) is False, \
+            assert self.is_visibility_of_element_located(*FormCreatePresaleLocators.SALE_LAW_TYPE_ELEMENT, 3) is False, \
                 "Ошибка: При выбранном Способе определения поставщика поле Порядок проведения закупочной процедуры не должно отображаться"
 
         # Ищем кнопку "Тип работ и услуг"
@@ -134,12 +134,12 @@ class PresaleFormCreate(BasePage):
         # Выбираем нужный элемент
         for item in user_data_dict["typeOfWorkServices"]:
             WORK_SERVICE_ELEMENT = (By.XPATH, f"//*[normalize-space(text()) and normalize-space(.)='{item}']")
-            if self.is_visibility_of_element_located(*WORK_SERVICE_ELEMENT):
+            if self.is_visibility_of_element_located(*WORK_SERVICE_ELEMENT, 3):
                 self.browser.find_element(*WORK_SERVICE_ELEMENT).click()
                 self.browser.find_element(*FormCreatePresaleLocators.CHOICE_IFRAME_BUTTON).click()
             else:
                 self.browser.find_element(*FormCreatePresaleLocators.SCROLL_DOWN_BUTTON).click()
-                assert self.is_visibility_of_element_located(*WORK_SERVICE_ELEMENT) is True, \
+                assert self.is_visibility_of_element_located(*WORK_SERVICE_ELEMENT, 3) is True, \
                     f"Не найден тип работ и услуг с именем {item}"
                 self.browser.find_element(*WORK_SERVICE_ELEMENT).click()
                 self.browser.find_element(*FormCreatePresaleLocators.CHOICE_IFRAME_BUTTON).click()

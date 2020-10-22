@@ -18,7 +18,7 @@ class ProjectPage(BasePage):
     def should_be_element_on_project_list(self, user_data_dict):
         how, what = ProjectPageLocators.FIND_ELEMENT_IN_PROJECT_LIST
         what = what.replace("Test_name", user_data_dict["fullName"])
-        assert self.is_visibility_of_element_located(how, what), \
+        assert self.is_visibility_of_element_located(how, what, 5), \
             f'Пресейловая активность с именем "{user_data_dict["fullName"]}" не найдена в списке'
 
     # Зайти внутрь сущности пресейла по названию.имя берется из файла.

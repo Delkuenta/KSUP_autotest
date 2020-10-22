@@ -85,7 +85,7 @@ class ContractFormCreate(BasePage):
         for territory in user_data_dict["territory"]:
             how, what = FormCreateContractLocators.TERRITORY_ELEMENT
             what = what.replace("territory_name", territory)
-            if self.is_visibility_of_element_located(how, what):
+            if self.is_visibility_of_element_located(how, what, 1):
                 self.browser.find_element(how, what).click()
                 self.browser.find_element(*FormCreateContractLocators.CHOICE_IFRAME_BUTTON).click()
             else:
@@ -93,12 +93,12 @@ class ContractFormCreate(BasePage):
                 scrolls = 0
                 # максимум возможных перелистываний
                 max_scrolls = 7
-                while self.is_visibility_of_element_located(how, what) is False and scrolls <= max_scrolls:
+                while self.is_visibility_of_element_located(how, what, 1) is False and scrolls <= max_scrolls:
                     self.browser.find_element(*FormCreateContractLocators.SCROLL_DOWN_BUTTON_TERRITORY).click()
                     scrolls += 1
                 self.browser.find_element(how, what).click()
                 self.browser.find_element(*FormCreateContractLocators.CHOICE_IFRAME_BUTTON).click()
-                if self.is_visibility_of_element_located(how, what) is False and scrolls == max_scrolls:
+                if self.is_visibility_of_element_located(how, what, 1) is False and scrolls == max_scrolls:
                     print(f"Не найдена территория  с именем {territory}")
 
         self.browser.find_element(*FormCreateContractLocators.CONFIRM_IFRAME_BUTTON).click()
@@ -119,7 +119,7 @@ class ContractFormCreate(BasePage):
         for technologies in user_data_dict["technologies"]:
             how, what = FormCreateContractLocators.TECHNOLOGIES_ELEMENT
             what = what.replace("technologies_name", technologies)
-            if self.is_visibility_of_element_located(how, what):
+            if self.is_visibility_of_element_located(how, what, 1):
                 self.browser.find_element(how, what).click()
                 self.browser.find_element(*FormCreateContractLocators.CHOICE_IFRAME_BUTTON).click()
             else:
@@ -127,13 +127,13 @@ class ContractFormCreate(BasePage):
                 scrolls = 0
                 # максимум возможных перелистываний
                 max_scrolls = 3
-                while self.is_visibility_of_element_located(how, what) is False and scrolls <= max_scrolls:
+                while self.is_visibility_of_element_located(how, what, 1) is False and scrolls <= max_scrolls:
                     self.browser.find_element(*FormCreateContractLocators.SCROLL_DOWN_BUTTON_TECHNOLOGIES).click()
                     scrolls += 1
 
                 self.browser.find_element(how, what).click()
                 self.browser.find_element(*FormCreateContractLocators.CHOICE_IFRAME_BUTTON).click()
-                if self.is_visibility_of_element_located(how, what) is False and scrolls == max_scrolls:
+                if self.is_visibility_of_element_located(how, what, 1) is False and scrolls == max_scrolls:
                     print(f"Не найдена технология с именем {technologies}")
 
         self.browser.find_element(*FormCreateContractLocators.CONFIRM_IFRAME_BUTTON).click()
@@ -209,7 +209,11 @@ class ContractFormCreate(BasePage):
         # Заполняем поле "Заказчик"
         self.browser.find_element(*FormCreateContractLocators.CUSTOMER_CONTRACT_ELEMENT).click()
         how, what = FormCreateContractLocators.CUSTOMER_DROPDOWN_CONTRACT_ELEMENT
-        what = what.replace("customer_name", user_data_dict["customer"])
+        if isinstance(user_data_dict["customer"], list):
+            customer = user_data_dict["customer"][0]
+        else:
+            customer = user_data_dict["customer"]
+        what = what.replace("customer_name", customer)
         self.browser.find_element(how, what).click()
 
         # Заполняем поле "Подразделение-продавец"
@@ -264,12 +268,12 @@ class ContractFormCreate(BasePage):
         # Выбираем нужный элемент
         for item in user_data_dict["typeOfWorkServices"]:
             WORK_SERVICE_ELEMENT = (By.XPATH, f"//*[normalize-space(text()) and normalize-space(.)='{item}']")
-            if self.is_visibility_of_element_located(*WORK_SERVICE_ELEMENT):
+            if self.is_visibility_of_element_located(*WORK_SERVICE_ELEMENT, 2):
                 self.browser.find_element(*WORK_SERVICE_ELEMENT).click()
                 self.browser.find_element(*FormCreateContractLocators.CHOICE_IFRAME_BUTTON).click()
             else:
                 self.browser.find_element(*FormCreateContractLocators.SCROLL_DOWN_BUTTON).click()
-                assert self.is_visibility_of_element_located(*WORK_SERVICE_ELEMENT) is True, \
+                assert self.is_visibility_of_element_located(*WORK_SERVICE_ELEMENT, 2) is True, \
                     f"Не найден тип работ и услуг с именем {item}"
                 self.browser.find_element(*WORK_SERVICE_ELEMENT).click()
                 self.browser.find_element(*FormCreateContractLocators.CHOICE_IFRAME_BUTTON).click()
@@ -321,7 +325,7 @@ class ContractFormCreate(BasePage):
         for territory in user_data_dict["territory"]:
             how, what = FormCreateContractLocators.TERRITORY_ELEMENT
             what = what.replace("territory_name", territory)
-            if self.is_visibility_of_element_located(how, what):
+            if self.is_visibility_of_element_located(how, what, 3):
                 self.browser.find_element(how, what).click()
                 self.browser.find_element(*FormCreateContractLocators.CHOICE_IFRAME_BUTTON).click()
             else:
@@ -329,12 +333,12 @@ class ContractFormCreate(BasePage):
                 scrolls = 0
                 # максимум возможных перелистываний
                 max_scrolls = 7
-                while self.is_visibility_of_element_located(how, what) is False and scrolls <= max_scrolls:
+                while self.is_visibility_of_element_located(how, what, 1) is False and scrolls <= max_scrolls:
                     self.browser.find_element(*FormCreateContractLocators.SCROLL_DOWN_BUTTON_TERRITORY).click()
                     scrolls += 1
                 self.browser.find_element(how, what).click()
                 self.browser.find_element(*FormCreateContractLocators.CHOICE_IFRAME_BUTTON).click()
-                if self.is_visibility_of_element_located(how, what) is False and scrolls == max_scrolls:
+                if self.is_visibility_of_element_located(how, what, 1) is False and scrolls == max_scrolls:
                     print(f"Не найдена территория  с именем {territory}")
 
         self.browser.find_element(*FormCreateContractLocators.CONFIRM_IFRAME_BUTTON).click()
@@ -349,7 +353,7 @@ class ContractFormCreate(BasePage):
         for technologies in user_data_dict["technologies"]:
             how, what = FormCreateContractLocators.TECHNOLOGIES_ELEMENT
             what = what.replace("technologies_name", technologies)
-            if self.is_visibility_of_element_located(how, what):
+            if self.is_visibility_of_element_located(how, what, 1):
                 self.browser.find_element(how, what).click()
                 self.browser.find_element(*FormCreateContractLocators.CHOICE_IFRAME_BUTTON).click()
             else:
@@ -357,13 +361,13 @@ class ContractFormCreate(BasePage):
                 scrolls = 0
                 # максимум возможных перелистываний
                 max_scrolls = 3
-                while self.is_visibility_of_element_located(how, what) is False and scrolls <= max_scrolls:
+                while self.is_visibility_of_element_located(how, what, 1) is False and scrolls <= max_scrolls:
                     self.browser.find_element(*FormCreateContractLocators.SCROLL_DOWN_BUTTON_TECHNOLOGIES).click()
                     scrolls += 1
 
                 self.browser.find_element(how, what).click()
                 self.browser.find_element(*FormCreateContractLocators.CHOICE_IFRAME_BUTTON).click()
-                if self.is_visibility_of_element_located(how, what) is False and scrolls == max_scrolls:
+                if self.is_visibility_of_element_located(how, what, 1) is False and scrolls == max_scrolls:
                     print(f"Не найдена технология с именем {technologies}")
 
         self.browser.find_element(*FormCreateContractLocators.CONFIRM_IFRAME_BUTTON).click()

@@ -8,7 +8,7 @@ class ZakupListPage(BasePage):
     def should_be_element_on_zakup_list(self,user_data_dict):
         how, what = ZakupListLocators.FIND_ELEMENT_IN_ZAKUP_LIST
         what = what.replace("Test_name", user_data_dict["fullName"])
-        assert self.is_visibility_of_element_located(how, what), \
+        assert self.is_visibility_of_element_located(how, what, 5), \
             f'Пресейловая активность с именем "{user_data_dict["fullName"]}" не найдена в списке'
 
     # Проверка доступности кнопки создания закупочной процедуры
@@ -20,6 +20,6 @@ class ZakupListPage(BasePage):
     def go_to_zakup_element(self, user_data_dict):
         how, what = ZakupListLocators.FIND_ELEMENT_IN_ZAKUP_LIST
         what = what.replace("Test_name", user_data_dict["fullName"])
-        assert self.is_visibility_of_element_located(how, what), \
+        assert self.is_visibility_of_element_located(how, what, 5), \
             f'Cущность с названием {user_data_dict["fullName"]} не найдена'
         self.browser.find_element(how, what).click()

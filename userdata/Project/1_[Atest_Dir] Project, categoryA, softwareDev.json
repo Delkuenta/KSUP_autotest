@@ -2,7 +2,7 @@
 	"main_data": {
         "fullName": "[АТест_Dir] Проект,категория A, разработка заказного ПО",
 		"eisPriceLink": "example@link.com",
-        "customers": ["КАЗНАЧЕЙСТВО РОССИИ"],
+        "customer": ["КАЗНАЧЕЙСТВО РОССИИ"],
 		"industry": ["IT-сектор", "Автопром"],
 		"typeOfWorkServices": ["Разработка заказного ПО", "Тестирование ПО"],
 		"executiveUnitLegal": "ООО \"ЛАНИТ-ТЕХНОЛОГИИ\"",

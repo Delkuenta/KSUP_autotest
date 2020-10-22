@@ -19,7 +19,7 @@ class PresalePage(BasePage):
     def should_be_element_on_presale_list(self, user_data_dict):
         how, what = PresaleListLocators.FIND_ELEMENT_IN_PRESALE_LIST
         what = what.replace("Test_name", user_data_dict["fullName"])
-        assert self.is_visibility_of_element_located(how, what), \
+        assert self.is_visibility_of_element_located(how, what, 5), \
             f'Пресейловая активность с именем "{user_data_dict["fullName"]}" не найдена в списке'
 
     # Зайти внутрь сущности пресейла по названию.имя берется из файла.

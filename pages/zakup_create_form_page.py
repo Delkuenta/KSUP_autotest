@@ -46,7 +46,7 @@ class ZakupFormCreate(BasePage):
             Select(self.browser.find_element(*FormCreateZakupLocators.CONTRACTOR_TYPE_TENDER_ZP)).select_by_value(
                 user_data_dict["saleLawType"])
             if user_data_dict["saleLawType"] == "44-ФЗ" or user_data_dict["saleLawType"] == "223-ФЗ":
-                assert self.is_visibility_of_element_located(*FormCreateZakupLocators.EIS_PURCHASE_NUMBER), \
+                assert self.is_visibility_of_element_located(*FormCreateZakupLocators.EIS_PURCHASE_NUMBER, 3), \
                     'Ошибка: Не отображено поле "Номер закупки"'
                 # Заполняем поле "Номер закупки *"
                 self.browser.find_element(*FormCreateZakupLocators.EIS_PURCHASE_NUMBER).send_keys(
@@ -143,15 +143,15 @@ class ZakupFormCreate(BasePage):
             # "Ссылка на запрос на Официальном сайте ЕИС" если порядок закупки 44-ФЗ
 
             if user_data_dict["saleLawType"] == "44-ФЗ":
-                assert self.is_visibility_of_element_located(*FormCreateZakupLocators.PURCHASE_START_DATE_FROM), \
+                assert self.is_visibility_of_element_located(*FormCreateZakupLocators.PURCHASE_START_DATE_FROM, 3), \
                     'Ошибка: Не отображено поле "Предполагаемая дата начала проведения закупки с"'
-                assert self.is_visibility_of_element_located(*FormCreateZakupLocators.PURCHASE_START_DATE_TO), \
+                assert self.is_visibility_of_element_located(*FormCreateZakupLocators.PURCHASE_START_DATE_TO, 3), \
                     'Ошибка: Не отображено поле "Предполагаемая дата начала проведения закупки с"'
 
-                assert self.is_visibility_of_element_located(*FormCreateZakupLocators.EIS_PRICE_NUMBER), \
+                assert self.is_visibility_of_element_located(*FormCreateZakupLocators.EIS_PRICE_NUMBER, 3), \
                     'Ошибка: Не отображено поле "Номер запроса цен на Официальном сайте ЕИС"'
 
-                assert self.is_visibility_of_element_located(*FormCreateZakupLocators.EIS_PRICE_LINK), \
+                assert self.is_visibility_of_element_located(*FormCreateZakupLocators.EIS_PRICE_LINK, 3), \
                     'Ошибка: Не отображено поле "Ссылка на запрос на Официальном сайте ЕИС"'
 
                 # Предполагаемая дата начала проведения закупки с
