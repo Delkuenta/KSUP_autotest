@@ -12,7 +12,7 @@ from pages.login_data import LoginData
 from pages.presale_create_form_page import PresaleFormCreate
 from pages.zakup_list_page import ZakupListPage
 
-# UnitSale\Seller_DKS - Seller2_DirGS
+# UnitSale\Seller_DKS
 """
 1_[Atest_Seller] PA+ZP+DK,Tender, categoryA, softwareDev, UnitSale.json
 2_[Atest_Seller] PA+ZP+DK,Tender, categoryB, softwareDev, UnitSale.json
@@ -34,7 +34,7 @@ from pages.zakup_list_page import ZakupListPage
 18_[Atest_Seller] PA+ZP+DK, RequestPrice, categoryC, OtherType, UnitSale.json
 """
 
-# UnitSale\Dir_DKS - Dir2_DirGS
+# UnitSale\Dir - DKS
 """
 1_[Atest_Dir] PA+ZP+DK,Tender, categoryA, softwareDev, UnitSale.json
 2_[Atest_Dir] PA+ZP+DK,Tender, categoryB, softwareDev, UnitSale.json
@@ -81,7 +81,7 @@ from pages.zakup_list_page import ZakupListPage
 # До первой ошибки --maxfail=1
 # Браузер для запуска --browser_name=firefox
 @pytest.mark.parametrize('path_data_file', [
-    r"UnitSale\Seller2 - DirGS\12_[Аtest_Seller2] PA+ZP+DK, CommercialOffer, categoryC, OtherType, UnitSale.json"])
+    r"UnitSale\Dir - DKS\2_[Atest_Dir] PA+ZP+DK,Tender, categoryB, softwareDev, UnitSale.json"])
 class TestUnitSaleFullBusinessCyclePaZpDk:
     def test_create_presale(self, browser_function, path_data_file):
         user_data_dict = BasePage.read_json(browser_function, path_data_file)

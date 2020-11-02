@@ -87,18 +87,25 @@ class TestKnowledgeBaseSearch:
         knowledge_page.reset_button_knowledge()
         delayed_assert.assert_expectations()
 
-    def test_search_line_project(self, browser_session):
+    def test_search_line_by_name_project(self, browser_session):
         project_data_dict = BasePage.read_json(browser_session, project_path_file)
         link = browser_session.current_url
         knowledge_page = KnowledgeSearchPage(browser_session, link)
+        knowledge_page.reset_button_knowledge()
+        knowledge_page.activate_checkbox_need_to_find("Проект")
         # knowledge_page.go_to_knowledge_search()
-        knowledge_page.search_line(project_data_dict)
+        knowledge_page.search_lien_by_name(project_data_dict)
 
-    def test_search_line_contract(self, browser_session):
+    def test_search_line_by_name_contract(self, browser_session):
         contract_data_dict = BasePage.read_json(browser_session, contract_path_file)
         link = browser_session.current_url
         knowledge_page = KnowledgeSearchPage(browser_session, link)
-        knowledge_page.search_line(contract_data_dict)
+        knowledge_page.reset_button_knowledge()
+        knowledge_page.activate_checkbox_need_to_find("Договор (контракт)")
+        knowledge_page.search_lien_by_name(contract_data_dict)
+
+    def test_search_line_by_customer(self, browser_session):
+        pass
 
     def test_search_with_customer_block_filter_in_project(self, browser_session):
         project_data_dict = BasePage.read_json(browser_session, project_path_file)

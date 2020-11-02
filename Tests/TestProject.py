@@ -6,10 +6,12 @@ from pages.project_create_form_page import ProjectFormCreate
 from pages.project_element_page import ProjectElementPage
 from pages.project_list_page import ProjectPage
 
+
 # 2_[Atest_Dir] Project_required fields, categoryA, softwareDev.json
 # 1_[Atest_Dir] Project, categoryA, softwareDev.json
-@pytest.mark.parametrize('path_data_file', [
-    r"Project\2_[Atest_Dir] Project_required fields, categoryA, softwareDev.json"])
+
+@pytest.mark.parametrize('path_data_file',
+                         [r"Project\2_[Atest_Dir] Project_required fields, categoryA, softwareDev.json"])
 class TestProject:
 
     def test_create_project(self, browser_function, path_data_file):

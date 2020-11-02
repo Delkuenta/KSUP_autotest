@@ -178,7 +178,7 @@ class KnowledgeSearchPage(BasePage):
                               f'Отображены сущности {set(list_found_element)}\nОжидаемый результат: "Юр.лицо/ИП"')
         delayed_assert.expect(len(set(list_found_element)) == 1, "Отображены сущности не только категории Юр.лицо/ИП")
 
-    def search_line(self, data_dict):
+    def search_lien_by_name(self, data_dict):
         split_name = data_dict["fullName"].split(",")
         if len(split_name) > 1:
             # Вводим первую часть названия
@@ -225,6 +225,17 @@ class KnowledgeSearchPage(BasePage):
 
         # Сбрасываем все настройки нажатием кнопки "Сбросить"
         self.browser.find_element(*KnowledgeSearchLocators.CLEAR_LINE_BUTTON).click()
+
+    def search_line_by_customer(self, name_customer, short_name_customer):
+        # Вводим в строку название подразделения
+        self.browser.find_element(*KnowledgeSearchLocators.SEARCH_LINE).send_keys(name_customer)
+        time.sleep(3)
+
+        # Проверяем найденные сущности по атрибуту "Заказчик"
+        
+
+
+
 
     def search_with_customer_block_filter(self, data_dict):
         # Жмем кнопку "Весь список" в блоке "Заказчик"
