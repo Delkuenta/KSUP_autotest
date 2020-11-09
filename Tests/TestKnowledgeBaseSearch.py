@@ -12,8 +12,8 @@ from pages.project_create_form_page import ProjectFormCreate
 from pages.project_element_page import ProjectElementPage
 from pages.project_list_page import ProjectPage
 
-project_path_file = r"KnowledgeElementSearch\2[Atest_Seller] Project, categoryA, softwareDev.json"
-contract_path_file = r"KnowledgeElementSearch\1[Atest_Seller] DK, categoryA, softwareDev_new.json"
+project_path_file = r"TPAC\KnowledgeElementSearch\2[Atest_Seller] Project, categoryA, softwareDev.json"
+contract_path_file = r"TPAC\KnowledgeElementSearch\1[Atest_Seller] DK, categoryA, softwareDev_new.json"
 
 
 class TestCreateElementBeforeTests:
@@ -27,7 +27,7 @@ class TestCreateElementBeforeTests:
         login_page.open()
         login_page.login(user_data_dict["createAccount"])
         login_page.verify_username(user_data_dict["createAccount"])
-        login_page.go_to_contract_list()
+        login_page.go_to_contract_list(link)
         contract_page = ContractPage(browser_session, browser_session.current_url)
         contract_page.go_to_create_contract()
         create_contract_page = ContractFormCreate(browser_session, link)
@@ -45,7 +45,7 @@ class TestCreateElementBeforeTests:
         login_page.open()
         login_page.login(user_data_dict["createAccount"])
         login_page.verify_username(user_data_dict["createAccount"])
-        login_page.go_to_project_list()
+        login_page.go_to_project_list(link)
         project_list_page = ProjectPage(browser_function, link)
         project_list_page.go_to_create_project()
         project_create_page = ProjectFormCreate(browser_function, link)
@@ -63,7 +63,7 @@ class TestKnowledgeBaseSearch:
         login_page.login("Mr_KSUP_Seller")
         login_page.verify_username("Mr_KSUP_Seller")
         knowledge_page = KnowledgeSearchPage(browser_session, link)
-        knowledge_page.go_to_knowledge_search()
+        knowledge_page.go_to_knowledge_search(link)
 
     def test_default_block_filter(self, browser_session):
         link = browser_session.current_url

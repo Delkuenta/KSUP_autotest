@@ -4,15 +4,15 @@ from selenium.webdriver.common.by import By
 class BasePageLocators:
     USER_NAME = (By.CSS_SELECTOR, ".o365cs-me-tile-nophoto-username.o365cs-me-bidi")
     LOGOUT_BUTTON = (By.CSS_SELECTOR, "#O365_SubLink_ShellSignout")
-    PRESALE_LIST_LINK = "https://ksup-tst.lanit/SalesManagement/Lists/Sale/All.aspx"
+    PRESALE_LIST_LINK = "/SalesManagement/Lists/Sale/All.aspx"
     PRESALE_LIST_TITLE = (By.CSS_SELECTOR, "#DeltaPlaceHolderPageTitleInTitleArea a")
-    ZAKUP_LIST_LINK = "https://ksup-tst.lanit/SalesManagement/Lists/PresaleActivity/All.aspx"
+    ZAKUP_LIST_LINK = "/SalesManagement/Lists/PresaleActivity/All.aspx"
     ZAKUP_LIST_TITLE = (By.CSS_SELECTOR, "#DeltaPlaceHolderPageTitleInTitleArea a")
-    CONTRACT_LIST_LINK = "https://ksup-tst.lanit/SalesManagement/Lists/Contract/All.aspx"
+    CONTRACT_LIST_LINK = "/SalesManagement/Lists/Contract/All.aspx"
     CONTRACT_LIST_TITLE = (By.CSS_SELECTOR, "#DeltaPlaceHolderPageTitleInTitleArea a")
-    KNOWLEDGE_SEARCH_LINK = "https://ksup-tst.lanit/Pages/KnowledgeBaseSearch.aspx"
+    KNOWLEDGE_SEARCH_LINK = "/Pages/KnowledgeBaseSearch.aspx"
     KNOWLEDGE_SEARCH_TITLE = (By.CSS_SELECTOR, ".title.title--main")
-    PROJECT_LIST_LINK = "https://ksup-tst.lanit/KnowledgeBase/Project/Forms/All.aspx"
+    PROJECT_LIST_LINK = "/KnowledgeBase/Project/Forms/All.aspx"
     PROJECT_TITLE = (By.CSS_SELECTOR, "#DeltaPlaceHolderPageTitleInTitleArea")
 
     # Локаторы во фрейме "Тип работ и услуг"

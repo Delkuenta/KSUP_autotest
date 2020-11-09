@@ -12,8 +12,9 @@ from pages.login_data import LoginData
 from pages.presale_create_form_page import PresaleFormCreate
 from pages.zakup_list_page import ZakupListPage
 
-# UnitSale\Seller_DKS
-"""
+
+r"""
+UnitSale\Seller
 1_[Atest_Seller] PA+ZP+DK,Tender, categoryA, softwareDev, UnitSale.json
 2_[Atest_Seller] PA+ZP+DK,Tender, categoryB, softwareDev, UnitSale.json
 3_[Atest_Seller] PA+ZP+DK,Tender, categoryC, softwareDev, UnitSale.json
@@ -32,10 +33,8 @@ from pages.zakup_list_page import ZakupListPage
 16_[Atest_Seller] PA+ZP+DK, RequestPrice, categoryA, OtherType, UnitSale.json
 17_[Atest_Seller] PA+ZP+DK, RequestPrice, categoryB, OtherType, UnitSale.json
 18_[Atest_Seller] PA+ZP+DK, RequestPrice, categoryC, OtherType, UnitSale.json
-"""
 
-# UnitSale\Dir - DKS
-"""
+UnitSale\Dir
 1_[Atest_Dir] PA+ZP+DK,Tender, categoryA, softwareDev, UnitSale.json
 2_[Atest_Dir] PA+ZP+DK,Tender, categoryB, softwareDev, UnitSale.json
 3_[Atest_Dir] PA+ZP+DK,Tender, categoryC, softwareDev, UnitSale.json
@@ -54,10 +53,8 @@ from pages.zakup_list_page import ZakupListPage
 16_[Atest_Dir] PA+ZP+DK, RequestPrice, categoryA, OtherType, UnitSale.json
 17_[Atest_Dir] PA+ZP+DK, RequestPrice, categoryB, OtherType, UnitSale.json.json
 18_[Atest_Dir] PA+ZP+DK, RequestPrice, categoryC, OtherType, UnitSale.json.json
-"""
 
-# UnitSale\Seller2 - DirGS
-"""
+UnitSale\Seller2
 1_[Atest_Seller2] PA+ZP+DK,Tender, categoryA, softwareDev, UnitSale.json
 2_[Atest_Seller2] PA+ZP+DK,Tender, categoryB, softwareDev, UnitSale.json
 3_[Atest_Seller2] PA+ZP+DK,Tender, categoryС, softwareDev, UnitSale.json
@@ -80,8 +77,7 @@ from pages.zakup_list_page import ZakupListPage
 
 # До первой ошибки --maxfail=1
 # Браузер для запуска --browser_name=firefox
-@pytest.mark.parametrize('path_data_file', [
-    r"UnitSale\Dir - DKS\2_[Atest_Dir] PA+ZP+DK,Tender, categoryB, softwareDev, UnitSale.json"])
+@pytest.mark.parametrize('path_data_file', [r"TPAC\UnitSale\Seller\1_[Atest_Seller] PA+ZP+DK,Tender, categoryA, softwareDev, UnitSale.json"])
 class TestUnitSaleFullBusinessCyclePaZpDk:
     def test_create_presale(self, browser_function, path_data_file):
         user_data_dict = BasePage.read_json(browser_function, path_data_file)
@@ -93,7 +89,7 @@ class TestUnitSaleFullBusinessCyclePaZpDk:
         login_page.login(user_data_dict["createAccount"])
         login_page.verify_username(user_data_dict["createAccount"])
         presale_list_page = PresalePage(browser_function, link)
-        presale_list_page.go_to_presale_list()
+        presale_list_page.go_to_presale_list(link)
         presale_list_page.should_be_clickable_create_button()
         presale_list_page.go_to_create_presale()
         create_presale_page = PresaleFormCreate(browser_function, link)
@@ -113,7 +109,7 @@ class TestUnitSaleFullBusinessCyclePaZpDk:
         login_page.login(user_data_dict["createAccount"])
         login_page.verify_username(user_data_dict["createAccount"])
         presale_list_page = PresalePage(browser_function, browser_function.current_url)
-        presale_list_page.go_to_presale_list()
+        presale_list_page.go_to_presale_list(link)
         presale_list_page.should_be_element_on_presale_list(user_data_dict)
         presale_list_page.go_to_presale_element(user_data_dict)
         presale_element_page = PresaleElementPage(browser_function, browser_function.current_url)
@@ -136,7 +132,7 @@ class TestUnitSaleFullBusinessCyclePaZpDk:
         login_page.open()
         login_page.login(user_data_dict["createAccount"])
         login_page.verify_username(user_data_dict["createAccount"])
-        login_page.go_to_zakup_list()
+        login_page.go_to_zakup_list(link)
         zakup_list_page = ZakupListPage(browser_function, browser_function.current_url)
         zakup_list_page.go_to_zakup_element(user_data_dict)
         zakup_element_page = ZakupElementPage(browser_function, browser_function.current_url)
@@ -162,7 +158,7 @@ class TestUnitSaleFullBusinessCyclePaZpDk:
             login_page.open()
             login_page.login("Mr_KSUP_Legal")
             login_page.verify_username("Mr_KSUP_Legal")
-            login_page.go_to_zakup_list()
+            login_page.go_to_zakup_list(link)
             zakup_list_page = ZakupListPage(browser_function, browser_function.current_url)
             zakup_list_page.go_to_zakup_element(user_data_dict)
             zakup_element_page = ZakupElementPage(browser_function, browser_function.current_url)
@@ -183,7 +179,7 @@ class TestUnitSaleFullBusinessCyclePaZpDk:
             login_page.open()
             login_page.login("Mr_KSUP_Count")
             login_page.verify_username("Mr_KSUP_Count")
-            login_page.go_to_zakup_list()
+            login_page.go_to_zakup_list(link)
             zakup_list_page = ZakupListPage(browser_function, browser_function.current_url)
             zakup_list_page.go_to_zakup_element(user_data_dict)
             zakup_element_page = ZakupElementPage(browser_function, browser_function.current_url)
@@ -204,7 +200,7 @@ class TestUnitSaleFullBusinessCyclePaZpDk:
             login_page.open()
             login_page.login("Mr_KSUP_Fin")
             login_page.verify_username("Mr_KSUP_Fin")
-            login_page.go_to_zakup_list()
+            login_page.go_to_zakup_list(link)
             zakup_list_page = ZakupListPage(browser_function, browser_function.current_url)
             zakup_list_page.go_to_zakup_element(user_data_dict)
             zakup_element_page = ZakupElementPage(browser_function, browser_function.current_url)
@@ -230,7 +226,7 @@ class TestUnitSaleFullBusinessCyclePaZpDk:
             login_page.open()
             login_page.login("Mr_KSUP_UDPRPO")
             login_page.verify_username("Mr_KSUP_UDPRPO")
-            login_page.go_to_zakup_list()
+            login_page.go_to_zakup_list(link)
             zakup_list_page = ZakupListPage(browser_function, browser_function.current_url)
             zakup_list_page.go_to_zakup_element(user_data_dict)
             zakup_element_page = ZakupElementPage(browser_function, browser_function.current_url)
@@ -252,7 +248,7 @@ class TestUnitSaleFullBusinessCyclePaZpDk:
             login_page.open()
             login_page.login("Mr_KSUP_KKP")
             login_page.verify_username("Mr_KSUP_KKP")
-            login_page.go_to_zakup_list()
+            login_page.go_to_zakup_list(link)
             zakup_list_page = ZakupListPage(browser_function, browser_function.current_url)
             zakup_list_page.go_to_zakup_element(user_data_dict)
             zakup_element_page = ZakupElementPage(browser_function, browser_function.current_url)
@@ -270,7 +266,7 @@ class TestUnitSaleFullBusinessCyclePaZpDk:
         login_page.open()
         login_page.login(user_data_dict["createAccount"])
         login_page.verify_username(user_data_dict["createAccount"])
-        login_page.go_to_zakup_list()
+        login_page.go_to_zakup_list(link)
         zakup_list_page = ZakupListPage(browser_function, browser_function.current_url)
         zakup_list_page.go_to_zakup_element(user_data_dict)
         zakup_element_page = ZakupElementPage(browser_function, browser_function.current_url)
@@ -292,7 +288,7 @@ class TestUnitSaleFullBusinessCyclePaZpDk:
         login_page.open()
         login_page.login(user_data_dict["createAccount"])
         login_page.verify_username(user_data_dict["createAccount"])
-        login_page.go_to_contract_list()
+        login_page.go_to_contract_list(link)
         contract_list = ContractPage(browser_function, browser_function.current_url)
         contract_list.go_to_contract_element(user_data_dict)
         contract_element_page = ContractElementPage(browser_function, browser_function.current_url)
@@ -308,7 +304,7 @@ class TestUnitSaleFullBusinessCyclePaZpDk:
         login_page.open()
         login_page.login("Mr_KSUP_Legal")
         login_page.verify_username("Mr_KSUP_Legal")
-        login_page.go_to_contract_list()
+        login_page.go_to_contract_list(link)
         contract_list_page = ContractPage(browser_function, browser_function.current_url)
         contract_list_page.go_to_contract_element(user_data_dict)
         contract_element_page = ContractElementPage(browser_function, browser_function.current_url)
@@ -325,7 +321,7 @@ class TestUnitSaleFullBusinessCyclePaZpDk:
         login_page.open()
         login_page.login("Mr_KSUP_Count")
         login_page.verify_username("Mr_KSUP_Count")
-        login_page.go_to_contract_list()
+        login_page.go_to_contract_list(link)
         contract_list_page = ContractPage(browser_function, browser_function.current_url)
         contract_list_page.go_to_contract_element(user_data_dict)
         contract_element_page = ContractElementPage(browser_function, browser_function.current_url)
@@ -342,7 +338,7 @@ class TestUnitSaleFullBusinessCyclePaZpDk:
         login_page.open()
         login_page.login("Mr_KSUP_Fin")
         login_page.verify_username("Mr_KSUP_Fin")
-        login_page.go_to_contract_list()
+        login_page.go_to_contract_list(link)
         contract_list_page = ContractPage(browser_function, browser_function.current_url)
         contract_list_page.go_to_contract_element(user_data_dict)
         contract_element_page = ContractElementPage(browser_function, browser_function.current_url)
@@ -365,7 +361,7 @@ class TestUnitSaleFullBusinessCyclePaZpDk:
             login_page.open()
             login_page.login("Mr_KSUP_UDPRPO")
             login_page.verify_username("Mr_KSUP_UDPRPO")
-            login_page.go_to_contract_list()
+            login_page.go_to_contract_list(link)
             contract_list_page = ContractPage(browser_function, browser_function.current_url)
             contract_list_page.go_to_contract_element(user_data_dict)
             contract_element_page = ContractElementPage(browser_function, browser_function.current_url)
@@ -387,7 +383,7 @@ class TestUnitSaleFullBusinessCyclePaZpDk:
             login_page.open()
             login_page.login("Mr_KSUP_KKP")
             login_page.verify_username("Mr_KSUP_KKP")
-            login_page.go_to_contract_list()
+            login_page.go_to_contract_list(link)
             contract_list_page = ContractPage(browser_function, browser_function.current_url)
             contract_list_page.go_to_contract_element(user_data_dict)
             contract_element_page = ContractElementPage(browser_function, browser_function.current_url)

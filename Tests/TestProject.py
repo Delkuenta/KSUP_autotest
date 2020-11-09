@@ -11,7 +11,7 @@ from pages.project_list_page import ProjectPage
 # 1_[Atest_Dir] Project, categoryA, softwareDev.json
 
 @pytest.mark.parametrize('path_data_file',
-                         [r"Project\2_[Atest_Dir] Project_required fields, categoryA, softwareDev.json"])
+                         [r"TPAC\Project\2_[Atest_Dir] Project_required fields, categoryA, softwareDev.json"])
 class TestProject:
 
     def test_create_project(self, browser_function, path_data_file):
@@ -22,7 +22,7 @@ class TestProject:
         login_page.open()
         login_page.login(user_data_dict["createAccount"])
         login_page.verify_username(user_data_dict["createAccount"])
-        login_page.go_to_project_list()
+        login_page.go_to_project_list(link)
         project_list_page = ProjectPage(browser_function, link)
         project_list_page.go_to_create_project()
         project_create_page = ProjectFormCreate(browser_function, link)

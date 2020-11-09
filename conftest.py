@@ -1,8 +1,6 @@
 import pytest
 from selenium import webdriver
 
-from pages.base_page import BasePage
-from userdata.user_data import UserData
 
 
 def pytest_addoption(parser):

@@ -1,14 +1,12 @@
 import json
 import os
 import time
-
 from selenium.webdriver import Remote as RemoteWebDriver
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
 from selenium.common.exceptions import NoSuchElementException, TimeoutException
-
 from userdata.user_data import UserData
-from .locators import BasePageLocators
+from pages.locators import BasePageLocators
 
 
 class BasePage:
@@ -88,31 +86,36 @@ class BasePage:
         self.browser.switch_to.default_content()
 
     # Переход на страницу "Пресейловая активность"
-    def go_to_presale_list(self):
-        self.browser.get(BasePageLocators.PRESALE_LIST_LINK)
+    def go_to_presale_list(self, link):
+        presale_link = link + BasePageLocators.PRESALE_LIST_LINK
+        self.browser.get(presale_link)
         assert self.is_text_to_be_present_in_element(*BasePageLocators.PRESALE_LIST_TITLE, "Пресейловые активности"), \
             "Титул страницы не соответствует переходу"
 
     # Переход на страницу "Закупочная процедура"
-    def go_to_zakup_list(self):
-        self.browser.get(BasePageLocators.ZAKUP_LIST_LINK)
+    def go_to_zakup_list(self, link):
+        zakup_link = link + BasePageLocators.ZAKUP_LIST_LINK
+        self.browser.get(zakup_link)
         assert self.is_text_to_be_present_in_element(*BasePageLocators.ZAKUP_LIST_TITLE, "Закупочные процедуры"), \
             "Титул страницы не соответствует переходу"
 
     # Переход на страницу "Договор/контракт"
-    def go_to_contract_list(self):
-        self.browser.get(BasePageLocators.CONTRACT_LIST_LINK)
+    def go_to_contract_list(self, link):
+        contract_link = link + BasePageLocators.CONTRACT_LIST_LINK
+        self.browser.get(contract_link)
         assert self.is_text_to_be_present_in_element(*BasePageLocators.CONTRACT_LIST_TITLE, "Договоры (контракты)"), \
             "Титул страницы не соответствует переходу"
 
     # Переход на страницу База знаний
-    def go_to_knowledge_search(self):
-        self.browser.get(BasePageLocators.KNOWLEDGE_SEARCH_LINK)
+    def go_to_knowledge_search(self, link):
+        knowledge_link = link + BasePageLocators.KNOWLEDGE_SEARCH_LINK
+        self.browser.get(knowledge_link)
         assert self.is_text_to_be_present_in_element(*BasePageLocators.KNOWLEDGE_SEARCH_TITLE, "Поиск по базе знаний"), \
             "Титул страницы не соответствует переходу"
 
-    def go_to_project_list(self):
-        self.browser.get(BasePageLocators.PROJECT_LIST_LINK)
+    def go_to_project_list(self, link):
+        project_link = link + BasePageLocators.PROJECT_LIST_LINK
+        self.browser.get(project_link)
         assert self.is_text_to_be_present_in_element(*BasePageLocators.PROJECT_TITLE, "Проекты"), \
             "Титул страницы не соответствует переходу"
 

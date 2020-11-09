@@ -6,13 +6,12 @@ from pages.contract_element_page import ContractElementPage
 from pages.contract_list_page import ContractPage
 from pages.login_data import LoginData
 
-# UnitSale\Dir - DKS
-"""
-19_[Atest_Dir] DK, categoryA, softwareDev.json
-"""
 
-# UnitSale\Seller2 - DirGS
-"""
+r"""
+UnitSale\Dir
+19_[Atest_Dir] DK, categoryA, softwareDev.json
+
+UnitSale\Seller2
 19_[Atest_Seller2] DK, categoryA, softwareDev.json
 20_[Atest_Seller2] DK, categoryB, softwareDev.json
 """
@@ -31,7 +30,7 @@ class TestDkFullBusinessCycle:
         login_page.open()
         login_page.login(user_data_dict["createAccount"])
         login_page.verify_username(user_data_dict["createAccount"])
-        login_page.go_to_contract_list()
+        login_page.go_to_contract_list(link)
         contract_page = ContractPage(browser_function, browser_function.current_url)
         contract_page.go_to_create_contract()
         create_contract_page = ContractFormCreate(browser_function, link)
@@ -49,7 +48,7 @@ class TestDkFullBusinessCycle:
         login_page.open()
         login_page.login(user_data_dict["createAccount"])
         login_page.verify_username(user_data_dict["createAccount"])
-        login_page.go_to_contract_list()
+        login_page.go_to_contract_list(link)
         contract_list = ContractPage(browser_function, browser_function.current_url)
         contract_list.go_to_contract_element(user_data_dict)
         contract_element_page = ContractElementPage(browser_function, browser_function.current_url)
@@ -65,7 +64,7 @@ class TestDkFullBusinessCycle:
         login_page.open()
         login_page.login("Mr_KSUP_Legal")
         login_page.verify_username("Mr_KSUP_Legal")
-        login_page.go_to_contract_list()
+        login_page.go_to_contract_list(link)
         contract_list_page = ContractPage(browser_function, browser_function.current_url)
         contract_list_page.go_to_contract_element(user_data_dict)
         contract_element_page = ContractElementPage(browser_function, browser_function.current_url)
@@ -82,7 +81,7 @@ class TestDkFullBusinessCycle:
         login_page.open()
         login_page.login("Mr_KSUP_Count")
         login_page.verify_username("Mr_KSUP_Count")
-        login_page.go_to_contract_list()
+        login_page.go_to_contract_list(link)
         contract_list_page = ContractPage(browser_function, browser_function.current_url)
         contract_list_page.go_to_contract_element(user_data_dict)
         contract_element_page = ContractElementPage(browser_function, browser_function.current_url)
@@ -99,7 +98,7 @@ class TestDkFullBusinessCycle:
         login_page.open()
         login_page.login("Mr_KSUP_Fin")
         login_page.verify_username("Mr_KSUP_Fin")
-        login_page.go_to_contract_list()
+        login_page.go_to_contract_list(link)
         contract_list_page = ContractPage(browser_function, browser_function.current_url)
         contract_list_page.go_to_contract_element(user_data_dict)
         contract_element_page = ContractElementPage(browser_function, browser_function.current_url)
@@ -123,7 +122,7 @@ class TestDkFullBusinessCycle:
             login_page.open()
             login_page.login("Mr_KSUP_UDPRPO")
             login_page.verify_username("Mr_KSUP_UDPRPO")
-            login_page.go_to_contract_list()
+            login_page.go_to_contract_list(link)
             contract_list_page = ContractPage(browser_function, browser_function.current_url)
             contract_list_page.go_to_contract_element(user_data_dict)
             contract_element_page = ContractElementPage(browser_function, browser_function.current_url)
@@ -146,7 +145,7 @@ class TestDkFullBusinessCycle:
             login_page.open()
             login_page.login("Mr_KSUP_KKP")
             login_page.verify_username("Mr_KSUP_KKP")
-            login_page.go_to_contract_list()
+            login_page.go_to_contract_list(link)
             contract_list_page = ContractPage(browser_function, browser_function.current_url)
             contract_list_page.go_to_contract_element(user_data_dict)
             contract_element_page = ContractElementPage(browser_function, browser_function.current_url)
