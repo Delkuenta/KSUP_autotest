@@ -1,0 +1,69 @@
+{
+	"main_data": {
+        "fullName": "14[АТест_Dir] ПА+ЗП+ДК, Запрос цен товаров, работ, услуг, категория B, разработка заказного ПО, Самостоятельная продажа",
+        "contractorType": "Запрос цен товаров, работ, услуг",
+        "customer": "ДИТ МОСКВЫ",
+        "salesUnit": "Департамент корпоративных систем",
+        "salesManager": "Батарова Татьяна Андреевна",
+        "executiveUnit": "Департамент корпоративных систем",
+        "executiveManager": "Батарова Татьяна Андреевна",
+        "executiveUnitLegal": "ООО \"ЛАНИТ-ТЕХНОЛОГИИ\"",
+        "saleLawType": "223-ФЗ",
+        "typeOfWorkServices": ["Разработка заказного ПО"],
+        "sum": 375000,
+        "currency": "Евро",
+        "priceCategory": "",
+        "applicationSize": 10000,
+        "contractSize": 7000,
+        "separateSale": "Да",
+        "competitionDeadlineFrom": "15.07.2020",
+        "startDate": "1.07.2020",
+        "endDate": "01.07.2021",
+        "projectProbability": 100,
+        "descriptionText": "Краткое описание текст",
+        "risksText": "Текст_риски_тест",
+        "purchaseNumber": "ZP/0014-ATdir",
+        "purchaseLink": "testlink_zakup_proc.com",
+        "projectRiskDepartment": "тестовое сообщение_Риски проекта с точки зрения Департамента",
+        "priceInformationDeadline": "16.07.2020",
+        "purchaseStartDateFrom": "17.07.2020",
+        "purchaseStartDateTo": "18.07.2020",
+        "eisPriceNumber": "ZP/0014-ATdir-Price",
+        "eisPriceLink": "example@link.com",
+        "numberContract": "DK/0014-ATdir",
+        "eisContractLink": "test_link_eis@mail.com",
+        "territory": ["Зарубежный"],
+        "technologies": ["Java"],
+        "quantitativeIndicatorsProject": "тестовый текст в поле Количественные показатели реализации проекта",
+        "projectUniqueCode": "2hMuCr14",
+		"project": "Тестовый проект",
+		"createAccount": "Mr_KSUP_Dir",
+        "payments": [
+            {
+                "sum": 150000,
+                "year": 2020,
+                "quarter": 3
+            },
+            {
+                "sum": 100000,
+                "year": 2020,
+                "quarter": 4
+            },
+            {
+                "sum": 70000,
+                "year": 2021,
+                "quarter": 1
+            },
+            {
+                "sum": 30000,
+                "year": 2021,
+                "quarter": 2
+            },
+            {
+                "sum": 25000,
+                "year": 2021,
+                "quarter": 3
+            }
+        ]
+    }
+}

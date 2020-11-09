@@ -1,0 +1,59 @@
+{
+	"main_data": {
+        "fullName": "6[АТест_Dir] ПА+ЗП+ДК, Тендерная заявка, категория C, НЕразработка заказного ПО, Самостоятельная продажа",
+        "contractorType": "Тендерная заявка",
+        "customer": "КАЗНАЧЕЙСТВО РОССИИ",
+        "salesUnit": "Департамент корпоративных систем",
+        "salesManager": "Батарова Татьяна Андреевна",
+        "executiveUnit": "Департамент корпоративных систем",
+        "executiveManager": "Батарова Татьяна Андреевна",
+        "executiveUnitLegal": "ООО \"ЛАНИТ-ТЕХНОЛОГИИ\"",
+        "saleLawType": "223-ФЗ",
+        "typeOfWorkServices": ["Прочие работы и услуги в части системной интеграции и инфраструктуры", "Проектирование и иная разработка документации в части инфраструктуры"],
+        "sum": 29000000,
+        "currency": "Рубль",
+        "priceCategory": "",
+        "applicationSize": 1000,
+        "contractSize": 2000,
+        "separateSale": "Да",
+        "competitionDeadlineFrom": "15.07.2020",
+        "startDate": "1.07.2020",
+        "endDate": "01.07.2021",
+        "projectProbability": 100,
+        "descriptionText": "Краткое описание текст",
+        "risksText": "Текст_риски_тест",
+        "purchaseNumber": "ZP/0006-ATdir",
+        "purchaseLink": "testlink_zakup_proc.com",
+        "projectRiskDepartment": "тестовое сообщение_Риски проекта с точки зрения Департамента",
+        "priceInformationDeadline": "16.07.2020",
+        "purchaseStartDateFrom": "17.07.2020",
+        "purchaseStartDateTo": "18.07.2020",
+        "eisPriceNumber": "ZP/0006-ATdir-Price",
+        "eisPriceLink": "example@link.com",
+        "numberContract": "DK/0006-ATdir",
+        "eisContractLink": "test_link_eis@mail.com",
+        "territory": ["Зарубежный"],
+        "technologies": ["Jira", "Microsoft Azure"],
+        "quantitativeIndicatorsProject": "тестовый текст в поле Количественные показатели реализации проекта",
+        "projectUniqueCode": "2hMuCr06",
+		"project": "Тестовый проект",
+		"createAccount": "Mr_KSUP_Dir",
+        "payments": [
+            {
+                "sum": 15000000,
+                "year": 2020,
+                "quarter": 3
+            },
+            {
+                "sum": 10000000,
+                "year": 2020,
+                "quarter": 4
+            },
+            {
+                "sum": 4000000,
+                "year": 2021,
+                "quarter": 1
+            }
+        ]
+    }
+}

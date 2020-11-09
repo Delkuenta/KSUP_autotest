@@ -1,0 +1,64 @@
+{
+	"main_data": {
+        "fullName": "2[АТест_Seller] ПА+ЗП+ДК, Тендерная заявка, категория B, разработка заказного ПО, Самостоятельная продажа",
+        "contractorType": "Тендерная заявка",
+        "customer": "КАЗНАЧЕЙСТВО РОССИИ",
+        "salesUnit": "Тестовый департамент",
+        "salesManager": "Бравосов Андрей Игоревич",
+        "executiveUnit": "Тестовый департамент",
+        "executiveManager": "Бравосов Андрей Игоревич",
+        "executiveUnitLegal": "ООО \"ЛАНИТ-ТЕХНОЛОГИИ\"",
+        "saleLawType": "223-ФЗ",
+        "typeOfWorkServices": ["Разработка заказного ПО", "Тестирование ПО"],
+        "sum": 45000000,
+        "currency": "Рубль",
+        "priceCategory": "",
+        "applicationSize": 1000,
+        "contractSize": 2000,
+        "separateSale": "Да",
+        "competitionDeadlineFrom": "15.07.2020",
+        "startDate": "1.07.2020",
+        "endDate": "01.07.2021",
+        "projectProbability": 100,
+        "descriptionText": "Краткое описание текст",
+        "risksText": "Текст_риски_тест",
+        "purchaseNumber": "ZP/0002-AT",
+        "purchaseLink": "testlink_zakup_proc.com",
+        "projectRiskDepartment": "тестовое сообщение_Риски проекта с точки зрения Департамента",
+        "priceInformationDeadline": "16.07.2020",
+        "purchaseStartDateFrom": "17.07.2020",
+        "purchaseStartDateTo": "18.07.2020",
+        "eisPriceNumber": "ZP/0002-AT-Price",
+        "eisPriceLink": "example@link.com",
+        "numberContract": "DK/0002-AT",
+        "eisContractLink": "test_link_eis@mail.com",
+        "territory": ["Архангельская область"],
+        "technologies": ["Jira"],
+        "quantitativeIndicatorsProject": "тестовый текст в поле Количественные показатели реализации проекта",
+        "projectUniqueCode": "2hMuCr02",
+		"project": "Тестовый проект",
+				"createAccount": "Mr_KSUP_Seller",
+        "payments": [
+            {
+                "sum": 25000000,
+                "year": 2020,
+                "quarter": 3
+            },
+            {
+                "sum": 10000000,
+                "year": 2020,
+                "quarter": 4
+            },
+            {
+                "sum": 6000000,
+                "year": 2021,
+                "quarter": 1
+            },
+            {
+                "sum": 4000000,
+                "year": 2021,
+                "quarter": 2
+            }
+        ]
+    }
+}

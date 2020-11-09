@@ -1,0 +1,69 @@
+{
+	"main_data": {
+        "fullName": "7[АТест_Seller] ПА+ЗП+ДК, Коммерческое предложение, категория A, разработка заказного ПО, Самостоятельная продажа",
+        "contractorType": "Коммерческое предложение",
+        "customer": "ООО \"СИБУР\"",
+        "salesUnit": "Департамент корпоративных систем",
+        "salesManager": "Бравосов Андрей Игоревич",
+        "executiveUnit": "Департамент корпоративных систем",
+        "executiveManager": "Бравосов Андрей Игоревич",
+        "executiveUnitLegal": "ООО \"ЛАНИТ-ТЕХНОЛОГИИ\"",
+        "saleLawType": "44-ФЗ",
+        "typeOfWorkServices": ["Аутсорсинг разработки (включая аутстаффинг)", "Внедрение готовых программных продуктов и решений (типа CRM, PLM)"],
+        "sum": 720000,
+        "currency": "Доллар",
+        "priceCategory": "",
+        "applicationSize": 5000,
+        "contractSize": 10000,
+        "separateSale": "Да",
+        "competitionDeadlineFrom": "15.07.2020",
+        "startDate": "1.07.2020",
+        "endDate": "01.07.2021",
+        "projectProbability": 100,
+        "descriptionText": "Краткое описание текст",
+        "risksText": "Текст_риски_тест",
+        "purchaseNumber": "ZP/0007-AT",
+        "purchaseLink": "testlink_zakup_proc.com",
+        "projectRiskDepartment": "тестовое сообщение_Риски проекта с точки зрения Департамента",
+        "priceInformationDeadline": "16.07.2020",
+        "purchaseStartDateFrom": "17.07.2020",
+        "purchaseStartDateTo": "18.07.2020",
+        "eisPriceNumber": "ZP/0007-AT-Price",
+        "eisPriceLink": "example@link.com",
+        "numberContract": "DK/0007-AT",
+        "eisContractLink": "test_link_eis@mail.com",
+        "territory": ["Архангельская область", "Воронежская область"],
+        "technologies": ["Java", "Jira"],
+        "quantitativeIndicatorsProject": "тестовый текст в поле Количественные показатели реализации проекта",
+        "projectUniqueCode": "2hMuCr07",
+		"project": "Тестовый проект",
+		"createAccount": "Mr_KSUP_Seller",
+        "payments": [
+            {
+                "sum": 400000,
+                "year": 2020,
+                "quarter": 3
+            },
+            {
+                "sum": 200000,
+                "year": 2020,
+                "quarter": 4
+            },
+            {
+                "sum": 70000,
+                "year": 2021,
+                "quarter": 1
+            },
+            {
+                "sum": 30000,
+                "year": 2021,
+                "quarter": 2
+            },
+            {
+                "sum": 20000,
+                "year": 2021,
+                "quarter": 3
+            }
+        ]
+    }
+}

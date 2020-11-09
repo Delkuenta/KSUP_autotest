@@ -1,0 +1,69 @@
+{
+	"main_data": {
+        "fullName": "12[АТест_Seller2] ПА+ЗП+ДК, Коммерческое предложение, категория В, НЕразработка заказного ПО, Самостоятельная продажа",
+        "contractorType": "Коммерческое предложение",
+        "customer": "КАЗНАЧЕЙСТВО РОССИИ",
+        "salesUnit": "Дирекция по работе с государственным сектором",
+        "salesManager": "Ногинский Михаил Владимирович",
+        "executiveUnit": "Дирекция по работе с государственным сектором",
+        "executiveManager": "Ногинский Михаил Владимирович",
+        "executiveUnitLegal": "ООО \"ЛАНИТ-ТЕХНОЛОГИИ\"",
+        "saleLawType": "44-ФЗ",
+        "typeOfWorkServices": ["Услуги по производству обучающего и презентационного контента", "Оптовая и розничная продажа товаров"],
+        "sum": 410000,
+        "currency": "Доллар",
+        "priceCategory": "",
+        "applicationSize": 5000,
+        "contractSize": 10000,
+        "separateSale": "Да",
+        "competitionDeadlineFrom": "15.07.2020",
+        "startDate": "1.07.2020",
+        "endDate": "01.07.2021",
+        "projectProbability": 100,
+        "descriptionText": "Краткое описание текст",
+        "risksText": "Текст_риски_тест",
+        "purchaseNumber": "ZP/0012-AT_S2",
+        "purchaseLink": "testlink_zakup_proc.com",
+        "projectRiskDepartment": "тестовое сообщение_Риски проекта с точки зрения Департамента",
+        "priceInformationDeadline": "16.07.2020",
+        "purchaseStartDateFrom": "17.07.2020",
+        "purchaseStartDateTo": "18.07.2020",
+        "eisPriceNumber": "ZP/0012-AT-Price_S2",
+        "eisPriceLink": "example@link.com",
+        "numberContract": "DK/0012-AT_S2",
+        "eisContractLink": "test_link_eis@mail.com",
+        "territory": ["Калининградская область"],
+        "technologies": ["Java"],
+        "quantitativeIndicatorsProject": "тестовый текст в поле Количественные показатели реализации проекта",
+        "projectUniqueCode": "2hMuCr12_S2",
+		"project": "Внедрение CRM Банк Возрождение",
+		"createAccount": "Mr_KSUP_Seller2",
+        "payments": [
+            {
+                "sum": 200000,
+                "year": 2020,
+                "quarter": 3
+            },
+            {
+                "sum": 100000,
+                "year": 2020,
+                "quarter": 4
+            },
+            {
+                "sum": 70000,
+                "year": 2021,
+                "quarter": 1
+            },
+            {
+                "sum": 30000,
+                "year": 2021,
+                "quarter": 2
+            },
+            {
+                "sum": 10000,
+                "year": 2021,
+                "quarter": 3
+            }
+        ]
+    }
+}

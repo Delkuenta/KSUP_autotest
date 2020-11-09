@@ -1,0 +1,69 @@
+{
+	"main_data": {
+        "fullName": "[АТест_Dir] ПА+ЗП Отклонение за все службы и эскалация на ККП, Тендерная заявка, категория A, разработка заказного ПО, Самостоятельная продажа",
+        "contractorType": "Тендерная заявка",
+        "customer": "КАЗНАЧЕЙСТВО РОССИИ",
+        "salesUnit": "Тестовый департамент",
+        "salesManager": "Бравосов Андрей Игоревич",
+        "executiveUnit": "Тестовый департамент",
+        "executiveManager": "Бравосов Андрей Игоревич",
+        "executiveUnitLegal": "ООО \"ЛАНИТ-ТЕХНОЛОГИИ\"",
+        "saleLawType": "44-ФЗ",
+        "typeOfWorkServices": ["Разработка заказного ПО", "Тестирование ПО"],
+        "sum": 52000000,
+        "currency": "Рубль",
+        "priceCategory": "",
+        "applicationSize": 1000,
+        "contractSize": 2000,
+        "separateSale": "Да",
+        "competitionDeadlineFrom": "15.07.2020",
+        "startDate": "1.07.2020",
+        "endDate": "01.07.2021",
+        "projectProbability": 100,
+        "descriptionText": "Краткое описание текст",
+        "risksText": "Текст_риски_тест",
+        "purchaseNumber": "ZP/0001-ATdirEsc",
+        "purchaseLink": "testlink_zakup_proc.com",
+        "projectRiskDepartment": "тестовое сообщение_Риски проекта с точки зрения Департамента",
+        "priceInformationDeadline": "16.07.2020",
+        "purchaseStartDateFrom": "17.07.2020",
+        "purchaseStartDateTo": "18.07.2020",
+        "eisPriceNumber": "ZP/0001-ATdir-PriceEsc",
+        "eisPriceLink": "example@link.com",
+        "numberContract": "DK/0001-ATdirEsc",
+        "eisContractLink": "test_link_eis@mail.com",
+        "territory": ["Архангельская область"],
+        "technologies": ["Jira"],
+        "quantitativeIndicatorsProject": "тестовый текст в поле Количественные показатели реализации проекта",
+        "projectUniqueCode": "2hMuCr01Esc",
+		"project": "Тестовый проект",
+        "createAccount": "Mr_KSUP_Dir",
+        "payments": [
+            {
+                "sum": 20000000,
+                "year": 2020,
+                "quarter": 3
+            },
+            {
+                "sum": 15000000,
+                "year": 2020,
+                "quarter": 4
+            },
+            {
+                "sum": 10000000,
+                "year": 2021,
+                "quarter": 1
+            },
+            {
+                "sum": 5000000,
+                "year": 2021,
+                "quarter": 2
+            },
+            {
+                "sum": 2000000,
+                "year": 2021,
+                "quarter": 3
+            }
+        ]
+    }
+}
