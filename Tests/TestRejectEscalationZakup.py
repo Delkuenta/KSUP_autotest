@@ -8,14 +8,14 @@ from pages.login_data import LoginData
 from pages.presale_create_form_page import PresaleFormCreate
 from pages.zakup_list_page import ZakupListPage
 
-# RejectApprovalZakup
+# RejectApproval
 """
 1_[Atest_Dir] Reject ZP,Tender, categoryA, softwareDev, UnitSale.json
 1_[Atest_Seller] Reject ZP,Tender, categoryA, softwareDev, UnitSale.json
 """
 # До первой ошибки --maxfail=1
 @pytest.mark.parametrize('path_data_file', [
-    r"TPAC\RejectApprovalZakup\1_[Atest_Dir] Reject ZP,Tender, categoryA, softwareDev, UnitSale.json"])
+    r"TPAC\RejectApproval\1_[Atest_Dir] Reject ZP,Tender, categoryA, softwareDev, UnitSale.json"])
 class TestRejectEscalationZakup:
 
     def test_create_presale(self, browser_function, path_data_file):

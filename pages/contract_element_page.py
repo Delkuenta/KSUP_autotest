@@ -1,6 +1,7 @@
 from pages.base_page import BasePage
 from pages.locators import ContractElementLocators
 from userdata.user_data import UserData
+from selenium.webdriver.support.color import Color
 
 
 class ContractElementPage(BasePage):
@@ -229,6 +230,10 @@ class ContractElementPage(BasePage):
         self.is_visibility_of_element_located(*ContractElementLocators.CONFIRM_SEND_APPROVAL_ELEMENT, 5)
         self.browser.find_element(*ContractElementLocators.CONFIRM_SEND_APPROVAL_ELEMENT).click()
 
+    def verify_unvisibility_approval_button(self):
+        assert self.is_element_clickable(*ContractElementLocators.SEND_APPROVAL_CONTRACT_ELEMENT) is False, \
+            'Кнопка "Отправить на согласование" доступна для нажатия после отклонения ККП'
+
     def verify_visibility_button_send_to_approval_contract(self):
 
         assert self.is_visibility_of_element_located(*ContractElementLocators.SEND_APPROVAL_CONTRACT_ELEMENT, 3), \
@@ -249,6 +254,13 @@ class ContractElementPage(BasePage):
                                                      "Согласовано"), \
             'Некорректный статус или отсутствует статус в строке "Согласование юридической службой"'
 
+    def verify_contract_reject_status_approval_leagal(self):
+        self.is_visibility_of_element_located(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_ELEMENT, 3)
+        self.browser.find_element(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_ELEMENT).click()
+        assert self.is_text_to_be_present_in_element(*ContractElementLocators.APPROVAL_LEGAL_STATUS_ELEMENT,
+                                                     "Отклонено"), \
+            'Некорректный статус или отсутствует статус в строке "Согласование юридической службой"'
+
     def verify_contract_waiting_status_approval_count(self):
         self.is_visibility_of_element_located(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_ELEMENT, 3)
         self.browser.find_element(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_ELEMENT).click()
@@ -262,6 +274,13 @@ class ContractElementPage(BasePage):
         self.browser.find_element(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_ELEMENT).click()
         assert self.is_text_to_be_present_in_element(*ContractElementLocators.APPROVAL_COUNT_STATUS_ELEMENT,
                                                      "Согласовано"), \
+            'Некорректный статус или отсутствует статус в строке "Согласование c бухгалтерией"'
+
+    def verify_contract_reject_status_approval_count(self):
+        self.is_visibility_of_element_located(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_ELEMENT, 3)
+        self.browser.find_element(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_ELEMENT).click()
+        assert self.is_text_to_be_present_in_element(*ContractElementLocators.APPROVAL_COUNT_STATUS_ELEMENT,
+                                                     "Отклонено"), \
             'Некорректный статус или отсутствует статус в строке "Согласование c бухгалтерией"'
 
     def verify_contract_waiting_status_approval_fin(self):
@@ -279,6 +298,13 @@ class ContractElementPage(BasePage):
                                                      "Согласовано"), \
             'Некорректный статус или отсутствует статус в строке "Согласование c финансовой службой"'
 
+    def verify_contract_reject_status_approval_fin(self):
+        self.is_visibility_of_element_located(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_ELEMENT, 3)
+        self.browser.find_element(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_ELEMENT).click()
+        assert self.is_text_to_be_present_in_element(*ContractElementLocators.APPROVAL_FIN_STATUS_ELEMENT,
+                                                     "Отклонено"), \
+            'Некорректный статус или отсутствует статус в строке "Согласование c финансовой службой"'
+
     def verify_contract_waiting_status_approval_udprpo(self):
         self.is_visibility_of_element_located(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_ELEMENT, 3)
         self.browser.find_element(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_ELEMENT).click()
@@ -292,6 +318,13 @@ class ContractElementPage(BasePage):
         self.browser.find_element(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_ELEMENT).click()
         assert self.is_text_to_be_present_in_element(*ContractElementLocators.APPROVAL_UDPRPO_STATUS_ELEMENT,
                                                      "Согласовано"), \
+            'Некорректный статус или отсутствует статус в строке "Согласование c УДПР ПО"'
+
+    def verify_contract_reject_status_approval_udprpo(self):
+        self.is_visibility_of_element_located(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_ELEMENT, 3)
+        self.browser.find_element(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_ELEMENT).click()
+        assert self.is_text_to_be_present_in_element(*ContractElementLocators.APPROVAL_UDPRPO_STATUS_ELEMENT,
+                                                     "Отклонено"), \
             'Некорректный статус или отсутствует статус в строке "Согласование c УДПР ПО"'
 
     def verify_contract_waiting_status_approval_kkp(self):
@@ -309,11 +342,43 @@ class ContractElementPage(BasePage):
                                                      "Согласовано"), \
             'Некорректный статус или отсутствует статус в строке "Согласование c ККП"'
 
+    def verify_contract_reject_status_approval_kkp(self):
+        self.is_visibility_of_element_located(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_ELEMENT, 3)
+        self.browser.find_element(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_ELEMENT).click()
+        assert self.is_text_to_be_present_in_element(*ContractElementLocators.APPROVAL_KKP_STATUS_ELEMENT,
+                                                     "Отклонено"), \
+            'Некорректный статус или отсутствует статус в строке "Согласование c ККП"'
+
+    def verify_contract_revision_status_approval_kkp(self):
+        self.is_visibility_of_element_located(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_ELEMENT, 3)
+        self.browser.find_element(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_ELEMENT).click()
+        assert self.is_text_to_be_present_in_element(*ContractElementLocators.APPROVAL_KKP_STATUS_ELEMENT,
+                                                     "Отправлено на доработку"), \
+            'Некорректный статус или отсутствует статус в строке "Согласование c ККП"'
+
+        # Проверяем цвет статуса "Отправлено на доработку"
+        reject_color = Color.from_string('red')
+        color_in_element = Color.from_string(self.browser.find_element(
+            *ContractElementLocators.APPROVAL_KKP_STATUS_ELEMENT).value_of_css_property('color'))
+        assert color_in_element == reject_color, \
+            'Некорректный цвет статуса "Отправлено на доработку" в строке согласования со службой ККП'
+
     def approval_contract_legal(self):
         self.is_element_clickable(*ContractElementLocators.APPROVAL_CONTRACT)
         self.browser.find_element(*ContractElementLocators.APPROVAL_CONTRACT).click()
         self.browser.find_element(*ContractElementLocators.COMMENT_TO_APPROVAL_CONTRACT).send_keys(
             UserData.comment_approval_legal)
+        self.browser.find_element(*ContractElementLocators.FILE_TO_APPROVAL_CONTRACT).send_keys(
+            UserData.file_path_for_link_doc)
+        self.browser.find_element(*ContractElementLocators.CONFIRM_APPROVAL_CONTRACT).click()
+        self.is_visibility_of_element_located(*ContractElementLocators.ClOSE_ALLERT_CONTRACT, 5)
+        self.browser.find_element(*ContractElementLocators.ClOSE_ALLERT_CONTRACT).click()
+
+    def reject_contract_legal(self):
+        self.is_element_clickable(*ContractElementLocators.REJECT_CONTRACT)
+        self.browser.find_element(*ContractElementLocators.REJECT_CONTRACT).click()
+        self.browser.find_element(*ContractElementLocators.COMMENT_TO_APPROVAL_CONTRACT).send_keys(
+            UserData.comment_reject_legal)
         self.browser.find_element(*ContractElementLocators.FILE_TO_APPROVAL_CONTRACT).send_keys(
             UserData.file_path_for_link_doc)
         self.browser.find_element(*ContractElementLocators.CONFIRM_APPROVAL_CONTRACT).click()
@@ -332,11 +397,34 @@ class ContractElementPage(BasePage):
         self.is_visibility_of_element_located(*ContractElementLocators.ClOSE_ALLERT_CONTRACT, 5)
         self.browser.find_element(*ContractElementLocators.ClOSE_ALLERT_CONTRACT).click()
 
+    def reject_contract_count(self):
+
+        self.is_element_clickable(*ContractElementLocators.REJECT_CONTRACT)
+        self.browser.find_element(*ContractElementLocators.REJECT_CONTRACT).click()
+        self.browser.find_element(*ContractElementLocators.COMMENT_TO_APPROVAL_CONTRACT).send_keys(
+            UserData.comment_reject_count)
+        self.browser.find_element(*ContractElementLocators.FILE_TO_APPROVAL_CONTRACT).send_keys(
+            UserData.file_path_for_link_jpg)
+        self.browser.find_element(*ContractElementLocators.CONFIRM_APPROVAL_CONTRACT).click()
+        self.is_visibility_of_element_located(*ContractElementLocators.ClOSE_ALLERT_CONTRACT, 5)
+        self.browser.find_element(*ContractElementLocators.ClOSE_ALLERT_CONTRACT).click()
+
     def approval_contract_fin(self):
         self.is_element_clickable(*ContractElementLocators.APPROVAL_CONTRACT)
         self.browser.find_element(*ContractElementLocators.APPROVAL_CONTRACT).click()
         self.browser.find_element(*ContractElementLocators.COMMENT_TO_APPROVAL_CONTRACT).send_keys(
             UserData.comment_approval_fin)
+        self.browser.find_element(*ContractElementLocators.FILE_TO_APPROVAL_CONTRACT).send_keys(
+            UserData.file_path_for_link_excel)
+        self.browser.find_element(*ContractElementLocators.CONFIRM_APPROVAL_CONTRACT).click()
+        self.is_visibility_of_element_located(*ContractElementLocators.ClOSE_ALLERT_CONTRACT, 5)
+        self.browser.find_element(*ContractElementLocators.ClOSE_ALLERT_CONTRACT).click()
+
+    def reject_contract_fin(self):
+        self.is_element_clickable(*ContractElementLocators.REJECT_CONTRACT)
+        self.browser.find_element(*ContractElementLocators.REJECT_CONTRACT).click()
+        self.browser.find_element(*ContractElementLocators.COMMENT_TO_APPROVAL_CONTRACT).send_keys(
+            UserData.comment_reject_fin)
         self.browser.find_element(*ContractElementLocators.FILE_TO_APPROVAL_CONTRACT).send_keys(
             UserData.file_path_for_link_excel)
         self.browser.find_element(*ContractElementLocators.CONFIRM_APPROVAL_CONTRACT).click()
@@ -354,6 +442,17 @@ class ContractElementPage(BasePage):
         self.is_visibility_of_element_located(*ContractElementLocators.ClOSE_ALLERT_CONTRACT, 5)
         self.browser.find_element(*ContractElementLocators.ClOSE_ALLERT_CONTRACT).click()
 
+    def reject_contract_udprpo(self):
+        self.is_element_clickable(*ContractElementLocators.REJECT_CONTRACT)
+        self.browser.find_element(*ContractElementLocators.REJECT_CONTRACT).click()
+        self.browser.find_element(*ContractElementLocators.COMMENT_TO_APPROVAL_CONTRACT).send_keys(
+            UserData.comment_reject_udprpo)
+        self.browser.find_element(*ContractElementLocators.FILE_TO_APPROVAL_CONTRACT).send_keys(
+            UserData.file_path_for_link_doc)
+        self.browser.find_element(*ContractElementLocators.CONFIRM_APPROVAL_CONTRACT).click()
+        self.is_visibility_of_element_located(*ContractElementLocators.ClOSE_ALLERT_CONTRACT, 5)
+        self.browser.find_element(*ContractElementLocators.ClOSE_ALLERT_CONTRACT).click()
+
     def approval_contract_kkp(self):
 
         self.is_element_clickable(*ContractElementLocators.APPROVAL_CONTRACT)
@@ -365,3 +464,36 @@ class ContractElementPage(BasePage):
         self.browser.find_element(*ContractElementLocators.CONFIRM_APPROVAL_CONTRACT).click()
         self.is_visibility_of_element_located(*ContractElementLocators.ClOSE_ALLERT_CONTRACT, 5)
         self.browser.find_element(*ContractElementLocators.ClOSE_ALLERT_CONTRACT).click()
+
+    def reject_contract_kkp(self):
+        self.is_element_clickable(*ContractElementLocators.REJECT_CONTRACT)
+        self.browser.find_element(*ContractElementLocators.REJECT_CONTRACT).click()
+        self.browser.find_element(*ContractElementLocators.COMMENT_TO_APPROVAL_CONTRACT).send_keys(
+            UserData.comment_reject_kkp)
+        self.browser.find_element(*ContractElementLocators.FILE_TO_APPROVAL_CONTRACT).send_keys(
+            UserData.file_path_for_link_jpg)
+        self.browser.find_element(*ContractElementLocators.CONFIRM_APPROVAL_CONTRACT).click()
+        self.is_visibility_of_element_located(*ContractElementLocators.ClOSE_ALLERT_CONTRACT, 5)
+        self.browser.find_element(*ContractElementLocators.ClOSE_ALLERT_CONTRACT).click()
+
+    def escalate_contract_on_kkp(self):
+        self.is_element_clickable(*ContractElementLocators.ESCALATE_CONTRACT)
+        self.browser.find_element(*ContractElementLocators.ESCALATE_CONTRACT).click()
+        self.browser.find_element(*ContractElementLocators.COMMENT_TO_APPROVAL_CONTRACT).send_keys(
+            UserData.comment_escalation_kkp)
+        self.browser.find_element(*ContractElementLocators.CONFIRM_APPROVAL_CONTRACT).click()
+        self.is_visibility_of_element_located(*ContractElementLocators.ClOSE_ALLERT_CONTRACT, 5)
+        self.browser.find_element(*ContractElementLocators.ClOSE_ALLERT_CONTRACT).click()
+
+    def revision_contract_from_kkp(self):
+        self.is_element_clickable(*ContractElementLocators.REVISION_CONTRACT)
+        self.browser.find_element(*ContractElementLocators.REVISION_CONTRACT).click()
+        self.browser.find_element(*ContractElementLocators.COMMENT_TO_APPROVAL_CONTRACT).send_keys(
+            UserData.comment_escalation_kkp)
+        self.browser.find_element(*ContractElementLocators.CONFIRM_APPROVAL_CONTRACT).click()
+        self.is_visibility_of_element_located(*ContractElementLocators.ClOSE_ALLERT_CONTRACT, 5)
+        self.browser.find_element(*ContractElementLocators.ClOSE_ALLERT_CONTRACT).click()
+
+
+
+

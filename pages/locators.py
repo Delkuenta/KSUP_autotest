@@ -74,6 +74,7 @@ class FormCreatePresaleLocators:
     # Ответственный менеджер подразделения-продавца *
     SALES_MANAGER_ELEMENT = (By.ID, "div-wcfLookupControl_KsupSeller")
     SALES_MANAGER_DROPDOWN_ELEMENT = (By.XPATH, f"//li[normalize-space(.)='salesManager_name']")
+    SALES_MANAGER_ELEMENT_VALUE = (By.ID, "select2-wcfLookupControl_KsupSeller-container")
 
     # Подразделение-исполнитель
     EXECUTIVE_UNIT_ELEMENT = (By.ID, "div-wcfLookupControl_KsupDivisionPerformer")
@@ -82,6 +83,7 @@ class FormCreatePresaleLocators:
     # Ответственный менеджер подразделения-исполнителя
     EXECUTIVE_MANAGER_ELEMENT = (By.ID, "div-wcfLookupControl_KsupPerformerResponsible")
     EXECUTIVE_MANAGER_DROPDOWN_ELEMENT = (By.XPATH, f"//li[normalize-space(.)='executiveManager_name']")
+    EXECUTIVE_MANAGER_ELEMENT_VALUE = (By.ID, "select2-wcfLookupControl_KsupPerformerResponsible-container")
 
     # Исполнитель (юридическое лицо)
     EXECUTIVE_UNIT_LEGAL_ELEMENT = (By.ID, "div-wcfLookupControl_KsupEgr_PerformerLegal")
@@ -136,30 +138,10 @@ class FormCreatePresaleLocators:
     # Риски
     RISKS_ELEMENT = (By.ID, "KsupRisks_32ca3c22-b19a-430b-8a16-dbe340b6867a_$TextField")
 
-    # 1 строка Плановых платежей
-    SUMTABLE1 = (By.XPATH, "//tr[3]/td[2]/input")
-    YEARTABLE1 = (By.XPATH, "//td[4]/input")
-    QUARTERTABLE1 = (By.XPATH, "//td[5]/select")
-
-    # 2 строка Плановых платежей
-    SUMTABLE2 = (By.XPATH, "//tr[4]/td[2]/input")
-    YEARTABLE2 = (By.XPATH, "//tr[4]/td[4]/input")
-    QUARTERTABLE2 = (By.XPATH, "//tr[4]/td[5]/select")
-
-    # 3 строка Плановых платежей
-    SUMTABLE3 = (By.XPATH, "//tr[5]/td[2]/input")
-    YEARTABLE3 = (By.XPATH, "//tr[5]/td[4]/input")
-    QUARTERTABLE3 = (By.XPATH, "//tr[5]/td[5]/select")
-
-    # 4 строка Плановых платежей
-    SUMTABLE4 = (By.XPATH, "//tr[6]/td[2]/input")
-    YEARTABLE4 = (By.XPATH, "//tr[6]/td[4]/input")
-    QUARTERTABLE4 = (By.XPATH, "//tr[6]/td[5]/select")
-
-    # 5 строка Плановых платежей
-    SUMTABLE5 = (By.XPATH, "//tr[7]/td[2]/input")
-    YEARTABLE5 = (By.XPATH, "//tr[7]/td[4]/input")
-    QUARTERTABLE5 = (By.XPATH, "//tr[7]/td[5]/select")
+    # Поля плановых платежей, возможно множество элементов
+    SUMTABLE = (By.CSS_SELECTOR, ".payplan-summa-field")
+    YEARTABLE = (By.CSS_SELECTOR, ".payplan-year-field")
+    QUARTERTABLE = (By.CSS_SELECTOR, ".payplan-cell.table__td select")
 
     # Кнопка создания сущности пресейл
     CONFIRM_PRESALE_BUTTON = (By.CSS_SELECTOR, '[value="Создать"].ms-ButtonHeightWidth')
@@ -581,6 +563,7 @@ class FormCreateContractLocators:
     # Ответственный менеджер подразделения-продавца
     SALES_MANAGER_CONTRACT_ELEMENT = (By.CSS_SELECTOR, '#div-wcfLookupControl_KsupSeller')
     SALES_MANAGER_CONTRACT_DROPDOWN_ELEMENT = (By.XPATH, f"//li[normalize-space(.)='salesManager_name']")
+    SALES_MANAGER_ELEMENT_VALUE = (By.ID, "select2-wcfLookupControl_KsupSeller-container")
 
     # Подразделение-исполнитель
     EXECUTIVE_UNIT_CONTRACT_ELEMENT = (
@@ -591,6 +574,7 @@ class FormCreateContractLocators:
     EXECUTIVE_MANAGER_CONTRACT_ELEMENT = (
         By.CSS_SELECTOR, "#div-wcfLookupControl_KsupPerformerResponsible")
     EXECUTIVE_MANAGER_DROPDOWN_CONTRACT_ELEMENT = (By.XPATH, f"//li[normalize-space(.)='executiveManager_name']")
+    EXECUTIVE_MANAGER_ELEMENT_VALUE = (By.ID, "select2-wcfLookupControl_KsupPerformerResponsible-container")
 
     # Исполнитель (юридическое лицо)
     EXECUTIVE_UNIT_LEGAL_CONTRACT_ELEMENT = (By.CSS_SELECTOR, "#div-wcfLookupControl_KsupEgr_PerformerLegal")
@@ -660,14 +644,12 @@ class FormCreateContractLocators:
     SEARCH_TERRITORY_ELEMENT = (
         By.CSS_SELECTOR, r"#KsupApplicationTerritory_\$containercontrolHolder .ms-taxonomy-browser-button")
 
-
     # Строка Территория применения
     TYPE_TERRITORY_ELEMENT = (By.ID, "KsupApplicationTerritory_$containereditableRegion")
 
     # Кнопка поиск вариантов у поля "Технологии"
     SEARCH_TECHNOLOGIES_ELEMENT = (
         By.CSS_SELECTOR, r"#KsupKeyTechnologies_\$containercontrolHolder .ms-taxonomy-browser-button")
-
 
     # Строка Ключевые технологии
     TYPE_TECHNOLOGIES_ELEMENT = (By.ID, "KsupKeyTechnologies_$containereditableRegion")
@@ -689,30 +671,10 @@ class FormCreateContractLocators:
         By.CSS_SELECTOR, "span.select2-search.select2-search--dropdown > input.select2-search__field")
     PROJECT_DROPDOWN_ELEMENT = (By.XPATH, f"//li[normalize-space(.)='project_name']")
 
-    # 1 строка Плановых платежей
-    SUMTABLE1 = (By.XPATH, "//tr[3]/td[2]/input")
-    YEARTABLE1 = (By.XPATH, "//td[4]/input")
-    QUARTERTABLE1 = (By.XPATH, "//td[5]/select")
-
-    # 2 строка Плановых платежей
-    SUMTABLE2 = (By.XPATH, "//tr[4]/td[2]/input")
-    YEARTABLE2 = (By.XPATH, "//tr[4]/td[4]/input")
-    QUARTERTABLE2 = (By.XPATH, "//tr[4]/td[5]/select")
-
-    # 3 строка Плановых платежей
-    SUMTABLE3 = (By.XPATH, "//tr[5]/td[2]/input")
-    YEARTABLE3 = (By.XPATH, "//tr[5]/td[4]/input")
-    QUARTERTABLE3 = (By.XPATH, "//tr[5]/td[5]/select")
-
-    # 4 строка Плановых платежей
-    SUMTABLE4 = (By.XPATH, "//tr[6]/td[2]/input")
-    YEARTABLE4 = (By.XPATH, "//tr[6]/td[4]/input")
-    QUARTERTABLE4 = (By.XPATH, "//tr[6]/td[5]/select")
-
-    # 5 строка Плановых платежей
-    SUMTABLE5 = (By.XPATH, "//tr[7]/td[2]/input")
-    YEARTABLE5 = (By.XPATH, "//tr[7]/td[4]/input")
-    QUARTERTABLE5 = (By.XPATH, "//tr[7]/td[5]/select")
+    # Поля Плановых платежей
+    SUMTABLE = (By.CSS_SELECTOR, ".payplan-summa-field")
+    YEARTABLE = (By.CSS_SELECTOR, ".payplan-year-field")
+    QUARTERTABLE = (By.CSS_SELECTOR, ".payplan-cell.table__td select")
 
     # поле для вставки файла Контракт
     FILE_CONTRACT = (By.XPATH, "//div[@id='File_Contract']/div/input")
@@ -757,9 +719,12 @@ class ContractElementLocators:
     SEND_APPROVAL_CONTRACT_ELEMENT = (By.ID, "Ribbon.ListForm.Display.ApprovalGroup-LargeLarge")
     CONFIRM_SEND_APPROVAL_ELEMENT = (By.XPATH, "//*[@type = 'button' and (text() = 'Отправить')]")
     CANCEL_SEND_APPROVAL_ELEMENT = (By.XPATH, "//*[@type = 'button' and (text() = 'Отмена')]")
+
     # Кнопка согласования и отклонения закупочной процедуры
     APPROVAL_CONTRACT = (By.ID, "Approve.Approve-Large")
     REJECT_CONTRACT = (By.ID, "Approve.Reject-Large")
+    ESCALATE_CONTRACT = (By.ID, "Approve.Escalate-Large")
+    REVISION_CONTRACT = (By.ID, "Approve.Revision-Large")
 
     # Элементы на вкладке "Статус Согласования"
     # Вкладка "Статус согласования"

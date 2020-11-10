@@ -18,7 +18,7 @@ UnitSale\Seller2
 
 # До первой ошибки --maxfail=1
 @pytest.mark.parametrize('path_data_file', [
-    r"UnitSale\Dir - DKS\19_[Atest_Dir] DK, categoryA, softwareDev.json"])
+    r"TPAC\UnitSale\Seller\19_[Atest_Seller] DK, categoryA, softwareDev.json"])
 class TestDkFullBusinessCycle:
 
     def test_create_contract(self, browser_function, path_data_file):
