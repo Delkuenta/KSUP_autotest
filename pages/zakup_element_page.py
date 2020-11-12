@@ -301,7 +301,7 @@ class ZakupElementPage(BasePage):
             'Некорректный статус или отсутствует статус в поле "Статус согласования" на вкладке "Общие сведения"'
 
     def verify_visibility_approval_button_zp(self):
-        assert self.is_visibility_of_element_located(*ZakupElementLocators.SEND_APPROVAL_ELEMENT, 5), \
+        assert self.is_visibility_of_element_located(*ZakupElementLocators.SEND_APPROVAL_BUTTON, 5), \
             'Кнопка "Отправить на согласование" не отобрежена'
 
     def verify_visibility_button_create_contract(self):
@@ -309,14 +309,14 @@ class ZakupElementPage(BasePage):
             'Кнопка "Внести информацию о договоре/контракте" не отобрежена'
 
     def verify_unvisibility_approval_button(self):
-        assert self.is_element_clickable(*ZakupElementLocators.SEND_APPROVAL_ELEMENT) is False, \
+        assert self.is_element_clickable(*ZakupElementLocators.SEND_APPROVAL_BUTTON) is False, \
             'Кнопка "Отправить на согласование" доступна для нажатия'
 
     def send_zakup_for_approval(self):
-        self.is_element_clickable(*ZakupElementLocators.SEND_APPROVAL_ELEMENT)
-        self.browser.find_element(*ZakupElementLocators.SEND_APPROVAL_ELEMENT).click()
-        self.is_visibility_of_element_located(*ZakupElementLocators.CONFIRM_SEND_APPROVAL_ELEMENT, 5)
-        self.browser.find_element(*ZakupElementLocators.CONFIRM_SEND_APPROVAL_ELEMENT).click()
+        self.is_element_clickable(*ZakupElementLocators.SEND_APPROVAL_BUTTON)
+        self.browser.find_element(*ZakupElementLocators.SEND_APPROVAL_BUTTON).click()
+        self.is_visibility_of_element_located(*ZakupElementLocators.CONFIRM_SEND_APPROVAL_BUTTON, 5)
+        self.browser.find_element(*ZakupElementLocators.CONFIRM_SEND_APPROVAL_BUTTON).click()
 
     def verify_zakup_waiting_status_approval_legal(self):
         # Проверяем поле статуса на вкладке "Общие сведения"
@@ -665,8 +665,8 @@ class ZakupElementPage(BasePage):
             'Некорректный цвет статуса "Отправлено на доработку" в строке согласования со службой ККП'
 
     def approval_zakup_legal(self):
-        self.is_element_clickable(*ZakupElementLocators.APPROVAL_ZAKUP)
-        self.browser.find_element(*ZakupElementLocators.APPROVAL_ZAKUP).click()
+        self.is_element_clickable(*ZakupElementLocators.APPROVAL_ZAKUP_BUTTON)
+        self.browser.find_element(*ZakupElementLocators.APPROVAL_ZAKUP_BUTTON).click()
         self.browser.find_element(*ZakupElementLocators.COMMENT_TO_APPROVAL_ZAKUP).send_keys(
             UserData.comment_approval_legal)
         self.browser.find_element(*ZakupElementLocators.FILE_TO_APPROVAL_ZAKUP).send_keys(
@@ -676,8 +676,8 @@ class ZakupElementPage(BasePage):
         self.browser.find_element(*ZakupElementLocators.ClOSE_ALLERT_ZAKUP).click()
 
     def approval_zakup_count(self):
-        self.is_element_clickable(*ZakupElementLocators.APPROVAL_ZAKUP)
-        self.browser.find_element(*ZakupElementLocators.APPROVAL_ZAKUP).click()
+        self.is_element_clickable(*ZakupElementLocators.APPROVAL_ZAKUP_BUTTON)
+        self.browser.find_element(*ZakupElementLocators.APPROVAL_ZAKUP_BUTTON).click()
         self.browser.find_element(*ZakupElementLocators.COMMENT_TO_APPROVAL_ZAKUP).send_keys(
             UserData.comment_approval_count)
         self.browser.find_element(*ZakupElementLocators.FILE_TO_APPROVAL_ZAKUP).send_keys(
@@ -687,8 +687,8 @@ class ZakupElementPage(BasePage):
         self.browser.find_element(*ZakupElementLocators.ClOSE_ALLERT_ZAKUP).click()
 
     def approval_zakup_fin(self):
-        self.is_element_clickable(*ZakupElementLocators.APPROVAL_ZAKUP)
-        self.browser.find_element(*ZakupElementLocators.APPROVAL_ZAKUP).click()
+        self.is_element_clickable(*ZakupElementLocators.APPROVAL_ZAKUP_BUTTON)
+        self.browser.find_element(*ZakupElementLocators.APPROVAL_ZAKUP_BUTTON).click()
         self.browser.find_element(*ZakupElementLocators.COMMENT_TO_APPROVAL_ZAKUP).send_keys(
             UserData.comment_approval_fin)
         self.browser.find_element(*ZakupElementLocators.FILE_TO_APPROVAL_ZAKUP).send_keys(
@@ -698,8 +698,8 @@ class ZakupElementPage(BasePage):
         self.browser.find_element(*ZakupElementLocators.ClOSE_ALLERT_ZAKUP).click()
 
     def approval_zakup_udprpo(self):
-        self.is_element_clickable(*ZakupElementLocators.APPROVAL_ZAKUP)
-        self.browser.find_element(*ZakupElementLocators.APPROVAL_ZAKUP).click()
+        self.is_element_clickable(*ZakupElementLocators.APPROVAL_ZAKUP_BUTTON)
+        self.browser.find_element(*ZakupElementLocators.APPROVAL_ZAKUP_BUTTON).click()
         self.browser.find_element(*ZakupElementLocators.COMMENT_TO_APPROVAL_ZAKUP).send_keys(
             UserData.comment_approval_udprpo)
         self.browser.find_element(*ZakupElementLocators.FILE_TO_APPROVAL_ZAKUP).send_keys(
@@ -709,8 +709,8 @@ class ZakupElementPage(BasePage):
         self.browser.find_element(*ZakupElementLocators.ClOSE_ALLERT_ZAKUP).click()
 
     def approval_zakup_kkp(self):
-        self.is_element_clickable(*ZakupElementLocators.APPROVAL_ZAKUP)
-        self.browser.find_element(*ZakupElementLocators.APPROVAL_ZAKUP).click()
+        self.is_element_clickable(*ZakupElementLocators.APPROVAL_ZAKUP_BUTTON)
+        self.browser.find_element(*ZakupElementLocators.APPROVAL_ZAKUP_BUTTON).click()
         self.browser.find_element(*ZakupElementLocators.COMMENT_TO_APPROVAL_ZAKUP).send_keys(
             UserData.comment_approval_kkp)
         self.browser.find_element(*ZakupElementLocators.FILE_TO_APPROVAL_ZAKUP).send_keys(
@@ -720,75 +720,75 @@ class ZakupElementPage(BasePage):
         self.browser.find_element(*ZakupElementLocators.ClOSE_ALLERT_ZAKUP).click()
 
     def reject_zakup_legal(self):
-        self.is_element_clickable(*ZakupElementLocators.REJECT_ZAKUP)
-        self.browser.find_element(*ZakupElementLocators.REJECT_ZAKUP).click()
+        self.is_element_clickable(*ZakupElementLocators.REJECT_ZAKUP_BUTTON)
+        self.browser.find_element(*ZakupElementLocators.REJECT_ZAKUP_BUTTON).click()
         self.browser.find_element(*ZakupElementLocators.COMMENT_TO_APPROVAL_ZAKUP).send_keys(
             UserData.comment_reject_legal)
         self.browser.find_element(*ZakupElementLocators.FILE_TO_APPROVAL_ZAKUP).send_keys(
             UserData.file_path_for_link_doc)
-        self.browser.find_element(*ZakupElementLocators.CONFIRM_APPROVAL_ZAKUP).click()
+        self.browser.find_element(*ZakupElementLocators.CONFIRM_REJECT_ZAKUP).click()
         self.is_visibility_of_element_located(*ZakupElementLocators.ClOSE_ALLERT_ZAKUP, 5)
         self.browser.find_element(*ZakupElementLocators.ClOSE_ALLERT_ZAKUP).click()
 
     def reject_zakup_count(self):
-        self.is_element_clickable(*ZakupElementLocators.REJECT_ZAKUP)
-        self.browser.find_element(*ZakupElementLocators.REJECT_ZAKUP).click()
+        self.is_element_clickable(*ZakupElementLocators.REJECT_ZAKUP_BUTTON)
+        self.browser.find_element(*ZakupElementLocators.REJECT_ZAKUP_BUTTON).click()
         self.browser.find_element(*ZakupElementLocators.COMMENT_TO_APPROVAL_ZAKUP).send_keys(
             UserData.comment_reject_count)
         self.browser.find_element(*ZakupElementLocators.FILE_TO_APPROVAL_ZAKUP).send_keys(
             UserData.file_path_for_link_jpg)
-        self.browser.find_element(*ZakupElementLocators.CONFIRM_APPROVAL_ZAKUP).click()
+        self.browser.find_element(*ZakupElementLocators.CONFIRM_REJECT_ZAKUP).click()
         self.is_visibility_of_element_located(*ZakupElementLocators.ClOSE_ALLERT_ZAKUP, 5)
         self.browser.find_element(*ZakupElementLocators.ClOSE_ALLERT_ZAKUP).click()
 
     def reject_zakup_fin(self):
-        self.is_element_clickable(*ZakupElementLocators.REJECT_ZAKUP)
-        self.browser.find_element(*ZakupElementLocators.REJECT_ZAKUP).click()
+        self.is_element_clickable(*ZakupElementLocators.REJECT_ZAKUP_BUTTON)
+        self.browser.find_element(*ZakupElementLocators.REJECT_ZAKUP_BUTTON).click()
         self.browser.find_element(*ZakupElementLocators.COMMENT_TO_APPROVAL_ZAKUP).send_keys(
             UserData.comment_reject_fin)
         self.browser.find_element(*ZakupElementLocators.FILE_TO_APPROVAL_ZAKUP).send_keys(
             UserData.file_path_for_link_excel)
-        self.browser.find_element(*ZakupElementLocators.CONFIRM_APPROVAL_ZAKUP).click()
+        self.browser.find_element(*ZakupElementLocators.CONFIRM_REJECT_ZAKUP).click()
         self.is_visibility_of_element_located(*ZakupElementLocators.ClOSE_ALLERT_ZAKUP, 5)
         self.browser.find_element(*ZakupElementLocators.ClOSE_ALLERT_ZAKUP).click()
 
     def reject_zakup_udprpo(self):
-        self.is_element_clickable(*ZakupElementLocators.REJECT_ZAKUP)
-        self.browser.find_element(*ZakupElementLocators.REJECT_ZAKUP).click()
+        self.is_element_clickable(*ZakupElementLocators.REJECT_ZAKUP_BUTTON)
+        self.browser.find_element(*ZakupElementLocators.REJECT_ZAKUP_BUTTON).click()
         self.browser.find_element(*ZakupElementLocators.COMMENT_TO_APPROVAL_ZAKUP).send_keys(
             UserData.comment_reject_udprpo)
         self.browser.find_element(*ZakupElementLocators.FILE_TO_APPROVAL_ZAKUP).send_keys(
             UserData.file_path_for_link_mp4)
-        self.browser.find_element(*ZakupElementLocators.CONFIRM_APPROVAL_ZAKUP).click()
+        self.browser.find_element(*ZakupElementLocators.CONFIRM_REJECT_ZAKUP).click()
         self.is_visibility_of_element_located(*ZakupElementLocators.ClOSE_ALLERT_ZAKUP, 5)
         self.browser.find_element(*ZakupElementLocators.ClOSE_ALLERT_ZAKUP).click()
 
     def reject_zakup_kkp(self):
-        self.is_element_clickable(*ZakupElementLocators.REJECT_ZAKUP)
-        self.browser.find_element(*ZakupElementLocators.REJECT_ZAKUP).click()
+        self.is_element_clickable(*ZakupElementLocators.REJECT_ZAKUP_BUTTON)
+        self.browser.find_element(*ZakupElementLocators.REJECT_ZAKUP_BUTTON).click()
         self.browser.find_element(*ZakupElementLocators.COMMENT_TO_APPROVAL_ZAKUP).send_keys(
             UserData.comment_reject_kkp)
         self.browser.find_element(*ZakupElementLocators.FILE_TO_APPROVAL_ZAKUP).send_keys(
             UserData.file_path_for_link_doc)
-        self.browser.find_element(*ZakupElementLocators.CONFIRM_APPROVAL_ZAKUP).click()
+        self.browser.find_element(*ZakupElementLocators.CONFIRM_REJECT_ZAKUP).click()
         self.is_visibility_of_element_located(*ZakupElementLocators.ClOSE_ALLERT_ZAKUP, 5)
         self.browser.find_element(*ZakupElementLocators.ClOSE_ALLERT_ZAKUP).click()
 
     def revision_zakup_from_kkp(self):
-        self.is_element_clickable(*ZakupElementLocators.REVISION_ZAKUP)
-        self.browser.find_element(*ZakupElementLocators.REVISION_ZAKUP).click()
+        self.is_element_clickable(*ZakupElementLocators.REVISION_ZAKUP_BUTTON)
+        self.browser.find_element(*ZakupElementLocators.REVISION_ZAKUP_BUTTON).click()
         self.browser.find_element(*ZakupElementLocators.COMMENT_TO_APPROVAL_ZAKUP).send_keys(
             UserData.comment_revision_kkp)
-        self.browser.find_element(*ZakupElementLocators.CONFIRM_APPROVAL_ZAKUP).click()
+        self.browser.find_element(*ZakupElementLocators.CONFIRM_REVISION_ZAKUP).click()
         self.is_visibility_of_element_located(*ZakupElementLocators.ClOSE_ALLERT_ZAKUP, 5)
         self.browser.find_element(*ZakupElementLocators.ClOSE_ALLERT_ZAKUP).click()
 
     def escalate_on_kkp(self):
-        self.is_element_clickable(*ZakupElementLocators.ESCALATE_ZAKUP)
-        self.browser.find_element(*ZakupElementLocators.ESCALATE_ZAKUP).click()
+        self.is_element_clickable(*ZakupElementLocators.ESCALATE_ZAKUP_BUTTON)
+        self.browser.find_element(*ZakupElementLocators.ESCALATE_ZAKUP_BUTTON).click()
         self.browser.find_element(*ZakupElementLocators.COMMENT_TO_APPROVAL_ZAKUP).send_keys(
             UserData.comment_escalation_kkp)
-        self.browser.find_element(*ZakupElementLocators.CONFIRM_APPROVAL_ZAKUP).click()
+        self.browser.find_element(*ZakupElementLocators.CONFIRM_ESCALATE_ZAKUP).click()
         self.is_visibility_of_element_located(*ZakupElementLocators.ClOSE_ALLERT_ZAKUP, 5)
         self.browser.find_element(*ZakupElementLocators.ClOSE_ALLERT_ZAKUP).click()
 

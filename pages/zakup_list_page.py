@@ -16,6 +16,11 @@ class ZakupListPage(BasePage):
         assert self.is_element_clickable(
             *ZakupListLocators.ZAKUP_CREATE_BUTTON), 'Кнопка "Создать" не доступна для нажатия'
 
+    def go_to_create_zakup(self):
+        button_create_zakup = self.browser.find_element(*ZakupListLocators.ZAKUP_CREATE_BUTTON)
+        self.is_element_clickable(*ZakupListLocators.ZAKUP_CREATE_BUTTON)
+        button_create_zakup.click()
+
     # Зайти внутрь сущности пресейла по названию.имя берется из файла или user_data.
     def go_to_zakup_element(self, user_data_dict):
         how, what = ZakupListLocators.FIND_ELEMENT_IN_ZAKUP_LIST

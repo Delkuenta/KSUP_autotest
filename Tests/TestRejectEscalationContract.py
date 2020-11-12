@@ -1,12 +1,10 @@
 import pytest
-
 from pages.base_page import BasePage
 from pages.contract_create_form_page import ContractFormCreate
 from pages.contract_element_page import ContractElementPage
 from pages.contract_list_page import ContractPage
-
 from pages.login_data import LoginData
-
+import delayed_assert
 
 # До первой ошибки --maxfail=1
 @pytest.mark.parametrize('path_data_file', [r"TPAC\RejectApproval\3_[Atest_Seller] Reject DK, categoryA, softwareDev.json"])
@@ -30,6 +28,7 @@ class TestRejectEscalationContract:
         contract_element_page = ContractElementPage(browser_function, browser_function.current_url)
         contract_element_page.verify_general_information_contract(user_data_dict)
         login_page.logout()
+        delayed_assert.assert_expectations()
 
     def test_send_contract_for_approval_cycle1(self, browser_function, path_data_file):
         user_data_dict = BasePage.read_json(browser_function, path_data_file)

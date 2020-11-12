@@ -15,9 +15,9 @@ from pages.zakup_list_page import ZakupListPage
 """
 # До первой ошибки --maxfail=1
 @pytest.mark.parametrize('path_data_file', [
-    r"TPAC\RejectApproval\1_[Atest_Dir] Reject ZP,Tender, categoryA, softwareDev, UnitSale.json"])
+    r"TPAC\RejectApproval\1_[Atest_Seller] Reject ZP,Tender, categoryA, softwareDev, UnitSale.json"])
 class TestRejectEscalationZakup:
-
+    """
     def test_create_presale(self, browser_function, path_data_file):
         user_data_dict = BasePage.read_json(browser_function, path_data_file)
         user_data_dict = BasePage.dict_preparation(browser_function, user_data_dict)
@@ -51,7 +51,7 @@ class TestRejectEscalationZakup:
         presale_element_page = PresaleElementPage(browser_function, browser_function.current_url)
         presale_element_page.go_to_create_zp_based_on_presale(user_data_dict)
         zakup_form_create_page = ZakupFormCreate(browser_function, browser_function.current_url)
-        zakup_form_create_page.form_create_zakup_all_type(user_data_dict)
+        zakup_form_create_page.form_create_zakup_all_type_based_on_presale(user_data_dict)
         zakup_list_page = ZakupListPage(browser_function, browser_function.current_url)
         zakup_list_page.should_be_element_on_zakup_list(user_data_dict)
         zakup_list_page.go_to_zakup_element(user_data_dict)
@@ -83,7 +83,7 @@ class TestRejectEscalationZakup:
         else:
             zakup_element_page.verify_zakup_not_require_status_approval()
         login_page.logout()
-
+    """
     def test_reject_zakup_for_legal_cycle1(self, browser_function, path_data_file):
         user_data_dict = BasePage.read_json(browser_function, path_data_file)
         user_data_dict = BasePage.dict_preparation(browser_function, user_data_dict)

@@ -1,29 +1,31 @@
-from selenium.webdriver.common.by import By
+import time
 
+import pytest_check as check
 from pages.base_page import BasePage
 from pages.locators import PresaleElementLocators
 from userdata.user_data import UserData
+import delayed_assert
 
 
 class PresaleElementPage(BasePage):
     # Проверка отображения кнопки "Внести информацию о запросе цен"
     def verify_visibility_button_create_zp_tender_based_on_presale(self):
-        assert self.is_visibility_of_element_located(*PresaleElementLocators.TENDER_APPLICATION_ELEMENT, 5), \
+        assert self.is_visibility_of_element_located(*PresaleElementLocators.TENDER_APPLICATION_BUTTON, 5), \
             'Кнопка "Внести информацию о конкурсе" не отобрежена'
 
     # Проверка отображения кнопки "Внести информацию о запросе цен"
     def verify_visibility_button_create_zp_presale_act_based_on_presale(self):
-        assert self.is_visibility_of_element_located(*PresaleElementLocators.PRESALE_ACT_ELEMENT, 5), \
+        assert self.is_visibility_of_element_located(*PresaleElementLocators.PRESALE_ACT_BUTTON, 5), \
             'Кнопка Внести информацию о запросе цен" не отображена'
 
     # Проверка отображения кнопки "Внести информацию о коммерческом предложении"
     def verify_visibility_button_create_zp_commercial_offer_based_on_presale(self):
-        assert self.is_visibility_of_element_located(*PresaleElementLocators.COMMERCIAL_OFFER_ELEMENT, 5), \
+        assert self.is_visibility_of_element_located(*PresaleElementLocators.COMMERCIAL_OFFER_BUTTON, 5), \
             'Кнопка "Внести информацию о коммерческом предложении" не отображена'
 
     # Проверка отображения кнопки создания контракта на основне Пресейла
     def verify_visibility_button_create_contract_based_on_presale(self):
-        assert self.is_visibility_of_element_located(*PresaleElementLocators, 5), \
+        assert self.is_visibility_of_element_located(*PresaleElementLocators.CREATE_CONTRACT_BUTTON, 5), \
             'Кнопка "Внести информацию о договор/контракте" не доступна для нажатия'
 
     def go_to_create_zp_based_on_presale(self, user_data_dict):
@@ -35,30 +37,82 @@ class PresaleElementPage(BasePage):
         elif user_data_dict["contractorType"] == "Запрос цен товаров, работ, услуг":
             PresaleElementPage.go_to_create_zp_presale_act_based_on_presale(self)
 
-    # Кнопка внутри пресейла для создания ЗП типа тендер (проверяем доступность и нажимаем)
+    # Кнопка "Внести информацию о кокурсе" (проверяем доступность и нажимаем)
     def go_to_create_zp_tender_based_on_presale(self):
-        assert self.is_visibility_of_element_located(*PresaleElementLocators.TENDER_APPLICATION_ELEMENT, 5), \
+        assert self.is_visibility_of_element_located(*PresaleElementLocators.TENDER_APPLICATION_BUTTON, 5), \
             'Кнопка "Внести информацию о конкурсе" не отображена'
-        self.browser.find_element(*PresaleElementLocators.TENDER_APPLICATION_ELEMENT).click()
+        self.browser.find_element(*PresaleElementLocators.TENDER_APPLICATION_BUTTON).click()
 
-    # Кнопка внутри пресейла для создания ЗП типа "Внести информацию о запросе цен" (проверяем доступность и нажимаем)
+    # Кнопка "Внести информацию о запросе цен" (проверяем доступность и нажимаем)
     def go_to_create_zp_presale_act_based_on_presale(self):
-        assert self.is_visibility_of_element_located(*PresaleElementLocators.PRESALE_ACT_ELEMENT, 5), \
+        assert self.is_visibility_of_element_located(*PresaleElementLocators.PRESALE_ACT_BUTTON, 5), \
             'Кнопка Внести информацию о запросе цен" не отображена'
-        self.browser.find_element(*PresaleElementLocators.PRESALE_ACT_ELEMENT).click()
+        self.browser.find_element(*PresaleElementLocators.PRESALE_ACT_BUTTON).click()
 
-    # Кнопка внутри пресейла для создания ЗП типа "Внести информацию о коммерческом предложении" (проверяем
-    # доступность и нажимаем)
+    # Кнопка "Внести информацию о коммерческом предложении" (проверяем доступность и нажимаем)
     def go_to_create_zp_commercial_offer_based_on_presale(self):
-        assert self.is_visibility_of_element_located(*PresaleElementLocators.COMMERCIAL_OFFER_ELEMENT, 5), \
+        assert self.is_visibility_of_element_located(*PresaleElementLocators.COMMERCIAL_OFFER_BUTTON, 5), \
             'Кнопка "Внести информацию о коммерческом предложении" не отображена'
-        self.browser.find_element(*PresaleElementLocators.COMMERCIAL_OFFER_ELEMENT).click()
+        self.browser.find_element(*PresaleElementLocators.COMMERCIAL_OFFER_BUTTON).click()
 
     # Кнопка создания контракта на основне Пресейла
     def go_to_create_contract_based_on_presale(self):
-        assert self.is_visibility_of_element_located(*PresaleElementLocators.CREATE_CONTRACT_ELEMENT, 5), \
+        assert self.is_visibility_of_element_located(*PresaleElementLocators.CREATE_CONTRACT_BUTTON, 5), \
             'Кнопка "Внести информацию о договор/контракте" не отображена'
-        self.browser.find_element(*PresaleElementLocators.CREATE_CONTRACT_ELEMENT).click()
+        self.browser.find_element(*PresaleElementLocators.CREATE_CONTRACT_BUTTON).click()
+
+    def send_to_approval_presale(self, user_data_dict):
+        if user_data_dict["createAccount"] == "Mr_KSUP_Seller" or user_data_dict["createAccount"] == "Mr_KSUP_Dir":
+
+            # Проверяем, что кнопка "Отправить исполнителю" не отображена
+            delayed_assert.expect(self.browser.find_element(
+                *PresaleElementLocators.SEND_APPROVE_TO_DEPARTMENT_BUTTON).is_displayed() is False,
+                                  f'Под ролью {user_data_dict["createAccount"]} отображена кнопка "Отправить исполнителю"')
+
+            # Отправляем на согласование продавцу
+            self.is_element_clickable(*PresaleElementLocators.SEND_APPROVE_TO_DIRECTION_BUTTON)
+            self.browser.find_element(*PresaleElementLocators.SEND_APPROVE_TO_DIRECTION_BUTTON).click()
+            self.browser.switch_to.frame(self.browser.find_element(*PresaleElementLocators.iframe))
+
+            # Проверяем предзаполнение поля "Подразделение" из поля "Подразделение-продавец"
+            delayed_assert.expect(
+                self.is_element_text(*PresaleElementLocators.APPROVAL_DEPARTMENT_ELEMENT) == user_data_dict[
+                    "salesUnit"],
+                f'При отправке на согласование под ролью {user_data_dict["createAccount"]} '
+                f'поле "Подразделение" должно предзаполняться значением из поля "Подразделение-продавец"')
+
+            self.browser.find_element(*PresaleElementLocators.APPROVAL_DEPARTMENT_ELEMENT).click()
+            how, what = PresaleElementLocators.UNIT_DROPDOWN_ELEMENT
+            what = what.replace("Unit_name", user_data_dict["salesUnit"])
+            self.browser.find_element(how, what).click()
+            self.browser.find_element(*PresaleElementLocators.APPROVAL_CONFIRM_SEND_BUTTON).click()
+            self.browser.find_element(*PresaleElementLocators.MESSAGE_OK_BUTTON).click()
+            self.is_frame_to_parent()
+        else:
+            # Проверяем, что кнопка "Отправить продавцу" не отображена
+            delayed_assert.expect(self.browser.find_element(
+                *PresaleElementLocators.SEND_APPROVE_TO_DIRECTION_BUTTON).is_displayed() is False,
+                                  f'Под ролью {user_data_dict["createAccount"]} отображена кнопка "Отправить продавцу"')
+
+            # Отправляем на согласование исполнителю
+            self.is_element_clickable(*PresaleElementLocators.SEND_APPROVE_TO_DEPARTMENT_BUTTON)
+            self.browser.find_element(*PresaleElementLocators.SEND_APPROVE_TO_DEPARTMENT_BUTTON).click()
+            self.browser.switch_to.frame(self.browser.find_element(*PresaleElementLocators.iframe))
+
+            # Проверяем предзаполнение поля "Подразделение"
+            delayed_assert.expect(
+                self.is_element_text(*PresaleElementLocators.APPROVAL_DEPARTMENT_ELEMENT) == user_data_dict[
+                    "executiveUnit"],
+                f'При отправке на согласование под ролью {user_data_dict["createAccount"]} '
+                f'поле "Подразделение" должно предзаполняться значением из поля "Подразделение-исполнитель"')
+
+            self.browser.find_element(*PresaleElementLocators.APPROVAL_DEPARTMENT_ELEMENT).click()
+            how, what = PresaleElementLocators.UNIT_DROPDOWN_ELEMENT
+            what = what.replace("Unit_name", user_data_dict["executiveUnit"])
+            self.browser.find_element(how, what).click()
+            self.browser.find_element(*PresaleElementLocators.APPROVAL_CONFIRM_SEND_BUTTON).click()
+            self.browser.find_element(*PresaleElementLocators.MESSAGE_OK_BUTTON).click()
+            self.is_frame_to_parent()
 
     def approval_presale(self, user_data_dict):
         self.is_element_clickable(*PresaleElementLocators.CONFIRM_APPROVAL_BUTTON)
@@ -75,7 +129,21 @@ class PresaleElementPage(BasePage):
             self.browser.find_element(how, what).click()
         self.browser.find_element(*PresaleElementLocators.APPROVAL_BUTTON_IN_FRAME).click()
         self.browser.find_element(*PresaleElementLocators.MESSAGE_OK_BUTTON).click()
+        self.is_frame_to_parent()
         self.browser.refresh()
+
+    def reject_approval_presale(self, user_data_dict):
+        self.is_element_clickable(*PresaleElementLocators.CANCEL_APPROVAL_BUTTON)
+        self.browser.find_element(*PresaleElementLocators.CANCEL_APPROVAL_BUTTON).click()
+        self.browser.switch_to.frame(self.browser.find_element(*PresaleElementLocators.iframe))
+        reason_field = self.browser.find_element(*PresaleElementLocators.REASON_TEXT_ELEMENT)
+        if user_data_dict["createAccount"] == "Mr_KSUP_Seller" or user_data_dict["createAccount"] == "Mr_KSUP_Dir":
+            reason_field.send_keys(UserData.comment_reject_presale_with_sales)
+        else:
+            reason_field.send_keys(UserData.comment_reject_presale_with_executive)
+        self.browser.find_element(*PresaleElementLocators.REJECT_BUTTON_IN_FRAME).click()
+        self.browser.find_element(*PresaleElementLocators.MESSAGE_OK_BUTTON).click()
+        self.is_frame_to_parent()
 
     def verify_presale_approval_waiting_status(self):
         assert self.is_text_to_be_present_in_element(*PresaleElementLocators.PRESALE_APPROVAL_STATUS,
@@ -87,6 +155,12 @@ class PresaleElementPage(BasePage):
         assert self.is_text_to_be_present_in_element(*PresaleElementLocators.PRESALE_APPROVAL_STATUS, "Согласовано"), \
             'Некорректный статус или отсутствует статус в поле "Статус согласования с подразделением"' \
             '\nОжидаемый результат: "Согласовано"'
+
+    def verify_presale_approval_reject_status(self):
+        assert self.is_text_to_be_present_in_element(*PresaleElementLocators.PRESALE_APPROVAL_STATUS,
+                                                     "Не согласовано"), \
+            'Некорректный статус или отсутствует статус в поле "Статус согласования с подразделением".' \
+            '\nОжидаемый результат: "Не согласовано"'
 
     def verify_general_information_in_presale(self, user_data_dict):
 

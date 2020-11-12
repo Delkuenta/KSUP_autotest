@@ -13,11 +13,12 @@ from pages.login_data import LoginData
 from pages.presale_create_form_page import PresaleFormCreate
 from pages.presale_element_page import PresaleElementPage
 from pages.presale_list_page import PresalePage
+from pages.zakup_create_form_page import ZakupFormCreate
+from pages.zakup_list_page import ZakupListPage
 
 
-@pytest.mark.parametrize('path_data_file', [
-    r"TPAC\UnitSale\Seller\1_[Atest_Seller] PA+ZP+DK,Tender, categoryA, softwareDev, UnitSale new.json"])
-def test_create_presale(browser_function, path_data_file):
+@pytest.mark.parametrize('path_data_file', [r"TPAC\UnitSale\Seller\1_[Atest_Seller] PA+ZP+DK,Tender, categoryA, softwareDev, UnitSale.json"])
+def test_create_zakup(browser_function, path_data_file):
     user_data_dict = BasePage.read_json(browser_function, path_data_file)
     user_data_dict = BasePage.dict_preparation(browser_function, user_data_dict)
     print(user_data_dict)
@@ -26,28 +27,8 @@ def test_create_presale(browser_function, path_data_file):
     login_page.open()
     login_page.login(user_data_dict["createAccount"])
     login_page.verify_username(user_data_dict["createAccount"])
-    presale_list_page = PresalePage(browser_function, link)
-    presale_list_page.go_to_presale_list(link)
-    presale_list_page.should_be_clickable_create_button()
-    presale_list_page.go_to_create_presale()
-    time.sleep(3)
-    payments_sum = 0
-    count_payments_line = len(user_data_dict["payments"])
-    print(f'\nКоличество строчек плановых платежей: {count_payments_line}')
-    current_line = 0
-    while current_line < count_payments_line:
-        # Заполняем поле "Сумма"
-        sum_field = browser_function.find_elements(*FormCreatePresaleLocators.SUMTABLE)[current_line]
-        sum_field.send_keys(user_data_dict["payments"][current_line]["sum"])
-
-        # Заполняем поле "Год"
-        year_field = browser_function.find_elements(*FormCreatePresaleLocators.YEARTABLE)[current_line]
-        year_field.send_keys(user_data_dict["payments"][current_line]["year"])
-
-        # Заполняем поле "Квартал"
-        quarter_field = browser_function.find_elements(*FormCreatePresaleLocators.QUARTERTABLE)[current_line]
-        Select(quarter_field).select_by_visible_text(f'{user_data_dict["payments"][current_line]["quarter"]} квартал')
-
-        payments_sum += user_data_dict["payments"][current_line]["sum"]
-        current_line += 1
-    breakpoint()
+    zakup_list_page = ZakupListPage(browser_function, link)
+    zakup_list_page.go_to_zakup_list(link)
+    zakup_list_page.go_to_create_zakup()
+    zakup_create_form_page = ZakupFormCreate(browser_function, link)
+    zakup_create_form_page.form_create_zakup(user_data_dict)

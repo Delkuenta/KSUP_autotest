@@ -225,18 +225,18 @@ class ContractElementPage(BasePage):
             print('Пустое поле "Количественные показатели реализации проекта" успешно не отображено')
 
     def send_contract_for_approval(self):
-        self.is_element_clickable(*ContractElementLocators.SEND_APPROVAL_CONTRACT_ELEMENT)
-        self.browser.find_element(*ContractElementLocators.SEND_APPROVAL_CONTRACT_ELEMENT).click()
-        self.is_visibility_of_element_located(*ContractElementLocators.CONFIRM_SEND_APPROVAL_ELEMENT, 5)
-        self.browser.find_element(*ContractElementLocators.CONFIRM_SEND_APPROVAL_ELEMENT).click()
+        self.is_element_clickable(*ContractElementLocators.SEND_APPROVAL_CONTRACT_CONTRACT)
+        self.browser.find_element(*ContractElementLocators.SEND_APPROVAL_CONTRACT_CONTRACT).click()
+        self.is_visibility_of_element_located(*ContractElementLocators.CONFIRM_SEND_APPROVAL_CONTRACT, 5)
+        self.browser.find_element(*ContractElementLocators.CONFIRM_SEND_APPROVAL_CONTRACT).click()
 
     def verify_unvisibility_approval_button(self):
-        assert self.is_element_clickable(*ContractElementLocators.SEND_APPROVAL_CONTRACT_ELEMENT) is False, \
+        assert self.is_element_clickable(*ContractElementLocators.SEND_APPROVAL_CONTRACT_CONTRACT) is False, \
             'Кнопка "Отправить на согласование" доступна для нажатия после отклонения ККП'
 
     def verify_visibility_button_send_to_approval_contract(self):
 
-        assert self.is_visibility_of_element_located(*ContractElementLocators.SEND_APPROVAL_CONTRACT_ELEMENT, 3), \
+        assert self.is_visibility_of_element_located(*ContractElementLocators.SEND_APPROVAL_CONTRACT_CONTRACT, 3), \
             'Кнопка "Отправить на согласование(Договор/контракт)" не отобрежена'
 
     def verify_contract_waiting_status_approval_legal(self):
@@ -374,35 +374,12 @@ class ContractElementPage(BasePage):
         self.is_visibility_of_element_located(*ContractElementLocators.ClOSE_ALLERT_CONTRACT, 5)
         self.browser.find_element(*ContractElementLocators.ClOSE_ALLERT_CONTRACT).click()
 
-    def reject_contract_legal(self):
-        self.is_element_clickable(*ContractElementLocators.REJECT_CONTRACT)
-        self.browser.find_element(*ContractElementLocators.REJECT_CONTRACT).click()
-        self.browser.find_element(*ContractElementLocators.COMMENT_TO_APPROVAL_CONTRACT).send_keys(
-            UserData.comment_reject_legal)
-        self.browser.find_element(*ContractElementLocators.FILE_TO_APPROVAL_CONTRACT).send_keys(
-            UserData.file_path_for_link_doc)
-        self.browser.find_element(*ContractElementLocators.CONFIRM_APPROVAL_CONTRACT).click()
-        self.is_visibility_of_element_located(*ContractElementLocators.ClOSE_ALLERT_CONTRACT, 5)
-        self.browser.find_element(*ContractElementLocators.ClOSE_ALLERT_CONTRACT).click()
-
     def approval_contract_count(self):
 
         self.is_element_clickable(*ContractElementLocators.APPROVAL_CONTRACT)
         self.browser.find_element(*ContractElementLocators.APPROVAL_CONTRACT).click()
         self.browser.find_element(*ContractElementLocators.COMMENT_TO_APPROVAL_CONTRACT).send_keys(
             UserData.comment_approval_count)
-        self.browser.find_element(*ContractElementLocators.FILE_TO_APPROVAL_CONTRACT).send_keys(
-            UserData.file_path_for_link_jpg)
-        self.browser.find_element(*ContractElementLocators.CONFIRM_APPROVAL_CONTRACT).click()
-        self.is_visibility_of_element_located(*ContractElementLocators.ClOSE_ALLERT_CONTRACT, 5)
-        self.browser.find_element(*ContractElementLocators.ClOSE_ALLERT_CONTRACT).click()
-
-    def reject_contract_count(self):
-
-        self.is_element_clickable(*ContractElementLocators.REJECT_CONTRACT)
-        self.browser.find_element(*ContractElementLocators.REJECT_CONTRACT).click()
-        self.browser.find_element(*ContractElementLocators.COMMENT_TO_APPROVAL_CONTRACT).send_keys(
-            UserData.comment_reject_count)
         self.browser.find_element(*ContractElementLocators.FILE_TO_APPROVAL_CONTRACT).send_keys(
             UserData.file_path_for_link_jpg)
         self.browser.find_element(*ContractElementLocators.CONFIRM_APPROVAL_CONTRACT).click()
@@ -420,33 +397,11 @@ class ContractElementPage(BasePage):
         self.is_visibility_of_element_located(*ContractElementLocators.ClOSE_ALLERT_CONTRACT, 5)
         self.browser.find_element(*ContractElementLocators.ClOSE_ALLERT_CONTRACT).click()
 
-    def reject_contract_fin(self):
-        self.is_element_clickable(*ContractElementLocators.REJECT_CONTRACT)
-        self.browser.find_element(*ContractElementLocators.REJECT_CONTRACT).click()
-        self.browser.find_element(*ContractElementLocators.COMMENT_TO_APPROVAL_CONTRACT).send_keys(
-            UserData.comment_reject_fin)
-        self.browser.find_element(*ContractElementLocators.FILE_TO_APPROVAL_CONTRACT).send_keys(
-            UserData.file_path_for_link_excel)
-        self.browser.find_element(*ContractElementLocators.CONFIRM_APPROVAL_CONTRACT).click()
-        self.is_visibility_of_element_located(*ContractElementLocators.ClOSE_ALLERT_CONTRACT, 5)
-        self.browser.find_element(*ContractElementLocators.ClOSE_ALLERT_CONTRACT).click()
-
     def approval_contract_udprpo(self):
         self.is_element_clickable(*ContractElementLocators.APPROVAL_CONTRACT)
         self.browser.find_element(*ContractElementLocators.APPROVAL_CONTRACT).click()
         self.browser.find_element(*ContractElementLocators.COMMENT_TO_APPROVAL_CONTRACT).send_keys(
             UserData.comment_approval_udprpo)
-        self.browser.find_element(*ContractElementLocators.FILE_TO_APPROVAL_CONTRACT).send_keys(
-            UserData.file_path_for_link_doc)
-        self.browser.find_element(*ContractElementLocators.CONFIRM_APPROVAL_CONTRACT).click()
-        self.is_visibility_of_element_located(*ContractElementLocators.ClOSE_ALLERT_CONTRACT, 5)
-        self.browser.find_element(*ContractElementLocators.ClOSE_ALLERT_CONTRACT).click()
-
-    def reject_contract_udprpo(self):
-        self.is_element_clickable(*ContractElementLocators.REJECT_CONTRACT)
-        self.browser.find_element(*ContractElementLocators.REJECT_CONTRACT).click()
-        self.browser.find_element(*ContractElementLocators.COMMENT_TO_APPROVAL_CONTRACT).send_keys(
-            UserData.comment_reject_udprpo)
         self.browser.find_element(*ContractElementLocators.FILE_TO_APPROVAL_CONTRACT).send_keys(
             UserData.file_path_for_link_doc)
         self.browser.find_element(*ContractElementLocators.CONFIRM_APPROVAL_CONTRACT).click()
@@ -465,6 +420,51 @@ class ContractElementPage(BasePage):
         self.is_visibility_of_element_located(*ContractElementLocators.ClOSE_ALLERT_CONTRACT, 5)
         self.browser.find_element(*ContractElementLocators.ClOSE_ALLERT_CONTRACT).click()
 
+    def reject_contract_legal(self):
+        self.is_element_clickable(*ContractElementLocators.REJECT_CONTRACT)
+        self.browser.find_element(*ContractElementLocators.REJECT_CONTRACT).click()
+        self.browser.find_element(*ContractElementLocators.COMMENT_TO_APPROVAL_CONTRACT).send_keys(
+            UserData.comment_reject_legal)
+        self.browser.find_element(*ContractElementLocators.FILE_TO_APPROVAL_CONTRACT).send_keys(
+            UserData.file_path_for_link_doc)
+        self.browser.find_element(*ContractElementLocators.CONFIRM_REJECT_CONTRACT).click()
+        self.is_visibility_of_element_located(*ContractElementLocators.ClOSE_ALLERT_CONTRACT, 5)
+        self.browser.find_element(*ContractElementLocators.ClOSE_ALLERT_CONTRACT).click()
+
+    def reject_contract_count(self):
+
+        self.is_element_clickable(*ContractElementLocators.REJECT_CONTRACT)
+        self.browser.find_element(*ContractElementLocators.REJECT_CONTRACT).click()
+        self.browser.find_element(*ContractElementLocators.COMMENT_TO_APPROVAL_CONTRACT).send_keys(
+            UserData.comment_reject_count)
+        self.browser.find_element(*ContractElementLocators.FILE_TO_APPROVAL_CONTRACT).send_keys(
+            UserData.file_path_for_link_jpg)
+        self.browser.find_element(*ContractElementLocators.CONFIRM_REJECT_CONTRACT).click()
+        self.is_visibility_of_element_located(*ContractElementLocators.ClOSE_ALLERT_CONTRACT, 5)
+        self.browser.find_element(*ContractElementLocators.ClOSE_ALLERT_CONTRACT).click()
+
+    def reject_contract_fin(self):
+        self.is_element_clickable(*ContractElementLocators.REJECT_CONTRACT)
+        self.browser.find_element(*ContractElementLocators.REJECT_CONTRACT).click()
+        self.browser.find_element(*ContractElementLocators.COMMENT_TO_APPROVAL_CONTRACT).send_keys(
+            UserData.comment_reject_fin)
+        self.browser.find_element(*ContractElementLocators.FILE_TO_APPROVAL_CONTRACT).send_keys(
+            UserData.file_path_for_link_excel)
+        self.browser.find_element(*ContractElementLocators.CONFIRM_REJECT_CONTRACT).click()
+        self.is_visibility_of_element_located(*ContractElementLocators.ClOSE_ALLERT_CONTRACT, 5)
+        self.browser.find_element(*ContractElementLocators.ClOSE_ALLERT_CONTRACT).click()
+
+    def reject_contract_udprpo(self):
+        self.is_element_clickable(*ContractElementLocators.REJECT_CONTRACT)
+        self.browser.find_element(*ContractElementLocators.REJECT_CONTRACT).click()
+        self.browser.find_element(*ContractElementLocators.COMMENT_TO_APPROVAL_CONTRACT).send_keys(
+            UserData.comment_reject_udprpo)
+        self.browser.find_element(*ContractElementLocators.FILE_TO_APPROVAL_CONTRACT).send_keys(
+            UserData.file_path_for_link_doc)
+        self.browser.find_element(*ContractElementLocators.CONFIRM_REJECT_CONTRACT).click()
+        self.is_visibility_of_element_located(*ContractElementLocators.ClOSE_ALLERT_CONTRACT, 5)
+        self.browser.find_element(*ContractElementLocators.ClOSE_ALLERT_CONTRACT).click()
+
     def reject_contract_kkp(self):
         self.is_element_clickable(*ContractElementLocators.REJECT_CONTRACT)
         self.browser.find_element(*ContractElementLocators.REJECT_CONTRACT).click()
@@ -472,7 +472,7 @@ class ContractElementPage(BasePage):
             UserData.comment_reject_kkp)
         self.browser.find_element(*ContractElementLocators.FILE_TO_APPROVAL_CONTRACT).send_keys(
             UserData.file_path_for_link_jpg)
-        self.browser.find_element(*ContractElementLocators.CONFIRM_APPROVAL_CONTRACT).click()
+        self.browser.find_element(*ContractElementLocators.CONFIRM_REJECT_CONTRACT).click()
         self.is_visibility_of_element_located(*ContractElementLocators.ClOSE_ALLERT_CONTRACT, 5)
         self.browser.find_element(*ContractElementLocators.ClOSE_ALLERT_CONTRACT).click()
 
@@ -481,7 +481,7 @@ class ContractElementPage(BasePage):
         self.browser.find_element(*ContractElementLocators.ESCALATE_CONTRACT).click()
         self.browser.find_element(*ContractElementLocators.COMMENT_TO_APPROVAL_CONTRACT).send_keys(
             UserData.comment_escalation_kkp)
-        self.browser.find_element(*ContractElementLocators.CONFIRM_APPROVAL_CONTRACT).click()
+        self.browser.find_element(*ContractElementLocators.CONFIRM_ESCALATE_CONTRACT).click()
         self.is_visibility_of_element_located(*ContractElementLocators.ClOSE_ALLERT_CONTRACT, 5)
         self.browser.find_element(*ContractElementLocators.ClOSE_ALLERT_CONTRACT).click()
 
@@ -490,10 +490,6 @@ class ContractElementPage(BasePage):
         self.browser.find_element(*ContractElementLocators.REVISION_CONTRACT).click()
         self.browser.find_element(*ContractElementLocators.COMMENT_TO_APPROVAL_CONTRACT).send_keys(
             UserData.comment_escalation_kkp)
-        self.browser.find_element(*ContractElementLocators.CONFIRM_APPROVAL_CONTRACT).click()
+        self.browser.find_element(*ContractElementLocators.CONFIRM_REVISION_CONTRACT).click()
         self.is_visibility_of_element_located(*ContractElementLocators.ClOSE_ALLERT_CONTRACT, 5)
         self.browser.find_element(*ContractElementLocators.ClOSE_ALLERT_CONTRACT).click()
-
-
-
-

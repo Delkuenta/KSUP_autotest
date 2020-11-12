@@ -53,6 +53,9 @@ class UserData:
     comment_reject_kkp = "Отклонение сущности за ККП"
     comment_escalation_kkp = "Эскалирование сущности на ККП"
     comment_revision_kkp = "Отправка на доработку создателю сущности"
+    comment_reject_presale_with_sales = "Отклонение сущности Пресейловая активность в качестве Продавца"
+    comment_reject_presale_with_executive = "Отклонение сущности Пресейловая активность в качестве Исполнителя"
+
 
 
 

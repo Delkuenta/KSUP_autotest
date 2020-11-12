@@ -17,126 +17,120 @@ class BasePageLocators:
 
     # Локаторы во фрейме "Тип работ и услуг"
     # Группы категорий
-    GROUP_CATEGORY_ELEMENT1 = (By.ID, "TIE_3")
-    GROUP_CATEGORY_ELEMENT2 = (By.ID, "TIE_4")
-    GROUP_CATEGORY_ELEMENT3 = (By.ID, "TIE_5")
-    GROUP_CATEGORY_ELEMENT4 = (By.ID, "TIE_6")
-    GROUP_CATEGORY_ELEMENT5 = (By.ID, "TIE_7")
+    GROUP_CATEGORY_ELEMENT1 = (By.CSS_SELECTOR, "#TIE_3")
+    GROUP_CATEGORY_ELEMENT2 = (By.CSS_SELECTOR, "#TIE_4")
+    GROUP_CATEGORY_ELEMENT3 = (By.CSS_SELECTOR, "#TIE_5")
+    GROUP_CATEGORY_ELEMENT4 = (By.CSS_SELECTOR, "#TIE_6")
+    GROUP_CATEGORY_ELEMENT5 = (By.CSS_SELECTOR, "#TIE_7")
 
     # Кнопка прокрутки вниз у категории Программное обеспечение
-    SCROLL_DOWN_SOFTWARE_BUTTON = (By.ID, "PGD_6")
+    SCROLL_DOWN_SOFTWARE_BUTTON = (By.CSS_SELECTOR, "#PGD_6")
 
-    # Кнопка  элемента
-    WORK_SERVICE_ELEMENT = (By.XPATH, f"//*[normalize-space(text()) and normalize-space(.)='name_type_works']")
+    # Кнопка  элемента //*[normalize-space(text()) and normalize-space(.)='name_type_works']
+    WORK_SERVICE_ELEMENT = (By.XPATH, "//*[contains(text(), 'name_type_works')]")
 
-    # Кнопка "Выбор"
-    CHOICE_IFRAME_BUTTON = (
-        By.ID, "ctl00_PlaceHolderDialogBodySection_PlaceHolderDialogBodyFooterMainSection_AddToFieldEditor")
-    # Кнопка подтверждения (ОК)
-    CONFIRM_IFRAME_BUTTON = (By.ID, "ctl00_OkButton")
+    # Кнопка "Выбор" //button[contains(@id, 'AddToFieldEditor')]
+    CHOICE_IFRAME_BUTTON = (By.CSS_SELECTOR, "button[id$='AddToFieldEditor']")
+    # Кнопка подтверждения (ОК) //button[contains(@id, 'OkButton')]
+    CONFIRM_IFRAME_BUTTON = (By.CSS_SELECTOR, "[id$='OkButton']")
 
     # Локаторы во фрейме "Территория применения"
     # Группа территорий во фрейме
-    GROUP_TERRITORY_ELEMENT = (By.ID, "TIE_3")
-    # Элемент территории
-    TERRITORY_ELEMENT = (By.XPATH, f"//*[normalize-space(text()) and normalize-space(.)='territory_name']")
+    GROUP_TERRITORY_ELEMENT = (By.CSS_SELECTOR, "#TIE_3")
+    # Элемент территории //*[normalize-space(text()) and normalize-space(.)='territory_name']
+    TERRITORY_ELEMENT = (By.XPATH, "//*[contains(text(), 'territory_name')]")
 
-    SCROLL_DOWN_BUTTON_TERRITORY = (By.ID, "PGD_3")
+    SCROLL_DOWN_BUTTON_TERRITORY = (By.CSS_SELECTOR, "#PGD_3")
 
     # Кнопка прокрутки в технологиях
-    SCROLL_DOWN_BUTTON = (By.ID, "PGD_1")
+    SCROLL_DOWN_BUTTON = (By.CSS_SELECTOR, "#PGD_1")
 
-    # Выбор технологии
-    ELEMENT_IN_FRAME = (By.XPATH, f"//*[normalize-space(text()) and normalize-space(.)='name']")
+    # Выбор технологии //*[normalize-space(text()) and normalize-space(.)='name']
+    ELEMENT_IN_FRAME = (By.XPATH, "//*[contains(text(), 'name')]")
 
 
 class PresaleListLocators:
     PRESALE_CREATE_BUTTON = (By.CSS_SELECTOR, "#idHomePageNewItem")
-    FIND_ELEMENT_IN_PRESALE_LIST = (
-        By.XPATH, f"//a[@class= 'ms-listlink' and contains(text(),'Test_name')]")
+    FIND_ELEMENT_IN_PRESALE_LIST = (By.XPATH, f"//a[@class= 'ms-listlink' and contains(text(),'Test_name')]")
 
 
 class FormCreatePresaleLocators:
-    # Предмет контракта
-    NAME_PRESALE_ELEMENT = (By.ID, "KsupFullName_1cb78896-92f2-4cb9-a3ad-b45e0f9932a6_$TextField")
+    # Предмет контракта  //textarea[contains(@id, 'KsupFullName')]
+    NAME_PRESALE_ELEMENT = (By.CSS_SELECTOR, "[id^='KsupFullName']")
 
-    # Способ определения поставщика
-    CONTRACTOR_TYPE_ELEMENT = (By.ID, "KsupContractorType_c208b1d8-b8f1-417e-83de-32d7be2864be_$DropDownChoice")
+    # Способ определения поставщика //select[contains(@id, '')]
+    CONTRACTOR_TYPE_ELEMENT = (By.CSS_SELECTOR, "[id^='KsupContractorType']")
 
-    # Заказчик *
-    CUSTOMER_ELEMENT = (By.XPATH, "//div[@id='div-wcfLookupControl_KsupEgr_Customer']/span/span/span")
+    # Заказчик * //div[@id='div-wcfLookupControl_KsupEgr_Customer']/span/span/span
+    CUSTOMER_ELEMENT = (By.CSS_SELECTOR, "[aria-labelledby*='wcfLookupControl_KsupEgr_Customer']")
     CUSTOMER_DROPDOWN_ELEMENT = (By.XPATH, "//li[contains(text(), 'customer_name')]")
 
-    # Подразделение-продавец *
-    SALES_UNIT_ELEMENT = (By.ID, "div-wcfLookupControl_KsupDivisions")
-    SALES_UNIT_DROPDOWN_ELEMENT = (By.XPATH, f"//li[normalize-space(.)='salesUnit_name']")
+    # Подразделение-продавец *f"//li[normalize-space(.)='salesUnit_name']"
+    SALES_UNIT_ELEMENT = (By.CSS_SELECTOR, "#div-wcfLookupControl_KsupDivisions")
+    SALES_UNIT_DROPDOWN_ELEMENT = (By.XPATH, "//li[contains(text(), 'salesUnit_name')]")
 
-    # Ответственный менеджер подразделения-продавца *
-    SALES_MANAGER_ELEMENT = (By.ID, "div-wcfLookupControl_KsupSeller")
-    SALES_MANAGER_DROPDOWN_ELEMENT = (By.XPATH, f"//li[normalize-space(.)='salesManager_name']")
-    SALES_MANAGER_ELEMENT_VALUE = (By.ID, "select2-wcfLookupControl_KsupSeller-container")
+    # Ответственный менеджер подразделения-продавца * //li[normalize-space(.)='salesManager_name']
+    SALES_MANAGER_ELEMENT = (By.CSS_SELECTOR, "#div-wcfLookupControl_KsupSeller")
+    SALES_MANAGER_DROPDOWN_ELEMENT = (By.XPATH, "//li[contains(text(), 'salesManager_name')]")
+    SALES_MANAGER_ELEMENT_VALUE = (By.CSS_SELECTOR, "#select2-wcfLookupControl_KsupSeller-container")
 
-    # Подразделение-исполнитель
-    EXECUTIVE_UNIT_ELEMENT = (By.ID, "div-wcfLookupControl_KsupDivisionPerformer")
-    EXECUTIVE_UNIT_DROPDOWN_ELEMENT = (By.XPATH, f"//li[normalize-space(.)='executiveUnit_name']")
+    # Подразделение-исполнитель  //li[contains(text(), 'executiveUnit_name')]
+    EXECUTIVE_UNIT_ELEMENT = (By.CSS_SELECTOR, "#div-wcfLookupControl_KsupDivisionPerformer")
+    EXECUTIVE_UNIT_DROPDOWN_ELEMENT = (By.XPATH, "//li[normalize-space(.)='executiveUnit_name']")
 
-    # Ответственный менеджер подразделения-исполнителя
-    EXECUTIVE_MANAGER_ELEMENT = (By.ID, "div-wcfLookupControl_KsupPerformerResponsible")
-    EXECUTIVE_MANAGER_DROPDOWN_ELEMENT = (By.XPATH, f"//li[normalize-space(.)='executiveManager_name']")
-    EXECUTIVE_MANAGER_ELEMENT_VALUE = (By.ID, "select2-wcfLookupControl_KsupPerformerResponsible-container")
+    # Ответственный менеджер подразделения-исполнителя //li[normalize-space(.)='executiveManager_name']
+    EXECUTIVE_MANAGER_ELEMENT = (By.CSS_SELECTOR, "#div-wcfLookupControl_KsupPerformerResponsible")
+    EXECUTIVE_MANAGER_DROPDOWN_ELEMENT = (By.XPATH, "//li[contains(text(), 'executiveManager_name')]")
+    EXECUTIVE_MANAGER_ELEMENT_VALUE = (By.CSS_SELECTOR, "#select2-wcfLookupControl_KsupPerformerResponsible-container")
 
     # Исполнитель (юридическое лицо)
-    EXECUTIVE_UNIT_LEGAL_ELEMENT = (By.ID, "div-wcfLookupControl_KsupEgr_PerformerLegal")
+    EXECUTIVE_UNIT_LEGAL_ELEMENT = (By.CSS_SELECTOR, "#div-wcfLookupControl_KsupEgr_PerformerLegal")
     EXECUTIVE_UNIT_LEGAL_DROPDOWN_ELEMENT = (By.XPATH, f"//li[contains(text(), 'executiveUnitLegal_name')]")
 
-    # Порядок проведения закупочной процедуры
-    SALE_LAW_TYPE_ELEMENT = (By.ID, "KsupSaleLawType_59c9adb5-ad0e-4308-b136-1f1006e5f9f6_$DropDownChoice")
+    # Порядок проведения закупочной процедуры //select[contains(@id, 'KsupSaleLawType')]
+    SALE_LAW_TYPE_ELEMENT = (By.CSS_SELECTOR, "[id^='KsupSaleLawType']")
 
     # Кнопка поиск допустимого варианта в категории "Тип работ и услуг"
-    SEARCH_VALID_OPTION_ELEMENT = (
-        By.CSS_SELECTOR, r"#KsupWorkServicesTypeMetadata_\$containercontrolHolder .ms-taxonomy-browser-button")
+    # //div[contains(@id,'KsupWorkServicesTypeMetadata')]/img[@class='ms-taxonomy-browser-button']
+    SEARCH_VALID_OPTION_ELEMENT = (By.CSS_SELECTOR, "[id^='KsupWorkServicesType']>[class='ms-taxonomy-browser-button']")
 
     # Элементы во фрейме "Тип работ и услуг"
     # Строка "Тип работ и услуг"
-    TYPE_WORK_SERVICES_ELEMENT = (By.ID, "KsupWorkServicesTypeMetadata_$containereditableRegion")
+    # //div[contains(@id,'KsupWorkServicesTypeMetadata') and contains(@class,'ms-taxonomy-writeableregion')]
+    TYPE_WORK_SERVICES_ELEMENT = (By.CSS_SELECTOR, "[id^='KsupWorkServicesType'][class^='ms-taxonomy-writeableregion']")
 
-    # Сумма
-    SUM_ELEMENT = (By.ID, "KsupSumPlan_9901571e-b38b-42cf-bb3c-f8f7977f1555_$NumberField")
+    # Сумма //input[starts-with(@id,'KsupSum')]
+    SUM_ELEMENT = (By.CSS_SELECTOR, "[id^='KsupSum']")
 
-    # Валюта
-    CURRENCY_ELEMENT = (By.ID, "KsupCurrency_9cb5cce6-1d98-4146-a2df-c05c4635dd8d_$DropDownChoice")
+    # Валюта //select[starts-with(@id, 'KsupCurrency')]
+    CURRENCY_ELEMENT = (By.CSS_SELECTOR, "[id^='KsupCurrency']")
 
-    # Размер обеспечения заявки
-    APPLICATION_SIZE_ELEMENT = (By.ID, "KsupApplicationSize_1117d974-3a17-4f6f-9104-8cf28be18914_$NumberField")
+    # Размер обеспечения заявки //input[starts-with(@id,'KsupApplicationSize')]
+    APPLICATION_SIZE_ELEMENT = (By.CSS_SELECTOR, "[id^='KsupApplicationSize']")
 
-    # Размер обеспечения договора/контракта
-    CONTRACT_SIZE_ELEMENT = (By.ID, "KsupContractSize_20253d6d-468d-443e-9179-3f20e0c2533e_$NumberField")
+    # Размер обеспечения договора/контракта //input[starts-with(@id,'KsupContractSize')]
+    CONTRACT_SIZE_ELEMENT = (By.CSS_SELECTOR, "[id^='KsupContractSize']")
 
-    # Самостоятельная продажа
-    SEPARATE_SALE_ELEMENT = (By.ID, "KsupSeparateSale_bf818721-7daf-4db6-b7b9-54ba73429ea5_$DropDownChoice")
+    # Самостоятельная продажа //select[starts-with(@id, 'KsupSeparateSale')]
+    SEPARATE_SALE_ELEMENT = (By.CSS_SELECTOR, "[id^='KsupSeparateSale']")
 
-    # Плановый срок подачи на конкурс
-    COMPETITION_DEADLINE_FROM_ELEMENT = (
-        By.ID, "KsupCompetitionDeadlineFrom_5b28696f-6ae9-4765-bb8d-b26513cd0e78_$DateTimeFieldDate")
+    # Плановый срок подачи на конкурс //input[starts-with(@id, 'KsupCompetitionDeadlineFrom')]
+    COMPETITION_DEADLINE_FROM_ELEMENT = (By.CSS_SELECTOR, "[id^='KsupCompetitionDeadlineFrom'][class='ms-input']")
 
-    # Плановая дата заключения договора/контракта *
-    PLAN_DATE_CONTRACT_CONCLUSION_ELEMENT = (
-        By.ID, "KsupPlanDateContractConclusion_536f5d8c-9e22-4878-9d4c-49c433c82c0d_$DateTimeFieldDate")
+    # Плановая дата заключения договора/контракта * //input[starts-with(@id, 'KsupPlanDateContractConclusion')]
+    PLAN_DATE_CONTRACT_CONCLUSION_ELEMENT = (By.CSS_SELECTOR, "[id^='KsupPlanDateContractConclusion'][class='ms-input']")
 
-    # Плановая дата окончания договора/контракта
-    PLAN_DATE_CONTRACT_FINISH_ELEMENT = (
-        By.ID, "KsupPlanDateContractFinish_aaf043ca-d88d-4e99-bcfe-7c15cbb8ba33_$DateTimeFieldDate")
+    # Плановая дата окончания договора/контракта //input[starts-with(@id, 'KsupPlanDateContractFinish')]
+    PLAN_DATE_CONTRACT_FINISH_ELEMENT = (By.CSS_SELECTOR, "[id^='KsupPlanDateContractFinish'][class='ms-input']")
 
-    # Вероятность заключения договора/контракта
-    PROJECT_PROBABILITY_ELEMENT = (
-        By.ID, "KsupProjectProbability_5bded577-c24a-41f7-ae50-0b1b234d8c21_$NumberField")
+    # Вероятность заключения договора/контракта //input[starts-with(@id, 'KsupProjectProbability')]
+    PROJECT_PROBABILITY_ELEMENT = (By.CSS_SELECTOR, "[id^='KsupProjectProbability']")
 
-    # Краткое описание
-    DESCRIPTION_PLAIN_TEXT_ELEMENT = (
-        By.ID, "KsupDescriptionPlainText_18b11f3d-f4ae-4a8f-ba29-62366bd13e66_$TextField")
+    # Краткое описание //textarea[starts-with(@id, 'KsupDescriptionPlainText')]
+    DESCRIPTION_PLAIN_TEXT_ELEMENT = (By.CSS_SELECTOR, "[id^='KsupDescriptionPlainText']")
 
-    # Риски
-    RISKS_ELEMENT = (By.ID, "KsupRisks_32ca3c22-b19a-430b-8a16-dbe340b6867a_$TextField")
+    # Риски //textarea[starts-with(@id, 'KsupRisks')]
+    RISKS_ELEMENT = (By.CSS_SELECTOR, "[id^='KsupRisks']")
 
     # Поля плановых платежей, возможно множество элементов
     SUMTABLE = (By.CSS_SELECTOR, ".payplan-summa-field")
@@ -147,13 +141,16 @@ class FormCreatePresaleLocators:
     CONFIRM_PRESALE_BUTTON = (By.CSS_SELECTOR, '[value="Создать"].ms-ButtonHeightWidth')
 
     # Элементы модульного окна при отправке на согласование внутри формы создания ПА
-    # Поле для выбора подразделения
     iframe = (By.CSS_SELECTOR, ".ms-dlgFrame")
-    APPROVAL_DEPARTMENT_ELEMENT = (By.XPATH, "//span[@id='select2-directionItems-container']")
-    # Кнопка "Отправить" на согласование
-    APPROVAL_CONFIRM_SEND_BUTTON = (By.ID, "ctl00_PlaceHolderMain_btnSend")
-    #
-    APPROVAL_CANCEL_SEND_BUTTON = (By.ID, "ctl00_PlaceHolderMain_btnCancel")
+
+    # Поле для выбора подразделения //span[@id='select2-directionItems-container']
+    APPROVAL_DEPARTMENT_ELEMENT = (By.XPATH, "//span[contains(@id, 'directionItems')]")
+
+    # Кнопка "Отправить" на согласование //input[contains(@id, 'PlaceHolderMain_btnSend')]
+    APPROVAL_CONFIRM_SEND_BUTTON = (By.CSS_SELECTOR, "[id*='PlaceHolderMain_btnSend']")
+
+    # Кнопка "Отмена" в модульном окне отправки на согласование //input[contains(@id, 'PlaceHolderMain_btnCancel')]
+    APPROVAL_CANCEL_SEND_BUTTON = (By.CSS_SELECTOR, "[id*='PlaceHolderMain_btnCancel']")
 
 
 class PresaleElementLocators:
@@ -161,43 +158,69 @@ class PresaleElementLocators:
     TITLE_IN_PRESALE = (By.CSS_SELECTOR, "#pageTitle")
 
     # Кнопка изменения элемента
-    EDIT_ITEM_ELEMENT = (By.ID, "Ribbon.ListForm.Display.Manage.EditItem-Large")
+    EDIT_ITEM_BUTTON = (By.CSS_SELECTOR, "[id='Ribbon.ListForm.Display.Manage.EditItem-Large']")
 
     # Кнопка "Внести информацию о конкурсе"
-    TENDER_APPLICATION_ELEMENT = (By.CSS_SELECTOR, "#createPresaleActivityBasedOnSale_TenderApplication-Large")
+    TENDER_APPLICATION_BUTTON = (By.CSS_SELECTOR, "#createPresaleActivityBasedOnSale_TenderApplication-Large")
 
     # Кнопка "Внести информацию о запросе цен"
-    PRESALE_ACT_ELEMENT = (By.CSS_SELECTOR, "#createPresaleActivityBasedOnSale_PresaleAct-Large")
+    PRESALE_ACT_BUTTON = (By.CSS_SELECTOR, "#createPresaleActivityBasedOnSale_PresaleAct-Large")
 
     # Кнопка "Внести информацию о коммерческом предложении"
-    COMMERCIAL_OFFER_ELEMENT = (By.CSS_SELECTOR, "#createPresaleActivityBasedOnSale_CommercialOffer-Large")
+    COMMERCIAL_OFFER_BUTTON = (By.CSS_SELECTOR, "#createPresaleActivityBasedOnSale_CommercialOffer-Large")
 
     # Кнопка "Внести информацию о договоре/контракте"
-    CREATE_CONTRACT_ELEMENT = (By.ID, "Ribbon.ListForm.Display.ContractGroup-LargeLarge")
+    CREATE_CONTRACT_BUTTON = (By.CSS_SELECTOR, "[id='Ribbon.ListForm.Display.ContractGroup-LargeLarge']")
 
-    # Кнопка согласования пресейла
-    CONFIRM_APPROVAL_BUTTON = (By.XPATH, "//a[@id='Approve.Approve-Large']")
-    # Кнопка  отклонения согласования
-    CANCEL_APPROVAL_BUTTON = (By.XPATH, "//a[@id='Approve.Reject-Large']")
+    # Кнопка "Отправить продавцу" //a[contains(@id, 'Approve.ToDirection')]
+    SEND_APPROVE_TO_DIRECTION_BUTTON = (By.CSS_SELECTOR, "[id^='Approve.ToDirection']")
+
+    # Кнопка "Отправить исполнителю/продавцу" //a[contains(@id, 'Approve.ToDepartment')]
+    SEND_APPROVE_TO_DEPARTMENT_BUTTON = (By.CSS_SELECTOR, "[id^='Approve.ToDepartment']")
+
+    # Элементы модульного окна при отправке на согласование
+    # Название(титул фрейма)
+    TITLE_APPROVAL_FRAME_PRESALE = (By.CSS_SELECTOR, "#dialogTitleSpan")
+
+    # Поле для выбора подразделения
+    APPROVAL_DEPARTMENT_ELEMENT = (By.XPATH, "//span[contains(@id, 'directionItems')]")
+    # Выбор из выпадающего списка //li[normalize-space(.)='Unit_name']
+    UNIT_DROPDOWN_ELEMENT = (By.XPATH, f"//li[contains(text(), 'Unit_name')]")
+    # Кнопка "Отправить" на согласование //input[contains(@id, 'PlaceHolderMain_btnSend')]
+    APPROVAL_CONFIRM_SEND_BUTTON = (By.CSS_SELECTOR, "[id*='PlaceHolderMain_btnSend']")
+    # Кнопка "Отмена" (работает в модульных окнах: отправки, согласования, отклоенения)
+    # //input[contains(@id, 'PlaceHolderMain_btnCancel')]
+    APPROVAL_CANCEL_SEND_BUTTON = (By.CSS_SELECTOR, "[id*='PlaceHolderMain_btnCancel']")
+
+    # Кнопка согласования пресейла //a[@id='Approve.Approve-Large']
+    CONFIRM_APPROVAL_BUTTON = (By.CSS_SELECTOR, "[id^='Approve.Approve']")
+
+    # Кнопка  отклонения согласования //a[@id='Approve.Reject-Large']
+    CANCEL_APPROVAL_BUTTON = (By.CSS_SELECTOR, "[id^='Approve.Reject']")
 
     # Окно iframe
     iframe = (By.CSS_SELECTOR, ".ms-dlgFrame")
 
     # Поле выбора менеджера в окне согласования
-    APPROVAL_MANAGER_ELEMENT = (By.ID, "select2-ctl00_PlaceHolderMain_ddlResponsbileManager-container")
+    APPROVAL_MANAGER_ELEMENT = (By.XPATH, "//span[contains(@id, 'PlaceHolderMain_ddlResponsbileManager')]")
 
-    # Выбор значения продавца
-    CHANGE_SELLER_RESPONSIBLE_DROPDOWN_ELEMENT = (By.XPATH, "//li[normalize-space(.)='salesManager_name']")
+    # Выбор значения продавца //li[normalize-space(.)='salesManager_name']
+    CHANGE_SELLER_RESPONSIBLE_DROPDOWN_ELEMENT = (By.XPATH, "//li[contains(text(), 'salesManager_name')]")
 
-    # Выбор значения продавца
-    CHANGE_SELLER_PERFORMER_DROPDOWN_ELEMENT = (By.XPATH, "//li[normalize-space(.)='executiveManager_name']")
+    # Выбор значения продавца //li[normalize-space(.)='executiveManager_name']
+    CHANGE_SELLER_PERFORMER_DROPDOWN_ELEMENT = (By.XPATH, "//li[contains(text(), 'executiveManager_name')]")
 
-    APPROVAL_BUTTON_IN_FRAME = (By.XPATH, "//input[@id='ctl00_PlaceHolderMain_btnApprove']")
+    # Кнопка подтверждения согласования в модульном окне //input[contains(@id, 'PlaceHolderMain_btnApprove')]
+    APPROVAL_BUTTON_IN_FRAME = (By.CSS_SELECTOR, "[id*='PlaceHolderMain_btnApprove']")
 
-    # Кнопка "Отмена"
-    CANCEL_BUTTON_IN_FRAME = (By.ID, "ctl00_PlaceHolderMain_btnCancel")
+    # Кнопка отклонения согласования в модульном окне //input[contains(@id, 'PlaceHolderMain_btnReject')]
+    REJECT_BUTTON_IN_FRAME = (By.CSS_SELECTOR, "[id*='PlaceHolderMain_btnReject']")
 
-    MESSAGE_OK_BUTTON = (By.XPATH, "//input[@value='OK']")
+    # Поле "Причина" в модульном окне отклонения
+    REASON_TEXT_ELEMENT = (By.CSS_SELECTOR, ".agreement-direction-reason")
+
+    # Кнопка ок в модульном окне "Сообщения" после отклонения/согласования //input[@value='OK']
+    MESSAGE_OK_BUTTON = (By.CSS_SELECTOR, "[value='OK']")
 
     # Элементы на вкладке "Общие сведения"
     CONTRACTOR_TYPE_IN_PRESALE = (By.CSS_SELECTOR, ".fldKsupContractorType #SPFieldChoice")
@@ -250,214 +273,203 @@ class FormCreateZakupLocators:
     TITLE_ZP = (By.CSS_SELECTOR, "#DeltaPlaceHolderPageTitleInTitleArea .die")
 
     # Тип закупочной процедуры
-    PRESALE_TYPE_ELEMENT = (By.CSS_SELECTOR, "#presaleTypes")
+    CONTRACTOR_TYPE_ELEMENT = (By.CSS_SELECTOR, "[id='presaleTypes']")
 
-    # Предмет контракта
-    NAME_ZP_ELEMENT = (By.ID, "KsupFullName_1cb78896-92f2-4cb9-a3ad-b45e0f9932a6_$TextField")
+    # Предмет контракта  //textarea[contains(@id, 'KsupFullName')]
+    NAME_ZP_ELEMENT = (By.CSS_SELECTOR, "[id^='KsupFullName']")
 
-    # Подразделение-продавец
-    SALES_UNIT_IN_ZP_ELEMENT = (By.CSS_SELECTOR, "#select2-wcfLookupControl_KsupDivisionSeller-container")
-    SALES_UNIT_IN_ZP_DROPDOWN_ELEMENT = (By.XPATH, f"//li[normalize-space(.)='salesUnit_name']")
+    # Подразделение-продавец *f"//li[normalize-space(.)='salesUnit_name']"
+    SALES_UNIT_IN_ZP_ELEMENT = (By.CSS_SELECTOR, "#div-wcfLookupControl_KsupDivisionSeller")
+    SALES_UNIT_DROPDOWN_ELEMENT = (By.XPATH, "//li[contains(text(), 'salesUnit_name')]")
 
     # Ответственный менеджер подразделения-продавца
-    SALES_MANAGER_IN_ZP_ELEMENT = (By.CSS_SELECTOR, '#select2-wcfLookupControl_KsupSeller-container')
+    SALES_MANAGER_IN_ZP_ELEMENT = (By.CSS_SELECTOR, '#div-wcfLookupControl_KsupSeller')
+    SALES_MANAGER_DROPDOWN_ELEMENT = (By.XPATH, "//li[contains(text(), 'salesManager_name')]")
 
     # Подразделение-исполнитель
-    EXECUTIVE_UNIT_IN_ZP_ELEMENT = (By.CSS_SELECTOR, "#select2-wcfLookupControl_KsupDivisionPerformer-container")
-    EXECUTIVE_UNIT_IN_ZP_DROPDOWN_ELEMENT = (By.XPATH, f"//li[normalize-space(.)='executiveUnit_name']")
+    EXECUTIVE_UNIT_IN_ZP_ELEMENT = (By.CSS_SELECTOR, "#div-wcfLookupControl_KsupDivisionPerformer")
+    EXECUTIVE_UNIT_IN_ZP_DROPDOWN_ELEMENT = (By.XPATH, "//li[contains(text(), 'executiveUnit_name')]")
 
     # Ответственный менеджер подразделения-исполнителя
-    EXECUTIVE_MANAGER_IN_ZP_ELEMENT = (
-        By.CSS_SELECTOR, "#select2-wcfLookupControl_KsupPerformerResponsible-container")
-    EXECUTIVE_MANAGER_IN_ZP_DROPDOWN_ELEMENT = (By.XPATH, f"//li[normalize-space(.)='executiveManager_name']")
+    EXECUTIVE_MANAGER_IN_ZP_ELEMENT = (By.CSS_SELECTOR, "#div-wcfLookupControl_KsupPerformerResponsible")
+    EXECUTIVE_MANAGER_IN_ZP_DROPDOWN_ELEMENT = (By.XPATH, "//li[contains(text(), 'executiveManager_name')]")
 
     # Заказчик
-    CUSTOMER_IN_ZP_ELEMENT = (By.CSS_SELECTOR, "#select2-wcfLookupControl_KsupEgr_Customer-container")
+    CUSTOMER_IN_ZP_ELEMENT = (By.CSS_SELECTOR, "#div-wcfLookupControl_KsupEgr_Customer")
     CUSTOMER_IN_ZP_DROPDOWN_ELEMENT = (By.XPATH, f"//li[contains(text(), 'customer_name')]")
 
     # Исполнитель (юридическое лицо)
-    EXECUTIVE_LEGAL_IN_ZP_ELEMENT = (By.ID, "div-wcfLookupControl_KsupEgr_PerformerLegal")
+    EXECUTIVE_LEGAL_IN_ZP_ELEMENT = (By.CSS_SELECTOR, "#div-wcfLookupControl_KsupEgr_PerformerLegal")
     EXECUTIVE_LEGAL_DROPDOWN_IN_ZP_ELEMENT = (By.XPATH, f"//li[contains(text(), 'executiveUnitLegal_name')]")
 
     # Кнопка поиск допустимого варианта в категории "Тип работ и услуг"
-    SEARCH_VALID_OPTION_ELEMENT = (
-        By.CSS_SELECTOR, r"#KsupWorkServicesTypeMetadata_\$containercontrolHolder .ms-taxonomy-browser-button")
+    # //div[contains(@id,'KsupWorkServicesTypeMetadata')]/img[@class='ms-taxonomy-browser-button']
+    SEARCH_VALID_OPTION_ELEMENT = (By.CSS_SELECTOR, "[id^=KsupWorkServicesType]>[class='ms-taxonomy-browser-button']")
 
     # Элементы во фрейме "Тип работ и услуг"
-
-    # Группы категорий
-    GROUP_CATEGORY_ELEMENT1 = (By.ID, "TIE_3")
-    GROUP_CATEGORY_ELEMENT2 = (By.ID, "TIE_4")
-    GROUP_CATEGORY_ELEMENT3 = (By.ID, "TIE_5")
-    GROUP_CATEGORY_ELEMENT4 = (By.ID, "TIE_6")
-    GROUP_CATEGORY_ELEMENT5 = (By.ID, "TIE_7")
-
-    # Категория
-    CATEGORY_ELEMENT = ""
-    # Кнопка "Выбор"
-    CHOICE_IFRAME_BUTTON = (
-        By.ID, "ctl00_PlaceHolderDialogBodySection_PlaceHolderDialogBodyFooterMainSection_AddToFieldEditor")
-    # Кнопка подтверждения (ОК)
-    CONFIRM_IFRAME_BUTTON = (By.ID, "ctl00_OkButton")
     # Строка "Тип работ и услуг"
-    TYPE_WORK_SERVICES_ELEMENT = (By.ID, "KsupWorkServicesTypeMetadata_$containereditableRegion")
+    # //div[contains(@id,'KsupWorkServicesTypeMetadata') and contains(@class,'ms-taxonomy-writeableregion')]
+    TYPE_WORK_SERVICES_ELEMENT = (By.CSS_SELECTOR, "[id^='KsupWorkServicesType'][class^='ms-taxonomy-writeableregion']")
 
-    # Сумма
-    SUM_IN_ZP_ELEMENT = (By.ID, "KsupContractSum_8729d9c3-d84d-4132-97dc-27457724cf36_$NumberField")
+    # Сумма //input[starts-with(@id, 'KsupContractSum')]
+    SUM_IN_ZP_ELEMENT = (By.CSS_SELECTOR, "[id^=KsupContractSum]")
 
-    # Валюта
-    CURRENCY_IN_ZP_ELEMENT = (By.ID, "KsupCurrency_9cb5cce6-1d98-4146-a2df-c05c4635dd8d_$DropDownChoice")
+    # Валюта //select[starts-with(@id, 'KsupCurrency')]
+    CURRENCY_IN_ZP_ELEMENT = (By.CSS_SELECTOR, "[id^=KsupCurrency]")
 
-    # Плановая дата окончания договора/контракта
-    PLAN_DATE_CONTRACT_FINISH_IN_ZP_ELEMENT = (By.XPATH,
-                                               "//input[@id='KsupContractPlanFinishDateFrom_ba6c4eb8-f5a5-4a43-8c07-d230571e83dc_$DateTimeFieldDate']")
+    # Плановая дата окончания договора/контракта //input[starts-with(@id, 'KsupContractPlanFinishDateFrom')]
+    PLAN_DATE_CONTRACT_FINISH_IN_ZP_ELEMENT = (By.CSS_SELECTOR, "[id^='KsupContractPlanFinishDateFrom'][class='ms-input']")
 
-    # Вероятность заключения договора/контракта
-    PROJECT_PROBABILITY_ELEMENT = (By.ID, "KsupContractProbability_f7fc8405-e077-4ebf-bf9c-50153beb4378_$NumberField")
+    # Вероятность заключения договора/контракта //input[starts-with(@id, 'KsupContractProbability')]
+    PROJECT_PROBABILITY_ELEMENT = (By.CSS_SELECTOR, "[id^='KsupContractProbability']")
 
-    # Связанные продажи
-    SALES_WITH_OP = (By.XPATH, "//div[@id='div-wcfLookupControl_KsupSalesWithOp']/span/span/span/ul/li[2]/input")
+    # Связанные продажи //div[@id='div-wcfLookupControl_KsupSalesWithOp']/span/span/span/ul/li[2]/input
+    SALES_WITH_OP = (By.XPATH, "//div[starts-with(@id,'div-wcfLookupControl_KsupSalesWithOp')]/span[starts-with(@class,'select2')]")
     SALES_WITH_OP_FOR_VERIFY = (By.CSS_SELECTOR, ".select2-selection__choice:nth-child(1)")
 
-    # Результаты работ
-    DESCRIPTION_PLAIN_IN_ZP_ELEMENT = (By.ID, "KsupPaDescription_81c0defa-82c4-4dec-a6f1-556818457fd6_$TextField")
+    # Результаты работ //textarea[starts-with(@id, 'KsupPaDescription')]
+    DESCRIPTION_PLAIN_IN_ZP_ELEMENT = (By.CSS_SELECTOR, "[id^='KsupPaDescription']")
 
-    # Риски проекта с точки зрения Департамента
-    PROJECT_RISK_DEPARTMENT_PERSPEC = (
-        By.ID, "KsupProjectRiskDepartmentPerspec_2c6333aa-aa0b-4e97-aab8-b89e7aa7f0c6_$TextField")
+    # Риски проекта с точки зрения Департамента //textarea[starts-with(@id, 'KsupProjectRiskDepartmentPerspec')]
+    PROJECT_RISK_DEPARTMENT_PERSPEC = (By.CSS_SELECTOR, "[id^='KsupProjectRiskDepartmentPerspec']")
 
-    # Документы с описанием рисков
-    FILE_RISK_MAP_AND_REGISTRY = (By.XPATH, "//div[@id='File_RiskMapAndRegistry']/div/input")
-    FILE_RISK_MAP_AND_REGISTRY_NAME_LINK = (By.CLASS_NAME, "fileField_File_RiskMapAndRegistry_NameLink_")
+    # Документы с описанием рисков //div[@id='File_RiskMapAndRegistry']/div/input
+    # //div[@id='File_RiskMapAndRegistry']//input[@type='file']
+    FILE_RISK_MAP_AND_REGISTRY = (By.CSS_SELECTOR, "[id='File_RiskMapAndRegistry']>div>input")
+    # fileField_File_RiskMapAndRegistry_NameLink_
+    FILE_RISK_MAP_AND_REGISTRY_NAME_LINK = (By.CSS_SELECTOR, "[class='fileField_File_RiskMapAndRegistry_NameLink_']")
 
-    # Иное
-    FILE_OTHER = (By.XPATH, "//div[@id='File_Other']/div/input")
-    FILE_OTHER_NAME_LINK = (By.CLASS_NAME, "fileField_File_Other_NameLink_")
+    # Иное //div[@id='File_Other']/div/input
+    FILE_OTHER = (By.CSS_SELECTOR, "[id='File_Other']>div>input")
+    # fileField_File_Other_NameLink_
+    FILE_OTHER_NAME_LINK = (By.CSS_SELECTOR, "[class='fileField_File_Other_NameLink_']")
 
     # Общие поля для типа "Тендерная заявка" и "Коммчерческое предложение"
-    # Плановая дата заключения договора/контракта *
-    PLAN_DATE_CONTRACT_CONCLUSION_IN_ZP_ELEMENT = (
-        By.XPATH, "//input[@id='KsupContractPlanDateFrom_4b3ff310-7fe8-4e4f-b23c-6d570282fedd_$DateTimeFieldDate']")
-    # Бюджет проекта
-    FILE_BUDGET_OF_PROJECT = (By.XPATH, "//div[@id='File_BudgetOfProject']/div/input")
-    FILE_BUDGET_OF_PROJECT_NAME_LINK = (By.CLASS_NAME, "fileField_File_BudgetOfProject_NameLink_")
+    # Плановая дата заключения договора/контракта * //input[starts-with(@id, 'KsupContractPlanDateFrom')]
+    PLAN_DATE_CONTRACT_CONCLUSION_IN_ZP_ELEMENT = (By.CSS_SELECTOR, "[id^='KsupContractPlanDateFrom'][class='ms-input']")
 
-    # Пояснительная служебная записка
-    FILE_EXPLANATORY_MEMORANUM = (By.XPATH, "//div[@id='File_ExplanatoryMemoranum']/div/input")
-    FILE_EXPLANATORY_MEMORANUM_NAME_LINK = (By.CLASS_NAME, "fileField_File_ExplanatoryMemoranum_NameLink_")
+    # Бюджет проекта //div[@id='File_BudgetOfProject']/div/input
+    FILE_BUDGET_OF_PROJECT = (By.CSS_SELECTOR, "[id='File_BudgetOfProject']>div>input")
+    # fileField_File_BudgetOfProject_NameLink_
+    FILE_BUDGET_OF_PROJECT_NAME_LINK = (By.CSS_SELECTOR, "[class='fileField_File_BudgetOfProject_NameLink_']")
 
-    # Проект контракта
-    FILE_PROJECT_OF_CONTRACT = (By.XPATH, "//div[@id='File_ProjectOfContract']/div/input")
-    FILE_PROJECT_OF_CONTRACT_NAME_LINK = (By.CLASS_NAME, "fileField_File_ProjectOfContract_NameLink_")
+    # Пояснительная служебная записка //div[@id='File_ExplanatoryMemoranum']/div/input
+    FILE_EXPLANATORY_MEMORANUM = (By.CSS_SELECTOR, "[id='File_ExplanatoryMemoranum']>div>input")
+    FILE_EXPLANATORY_MEMORANUM_NAME_LINK = (By.CSS_SELECTOR, "[class='fileField_File_ExplanatoryMemoranum_NameLink_']")
+
+    # Проект контракта //div[@id='File_ProjectOfContract']/div/input
+    FILE_PROJECT_OF_CONTRACT = (By.CSS_SELECTOR, "[id='File_ProjectOfContract']>div>input")
+    FILE_PROJECT_OF_CONTRACT_NAME_LINK = (By.CSS_SELECTOR, "[class='fileField_File_ProjectOfContract_NameLink_']")
 
     # Общие поля для типа "Тендерная заявка" и "Запрос, цен, товаров и услуг"
-    # Порядок проведения закупочной процедуры (Тендерная заявка)
-    CONTRACTOR_TYPE_TENDER_ZP = (By.ID, "KsupTenderLowType_ea75ed3b-3361-4f0e-ad36-dcd5aba52908_$DropDownChoice")
+    # Порядок проведения закупочной процедуры (Тендерная заявка) //select[starts-with(@id, 'KsupTenderLowType')]
+    CONTRACTOR_TYPE_TENDER_ZP = (By.CSS_SELECTOR, "[id^= 'KsupTenderLowType']")
 
-    # Порядок проведения закупочной процедуры (Тендерная заявка)
-    CONTRACTOR_TYPE_ZAPROS_CEN_ZP = (By.ID, "KsupRequestLowType_c021af9e-7150-4f51-b854-a2f0140ef257_$DropDownChoice")
+    # Порядок проведения закупочной процедуры (Тендерная заявка) //select[starts-with(@id, 'KsupRequestLowType')]
+    CONTRACTOR_TYPE_ZAPROS_CEN_ZP = (By.CSS_SELECTOR, "[id^= 'KsupRequestLowType']")
 
-    # Размер обеспечения заявки
-    APPLICATION_SIZE_IN_ZP_ELEMENT = (By.ID, "KsupApplicationSize_1117d974-3a17-4f6f-9104-8cf28be18914_$NumberField")
+    # Размер обеспечения заявки //input[starts-with(@id, 'KsupApplicationSize')]
+    APPLICATION_SIZE_IN_ZP_ELEMENT = (By.CSS_SELECTOR, "[id^= 'KsupApplicationSize']")
 
-    # Размер обеспечения договора/контракта
-    CONTRACT_SIZE_IN_ZP_ELEMENT = (By.ID, "KsupContractSize_20253d6d-468d-443e-9179-3f20e0c2533e_$NumberField")
+    # Размер обеспечения договора/контракта //input[starts-with(@id, 'KsupContractSize')]
+    CONTRACT_SIZE_IN_ZP_ELEMENT = (By.CSS_SELECTOR, "[id^= 'KsupContractSize']")
 
     # Уникальные поля для типа "Тендерная заявка"
-    # чек-бокс Совместные торги
-    JOINT_BIDDING_ELEMENT = (
-        By.CSS_SELECTOR, "#KsupPresaleJointBidding_d87bbac9-74b3-46c4-9372-38feb12d67f9_$BooleanField")
+    # чек-бокс Совместные торги //input[starts-with(@id, 'KsupPresaleJointBidding')]
+    JOINT_BIDDING_ELEMENT = (By.CSS_SELECTOR, "[id^='KsupPresaleJointBidding']")
 
-    # Срок подачи на конкурс
-    COMPETITION_DEADLINE_IN_ZP_FROM_ELEMENT = (
-        By.XPATH, "//input[@id='KsupCompetitionDeadlineFrom_5b28696f-6ae9-4765-bb8d-b26513cd0e78_$DateTimeFieldDate']")
-    # Номер закупки
-    EIS_PURCHASE_NUMBER = (By.ID, "KsupEisPurchaseNumber_8afdb894-e496-4d71-9e54-a1bf0e0a5fb6_$TextField")
+    # Срок подачи на конкурс //input[starts-with(@id, 'KsupCompetitionDeadlineFrom')]
+    COMPETITION_DEADLINE_IN_ZP_FROM_ELEMENT = (By.CSS_SELECTOR, "[id^='KsupCompetitionDeadlineFrom'][class='ms-input']")
 
-    # Ссылка на закупку
-    EIS_PURCHASE_LINK = (By.ID, "KsupEisPurchaseLink_39dc12ef-bb5e-46a5-a469-5d687be8ab91_$TextField")
+    # Номер закупки //input[starts-with(@id, 'KsupEisPurchaseNumber')]
+    EIS_PURCHASE_NUMBER = (By.CSS_SELECTOR, "[id^='KsupEisPurchaseNumber']")
 
-    # Тендерная заявка
-    FILE_TENDER_REQUEST = (By.XPATH, "//div[@id='File_TenderRequest']/div/input")
-    FILE_TENDER_NAME_LINK = (By.CLASS_NAME, "fileField_File_TenderRequest_NameLink_")
+    # Ссылка на закупку //textarea[starts-with(@id, 'KsupEisPurchaseLink')]
+    EIS_PURCHASE_LINK = (By.CSS_SELECTOR, "[id^='KsupEisPurchaseLink']")
 
-    # Тендерная документация
-    FILE_TENDER_DOCS_FROM_CUSTOMER = (By.XPATH, "//div[@id='File_TenderDocsFromCustomer']/div/input")
-    FILE_TENDER_DOCS_NAME_LINK = (By.CLASS_NAME, "fileField_File_TenderDocsFromCustomer_NameLink_")
+    # Тендерная заявка //div[@id='File_TenderRequest']/div/input
+    FILE_TENDER_REQUEST = (By.CSS_SELECTOR, "[id='File_TenderRequest']>div>input")
+    FILE_TENDER_NAME_LINK = (By.CSS_SELECTOR, "[class='fileField_File_TenderRequest_NameLink_']")
+
+    # Тендерная документация //div[@id='File_TenderDocsFromCustomer']/div/input
+    FILE_TENDER_DOCS_FROM_CUSTOMER = (By.CSS_SELECTOR, "[id='File_TenderDocsFromCustomer']>div>input")
+    FILE_TENDER_DOCS_NAME_LINK = (By.CSS_SELECTOR, "[class='fileField_File_TenderDocsFromCustomer_NameLink_']")
 
     # Уникальные поля для типа "Коммерческое предложение"
 
-    # Официальный запрос от Заказчика на КП
-    FILE_KP_REQUEST_FROM_CUSTOMER = (By.XPATH, "//div[@id='File_KPRequestFromCustomer']/div/input")
-    FILE_KP_REQUEST_FROM_CUSTOMER_NAME_LINK = (By.CLASS_NAME, "fileField_File_KPRequestFromCustomer_NameLink_")
+    # Официальный запрос от Заказчика на КП //div[@id='File_KPRequestFromCustomer']/div/input
+    FILE_KP_REQUEST_FROM_CUSTOMER = (By.CSS_SELECTOR, "[id='File_KPRequestFromCustomer']>div>input")
+    FILE_KP_REQUEST_FROM_CUSTOMER_NAME_LINK = (By.CSS_SELECTOR, "[class='fileField_File_KPRequestFromCustomer_NameLink_']")
 
-    # Коммерческое предложение по официальному запросу
-    FILE_OFFER_BY_REQUEST = (By.XPATH, "//div[@id='File_OfferByRequest']/div/input")
-    FILE_OFFER_BY_REQUEST_NAME_LINK = (By.CLASS_NAME, "fileField_File_OfferByRequest_NameLink_")
+    # Коммерческое предложение по официальному запросу //div[@id='File_OfferByRequest']/div/input
+    FILE_OFFER_BY_REQUEST = (By.CSS_SELECTOR, "[id='File_OfferByRequest']>div>input")
+    FILE_OFFER_BY_REQUEST_NAME_LINK = (By.CSS_SELECTOR, "[class='fileField_File_OfferByRequest_NameLink_']")
 
     # Уникальные поля для типа "Запрос цена, товаров и услуг"
 
-    # Срок предоставления ценовой информации
-    PRICE_INFORMATION_DEADLINE_FROM = (
-        By.XPATH,
-        "//input[@id='KsupPriceInformationDeadlineFrom_8ec338f0-a8c3-4c1a-8b36-892c98be55a7_$DateTimeFieldDate']")
+    # Срок предоставления ценовой информации //input[starts-with(@id, 'KsupPriceInformationDeadlineFrom')]
+    PRICE_INFORMATION_DEADLINE_FROM = (By.CSS_SELECTOR, "[id^='KsupPriceInformationDeadlineFrom'][class='ms-input']")
 
-    # Предполагаемая дата начала проведения закупки с
-    PURCHASE_START_DATE_FROM = (
-        By.XPATH, "//input[@id='KsupPurchaseStartDateFrom_f6f725b7-1c54-4d4c-a087-39f89853714f_$DateTimeFieldDate']")
+    # Предполагаемая дата начала проведения закупки с //input[starts-with(@id, 'KsupPurchaseStartDateFrom')]
+    PURCHASE_START_DATE_FROM = (By.CSS_SELECTOR, "[id^='KsupPurchaseStartDateFrom'][class='ms-input']")
 
-    # Предполагаемая дата начала проведения закупки по
-    PURCHASE_START_DATE_TO = (
-        By.XPATH, "//input[@id='KsupPurchaseStartDateTo_c8e972e8-b7ad-4de5-afca-78c2103ca3bb_$DateTimeFieldDate']")
+    # Предполагаемая дата начала проведения закупки по //input[starts-with(@id, 'KsupPurchaseStartDateTo')]
+    PURCHASE_START_DATE_TO = (By.CSS_SELECTOR, "[id^='KsupPurchaseStartDateTo'][class='ms-input']")
 
-    # Номер запроса цен на Официальном сайте ЕИС
-    EIS_PRICE_NUMBER = (By.ID, "KsupEisPriceNumber_0c8b9e99-9c3a-421a-8f14-c03b006f4231_$TextField")
+    # Номер запроса цен на Официальном сайте ЕИС //input[starts-with(@id, 'KsupEisPriceNumber')]
+    EIS_PRICE_NUMBER = (By.CSS_SELECTOR, "[id^='KsupEisPriceNumber']")
 
-    # Ссылка на запрос на Официальном сайте ЕИС
-    EIS_PRICE_LINK = (By.ID, "KsupEisPriceLink_deebb51e-29c0-4543-9290-d801cfafcb4c_$TextField")
+    # Ссылка на запрос на Официальном сайте ЕИС //textarea[starts-with(@id, 'KsupEisPriceLink')]
+    EIS_PRICE_LINK = (By.CSS_SELECTOR, "[id^='KsupEisPriceLink']")
 
-    # Запрос НМЦК
-    FILE_NMCK_REQUEST = (By.XPATH, "//div[@id='File_NMCKRequest']/div/input")
-    FILE_NMCK_REQUEST_NAME_LINK = (By.CLASS_NAME, "fileField_File_NMCKRequest_NameLink_")
+    # Запрос НМЦК //div[@id='File_NMCKRequest']/div/input
+    FILE_NMCK_REQUEST = (By.CSS_SELECTOR, "[id='File_NMCKRequest']>div>input")
+    FILE_NMCK_REQUEST_NAME_LINK = (By.CSS_SELECTOR, "[class='fileField_File_NMCKRequest_NameLink_']")
 
-    # Ответ на запрос НМЦК
-    FILE_NMCK_RESPONSE = (By.XPATH, "//div[@id='File_NMCKResponse']/div/input")
-    FILE_NMCK_RESPONSE_NAME_LINK = (By.CLASS_NAME, "fileField_File_NMCKResponse_NameLink_")
+    # Ответ на запрос НМЦК //div[@id='File_NMCKResponse']/div/input
+    FILE_NMCK_RESPONSE = (By.CSS_SELECTOR, "[id='File_NMCKResponse']>div>input")
+    FILE_NMCK_RESPONSE_NAME_LINK = (By.CSS_SELECTOR, "[class='fileField_File_NMCKResponse_NameLink_']")
 
     # Кнопка создания сущности закупочная процедура
-    CONFIRM_ZP_BUTTON = (By.CSS_SELECTOR, '[value="Создать"].ms-ButtonHeightWidth')
+    CONFIRM_ZP_BUTTON = (By.CSS_SELECTOR, "[id*='diidIOSaveItem'][value='Создать']")
 
 
 class ZakupListLocators:
     ZAKUP_CREATE_BUTTON = (By.CSS_SELECTOR, "#idHomePageNewItem")
-    FIND_ELEMENT_IN_ZAKUP_LIST = (
-        By.XPATH, f"//a[@class= 'ms-listlink' and contains(text(),'Test_name')]")
+    FIND_ELEMENT_IN_ZAKUP_LIST = (By.XPATH, f"//a[@class= 'ms-listlink' and contains(text(),'Test_name')]")
 
 
 class ZakupElementLocators:
     # Титул в карточке "Закупочная процедура"
     TITLE_IN_ZP = (By.CSS_SELECTOR, "#pageTitle")
-    # Послать на согласование закупочную процедуру
-    SEND_APPROVAL_ELEMENT = (By.ID, "ApprovePresaleActivity.ToApprove-Large")
+
+    # Кнопка создания Контракта на основе закупочной процедуры //a[starts-with(@id, 'CreateContractBasedOnPresaleActivity')]
+    CREATE_CONTRACT_BASED_ON_ZAKUP = (By.CSS_SELECTOR, "[id^='CreateContractBasedOnPresaleActivity']")
+
+    # Кнопка Отправить на согласование ЗП  //a[contains(@id, 'ApprovePresaleActivity.ToApprove')]
+    SEND_APPROVAL_BUTTON = (By.CSS_SELECTOR, "[id^='ApprovePresaleActivity.ToApprove']")
     # Всплывающее окно подтверждения/отмены отправки закупочной процедуры
-    CONFIRM_SEND_APPROVAL_ELEMENT = (By.XPATH, "//*[@type = 'button' and (text() = 'Отправить')]")
-    CANCEL_SEND_APPROVAL_ELEMENT = (By.XPATH, "//*[@type = 'button' and (text() = 'Отмена')]")
+    CONFIRM_SEND_APPROVAL_BUTTON = (By.XPATH, "//button[@type = 'button' and (text() = 'Отправить')]")
+    CANCEL_SEND_APPROVAL_BUTTON = (By.XPATH, "//button[@type = 'button' and (text() = 'Отмена')]")
+    # Кнопка согласования и отклонения закупочной процедуры //a[starts-with(@id, 'ApprovePresaleActivity.Approve')]
+    APPROVAL_ZAKUP_BUTTON = (By.CSS_SELECTOR, "[id^='ApprovePresaleActivity.Approve']")
+    REJECT_ZAKUP_BUTTON = (By.CSS_SELECTOR, "[id^='ApprovePresaleActivity.Reject']")
+    # Кнопка эскалирования на ККП
+    ESCALATE_ZAKUP_BUTTON = (By.CSS_SELECTOR, "[id^='ApprovePresaleActivity.Escalate']")
+    # Кнопка отправка на доработку
+    REVISION_ZAKUP_BUTTON = (By.CSS_SELECTOR, "[id^='ApprovePresaleActivity.Revision']")
+    # Кнопка Отзыв с внутренного согласования
+    WITHDRAW_FROM_APPROVAL_BUTTON = (By.CSS_SELECTOR, "[id^='Approve.Cancel']")
 
-    # Кнопка создания Контракта на основе закупочной процедуры
-    CREATE_CONTRACT_BASED_ON_ZAKUP = (By.ID, "CreateContractBasedOnPresaleActivityCustomActionButton-Large")
-
-    # Кнопка согласования и отклонения закупочной процедуры
-    APPROVAL_ZAKUP = (By.ID, "ApprovePresaleActivity.Approve-Large")
-    REJECT_ZAKUP = (By.ID, "ApprovePresaleActivity.Reject-Large")
-    ESCALATE_ZAKUP = (By.ID, "ApprovePresaleActivity.Escalate-Large")
-    REVISION_ZAKUP = (By.ID, "ApprovePresaleActivity.Revision-Large")
-    WITHDRAW_FROM_APPROVAL_ELEMENT = (By.ID, "Approve.Cancel-Large")
-
-    # элементы внутри окна подтверждения/отклонения
-    COMMENT_TO_APPROVAL_ZAKUP = (By.XPATH, "//textarea[@id='dialogComment']")
-    FILE_TO_APPROVAL_ZAKUP = (By.XPATH, "//input[@name='filefield']")
-    CONFIRM_APPROVAL_ZAKUP = (By.XPATH, "(//button[@type='button'])[10]")
-    CANCEL_APPROVAL_ZAKUP = (By.XPATH, "(//button[@type='button'])[9]")
+    # элементы внутри окна подтверждения/отклонения //textarea[@id ='dialogComment']
+    COMMENT_TO_APPROVAL_ZAKUP = (By.CSS_SELECTOR, "[id='dialogComment']")
+    # //input[@name='filefield']
+    FILE_TO_APPROVAL_ZAKUP = (By.CSS_SELECTOR, "[name='filefield']")
+    CONFIRM_APPROVAL_ZAKUP = (By.XPATH, "//button[@type = 'button' and (text() = 'Согласовать')]")
+    CONFIRM_REJECT_ZAKUP = (By.XPATH, "//button[@type = 'button' and (text() = 'Отклонить')]")
+    CONFIRM_ESCALATE_ZAKUP = (By.XPATH, "//button[@type = 'button' and (text() = 'Эскалировать')]")
+    CONFIRM_REVISION_ZAKUP = (By.XPATH, "//button[@type = 'button' and (text() = 'Отправить на доработку')]")
+    CANCEL_APPROVAL_ZAKUP = (By.XPATH, "//button[@type = 'button' and (text() = 'Отмена')]")
     ClOSE_ALLERT_ZAKUP = (By.CSS_SELECTOR, "#dlgTitleBtns")
 
     # Вкладки в карточке
@@ -465,28 +477,18 @@ class ZakupElementLocators:
     ATTACHED_FILES_ELEMENT = (By.XPATH, "//a[contains(@href, '#tabFiles')]")
     APPROVAL_HISTORY_ELEMENT = (By.XPATH, "//a[contains(@href, '#tabApprovingHistory')]")
 
-    # Строки согласования
-    APPROVAL_LEGAL_STATUS_ELEMENT = (
-        By.XPATH,
-        "(.//*[normalize-space(text()) and normalize-space(.)='Согласование юридической службой'])[1]/following::span[1]")
-    APPROVAL_COUNT_STATUS_ELEMENT = (
-        By.XPATH,
-        "(.//*[normalize-space(text()) and normalize-space(.)='Согласование бухгалтерией'])[1]/following::span[1]")
-    APPROVAL_FIN_STATUS_ELEMENT = (
-        By.XPATH,
-        "(.//*[normalize-space(text()) and normalize-space(.)='Согласование финансовой службой'])[1]/following::span[1]")
-    APPROVAL_UDPRPO_STATUS_ELEMENT = (
-        By.XPATH, "(.//*[normalize-space(text()) and normalize-space(.)='Согласование УДПР ПО'])[1]/following::span[1]")
-    APPROVAL_KKP_STATUS_ELEMENT = (
-        By.XPATH, "(.//*[normalize-space(text()) and normalize-space(.)='Согласование ККП'])[1]/following::span[1]")
+    # Строки статус согласования
+    APPROVAL_LEGAL_STATUS_ELEMENT = (By.XPATH, "//*[text() ='Согласование юридической службой']/following::span[1]")
+    APPROVAL_COUNT_STATUS_ELEMENT = (By.XPATH, "//*[text() ='Согласование бухгалтерией']/following::span[1]")
+    APPROVAL_FIN_STATUS_ELEMENT = (By.XPATH, "//*[text() ='Согласование финансовой службой']/following::span[1]")
+    APPROVAL_UDPRPO_STATUS_ELEMENT = (By.XPATH, "//*[text() ='Согласование УДПР ПО']/following::span[1]")
+    APPROVAL_KKP_STATUS_ELEMENT = (By.XPATH, "//*[text() ='Согласование ККП']/following::span[1]")
 
     # Элементы на вкладке "Общие сведения"
     # Поле "Статус согласования"
     APPROVAL_MAIN_STATUS_IN_ZP = (By.CSS_SELECTOR, ".fldKsupPresaleApproveStatus #SPFieldChoice")
-    # Поле "Тип закупочной процедуры"
-    CONTRACTOR_TYPE_IN_ZP = (
-        By.CSS_SELECTOR,
-        "#ctl00_ctl70_g_93f2ae31_fc13_4393_9245_5d2f3d13a770_ctl00_ucListItemForm_tdContentTypeFieldDisplay")
+    # Поле "Тип закупочной процедуры" //td[contains(@id, 'ContentTypeFieldDisplay')]
+    CONTRACTOR_TYPE_IN_ZP = (By.CSS_SELECTOR, "[id$='tdContentTypeFieldDisplay']")
     # Поле "Подразделение-продавец"
     SALES_UNIT_IN_ZP = (By.CSS_SELECTOR, ".fldKsupDivisionSeller #SPFieldWcfLookup")
     # Поле "Ответственный менеджер подразделения-продавца"
@@ -549,161 +551,139 @@ class ZakupElementLocators:
 
 class FormCreateContractLocators:
     CONTRACT_TITLE = (By.CSS_SELECTOR, "#DeltaPlaceHolderPageTitleInTitleArea .die")
-    # Предмет контракта
-    NAME_CONTRACT_ELEMENT = (By.ID, "KsupFullName_1cb78896-92f2-4cb9-a3ad-b45e0f9932a6_$TextField")
+    # Предмет контракта //textarea[starts-with(@id, 'KsupFullName')]
+    NAME_CONTRACT_ELEMENT = (By.CSS_SELECTOR, "[id^='KsupFullName']")
 
     # Заказчик
     CUSTOMER_CONTRACT_ELEMENT = (By.CSS_SELECTOR, "#div-wcfLookupControl_KsupEgr_Customer")
     CUSTOMER_DROPDOWN_CONTRACT_ELEMENT = (By.XPATH, f"//li[contains(text(), 'customer_name')]")
 
-    # Подразделение-продавец
-    SALES_UNIT_CONTRACT_ELEMENT = (By.ID, "div-wcfLookupControl_KsupDivisions")
-    SALES_UNIT_DROPDOWN_CONTRACT_ELEMENT = (By.XPATH, f"//li[normalize-space(.)='salesUnit_name']")
+    # Подразделение-продавец //li[normalize-space()='salesUnit_name']
+    SALES_UNIT_CONTRACT_ELEMENT = (By.CSS_SELECTOR, "#div-wcfLookupControl_KsupDivisions")
+    SALES_UNIT_DROPDOWN_CONTRACT_ELEMENT = (By.XPATH, f"//li[contains(text(), 'salesUnit_name')]")
 
     # Ответственный менеджер подразделения-продавца
     SALES_MANAGER_CONTRACT_ELEMENT = (By.CSS_SELECTOR, '#div-wcfLookupControl_KsupSeller')
-    SALES_MANAGER_CONTRACT_DROPDOWN_ELEMENT = (By.XPATH, f"//li[normalize-space(.)='salesManager_name']")
-    SALES_MANAGER_ELEMENT_VALUE = (By.ID, "select2-wcfLookupControl_KsupSeller-container")
+    SALES_MANAGER_CONTRACT_DROPDOWN_ELEMENT = (By.XPATH, "//li[contains(text(), 'salesManager_name')]")
+    SALES_MANAGER_ELEMENT_VALUE = (By.CSS_SELECTOR, "#select2-wcfLookupControl_KsupSeller-container")
 
     # Подразделение-исполнитель
-    EXECUTIVE_UNIT_CONTRACT_ELEMENT = (
-        By.CSS_SELECTOR, "#div-wcfLookupControl_KsupDivisionPerformer")
-    EXECUTIVE_UNIT_CONTRACT_DROPDOWN_ELEMENT = (By.XPATH, f"//li[normalize-space(.)='executiveUnit_name']")
+    EXECUTIVE_UNIT_CONTRACT_ELEMENT = (By.CSS_SELECTOR, "#div-wcfLookupControl_KsupDivisionPerformer")
+    EXECUTIVE_UNIT_CONTRACT_DROPDOWN_ELEMENT = (By.XPATH, f"//li[normalize-space()='executiveUnit_name']")
 
     # Ответственный менеджер подразделения-исполнителя
-    EXECUTIVE_MANAGER_CONTRACT_ELEMENT = (
-        By.CSS_SELECTOR, "#div-wcfLookupControl_KsupPerformerResponsible")
-    EXECUTIVE_MANAGER_DROPDOWN_CONTRACT_ELEMENT = (By.XPATH, f"//li[normalize-space(.)='executiveManager_name']")
-    EXECUTIVE_MANAGER_ELEMENT_VALUE = (By.ID, "select2-wcfLookupControl_KsupPerformerResponsible-container")
+    EXECUTIVE_MANAGER_CONTRACT_ELEMENT = (By.CSS_SELECTOR, "#div-wcfLookupControl_KsupPerformerResponsible")
+    EXECUTIVE_MANAGER_DROPDOWN_CONTRACT_ELEMENT = (By.XPATH, "//li[contains(text(), 'executiveManager_name')]")
+    EXECUTIVE_MANAGER_ELEMENT_VALUE = (By.CSS_SELECTOR, "#select2-wcfLookupControl_KsupPerformerResponsible-container")
 
     # Исполнитель (юридическое лицо)
     EXECUTIVE_UNIT_LEGAL_CONTRACT_ELEMENT = (By.CSS_SELECTOR, "#div-wcfLookupControl_KsupEgr_PerformerLegal")
     EXECUTIVE_UNIT_LEGAL_DROPDOWN_CONTRACT_ELEMENT = (By.XPATH, f"//li[contains(text(), 'executiveUnitLegal_name')]")
 
     # Кнопка поиск допустимого варианта в категории "Тип работ и услуг"
-    SEARCH_TYPE_AND_SERVICES_ELEMENT = (
-        By.CSS_SELECTOR, r"#KsupWorkServicesTypeMetadata_\$containercontrolHolder .ms-taxonomy-browser-button")
+    # //div[contains(@id,'KsupWorkServicesTypeMetadata')]/img[@class='ms-taxonomy-browser-button']
+    SEARCH_TYPE_AND_SERVICES_ELEMENT = (By.CSS_SELECTOR, "[id^='KsupWorkServicesType']>[class='ms-taxonomy-browser-button']")
 
-    # Элементы во фрейме "Тип работ и услуг"
-    # Группы категорий
-    GROUP_CATEGORY_ELEMENT1 = (By.ID, "TIE_3")
-    GROUP_CATEGORY_ELEMENT2 = (By.ID, "TIE_4")
-    GROUP_CATEGORY_ELEMENT3 = (By.ID, "TIE_5")
-    GROUP_CATEGORY_ELEMENT4 = (By.ID, "TIE_6")
-    GROUP_CATEGORY_ELEMENT5 = (By.ID, "TIE_7")
+    # Сумма //input[starts-with(@id,'KsupSum')]
+    SUM_ELEMENT = (By.CSS_SELECTOR, "[id^='KsupSum']")
 
-    # Кнопка прокрутки вниз у категории Программное обеспечение
-    SCROLL_DOWN_BUTTON = (By.ID, "PGD_6")
-
-    # Категория
-    CATEGORY_ELEMENT = ""
-    # Кнопка "Выбор"
-    CHOICE_IFRAME_BUTTON = (
-        By.ID, "ctl00_PlaceHolderDialogBodySection_PlaceHolderDialogBodyFooterMainSection_AddToFieldEditor")
-    # Кнопка подтверждения (ОК)
-    CONFIRM_IFRAME_BUTTON = (By.ID, "ctl00_OkButton")
-    # Строка "Тип работ и услуг"
-    TYPE_WORK_SERVICES_ELEMENT = (By.ID, "KsupWorkServicesTypeMetadata_$containereditableRegion")
-
-    # Сумма
-    SUM_ELEMENT = (By.ID, "KsupSum_0270deef-a686-4d0f-8537-95b179e49cc9_$NumberField")
-
-    # Валюта
-    CURRENCY_ELEMENT = (By.ID, "KsupCurrency_9cb5cce6-1d98-4146-a2df-c05c4635dd8d_$DropDownChoice")
+    # Валюта //select[starts-with(@id,'KsupCurrency')]
+    CURRENCY_ELEMENT = (By.CSS_SELECTOR, "[id^='KsupCurrency']")
 
     # связанная Пресейловые активности
     PRESALE_SELECT = (By.XPATH, "//div[@id='div-wcfLookupControl_KsupSales']")
-    PRESALE_SELECT_DROPDOWN = (By.XPATH, f"(.//*[normalize-space(.)='fullName_name'])")
+    PRESALE_SELECT_DROPDOWN = (By.XPATH, "//*[normalize-space(.)='fullName_name']")
 
     # Связанная закупочная процедура
     ZAKUP_SELECT = (By.XPATH, "//span[@id='select2-wcfLookupControl_KsupPresaleActivity-container']")
-    ZAKUP_SELECT_DROPDOWN = (By.XPATH, f".//*[normalize-space(.)='fullName']")
+    ZAKUP_SELECT_DROPDOWN = (By.XPATH, ".//*[normalize-space(.)='fullName']")
 
-    # Номер договора
-    NUMBER_CONTRACT_ELEMENT = (By.CSS_SELECTOR, "#KsupContractNumber_01736dbc-f5d8-49d4-86ca-2fae900a7d2c")
+    # Номер договора //input[starts-with(@id,'KsupContractNumber')]
+    NUMBER_CONTRACT_ELEMENT = (By.CSS_SELECTOR, "[id^='KsupContractNumber']")
 
-    # Чек-бокс Догвоор не заключается
-    CONTRACT_IS_NETTING = (By.CSS_SELECTOR, "#KsupContractIsNetting_c8e2c9fe-523c-4d05-913a-eab1b2d18369")
+    # Чек-бокс Догвоор не заключается //input[starts-with(@id,'KsupContractIsNetting')]
+    CONTRACT_IS_NETTING = (By.CSS_SELECTOR, "[id^='KsupContractIsNetting']")
 
-    # Дата заключения договор/контракта
-    START_DATE_CONTRACT = (By.ID, "KsupConclusionDate_1cc85b45-2b12-499b-aeda-bdbdb850a027_$DateTimeFieldDate")
+    # Дата заключения договор/контракта //input[starts-with(@id,'KsupConclusionDate')]
+    START_DATE_CONTRACT = (By.CSS_SELECTOR, "[id^='KsupConclusionDate'][class='ms-input']")
 
-    # Дата завершение договор/контракта
-    END_DATE_CONTRACT = (By.ID, "KsupDateEnd_5714bf19-cc8d-4a00-8acf-1be5513dde9b_$DateTimeFieldDate")
+    # Дата завершение договор/контракта //input[starts-with(@id,'KsupDateEnd')]
+    END_DATE_CONTRACT = (By.CSS_SELECTOR, "[id^='KsupDateEnd'][class='ms-input']")
 
-    # Номер закупки
-    EIS_PURCHASE_NUMBER_CONTRACT = (By.ID, "KsupEisPurchaseNumber_8afdb894-e496-4d71-9e54-a1bf0e0a5fb6_$TextField")
+    # Номер закупки //input[starts-with(@id,'KsupEisPurchaseNumber')]
+    EIS_PURCHASE_NUMBER_CONTRACT = (By.CSS_SELECTOR, "[id^='KsupEisPurchaseNumber']")
 
-    # Ссылка на закупку
-    EIS_PURCHSE_LINK_CONTRACT = (By.ID, "KsupOffEisPurchaseLink_75c016cd-a29d-4b9e-b15b-fe4a8a8c0b27_$TextField")
+    # Ссылка на закупку //textarea[starts-with(@id,'KsupOffEisPurchaseLink')]
+    EIS_PURCHSE_LINK_CONTRACT = (By.CSS_SELECTOR, "[id^='KsupOffEisPurchaseLink']")
 
-    # Ссылка на договор/контракт на Официальном сайте ЕИС
-    EIS_CONTRACT_LINK = (By.ID, "KsupEisContractLink_5155f76b-7bfa-4bca-aacf-a508d08a5bbb_$TextField")
+    # Ссылка на договор/контракт на Официальном сайте ЕИС //textarea[starts-with(@id,'KsupEisContractLink')]
+    EIS_CONTRACT_LINK = (By.CSS_SELECTOR, "[id^='KsupEisContractLink']")
 
     # Кнопка поиск вариантов у поля "Территория применения"
-    SEARCH_TERRITORY_ELEMENT = (
-        By.CSS_SELECTOR, r"#KsupApplicationTerritory_\$containercontrolHolder .ms-taxonomy-browser-button")
+    # //div[contains(@id,'KsupApplicationTerritory')]/img[@class='ms-taxonomy-browser-button']
+    SEARCH_TERRITORY_ELEMENT = (By.CSS_SELECTOR, "[id^='KsupApplicationTerritory']>[class='ms-taxonomy-browser-button']")
 
     # Строка Территория применения
-    TYPE_TERRITORY_ELEMENT = (By.ID, "KsupApplicationTerritory_$containereditableRegion")
+    # //div[contains(@id,'KsupApplicationTerritory') and contains(@class,'ms-taxonomy-writeableregion')]
+    TYPE_TERRITORY_ELEMENT = (By.CSS_SELECTOR, "[id^='KsupApplicationTerritory'][class^='ms-taxonomy-writeableregion']")
 
     # Кнопка поиск вариантов у поля "Технологии"
-    SEARCH_TECHNOLOGIES_ELEMENT = (
-        By.CSS_SELECTOR, r"#KsupKeyTechnologies_\$containercontrolHolder .ms-taxonomy-browser-button")
+    # //div[contains(@id,'KsupKeyTechnologies')]/img[@class='ms-taxonomy-browser-button']
+    SEARCH_TECHNOLOGIES_ELEMENT = (By.CSS_SELECTOR, "[id^='KsupKeyTechnologies']>[class='ms-taxonomy-browser-button']")
 
     # Строка Ключевые технологии
-    TYPE_TECHNOLOGIES_ELEMENT = (By.ID, "KsupKeyTechnologies_$containereditableRegion")
+    # //div[contains(@id,'KsupKeyTechnologies') and contains(@class,'ms-taxonomy-writeableregion')]
+    TYPE_TECHNOLOGIES_ELEMENT = (By.CSS_SELECTOR, "[id^='KsupKeyTechnologies'][class*='ms-taxonomy-writeableregion']")
 
-    # Поле Цели и задачи
-    DESCRIPTION_PLAIN_TEXT_ELEMENT = (
-        By.ID, "KsupDescriptionPlainText_18b11f3d-f4ae-4a8f-ba29-62366bd13e66_$TextField")
+    # Поле Цели и задачи //textarea[starts-with(@id,'KsupDescriptionPlainText')]
+    DESCRIPTION_PLAIN_TEXT_ELEMENT = (By.CSS_SELECTOR, "[id^='KsupDescriptionPlainText']")
 
-    # Количественные показатели реализации проекта
-    QUANTITATIVE_INDICATORS_PROJECT_ELEMENT = (
-        By.ID, "KsupQuantitativeIndicatorsProjec_50b9dcc0-2a17-4730-b693-13774456029b_$TextField")
+    # Количественные показатели реализации проекта //textarea[starts-with(@id,'KsupQuantitativeIndicatorsProjec')]
+    QUANTITATIVE_INDICATORS_PROJECT_ELEMENT = (By.CSS_SELECTOR, "[id^='KsupQuantitativeIndicatorsProjec']")
 
-    # Уникальный код проекта
-    PROJECT_UNIQUE_CODE = (By.ID, "KsupContractProjectUniqueCode_5dc91e1c-28a9-4156-b785-54fa4257f70d_$TextField")
+    # Уникальный код проекта //input[starts-with(@id,'KsupContractProjectUniqueCode')]
+    PROJECT_UNIQUE_CODE = (By.CSS_SELECTOR, "[id^='KsupContractProjectUniqueCode']")
 
-    # Поле "Связанный проект"
-    PROJECT_ELEMENT = (By.ID, "div-wcfLookupControl_KsupProject")
-    PROJECT_FIND_ELEMENT = (
-        By.CSS_SELECTOR, "span.select2-search.select2-search--dropdown > input.select2-search__field")
-    PROJECT_DROPDOWN_ELEMENT = (By.XPATH, f"//li[normalize-space(.)='project_name']")
+    # Поле "Связанный проект" //div[@id='div-wcfLookupControl_KsupProject']
+    PROJECT_ELEMENT = (By.CSS_SELECTOR, "#div-wcfLookupControl_KsupProject")
+    # //span[contains(@class, 'select2-search')]//input
+    PROJECT_FIND_ELEMENT = (By.CSS_SELECTOR, "[class$='select2-search--dropdown']>input")
+    # //li[normalize-space(.)='project_name']
+    PROJECT_DROPDOWN_ELEMENT = (By.XPATH, "//li[contains(text(), 'project_name')]")
 
     # Поля Плановых платежей
     SUMTABLE = (By.CSS_SELECTOR, ".payplan-summa-field")
     YEARTABLE = (By.CSS_SELECTOR, ".payplan-year-field")
     QUARTERTABLE = (By.CSS_SELECTOR, ".payplan-cell.table__td select")
 
-    # поле для вставки файла Контракт
-    FILE_CONTRACT = (By.XPATH, "//div[@id='File_Contract']/div/input")
-    FILE_CONTRACT_NAME = (By.CLASS_NAME, "fileField_File_Contract_NameLink_")
+    # поле для вставки файла Контракт //div[@id='File_Contract']/div/input
+    FILE_CONTRACT = (By.CSS_SELECTOR, "[id='File_Contract']>div>input")
+    FILE_CONTRACT_NAME = (By.CSS_SELECTOR, "[class='fileField_File_Contract_NameLink_']")
 
-    # Бюджет проекта
-    FILE_BUDGET_OF_PROJECT = (By.XPATH, "//div[@id='File_BudgetOfProject']/div/input")
-    FILE_BUDGET_OF_PROJECT_NAME = (By.CLASS_NAME, "fileField_File_BudgetOfProject_NameLink_")
+    # Бюджет проекта //div[@id='File_BudgetOfProject']/div/input
+    FILE_BUDGET_OF_PROJECT = (By.CSS_SELECTOR, "[id='File_BudgetOfProject']>div>input")
+    FILE_BUDGET_OF_PROJECT_NAME = (By.CSS_SELECTOR, "[class='fileField_File_BudgetOfProject_NameLink_']")
 
-    # Пояснительная служебная записка
-    FILE_EXPLANATORY_MEMORANUM = (By.XPATH, "//div[@id='File_ExplanatoryMemoranum']/div/input")
-    FILE_EXPLANATORY_MEMORANUM_NAME = (By.CLASS_NAME, "fileField_File_ExplanatoryMemoranum_NameLink_")
+    # Пояснительная служебная записка //div[@id='File_ExplanatoryMemoranum']/div/input
+    FILE_EXPLANATORY_MEMORANUM = (By.CSS_SELECTOR, "[id='File_ExplanatoryMemoranum']>div>input")
+    FILE_EXPLANATORY_MEMORANUM_NAME = (By.CSS_SELECTOR, "[class='fileField_File_ExplanatoryMemoranum_NameLink_']")
 
-    # Реестр рисков, Карта рисков
-    FILE_RISK_MAP_AND_REGISTERY = (By.XPATH, "//div[@id='File_RiskMapAndRegistry']/div/input")
-    FILE_RISK_MAP_AND_REGISTERY_NAME = (By.CLASS_NAME, "fileField_File_RiskMapAndRegistry_NameLink_")
+    # Реестр рисков, Карта рисков //div[@id='File_RiskMapAndRegistry']/div/input
+    FILE_RISK_MAP_AND_REGISTERY = (By.CSS_SELECTOR, "[id='File_RiskMapAndRegistry']>div>input")
+    FILE_RISK_MAP_AND_REGISTERY_NAME = (By.CSS_SELECTOR, "[class='fileField_File_RiskMapAndRegistry_NameLink_']")
 
-    # Иное
-    FILE_OTHER = (By.XPATH, "//div[@id='File_Other']/div/input")
-    FILE_OTHER_NAME = (By.CLASS_NAME, "fileField_File_Other_NameLink_")
+    # Иное //div[@id='File_Other']/div/input
+    FILE_OTHER = (By.CSS_SELECTOR, "[id='File_Other']>div>input")
+    FILE_OTHER_NAME = (By.CSS_SELECTOR, "[class='fileField_File_Other_NameLink_']")
 
     # Кнопка создания ДК
-    CONFIRM_CONTRACT_BUTTON = (By.CSS_SELECTOR, '[value="Создать"].ms-ButtonHeightWidth')
+    CONFIRM_CONTRACT_BUTTON = (By.CSS_SELECTOR, "[id*='diidIOSaveItem'][value='Создать']")
 
     # Кнопка подтверждения внесения правок в Связанный проект
     CONFIRM_CHANGE_PROJECT_BUTTON = (By.XPATH, "//input[@value='OK']")
 
     # Кнопка "Отмена" в окне подтверждения внесения правок в Связанный проект
-    CANCEL_CHANGE_PROJECT_BUTTON = (By.XPATH, "xpath=(//input[@value='Отмена'])[3]")
+    CANCEL_CHANGE_PROJECT_BUTTON = (By.XPATH, "//input[@value='Отмена']")
 
 
 class ContractPageLocators:
@@ -716,43 +696,40 @@ class ContractElementLocators:
     TITLE_IN_CONTRACT = (By.CSS_SELECTOR, "#pageTitle")
 
     # Кнопки на риббоне SP
-    SEND_APPROVAL_CONTRACT_ELEMENT = (By.ID, "Ribbon.ListForm.Display.ApprovalGroup-LargeLarge")
-    CONFIRM_SEND_APPROVAL_ELEMENT = (By.XPATH, "//*[@type = 'button' and (text() = 'Отправить')]")
-    CANCEL_SEND_APPROVAL_ELEMENT = (By.XPATH, "//*[@type = 'button' and (text() = 'Отмена')]")
+    # Отправить на согласование //a[starts-with(@id, 'Approve.ToApprove')]
+    SEND_APPROVAL_CONTRACT_CONTRACT = (By.CSS_SELECTOR, "[id^='Approve.ToApprove']")
+    CONFIRM_SEND_APPROVAL_CONTRACT = (By.XPATH, "//button[@type = 'button' and (text() = 'Отправить')]")
+    CANCEL_SEND_APPROVAL_CONTRACT = (By.XPATH, "//button[@type = 'button' and (text() = 'Отмена')]")
+    CONFIRM_REJECT_CONTRACT = (By.XPATH, "//button[@type = 'button' and (text() = 'Отклонить')]")
+    CONFIRM_ESCALATE_CONTRACT = (By.XPATH, "//button[@type = 'button' and (text() = 'Эскалировать')]")
+    CONFIRM_REVISION_CONTRACT = (By.XPATH, "//button[@type = 'button' and (text() = 'Отправить на доработку')]")
 
     # Кнопка согласования и отклонения закупочной процедуры
-    APPROVAL_CONTRACT = (By.ID, "Approve.Approve-Large")
-    REJECT_CONTRACT = (By.ID, "Approve.Reject-Large")
-    ESCALATE_CONTRACT = (By.ID, "Approve.Escalate-Large")
-    REVISION_CONTRACT = (By.ID, "Approve.Revision-Large")
+    APPROVAL_CONTRACT = (By.CSS_SELECTOR, "[id^='Approve.Approve']")
+    REJECT_CONTRACT = (By.CSS_SELECTOR, "[id^='Approve.Reject']")
+    ESCALATE_CONTRACT = (By.CSS_SELECTOR, "[id^='Approve.Escalate']")
+    REVISION_CONTRACT = (By.CSS_SELECTOR, "[id^='Approve.Revision']")
 
     # Элементы на вкладке "Статус Согласования"
     # Вкладка "Статус согласования"
     APPROVAL_HISTORY_CONTRACT_ELEMENT = (By.XPATH, "//a[contains(@href, '#tabApprovingHistory')]")
     # Строка согласование с юридической службой
-    APPROVAL_LEGAL_STATUS_ELEMENT = (
-        By.XPATH,
-        "(.//*[normalize-space(text()) and normalize-space(.)='Согласование юридической службой'])[1]/following::span[1]")
+    APPROVAL_LEGAL_STATUS_ELEMENT = (By.XPATH, "//*[text() ='Согласование юридической службой']/following::span[1]")
     # Строка согласование с бухгалтерией
-    APPROVAL_COUNT_STATUS_ELEMENT = (
-        By.XPATH,
-        "(.//*[normalize-space(text()) and normalize-space(.)='Согласование бухгалтерией'])[1]/following::span[1]")
+    APPROVAL_COUNT_STATUS_ELEMENT = (By.XPATH, "//*[text() ='Согласование бухгалтерией']/following::span[1]")
     # Строка согласование с финансовой службой
-    APPROVAL_FIN_STATUS_ELEMENT = (
-        By.XPATH,
-        "(.//*[normalize-space(text()) and normalize-space(.)='Согласование финансовой службой'])[1]/following::span[1]")
+    APPROVAL_FIN_STATUS_ELEMENT = (By.XPATH, "//*[text() ='Согласование финансовой службой']/following::span[1]")
     # Строка согласование с УДПР ПО
-    APPROVAL_UDPRPO_STATUS_ELEMENT = (
-        By.XPATH, "(.//*[normalize-space(text()) and normalize-space(.)='Согласование УДПР ПО'])[1]/following::span[1]")
+    APPROVAL_UDPRPO_STATUS_ELEMENT = (By.XPATH, "//*[text() ='Согласование УДПР ПО']/following::span[1]")
     # Строка согласование с ККП
-    APPROVAL_KKP_STATUS_ELEMENT = (
-        By.XPATH, "(.//*[normalize-space(text()) and normalize-space(.)='Согласование ККП'])[1]/following::span[1]")
+    APPROVAL_KKP_STATUS_ELEMENT = (By.XPATH, "//*[text() ='Согласование ККП']/following::span[1]")
 
-    # Элементы внутри окна подтверждения/отклонения
-    COMMENT_TO_APPROVAL_CONTRACT = (By.XPATH, "//textarea[@id='dialogComment']")
-    FILE_TO_APPROVAL_CONTRACT = (By.XPATH, "//input[@name='filefield']")
-    CONFIRM_APPROVAL_CONTRACT = (By.XPATH, "(//button[@type='button'])[10]")
-    CANCEL_APPROVAL_CONTRACT = (By.XPATH, "(//button[@type='button'])[9]")
+    # Элементы внутри окна подтверждения/отклонения //textarea[@id='dialogComment']
+    COMMENT_TO_APPROVAL_CONTRACT = (By.CSS_SELECTOR, "[id='dialogComment']")
+    # Прикрепление файла  //input[@name='filefield']
+    FILE_TO_APPROVAL_CONTRACT = (By.CSS_SELECTOR, "[name='filefield']")
+    CONFIRM_APPROVAL_CONTRACT = (By.XPATH, "//button[@type = 'button' and (text() = 'Согласовать')]")
+    CANCEL_APPROVAL_CONTRACT = (By.XPATH, "//button[@type = 'button' and (text() = 'Отмена')]")
     ClOSE_ALLERT_CONTRACT = (By.CSS_SELECTOR, "#dlgTitleBtns")
 
     # Элементы на вкладке "Общие сведения"
@@ -865,40 +842,31 @@ class KnowledgeSearchLocators:
     NAMES_OF_ALL_FOUND_ELEMENT = (By.CSS_SELECTOR, ".search-result__title h2")
 
     # Значение в поле "Заказчик"
-    CUSTOMER_VALUE_IN_RESULT = (
-        By.XPATH, "(.//*[normalize-space(text()) and normalize-space(.)='Заказчик'])/following::p[1]")
+    CUSTOMER_VALUE_IN_RESULT = (By.XPATH, "//*[text() ='Заказчик']/following::p[1]")
 
     # Значение в поле "Подразделение"
-    PERFORMER_VALUE_IN_RESULT = (
-        By.XPATH, "(.//*[normalize-space(text()) and normalize-space(.)='Подразделение'])/following::p[1]")
+    PERFORMER_VALUE_IN_RESULT = (By.XPATH, "//*[text() ='Подразделение']/following::p[1]")
 
-    TECHNOLOGIES_VALUE_IN_RESULT = (
-        By.XPATH, "(.//*[normalize-space(text()) and normalize-space(.)='Технологии'])/following::p[1]")
+    TECHNOLOGIES_VALUE_IN_RESULT = (By.XPATH, "//*[text() ='Технологии']/following::p[1]")
 
     # Значения в карточке "Договор(контракт)" (множественный результат)
     # Значение в поле "Исполнитель"
-    LEGAL_VALUE_IN_RESULT = (
-        By.XPATH, "(.//*[normalize-space(text()) and normalize-space(.)='Исполнитель'])/following::p[1]")
+    LEGAL_VALUE_IN_RESULT = (By.XPATH, "//*[text() ='Исполнитель']/following::p[1]")
 
     # Значение в поле "Сумма контракта (руб.)"
-    SUM_VALUE_IN_RESULT = (
-        By.XPATH, "(.//*[normalize-space(text()) and normalize-space(.)='Сумма контракта (руб.)'])/following::p[1]")
+    SUM_VALUE_IN_RESULT = (By.XPATH, "//*[text() ='Сумма контракта (руб.)']/following::p[1]")
 
     # Значение в поле "Тип работ и услуг"
-    TYPE_WORKS_VALUE_IN_RESULT = (
-        By.XPATH, "(.//*[normalize-space(text()) and normalize-space(.)='Тип работ и услуг'])/following::p[1]")
+    TYPE_WORKS_VALUE_IN_RESULT = (By.XPATH, "//*[text() ='Тип работ и услуг']/following::p[1]")
 
     # Значение в поле "Дата заключения"
-    START_DATE_VALUE_IN_RESULT = (
-        By.XPATH, "(.//*[normalize-space(text()) and normalize-space(.)='Дата заключения'])/following::p[1]")
+    START_DATE_VALUE_IN_RESULT = (By.XPATH, "//*[text() ='Дата заключения']/following::p[1]")
 
     # Значение в поле "Дата завершения"
-    END_DATE_VALUE_IN_RESULT = (
-        By.XPATH, "(.//*[normalize-space(text()) and normalize-space(.)='Дата завершения'])/following::p[1]")
+    END_DATE_VALUE_IN_RESULT = (By.XPATH, "//*[text() ='Дата завершения']/following::p[1]")
 
     # Значение в поле "Номер контракта"
-    CONTRACT_NUMBER_VALE_IN_RESULT = (
-        By.XPATH, "(.//*[normalize-space(text()) and normalize-space(.)='Номер контракта'])/following::p[1]")
+    CONTRACT_NUMBER_VALE_IN_RESULT = (By.XPATH, "//*[text() ='Номер контракта']/following::p[1]")
 
     # Кнопка "загрузить еще" в результатах поиска
     LOAD_MORE_BUTTON = (By.XPATH, "//a[contains(text(),'Загрузить еще')]")
@@ -916,134 +884,106 @@ class ProjectPageLocators:
 
 
 class FormCreateProjectLocators:
-    # Название проекта
-    NAME_PROJECT_ELEMENT = (By.ID, "KsupProjectFullName_6da07182-599d-48a1-9a8f-2c8b53a37767_$TextField")
+    # Название проекта //textarea[starts-with(@id, 'KsupProjectFullName')]
+    NAME_PROJECT_ELEMENT = (By.CSS_SELECTOR, "[id^='KsupProjectFullName']")
 
-    # Ссылка на закупку на Официальном сайте ЕИС
-    EIS_PURCHSE_LINK_CONTRACT = (By.ID, "KsupLinkPurchase_fc1dd9f8-1072-4ff2-84a9-9d508615913d_$TextField")
+    # Ссылка на закупку на Официальном сайте ЕИС //textarea[starts-with(@id, 'KsupLinkPurchase')]
+    EIS_PURCHSE_LINK_CONTRACT = (By.CSS_SELECTOR, "[id^='KsupLinkPurchase']")
 
-    # Заказчик
-    CUSTOMER_ELEMENT = (By.XPATH, "//div[@id='div-wcfLookupControl_KsupEgr_Customers']/span/span/span")
-    CUSTOMER_DROPDOWN_ELEMENT = (By.XPATH, f"//li[contains(text(), 'customer_name')]")
+    # Заказчик //div[@id='div-wcfLookupControl_KsupEgr_Customers']/span/span/span
+    CUSTOMER_ELEMENT = (By.CSS_SELECTOR, "#div-wcfLookupControl_KsupEgr_Customers")
+    CUSTOMER_DROPDOWN_ELEMENT = (By.XPATH, "//li[contains(text(), 'customer_name')]")
 
     # Кнопка "Поиск допустимого варианта" у поля "Отрасль"
-    SEARCH_INDUSTRY_ELEMENT = (By.CSS_SELECTOR, r"#KsupIndustry_\$container .ms-taxonomy-browser-button")
-    # Элемент внутри списка "Отрасль"
-    INDUSTRY_ELEMENT = (By.XPATH, f"//*[normalize-space(text()) and normalize-space(.)='industry_name']")
-
-    # Кнопка прокрутки вниз
-    SCROLL_DOWN_BUTTON_INDUSTRY = (By.ID, "PGD_1")
-
-    # Кнопка "Выбор" в окне "Отрасль"
-    CHOICE_IFRAME_BUTTON = (By.ID, "ctl00_PlaceHolderDialogBodySection_PlaceHolderDialogBodyFooterMainSection_AddToFieldEditor")
-    # Кнопка "Ок" в окне "Отрасль"
-    CONFIRM_IFRAME_BUTTON = (By.XPATH, "//*[@type = 'button' and @value = 'ОК']")
+    # //div[contains(@id,'KsupIndustry')]/img[@class='ms-taxonomy-browser-button']
+    SEARCH_INDUSTRY_ELEMENT = (By.CSS_SELECTOR, "[id^='KsupIndustry']>[class='ms-taxonomy-browser-button']")
 
     # Кнопка поиск допустимого варианта в категории "Тип работ и услуг"
-    SEARCH_TYPE_AND_SERVICES_ELEMENT = (
-        By.CSS_SELECTOR, r"#KsupWorkServicesTypeMetadata_\$containercontrolHolder .ms-taxonomy-browser-button")
-
-    # Элементы во фрейме "Тип работ и услуг"
-    # Группы категорий
-    GROUP_CATEGORY_ELEMENT1 = (By.ID, "TIE_3")
-    GROUP_CATEGORY_ELEMENT2 = (By.ID, "TIE_4")
-    GROUP_CATEGORY_ELEMENT3 = (By.ID, "TIE_5")
-    GROUP_CATEGORY_ELEMENT4 = (By.ID, "TIE_6")
-    GROUP_CATEGORY_ELEMENT5 = (By.ID, "TIE_7")
-
-    # Кнопка прокрутки вниз у категории Программное обеспечение
-    SCROLL_DOWN_BUTTON = (By.ID, "PGD_6")
-
-    # Элемент внутри списка "Отрасль"
-    WORK_AND_SERVICIES_ELEMENT = (By.XPATH, f"//*[normalize-space(text()) and normalize-space(.)='work_and_services_name']")
-
+    # //div[contains(@id,'KsupWorkServicesType')]/img[@class='ms-taxonomy-browser-button']
+    SEARCH_TYPE_AND_SERVICES_ELEMENT = (By.CSS_SELECTOR, "[id^='KsupWorkServicesType']>[class='ms-taxonomy-browser-button']")
     # Строка "Тип работ и услуг"
-    TYPE_WORK_SERVICES_ELEMENT = (By.ID, "KsupWorkServicesTypeMetadata_$containereditableRegion")
+    TYPE_WORK_SERVICES_ELEMENT = (By.CSS_SELECTOR, "[id^='KsupWorkServicesType'][class*='ms-taxonomy-writeableregion']")
 
-    # Исполнитель (юридическое лицо)
-    EXECUTIVE_UNIT_LEGAL_PROJECT_ELEMENT = (By.XPATH, "//div[@id='div-wcfLookupControl_KsupEgr_PerformerLegal']/span/span/span")
-    EXECUTIVE_UNIT_LEGAL_DROPDOWN_PROJECT_ELEMENT = (By.XPATH, f"//li[contains(text(), 'executiveUnitLegal_name')]")
+    # Исполнитель (юридическое лицо) //div[@id='div-wcfLookupControl_KsupEgr_PerformerLegal']/span/span/span
+    EXECUTIVE_UNIT_LEGAL_PROJECT_ELEMENT = (By.CSS_SELECTOR, "#div-wcfLookupControl_KsupEgr_PerformerLegal")
+    EXECUTIVE_UNIT_LEGAL_DROPDOWN_PROJECT_ELEMENT = (By.XPATH, "//li[contains(text(), 'executiveUnitLegal_name')]")
 
-    # Подразделение-исполнитель
-    EXECUTIVE_UNIT_PROJECT_ELEMENT = (By.XPATH, "//div[@id='div-wcfLookupControl_KsupPerformerDivision']/span/span/span")
-    EXECUTIVE_UNIT_PROJECT_DROPDOWN_ELEMENT = (By.XPATH, f"//li[normalize-space(.)='executiveUnit_name']")
+    # Подразделение-исполнитель //div[@id='div-wcfLookupControl_KsupPerformerDivision']/span/span/span
+    EXECUTIVE_UNIT_PROJECT_ELEMENT = (By.CSS_SELECTOR, "#div-wcfLookupControl_KsupPerformerDivision")
+    # //li[normalize-space(.)='executiveUnit_name']
+    EXECUTIVE_UNIT_PROJECT_DROPDOWN_ELEMENT = (By.XPATH, "//li[contains(text(), 'executiveUnit_name')]")
 
-    # Cоисполнители
-    SALES_UNIT_ELEMENT = (By.XPATH, "//div[@id='div-wcfLookupControl_KsupPerformerDivisions']/span/span/span")
-    SALES_UNIT_DROPDOWN_ELEMENT = (By.XPATH, f"//li[normalize-space(.)='salesUnit_name']")
+    # Cоисполнители //div[@id='div-wcfLookupControl_KsupPerformerDivisions']/span/span/span
+    SALES_UNIT_ELEMENT = (By.CSS_SELECTOR, "#div-wcfLookupControl_KsupPerformerDivisions")
+    # //li[normalize-space(.)='salesUnit_name']
+    SALES_UNIT_DROPDOWN_ELEMENT = (By.XPATH, "//li[contains(text(), 'salesUnit_name')]")
 
-    PROJECT_STAGE_ELEMENT = (By.CSS_SELECTOR, r"#KsupProjectStage_0773d15c-11ee-448d-8e22-c4ae0f3c39b8_\$DropDownChoice")
+    # Стадия проекта //select[starts-with(@id, 'KsupProjectStage')]
+    PROJECT_STAGE_ELEMENT = (By.CSS_SELECTOR, "[id^='KsupProjectStage']")
 
-    # Связанный договор/контракт
-    CONTRACTS_ELEMENT = (By.XPATH, "//div[@id='div-wcfLookupControl_KsupContracts']/span/span/span")
+    # Связанный договор/контракт //div[@id='div-wcfLookupControl_KsupContracts']/span/span/span
+    CONTRACTS_ELEMENT = (By.CSS_SELECTOR, "#div-wcfLookupControl_KsupContracts")
     CONTRACTS_DROPDOWN_ELEMENT = (By.XPATH, "//li[normalize-space(.)='contract_name']")
 
-    # Срок начала
-    START_DATE_ELEMENT = (By.CSS_SELECTOR, r"#KsupStartDatePlan_8a09abb1-cbf6-4bc5-a68d-6a6c088dbb60_\$DateTimeFieldDate")
+    # Срок начала //input[starts-with(@id, 'KsupStartDatePlan')]
+    START_DATE_ELEMENT = (By.CSS_SELECTOR, "[id^='KsupStartDatePlan'][class='ms-input']")
 
     # Кнопка "Поиск допустимого варианта" у поля "Вендоры"
-    SEARCH_VENDORS_ELEMENT = (By.CSS_SELECTOR, r"#KsupVendors_\$container .ms-taxonomy-browser-button")
-
-    # Элемент Вендор в модульном окне "Вендоры"
-    VENDOR_ELEMENT = (By.XPATH, f"//*[normalize-space(text()) and normalize-space(.)='vendor_name']")
+    # //div[contains(@id,'KsupVendors')]/img[@class='ms-taxonomy-browser-button']
+    SEARCH_VENDORS_BUTTON = (By.CSS_SELECTOR, "[id^='KsupVendors']>[class='ms-taxonomy-browser-button']")
 
     # Кнопка "Поиск допустимого варианта" у поля "Теги"
-    SEARCH_TAGS_ELEMENT = (By.CSS_SELECTOR, r"#KsupTag_\$container .ms-taxonomy-browser-button")
+    # //div[contains(@id,'KsupTag')]/img[@class='ms-taxonomy-browser-button']
+    SEARCH_TAGS_BUTTON = (By.CSS_SELECTOR, "[id^='KsupTag']>[class='ms-taxonomy-browser-button']")
 
-    # Элемент Тег в модульном окне "Теги"
-    TAG_ELEMENT = (By.XPATH, f"//*[normalize-space(text()) and normalize-space(.)='tag_name']")
+    # Менеджеры проекта //div[@id='div-wcfLookupControl_KsupSellers']/span/span/span
+    SALES_MANAGER_ELEMENT = (By.CSS_SELECTOR, "#div-wcfLookupControl_KsupSellers")
+    # //li[normalize-space(.)='manager_name']
+    SALES_MANAGER_DROPDOWN_ELEMENT = (By.XPATH, "//li[contains(text(), 'manager_name')]")
 
-    # Менеджеры проекта
-    SALES_MANAGER_ELEMENT = (By.XPATH, "//div[@id='div-wcfLookupControl_KsupSellers']/span/span/span")
-    SALES_MANAGER_DROPDOWN_ELEMENT = (By.XPATH, "//li[normalize-space(.)='manager_name']")
-
-    # Контактное лицо от ЛАНИТ
-    RP_LANIT_ELEMENT = (By.CSS_SELECTOR, r"#KsupRpLanit_c9f28b10-e6a1-4b8e-b4b0-f5dc0565045e_\$ClientPeoplePicker_EditorInput")
+    # Контактное лицо от ЛАНИТ #KsupRpLanit_c9f28b10-e6a1-4b8e-b4b0-f5dc0565045e_\$ClientPeoplePicker_EditorInput
+    RP_LANIT_ELEMENT = (By.CSS_SELECTOR, "[id^='KsupRpLanit'][class*='editorInput']")
     RP_LANIT_DROPDOWN_ELEMENT = (By.XPATH, "//*[(text() = 'name' or . = 'name')]")
 
-    # Дата реализации
-    END_DATE_ELEMENT = (By.CSS_SELECTOR, r"#KsupDuePlan_1b0a9fb3-7a1a-4039-b25f-d2764f2f5d21_\$DateTimeFieldDate")
+    # Дата реализации //input[starts-with(@id, 'KsupDuePlan')]
+    END_DATE_ELEMENT = (By.CSS_SELECTOR, "[id^='KsupDuePlan'][class='ms-input']")
 
-    # Сумма по всем договорам/контрактам
-    SUM_ELEMENT = (By.ID, "KsupPrice_x0421_ategory_1fd6a848-0f56-4ba2-85d2-6a40f0086b05_$DropDownChoice")
+    # Сумма по всем договорам/контрактам //select[starts-with(@id, 'KsupPrice')]
+    SUM_ELEMENT = (By.CSS_SELECTOR, "[id^='KsupPrice']")
 
-    # Кнопка "Поиск допустимого варианта" у поля "Территория применения"
-    SEARCH_TERRITORY_ELEMENT = (By.CSS_SELECTOR, r"#KsupApplicationTerritory_\$containercontrolHolder .ms-taxonomy-browser-button")
+    # Кнопка поиск вариантов у поля "Территория применения"
+    # //div[contains(@id,'KsupApplicationTerritory')]/img[@class='ms-taxonomy-browser-button']
+    SEARCH_TERRITORY_ELEMENT = (By.CSS_SELECTOR, "[id^='KsupApplicationTerritory']>[class='ms-taxonomy-browser-button']")
 
-    # Группа территорий во фрейме
-    GROUP_TERRITORY_ELEMENT = (By.ID, "TIE_3")
-
-    # Элемент территории
-    TERRITORY_ELEMENT = (By.XPATH, f"//*[normalize-space(text()) and normalize-space(.)='territory_name']")
-
-    SCROLL_DOWN_BUTTON_TERRITORY = (By.ID, "PGD_3")
+    # Строка Территория применения
+    # //div[contains(@id,'KsupApplicationTerritory') and contains(@class,'ms-taxonomy-writeableregion')]
+    TYPE_TERRITORY_ELEMENT = (By.CSS_SELECTOR, "[id^='KsupApplicationTerritory'][class*='ms-taxonomy-writeableregion']")
 
     # Кнопка поиск вариантов у поля "Технологии"
-    SEARCH_TECHNOLOGIES_ELEMENT = (
-        By.CSS_SELECTOR, r"#KsupTechnology_\$container .ms-taxonomy-browser-button")
+    # //div[contains(@id,'KsupTechnology')]/img[@class='ms-taxonomy-browser-button']
+    SEARCH_TECHNOLOGIES_ELEMENT = (By.CSS_SELECTOR, "[id^='KsupTechnology']>[class='ms-taxonomy-browser-button']")
 
-    # Кнопка прокрутки в технологиях
-    SCROLL_DOWN_BUTTON_TECHNOLOGIES = (By.ID, "PGD_1")
+    # Строка Ключевые технологии
+    # //div[contains(@id,'KsupTechnology') and contains(@class,'ms-taxonomy-writeableregion')]
+    TYPE_TECHNOLOGIES_ELEMENT = (By.CSS_SELECTOR, "[id^='KsupTechnology'][class*='ms-taxonomy-writeableregion']")
 
-    # Выбор технологии
-    TECHNOLOGIES_ELEMENT = (By.XPATH, f"//*[normalize-space(text()) and normalize-space(.)='technologies_name']")
+    # Категория //select[starts-with(@id, 'KsupProjectCategory')]
+    PROJECT_CATEGORY_ELEMENT = (By.CSS_SELECTOR, "[id^='KsupProjectCategory']")
 
-    # Категория
-    PROJECT_CATEGORY_ELEMENT = (By.ID, "KsupProjectCategory_038d97ca-e862-46ce-b363-1d12156b4749_$DropDownChoice")
+    # Цели и задачи //textarea[starts-with(@id, 'KsupServices')]
+    DESCRIPTION_TEXT_ELEMENT = (By.CSS_SELECTOR, "textarea[id^='KsupServices']")
 
-    # Цели и задачи
-    DESCRIPTION_TEXT_ELEMENT = (By.ID, "KsupServices_561cef35-9fbc-464d-9cd9-d8902e9b8934_$TextField")
+    # Ожидаемые результаты проекта //textarea[starts-with(@id, 'KsupProjectResult')]
+    PROJECT_RESULT_ELEMENT = (By.CSS_SELECTOR, "textarea[id^='KsupProjectResult']")
 
-    # Ожидаемые результаты проекта
-    PROJECT_RESULT_ELEMENT = (By.ID, "KsupProjectResult_656ba0b0-3427-4901-9742-7ddf9d1f350b_$TextField")
+    # Информация о заинтересованности //textarea[starts-with(@id, 'KsupInterestInformation')]
+    INTEREST_INFORMATION_ELEMENT = (By.CSS_SELECTOR, "textarea[id^='KsupInterestInformation']")
 
-    # Информация о заинтересованности
-    INTEREST_INFORMATION_ELEMENT = (By.ID, "KsupInterestInformation_bac54c15-b35d-424d-b924-2f64b0a1ddca_$TextField")
+    # Описание //textarea[starts-with(@id, 'KsupDescription')]
+    DESCRIPTION_ELEMENT = (By.CSS_SELECTOR, "textarea[id^='KsupDescription']")
 
-    # Описание
-    DESCRIPTION_ELEMENT = (By.ID, "KsupDescription_4d5ebadf-de91-444a-9272-6483acf5c3a0_$TextField")
-
-    CONFIRM_PROJECT_BUTTON = (By.XPATH, "//*[@type = 'submit' and @value = 'Сохранить']")
+    # Кнопка "Сохранить"(создать проект) //*[@type = 'submit' and @value = 'Сохранить']
+    CONFIRM_PROJECT_BUTTON = (By.CSS_SELECTOR, "[id$='RptControls_btnOK']")
 
 
 class ProjectElementLocators:

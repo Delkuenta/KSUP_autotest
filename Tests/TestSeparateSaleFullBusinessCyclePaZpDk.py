@@ -161,7 +161,7 @@ class TestSeparateSaleFullBusinessCyclePaZpDk:
         presale_element_page = PresaleElementPage(browser_function, browser_function.current_url)
         presale_element_page.go_to_create_zp_based_on_presale(user_data_dict)
         zakup_form_create_page = ZakupFormCreate(browser_function, browser_function.current_url)
-        zakup_form_create_page.form_create_zakup_all_type(user_data_dict)
+        zakup_form_create_page.form_create_zakup_all_type_based_on_presale(user_data_dict)
         zakup_list_page = ZakupListPage(browser_function, browser_function.current_url)
         zakup_list_page.should_be_element_on_zakup_list(user_data_dict)
         zakup_list_page.go_to_zakup_element(user_data_dict)

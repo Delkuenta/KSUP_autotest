@@ -9,50 +9,34 @@ import delayed_assert
 class PresaleFormCreate(BasePage):
     # Форма создания пресейла
     def form_create_presale_all_type(self, user_data_dict):
-        time.sleep(3)
-        """
-        if user_data_dict["separateSale"] == "Да":
-            # Ждем загрузки страницы по последнему загружаемому объекту
-            # Если это Самостоятельная продажа, то смотрим в поле "Ответственный менеджер подразделения-продавца"
-            # значение из переменной "salesManager"
-            self.is_text_to_be_present_in_element(*FormCreatePresaleLocators.SALES_MANAGER_ELEMENT,
-                                                  user_data_dict["salesManager"])
-        else:
-            # Ждем загрузки страницы по последнему загружаемому объекту
-            # Если это НЕ самостоятельная продажа, то смотрим в поле "Ответственный менеджер подразделения-продавца"
-            # значение из переменной "executiveManager" так как в поле "salesManager"
-            if user_data_dict["createAccount"] == "Mr_KSUP_Seller":
-                self.is_text_to_be_present_in_element(*FormCreatePresaleLocators.SALES_MANAGER_ELEMENT,
-                                                      user_data_dict["executiveManager"])
-            else:
-                if user_data_dict["createAccount"] == "Mr_KSUP_Seller2":
-                    self.is_text_to_be_present_in_element(*FormCreatePresaleLocators.SALES_MANAGER_ELEMENT,
-                                                          user_data_dict["salesManager"])
-        """
+        time.sleep(2)
+
         # Проверяем предзаполнение полей:
         # "Ответственный менеджер подразделения-продавца" и "Ответственный менеджер подразделения-исполнителя" для УЗ продавца
         if user_data_dict["createAccount"] == "Mr_KSUP_Seller":
-            check.equal(self.is_element_text(*FormCreatePresaleLocators.SALES_MANAGER_ELEMENT_VALUE),
-                        user_data_dict["executiveManager"],
-                        f'Для роли {user_data_dict["createAccount"]} '
-                        f'поле "Ответственный менеджер подразделения-продавца" '
-                        f'должно быть предзаполненно значением: "{user_data_dict["executiveManager"]}"')
-            check.equal(self.is_element_text(*FormCreatePresaleLocators.EXECUTIVE_MANAGER_ELEMENT_VALUE),
-                        user_data_dict["executiveManager"],
-                        f'Для роли {user_data_dict["createAccount"]} '
-                        f'поле "Ответственный менеджер подразделения-исполнителя" '
-                        f'должно быть предзаполненно значением: "{user_data_dict["executiveManager"]}"')
+            delayed_assert.expect(self.is_element_text(*FormCreatePresaleLocators.SALES_MANAGER_ELEMENT_VALUE) ==
+                                  user_data_dict["executiveManager"],
+                                  f'Для роли {user_data_dict["createAccount"]} '
+                                  f'поле "Ответственный менеджер подразделения-продавца" '
+                                  f'должно быть предзаполненно значением: "{user_data_dict["executiveManager"]}"')
+            # Баг https://jira.lanit.ru/browse/KSUP-1041
+            delayed_assert.expect(self.is_element_text(*FormCreatePresaleLocators.EXECUTIVE_MANAGER_ELEMENT_VALUE) ==
+                                  user_data_dict["executiveManager"],
+                                  f'Для роли {user_data_dict["createAccount"]} '
+                                  f'поле "Ответственный менеджер подразделения-исполнителя" '
+                                  f'должно быть предзаполненно значением: "{user_data_dict["executiveManager"]}"')
         elif user_data_dict["createAccount"] == "Mr_KSUP_Seller2":
-            check.equal(self.is_element_text(*FormCreatePresaleLocators.SALES_MANAGER_ELEMENT_VALUE),
-                        user_data_dict["salesManager"],
-                        f'Для роли {user_data_dict["createAccount"]} '
-                        f'поле "Ответственный менеджер подразделения-продавца" '
-                        f'должно быть предзаполненно значением: "{user_data_dict["salesManager"]}"')
-            check.equal(self.is_element_text(*FormCreatePresaleLocators.EXECUTIVE_MANAGER_ELEMENT_VALUE),
-                        user_data_dict["salesManager"],
-                        f'Для роли {user_data_dict["createAccount"]} '
-                        f'поле "Ответственный менеджер подразделения-исполнителя" '
-                        f'должно быть предзаполненно значением: "{user_data_dict["salesManager"]}"')
+            delayed_assert.expect(self.is_element_text(*FormCreatePresaleLocators.SALES_MANAGER_ELEMENT_VALUE) ==
+                                  user_data_dict["salesManager"],
+                                  f'Для роли {user_data_dict["createAccount"]} '
+                                  f'поле "Ответственный менеджер подразделения-продавца" '
+                                  f'должно быть предзаполненно значением: "{user_data_dict["salesManager"]}"')
+            # Баг https://jira.lanit.ru/browse/KSUP-1041
+            delayed_assert.expect(self.is_element_text(*FormCreatePresaleLocators.EXECUTIVE_MANAGER_ELEMENT_VALUE) ==
+                                  user_data_dict["salesManager"],
+                                  f'Для роли {user_data_dict["createAccount"]} '
+                                  f'поле "Ответственный менеджер подразделения-исполнителя" '
+                                  f'должно быть предзаполненно значением: "{user_data_dict["salesManager"]}"')
 
         # Ищем поле "Предмет контракта" и заполняем
         self.browser.find_element(*FormCreatePresaleLocators.NAME_PRESALE_ELEMENT).send_keys(
@@ -124,8 +108,8 @@ class PresaleFormCreate(BasePage):
         if user_data_dict["contractorType"] == "Тендерная заявка" \
                 or user_data_dict["contractorType"] == "Запрос цен товаров, работ, услуг":
             assert self.is_visibility_of_element_located(*FormCreatePresaleLocators.SALE_LAW_TYPE_ELEMENT, 3), \
-                "Ошибка: При выбранном способе определения поставщика не отображено поле Порядок проведения " \
-                "закупочной процедуры "
+                f'Ошибка: При выбранном способе определения поставщика: {user_data_dict["contractorType"]} ' \
+                f'не отображено поле: "Порядок проведения закупочной процедуры"'
 
             # Ищем поле "Порядок проведения закупочной процедуры" и выбираем значение из выпадающего списка
             sale_law_type_element = Select(
@@ -134,8 +118,9 @@ class PresaleFormCreate(BasePage):
 
         if user_data_dict["contractorType"] == "Коммерческое предложение" \
                 or user_data_dict["contractorType"] == "Информация отсутствует":
-            assert self.is_visibility_of_element_located(*FormCreatePresaleLocators.SALE_LAW_TYPE_ELEMENT, 3) is False, \
-                "Ошибка: При выбранном Способе определения поставщика поле Порядок проведения закупочной процедуры не должно отображаться"
+            assert self.browser.find_element(*FormCreatePresaleLocators.SALE_LAW_TYPE_ELEMENT).is_displayed() is False, \
+                f'Ошибка: При выбранном Способе определения поставщика: {user_data_dict["contractorType"]} ' \
+                f'поле "Порядок проведения закупочной" процедуры не должно отображаться'
 
         # Ищем кнопку "Тип работ и услуг"
         self.browser.find_element(*FormCreatePresaleLocators.SEARCH_VALID_OPTION_ELEMENT).click()
@@ -239,13 +224,27 @@ class PresaleFormCreate(BasePage):
             if user_data_dict["separateSale"] == "Нет":
                 self.browser.switch_to.alert.accept()
                 self.browser.switch_to.frame(self.browser.find_element(*FormCreatePresaleLocators.iframe))
-                self.browser.find_element(*FormCreatePresaleLocators.APPROVAL_DEPARTMENT_ELEMENT).click()
                 if user_data_dict["createAccount"] == "Mr_KSUP_Seller" or \
                         user_data_dict["createAccount"] == "Mr_KSUP_Dir":
+
+                    # Проверяем предзаполнение поля "Подразделение"
+                    delayed_assert.expect(
+                        self.is_element_text(*FormCreatePresaleLocators.APPROVAL_DEPARTMENT_ELEMENT) == user_data_dict[
+                            "salesUnit"],
+                        f'При отправке на согласование под ролью {user_data_dict["createAccount"]} '
+                        f'поле "Подразделение" должно предзаполняться значением из поля "Подразделение-продавец"')
+                    self.browser.find_element(*FormCreatePresaleLocators.APPROVAL_DEPARTMENT_ELEMENT).click()
                     how, what = FormCreatePresaleLocators.SALES_UNIT_DROPDOWN_ELEMENT
                     what = what.replace("salesUnit_name", user_data_dict["salesUnit"])
                     self.browser.find_element(how, what).click()
                 else:
+                    # Проверяем предзаполнение поля "Подразделение"
+                    delayed_assert.expect(
+                        self.is_element_text(*FormCreatePresaleLocators.APPROVAL_DEPARTMENT_ELEMENT) == user_data_dict[
+                            "executiveUnit"],
+                        f'При отправке на согласование под ролью {user_data_dict["createAccount"]} '
+                        f'поле "Подразделение" должно предзаполняться значением из поля "Подразделение-исполнитель"')
+                    self.browser.find_element(*FormCreatePresaleLocators.APPROVAL_DEPARTMENT_ELEMENT).click()
                     how, what = FormCreatePresaleLocators.EXECUTIVE_UNIT_DROPDOWN_ELEMENT
                     what = what.replace("executiveUnit_name", user_data_dict["executiveUnit"])
                     self.browser.find_element(how, what).click()

@@ -73,12 +73,13 @@ class ProjectFormCreate(BasePage):
 
         # Выбираем значение в поле "Вендоры"
         if len(user_data_dict["vendors"]) > 0:
-            self.browser.find_element(*FormCreateProjectLocators.SEARCH_VENDORS_ELEMENT).click()
-            self.select_elements_in_frame(user_data_dict["vendors"], 10)
+            self.browser.find_element(*FormCreateProjectLocators.SEARCH_VENDORS_BUTTON).click()
+            time.sleep(2)
+            self.select_elements_in_frame(user_data_dict["vendors"], 3)
 
         # Выбираем значение в поле "Теги"
         if len(user_data_dict["tags"]) > 0:
-            self.browser.find_element(*FormCreateProjectLocators.SEARCH_TAGS_ELEMENT).click()
+            self.browser.find_element(*FormCreateProjectLocators.SEARCH_TAGS_BUTTON).click()
             time.sleep(2)
             self.select_elements_in_frame(user_data_dict["tags"], 1)
 
@@ -136,12 +137,11 @@ class ProjectFormCreate(BasePage):
         if len(user_data_dict["description"]) > 0:
             self.browser.find_element(*FormCreateProjectLocators.DESCRIPTION_ELEMENT).send_keys(
                 user_data_dict["description"])
-        breakpoint()
         # Жмем кнопку "Создать"
         self.browser.find_element(*FormCreateProjectLocators.CONFIRM_PROJECT_BUTTON).click()
 
         # Ждем пока исчезнет надпись "Мы работаем над этим"
-        time.sleep(5)
+        time.sleep(10)
 
 
 

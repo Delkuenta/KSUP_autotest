@@ -11,7 +11,7 @@ from pages.project_list_page import ProjectPage
 # 1_[Atest_Dir] Project, categoryA, softwareDev.json
 
 @pytest.mark.parametrize('path_data_file',
-                         [r"TPAC\Project\2_[Atest_Dir] Project_required fields, categoryA, softwareDev.json"])
+                         [r"TPAC\Project\1_[Atest_Dir] Project, categoryA, softwareDev.json"])
 class TestProject:
 
     def test_create_project(self, browser_function, path_data_file):
