@@ -13,7 +13,7 @@ from pages.project_element_page import ProjectElementPage
 from pages.project_list_page import ProjectPage
 
 project_path_file = r"TPAC\KnowledgeElementSearch\2[Atest_Seller] Project, categoryA, softwareDev.json"
-contract_path_file = r"TPAC\KnowledgeElementSearch\1[Atest_Seller] DK, categoryA, softwareDev_new.json"
+contract_path_file = r"TPAC\KnowledgeElementSearch\1[Atest_Seller] DK, categoryA, softwareDev.json"
 
 
 class TestCreateElementBeforeTests:

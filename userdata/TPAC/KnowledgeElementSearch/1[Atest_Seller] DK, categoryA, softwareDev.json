@@ -1,8 +1,8 @@
 {
 	"main_data": {
-        "fullName": "Информационная система отчетности 2020",
+        "fullName": "[Атест]ДК для поиска в БЗ, категория А, РазработкаПО",
         "contractorType": "",
-        "customer": ["КАЗНАЧЕЙСТВО РОССИИ"],
+        "customer": "КАЗНАЧЕЙСТВО РОССИИ",
         "salesUnit": "Департамент корпоративных систем",
         "salesManager": "Батарова Татьяна Андреевна",
         "executiveUnit": "Департамент корпоративных систем",
@@ -22,7 +22,7 @@
         "projectProbability": "",
         "descriptionText": "Краткое описание текст",
         "risksText": "Текст_риски_тест",
-        "purchaseNumber": "ZP/0019-AT",
+        "purchaseNumber": "ZP/0019-AT_Know",
         "purchaseLink": "testlink_zakup_proc.com",
         "projectRiskDepartment": "",
         "priceInformationDeadline": "",

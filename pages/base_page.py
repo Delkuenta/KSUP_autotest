@@ -11,7 +11,7 @@ from pages.locators import BasePageLocators
 
 class BasePage:
 
-    def __init__(self, browser: RemoteWebDriver, url, timeout=5):
+    def __init__(self, browser: RemoteWebDriver, url, timeout=10):
         self.browser = browser
         self.url = url
         self.browser.implicitly_wait(timeout)  # неявное ожидание
@@ -56,7 +56,7 @@ class BasePage:
         return False
 
     # is_disappeared: будет ждать до тех пор, пока элемент не исчезнет
-    def is_disappeared(self, how, what, timeout=5):
+    def is_disappeared(self, how, what, timeout=10):
         try:
             WebDriverWait(self.browser, timeout, 1, TimeoutException).until_not(
                 ec.presence_of_element_located((how, what)))

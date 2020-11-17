@@ -10,7 +10,6 @@ class PresaleFormCreate(BasePage):
     # Форма создания пресейла
     def form_create_presale_all_type(self, user_data_dict):
         time.sleep(2)
-
         # Проверяем предзаполнение полей:
         # "Ответственный менеджер подразделения-продавца" и "Ответственный менеджер подразделения-исполнителя" для УЗ продавца
         if user_data_dict["createAccount"] == "Mr_KSUP_Seller":
@@ -249,3 +248,5 @@ class PresaleFormCreate(BasePage):
                     what = what.replace("executiveUnit_name", user_data_dict["executiveUnit"])
                     self.browser.find_element(how, what).click()
                 self.browser.find_element(*FormCreatePresaleLocators.APPROVAL_CONFIRM_SEND_BUTTON).click()
+
+        self.is_frame_to_parent()

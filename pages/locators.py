@@ -1,9 +1,14 @@
 from selenium.webdriver.common.by import By
 
+class LoginPageLocators:
+    USER_NAME_ELEMENT = (By.CSS_SELECTOR, "#userNameInput")
+    PASSWORD_ELEMENT = (By.CSS_SELECTOR, "#passwordInput")
+    SUBMIT_BUTTON = (By.CSS_SELECTOR, "#submitButton")
+
 
 class BasePageLocators:
-    USER_NAME = (By.CSS_SELECTOR, ".o365cs-me-tile-nophoto-username.o365cs-me-bidi")
-    LOGOUT_BUTTON = (By.CSS_SELECTOR, "#O365_SubLink_ShellSignout")
+    USER_NAME = (By.CSS_SELECTOR, "span[class*='me-tile-nophoto-username']")
+    LOGOUT_BUTTON = (By.CSS_SELECTOR, "[id$='SubLink_ShellSignout']")
     PRESALE_LIST_LINK = "/SalesManagement/Lists/Sale/All.aspx"
     PRESALE_LIST_TITLE = (By.CSS_SELECTOR, "#DeltaPlaceHolderPageTitleInTitleArea a")
     ZAKUP_LIST_LINK = "/SalesManagement/Lists/PresaleActivity/All.aspx"
@@ -985,6 +990,9 @@ class FormCreateProjectLocators:
     # Кнопка "Сохранить"(создать проект) //*[@type = 'submit' and @value = 'Сохранить']
     CONFIRM_PROJECT_BUTTON = (By.CSS_SELECTOR, "[id$='RptControls_btnOK']")
 
+    # Титул на странице "Мы работаем над этим"
+    CREATE_WAITING_TITLE = (By.XPATH, "//h1[contains(text(), 'Мы работаем над этим...')]")
+
 
 class ProjectElementLocators:
     TITLE_VALUE = (By.CSS_SELECTOR, ".title.title--main")
@@ -1056,3 +1064,7 @@ class ProjectElementLocators:
 
     # Значение в поле "Описание"
     DESCRIPTION_VALUE = (By.CSS_SELECTOR, ".fldKsupDescription #SPFieldNote")
+
+
+class OpList_Locators:
+    CREATE_WAITING_TITLE = (By.XPATH, "//h2[contains(text(), 'Пожалуйста, подождите')]")

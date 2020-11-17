@@ -12,15 +12,13 @@ class ContractElementPage(BasePage):
         print('Название карточки "Договор/контракт" успешно проверено')
 
         # Проверяем поле "Заказчик"
-        assert self.is_element_text(*ContractElementLocators.CUSTOMER_IN_CONTRACT) == user_data_dict[
-            "customer"], \
+        assert self.is_element_text(*ContractElementLocators.CUSTOMER_IN_CONTRACT) == user_data_dict["customer"], \
             f'\nНекорректное значение в поле "Заказчик".' \
             f'\nОжидаемый результат:{user_data_dict["customer"]}'
         print('Значение в поле "Заказчик" успешно проверено')
 
         # Проверяем поле "Подразделение-продавец"
-        assert self.is_element_text(*ContractElementLocators.SALES_UNIT_IN_CONTRACT) == user_data_dict[
-            "salesUnit"], \
+        assert self.is_element_text(*ContractElementLocators.SALES_UNIT_IN_CONTRACT) == user_data_dict["salesUnit"], \
             f'\nНекорректное значение в поле "Подразделение-продавец". ' \
             f'\nОжидаемый результат:{user_data_dict["salesUnit"]}'
         print('Значение в поле "Подразделение-продавец" успешно проверено')
@@ -175,8 +173,7 @@ class ContractElementPage(BasePage):
             print('Пустое поле "Уникальный код проекта" успешно не отображено')
 
         # Проверяем поле "Связанный проект"
-        assert self.is_element_text(*ContractElementLocators.PROJECT_IN_CONTRACT) == \
-               user_data_dict["project"], \
+        assert self.is_element_text(*ContractElementLocators.PROJECT_IN_CONTRACT) == user_data_dict["project"], \
             f'Значение в поле "Связанный проект" не корректно.' \
             f'\n Ожидаемый результат: {user_data_dict["project"]}'
         print('Значение в поле "Связанный проект" успешно проверено')

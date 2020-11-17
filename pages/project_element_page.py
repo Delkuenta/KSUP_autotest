@@ -112,7 +112,7 @@ class ProjectElementPage(BasePage):
             f'Фактический результат:{self.is_element_text(*ProjectElementLocators.TITLE_VALUE)}'
 
         # Проверяем значение в поле "Заказчики"
-        customers_str = converting_values_to_strings(user_data_dict["customers"])
+        customers_str = converting_values_to_strings(user_data_dict["customer"])
         assert self.is_element_text(*ProjectElementLocators.CUSTOMER_VALUE) == customers_str, \
             f'Некорректное значение в поле "Заказчики".\n ' \
             f'Ожидаемый результат: {customers_str}\n ' \

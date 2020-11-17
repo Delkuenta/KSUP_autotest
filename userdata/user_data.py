@@ -4,16 +4,16 @@ import os
 
 class UserData:
 
-    # Учетные записи, статичные.
-    login_seller = [r"Lanit\Mr_KSUP_Seller", "AsdGhj-5681-Sle"]
-    login_dir = [r"Lanit\Mr_KSUP_Dir", "AsdGhj-5681-Dri"]
-    login_seller2 = [r"Lanit\Mr_KSUP_Seller2", "AsdGhj-5681-2Les"]
-    login_dir2 = [r"Lanit\Mr_KSUP_Dir2", "AsdGhj-5681-2Rid"]
-    login_legal = [r"Lanit\Mr_KSUP_Legal", "AsdGhj-5681-Lge"]
-    login_count = [r"Lanit\Mr_KSUP_Count", "*AF5hcnEfF8D2g8a"]
-    login_fin = [r"Lanit\Mr_KSUP_Fin", "AsdGhj-5681-Fni"]
-    login_udprpo = [r"Lanit\Mr_KSUP_UDPRPO", "lPRvCNi9m9zU8gb"]
-    login_kkp = [r"Lanit\Mr_KSUP_KKP", "su@rMpuYu{^}bOI5Z"]
+    user_account = {r"Mr_KSUP_Seller": "AsdGhj-5681-Sle",
+                    r"Mr_KSUP_Dir": "AsdGhj-5681-Dri",
+                    r"Mr_KSUP_Seller2": "AsdGhj-5681-2Les",
+                    r"Mr_KSUP_Dir2": "AsdGhj-5681-2Rid",
+                    r"Mr_KSUP_Legal": "AsdGhj-5681-Lge",
+                    r"Mr_KSUP_Count": "*AF5hcnEfF8D2g8a",
+                    r"Mr_KSUP_Fin": "AsdGhj-5681-Fni",
+                    r"Mr_KSUP_UDPRPO": "lPRvCNi9m9zU8gb",
+                    r"Mr_KSUP_KKP": "su@rMpuYu{^}bOI5Z"
+                    }
 
     # Группа файлов и их путей для прикрепления
     # Значение пути в переменную для прикрепляемых файлов

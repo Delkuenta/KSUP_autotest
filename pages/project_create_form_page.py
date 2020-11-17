@@ -141,7 +141,8 @@ class ProjectFormCreate(BasePage):
         self.browser.find_element(*FormCreateProjectLocators.CONFIRM_PROJECT_BUTTON).click()
 
         # Ждем пока исчезнет надпись "Мы работаем над этим"
-        time.sleep(10)
+        time.sleep(2)
+        self.is_disappeared(*FormCreateProjectLocators.CREATE_WAITING_TITLE)
 
 
 
