@@ -228,13 +228,12 @@ class PresaleFormCreate(BasePage):
 
                     # Проверяем предзаполнение поля "Подразделение"
                     delayed_assert.expect(
-                        self.is_element_text(*FormCreatePresaleLocators.APPROVAL_DEPARTMENT_ELEMENT) == user_data_dict[
-                            "salesUnit"],
+                        user_data_dict["salesUnit"] in self.is_element_text(*FormCreatePresaleLocators.APPROVAL_DEPARTMENT_ELEMENT),
                         f'При отправке на согласование под ролью {user_data_dict["createAccount"]} '
                         f'поле "Подразделение" должно предзаполняться значением из поля "Подразделение-продавец"')
                     self.browser.find_element(*FormCreatePresaleLocators.APPROVAL_DEPARTMENT_ELEMENT).click()
-                    how, what = FormCreatePresaleLocators.SALES_UNIT_DROPDOWN_ELEMENT
-                    what = what.replace("salesUnit_name", user_data_dict["salesUnit"])
+                    how, what = FormCreatePresaleLocators.APPROVAL_DEPARTMENT_ELEMENT_DROPDOWN
+                    what = what.replace("deparment_value", user_data_dict["salesUnit"])
                     self.browser.find_element(how, what).click()
                 else:
                     # Проверяем предзаполнение поля "Подразделение"
@@ -244,8 +243,8 @@ class PresaleFormCreate(BasePage):
                         f'При отправке на согласование под ролью {user_data_dict["createAccount"]} '
                         f'поле "Подразделение" должно предзаполняться значением из поля "Подразделение-исполнитель"')
                     self.browser.find_element(*FormCreatePresaleLocators.APPROVAL_DEPARTMENT_ELEMENT).click()
-                    how, what = FormCreatePresaleLocators.EXECUTIVE_UNIT_DROPDOWN_ELEMENT
-                    what = what.replace("executiveUnit_name", user_data_dict["executiveUnit"])
+                    how, what = FormCreatePresaleLocators.APPROVAL_DEPARTMENT_ELEMENT_DROPDOWN
+                    what = what.replace("deparment_value", user_data_dict["executiveUnit"])
                     self.browser.find_element(how, what).click()
                 self.browser.find_element(*FormCreatePresaleLocators.APPROVAL_CONFIRM_SEND_BUTTON).click()
 

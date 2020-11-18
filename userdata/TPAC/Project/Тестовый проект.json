@@ -1,0 +1,29 @@
+{
+	"main_data": {
+        "fullName": "Тестовый проект",
+		"eisPriceLink": "",
+        "customer": ["КАЗНАЧЕЙСТВО РОССИИ"],
+		"industry": ["IT-сектор", "Автопром"],
+		"typeOfWorkServices": ["Разработка заказного ПО", "Тестирование ПО"],
+		"executiveUnitLegal": "ООО \"ЛАНИТ-ТЕХНОЛОГИИ\"",
+        "executiveUnit": "Департамент корпоративных систем",
+        "salesUnit": [],
+		"projectStage": "Активный",
+		"contracts": [],
+        "startDate": "01.07.2020",
+		"vendors": [], 
+		"tags": [],
+        "salesManager": ["Батарова Татьяна Андреевна"],
+		"rpLanit": "Mr_KSUP_Seller@LANIT",
+        "endDate": "",
+		"sum": "До 500 тыс. руб.",
+        "territory": ["Архангельская область"],
+        "technologies": ["Jira"],
+		"projectCategory": "Крупный",
+        "descriptionText": "Краткое описание текст Цели и задачи",
+		"quantitativeIndicatorsProject": "",
+		"interestInformation": "",
+		"description": "",
+		"createAccount": "Mr_KSUP_Dir"
+    }
+}

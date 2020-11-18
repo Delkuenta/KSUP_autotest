@@ -72,7 +72,7 @@ class FormCreatePresaleLocators:
 
     # Подразделение-продавец *f"//li[normalize-space(.)='salesUnit_name']"
     SALES_UNIT_ELEMENT = (By.CSS_SELECTOR, "#div-wcfLookupControl_KsupDivisions")
-    SALES_UNIT_DROPDOWN_ELEMENT = (By.XPATH, "//li[contains(text(), 'salesUnit_name')]")
+    SALES_UNIT_DROPDOWN_ELEMENT = (By.XPATH, "//*[contains(@id, 'KsupDivisions')]//li[contains(text(), 'salesUnit_name')]")
 
     # Ответственный менеджер подразделения-продавца * //li[normalize-space(.)='salesManager_name']
     SALES_MANAGER_ELEMENT = (By.CSS_SELECTOR, "#div-wcfLookupControl_KsupSeller")
@@ -81,7 +81,9 @@ class FormCreatePresaleLocators:
 
     # Подразделение-исполнитель  //li[contains(text(), 'executiveUnit_name')]
     EXECUTIVE_UNIT_ELEMENT = (By.CSS_SELECTOR, "#div-wcfLookupControl_KsupDivisionPerformer")
-    EXECUTIVE_UNIT_DROPDOWN_ELEMENT = (By.XPATH, "//li[normalize-space(.)='executiveUnit_name']")
+    # //li[contains(text(), '')]
+    EXECUTIVE_UNIT_DROPDOWN_ELEMENT = (
+        By.XPATH, "//*[contains(@id, 'KsupDivisionPerformer')]//li[contains(text(), 'executiveUnit_name')]")
 
     # Ответственный менеджер подразделения-исполнителя //li[normalize-space(.)='executiveManager_name']
     EXECUTIVE_MANAGER_ELEMENT = (By.CSS_SELECTOR, "#div-wcfLookupControl_KsupPerformerResponsible")
@@ -150,6 +152,8 @@ class FormCreatePresaleLocators:
 
     # Поле для выбора подразделения //span[@id='select2-directionItems-container']
     APPROVAL_DEPARTMENT_ELEMENT = (By.XPATH, "//span[contains(@id, 'directionItems')]")
+    APPROVAL_DEPARTMENT_ELEMENT_DROPDOWN = (By.XPATH,
+                                            "//*[contains(@id, 'directionItems-results')]//li[contains(text(), 'deparment_value')]")
 
     # Кнопка "Отправить" на согласование //input[contains(@id, 'PlaceHolderMain_btnSend')]
     APPROVAL_CONFIRM_SEND_BUTTON = (By.CSS_SELECTOR, "[id*='PlaceHolderMain_btnSend']")

@@ -36,8 +36,8 @@ class LoginData(BasePage):
             print(self.browser.capabilities['browserName'])
 
     def logout(self):
-        self.is_visibility_of_element_located(*BasePageLocators.USER_NAME)
+        self.is_visibility_of_element_located(*BasePageLocators.USER_NAME, 5)
         self.browser.find_element(*BasePageLocators.USER_NAME).click()
         time.sleep(1)
-        self.is_visibility_of_element_located(*BasePageLocators.LOGOUT_BUTTON)
+        self.is_visibility_of_element_located(*BasePageLocators.LOGOUT_BUTTON, 5)
         self.browser.find_element(*BasePageLocators.LOGOUT_BUTTON).click()

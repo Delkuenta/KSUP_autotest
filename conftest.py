@@ -7,7 +7,7 @@ from msedge.selenium_tools import Edge, EdgeOptions
 def pytest_addoption(parser):
     parser.addoption('--browser_name',
                      action='store',
-                     default="firefox",
+                     default="chrome",
                      help="Choose browser: chrome or firefox")
     parser.addoption('--language',
                      action='store',
@@ -25,7 +25,7 @@ def browser_function(request):
     if browser_name == "chrome":
         options = webdriver.ChromeOptions()
         options.add_argument("ignore-certificate-errors")
-        # options.add_argument("start-maximized")
+        options.add_argument("start-maximized")
         print("\nstart chrome browser for test..")
         browser = webdriver.Chrome(options=options)
 
