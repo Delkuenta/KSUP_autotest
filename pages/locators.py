@@ -306,6 +306,8 @@ class FormCreateZakupLocators:
     # Заказчик
     CUSTOMER_IN_ZP_ELEMENT = (By.CSS_SELECTOR, "#div-wcfLookupControl_KsupEgr_Customer")
     CUSTOMER_IN_ZP_DROPDOWN_ELEMENT = (By.XPATH, f"//li[contains(text(), 'customer_name')]")
+    # Название поля "Заказчик" при активации "Совмсетные торги" меняет название
+    CUSTOMER_FIELD_NAME = (By.XPATH, "//*[@class='fldKsupEgr_Customer ']//*[@class='ms-h3 ms-standardheader']")
 
     # Исполнитель (юридическое лицо)
     EXECUTIVE_LEGAL_IN_ZP_ELEMENT = (By.CSS_SELECTOR, "#div-wcfLookupControl_KsupEgr_PerformerLegal")
@@ -385,7 +387,7 @@ class FormCreateZakupLocators:
 
     # Уникальные поля для типа "Тендерная заявка"
     # чек-бокс Совместные торги //input[starts-with(@id, 'KsupPresaleJointBidding')]
-    JOINT_BIDDING_ELEMENT = (By.CSS_SELECTOR, "[id^='KsupPresaleJointBidding']")
+    JOINT_BIDDING_CHECKBOX = (By.CSS_SELECTOR, "[id^='KsupPresaleJointBidding']")
 
     # Срок подачи на конкурс //input[starts-with(@id, 'KsupCompetitionDeadlineFrom')]
     COMPETITION_DEADLINE_IN_ZP_FROM_ELEMENT = (By.CSS_SELECTOR, "[id^='KsupCompetitionDeadlineFrom'][class='ms-input']")
@@ -496,65 +498,69 @@ class ZakupElementLocators:
     # Элементы на вкладке "Общие сведения"
     # Поле "Статус согласования"
     APPROVAL_MAIN_STATUS_IN_ZP = (By.CSS_SELECTOR, ".fldKsupPresaleApproveStatus #SPFieldChoice")
-    # Поле "Тип закупочной процедуры" //td[contains(@id, 'ContentTypeFieldDisplay')]
+    # Значение в Поле "Тип закупочной процедуры" //td[contains(@id, 'ContentTypeFieldDisplay')]
     CONTRACTOR_TYPE_IN_ZP = (By.CSS_SELECTOR, "[id$='tdContentTypeFieldDisplay']")
-    # Поле "Подразделение-продавец"
+    # Значение в Поле "Подразделение-продавец"
     SALES_UNIT_IN_ZP = (By.CSS_SELECTOR, ".fldKsupDivisionSeller #SPFieldWcfLookup")
-    # Поле "Ответственный менеджер подразделения-продавца"
+    # Значение в Поле "Ответственный менеджер подразделения-продавца"
     SALES_MANAGER_IN_ZP = (By.CSS_SELECTOR, ".fldKsupSeller #SPFieldWcfLookup")
-    # Поле "Подразделение-исполнитель"
+    # Значение в Поле "Подразделение-исполнитель"
     EXECUTIVE_UNIT_IN_ZP = (By.CSS_SELECTOR, ".fldKsupDivisionPerformer #SPFieldWcfLookup")
-    # Поле "Ответственный менеджер подразделения-исполнителя"
+    # Значение в Поле "Ответственный менеджер подразделения-исполнителя"
     EXECUTIVE_MANAGER_IN_ZP = (By.CSS_SELECTOR, ".fldKsupPerformerResponsible #SPFieldWcfLookup")
-    # Поле "Заказчик"
+    # Значение в Поле "Совместные торги"
+    JOINT_BIDDING_IN_ZP = (By.CSS_SELECTOR, ".fldKsupPresaleJointBidding  #SPFieldBoolean")
+    # Название поля "Заказчик"
+    CUSTOMER_FIELD_NAME = (By.CSS_SELECTOR, ".fldKsupEgr_Customer .ms-h3")
+    # Значение в Поле "Заказчик"
     CUSTOMER_IN_ZP = (By.CSS_SELECTOR, ".fldKsupEgr_Customer #SPFieldWcfLookup")
-    # Поле "Тип работ и услуг"
+    # Значение в Поле "Тип работ и услуг"
     TYPE_OF_WORK_SERVCICES_IN_ZP = (By.CSS_SELECTOR, "#SPFieldTaxonomyFieldTypeMulti")
-    # Поле "Исполнитель (юридическое лицо)"
+    # Значение в Поле "Исполнитель (юридическое лицо)"
     EXECUTIVE_UNIT_LEGAL_IN_ZP = (By.CSS_SELECTOR, ".fldKsupEgr_PerformerLegal #SPFieldWcfLookup")
-    # Поле "Начальная (максимальная) цена контракта"
+    # Значение в Поле "Начальная (максимальная) цена контракта"
     SUM_IN_ZP = (By.CSS_SELECTOR, ".fldKsupContractSum #SPFieldNumber")
-    # Поле "Валюта договора/контракта"
+    # Значение в Поле "Валюта договора/контракта"
     CURRENCY_IN_ZP = (By.CSS_SELECTOR, ".fldKsupCurrency #SPFieldChoice")
-    # Поле "Категория проекта" (ценовая)
+    # Значение в Поле "Категория проекта" (ценовая)
     PRICE_CATEGORY_IN_ZP = (By.CSS_SELECTOR, ".fldKsupProjectCategoryBySum #SPFieldChoice")
-    # Поле "Порядок проведения закупочной процедуры" для Тендер
+    # Значние в Поле "Порядок проведения закупочной процедуры" для Тендер
     SALE_LAW_TYPE_TENDER_ZP = (By.CSS_SELECTOR, ".fldKsupTenderLowType #SPFieldChoice")
-    # Поле "Порядок проведения закупочной процедуры" для Запрос цен
+    # Значение в Поле "Порядок проведения закупочной процедуры" для Запрос цен
     SALE_LAW_TYPE_ZAPROS_ZP = (By.CSS_SELECTOR, ".fldKsupRequestLowType #SPFieldChoice")
-    # Поле "Размер обеспечения заявки"
+    # Значение в Поле "Размер обеспечения заявки"
     APPLICATION_SIZE_IN_ZP = (By.CSS_SELECTOR, ".fldKsupApplicationSize #SPFieldNumber")
-    # Поле "Размер обеспечения договора/контракта"
+    # Значение в Поле "Размер обеспечения договора/контракта"
     CONTRACT_SIZE_IN_ZP = (By.CSS_SELECTOR, ".fldKsupContractSize #SPFieldNumber")
-    # Поле "Срок подачи на конкурс"
+    # Значение в Поле "Срок подачи на конкурс"
     COMPETITION_DEAD_LINE_FROM_IN_ZP = (By.CSS_SELECTOR, ".fldKsupCompetitionDeadlineFrom #SPFieldDateTime")
-    # Поле "Срок представления ценовой информации"
+    # Значение в Поле "Срок представления ценовой информации"
     PRICE_INFORMATION_DEAD_LINE_FROM_IN_ZP = (By.CSS_SELECTOR, ".fldKsupPriceInformationDeadlineFrom #SPFieldDateTime")
-    # Поле "Предполагаемая дата начала проведения закупки с"
+    # Значение в Поле "Предполагаемая дата начала проведения закупки с"
     PURCHASE_START_DATE_FROM = (By.CSS_SELECTOR, ".fldKsupPurchaseStartDateFrom #SPFieldDateTime")
-    # Поле "Предполагаемая дата начала проведения закупки по"
+    # Значение в Поле "Предполагаемая дата начала проведения закупки по"
     PURCHASE_START_DATE_TO = (By.CSS_SELECTOR, ".fldKsupPurchaseStartDateTo #SPFieldDateTime")
-    # Поле "Плановая дата заключения договора/контракта"
+    # Значение в Поле "Плановая дата заключения договора/контракта"
     START_DATE_IN_ZP = (By.CSS_SELECTOR, ".fldKsupContractPlanDateFrom #SPFieldDateTime")
-    # Поле "Плановая дата окончания договора/контракта"
+    # Значение в Поле "Плановая дата окончания договора/контракта"
     END_DATE_IN_ZP = (By.CSS_SELECTOR, ".fldKsupContractPlanFinishDateFrom #SPFieldDateTime")
-    # Поле "Вероятность заключения договора/контракта"
+    # Значение в Поле "Вероятность заключения договора/контракта"
     PROJECT_PROBABILITY_IN_ZP = (By.CSS_SELECTOR, ".fldKsupContractProbability #SPFieldNumber")
-    # Поле "Номер закупки"
+    # Значение в Поле "Номер закупки"
     PURCHASE_NUMBER_IN_ZP = (By.CSS_SELECTOR, ".fldKsupEisPurchaseNumber #SPFieldText")
-    # Поле "Номер запроса цен на Официальном сайте ЕИС"
+    # Значение в Поле "Номер запроса цен на Официальном сайте ЕИС"
     EIS_PRICE_NUMBER_IN_ZP = (By.CSS_SELECTOR, ".fldKsupEisPriceNumber #SPFieldText")
-    # Поле "Связанные продажи"
+    # Значение в Поле "Связанные продажи"
     RELATED_SALES_IN_ZP = (By.CSS_SELECTOR, ".fldKsupSalesWithOp #SPFieldWcfLookup")
-    # Поле "Статус продажи"
+    # Значение в Поле "Статус продажи"
     PRESALE_STATUS_IN_ZP = (By.CSS_SELECTOR, ".fldKsupPaSaleStatus #SPFieldChoice")
-    # Поле "Ссылка на закупку"
+    # Значение в Поле "Ссылка на закупку"
     PURCHASE_LINK_IN_ZP = (By.CSS_SELECTOR, ".fldKsupEisPurchaseLink #SPFieldNote")
-    # Поле "Результаты работ"
+    # Значение в Поле "Результаты работ"
     DESCRIPTION_TEXT_IN_ZP = (By.CSS_SELECTOR, ".fldKsupPaDescription #SPFieldNote")
-    # Поле "Риски проекта с точки зрения Департамента"
+    # Значение в Поле "Риски проекта с точки зрения Департамента"
     PROJECT_RISKS_DEPARTMENT_IN_ZP = (By.CSS_SELECTOR, ".fldKsupProjectRiskDepartmentPerspec #SPFieldNote")
-    # Поле "Ссылка на запрос на Официальном сайте ЕИС"
+    # Значение в Поле "Ссылка на запрос на Официальном сайте ЕИС"
     EIS_PRICE_LINK_IN_ZP = (By.CSS_SELECTOR, ".fldKsupEisPriceLink #SPFieldNote")
 
 
@@ -569,7 +575,7 @@ class FormCreateContractLocators:
 
     # Подразделение-продавец //li[normalize-space()='salesUnit_name']
     SALES_UNIT_CONTRACT_ELEMENT = (By.CSS_SELECTOR, "#div-wcfLookupControl_KsupDivisions")
-    SALES_UNIT_DROPDOWN_CONTRACT_ELEMENT = (By.XPATH, f"//li[contains(text(), 'salesUnit_name')]")
+    SALES_UNIT_DROPDOWN_CONTRACT_ELEMENT = (By.XPATH, "//*[contains(@id, 'KsupDivisions')]//li[contains(text(), 'salesUnit_name')]")
 
     # Ответственный менеджер подразделения-продавца
     SALES_MANAGER_CONTRACT_ELEMENT = (By.CSS_SELECTOR, '#div-wcfLookupControl_KsupSeller')
@@ -578,7 +584,7 @@ class FormCreateContractLocators:
 
     # Подразделение-исполнитель
     EXECUTIVE_UNIT_CONTRACT_ELEMENT = (By.CSS_SELECTOR, "#div-wcfLookupControl_KsupDivisionPerformer")
-    EXECUTIVE_UNIT_CONTRACT_DROPDOWN_ELEMENT = (By.XPATH, f"//li[normalize-space()='executiveUnit_name']")
+    EXECUTIVE_UNIT_CONTRACT_DROPDOWN_ELEMENT = (By.XPATH, "//*[contains(@id, 'KsupDivisionPerformer')]//li[contains(text(), 'executiveUnit_name')]")
 
     # Ответственный менеджер подразделения-исполнителя
     EXECUTIVE_MANAGER_CONTRACT_ELEMENT = (By.CSS_SELECTOR, "#div-wcfLookupControl_KsupPerformerResponsible")
@@ -653,8 +659,8 @@ class FormCreateContractLocators:
     # Уникальный код проекта //input[starts-with(@id,'KsupContractProjectUniqueCode')]
     PROJECT_UNIQUE_CODE = (By.CSS_SELECTOR, "[id^='KsupContractProjectUniqueCode']")
 
-    # Поле "Связанный проект" //div[@id='div-wcfLookupControl_KsupProject']
-    PROJECT_ELEMENT = (By.CSS_SELECTOR, "#div-wcfLookupControl_KsupProject")
+    # Поле "Связанный проект" //div[@id='div-wcfLookupControl_KsupProject'] #div-wcfLookupControl_KsupProject
+    PROJECT_ELEMENT = (By.XPATH, "//*[@id='div-wcfLookupControl_KsupProject']//span[contains(@class,'select2-container')]")
     # //span[contains(@class, 'select2-search')]//input
     PROJECT_FIND_ELEMENT = (By.CSS_SELECTOR, "[class$='select2-search--dropdown']>input")
     # //li[normalize-space(.)='project_name']
@@ -694,6 +700,26 @@ class FormCreateContractLocators:
     # Кнопка "Отмена" в окне подтверждения внесения правок в Связанный проект
     CANCEL_CHANGE_PROJECT_BUTTON = (By.XPATH, "//input[@value='Отмена']")
 
+    # Добавленные договоры/контракты
+
+    # Поле "Заказчик" множественный результат
+    JOINT_BIDDING_CUSTOMER = (By.XPATH, "//*[@data-member='customer']//*[contains(@class, 'select2-selection--single')]")
+    JOINT_BIDDING_CUSTOMER_DROPDOWN = (By.XPATH, "//li[contains(text(), 'customer_name')]")
+    # Поле "Номер" множественный результат
+    JOINT_BIDDING_NUMBER = (By.XPATH, "//*[@data-member='number']//input[contains(@class,'number-field')]")
+
+    # Поле "Дата заключения"
+    JOINT_BIDDING_START_DATE = (By.XPATH, "//*[@data-member='imprisonmentDate']//input[contains(@class,'imprisonment-date')]")
+
+    # Поле "Дата окончания"
+    JOINT_BIDDING_END_DATE = (By.XPATH, "//*[@data-member='expirationDate']//input[contains(@class,'expriration-date')]")
+
+    # Поле "Сумма договора/контракта"
+    JOINT_BIDDING_SUMMA = (By.XPATH, "//*[@data-member='summa']//input[contains(@class,'jointbidding-summa')]")
+
+    # Кнопка Удаления строки в табилце "Добавленные договоры контракты"
+    JOINT_BIDDING_DELETE_ROW = (By.XPATH, "//td[@data-member='delete' and contains(@class, 'jointbidding-cell-delete')]")
+
 
 class ContractPageLocators:
     CONTRACT_CREATE_BUTTON = (By.CSS_SELECTOR, "#idHomePageNewItem")
@@ -721,7 +747,7 @@ class ContractElementLocators:
 
     # Элементы на вкладке "Статус Согласования"
     # Вкладка "Статус согласования"
-    APPROVAL_HISTORY_CONTRACT_ELEMENT = (By.XPATH, "//a[contains(@href, '#tabApprovingHistory')]")
+    APPROVAL_HISTORY_CONTRACT_TABS = (By.XPATH, "//a[contains(@href, '#tabApprovingHistory')]")
     # Строка согласование с юридической службой
     APPROVAL_LEGAL_STATUS_ELEMENT = (By.XPATH, "//*[text() ='Согласование юридической службой']/following::span[1]")
     # Строка согласование с бухгалтерией
@@ -732,6 +758,9 @@ class ContractElementLocators:
     APPROVAL_UDPRPO_STATUS_ELEMENT = (By.XPATH, "//*[text() ='Согласование УДПР ПО']/following::span[1]")
     # Строка согласование с ККП
     APPROVAL_KKP_STATUS_ELEMENT = (By.XPATH, "//*[text() ='Согласование ККП']/following::span[1]")
+
+    # Вкладка "Заключенные договоры/контракты"
+    JOINT_BIDDING_CONTRACT_TABS = (By.CSS_SELECTOR, "a[href='#tabJointBidding']")
 
     # Элементы внутри окна подтверждения/отклонения //textarea[@id='dialogComment']
     COMMENT_TO_APPROVAL_CONTRACT = (By.CSS_SELECTOR, "[id='dialogComment']")
@@ -789,6 +818,27 @@ class ContractElementLocators:
     DESCRIPTION_TEXT_IN_CONTRACT = (By.CSS_SELECTOR, ".fldKsupDescriptionPlainText #SPFieldNote")
     # Поле "Количественные показатели реализации проекта"
     QUANTITATIVE_INDICATORS_PROJECT = (By.CSS_SELECTOR, ".fldKsupQuantitativeIndicatorsProjec #SPFieldNote")
+
+    # Вкладка "Заключенные договоры/контракты"
+
+    # Значнеие в поле "Заказчик" Множественный результат
+    JOINT_BIDDING_CUSTOMER_VALUE = (By.CSS_SELECTOR, "[data-member='customer'][class^='jointbidding']")
+
+    # Значение в поле "Номер" Множественный результат
+    JOINT_BIDDING_NUMBER_VALUE = (By.CSS_SELECTOR, "[data-member='number'][class^='jointbidding']")
+
+    # Значение в поле "Дата заключения" Множественный результат
+    JOINT_BIDDING_START_DATE_VALUE = (By.CSS_SELECTOR, "[data-member='imprisonmentDate'][class^='jointbidding']")
+
+    # Значение в поле "Дата окончания" Множественный результат
+    JOINT_BIDDING_END_DATE_VALUE = (By.CSS_SELECTOR, "[data-member=''][class^='jointbidding']")
+
+    # Значение в поле "Дата окончания" Множественный результат
+    JOINT_BIDDING_SUM_VALUE = (By.CSS_SELECTOR, "[data-member='summa'][class^='jointbidding']")
+
+    JOINT_BIDDING_TOTAL_SUM_VALUE = (By.CSS_SELECTOR, "[class^='payplan-cell']>span")
+
+
 
 
 class KnowledgeSearchLocators:

@@ -44,6 +44,18 @@ class ZakupElementPage(BasePage):
             f'\nОжидаемый результат:{user_data_dict["executiveManager"]}'
         print('Значение в поле "Ответственный менеджер подразделения-исполнителя" успешно проверено')
 
+        # Проверяем поле "Совместные торги"
+        if user_data_dict["contractorType"] == 'Тендерная заявка' and user_data_dict["jointBidding"] == 'Да':
+            assert self.is_element_text(*ZakupElementLocators.JOINT_BIDDING_IN_ZP) == user_data_dict["jointBidding"], \
+                f'\nНекорректное значение в поле "Совместные торги".' \
+                f'\nОжидаемый результат:{user_data_dict["jointBidding"]}'
+
+            # Проверяем название поля "Заказчик" при совместных торгах
+            assert self.is_element_text(*ZakupElementLocators.CUSTOMER_FIELD_NAME) == "Организация, осуществляющая размещение закупки", \
+                f'\nНекорректное название поля "Заказчик" при совместных торгах.' \
+                f'\nОжидаемый результат: Организация, осуществляющая размещение закупки' \
+                f'\nФактический результат: {self.is_element_text(*ZakupElementLocators.CUSTOMER_FIELD_NAME)}'
+
         # Проверяем поле "Заказчик"
         assert self.is_element_text(*ZakupElementLocators.CUSTOMER_IN_ZP) == user_data_dict["customer"], \
             f'\nНекорректное значение в поле "Заказчик".' \

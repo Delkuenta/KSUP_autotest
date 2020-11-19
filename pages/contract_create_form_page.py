@@ -148,6 +148,38 @@ class ContractFormCreate(BasePage):
         self.browser.find_element(*FormCreateContractLocators.FILE_OTHER).send_keys(UserData.file_path_for_link_mp4)
         self.is_text_to_be_present_in_element(*FormCreateContractLocators.FILE_OTHER_NAME, UserData.name_mp4_to_link)
 
+        if user_data_dict["jointBidding"] == "Да":
+            # Заполняем таблицу "Добавленные договоры/контракты"
+            sum_joint_bidding = 0
+            count_joint_contracts_row = len(user_data_dict["jointBiddingContracts"])
+            print(f'\nКоличество строчек Добавленных договор/контрактов: {count_joint_contracts_row}')
+            current_row = 0
+            while current_row < count_joint_contracts_row:
+                # Заполняем поле "Заказчик"
+                customer_field = self.browser.find_elements(*FormCreateContractLocators.JOINT_BIDDING_CUSTOMER)[current_row]
+                customer_field.click()
+                how, what = FormCreateContractLocators.JOINT_BIDDING_CUSTOMER_DROPDOWN
+                what = what.replace('customer_name', user_data_dict["jointBiddingContracts"][current_row]["customer"])
+                self.browser.find_element(how, what).click()
+
+                # Заполняем поле "Номер"
+                number_field = self.browser.find_elements(*FormCreateContractLocators.JOINT_BIDDING_NUMBER)[current_row]
+                number_field.send_keys(user_data_dict["jointBiddingContracts"][current_row]["number"])
+
+                # Заполняем поле "Дата заключения"
+                startDate_field = self.browser.find_elements(*FormCreateContractLocators.JOINT_BIDDING_START_DATE)[current_row]
+                startDate_field.send_keys(user_data_dict["jointBiddingContracts"][current_row]["startDate"])
+
+                # Заполняем поле "Дата окончания"
+                endDate_field = self.browser.find_elements(*FormCreateContractLocators.JOINT_BIDDING_END_DATE)[current_row]
+                endDate_field.send_keys(user_data_dict["jointBiddingContracts"][current_row]["endDate"])
+
+                # Заполняем поле "Сумма"
+                summa_field = self.browser.find_elements(*FormCreateContractLocators.JOINT_BIDDING_SUMMA)[current_row]
+                summa_field.send_keys(user_data_dict["jointBiddingContracts"][current_row]["sum"])
+
+                sum_joint_bidding += user_data_dict["jointBiddingContracts"][current_row]["sum"]
+                current_row += 1
         # Жмем кнопку создать
         self.browser.find_element(*FormCreateContractLocators.CONFIRM_CONTRACT_BUTTON).click()
         # Подтверждаем внесение изменений  в связанный проект

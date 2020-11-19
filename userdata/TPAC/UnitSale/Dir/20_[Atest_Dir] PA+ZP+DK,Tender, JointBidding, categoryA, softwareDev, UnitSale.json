@@ -1,70 +1,92 @@
 {
 	"main_data": {
-        "fullName": "9[АТест_Seller] ПА+ЗП+ДК, Коммерческое предложение, категория C, разработка заказного ПО, Самостоятельная продажа",
-        "contractorType": "Коммерческое предложение",
-        "customer": "ООО \"СИБУР\"",
+        "fullName": "20[АТест_Dir] ПА+ЗП+ДК, Тендерная заявка, категория A, разработка заказного ПО, Самостоятельная продажа, Совместные торги",
+        "contractorType": "Тендерная заявка",
+        "customer": "КАЗНАЧЕЙСТВО РОССИИ",
         "salesUnit": "Департамент корпоративных систем",
         "salesManager": "Батарова Татьяна Андреевна",
         "executiveUnit": "Департамент корпоративных систем",
         "executiveManager": "Батарова Татьяна Андреевна",
         "executiveUnitLegal": "ООО \"ЛАНИТ-ТЕХНОЛОГИИ\"",
         "saleLawType": "44-ФЗ",
-        "typeOfWorkServices": ["Прочие работы и услуги в части ПО"],
-        "sum": 400000,
-        "currency": "Доллар",
+        "typeOfWorkServices": ["Разработка заказного ПО", "Тестирование ПО"],
+        "sum": 52000000,
+        "currency": "Рубль",
         "priceCategory": "",
-        "applicationSize": 5000,
-        "contractSize": 10000,
+        "applicationSize": 1000,
+        "contractSize": 2000,
         "separateSale": "Да",
-		"jointBidding": "Нет",
+		"jointBidding": "Да",
         "competitionDeadlineFrom": "15.07.2020",
         "startDate": "1.07.2020",
         "endDate": "01.07.2021",
         "projectProbability": 100,
         "descriptionText": "Краткое описание текст",
         "risksText": "Текст_риски_тест",
-        "purchaseNumber": "ZP/0009-AT",
+        "purchaseNumber": "ZP/0001-ATdirBJ",
         "purchaseLink": "testlink_zakup_proc.com",
         "projectRiskDepartment": "тестовое сообщение_Риски проекта с точки зрения Департамента",
         "priceInformationDeadline": "16.07.2020",
         "purchaseStartDateFrom": "17.07.2020",
         "purchaseStartDateTo": "18.07.2020",
-        "eisPriceNumber": "ZP/0009-AT-Price",
+        "eisPriceNumber": "ZP/0001-ATdir-Price-BJ",
         "eisPriceLink": "example@link.com",
-        "numberContract": "DK/0009-AT",
+        "numberContract": "DK/0001-ATdir-BJ",
         "eisContractLink": "test_link_eis@mail.com",
-        "territory": ["г. Севастополь"],
-        "technologies": ["Java"],
+        "territory": ["Архангельская область"],
+        "technologies": ["Jira"],
         "quantitativeIndicatorsProject": "тестовый текст в поле Количественные показатели реализации проекта",
-        "projectUniqueCode": "2hMuCr09",
+        "projectUniqueCode": "2hMuCr01-BJ",
 		"project": "Тестовый проект",
-		"createAccount": "Mr_KSUP_Seller",
+		"createAccount": "Mr_KSUP_Dir",
         "payments": [
             {
-                "sum": 200000,
+                "sum": 20000000,
                 "year": 2020,
                 "quarter": 3
             },
             {
-                "sum": 100000,
+                "sum": 15000000,
                 "year": 2020,
                 "quarter": 4
             },
             {
-                "sum": 50000,
+                "sum": 10000000,
                 "year": 2021,
                 "quarter": 1
             },
             {
-                "sum": 30000,
+                "sum": 5000000,
                 "year": 2021,
                 "quarter": 2
             },
             {
-                "sum": 20000,
+                "sum": 2000000,
                 "year": 2021,
                 "quarter": 3
             }
-        ]
+        ],
+		"jointBiddingContracts":[
+			{   
+				"customer": "ДИТ МОСКВЫ",
+                "number": "JB0001",
+                "startDate": "17.07.2020",
+				"endDate": "18.11.2020",
+				"sum": 15000000
+			},
+			{				
+				"customer": "БАНК РОССИИ",
+                "number": "JB0002",
+                "startDate": "19.11.2020",
+				"endDate": "20.03.2021",
+				"sum": 17000000
+			},
+			{
+				"customer": "БАНК ГПБ (АО)",
+                "number": "JB0003",
+                "startDate": "20.03.2021",
+				"endDate": "17.07.2021",
+				"sum": 20000000
+			}]
     }
 }

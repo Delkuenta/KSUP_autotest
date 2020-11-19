@@ -1,3 +1,5 @@
+import time
+
 from pages.base_page import BasePage
 from pages.locators import ContractElementLocators
 from userdata.user_data import UserData
@@ -104,7 +106,8 @@ class ContractElementPage(BasePage):
                 f'\n Ожидаемый результат: {user_data_dict["numberContract"]}'
             print('Значение в поле "Категория проекта" успешно проверено')
         else:
-            assert self.browser.find_element(*ContractElementLocators.CONTRACT_NUMBER_IN_CONTRACT).is_displayed() is False, \
+            assert self.browser.find_element(
+                *ContractElementLocators.CONTRACT_NUMBER_IN_CONTRACT).is_displayed() is False, \
                 'Отображено пустое поле "Номер"'
             print('Пустое поле "Номер" успешно не отображено')
 
@@ -130,7 +133,8 @@ class ContractElementPage(BasePage):
                 f'\nОжидаемый результат:{user_data_dict["purchaseNumber"]}'
             print('Значение в поле "Номер закупки" успешно проверено')
         else:
-            assert self.browser.find_element(*ContractElementLocators.PURCHASE_NUMBER_IN_CONTRACT).is_displayed() is False, \
+            assert self.browser.find_element(
+                *ContractElementLocators.PURCHASE_NUMBER_IN_CONTRACT).is_displayed() is False, \
                 'Отображено пустое поле "Номер закупки"'
             print('Пустое поле "Номер закупки" успешно не отображено')
 
@@ -168,14 +172,16 @@ class ContractElementPage(BasePage):
                 f'\nОжидаемый результат:{user_data_dict["projectUniqueCode"]}'
             print('Значение в поле "Уникальный код проекта" успешно проверено')
         else:
-            assert self.browser.find_element(*ContractElementLocators.PROJECT_UNIQUE_CODE_IN_CONTRACT).is_displayed() is False, \
+            assert self.browser.find_element(
+                *ContractElementLocators.PROJECT_UNIQUE_CODE_IN_CONTRACT).is_displayed() is False, \
                 'Отображено пустое поле "Уникальный код проекта"'
             print('Пустое поле "Уникальный код проекта" успешно не отображено')
 
         # Проверяем поле "Связанный проект"
         assert self.is_element_text(*ContractElementLocators.PROJECT_IN_CONTRACT) == user_data_dict["project"], \
             f'Значение в поле "Связанный проект" не корректно.' \
-            f'\n Ожидаемый результат: {user_data_dict["project"]}'
+            f'\nОжидаемый результат: {user_data_dict["project"]}' \
+            f'\nФактический результат: {self.is_element_text(*ContractElementLocators.PROJECT_IN_CONTRACT)}'
         print('Значение в поле "Связанный проект" успешно проверено')
 
         # Проверяем поле "Ссылка на закупку"
@@ -186,7 +192,8 @@ class ContractElementPage(BasePage):
                 f'\n Ожидаемый результат: {user_data_dict["purchaseLink"]}'
             print('Значение в поле "Ссылка на закупку" успешно проверено')
         else:
-            assert self.browser.find_element(*ContractElementLocators.PURCHASE_LINK_IN_CONTRACT).is_displayed() is False, \
+            assert self.browser.find_element(
+                *ContractElementLocators.PURCHASE_LINK_IN_CONTRACT).is_displayed() is False, \
                 'Отображено пустое поле "Ссылка на закупку"'
             print('Пустое поле "Ссылка на закупку" успешно не отображено')
 
@@ -198,7 +205,8 @@ class ContractElementPage(BasePage):
                 f'\n Ожидаемый результат: {user_data_dict["eisContractLink"]}'
             print('Значение в поле "Ссылка на договор/контракт на Официальном сайте ЕИС" успешно проверено')
         else:
-            assert self.browser.find_element(*ContractElementLocators.EIS_CONTRACT_LINK_IN_CONTRACT).is_displayed() is False, \
+            assert self.browser.find_element(
+                *ContractElementLocators.EIS_CONTRACT_LINK_IN_CONTRACT).is_displayed() is False, \
                 'Отображено пустое поле "Ссылка на договор/контракт на Официальном сайте ЕИС"'
             print('Пустое поле "Ссылка на договор/контракт на Официальном сайте ЕИС" успешно не отображено')
 
@@ -217,9 +225,64 @@ class ContractElementPage(BasePage):
                 f'\n Ожидаемый результат: {user_data_dict["quantitativeIndicatorsProject"]}'
             print('Значение в поле "Количественные показатели реализации проекта" успешно проверено')
         else:
-            assert self.browser.find_element(*ContractElementLocators.QUANTITATIVE_INDICATORS_PROJECT).is_displayed() is False, \
+            assert self.browser.find_element(
+                *ContractElementLocators.QUANTITATIVE_INDICATORS_PROJECT).is_displayed() is False, \
                 'Отображено пустое поле "Количественные показатели реализации проекта"'
             print('Пустое поле "Количественные показатели реализации проекта" успешно не отображено')
+
+    def verify_joint_bidding_inform_contract(self, user_data_dict):
+        # Переходим на вкладку "Заключенные договоры/контракты"
+        self.browser.find_element(*ContractElementLocators.JOINT_BIDDING_CONTRACT_TABS).click()
+        time.sleep(2)
+        # Проверяем заполнение информации в таблице
+        sum_joint_bidding = 0
+        current_row = 0
+        count_joint_contracts_row = len(user_data_dict["jointBiddingContracts"])
+        while current_row < count_joint_contracts_row:
+            # Проверяем значение в поле "Заказчик"
+            customer_value = (self.browser.find_elements(*ContractElementLocators.JOINT_BIDDING_CUSTOMER_VALUE)[current_row]).text
+            assert customer_value == user_data_dict["jointBiddingContracts"][current_row]["customer"], \
+                f'Не корректное значение в поле "Заказчик" в строке {current_row}' \
+                f'\n Ожидаемый результат: {user_data_dict["jointBiddingContracts"][current_row]["customer"]}' \
+                f'\n Фактический результат: {customer_value}'
+
+            # Проверяем значение в поле "Номер"
+            number_value = (self.browser.find_elements(*ContractElementLocators.JOINT_BIDDING_NUMBER_VALUE)[current_row]).text
+            assert number_value == user_data_dict["jointBiddingContracts"][current_row]["number"], \
+                f'Не корректное значение в поле "Номер" в строке {current_row}' \
+                f'\n Ожидаемый результат: {user_data_dict["jointBiddingContracts"][current_row]["number"]}' \
+                f'\n Фактический результат: {number_value}'
+
+            # Проверяем значение в поле "Дата заключения"
+            start_date_value = (self.browser.find_elements(*ContractElementLocators.JOINT_BIDDING_START_DATE_VALUE)[current_row]).text
+            assert start_date_value == user_data_dict["jointBiddingContracts"][current_row]["startDate"], \
+                f'Не корректное значение в поле "Дата заключения" в строке {current_row}' \
+                f'\n Ожидаемый результат: {user_data_dict["jointBiddingContracts"][current_row]["startDate"]}' \
+                f'\n Фактический результат: {start_date_value}'
+
+            # Проверяем значение в поле "Дата завершения"
+            end_date_value = (self.browser.find_elements(*ContractElementLocators.JOINT_BIDDING_END_DATE_VALUE)[current_row]).text
+            assert end_date_value == user_data_dict["jointBiddingContracts"][current_row]["endDate"], \
+                f'Не корректное значение в поле "Дата завершения" в строке {current_row}' \
+                f'\n Ожидаемый результат: {user_data_dict["jointBiddingContracts"][current_row]["endDate"]}' \
+                f'\n Фактический результат: {end_date_value}'
+
+            # Проверяем значение в поле "Сумма договора/контракта"
+            sum_value = (self.browser.find_elements(*ContractElementLocators.JOINT_BIDDING_SUM_VALUE)[current_row]).text
+            sum_value_exception = ('{:,d}'.format(user_data_dict["jointBiddingContracts"][current_row]["sum"])).replace(",", " ") + ',00'
+            assert sum_value == sum_value_exception, \
+                f'Не корректное значение в поле "Сумма договора/контракта" в строке {current_row}' \
+                f'\n Ожидаемый результат: {sum_value_exception}' \
+                f'\n Фактический результат: {sum_value}'
+            sum_joint_bidding += user_data_dict["jointBiddingContracts"][current_row]["sum"]
+            current_row += 1
+        # Проверяем значение в Поле "Итого"
+        sum_joint_bidding_exception = ('{:,d}'.format(sum_joint_bidding)).replace(",", " ") + ',00'
+        total_sum_joint_bidding = self.is_element_text(*ContractElementLocators.JOINT_BIDDING_TOTAL_SUM_VALUE)
+        assert sum_joint_bidding_exception == total_sum_joint_bidding, \
+            f'Некорректное значение в поле "Итого"' \
+            f'\nОжидаемый результат: {sum_joint_bidding_exception}' \
+            f'\nФактический результат: {total_sum_joint_bidding}'
 
     def send_contract_for_approval(self):
         self.is_element_clickable(*ContractElementLocators.SEND_APPROVAL_CONTRACT_CONTRACT)
@@ -237,118 +300,118 @@ class ContractElementPage(BasePage):
             'Кнопка "Отправить на согласование(Договор/контракт)" не отобрежена'
 
     def verify_contract_waiting_status_approval_legal(self):
-        self.is_visibility_of_element_located(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_ELEMENT, 3)
-        self.browser.find_element(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_ELEMENT).click()
+        self.is_visibility_of_element_located(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_TABS, 3)
+        self.browser.find_element(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_TABS).click()
 
         assert self.is_text_to_be_present_in_element(
             *ContractElementLocators.APPROVAL_LEGAL_STATUS_ELEMENT, "Ожидает согласования"), \
             'Некорректный статус или отсутствует статус в строке "Согласование юридической службой"'
 
     def verify_contract_successfully_status_approval_legal(self):
-        self.is_visibility_of_element_located(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_ELEMENT, 3)
-        self.browser.find_element(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_ELEMENT).click()
+        self.is_visibility_of_element_located(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_TABS, 3)
+        self.browser.find_element(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_TABS).click()
         assert self.is_text_to_be_present_in_element(*ContractElementLocators.APPROVAL_LEGAL_STATUS_ELEMENT,
                                                      "Согласовано"), \
             'Некорректный статус или отсутствует статус в строке "Согласование юридической службой"'
 
     def verify_contract_reject_status_approval_leagal(self):
-        self.is_visibility_of_element_located(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_ELEMENT, 3)
-        self.browser.find_element(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_ELEMENT).click()
+        self.is_visibility_of_element_located(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_TABS, 3)
+        self.browser.find_element(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_TABS).click()
         assert self.is_text_to_be_present_in_element(*ContractElementLocators.APPROVAL_LEGAL_STATUS_ELEMENT,
                                                      "Отклонено"), \
             'Некорректный статус или отсутствует статус в строке "Согласование юридической службой"'
 
     def verify_contract_waiting_status_approval_count(self):
-        self.is_visibility_of_element_located(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_ELEMENT, 3)
-        self.browser.find_element(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_ELEMENT).click()
+        self.is_visibility_of_element_located(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_TABS, 3)
+        self.browser.find_element(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_TABS).click()
 
         assert self.is_text_to_be_present_in_element(*ContractElementLocators.APPROVAL_COUNT_STATUS_ELEMENT,
                                                      "Ожидает согласования"), \
             'Некорректный статус или отсутствует статус в строке "Согласование c бухгалтерией"'
 
     def verify_contract_successfully_status_approval_count(self):
-        self.is_visibility_of_element_located(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_ELEMENT, 3)
-        self.browser.find_element(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_ELEMENT).click()
+        self.is_visibility_of_element_located(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_TABS, 3)
+        self.browser.find_element(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_TABS).click()
         assert self.is_text_to_be_present_in_element(*ContractElementLocators.APPROVAL_COUNT_STATUS_ELEMENT,
                                                      "Согласовано"), \
             'Некорректный статус или отсутствует статус в строке "Согласование c бухгалтерией"'
 
     def verify_contract_reject_status_approval_count(self):
-        self.is_visibility_of_element_located(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_ELEMENT, 3)
-        self.browser.find_element(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_ELEMENT).click()
+        self.is_visibility_of_element_located(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_TABS, 3)
+        self.browser.find_element(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_TABS).click()
         assert self.is_text_to_be_present_in_element(*ContractElementLocators.APPROVAL_COUNT_STATUS_ELEMENT,
                                                      "Отклонено"), \
             'Некорректный статус или отсутствует статус в строке "Согласование c бухгалтерией"'
 
     def verify_contract_waiting_status_approval_fin(self):
-        self.is_visibility_of_element_located(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_ELEMENT, 3)
-        self.browser.find_element(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_ELEMENT).click()
+        self.is_visibility_of_element_located(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_TABS, 3)
+        self.browser.find_element(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_TABS).click()
 
         assert self.is_text_to_be_present_in_element(*ContractElementLocators.APPROVAL_FIN_STATUS_ELEMENT,
                                                      "Ожидает согласования"), \
             'Некорректный статус или отсутствует статус в строке "Согласование c финансовой службой"'
 
     def verify_contract_successfully_status_approval_fin(self):
-        self.is_visibility_of_element_located(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_ELEMENT, 3)
-        self.browser.find_element(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_ELEMENT).click()
+        self.is_visibility_of_element_located(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_TABS, 3)
+        self.browser.find_element(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_TABS).click()
         assert self.is_text_to_be_present_in_element(*ContractElementLocators.APPROVAL_FIN_STATUS_ELEMENT,
                                                      "Согласовано"), \
             'Некорректный статус или отсутствует статус в строке "Согласование c финансовой службой"'
 
     def verify_contract_reject_status_approval_fin(self):
-        self.is_visibility_of_element_located(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_ELEMENT, 3)
-        self.browser.find_element(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_ELEMENT).click()
+        self.is_visibility_of_element_located(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_TABS, 3)
+        self.browser.find_element(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_TABS).click()
         assert self.is_text_to_be_present_in_element(*ContractElementLocators.APPROVAL_FIN_STATUS_ELEMENT,
                                                      "Отклонено"), \
             'Некорректный статус или отсутствует статус в строке "Согласование c финансовой службой"'
 
     def verify_contract_waiting_status_approval_udprpo(self):
-        self.is_visibility_of_element_located(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_ELEMENT, 3)
-        self.browser.find_element(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_ELEMENT).click()
+        self.is_visibility_of_element_located(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_TABS, 3)
+        self.browser.find_element(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_TABS).click()
 
         assert self.is_text_to_be_present_in_element(*ContractElementLocators.APPROVAL_UDPRPO_STATUS_ELEMENT,
                                                      "Ожидает согласования"), \
             'Некорректный статус или отсутствует статус в строке "Согласование c УДПР ПО"'
 
     def verify_contract_successfully_status_approval_udprpo(self):
-        self.is_visibility_of_element_located(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_ELEMENT, 3)
-        self.browser.find_element(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_ELEMENT).click()
+        self.is_visibility_of_element_located(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_TABS, 3)
+        self.browser.find_element(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_TABS).click()
         assert self.is_text_to_be_present_in_element(*ContractElementLocators.APPROVAL_UDPRPO_STATUS_ELEMENT,
                                                      "Согласовано"), \
             'Некорректный статус или отсутствует статус в строке "Согласование c УДПР ПО"'
 
     def verify_contract_reject_status_approval_udprpo(self):
-        self.is_visibility_of_element_located(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_ELEMENT, 3)
-        self.browser.find_element(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_ELEMENT).click()
+        self.is_visibility_of_element_located(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_TABS, 3)
+        self.browser.find_element(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_TABS).click()
         assert self.is_text_to_be_present_in_element(*ContractElementLocators.APPROVAL_UDPRPO_STATUS_ELEMENT,
                                                      "Отклонено"), \
             'Некорректный статус или отсутствует статус в строке "Согласование c УДПР ПО"'
 
     def verify_contract_waiting_status_approval_kkp(self):
-        self.is_visibility_of_element_located(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_ELEMENT, 3)
-        self.browser.find_element(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_ELEMENT).click()
+        self.is_visibility_of_element_located(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_TABS, 3)
+        self.browser.find_element(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_TABS).click()
 
         assert self.is_text_to_be_present_in_element(*ContractElementLocators.APPROVAL_KKP_STATUS_ELEMENT,
                                                      "Ожидает согласования"), \
             'Некорректный статус или отсутствует статус в строке "Согласование c ККП"'
 
     def verify_contract_successfully_status_approval_kkp(self):
-        self.is_visibility_of_element_located(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_ELEMENT, 3)
-        self.browser.find_element(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_ELEMENT).click()
+        self.is_visibility_of_element_located(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_TABS, 3)
+        self.browser.find_element(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_TABS).click()
         assert self.is_text_to_be_present_in_element(*ContractElementLocators.APPROVAL_KKP_STATUS_ELEMENT,
                                                      "Согласовано"), \
             'Некорректный статус или отсутствует статус в строке "Согласование c ККП"'
 
     def verify_contract_reject_status_approval_kkp(self):
-        self.is_visibility_of_element_located(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_ELEMENT, 3)
-        self.browser.find_element(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_ELEMENT).click()
+        self.is_visibility_of_element_located(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_TABS, 3)
+        self.browser.find_element(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_TABS).click()
         assert self.is_text_to_be_present_in_element(*ContractElementLocators.APPROVAL_KKP_STATUS_ELEMENT,
                                                      "Отклонено"), \
             'Некорректный статус или отсутствует статус в строке "Согласование c ККП"'
 
     def verify_contract_revision_status_approval_kkp(self):
-        self.is_visibility_of_element_located(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_ELEMENT, 3)
-        self.browser.find_element(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_ELEMENT).click()
+        self.is_visibility_of_element_located(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_TABS, 3)
+        self.browser.find_element(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_TABS).click()
         assert self.is_text_to_be_present_in_element(*ContractElementLocators.APPROVAL_KKP_STATUS_ELEMENT,
                                                      "Отправлено на доработку"), \
             'Некорректный статус или отсутствует статус в строке "Согласование c ККП"'

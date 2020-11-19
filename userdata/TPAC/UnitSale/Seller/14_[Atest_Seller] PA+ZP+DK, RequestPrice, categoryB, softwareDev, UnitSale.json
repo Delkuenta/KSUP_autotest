@@ -16,6 +16,7 @@
         "applicationSize": 10000,
         "contractSize": 7000,
         "separateSale": "Да",
+		"jointBidding": "Нет",
         "competitionDeadlineFrom": "15.07.2020",
         "startDate": "1.07.2020",
         "endDate": "01.07.2021",

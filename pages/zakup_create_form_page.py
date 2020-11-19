@@ -33,16 +33,34 @@ class ZakupFormCreate(BasePage):
                                   f'Фактический результат: {title_zp}')
 
         # Проверки заполнения общих полей для всех типов
-        assert user_data_dict["salesUnit"] in self.is_element_text(*FormCreateZakupLocators.SALES_UNIT_IN_ZP_ELEMENT), "Некорректная информация в поле Подразделение-продавец"
-        assert user_data_dict["salesManager"] in self.is_element_text(*FormCreateZakupLocators.SALES_MANAGER_IN_ZP_ELEMENT), "Некорректная информация в поле Ответственный менеджер подразделения-продавца"
-        assert user_data_dict["executiveUnit"] in self.is_element_text(*FormCreateZakupLocators.EXECUTIVE_UNIT_IN_ZP_ELEMENT), "Некорректная информация в поле Подразделение-исполнитель"
-        assert user_data_dict["executiveManager"] in self.is_element_text(*FormCreateZakupLocators.EXECUTIVE_MANAGER_IN_ZP_ELEMENT), "Некорректная информация в поле Ответственный менеджер подразделения-исполнителя"
-        assert user_data_dict["customer"] in self.is_element_text(*FormCreateZakupLocators.CUSTOMER_IN_ZP_ELEMENT), "Некорректная информация в поле Заказчик"
-        assert user_data_dict["executiveUnitLegal"] in self.is_element_text(*FormCreateZakupLocators.EXECUTIVE_LEGAL_IN_ZP_ELEMENT), "Некорректная информация в поле Исполнитель Юр.Лицо"
-        assert user_data_dict["fullName"] in self.is_element_text(*FormCreateZakupLocators.SALES_WITH_OP_FOR_VERIFY), "Некорректная информация в поле Связанные продажи"
+        assert user_data_dict["salesUnit"] in self.is_element_text(
+            *FormCreateZakupLocators.SALES_UNIT_IN_ZP_ELEMENT), "Некорректная информация в поле Подразделение-продавец"
+        assert user_data_dict["salesManager"] in self.is_element_text(
+            *FormCreateZakupLocators.SALES_MANAGER_IN_ZP_ELEMENT), "Некорректная информация в поле Ответственный менеджер подразделения-продавца"
+        assert user_data_dict["executiveUnit"] in self.is_element_text(
+            *FormCreateZakupLocators.EXECUTIVE_UNIT_IN_ZP_ELEMENT), "Некорректная информация в поле Подразделение-исполнитель"
+        assert user_data_dict["executiveManager"] in self.is_element_text(
+            *FormCreateZakupLocators.EXECUTIVE_MANAGER_IN_ZP_ELEMENT), "Некорректная информация в поле Ответственный менеджер подразделения-исполнителя"
+        assert user_data_dict["customer"] in self.is_element_text(
+            *FormCreateZakupLocators.CUSTOMER_IN_ZP_ELEMENT), "Некорректная информация в поле Заказчик"
+        assert user_data_dict["executiveUnitLegal"] in self.is_element_text(
+            *FormCreateZakupLocators.EXECUTIVE_LEGAL_IN_ZP_ELEMENT), "Некорректная информация в поле Исполнитель Юр.Лицо"
+        assert user_data_dict["fullName"] in self.is_element_text(
+            *FormCreateZakupLocators.SALES_WITH_OP_FOR_VERIFY), "Некорректная информация в поле Связанные продажи"
 
         # Заполнение полей исходя из типа заявки
         if user_data_dict["contractorType"] == "Тендерная заявка":
+            if user_data_dict["jointBidding"] == "Да":
+                # Активируем чек-бокс "Совместные торги"
+                self.browser.find_element(*FormCreateZakupLocators.JOINT_BIDDING_CHECKBOX).click()
+                # Проверяем, что при активации сменилось название поля "Заказчик"
+                delayed_assert.expect(
+                    self.is_text_to_be_present_in_element(*FormCreateZakupLocators.CUSTOMER_FIELD_NAME,
+                                                          'Организация, осуществляющая размещение закупки') is True,
+                    'При активации чек-бокса "Совместные торги" отображено не корреткное название\n '
+                    'Ожидаемый результат:"Организация, осуществляющая размещение закупки"\n'
+                    f'Фактический результат {self.is_element_text(*FormCreateZakupLocators.CUSTOMER_FIELD_NAME)}')
+
             # Заполняем поле "Порядок проведения закупочной процедуры"
             Select(self.browser.find_element(*FormCreateZakupLocators.CONTRACTOR_TYPE_TENDER_ZP)).select_by_value(
                 user_data_dict["saleLawType"])
@@ -145,7 +163,6 @@ class ZakupFormCreate(BasePage):
             # "Ссылка на запрос на Официальном сайте ЕИС" если порядок закупки 44-ФЗ
 
             if user_data_dict["saleLawType"] == "44-ФЗ":
-
                 # Проверка отображения поля "Предполагаемая дата начала проведения закупки с"
                 assert self.is_visibility_of_element_located(*FormCreateZakupLocators.PURCHASE_START_DATE_FROM, 3), \
                     'Ошибка: Не отображено поле "Предполагаемая дата начала проведения закупки с"'

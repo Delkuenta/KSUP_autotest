@@ -17,7 +17,7 @@ from pages.zakup_list_page import ZakupListPage
 @pytest.mark.parametrize('path_data_file', [
     r"TPAC\RejectApproval\1_[Atest_Seller] Reject ZP,Tender, categoryA, softwareDev, UnitSale.json"])
 class TestRejectEscalationZakup:
-    """
+
     def test_create_presale(self, browser_function, path_data_file):
         user_data_dict = BasePage.read_json(browser_function, path_data_file)
         user_data_dict = BasePage.dict_preparation(browser_function, user_data_dict)
@@ -83,7 +83,7 @@ class TestRejectEscalationZakup:
         else:
             zakup_element_page.verify_zakup_not_require_status_approval()
         login_page.logout()
-    """
+
     def test_reject_zakup_for_legal_cycle1(self, browser_function, path_data_file):
         user_data_dict = BasePage.read_json(browser_function, path_data_file)
         user_data_dict = BasePage.dict_preparation(browser_function, user_data_dict)
