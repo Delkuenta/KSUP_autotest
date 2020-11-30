@@ -10,13 +10,6 @@ from pages.locators import KnowledgeSearchLocators
 
 
 class KnowledgeSearchPage(BasePage):
-    # Вспомогательный метод: собирает текст у всех найденных элементов в список.
-    def item_text_collector(self, how, what):
-        web_elements = self.browser.find_elements(how, what)
-        list_text_element = []
-        for item in web_elements:
-            list_text_element.append(item.text)
-        return list_text_element
 
     # Вспомогательный метод: Прогрузка всех найденных результатов.
     def load_all_result(self):
@@ -178,9 +171,10 @@ class KnowledgeSearchPage(BasePage):
                               f'Отображены сущности {set(list_found_element)}\nОжидаемый результат: "Юр.лицо/ИП"')
         delayed_assert.expect(len(set(list_found_element)) == 1, "Отображены сущности не только категории Юр.лицо/ИП")
 
-    def search_lien_by_name(self, data_dict):
-        split_name = data_dict["fullName"].split(",")
-        if len(split_name) > 1:
+    def search_line_by_name(self, data_dict):
+        # Проверяем наличие разделителя: ","
+        if data_dict["fullName"].find(",") >= 0:
+            split_name = data_dict["fullName"].split(",")
             # Вводим первую часть названия
             self.browser.find_element(*KnowledgeSearchLocators.SEARCH_LINE).send_keys(split_name[0])
             time.sleep(3)
@@ -207,7 +201,6 @@ class KnowledgeSearchPage(BasePage):
                         f'Не найдено сущности "{data_dict["fullName"]}" по поиску значения {split_name[1]}'
             else:
                 print("Не найдено результатов удовлетворяющих запросу")
-
             # Очищаем строку поиска
             self.browser.find_element(*KnowledgeSearchLocators.CLEAR_LINE_BUTTON).click()
 
@@ -232,18 +225,18 @@ class KnowledgeSearchPage(BasePage):
         time.sleep(3)
 
         # Проверяем найденные сущности по атрибуту "Заказчик"
-        
-
-
-
 
     def search_with_customer_block_filter(self, data_dict):
         # Жмем кнопку "Весь список" в блоке "Заказчик"
         self.browser.find_element(*KnowledgeSearchLocators.ALL_LIST_CUSTOMER_BLOCK).click()
         self.is_text_to_be_present_in_element(*KnowledgeSearchLocators.ALL_LIST_CUSTOMER_BLOCK, "Свернуть")
-
+        #
+        if isinstance(data_dict["customer"], str):
+            original_list_customer = [data_dict["customer"]]
+        else:
+            original_list_customer = data_dict["customer"]
         # Поиск и активация чек-боксов
-        for element in data_dict["customer"]:
+        for element in original_list_customer:
             # Вводим в строку поиска первое значение "Заказчик"
             self.browser.find_element(*KnowledgeSearchLocators.SEARCH_LINE_IN_BLOCK_FILTER).send_keys(
                 element)
@@ -258,22 +251,23 @@ class KnowledgeSearchPage(BasePage):
                 f'Чек-бокс {element} в блоке "Заказчик" не активирован'
             time.sleep(2)
 
-            # Проверяем результаты фильтрации по полю "Заказчик"
-            list_customer_found = self.item_text_collector(*KnowledgeSearchLocators.CUSTOMER_VALUE_IN_RESULT)
-            result = 0
-            for str_customer in set(list_customer_found):
-                if element in str_customer:
-                    result += 1
-            assert result > 1, \
-                f'После фильтрации по полю "Заказчик" не отображено ожидаемого результата\n ' \
-                f'Ожидаемый результат: {element}\n ' \
-                f'Фактические результаты: {set(list_customer_found)}'
-
             # Проверяем результаты фильтраци по названию сущности
             self.checking_the_found_name(data_dict["fullName"], "Заказчик")
 
+            # Проверяем результаты фильтрации по полю "Заказчик"
+            list_customer_found = self.item_text_collector(*KnowledgeSearchLocators.CUSTOMER_VALUE_IN_RESULT)
+            result = 0
+            for found_value in set(list_customer_found):
+                if element in found_value:
+                    result += 1
+            assert result > 1, \
+                f'После фильтрации по полю "Заказчик" не отображено ожидаемого результата ' \
+                f'или в карточке отсутствует поле "Заказчик"\n ' \
+                f'Ожидаемый результат: Значение "{element}" в поле "Заказчик"\n ' \
+                f'Фактические результаты: {set(list_customer_found)}'
+
         # Деактивируем чек-боксы
-        for element in data_dict["customer"]:
+        for element in original_list_customer:
             # Вводим в строку поиска первое значение "Заказчик"
             self.browser.find_element(*KnowledgeSearchLocators.SEARCH_LINE_IN_BLOCK_FILTER).send_keys(element)
 
@@ -453,11 +447,12 @@ class KnowledgeSearchPage(BasePage):
             # Проверяем результаты фильтрации по полю "Технологии"
             list_technologies_found = self.item_text_collector(*KnowledgeSearchLocators.TECHNOLOGIES_VALUE_IN_RESULT)
             result = 0
-            for str_technology in set(list_technologies_found):
-                if element in str_technology:
+            for found_value in set(list_technologies_found):
+                if element in found_value:
                     result += 1
             assert result > 0, \
-                f'После фильтрации по полю "Технология" не отображено ожидаемого результата\n ' \
+                f'После фильтрации по полю "Технология" не отображено ожидаемого результата ' \
+                f'или в карточке отсутствует поле "Технология"\n ' \
                 f'Ожидаемый результат: {element}\n ' \
                 f'Фактические результаты: {set(list_technologies_found)}'
 

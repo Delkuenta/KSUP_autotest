@@ -11,23 +11,41 @@ from pages.zakup_element_page import ZakupElementPage
 from pages.zakup_list_page import ZakupListPage
 
 
-@pytest.mark.parametrize('path_data_file', [
-    r"TPAC\SeparateSale\Seller - Seller2\2[Atest_Seller] PA+ZP+DK, CommercialOffer, categoryA, SoftwareDev, SeparateSale.json"])
+@pytest.mark.parametrize('path_data_file', [r"TPAC\UnitSale\Seller\1_[Atest_Seller] PA+ZP+DK,Tender, categoryA, softwareDev, UnitSale.json"])
 class TestUnitSaleFullBusinessCyclePaZpDk:
-    def test_verify_visibility_zakup_button_salesManager(self, browser_function, path_data_file):
-        user_data_dict = BasePage.read_json(browser_function, path_data_file)
-        user_data_dict = BasePage.dict_preparation(browser_function, user_data_dict)
+    def test_login(self, browser_session, path_data_file):
+        user_data_dict = BasePage.read_json(browser_session, path_data_file)
+        user_data_dict = BasePage.dict_preparation(browser_session, user_data_dict)
         link = LoginData.link
-        login_page = LoginData(browser_function, link)
+        presale_list_page = PresalePage(browser_session, link)
+        login_page = LoginData(browser_session, link)
         login_page.open()
-        login_page.login("Mr_KSUP_Seller2")
-        zakup_list_page = ZakupListPage(browser_function, link)
-        zakup_list_page.go_to_zakup_list(link)
-        zakup_list_page.go_to_zakup_element(user_data_dict)
-        zakup_element_page = ZakupElementPage(browser_function, link)
-        refresh_count = 0
-        while refresh_count <= 50:
-            zakup_element_page.verify_visibility_button_create_contract()
-            browser_function.refresh()
-            refresh_count += 1
+        login_page.login(user_data_dict["createAccount"])
+        login_page.verify_username(user_data_dict["createAccount"])
+        presale_list_page.go_to_presale_list(link)
 
+    @pytest.mark.repeat(200)
+    @pytest.mark.xfail(reason="Баг https://jira.lanit.ru/browse/KSUP-1041")
+    def test_create_presale(self, browser_session, path_data_file):
+        user_data_dict = BasePage.read_json(browser_session, path_data_file)
+        user_data_dict = BasePage.dict_preparation(browser_session, user_data_dict)
+        print(user_data_dict)
+        link = LoginData.link
+        presale_list_page = PresalePage(browser_session, link)
+        create_presale_page = PresaleFormCreate(browser_session, link)
+        presale_list_page.should_be_clickable_create_button()
+        presale_list_page.go_to_create_presale()
+        create_presale_page.form_create_presale_all_type(user_data_dict)
+
+
+def test_function_split():
+    mine_list = []
+    mine_str = "КАЗНАЧЕЙСТВО РОССИИ"
+    old_list = ["ДИТ МОСКВЫ", "ХУЙ", "ПИЗДА"]
+    mine_list += [mine_str]
+    print("\n", mine_list)
+    print("\n", type(mine_list), "\n")
+    mine_list = []
+    mine_list += old_list
+    print("\n", mine_list)
+    print("\n", type(mine_list))

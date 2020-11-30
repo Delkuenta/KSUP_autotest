@@ -24,7 +24,7 @@ UnitSale\Seller
 6_[Atest_Seller] PA+ZP+DK,Tender, categoryC, OtherType, UnitSale.json
 7_[Аtest_Seller] PA+ZP+DK, CommercialOffer, categoryA, softwareDev, UnitSale.json
 8_[Аtest_Seller] PA+ZP+DK, CommercialOffer, categoryB, softwareDev, UnitSale.json
-9_[Аtest_Seller] PA+ZP+DK, CommercialOffer, categoryC, softwareDev, UnitSale.json
+9_[Atest_Seller] PA+ZP+DK, CommercialOffer, categoryC, softwareDev, UnitSale.json
 10_[Аtest_Seller] PA+ZP+DK, CommercialOffer, categoryA, OtherType, UnitSale.json
 11_[Аtest_Seller] PA+ZP+DK, CommercialOffer, categoryB, OtherType, UnitSale.json
 12_[Аtest_Seller] PA+ZP+DK, CommercialOffer, categoryC, OtherType, UnitSale.json
@@ -79,7 +79,7 @@ UnitSale\Seller2
 
 # До первой ошибки --maxfail=1
 # Браузер для запуска --browser_name=firefox
-@pytest.mark.parametrize('path_data_file', [r"TPAC\UnitSale\Dir\20_[Atest_Dir] PA+ZP+DK,Tender, JointBidding, categoryA, softwareDev, UnitSale.json"])
+@pytest.mark.parametrize('path_data_file', [r"TPAC\UnitSale\Seller\13_[Atest_Seller] PA+ZP+DK, RequestPrice, categoryA, softwareDev, UnitSale.json"])
 class TestUnitSaleFullBusinessCyclePaZpDk:
     @pytest.mark.xfail(reason="Баг https://jira.lanit.ru/browse/KSUP-1041")
     def test_create_presale(self, browser_function, path_data_file):
@@ -98,6 +98,7 @@ class TestUnitSaleFullBusinessCyclePaZpDk:
         presale_list_page.should_be_clickable_create_button()
         presale_list_page.go_to_create_presale()
         create_presale_page.form_create_presale_all_type(user_data_dict)
+        presale_list_page.go_to_mine_elements_tabs()
         presale_list_page.should_be_element_on_presale_list(user_data_dict)
         presale_list_page.go_to_presale_element(user_data_dict)
         presale_element_page.verify_general_information_in_presale(user_data_dict)
@@ -115,23 +116,20 @@ class TestUnitSaleFullBusinessCyclePaZpDk:
         zakup_form_create_page = ZakupFormCreate(browser_function, browser_function.current_url)
         zakup_list_page = ZakupListPage(browser_function, browser_function.current_url)
         zakup_element_page = ZakupElementPage(browser_function, browser_function.current_url)
-        # Логин
+
         login_page.open()
         login_page.login(user_data_dict["createAccount"])
         login_page.verify_username(user_data_dict["createAccount"])
-        # Переход на список сущностей "Пресейловая активность"
+
         presale_list_page.go_to_presale_list(link)
+        presale_list_page.go_to_mine_elements_tabs()
         presale_list_page.should_be_element_on_presale_list(user_data_dict)
-        # Переход в карточку "Пресейловая активность"
         presale_list_page.go_to_presale_element(user_data_dict)
         presale_element_page.go_to_create_zp_based_on_presale(user_data_dict)
-        # Заполнение формы создания сущности "Закупочная процедура" на основе сущности "Пресейловая активность"
         zakup_form_create_page.form_create_zakup_all_type_based_on_presale(user_data_dict)
-        # Проверка создания сущности в списке сущностей "Закупочная процедура"
+        zakup_list_page.go_to_mine_elements_tabs()
         zakup_list_page.should_be_element_on_zakup_list(user_data_dict)
-        # Переходим в карточку сущности "Закупочная процедура"
         zakup_list_page.go_to_zakup_element(user_data_dict)
-        # Проверка корректности заполненных полей и статуса созданной сущности
         zakup_element_page.verify_general_information_in_zakup(user_data_dict)
         zakup_element_page.verify_draft_status_zakup()
 
@@ -182,12 +180,17 @@ class TestUnitSaleFullBusinessCyclePaZpDk:
             login_page.verify_username("Mr_KSUP_Legal")
             login_page.go_to_zakup_list(link)
             zakup_list_page = ZakupListPage(browser_function, browser_function.current_url)
+            zakup_list_page.go_to_approval_elements_tabs()
+            zakup_list_page.should_be_element_on_zakup_list(user_data_dict)
             zakup_list_page.go_to_zakup_element(user_data_dict)
             zakup_element_page = ZakupElementPage(browser_function, browser_function.current_url)
             zakup_element_page.verify_general_information_in_zakup(user_data_dict)
             zakup_element_page.approval_zakup_legal()
             zakup_element_page.verify_zakup_successfully_status_approval_legal()
             zakup_element_page.verify_zakup_waiting_status_approval_count()
+            login_page.go_to_zakup_list(link)
+            zakup_list_page.go_to_approved_elements_tabs()
+            zakup_list_page.should_be_element_on_zakup_list(user_data_dict)
             login_page.logout()
         else:
             print("\nВнутреннее согласование закупочной процедуры за Юридическую службу не требуется")
@@ -203,12 +206,17 @@ class TestUnitSaleFullBusinessCyclePaZpDk:
             login_page.verify_username("Mr_KSUP_Count")
             login_page.go_to_zakup_list(link)
             zakup_list_page = ZakupListPage(browser_function, browser_function.current_url)
+            # zakup_list_page.go_to_approval_elements_tabs()
+            zakup_list_page.should_be_element_on_zakup_list(user_data_dict)
             zakup_list_page.go_to_zakup_element(user_data_dict)
             zakup_element_page = ZakupElementPage(browser_function, browser_function.current_url)
             zakup_element_page.verify_general_information_in_zakup(user_data_dict)
             zakup_element_page.approval_zakup_count()
             zakup_element_page.verify_zakup_successfully_status_approval_count()
             zakup_element_page.verify_zakup_waiting_status_approval_fin()
+            login_page.go_to_zakup_list(link)
+            # zakup_list_page.go_to_approved_elements_tabs()
+            zakup_list_page.should_be_element_on_zakup_list(user_data_dict)
             login_page.logout()
         else:
             print("\nВнутреннее согласование закупочной процедуры за Бухгалтерию не требуется")
@@ -224,6 +232,8 @@ class TestUnitSaleFullBusinessCyclePaZpDk:
             login_page.verify_username("Mr_KSUP_Fin")
             login_page.go_to_zakup_list(link)
             zakup_list_page = ZakupListPage(browser_function, browser_function.current_url)
+            zakup_list_page.go_to_approval_elements_tabs()
+            zakup_list_page.should_be_element_on_zakup_list(user_data_dict)
             zakup_list_page.go_to_zakup_element(user_data_dict)
             zakup_element_page = ZakupElementPage(browser_function, browser_function.current_url)
             zakup_element_page.verify_general_information_in_zakup(user_data_dict)
@@ -235,6 +245,9 @@ class TestUnitSaleFullBusinessCyclePaZpDk:
             elif user_data_dict["groupTypeWork"] == "Other" \
                     and user_data_dict["priceCategory"] == "A":
                 zakup_element_page.verify_zakup_waiting_status_approval_kkp()
+            login_page.go_to_zakup_list(link)
+            zakup_list_page.go_to_approved_elements_tabs()
+            zakup_list_page.should_be_element_on_zakup_list(user_data_dict)
             login_page.logout()
         else:
             print("\nВнутреннее согласование закупочной процедуры c финансовой службой не требуется")
@@ -250,6 +263,8 @@ class TestUnitSaleFullBusinessCyclePaZpDk:
             login_page.verify_username("Mr_KSUP_UDPRPO")
             login_page.go_to_zakup_list(link)
             zakup_list_page = ZakupListPage(browser_function, browser_function.current_url)
+            zakup_list_page.go_to_approval_elements_tabs()
+            zakup_list_page.should_be_element_on_zakup_list(user_data_dict)
             zakup_list_page.go_to_zakup_element(user_data_dict)
             zakup_element_page = ZakupElementPage(browser_function, browser_function.current_url)
             zakup_element_page.approval_zakup_udprpo()
@@ -257,6 +272,9 @@ class TestUnitSaleFullBusinessCyclePaZpDk:
             if user_data_dict["contractorType"] == "Тендерная заявка" \
                     and user_data_dict["priceCategory"] == "A":
                 zakup_element_page.verify_zakup_waiting_status_approval_kkp()
+            login_page.go_to_zakup_list(link)
+            zakup_list_page.go_to_approved_elements_tabs()
+            zakup_list_page.should_be_element_on_zakup_list(user_data_dict)
             login_page.logout()
         else:
             print("\nВнутреннее согласование закупочной процедуры со службой УДПР ПО не требуется")
@@ -272,10 +290,15 @@ class TestUnitSaleFullBusinessCyclePaZpDk:
             login_page.verify_username("Mr_KSUP_KKP")
             login_page.go_to_zakup_list(link)
             zakup_list_page = ZakupListPage(browser_function, browser_function.current_url)
+            zakup_list_page.go_to_approval_elements_tabs()
+            zakup_list_page.should_be_element_on_zakup_list(user_data_dict)
             zakup_list_page.go_to_zakup_element(user_data_dict)
             zakup_element_page = ZakupElementPage(browser_function, browser_function.current_url)
             zakup_element_page.approval_zakup_kkp()
             zakup_element_page.verify_zakup_successfully_status_approval_kkp(user_data_dict)
+            login_page.go_to_zakup_list(link)
+            zakup_list_page.go_to_approved_elements_tabs()
+            zakup_list_page.should_be_element_on_zakup_list(user_data_dict)
             login_page.logout()
         else:
             print("\nВнутреннее согласование закупочной процедуры со службой ККП не требуется")
@@ -290,12 +313,15 @@ class TestUnitSaleFullBusinessCyclePaZpDk:
         login_page.verify_username(user_data_dict["createAccount"])
         login_page.go_to_zakup_list(link)
         zakup_list_page = ZakupListPage(browser_function, browser_function.current_url)
+        zakup_list_page.go_to_mine_elements_tabs()
+        zakup_list_page.should_be_element_on_zakup_list(user_data_dict)
         zakup_list_page.go_to_zakup_element(user_data_dict)
         zakup_element_page = ZakupElementPage(browser_function, browser_function.current_url)
         zakup_element_page.go_to_create_contract_based_on_zp()
         contract_form_create = ContractFormCreate(browser_function, browser_function.current_url)
         contract_form_create.form_create_contract_based_on_zakup(user_data_dict)
         contract_list_page = ContractPage(browser_function, browser_function.current_url)
+        contract_list_page.go_to_mine_elements_tab()
         contract_list_page.should_be_element_on_contract_list(user_data_dict)
         contract_list_page.go_to_contract_element(user_data_dict)
         contract_element_page = ContractElementPage(browser_function, browser_function.current_url)
@@ -314,6 +340,8 @@ class TestUnitSaleFullBusinessCyclePaZpDk:
         login_page.verify_username(user_data_dict["createAccount"])
         login_page.go_to_contract_list(link)
         contract_list = ContractPage(browser_function, browser_function.current_url)
+        contract_list.go_to_mine_elements_tab()
+        contract_list.should_be_element_on_contract_list(user_data_dict)
         contract_list.go_to_contract_element(user_data_dict)
         contract_element_page = ContractElementPage(browser_function, browser_function.current_url)
         contract_element_page.send_contract_for_approval()
@@ -330,11 +358,16 @@ class TestUnitSaleFullBusinessCyclePaZpDk:
         login_page.verify_username("Mr_KSUP_Legal")
         login_page.go_to_contract_list(link)
         contract_list_page = ContractPage(browser_function, browser_function.current_url)
+        contract_list_page.go_to_approval_elements_tab()
+        contract_list_page.should_be_element_on_contract_list(user_data_dict)
         contract_list_page.go_to_contract_element(user_data_dict)
         contract_element_page = ContractElementPage(browser_function, browser_function.current_url)
         contract_element_page.approval_contract_legal()
         contract_element_page.verify_contract_successfully_status_approval_legal()
         contract_element_page.verify_contract_waiting_status_approval_count()
+        login_page.go_to_contract_list(link)
+        contract_list_page.go_to_approved_elements_tab()
+        contract_list_page.should_be_element_on_contract_list(user_data_dict)
         login_page.logout()
 
     def test_approval_contract_for_count(self, browser_function, path_data_file):
@@ -347,11 +380,16 @@ class TestUnitSaleFullBusinessCyclePaZpDk:
         login_page.verify_username("Mr_KSUP_Count")
         login_page.go_to_contract_list(link)
         contract_list_page = ContractPage(browser_function, browser_function.current_url)
+        # contract_list_page.go_to_approval_elements_tab()
+        contract_list_page.should_be_element_on_contract_list(user_data_dict)
         contract_list_page.go_to_contract_element(user_data_dict)
         contract_element_page = ContractElementPage(browser_function, browser_function.current_url)
         contract_element_page.approval_contract_count()
         contract_element_page.verify_contract_successfully_status_approval_count()
         contract_element_page.verify_contract_waiting_status_approval_fin()
+        login_page.go_to_contract_list(link)
+        # contract_list_page.go_to_approved_elements_tab()
+        contract_list_page.should_be_element_on_contract_list(user_data_dict)
         login_page.logout()
 
     def test_approval_contract_for_fin(self, browser_function, path_data_file):
@@ -364,6 +402,8 @@ class TestUnitSaleFullBusinessCyclePaZpDk:
         login_page.verify_username("Mr_KSUP_Fin")
         login_page.go_to_contract_list(link)
         contract_list_page = ContractPage(browser_function, browser_function.current_url)
+        contract_list_page.go_to_approval_elements_tab()
+        contract_list_page.should_be_element_on_contract_list(user_data_dict)
         contract_list_page.go_to_contract_element(user_data_dict)
         contract_element_page = ContractElementPage(browser_function, browser_function.current_url)
         contract_element_page.approval_contract_fin()
@@ -374,6 +414,9 @@ class TestUnitSaleFullBusinessCyclePaZpDk:
                 and user_data_dict["priceCategory"] == "A" \
                 and user_data_dict["contractorType"] != "Тендерная заявка":
             contract_element_page.verify_contract_waiting_status_approval_kkp()
+        login_page.go_to_contract_list(link)
+        contract_list_page.go_to_approved_elements_tab()
+        contract_list_page.should_be_element_on_contract_list(user_data_dict)
         login_page.logout()
 
     def test_approval_contract_for_udprpo(self, browser_function, path_data_file):
@@ -387,12 +430,17 @@ class TestUnitSaleFullBusinessCyclePaZpDk:
             login_page.verify_username("Mr_KSUP_UDPRPO")
             login_page.go_to_contract_list(link)
             contract_list_page = ContractPage(browser_function, browser_function.current_url)
+            contract_list_page.go_to_approval_elements_tab()
+            contract_list_page.should_be_element_on_contract_list(user_data_dict)
             contract_list_page.go_to_contract_element(user_data_dict)
             contract_element_page = ContractElementPage(browser_function, browser_function.current_url)
             contract_element_page.approval_contract_udprpo()
             contract_element_page.verify_contract_successfully_status_approval_udprpo()
             if user_data_dict["contractorType"] != "Тендерная заявка" and user_data_dict["priceCategory"] == "A":
                 contract_element_page.verify_contract_waiting_status_approval_kkp()
+            login_page.go_to_contract_list(link)
+            contract_list_page.go_to_approved_elements_tab()
+            contract_list_page.should_be_element_on_contract_list(user_data_dict)
             login_page.logout()
         else:
             print("\nВнутреннее согласование контракта со службой УДПР ПО не требуется")
@@ -409,10 +457,15 @@ class TestUnitSaleFullBusinessCyclePaZpDk:
             login_page.verify_username("Mr_KSUP_KKP")
             login_page.go_to_contract_list(link)
             contract_list_page = ContractPage(browser_function, browser_function.current_url)
+            contract_list_page.go_to_approval_elements_tab()
+            contract_list_page.should_be_element_on_contract_list(user_data_dict)
             contract_list_page.go_to_contract_element(user_data_dict)
             contract_element_page = ContractElementPage(browser_function, browser_function.current_url)
             contract_element_page.approval_contract_kkp()
             contract_element_page.verify_contract_successfully_status_approval_kkp()
+            login_page.go_to_contract_list(link)
+            contract_list_page.go_to_approved_elements_tab()
+            contract_list_page.should_be_element_on_contract_list(user_data_dict)
             login_page.logout()
         else:
             print("\nВнутреннее согласование контракта со службой ККП не требуется")

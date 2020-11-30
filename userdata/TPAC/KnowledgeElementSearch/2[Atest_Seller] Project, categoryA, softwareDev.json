@@ -1,13 +1,13 @@
 {
 	"main_data": {
-        "fullName": "[Атест]Проект для поиска в БЗ",
+        "fullName": "[Атест],Проект для поиска в БЗ",
 		"eisPriceLink": "example@link.com",
         "customer": ["КАЗНАЧЕЙСТВО РОССИИ", "БАНК РОССИИ"],
 		"industry": ["IT-сектор", "Автопром"],
 		"typeOfWorkServices": ["Разработка заказного ПО", "Тестирование ПО"],
 		"executiveUnitLegal": "ООО \"ЛАНИТ ЭКСПЕРТИЗА\"",
         "executiveUnit": "Департамент корпоративных систем",
-        "salesUnit": ["Департамент корпоративных систем", "НОРБИТ"],
+        "salesUnit": ["НОРБИТ"],
 		"projectStage": "Подготовка",
 		"contracts": [],
         "startDate": "01.07.2020",

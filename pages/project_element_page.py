@@ -180,7 +180,7 @@ class ProjectElementPage(BasePage):
                 f'Ожидаемый результат: {user_data_dict["salesUnit"]}\n' \
                 f'Фактический результат: {self.is_element_text(*ProjectElementLocators.PERFOMER_DIVISIONS_VALUE)}'
         else:
-            assert len(self.browser.find_elements(*ProjectElementLocators.PERFOMER_DIVISIONS_VALUE)) == 0, \
+            assert self.browser.find_element(*ProjectElementLocators.PERFOMER_DIVISIONS_VALUE).is_displayed() is False, \
                 'Отображено пустое поле "Соисполнители"'
 
         # Проверяем значение в поле "Связанные договоры/контракты"

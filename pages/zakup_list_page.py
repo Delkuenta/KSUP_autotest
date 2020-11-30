@@ -28,3 +28,87 @@ class ZakupListPage(BasePage):
         assert self.is_visibility_of_element_located(how, what, 5), \
             f'Cущность с названием {user_data_dict["fullName"]} не найдена'
         self.browser.find_element(how, what).click()
+
+    # Перейти на вкладку "Мои"
+    def go_to_mine_elements_tabs(self):
+        self.is_visibility_of_element_located(*ZakupListLocators.MINE_ELEMENTS_TAB, 5)
+        self.browser.find_element(*ZakupListLocators.MINE_ELEMENTS_TAB).click()
+
+    # Перейти на вкладку "На согласовании"
+    def go_to_approval_elements_tabs(self):
+        self.is_visibility_of_element_located(*ZakupListLocators.APPROVAL_ELEMENTS_TAB, 5)
+        self.browser.find_element(*ZakupListLocators.APPROVAL_ELEMENTS_TAB).click()
+
+    # Перейти на вкладку "Отклонено"
+    def go_to_rejected_elements_tabs(self):
+        self.is_visibility_of_element_located(*ZakupListLocators.REJECTED_ELEMENTS_TAB, 5)
+        self.browser.find_element(*ZakupListLocators.REJECTED_ELEMENTS_TAB).click()
+
+    # Перейти на вкладку "Согласовано"
+    def go_to_approved_elements_tabs(self):
+        self.is_visibility_of_element_located(*ZakupListLocators.APPROVED_ELEMENTS_TAB, 5)
+        self.browser.find_element(*ZakupListLocators.APPROVED_ELEMENTS_TAB).click()
+
+    def verify_element_status_in_approval_tab(self, approval_status="На согласовании с юридической службой"):
+        self.browser.implicitly_wait(1)
+        exception_set = {approval_status}
+        actual_status_list = self.item_text_collector(*ZakupListLocators.APPROVAL_STATUS_VALUES)
+        while self.is_visibility_of_element_located(*ZakupListLocators.PAGINATOR_NEXT_BUTTON, 0):
+            self.browser.find_element(*ZakupListLocators.PAGINATOR_NEXT_BUTTON).click()
+            actual_status_list += self.item_text_collector(*ZakupListLocators.APPROVAL_STATUS_VALUES)
+        result = list(set(actual_status_list) - exception_set)
+        assert len(result) == 0, 'Не корректные элементы на вкладке. ' \
+                                 f'\nОжидаемый результат: Отображены только сущности со статусом "{approval_status}"' \
+                                 f'\nФактический результат: Отображены сущности со статусом/ми: {result}'
+
+    def verify_element_status_in_rejected_tab(self, rejected_status="Отклонено юридической службой"):
+        self.browser.implicitly_wait(1)
+        exception_set = {rejected_status}
+        actual_status_list = self.item_text_collector(*ZakupListLocators.APPROVAL_STATUS_VALUES)
+        while self.is_visibility_of_element_located(*ZakupListLocators.PAGINATOR_NEXT_BUTTON, 0):
+            self.browser.find_element(*ZakupListLocators.PAGINATOR_NEXT_BUTTON).click()
+            actual_status_list += self.item_text_collector(*ZakupListLocators.APPROVAL_STATUS_VALUES)
+        result = list(set(actual_status_list) - exception_set)
+        assert len(result) == 0, 'Не корректные элементы на вкладке. ' \
+                                 f'\nОжидаемый результат: Отображены только сущности со статусом "{rejected_status}"' \
+                                 f'\nФактический результат: Отображены сущности со статусом/ми: {result}'
+
+    def verify_element_status_in_approved_tab(self, login_name):
+        self.browser.implicitly_wait(1)
+        exception_set = {}
+        if login_name == "Mr_KSUP_Legal":
+            exception_set = {"На согласовании с бухгалтерией",
+                             "На согласовании с финансовой службой",
+                             "На согласовании УДПР ПО",
+                             "На согласовании в ККП",
+                             "Согласовано с финансовой службой",
+                             "Согласовано УДПР ПО",
+                             "Участие в проекте согласовано в ККП"}
+        elif login_name == "Mr_KSUP_Count":
+            exception_set = {"На согласовании с финансовой службой",
+                             "На согласовании УДПР ПО",
+                             "На согласовании в ККП",
+                             "Согласовано с финансовой службой",
+                             "Согласовано УДПР ПО",
+                             "Участие в проекте согласовано в ККП"}
+        elif login_name == "Mr_KSUP_Fin":
+            exception_set = {"На согласовании УДПР ПО",
+                             "На согласовании в ККП",
+                             "Согласовано с финансовой службой",
+                             "Согласовано УДПР ПО",
+                             "Участие в проекте согласовано в ККП"}
+        elif login_name == "Mr_KSUP_UDPRPO":
+            exception_set = {"На согласовании в ККП",
+                             "Согласовано УДПР ПО",
+                             "Участие в проекте согласовано в ККП"}
+        elif login_name == "Mr_KSUP_KKP":
+            exception_set = {"Участие в проекте согласовано в ККП"}
+
+        actual_status_list = self.item_text_collector(*ZakupListLocators.APPROVAL_STATUS_VALUES)
+        while self.is_visibility_of_element_located(*ZakupListLocators.PAGINATOR_NEXT_BUTTON, 0):
+            self.browser.find_element(*ZakupListLocators.PAGINATOR_NEXT_BUTTON).click()
+            actual_status_list += self.item_text_collector(*ZakupListLocators.APPROVAL_STATUS_VALUES)
+        result = list(set(actual_status_list) - exception_set)
+        assert len(result) == 0, 'Не корректные элементы на вкладке. ' \
+                                 f'\nОжидаемый результат: Отображены только сущности со статусом "{exception_set}"' \
+                                 f'\nФактический результат: Отображены сущности со статусом/ми: {result}'

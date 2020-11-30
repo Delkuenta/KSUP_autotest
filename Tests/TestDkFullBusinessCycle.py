@@ -8,8 +8,13 @@ from pages.login_data import LoginData
 
 
 r"""
+19_[Atest_Seller] DK, categoryA, softwareDev.json
+20_[Atest_Seller] DK, categoryB, softwareDev.json
+21_[Atest_Seller] DK, categoryC, softwareDev.json
+
 UnitSale\Dir
 19_[Atest_Dir] DK, categoryA, softwareDev.json
+
 
 UnitSale\Seller2
 19_[Atest_Seller2] DK, categoryA, softwareDev.json
@@ -18,7 +23,9 @@ UnitSale\Seller2
 
 # До первой ошибки --maxfail=1
 @pytest.mark.parametrize('path_data_file', [
-    r"TPAC\UnitSale\Seller\19_[Atest_Seller] DK, categoryA, softwareDev.json"])
+    #r"TPAC\UnitSale\Seller\19_[Atest_Seller] DK, categoryA, softwareDev.json",
+    r"TPAC\UnitSale\Seller\20_[Atest_Seller] DK, categoryB, softwareDev.json"])
+    #r"TPAC\UnitSale\Seller\21_[Atest_Seller] DK, categoryC, softwareDev.json"])
 class TestDkFullBusinessCycle:
 
     def test_create_contract(self, browser_function, path_data_file):

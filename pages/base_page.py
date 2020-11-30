@@ -264,3 +264,10 @@ class BasePage:
         self.is_frame_to_parent()
         time.sleep(2)
 
+    # Вспомогательный метод: собирает текст у всех найденных элементов в список.
+    def item_text_collector(self, how, what):
+        web_elements = self.browser.find_elements(how, what)
+        list_text_element = []
+        for item in web_elements:
+            list_text_element.append(item.text)
+        return list_text_element

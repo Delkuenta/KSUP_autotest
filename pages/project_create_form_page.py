@@ -112,7 +112,7 @@ class ProjectFormCreate(BasePage):
         # Выбираем значение в поле "Ключевые технологии"
         self.browser.find_element(*FormCreateProjectLocators.SEARCH_TECHNOLOGIES_ELEMENT).click()
         time.sleep(2)
-        self.select_elements_in_frame(user_data_dict["technologies"], 2)
+        self.select_elements_in_frame(user_data_dict["technologies"], 1)
 
         # Ищем поле "Категория" и выбираем значение
         Select(self.browser.find_element(*FormCreateProjectLocators.PROJECT_CATEGORY_ELEMENT)).select_by_value(

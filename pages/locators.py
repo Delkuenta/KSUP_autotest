@@ -1,5 +1,6 @@
 from selenium.webdriver.common.by import By
 
+
 class LoginPageLocators:
     USER_NAME_ELEMENT = (By.CSS_SELECTOR, "#userNameInput")
     PASSWORD_ELEMENT = (By.CSS_SELECTOR, "#passwordInput")
@@ -57,6 +58,20 @@ class BasePageLocators:
 class PresaleListLocators:
     PRESALE_CREATE_BUTTON = (By.CSS_SELECTOR, "#idHomePageNewItem")
     FIND_ELEMENT_IN_PRESALE_LIST = (By.XPATH, f"//a[@class= 'ms-listlink' and contains(text(),'Test_name')]")
+
+    # Вкладки на листе сущности "Пресейловая активность"
+    ALL_ELEMENTS_TAB = (By.CSS_SELECTOR, "a[class^='viewAll']")
+    MINE_ELEMENTS_TAB = (By.CSS_SELECTOR, "a[class^='viewMy']")
+    SENT_ELEMENTS_TAB = (By.CSS_SELECTOR, "a[class^='viewSent']")
+    APPROVAL_ELEMENTS_TAB = (By.CSS_SELECTOR, "a[class^='viewApproval']")
+    IN_OP_ELEMENTS_TAB = (By.CSS_SELECTOR, "a[class^='viewInOp']")
+    OUT_OP_ELEMENTS_TAB = (By.CSS_SELECTOR, "a[class^='viewOutOp']")
+
+    # Поле "Статус согласования" множественный результат
+    APPROVAL_STATUS_VALUES = (By.CSS_SELECTOR, "[class^='colKsupSaleApproveStatus ms-cellstyle ms-vb2']")
+
+    # Кнопка Пагинатора "Далее"
+    PAGINATOR_NEXT_BUTTON = (By.CSS_SELECTOR, "[class^='ms-commandLink'][title='Далее']")
 
 
 class FormCreatePresaleLocators:
@@ -449,6 +464,19 @@ class ZakupListLocators:
     ZAKUP_CREATE_BUTTON = (By.CSS_SELECTOR, "#idHomePageNewItem")
     FIND_ELEMENT_IN_ZAKUP_LIST = (By.XPATH, f"//a[@class= 'ms-listlink' and contains(text(),'Test_name')]")
 
+    # Вкладки на листе сущности "Закупочная процедура"
+    ALL_ELEMENTS_TAB = (By.CSS_SELECTOR, "a[class^='viewAll']")
+    MINE_ELEMENTS_TAB = (By.CSS_SELECTOR, "a[class^='viewMy']")
+    APPROVAL_ELEMENTS_TAB = (By.CSS_SELECTOR, "a[class^='viewApproval']")
+    REJECTED_ELEMENTS_TAB = (By.CSS_SELECTOR, "a[class^='viewRejected']")
+    APPROVED_ELEMENTS_TAB = (By.CSS_SELECTOR, "a[class^='viewApproved']")
+
+    # Поле "Статус согласования" множественный результат
+    APPROVAL_STATUS_VALUES = (By.CSS_SELECTOR, "[class^='colKsupPresaleApproveStatus ms-cellstyle ms-vb2']")
+
+    # Кнопка Пагинатора "Далее"
+    PAGINATOR_NEXT_BUTTON = (By.CSS_SELECTOR, "[class^='ms-commandLink'][title='Далее']")
+
 
 class ZakupElementLocators:
     # Титул в карточке "Закупочная процедура"
@@ -721,9 +749,19 @@ class FormCreateContractLocators:
     JOINT_BIDDING_DELETE_ROW = (By.XPATH, "//td[@data-member='delete' and contains(@class, 'jointbidding-cell-delete')]")
 
 
-class ContractPageLocators:
+class ContractListLocators:
     CONTRACT_CREATE_BUTTON = (By.CSS_SELECTOR, "#idHomePageNewItem")
     FIND_ELEMENT_IN_CONTRACT_LIST = (By.XPATH, f"//a[@class= 'ms-listlink' and contains(text(),'Test_name')]")
+
+    # Вкладки на листе сущности "Договор/контракт"
+    ALL_ELEMENTS_TAB = (By.CSS_SELECTOR, "a[class^='viewAll']")
+    MINE_ELEMENTS_TAB = (By.CSS_SELECTOR, "a[class^='viewMy']")
+    APPROVAL_ELEMENTS_TAB = (By.CSS_SELECTOR, "a[class^='viewApproval']")
+    REJECTED_ELEMENTS_TAB = (By.CSS_SELECTOR, "a[class^='viewRejected']")
+    APPROVED_ELEMENTS_TAB = (By.CSS_SELECTOR, "a[class^='viewApproved']")
+
+    # Поле "Статус согласования" множественный результат
+    APPROVAL_STATUS_VALUES = (By.CSS_SELECTOR, "[class^='colKsupContractApproveStatus ms-cellstyle ms-vb2']")
 
 
 class ContractElementLocators:
@@ -839,8 +877,6 @@ class ContractElementLocators:
     JOINT_BIDDING_TOTAL_SUM_VALUE = (By.CSS_SELECTOR, "[class^='payplan-cell']>span")
 
 
-
-
 class KnowledgeSearchLocators:
 
     # Локаторы в области "Быстрые фильтры"
@@ -936,10 +972,19 @@ class KnowledgeSearchLocators:
     NOT_FOUND_RESULT = (By.XPATH, "//a[contains(text(),'Результаты не найдены')]")
 
 
-class ProjectPageLocators:
+class ProjectListLocators:
     PROJECT_CREATE_BUTTON = (By.CSS_SELECTOR, "#QCB1_Button1")
-
     FIND_ELEMENT_IN_PROJECT_LIST = (By.XPATH, f"//a[contains(text(),'Test_name')]")
+
+    # Вкладки на листе сущности "Договор/контракт"
+    ALL_ELEMENTS_TAB = (By.CSS_SELECTOR, "a[class^='viewAll']")
+    WAITING_INTEREST_ELEMENTS_TAB = (By.CSS_SELECTOR, "a[class^='viewMarketingWaitingInformation']")
+    INTERESTED_ELEMENTS_TAB = (By.CSS_SELECTOR, "a[class^='viewMarketingInterested']")
+    NOT_INTERESTED_ELEMENTS_TAB = (By.CSS_SELECTOR, "a[class^='viewMarketingNotInterested']")
+    WAITING_INFORM_ELEMENTS_TAB = (By.CSS_SELECTOR, "a[class^='viewMarketingWaitingInformation']")
+    INFORMATION_ENOUGH_ELEMENTS_TAB = (By.CSS_SELECTOR, "a[class^='viewInformationEnough']")
+    INFORMATION_NOT_ENOUGH_ELEMENTS_TAB = (By.CSS_SELECTOR, "a[class^='viewInformationNotEnough']")
+
 
 
 class FormCreateProjectLocators:
