@@ -433,6 +433,7 @@ class ContractElementPage(BasePage):
         self.browser.find_element(*ContractElementLocators.CONFIRM_APPROVAL_CONTRACT).click()
         self.is_visibility_of_element_located(*ContractElementLocators.ClOSE_ALLERT_CONTRACT, 5)
         self.browser.find_element(*ContractElementLocators.ClOSE_ALLERT_CONTRACT).click()
+        self.browser.refresh()
 
     def approval_contract_count(self):
 
@@ -445,6 +446,7 @@ class ContractElementPage(BasePage):
         self.browser.find_element(*ContractElementLocators.CONFIRM_APPROVAL_CONTRACT).click()
         self.is_visibility_of_element_located(*ContractElementLocators.ClOSE_ALLERT_CONTRACT, 5)
         self.browser.find_element(*ContractElementLocators.ClOSE_ALLERT_CONTRACT).click()
+        self.browser.refresh()
 
     def approval_contract_fin(self):
         self.is_element_clickable(*ContractElementLocators.APPROVAL_CONTRACT)
@@ -456,6 +458,7 @@ class ContractElementPage(BasePage):
         self.browser.find_element(*ContractElementLocators.CONFIRM_APPROVAL_CONTRACT).click()
         self.is_visibility_of_element_located(*ContractElementLocators.ClOSE_ALLERT_CONTRACT, 5)
         self.browser.find_element(*ContractElementLocators.ClOSE_ALLERT_CONTRACT).click()
+        self.browser.refresh()
 
     def approval_contract_udprpo(self):
         self.is_element_clickable(*ContractElementLocators.APPROVAL_CONTRACT)
@@ -467,6 +470,7 @@ class ContractElementPage(BasePage):
         self.browser.find_element(*ContractElementLocators.CONFIRM_APPROVAL_CONTRACT).click()
         self.is_visibility_of_element_located(*ContractElementLocators.ClOSE_ALLERT_CONTRACT, 5)
         self.browser.find_element(*ContractElementLocators.ClOSE_ALLERT_CONTRACT).click()
+        self.browser.refresh()
 
     def approval_contract_kkp(self):
 
@@ -479,6 +483,7 @@ class ContractElementPage(BasePage):
         self.browser.find_element(*ContractElementLocators.CONFIRM_APPROVAL_CONTRACT).click()
         self.is_visibility_of_element_located(*ContractElementLocators.ClOSE_ALLERT_CONTRACT, 5)
         self.browser.find_element(*ContractElementLocators.ClOSE_ALLERT_CONTRACT).click()
+        self.browser.refresh()
 
     def reject_contract_legal(self):
         self.is_element_clickable(*ContractElementLocators.REJECT_CONTRACT)
@@ -490,6 +495,7 @@ class ContractElementPage(BasePage):
         self.browser.find_element(*ContractElementLocators.CONFIRM_REJECT_CONTRACT).click()
         self.is_visibility_of_element_located(*ContractElementLocators.ClOSE_ALLERT_CONTRACT, 5)
         self.browser.find_element(*ContractElementLocators.ClOSE_ALLERT_CONTRACT).click()
+        self.browser.refresh()
 
     def reject_contract_count(self):
 
@@ -502,6 +508,7 @@ class ContractElementPage(BasePage):
         self.browser.find_element(*ContractElementLocators.CONFIRM_REJECT_CONTRACT).click()
         self.is_visibility_of_element_located(*ContractElementLocators.ClOSE_ALLERT_CONTRACT, 5)
         self.browser.find_element(*ContractElementLocators.ClOSE_ALLERT_CONTRACT).click()
+        self.browser.refresh()
 
     def reject_contract_fin(self):
         self.is_element_clickable(*ContractElementLocators.REJECT_CONTRACT)
@@ -513,6 +520,7 @@ class ContractElementPage(BasePage):
         self.browser.find_element(*ContractElementLocators.CONFIRM_REJECT_CONTRACT).click()
         self.is_visibility_of_element_located(*ContractElementLocators.ClOSE_ALLERT_CONTRACT, 5)
         self.browser.find_element(*ContractElementLocators.ClOSE_ALLERT_CONTRACT).click()
+        self.browser.refresh()
 
     def reject_contract_udprpo(self):
         self.is_element_clickable(*ContractElementLocators.REJECT_CONTRACT)
@@ -524,6 +532,7 @@ class ContractElementPage(BasePage):
         self.browser.find_element(*ContractElementLocators.CONFIRM_REJECT_CONTRACT).click()
         self.is_visibility_of_element_located(*ContractElementLocators.ClOSE_ALLERT_CONTRACT, 5)
         self.browser.find_element(*ContractElementLocators.ClOSE_ALLERT_CONTRACT).click()
+        self.browser.refresh()
 
     def reject_contract_kkp(self):
         self.is_element_clickable(*ContractElementLocators.REJECT_CONTRACT)
@@ -535,6 +544,7 @@ class ContractElementPage(BasePage):
         self.browser.find_element(*ContractElementLocators.CONFIRM_REJECT_CONTRACT).click()
         self.is_visibility_of_element_located(*ContractElementLocators.ClOSE_ALLERT_CONTRACT, 5)
         self.browser.find_element(*ContractElementLocators.ClOSE_ALLERT_CONTRACT).click()
+        self.browser.refresh()
 
     def escalate_contract_on_kkp(self):
         self.is_element_clickable(*ContractElementLocators.ESCALATE_CONTRACT)

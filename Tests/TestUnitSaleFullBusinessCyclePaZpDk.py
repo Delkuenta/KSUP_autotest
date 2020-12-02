@@ -81,6 +81,7 @@ UnitSale\Seller2
 # Браузер для запуска --browser_name=firefox
 @pytest.mark.parametrize('path_data_file', [r"TPAC\UnitSale\Seller\13_[Atest_Seller] PA+ZP+DK, RequestPrice, categoryA, softwareDev, UnitSale.json"])
 class TestUnitSaleFullBusinessCyclePaZpDk:
+
     @pytest.mark.xfail(reason="Баг https://jira.lanit.ru/browse/KSUP-1041")
     def test_create_presale(self, browser_function, path_data_file):
         user_data_dict = BasePage.read_json(browser_function, path_data_file)

@@ -1,0 +1,11 @@
+{
+	"main_data": {
+        "fullName": "Департамент корпоративных систем",
+		"shortName": "ДКС",
+		"spName": "ДКС",
+		"type": "Департамент",
+		"includeDivisionInOpPlan": "Да",
+		"users": "Mr_KSUP_Dir",
+		"createAccount": "Mr_KSUP_Seller"
+    }
+}

@@ -9,7 +9,7 @@ import pyautogui
 
 class LoginData(BasePage):
     # ППАК https://ksup.lanit.ru
-    # ТПАК https://ksup-test.lanit.ru/
+    # ТПАК https://ksup-test.lanit.ru
     link = "https://ksup-test.lanit.ru"
 
     def login(self, login):

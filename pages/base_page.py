@@ -106,6 +106,12 @@ class BasePage:
         assert self.is_text_to_be_present_in_element(*BasePageLocators.CONTRACT_LIST_TITLE, "Договоры (контракты)"), \
             "Титул страницы не соответствует переходу"
 
+    def go_to_customer_list(self, link):
+        customer_link = link + BasePageLocators.CUSTOMER_LIST_LINK
+        self.browser.get(customer_link)
+        assert self.is_text_to_be_present_in_element(*BasePageLocators.CUSTOMER_TITLE, "Заказчики и исполнители"), \
+            "Титул страницы не соответствует переходу"
+
     # Переход на страницу База знаний
     def go_to_knowledge_search(self, link):
         knowledge_link = link + BasePageLocators.KNOWLEDGE_SEARCH_LINK
@@ -239,6 +245,8 @@ class BasePage:
 
     def select_elements_in_frame(self, list_elements, max_scrolls):
         self.browser.implicitly_wait(2)
+        if isinstance(list_elements, str):
+            list_elements = [list_elements]
         # Выбираем значение в поле "Ключевые технологии"
         self.is_frame_to_be_available_and_switch_to_it()
         for element in list_elements:

@@ -12,7 +12,8 @@ class UserData:
                     r"Mr_KSUP_Count": "*AF5hcnEfF8D2g8a",
                     r"Mr_KSUP_Fin": "AsdGhj-5681-Fni",
                     r"Mr_KSUP_UDPRPO": "lPRvCNi9m9zU8gb",
-                    r"Mr_KSUP_KKP": "su@rMpuYu{^}bOI5Z"
+                    r"Mr_KSUP_KKP": "su@rMpuYu{^}bOI5Z",
+                    r"Mr_KSUP_Admin": "AsdGhj-2038-dAm"
                     }
 
     # Группа файлов и их путей для прикрепления

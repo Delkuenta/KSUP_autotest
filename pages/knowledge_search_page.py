@@ -14,9 +14,9 @@ class KnowledgeSearchPage(BasePage):
     # Вспомогательный метод: Прогрузка всех найденных результатов.
     def load_all_result(self):
         self.browser.implicitly_wait(1)
-        if self.is_visibility_of_element_located(*KnowledgeSearchLocators.NOT_FOUND_RESULT, 1) is False:
+        if self.is_visibility_of_element_located(*KnowledgeSearchLocators.NOT_FOUND_RESULT, 2) is False:
             # Подгружаем весь список найденных сущностей
-            while self.is_visibility_of_element_located(*KnowledgeSearchLocators.END_LOAD_BUTTON, 1) is False:
+            while self.is_visibility_of_element_located(*KnowledgeSearchLocators.END_LOAD_BUTTON, 2) is False:
                 self.browser.find_element(*KnowledgeSearchLocators.LOAD_MORE_BUTTON).click()
                 if self.browser.find_element(*KnowledgeSearchLocators.END_LOAD_BUTTON).is_displayed() is True:
                     break
@@ -219,12 +219,18 @@ class KnowledgeSearchPage(BasePage):
         # Сбрасываем все настройки нажатием кнопки "Сбросить"
         self.browser.find_element(*KnowledgeSearchLocators.CLEAR_LINE_BUTTON).click()
 
-    def search_line_by_customer(self, name_customer, short_name_customer):
+    def search_line_by_customer(self, name_customer):
         # Вводим в строку название подразделения
         self.browser.find_element(*KnowledgeSearchLocators.SEARCH_LINE).send_keys(name_customer)
         time.sleep(3)
 
-        # Проверяем найденные сущности по атрибуту "Заказчик"
+        # Подгружаем весь список найденных сущностей
+        self.load_all_result()
+
+        # Проверяем найденные по названию
+        list_name_found = self.item_text_collector(*KnowledgeSearchLocators.NAMES_OF_ALL_FOUND_ELEMENT)
+        assert name_customer in list_name_found, \
+            f'Не найдена сущность с названием "{name_customer}" по поиску значения Заказчик в строке ввода'
 
     def search_with_customer_block_filter(self, data_dict):
         # Жмем кнопку "Весь список" в блоке "Заказчик"

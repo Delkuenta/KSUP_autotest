@@ -19,7 +19,9 @@ class BasePageLocators:
     KNOWLEDGE_SEARCH_LINK = "/Pages/KnowledgeBaseSearch.aspx"
     KNOWLEDGE_SEARCH_TITLE = (By.CSS_SELECTOR, ".title.title--main")
     PROJECT_LIST_LINK = "/KnowledgeBase/Project/Forms/All.aspx"
-    PROJECT_TITLE = (By.CSS_SELECTOR, "#DeltaPlaceHolderPageTitleInTitleArea")
+    PROJECT_TITLE = (By.CSS_SELECTOR, "#DeltaPlaceHolderPageTitleInTitleArea a")
+    CUSTOMER_LIST_LINK = "/KnowledgeBase/Lists/Egrul/All.aspx"
+    CUSTOMER_TITLE = (By.CSS_SELECTOR, "#DeltaPlaceHolderPageTitleInTitleArea a")
 
     # Локаторы во фрейме "Тип работ и услуг"
     # Группы категорий
@@ -729,7 +731,6 @@ class FormCreateContractLocators:
     CANCEL_CHANGE_PROJECT_BUTTON = (By.XPATH, "//input[@value='Отмена']")
 
     # Добавленные договоры/контракты
-
     # Поле "Заказчик" множественный результат
     JOINT_BIDDING_CUSTOMER = (By.XPATH, "//*[@data-member='customer']//*[contains(@class, 'select2-selection--single')]")
     JOINT_BIDDING_CUSTOMER_DROPDOWN = (By.XPATH, "//li[contains(text(), 'customer_name')]")
@@ -986,7 +987,6 @@ class ProjectListLocators:
     INFORMATION_NOT_ENOUGH_ELEMENTS_TAB = (By.CSS_SELECTOR, "a[class^='viewInformationNotEnough']")
 
 
-
 class FormCreateProjectLocators:
     # Название проекта //textarea[starts-with(@id, 'KsupProjectFullName')]
     NAME_PROJECT_ELEMENT = (By.CSS_SELECTOR, "[id^='KsupProjectFullName']")
@@ -996,6 +996,7 @@ class FormCreateProjectLocators:
 
     # Заказчик //div[@id='div-wcfLookupControl_KsupEgr_Customers']/span/span/span
     CUSTOMER_ELEMENT = (By.CSS_SELECTOR, "#div-wcfLookupControl_KsupEgr_Customers")
+    CUSTOMER_SEARCH_FIELD = (By.CSS_SELECTOR, "[class='select2-search__field']")
     CUSTOMER_DROPDOWN_ELEMENT = (By.XPATH, "//li[contains(text(), 'customer_name')]")
 
     # Кнопка "Поиск допустимого варианта" у поля "Отрасль"
@@ -1165,5 +1166,102 @@ class ProjectElementLocators:
     DESCRIPTION_VALUE = (By.CSS_SELECTOR, ".fldKsupDescription #SPFieldNote")
 
 
-class OpList_Locators:
+class OpListLocators:
     CREATE_WAITING_TITLE = (By.XPATH, "//h2[contains(text(), 'Пожалуйста, подождите')]")
+
+
+class CustomerListLocators:
+    CUSTOMER_CREATE_BUTTON = (By.CSS_SELECTOR, "#idHomePageNewItem")
+    FIND_ELEMENT_IN_CONTRACT_LIST = (By.XPATH, f"//a[@class= 'ms-listlink' and contains(text(),'Test_name')]")
+
+    # Вкладки на листе сущности "Заказчики и исполнители"
+    ALL_ELEMENTS_TAB = (By.CSS_SELECTOR, "a[class^='viewAll']")
+    GK_LANIT_ELEMENTS_TAB = (By.CSS_SELECTOR, "a[class^='viewlanit']")
+    IP_ELEMENTS_TAB = (By.CSS_SELECTOR, "a[class^='viewip']")
+    UL_ELEMENTS_TAB = (By.CSS_SELECTOR, "a[class^='viewul']")
+
+
+class FormCreateCustomerLocators:
+    # Титул в карточке "Пресейловая активность"
+    TITLE_IN_CUSTOMER_FORM = (By.CSS_SELECTOR, "#pageTitle")
+
+    OGRN_ELEMENT = (By.CSS_SELECTOR, "[aria-labelledby*='selectEgrulViewOgrnSelect']")
+    SEARCH_OGRN_ELEMENT = (By.CSS_SELECTOR, "input[class='select2-search__field']")
+    OGRN_DROPDOWN_ELEMENT = (By.XPATH, "//li[contains(text(), 'customer_ogrn')]")
+    CONFIRM_BUTTON = (By.CSS_SELECTOR, "[value='OK']")
+    CANCEL_BUTTON = (By.CSS_SELECTOR, "[value='Закрыть']")
+
+    # Поле "Полное наименование *"(только у ЮР.лица)
+    FULL_NAME_FIELD = (By.CSS_SELECTOR, "[id^='KsupEgr_FullName']")
+
+    # Поле "ФИО" (только для ИП)
+    FIO_FIELD = (By.CSS_SELECTOR, "[id^='KsupEgr_Fio']")
+
+    # Поле "Название"
+    TITLE_NAME_FIELD = (By.CSS_SELECTOR, "[id^='Title']")
+
+    # Поле "ОГРН/ОГРНИП"
+    OGRN_FIELD = (By.CSS_SELECTOR, "[id^='KsupEgr_Ogrn']")
+
+    # Поле "ИНН"
+    INN_FIELD = (By.CSS_SELECTOR, "[id^='KsupEgr_Inn']")
+
+    # Поле "ККП" (только у ЮР.лица)
+    KKP_FIELD =(By.CSS_SELECTOR, "[id^='KsupEgr_Kpp']")
+
+    # Поле "Адрес" (только у ЮР.лица)
+    ADDRESS_FIELD = (By.CSS_SELECTOR, "[id^='KsupEgr_Address']")
+
+    # Поле "Дата ликвидации" (только у ЮР.лица)
+    LIQUIDATION_DATE_FIELD = (By.CSS_SELECTOR, "input[id^='KsupEgr_LiquidationDate']")
+
+    # Кнопка "Поиск допустимого варианта" у поля "Отрасль"
+    # //div[contains(@id,'KsupEgr_Industry')]/img[@class='ms-taxonomy-browser-button']
+    SEARCH_INDUSTRY_BUTTON = (By.CSS_SELECTOR, "[id^='KsupEgr_Industry']>[class='ms-taxonomy-browser-button']")
+    INDUSTRY_FIELD = (By.CSS_SELECTOR, "[id^='KsupEgr_Industry']>[class='valid-text']")
+
+    # Поле "Значимость"
+    SIGNIFICANCE_ELEMENT = (By.CSS_SELECTOR, "[id^='KsupEgr_Significance']")
+
+    # Поле "Описание"
+    DESCRIPTION_FIELD = (By.CSS_SELECTOR, "[id^='KsupEgr_Description']")
+
+    # Поле "Контактные лица"
+    CONTACT_PERSONS_FIELD = (By.CSS_SELECTOR, "[id^='KsupEgr_ContactPersons']")
+
+    # Поле "Конкуренты ЛАНИТ"
+    COMPETITORS_FIELD = (By.CSS_SELECTOR, "[id^='KsupEgr_Competitors']")
+
+    # Поле "Сайт"
+    SITE_FIELD = (By.CSS_SELECTOR, "[id^='KsupEgr_Site']")
+
+    # Поле "Статус Взаимодействия"
+    INTERACTION_STATUS_FIELD = (By.CSS_SELECTOR, "[id^='KsupEgr_InteractionStatus']")
+
+    # Поле "Дирекция, ответственная за взаимодействие" (отображено только под Admin)
+    DIRECTION_ELEMENT = (By.CSS_SELECTOR, "#div-wcfLookupControl_KsupEgr_Direction")
+    DIRECTION_SEARCH_FIELD = (By.CSS_SELECTOR, "[class='select2-search__field']")
+    DIRECTION_DROPDOWN_ELEMENT = (By.XPATH, "//li[contains(text(), 'direction_name')]")
+
+    # Поле "Департаменты, ответственные за взаимодействие" (отображено только под Admin)
+    DIVISION_ELEMENT = (By.CSS_SELECTOR, "#div-wcfLookupControl_KsupEgr_Divisions")
+    DIVISION_SEARCH_FIELD = (By.CSS_SELECTOR, "[class='select2-search__field']")
+    DIVISION_DROPDOWN_ELEMENT = (By.XPATH, "//li[contains(text(), 'division_name')]")
+
+    # Чек-бокс "ГК ЛАНИТ" (отображено только под Admin)
+    IS_LANIT_CHECKBOX = (By.CSS_SELECTOR, "[id^='KsupEgr_IsLanit']")
+
+    # Поле "Руководители" (отображено только под Admin)
+    CUSTOMER_HEAD_FIELD = (By.CSS_SELECTOR, "input[id^='KsupEgrHead_EgrulHead'][class*='editorInput']")
+    CUSTOMER_HEAD_DROPDOWN_ELEMENT = (By.XPATH, "//a[@class='ms-core-menu-link']//div[contains(text(), 'name')]")
+
+    # Чек-бокс "Уведомлять руководителя" (отображено только под Admin)
+    SHOULD_NOTIFY_CHECKBOX = (By.CSS_SELECTOR, "[id^='KsupEgrHead_ShouldNotify']")
+
+    # Поле "Уведомлять о"
+    NOTIFY_ABOUT_FIELD =(By.CSS_SELECTOR, "[class^='fldKsupEgrHead_NotifyAbout']")
+    # Чек-боксы в блоке "Уведомлять о" (отображено только под Admin)
+    NOTIFY_ABOUT_CHECKBOX = (By.XPATH, "//*[contains(@for, 'KsupEgrHead_NotifyAbout') and normalize-space(.)= 'name']")
+
+    # Кнопка создания
+    CONFIRM_CREATE_BUTTON = (By.XPATH, "//*[contains(@id, 'diidIOSaveItem') and @value='Создать']")

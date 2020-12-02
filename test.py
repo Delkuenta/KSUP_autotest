@@ -39,13 +39,8 @@ class TestUnitSaleFullBusinessCyclePaZpDk:
 
 
 def test_function_split():
-    mine_list = []
-    mine_str = "КАЗНАЧЕЙСТВО РОССИИ"
-    old_list = ["ДИТ МОСКВЫ", "ХУЙ", "ПИЗДА"]
-    mine_list += [mine_str]
-    print("\n", mine_list)
-    print("\n", type(mine_list), "\n")
-    mine_list = []
-    mine_list += old_list
-    print("\n", mine_list)
-    print("\n", type(mine_list))
+    dick = "1"
+    if not dick:
+        print("\nПеременная пустая")
+    else:
+        print("\nПеременная НЕ пустая")

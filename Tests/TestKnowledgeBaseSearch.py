@@ -12,8 +12,10 @@ from pages.project_create_form_page import ProjectFormCreate
 from pages.project_element_page import ProjectElementPage
 from pages.project_list_page import ProjectPage
 
-project_path_file = r"TPAC\KnowledgeElementSearch\2[Atest_Seller] Project, categoryA, softwareDev.json"
-contract_path_file = r"TPAC\KnowledgeElementSearch\1[Atest_Seller] DK, categoryA, softwareDev.json"
+project_path_file = r"TPAC\KnowledgeElementSearch\1[Atest_Seller] Project, categoryA, softwareDev.json"
+contract_path_file = r"TPAC\KnowledgeElementSearch\2[Atest_Seller] DK, categoryA, softwareDev.json"
+department_path_file = r"TPAC\KnowledgeElementSearch\3[Atest] Department, DKS.json"
+
 
 
 @pytest.fixture(scope="session")
@@ -57,14 +59,12 @@ class TestCreateElementBeforeTests:
         login_page.verify_username(user_data_dict["createAccount"])
         login_page.go_to_contract_list(link)
         contract_page = ContractPage(browser_function, browser_function.current_url)
-        #contract_page.go_to_create_contract()
-        #create_contract_page = ContractFormCreate(browser_function, link)
-        #create_contract_page.form_create_contract(user_data_dict)
+        contract_page.go_to_create_contract()
+        create_contract_page = ContractFormCreate(browser_function, link)
+        create_contract_page.form_create_contract(user_data_dict)
         contract_page.go_to_contract_element(user_data_dict)
         contract_element_page = ContractElementPage(browser_function, browser_function.current_url)
         contract_element_page.verify_general_information_contract(user_data_dict)
-
-
 
 
 class TestKnowledgeBaseSearch:
@@ -91,7 +91,7 @@ class TestKnowledgeBaseSearch:
         knowledge_page.reset_button_knowledge()
         delayed_assert.assert_expectations()
 
-    def test_search_line_by_name_project(self, browser_session, login_for_knowledge):
+    def test_search_line_project_by_name(self, browser_session, login_for_knowledge):
         project_data_dict = BasePage.read_json(browser_session, project_path_file)
         link = browser_session.current_url
         knowledge_page = KnowledgeSearchPage(browser_session, link)
@@ -100,7 +100,7 @@ class TestKnowledgeBaseSearch:
         # knowledge_page.go_to_knowledge_search()
         knowledge_page.search_line_by_name(project_data_dict)
 
-    def test_search_line_by_name_contract(self, browser_session, login_for_knowledge):
+    def test_search_line_contract_by_name(self, browser_session, login_for_knowledge):
         contract_data_dict = BasePage.read_json(browser_session, contract_path_file)
         link = browser_session.current_url
         knowledge_page = KnowledgeSearchPage(browser_session, link)
@@ -108,10 +108,31 @@ class TestKnowledgeBaseSearch:
         knowledge_page.activate_checkbox_need_to_find("Договор (контракт)")
         knowledge_page.search_line_by_name(contract_data_dict)
 
-    def test_search_line_by_customer(self, browser_session, login_for_knowledge):
+    def test_search_line_project_by_customer(self, browser_session, login_for_knowledge):
+        project_data_dict = BasePage.read_json(browser_session, project_path_file)
+        link = browser_session.current_url
+        knowledge_page = KnowledgeSearchPage(browser_session, link)
+        knowledge_page.reset_button_knowledge()
+        knowledge_page.search_line_by_customer(project_data_dict["customer"][0])
+
+    def test_search_line_contract_by_customer(self, browser_session, login_for_knowledge):
+        contract_data_dict = BasePage.read_json(browser_session, contract_path_file)
+        link = browser_session.current_url
+        knowledge_page = KnowledgeSearchPage(browser_session, link)
+        knowledge_page.reset_button_knowledge()
+        knowledge_page.search_line_by_customer(contract_data_dict["customer"])
+
+    def test_search_line_by_customer_element(self, browser_session, login_for_knowledge):
         pass
 
-    def test_search_with_customer_block_filter_in_project(self, browser_session, login_for_knowledge):
+    def test_search_line_by_executiveunit_element(self, browser_session, login_for_knowledge):
+        department_dict = BasePage.read_json(browser_session, department_path_file)
+        link = browser_session.current_url
+        knowledge_page = KnowledgeSearchPage(browser_session, link)
+        knowledge_page.reset_button_knowledge()
+        knowledge_page.search_line_by_customer(department_dict["fullName"])
+
+    def test_search_project_with_customer_block_filter(self, browser_session, login_for_knowledge):
         project_data_dict = BasePage.read_json(browser_session, project_path_file)
         link = browser_session.current_url
         knowledge_page = KnowledgeSearchPage(browser_session, link)
@@ -119,7 +140,7 @@ class TestKnowledgeBaseSearch:
         knowledge_page.activate_checkbox_need_to_find("Проект")
         knowledge_page.search_with_customer_block_filter(project_data_dict)
 
-    def test_search_with_legal_block_filter_in_project(self, browser_session):
+    def test_search_project_with_legal_block_filter(self, browser_session, login_for_knowledge):
         project_data_dict = BasePage.read_json(browser_session, project_path_file)
         link = browser_session.current_url
         knowledge_page = KnowledgeSearchPage(browser_session, link)
@@ -127,7 +148,7 @@ class TestKnowledgeBaseSearch:
         knowledge_page.activate_checkbox_need_to_find("Проект")
         knowledge_page.search_with_legal_block_filter(project_data_dict)
 
-    def test_search_with_performer_block_filter_in_project(self, browser_session):
+    def test_search_project_with_performer_block_filter(self, browser_session, login_for_knowledge):
         project_data_dict = BasePage.read_json(browser_session, project_path_file)
         link = browser_session.current_url
         knowledge_page = KnowledgeSearchPage(browser_session, link)
@@ -135,7 +156,7 @@ class TestKnowledgeBaseSearch:
         knowledge_page.activate_checkbox_need_to_find("Проект")
         knowledge_page.search_with_performer_block_filter(project_data_dict)
 
-    def test_search_with_type_works_block_filter_in_project(self, browser_session):
+    def test_search_project_with_type_works_block_filter(self, browser_session, login_for_knowledge):
         project_data_dict = BasePage.read_json(browser_session, project_path_file)
         link = browser_session.current_url
         knowledge_page = KnowledgeSearchPage(browser_session, link)
@@ -143,7 +164,7 @@ class TestKnowledgeBaseSearch:
         knowledge_page.activate_checkbox_need_to_find("Проект")
         knowledge_page.search_with_type_works_block_filter(project_data_dict)
 
-    def test_search_with_technologies_block_filter_in_project(self, browser_session):
+    def test_search_project_with_technologies_block_filter(self, browser_session, login_for_knowledge):
         project_data_dict = BasePage.read_json(browser_session, project_path_file)
         link = browser_session.current_url
         knowledge_page = KnowledgeSearchPage(browser_session, link)
@@ -151,7 +172,7 @@ class TestKnowledgeBaseSearch:
         knowledge_page.activate_checkbox_need_to_find("Проект")
         knowledge_page.search_with_technologies_block_filter(project_data_dict)
 
-    def test_search_with_all_fast_filter_in_project(self, browser_session, login_for_knowledge):
+    def test_search_project_with_all_fast_filter(self, browser_session, login_for_knowledge):
         project_data_dict = BasePage.read_json(browser_session, project_path_file)
         link = browser_session.current_url
         knowledge_page = KnowledgeSearchPage(browser_session, link)
@@ -169,7 +190,7 @@ class TestKnowledgeBaseSearch:
         knowledge_page.activate_checkbox_need_to_find("Договор (контракт)")
         knowledge_page.search_with_sum_block_filter(contract_data_dict)
 
-    @pytest.mark.xfail(reason='Не осуществляется поиск если в поля "Сумма проекта" От  ввести равное значение из ДК /KSUP-1138')
+    @pytest.mark.xfail(reason='Не осуществляется поиск если в поля "Дата заключения" От  ввести равное значение из ДК /KSUP-1138')
     def test_search_with_start_date_block_filter_in_contract(self, browser_session, login_for_knowledge):
         contract_data_dict = BasePage.read_json(browser_session, contract_path_file)
         contract_data_dict = BasePage.dict_preparation(browser_session, contract_data_dict)
@@ -179,7 +200,7 @@ class TestKnowledgeBaseSearch:
         knowledge_page.activate_checkbox_need_to_find("Договор (контракт)")
         knowledge_page.search_with_start_date_block_filter(contract_data_dict)
 
-    @pytest.mark.xfail(reason='Не осуществляется поиск если в поля "Сумма проекта" От  ввести равное значение из ДК /KSUP-1138')
+    @pytest.mark.xfail(reason='Не осуществляется поиск если в поля "Дата окончания" От  ввести равное значение из ДК /KSUP-1138')
     def test_search_with_end_date_block_filter_in_contract(self, browser_session, login_for_knowledge):
         contract_data_dict = BasePage.read_json(browser_session, contract_path_file)
         contract_data_dict = BasePage.dict_preparation(browser_session, contract_data_dict)
@@ -190,7 +211,7 @@ class TestKnowledgeBaseSearch:
         knowledge_page.search_with_end_date_block_filter(contract_data_dict)
 
     @pytest.mark.xfail(reason='В БЗ по сущности ДК не работает фильтрация по блоку "Статус контракта" /KSUP-1074')
-    def test_search_with_status_contract_block_filter_in_contract(self, browser_session):
+    def test_search_with_status_contract_block_filter_in_contract(self, browser_session, login_for_knowledge):
         contract_data_dict = BasePage.read_json(browser_session, contract_path_file)
         contract_data_dict = BasePage.dict_preparation(browser_session, contract_data_dict)
         link = browser_session.current_url

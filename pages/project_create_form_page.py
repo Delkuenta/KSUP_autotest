@@ -19,6 +19,7 @@ class ProjectFormCreate(BasePage):
         # Заполняем поле "Заказчик *"
         for customer in user_data_dict["customer"]:
             self.browser.find_element(*FormCreateProjectLocators.CUSTOMER_ELEMENT).click()
+            self.browser.find_element(*FormCreateProjectLocators.CUSTOMER_SEARCH_FIELD).send_keys(customer)
             how, what = FormCreateProjectLocators.CUSTOMER_DROPDOWN_ELEMENT
             what = what.replace("customer_name", customer)
             self.browser.find_element(how, what).click()
