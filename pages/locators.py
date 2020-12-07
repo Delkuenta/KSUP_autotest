@@ -522,7 +522,7 @@ class ZakupElementLocators:
     APPROVAL_LEGAL_STATUS_ELEMENT = (By.XPATH, "//*[text() ='Согласование юридической службой']/following::span[1]")
     APPROVAL_COUNT_STATUS_ELEMENT = (By.XPATH, "//*[text() ='Согласование бухгалтерией']/following::span[1]")
     APPROVAL_FIN_STATUS_ELEMENT = (By.XPATH, "//*[text() ='Согласование финансовой службой']/following::span[1]")
-    APPROVAL_UDPRPO_STATUS_ELEMENT = (By.XPATH, "//*[text() ='Согласование УДПР ПО']/following::span[1]")
+    APPROVAL_UDPRPO_STATUS_ELEMENT = (By.XPATH, "//*[text() ='Согласование Директором по разработке ПО']/following::span[1]")
     APPROVAL_KKP_STATUS_ELEMENT = (By.XPATH, "//*[text() ='Согласование ККП']/following::span[1]")
 
     # Элементы на вкладке "Общие сведения"
@@ -784,6 +784,9 @@ class ContractElementLocators:
     ESCALATE_CONTRACT = (By.CSS_SELECTOR, "[id^='Approve.Escalate']")
     REVISION_CONTRACT = (By.CSS_SELECTOR, "[id^='Approve.Revision']")
 
+    # Вкладка "Общие сведения"
+    GENERAL_INFORMATION_ELEMENT = (By.XPATH, "//a[contains(@href, '#tabCommon')]")
+
     # Элементы на вкладке "Статус Согласования"
     # Вкладка "Статус согласования"
     APPROVAL_HISTORY_CONTRACT_TABS = (By.XPATH, "//a[contains(@href, '#tabApprovingHistory')]")
@@ -793,8 +796,8 @@ class ContractElementLocators:
     APPROVAL_COUNT_STATUS_ELEMENT = (By.XPATH, "//*[text() ='Согласование бухгалтерией']/following::span[1]")
     # Строка согласование с финансовой службой
     APPROVAL_FIN_STATUS_ELEMENT = (By.XPATH, "//*[text() ='Согласование финансовой службой']/following::span[1]")
-    # Строка согласование с УДПР ПО
-    APPROVAL_UDPRPO_STATUS_ELEMENT = (By.XPATH, "//*[text() ='Согласование УДПР ПО']/following::span[1]")
+    # Строка согласование с Директором по разработке ПО
+    APPROVAL_UDPRPO_STATUS_ELEMENT = (By.XPATH, "//*[text() ='Согласование Директором по разработке ПО']/following::span[1]")
     # Строка согласование с ККП
     APPROVAL_KKP_STATUS_ELEMENT = (By.XPATH, "//*[text() ='Согласование ККП']/following::span[1]")
 
@@ -810,6 +813,8 @@ class ContractElementLocators:
     ClOSE_ALLERT_CONTRACT = (By.CSS_SELECTOR, "#dlgTitleBtns")
 
     # Элементы на вкладке "Общие сведения"
+    # Поле "Статус согласования"
+    APPROVAL_MAIN_STATUS_IN_CONTRACT = (By.CSS_SELECTOR, ".fldKsupContractApproveStatus #SPFieldChoice")
     # Поле "Заказчик"
     CUSTOMER_IN_CONTRACT = (By.CSS_SELECTOR, ".fldKsupEgr_Customer #SPFieldWcfLookup")
     # Поле "Подразделение-продавец"
@@ -859,7 +864,6 @@ class ContractElementLocators:
     QUANTITATIVE_INDICATORS_PROJECT = (By.CSS_SELECTOR, ".fldKsupQuantitativeIndicatorsProjec #SPFieldNote")
 
     # Вкладка "Заключенные договоры/контракты"
-
     # Значнеие в поле "Заказчик" Множественный результат
     JOINT_BIDDING_CUSTOMER_VALUE = (By.CSS_SELECTOR, "[data-member='customer'][class^='jointbidding']")
 
@@ -929,7 +933,6 @@ class KnowledgeSearchLocators:
     # Кнопка очистки строки поиска
     CLEAR_LINE_BUTTON = (By.XPATH, "//*[@class = 'clearable__clear']")
 
-
     # Локаторы в области результатов поиска
     # Элемент "Тип сущности" в результатах поиска (множественный результат)
     TYPES_OF_ALL_FOUND_ELEMENT = (By.CSS_SELECTOR, ".search-result__title h6")
@@ -945,7 +948,6 @@ class KnowledgeSearchLocators:
 
     TECHNOLOGIES_VALUE_IN_RESULT = (By.XPATH, "//*[text() ='Технологии']/following::p[1]")
 
-    # Значения в карточке "Договор(контракт)" (множественный результат)
     # Значение в поле "Исполнитель"
     LEGAL_VALUE_IN_RESULT = (By.XPATH, "//*[text() ='Исполнитель']/following::p[1]")
 
@@ -1172,7 +1174,7 @@ class OpListLocators:
 
 class CustomerListLocators:
     CUSTOMER_CREATE_BUTTON = (By.CSS_SELECTOR, "#idHomePageNewItem")
-    FIND_ELEMENT_IN_CONTRACT_LIST = (By.XPATH, f"//a[@class= 'ms-listlink' and contains(text(),'Test_name')]")
+    FIND_ELEMENT_IN_CUSTOMER_LIST = (By.XPATH, f"//a[@class= 'ms-listlink' and contains(text(),'Test_name')]")
 
     # Вкладки на листе сущности "Заказчики и исполнители"
     ALL_ELEMENTS_TAB = (By.CSS_SELECTOR, "a[class^='viewAll']")

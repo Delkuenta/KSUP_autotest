@@ -171,10 +171,10 @@ class KnowledgeSearchPage(BasePage):
                               f'Отображены сущности {set(list_found_element)}\nОжидаемый результат: "Юр.лицо/ИП"')
         delayed_assert.expect(len(set(list_found_element)) == 1, "Отображены сущности не только категории Юр.лицо/ИП")
 
-    def search_line_by_name(self, data_dict):
+    def search_line_by_name(self, name):
         # Проверяем наличие разделителя: ","
-        if data_dict["fullName"].find(",") >= 0:
-            split_name = data_dict["fullName"].split(",")
+        if name.find(",") >= 0:
+            split_name = name.split(",")
             # Вводим первую часть названия
             self.browser.find_element(*KnowledgeSearchLocators.SEARCH_LINE).send_keys(split_name[0])
             time.sleep(3)
@@ -182,8 +182,8 @@ class KnowledgeSearchPage(BasePage):
             list_name_found = self.item_text_collector(*KnowledgeSearchLocators.NAMES_OF_ALL_FOUND_ELEMENT)
             if len(list_name_found) > 0:
 
-                assert list_name_found.count(data_dict["fullName"]) == 1, \
-                    f'Не найдено сущности "{data_dict["fullName"]}" по поиску значения {split_name[0]}'
+                assert list_name_found.count(name) == 1, \
+                    f'Не найдено сущности "{name}" по поиску значения {split_name[0]}'
             else:
                 print("Не найдено ни одного результата удовлетворяющего запросу")
 
@@ -196,23 +196,27 @@ class KnowledgeSearchPage(BasePage):
             # Проверяем названия найденных сущностей по второй части названия
             list_name_found = self.item_text_collector(*KnowledgeSearchLocators.NAMES_OF_ALL_FOUND_ELEMENT)
             if len(list_name_found) > 0:
-                if list_name_found.count(data_dict["fullName"]) == 0:
-                    assert list_name_found.count(data_dict["fullName"]) == 1, \
-                        f'Не найдено сущности "{data_dict["fullName"]}" по поиску значения {split_name[1]}'
+                if list_name_found.count(name) == 0:
+                    assert list_name_found.count(name) == 1, \
+                        f'Не найдено сущности "{name}" по поиску значения {split_name[1]}'
             else:
                 print("Не найдено результатов удовлетворяющих запросу")
             # Очищаем строку поиска
             self.browser.find_element(*KnowledgeSearchLocators.CLEAR_LINE_BUTTON).click()
 
+        # Удаляем спецсимволы из переменной
+        if name.find('"') >= 0:
+            name = name.replace('"', "")
+
         # Вводим полное название
-        self.browser.find_element(*KnowledgeSearchLocators.SEARCH_LINE).send_keys(data_dict["fullName"])
+        self.browser.find_element(*KnowledgeSearchLocators.SEARCH_LINE).send_keys(name)
         time.sleep(3)
         # Проверяем названия найденных сущностей по целому названию
         list_name_found = self.item_text_collector(*KnowledgeSearchLocators.NAMES_OF_ALL_FOUND_ELEMENT)
         if len(list_name_found) > 0:
-            if list_name_found.count(data_dict["fullName"]) == 0:
-                assert list_name_found.count(data_dict["fullName"]) == 1, \
-                    f'Не найдено сущности "{data_dict["fullName"]}" по поиску значения {data_dict["fullName"]}'
+            if list_name_found.count(name) == 0:
+                assert list_name_found.count(name) == 1, \
+                    f'Не найдено сущности "{name}" по поиску значения {name}'
         else:
             print("Не найдено результатов удовлетворяющих запросу")
 

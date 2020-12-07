@@ -6,8 +6,12 @@ from pages.customer_create_form import CustomerFormCreate
 from pages.customer_list_page import CustomerPage
 from pages.login_data import LoginData
 
-
-@pytest.mark.parametrize('path_data_file', [r"TPAC\KnowledgeElementSearch\4[Atest] Customer, Roga&Kopita.json"])
+"""
+Customer\[Atest]Customer, OOO.json
+Customer\[Atest]Customer, IP.json
+"""
+@pytest.mark.parametrize('path_data_file', [r"TPAC\Customer\[Atest]Customer, IP.json",
+                                            r"TPAC\Customer\[Atest]Customer, OOO.json"])
 class TestCustomer:
 
     def test_create_customer(self, browser_function, path_data_file):
@@ -23,4 +27,13 @@ class TestCustomer:
         customer_page.go_to_create_customer()
         customer_create_form = CustomerFormCreate(browser_function, link)
         customer_create_form.create_customer_form(user_data_dict)
+        if user_data_dict["gklanit"] == 1:
+            customer_page.go_to_gklanit_tab()
+            customer_page.should_be_element_on_customer_list(user_data_dict)
+        if len(str(user_data_dict["ogrn"])) == 13:
+            customer_page.go_to_ul_tab()
+            customer_page.should_be_element_on_customer_list(user_data_dict)
+        else:
+            customer_page.go_to_ip_tab()
+            customer_page.should_be_element_on_customer_list(user_data_dict)
         delayed_assert.assert_expectations()

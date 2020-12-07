@@ -300,12 +300,27 @@ class ContractElementPage(BasePage):
             'Кнопка "Отправить на согласование(Договор/контракт)" не отобрежена'
 
     def verify_contract_waiting_status_approval_legal(self):
+        # Проверяем поле статуса на вкладке "Общие сведения"
+        self.browser.find_element(*ContractElementLocators.GENERAL_INFORMATION_ELEMENT).click()
+        self.is_visibility_of_element_located(*ContractElementLocators.APPROVAL_MAIN_STATUS_IN_CONTRACT, 5)
+        assert self.is_text_to_be_present_in_element(*ContractElementLocators.APPROVAL_MAIN_STATUS_IN_CONTRACT,
+                                                     "На согласовании с юридической службой"), \
+            'Некорректный статус или отсутствует статус в поле "Статус согласования" на вкладке "Общие сведения"'
+
+        # Проверяем статус согласования на вкладке "Статус согласования"
         self.is_visibility_of_element_located(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_TABS, 3)
         self.browser.find_element(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_TABS).click()
 
         assert self.is_text_to_be_present_in_element(
             *ContractElementLocators.APPROVAL_LEGAL_STATUS_ELEMENT, "Ожидает согласования"), \
             'Некорректный статус или отсутствует статус в строке "Согласование юридической службой"'
+
+        # Проверяем цвет статуса "Ожидает согласования"
+        waiting_color = "#f5b300"
+        color_in_element = (Color.from_string(self.browser.find_element(
+            *ContractElementLocators.APPROVAL_LEGAL_STATUS_ELEMENT).value_of_css_property('color'))).hex
+        assert color_in_element == waiting_color, \
+            'Некорректный цвет статуса "Ожидает согласования" в строке согласования с юридической службой'
 
     def verify_contract_successfully_status_approval_legal(self):
         self.is_visibility_of_element_located(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_TABS, 3)
@@ -314,20 +329,58 @@ class ContractElementPage(BasePage):
                                                      "Согласовано"), \
             'Некорректный статус или отсутствует статус в строке "Согласование юридической службой"'
 
-    def verify_contract_reject_status_approval_leagal(self):
+        # Проверяем цвет статуса "Согласовано"
+        successfully_color = Color.from_string('green')
+        color_in_element = Color.from_string(self.browser.find_element(
+            *ContractElementLocators.APPROVAL_LEGAL_STATUS_ELEMENT).value_of_css_property('color'))
+        assert color_in_element == successfully_color, \
+            'Некорректный цвет статуса "Согласовано юридической службой" в строке согласования с юридической службой'
+
+    def verify_contract_reject_status_approval_legal(self):
+        # Проверяем статус "Отклонено" на вкладке "Общие сведения"
+        self.browser.find_element(*ContractElementLocators.GENERAL_INFORMATION_ELEMENT).click()
+        self.is_visibility_of_element_located(*ContractElementLocators.APPROVAL_MAIN_STATUS_IN_CONTRACT, 5)
+        assert self.is_text_to_be_present_in_element(*ContractElementLocators.APPROVAL_MAIN_STATUS_IN_CONTRACT,
+                                                     "Не согласовано с юридической службой"), \
+            '\nНекорректный статус или отсутствует статус в поле "Статус согласования" на вкладке "Общие сведения" ' \
+            '\n Ожидаемый результат: Отображен статус "Не согласовано с финансовой службой"'
+
+        # Проверяем статус на вкладке "Статус согласования"
         self.is_visibility_of_element_located(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_TABS, 3)
         self.browser.find_element(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_TABS).click()
         assert self.is_text_to_be_present_in_element(*ContractElementLocators.APPROVAL_LEGAL_STATUS_ELEMENT,
                                                      "Отклонено"), \
             'Некорректный статус или отсутствует статус в строке "Согласование юридической службой"'
 
+        # Проверяем цвет статуса "Отклонено"
+        reject_color = Color.from_string('red')
+        color_in_element = Color.from_string(self.browser.find_element(
+            *ContractElementLocators.APPROVAL_LEGAL_STATUS_ELEMENT).value_of_css_property('color'))
+        assert color_in_element == reject_color, \
+            'Некорректный цвет статуса "Отклонено" в строке согласования с юридической службой'
+
     def verify_contract_waiting_status_approval_count(self):
+        # Проверяем поле статуса на вкладке "Общие сведения"
+        self.browser.find_element(*ContractElementLocators.GENERAL_INFORMATION_ELEMENT).click()
+        self.is_visibility_of_element_located(*ContractElementLocators.APPROVAL_MAIN_STATUS_IN_CONTRACT, 5)
+        assert self.is_text_to_be_present_in_element(*ContractElementLocators.APPROVAL_MAIN_STATUS_IN_CONTRACT,
+                                                     "На согласовании с бухгалтерией"), \
+            'Некорректный статус или отсутствует статус в поле "Статус согласования" на вкладке "Общие сведения"'
+
+        # Проверяем согласование на вкладке "Статус согласования"
         self.is_visibility_of_element_located(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_TABS, 3)
         self.browser.find_element(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_TABS).click()
 
         assert self.is_text_to_be_present_in_element(*ContractElementLocators.APPROVAL_COUNT_STATUS_ELEMENT,
                                                      "Ожидает согласования"), \
             'Некорректный статус или отсутствует статус в строке "Согласование c бухгалтерией"'
+
+        # Проверяем цвет статуса "Ожидает согласования"
+        waiting_color = "#f5b300"
+        color_in_element = (Color.from_string(self.browser.find_element(
+            *ContractElementLocators.APPROVAL_COUNT_STATUS_ELEMENT).value_of_css_property('color'))).hex
+        assert color_in_element == waiting_color, \
+            'Некорректный цвет статуса "Ожидает согласования" в строке согласования с бухгалтерией'
 
     def verify_contract_successfully_status_approval_count(self):
         self.is_visibility_of_element_located(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_TABS, 3)
@@ -336,14 +389,43 @@ class ContractElementPage(BasePage):
                                                      "Согласовано"), \
             'Некорректный статус или отсутствует статус в строке "Согласование c бухгалтерией"'
 
+        # Проверяем цвет статуса "Согласовано"
+        successfully_color = Color.from_string('green')
+        color_in_element = Color.from_string(self.browser.find_element(
+            *ContractElementLocators.APPROVAL_COUNT_STATUS_ELEMENT).value_of_css_property('color'))
+        assert color_in_element == successfully_color, \
+            'Некорректный цвет статуса "Согласовано" в строке согласования с бухгалтерией'
+
     def verify_contract_reject_status_approval_count(self):
+        # Проверяем статус "Отклонено" на вкладке "Общие сведения"
+        self.browser.find_element(*ContractElementLocators.GENERAL_INFORMATION_ELEMENT).click()
+        self.is_visibility_of_element_located(*ContractElementLocators.APPROVAL_MAIN_STATUS_IN_CONTRACT, 5)
+        assert self.is_text_to_be_present_in_element(*ContractElementLocators.APPROVAL_MAIN_STATUS_IN_CONTRACT,
+                                                     "Не согласовано бухгалтерией"), \
+            '\nНекорректный статус или отсутствует статус в поле "Статус согласования" на вкладке "Общие сведения" ' \
+            '\n Ожидаемый результат: Отображен статус "Не согласовано с бухгалтерией"'
+
         self.is_visibility_of_element_located(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_TABS, 3)
         self.browser.find_element(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_TABS).click()
         assert self.is_text_to_be_present_in_element(*ContractElementLocators.APPROVAL_COUNT_STATUS_ELEMENT,
                                                      "Отклонено"), \
             'Некорректный статус или отсутствует статус в строке "Согласование c бухгалтерией"'
 
+        # Проверяем цвет статуса "Отклонено"
+        reject_color = Color.from_string('red')
+        color_in_element = Color.from_string(self.browser.find_element(
+            *ContractElementLocators.APPROVAL_COUNT_STATUS_ELEMENT).value_of_css_property('color'))
+        assert color_in_element == reject_color, \
+            'Некорректный цвет статуса "Отклонено" в строке согласования с бухгалтерией'
+
     def verify_contract_waiting_status_approval_fin(self):
+        # Проверяем поле статуса на вкладке "Общие сведения"
+        self.browser.find_element(*ContractElementLocators.GENERAL_INFORMATION_ELEMENT).click()
+        self.is_visibility_of_element_located(*ContractElementLocators.APPROVAL_MAIN_STATUS_IN_CONTRACT, 5)
+        assert self.is_text_to_be_present_in_element(*ContractElementLocators.APPROVAL_MAIN_STATUS_IN_CONTRACT,
+                                                     "На согласовании с финансовой службой"), \
+            'Некорректный статус или отсутствует статус в поле "Статус согласования" на вкладке "Общие сведения"'
+
         self.is_visibility_of_element_located(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_TABS, 3)
         self.browser.find_element(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_TABS).click()
 
@@ -351,43 +433,137 @@ class ContractElementPage(BasePage):
                                                      "Ожидает согласования"), \
             'Некорректный статус или отсутствует статус в строке "Согласование c финансовой службой"'
 
-    def verify_contract_successfully_status_approval_fin(self):
+        # Проверяем цвет статуса "Ожидает согласования"
+        waiting_color = "#f5b300"
+        color_in_element = (Color.from_string(self.browser.find_element(
+            *ContractElementLocators.APPROVAL_FIN_STATUS_ELEMENT).value_of_css_property('color'))).hex
+        assert color_in_element == waiting_color, \
+            'Некорректный цвет статуса "Ожидает согласования" в строке согласования с финансовой службой'
+
+    def verify_contract_successfully_status_approval_fin(self, user_data_dict):
+        # Проверяем успешный статус согласования во вкладке "Общие сведения"
+        if (user_data_dict["priceCategory"] == "C") or \
+                (user_data_dict["priceCategory"] == "B"
+                 and user_data_dict["groupTypeWork"] == "Other"):
+            self.browser.find_element(*ContractElementLocators.GENERAL_INFORMATION_ELEMENT).click()
+            self.is_visibility_of_element_located(*ContractElementLocators.APPROVAL_MAIN_STATUS_IN_CONTRACT, 5)
+            assert self.is_text_to_be_present_in_element(*ContractElementLocators.APPROVAL_MAIN_STATUS_IN_CONTRACT,
+                                                         "Согласовано с финансовой службой"), \
+                'Некорректный статус или отсутствует статус в поле "Статус согласования" на вкладке "Общие сведения"'
+
+        # Проверяем статус на вкладке "Статус согласования"
         self.is_visibility_of_element_located(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_TABS, 3)
         self.browser.find_element(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_TABS).click()
         assert self.is_text_to_be_present_in_element(*ContractElementLocators.APPROVAL_FIN_STATUS_ELEMENT,
                                                      "Согласовано"), \
             'Некорректный статус или отсутствует статус в строке "Согласование c финансовой службой"'
+
+        # Проверяем цвет статуса "Согласовано"
+        successfully_color = Color.from_string('green')
+        color_in_element = Color.from_string(self.browser.find_element(
+            *ContractElementLocators.APPROVAL_FIN_STATUS_ELEMENT).value_of_css_property('color'))
+        assert color_in_element == successfully_color, \
+            'Некорректный цвет статуса "Согласовано" в строке согласования с финансовой службой'
 
     def verify_contract_reject_status_approval_fin(self):
+        # Проверяем статус "Отклонено" на вкладке "Общие сведения"
+        self.browser.find_element(*ContractElementLocators.GENERAL_INFORMATION_ELEMENT).click()
+        self.is_visibility_of_element_located(*ContractElementLocators.APPROVAL_MAIN_STATUS_IN_CONTRACT, 5)
+        assert self.is_text_to_be_present_in_element(*ContractElementLocators.APPROVAL_MAIN_STATUS_IN_CONTRACT,
+                                                     "Не согласовано с финансовой службой"), \
+            '\nНекорректный статус или отсутствует статус в поле "Статус согласования" на вкладке "Общие сведения" ' \
+            '\n Ожидаемый результат: Отображен статус "Не согласовано с финансовой службой"'
+
         self.is_visibility_of_element_located(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_TABS, 3)
         self.browser.find_element(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_TABS).click()
         assert self.is_text_to_be_present_in_element(*ContractElementLocators.APPROVAL_FIN_STATUS_ELEMENT,
                                                      "Отклонено"), \
             'Некорректный статус или отсутствует статус в строке "Согласование c финансовой службой"'
 
+        # Проверяем цвет статуса "Отклонено"
+        reject_color = Color.from_string('red')
+        color_in_element = Color.from_string(self.browser.find_element(
+            *ContractElementLocators.APPROVAL_FIN_STATUS_ELEMENT).value_of_css_property('color'))
+        assert color_in_element == reject_color, \
+            'Некорректный цвет статуса "Отклонено" в строке согласования с финансовой службой'
+
     def verify_contract_waiting_status_approval_udprpo(self):
+        # Проверяем поле статуса на вкладке "Общие сведения"
+        self.browser.find_element(*ContractElementLocators.GENERAL_INFORMATION_ELEMENT).click()
+        self.is_visibility_of_element_located(*ContractElementLocators.APPROVAL_MAIN_STATUS_IN_CONTRACT, 5)
+        assert self.is_text_to_be_present_in_element(*ContractElementLocators.APPROVAL_MAIN_STATUS_IN_CONTRACT,
+                                                     "На согласовании Директором по разработке ПО"), \
+            'Некорректный статус или отсутствует статус в поле "Статус согласования" на вкладке "Общие сведения"'
+
+        # Проверяем статус на вкладке "Статус согласования"
         self.is_visibility_of_element_located(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_TABS, 3)
         self.browser.find_element(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_TABS).click()
 
         assert self.is_text_to_be_present_in_element(*ContractElementLocators.APPROVAL_UDPRPO_STATUS_ELEMENT,
                                                      "Ожидает согласования"), \
-            'Некорректный статус или отсутствует статус в строке "Согласование c УДПР ПО"'
+            'Некорректный статус или отсутствует статус в строке "Согласование c Директором по разработке ПО"'
 
-    def verify_contract_successfully_status_approval_udprpo(self):
+        # Проверяем цвет статуса "Ожидает согласования"
+        waiting_color = "#f5b300"
+        color_in_element = (Color.from_string(self.browser.find_element(
+            *ContractElementLocators.APPROVAL_UDPRPO_STATUS_ELEMENT).value_of_css_property('color'))).hex
+        assert color_in_element == waiting_color, \
+            'Некорректный цвет статуса "Ожидает согласования" в строке согласования со службой Директором по разработке ПО'
+
+    def verify_contract_successfully_status_approval_udprpo(self, user_data_dict):
+        # Проверяем успешный статус согласования во вкладке "Общие сведения"
+        if user_data_dict["groupTypeWork"] == "Software" and user_data_dict["priceCategory"] == "B":
+            self.browser.find_element(*ContractElementLocators.GENERAL_INFORMATION_ELEMENT).click()
+            self.is_visibility_of_element_located(*ContractElementLocators.APPROVAL_MAIN_STATUS_IN_CONTRACT, 5)
+            assert self.is_text_to_be_present_in_element(*ContractElementLocators.APPROVAL_MAIN_STATUS_IN_CONTRACT,
+                                                         "Согласовано Директором по разработке ПО"), \
+                'Некорректный статус или отсутствует статус в поле "Статус согласования" на вкладке "Общие сведения"'
+
+        # Проверяем статус на вкладке "Статс согласования"
         self.is_visibility_of_element_located(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_TABS, 3)
         self.browser.find_element(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_TABS).click()
         assert self.is_text_to_be_present_in_element(*ContractElementLocators.APPROVAL_UDPRPO_STATUS_ELEMENT,
                                                      "Согласовано"), \
-            'Некорректный статус или отсутствует статус в строке "Согласование c УДПР ПО"'
+            'Некорректный статус или отсутствует статус в строке "Согласование c Директором по разработке ПО"'
+
+        # Проверяем цвет статуса "Согласовано" на вкладке "Статус согласования"
+        successfully_color = Color.from_string('green')
+        color_in_element = Color.from_string(self.browser.find_element(
+            *ContractElementLocators.APPROVAL_UDPRPO_STATUS_ELEMENT).value_of_css_property('color'))
+        assert color_in_element == successfully_color, \
+            'Некорректный цвет статуса "Согласовано" в строке согласования с Директором по разработке ПО'
 
     def verify_contract_reject_status_approval_udprpo(self):
+        # Проверяем статус "Отклонено" на вкладке "Общие сведения"
+        self.browser.find_element(*ContractElementLocators.GENERAL_INFORMATION_ELEMENT).click()
+        self.is_visibility_of_element_located(*ContractElementLocators.APPROVAL_MAIN_STATUS_IN_CONTRACT, 5)
+        assert self.is_text_to_be_present_in_element(*ContractElementLocators.APPROVAL_MAIN_STATUS_IN_CONTRACT,
+                                                     "Не согласовано Директором по разработке ПО"), \
+            '\nНекорректный статус или отсутствует статус в поле "Статус согласования" на вкладке "Общие сведения" ' \
+            '\n Ожидаемый результат: Отображен статус "Не согласовано Директором по разработке ПО"'
+
         self.is_visibility_of_element_located(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_TABS, 3)
         self.browser.find_element(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_TABS).click()
         assert self.is_text_to_be_present_in_element(*ContractElementLocators.APPROVAL_UDPRPO_STATUS_ELEMENT,
                                                      "Отклонено"), \
-            'Некорректный статус или отсутствует статус в строке "Согласование c УДПР ПО"'
+            'Некорректный статус или отсутствует статус в строке "Согласование c Директором по разработке ПО"'
+
+        # Проверяем цвет статуса "Отклонено"
+        reject_color = Color.from_string('red')
+        color_in_element = Color.from_string(self.browser.find_element(
+            *ContractElementLocators.APPROVAL_UDPRPO_STATUS_ELEMENT).value_of_css_property('color'))
+        assert color_in_element == reject_color, \
+            'Некорректный цвет статуса "Отклонено" в строке согласования со службой Директором по разработке ПО'
 
     def verify_contract_waiting_status_approval_kkp(self):
+        # Проверяем поле статуса на вкладке "Общие сведения"
+        self.browser.find_element(*ContractElementLocators.GENERAL_INFORMATION_ELEMENT).click()
+        self.is_visibility_of_element_located(*ContractElementLocators.APPROVAL_MAIN_STATUS_IN_CONTRACT, 5)
+        assert self.is_text_to_be_present_in_element(*ContractElementLocators.APPROVAL_MAIN_STATUS_IN_CONTRACT,
+                                                     "На согласовании в ККП"), \
+            'Некорректный статус или отсутствует статус в поле "Статус согласования" на вкладке "Общие сведения"'
+
+        # Проверяем статус на вкладке "Статус согласования"
         self.is_visibility_of_element_located(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_TABS, 3)
         self.browser.find_element(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_TABS).click()
 
@@ -395,21 +571,69 @@ class ContractElementPage(BasePage):
                                                      "Ожидает согласования"), \
             'Некорректный статус или отсутствует статус в строке "Согласование c ККП"'
 
-    def verify_contract_successfully_status_approval_kkp(self):
+        # Проверяем цвет статуса "Ожидает согласования"
+        waiting_color = "#f5b300"
+        color_in_element = (Color.from_string(self.browser.find_element(
+            *ContractElementLocators.APPROVAL_KKP_STATUS_ELEMENT).value_of_css_property('color'))).hex
+        assert color_in_element == waiting_color, \
+            'Некорректный цвет статуса "Ожидает согласования" в строке согласования со службой ККП'
+
+    def verify_contract_successfully_status_approval_kkp(self, user_data_dict):
+        # Проверяем успешный статус согласования во вкладке "Общие сведения"
+        if user_data_dict["priceCategory"] != "A":
+            self.browser.find_element(*ContractElementLocators.GENERAL_INFORMATION_ELEMENT).click()
+            self.is_visibility_of_element_located(*ContractElementLocators.APPROVAL_MAIN_STATUS_IN_CONTRACT, 5)
+            assert self.is_text_to_be_present_in_element(*ContractElementLocators.APPROVAL_MAIN_STATUS_IN_CONTRACT,
+                                                         "Участие в проекте согласовано в ККП"), \
+                'Некорректный статус или отсутствует статус в поле "Статус согласования" на вкладке "Общие сведения"'
+
+        # Проверяем статус на вкладке "Статус согласования"
         self.is_visibility_of_element_located(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_TABS, 3)
         self.browser.find_element(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_TABS).click()
         assert self.is_text_to_be_present_in_element(*ContractElementLocators.APPROVAL_KKP_STATUS_ELEMENT,
                                                      "Согласовано"), \
             'Некорректный статус или отсутствует статус в строке "Согласование c ККП"'
 
+        # Проверяем цвет статуса "Согласовано" на вкладке "Статус согласования"
+        successfully_color = Color.from_string('green')
+        color_in_element = Color.from_string(self.browser.find_element(
+            *ContractElementLocators.APPROVAL_KKP_STATUS_ELEMENT).value_of_css_property('color'))
+        assert color_in_element == successfully_color, \
+            'Некорректный цвет статуса "Согласовано" в строке согласования со службой ККП'
+
     def verify_contract_reject_status_approval_kkp(self):
+        # Проверяем статус "Отклонено" на вкладке "Общие сведения"
+        self.browser.find_element(*ContractElementLocators.GENERAL_INFORMATION_ELEMENT).click()
+        self.is_visibility_of_element_located(*ContractElementLocators.APPROVAL_MAIN_STATUS_IN_CONTRACT, 5)
+        assert self.is_text_to_be_present_in_element(*ContractElementLocators.APPROVAL_MAIN_STATUS_IN_CONTRACT,
+                                                     "Участие в проекте не согласовано в ККП"), \
+            '\nНекорректный статус или отсутствует статус в поле "Статус согласования" на вкладке "Общие сведения" ' \
+            '\n Ожидаемый результат: Отображен статус "Участие в проекте не согласовано в ККП"'
+
+        # Проверяем статус на вкладке "Статус согласования"
         self.is_visibility_of_element_located(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_TABS, 3)
         self.browser.find_element(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_TABS).click()
         assert self.is_text_to_be_present_in_element(*ContractElementLocators.APPROVAL_KKP_STATUS_ELEMENT,
                                                      "Отклонено"), \
             'Некорректный статус или отсутствует статус в строке "Согласование c ККП"'
 
+        # Проверяем цвет статуса "Отклонено"
+        reject_color = Color.from_string('red')
+        color_in_element = Color.from_string(self.browser.find_element(
+            *ContractElementLocators.APPROVAL_KKP_STATUS_ELEMENT).value_of_css_property('color'))
+        assert color_in_element == reject_color, \
+            'Некорректный цвет статуса "Отклонено" в строке согласования со службой ККП'
+
     def verify_contract_revision_status_approval_kkp(self):
+        # Проверяем статус "Отправлено на доработку" на вкладке "Общие сведения"
+        self.browser.find_element(*ContractElementLocators.GENERAL_INFORMATION_ELEMENT).click()
+        self.is_visibility_of_element_located(*ContractElementLocators.APPROVAL_MAIN_STATUS_IN_CONTRACT, 5)
+        assert self.is_text_to_be_present_in_element(*ContractElementLocators.APPROVAL_MAIN_STATUS_IN_CONTRACT,
+                                                     "Отправлено на доработку ККП"), \
+            '\nНекорректный статус или отсутствует статус в поле "Статус согласования" на вкладке "Общие сведения" ' \
+            '\n Ожидаемый результат: Отображен статус "Отправлено на доработку ККП"'
+
+        # Проверяем статус на вкладке "Статус согласования"
         self.is_visibility_of_element_located(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_TABS, 3)
         self.browser.find_element(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_TABS).click()
         assert self.is_text_to_be_present_in_element(*ContractElementLocators.APPROVAL_KKP_STATUS_ELEMENT,

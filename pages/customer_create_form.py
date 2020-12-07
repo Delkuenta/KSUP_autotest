@@ -184,4 +184,3 @@ class CustomerFormCreate(BasePage):
 
         # Жмем кнопку "Создать"
         self.browser.find_element(*FormCreateCustomerLocators.CONFIRM_CREATE_BUTTON).click()
-        breakpoint()

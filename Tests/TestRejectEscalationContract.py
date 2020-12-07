@@ -59,7 +59,7 @@ class TestRejectEscalationContract:
         contract_list.go_to_contract_element(user_data_dict)
         contract_element_page = ContractElementPage(browser_function, browser_function.current_url)
         contract_element_page.reject_contract_legal()
-        contract_element_page.verify_contract_reject_status_approval_leagal()
+        contract_element_page.verify_contract_reject_status_approval_legal()
         login_page.logout()
 
     def test_send_contract_for_approval_cycle2(self, browser_function, path_data_file):
@@ -240,7 +240,7 @@ class TestRejectEscalationContract:
         contract_list_page.go_to_contract_element(user_data_dict)
         contract_element_page = ContractElementPage(browser_function, browser_function.current_url)
         contract_element_page.approval_contract_fin()
-        contract_element_page.verify_contract_successfully_status_approval_fin()
+        contract_element_page.verify_contract_successfully_status_approval_fin(user_data_dict)
         if user_data_dict["groupTypeWork"] == "Software" and user_data_dict["priceCategory"] != "C":
             contract_element_page.verify_contract_waiting_status_approval_udprpo()
         elif user_data_dict["groupTypeWork"] == "Other" \
@@ -360,7 +360,7 @@ class TestRejectEscalationContract:
         contract_list_page.go_to_contract_element(user_data_dict)
         contract_element_page = ContractElementPage(browser_function, browser_function.current_url)
         contract_element_page.approval_contract_fin()
-        contract_element_page.verify_contract_successfully_status_approval_fin()
+        contract_element_page.verify_contract_successfully_status_approval_fin(user_data_dict)
         if user_data_dict["groupTypeWork"] == "Software" and user_data_dict["priceCategory"] != "C":
             contract_element_page.verify_contract_waiting_status_approval_udprpo()
         elif user_data_dict["groupTypeWork"] == "Other" \
@@ -384,7 +384,7 @@ class TestRejectEscalationContract:
             contract_list_page.go_to_contract_element(user_data_dict)
             contract_element_page = ContractElementPage(browser_function, browser_function.current_url)
             contract_element_page.approval_contract_udprpo()
-            contract_element_page.verify_contract_successfully_status_approval_udprpo()
+            contract_element_page.verify_contract_successfully_status_approval_udprpo(user_data_dict)
             if user_data_dict["contractorType"] != "Тендерная заявка" \
                     and user_data_dict["priceCategory"] == "A":
                 contract_element_page.verify_contract_waiting_status_approval_kkp()

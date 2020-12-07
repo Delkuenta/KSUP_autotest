@@ -39,8 +39,6 @@ class TestUnitSaleFullBusinessCyclePaZpDk:
 
 
 def test_function_split():
-    dick = "1"
-    if not dick:
-        print("\nПеременная пустая")
-    else:
-        print("\nПеременная НЕ пустая")
+    dick = 'ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"ЗЛЫЕ МАРСИАНЕ\"'
+    dick =dick.replace('"', "")
+    print(dick)
