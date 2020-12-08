@@ -944,12 +944,16 @@ class KnowledgeSearchLocators:
     CUSTOMER_VALUE_IN_RESULT = (By.XPATH, "//*[text() ='Заказчик']/following::p[1]")
 
     # Значение в поле "Подразделение"
-    PERFORMER_VALUE_IN_RESULT = (By.XPATH, "//*[text() ='Подразделение']/following::p[1]")
+    DEPARTMENT_VALUE_IN_RESULT = (By.XPATH, "//*[text() ='Подразделение']/following::p[1]")
 
+    # Значение в поле "Технологии"
     TECHNOLOGIES_VALUE_IN_RESULT = (By.XPATH, "//*[text() ='Технологии']/following::p[1]")
 
     # Значение в поле "Исполнитель"
     LEGAL_VALUE_IN_RESULT = (By.XPATH, "//*[text() ='Исполнитель']/following::p[1]")
+
+    # Значение в поле "Категория"
+    CATEGORY_VALUE_IN_RESULT = (By.XPATH, "//*[text() ='Исполнитель']/following::p[1]")
 
     # Значение в поле "Сумма контракта (руб.)"
     SUM_VALUE_IN_RESULT = (By.XPATH, "//*[text() ='Сумма контракта (руб.)']/following::p[1]")

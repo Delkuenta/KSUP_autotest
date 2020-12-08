@@ -2,10 +2,10 @@
 	"main_data": {
         "fullName": "[Атест],Проект для поиска в БЗ",
 		"eisPriceLink": "example@link.com",
-        "customer": ["КАЗНАЧЕЙСТВО РОССИИ", "БАНК РОССИИ"],
+        "customer": ["ХАБАРОВ СЕРГЕЙ ВЛАДИМИРОВИЧ"],
 		"industry": ["IT-сектор", "Автопром"],
 		"typeOfWorkServices": ["Разработка заказного ПО", "Тестирование ПО"],
-		"executiveUnitLegal": "ООО \"ЛАНИТ ЭКСПЕРТИЗА\"",
+		"executiveUnitLegal": "ООО \"ЗЛЫЕ МАРСИАНЕ\"",
         "executiveUnit": "Департамент корпоративных систем",
         "salesUnit": ["НОРБИТ"],
 		"projectStage": "Подготовка",

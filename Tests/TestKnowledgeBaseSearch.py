@@ -100,7 +100,14 @@ class TestKnowledgeBaseSearch:
         knowledge_page.reset_button_knowledge()
         knowledge_page.search_line_by_name(project_data_dict["fullName"])
 
-    # Поиск проекта в стркое поиска по подразделению
+    # Поиск проекта в строке поиска по подразделению
+    def test_search_line_project_by_department(self, browser_session, login_for_knowledge):
+        project_data_dict = BasePage.read_json(browser_session, project_path_file)
+        link = browser_session.current_url
+        knowledge_page = KnowledgeSearchPage(browser_session, link)
+        knowledge_page.reset_button_knowledge()
+        knowledge_page.activate_checkbox_need_to_find("Проект")
+        knowledge_page.search_line_by_department(project_data_dict)
 
     # Поиск проекта в строке поиска по заказчику
     def test_search_line_project_by_customer(self, browser_session, login_for_knowledge):
@@ -108,13 +115,46 @@ class TestKnowledgeBaseSearch:
         link = browser_session.current_url
         knowledge_page = KnowledgeSearchPage(browser_session, link)
         knowledge_page.reset_button_knowledge()
-        knowledge_page.search_line_by_customer(project_data_dict["customer"][0])
+        knowledge_page.activate_checkbox_need_to_find("Проект")
+        knowledge_page.search_line_by_customer(project_data_dict)
+
+    # Поиск проекта в строке поиска по исполнителю
+    @pytest.mark.xfail(reason='Не отображено поле "Юр.лицо-исполнитель" в карточке сущности Проект /KSUP-1082')
+    def test_search_line_project_by_executive_unit_legal(self, browser_session, login_for_knowledge):
+        project_data_dict = BasePage.read_json(browser_session, project_path_file)
+        link = browser_session.current_url
+        knowledge_page = KnowledgeSearchPage(browser_session, link)
+        knowledge_page.reset_button_knowledge()
+        knowledge_page.activate_checkbox_need_to_find("Проект")
+        knowledge_page.search_line_by_executive_unit_legal(project_data_dict)
 
     # Поиск проекта в строке поиска по Типу работ и услуг
+    @pytest.mark.xfail(reason='Не отображено поле "Тип работ и услуг" в карточке сущности Проект /KSUP-1082')
+    def test_search_line_project_by_type_work_and_services(self, browser_session, login_for_knowledge):
+        project_data_dict = BasePage.read_json(browser_session, project_path_file)
+        link = browser_session.current_url
+        knowledge_page = KnowledgeSearchPage(browser_session, link)
+        knowledge_page.reset_button_knowledge()
+        knowledge_page.activate_checkbox_need_to_find("Проект")
+        knowledge_page.search_line_by_type_works_and_services(project_data_dict)
 
     # Поиск проекта в строке поиска по Технологии
+    def test_search_line_project_by_technologies(self, browser_session, login_for_knowledge):
+        project_data_dict = BasePage.read_json(browser_session, project_path_file)
+        link = browser_session.current_url
+        knowledge_page = KnowledgeSearchPage(browser_session, link)
+        knowledge_page.reset_button_knowledge()
+        knowledge_page.activate_checkbox_need_to_find("Проект")
+        knowledge_page.search_line_by_technologies(project_data_dict)
 
     # Поиск проекта в строке поиска по Категории
+    def test_search_line_project_by_category(self, browser_session, login_for_knowledge):
+        project_data_dict = BasePage.read_json(browser_session, project_path_file)
+        link = browser_session.current_url
+        knowledge_page = KnowledgeSearchPage(browser_session, link)
+        knowledge_page.reset_button_knowledge()
+        knowledge_page.activate_checkbox_need_to_find("Проект")
+        knowledge_page.search_line_by_category(project_data_dict)
 
     # Поиск договора/контракта в строке по названию
     def test_search_line_contract_by_name(self, browser_session, login_for_knowledge):
@@ -125,12 +165,14 @@ class TestKnowledgeBaseSearch:
         knowledge_page.search_line_by_name(contract_data_dict["fullName"])
 
     # Поиск договора/контракта в строке поиска по заказчику
+    @pytest.mark.xfail(reason='Не отображено поле "Заказчик" в карточке сущности ДК /KSUP-1092')
     def test_search_line_contract_by_customer(self, browser_session, login_for_knowledge):
         contract_data_dict = BasePage.read_json(browser_session, contract_path_file)
         link = browser_session.current_url
         knowledge_page = KnowledgeSearchPage(browser_session, link)
         knowledge_page.reset_button_knowledge()
-        knowledge_page.search_line_by_customer(contract_data_dict["customer"])
+        knowledge_page.activate_checkbox_need_to_find("Договор (контракт)+")
+        knowledge_page.search_line_by_customer(contract_data_dict)
 
     # Поиск договора/контракта в строке поиска по исполнителю
 
