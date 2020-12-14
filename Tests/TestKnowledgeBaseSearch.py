@@ -15,7 +15,7 @@ from pages.project_list_page import ProjectPage
 project_path_file = r"TPAC\KnowledgeElementSearch\1[Atest_Seller] Project, categoryA, softwareDev.json"
 contract_path_file = r"TPAC\KnowledgeElementSearch\2[Atest_Seller] DK, categoryA, softwareDev.json"
 department_path_file = r"TPAC\KnowledgeElementSearch\3[Atest] Department, DKS.json"
-customer_path_file = r"TPAC\KnowledgeElementSearch"
+ulip_path_file = r"TPAC\Customer\[Atest]Customer, OOO.json"
 
 
 
@@ -91,6 +91,11 @@ class TestKnowledgeBaseSearch:
         knowledge_page.deactivate_checkbox_need_to_find("Юр.лицо/ИП")
         knowledge_page.reset_button_knowledge()
         delayed_assert.assert_expectations()
+    # Проверка поиска сущностей при активации чек-бокса в блоке "Заказчик"
+    # Проверка поиска сущностей при активации чек-бокса в блоке "Юр.лицо-исполнитель"
+    # Проверка поиска сущностей при активации чек-бокса в блоке "Подразделение-исполнитель"
+    # Проверка поиска сущностей при активации чек-бокса в блоке "Тип работ и услуг"
+    # Проверка поиска сущностей при активации чек-бокса в  блоке "Технологии"
 
     # Поиск проекта в строке по названию
     def test_search_line_project_by_name(self, browser_session, login_for_knowledge):
@@ -175,32 +180,112 @@ class TestKnowledgeBaseSearch:
         knowledge_page.search_line_by_customer(contract_data_dict)
 
     # Поиск договора/контракта в строке поиска по исполнителю
+    def test_search_line_contract_by_executive_unit_legal(self, browser_session, login_for_knowledge):
+        contract_data_dict = BasePage.read_json(browser_session, contract_path_file)
+        link = browser_session.current_url
+        knowledge_page = KnowledgeSearchPage(browser_session, link)
+        knowledge_page.reset_button_knowledge()
+        knowledge_page.activate_checkbox_need_to_find("Договор (контракт)")
+        knowledge_page.search_line_by_executive_unit_legal(contract_data_dict)
 
     # Поиск договора/контракта в строке поиска по подразделению
+    def test_search_line_contract_by_department(self, browser_session, login_for_knowledge):
+        contract_data_dict = BasePage.read_json(browser_session, contract_path_file)
+        link = browser_session.current_url
+        knowledge_page = KnowledgeSearchPage(browser_session, link)
+        knowledge_page.reset_button_knowledge()
+        knowledge_page.activate_checkbox_need_to_find("Договор (контракт)")
+        knowledge_page.search_line_by_department(contract_data_dict)
 
     # Поиск договора/контракта в строке поиска по номеру контракта
+    def test_search_line_contract_by_number(self, browser_session, login_for_knowledge):
+        contract_data_dict = BasePage.read_json(browser_session, contract_path_file)
+        link = browser_session.current_url
+        knowledge_page = KnowledgeSearchPage(browser_session, link)
+        knowledge_page.reset_button_knowledge()
+        knowledge_page.activate_checkbox_need_to_find("Договор (контракт)")
+        knowledge_page.search_line_by_number(contract_data_dict)
 
     # Поиск договора/контракта в строке поиска по Типу работ и услуг
+    def test_search_line_contract_by_type_work_and_services(self, browser_session, login_for_knowledge):
+        contract_data_dict = BasePage.read_json(browser_session, contract_path_file)
+        link = browser_session.current_url
+        knowledge_page = KnowledgeSearchPage(browser_session, link)
+        knowledge_page.reset_button_knowledge()
+        knowledge_page.activate_checkbox_need_to_find("Договор (контракт)")
+        knowledge_page.search_line_by_type_works_and_services(contract_data_dict)
 
     # Поиск договора/контракта в строке поиска по Технологии
-
-    # Поиск Юр.лицо/ИП в строке поиска поиска по длиному названию
-    def test_search_line_ul_ip_by_name(self, browser_session, login_for_knowledge):
-        pass
+    def test_search_line_contract_by_technologies(self, browser_session, login_for_knowledge):
+        contract_data_dict = BasePage.read_json(browser_session, contract_path_file)
+        link = browser_session.current_url
+        knowledge_page = KnowledgeSearchPage(browser_session, link)
+        knowledge_page.reset_button_knowledge()
+        knowledge_page.activate_checkbox_need_to_find("Договор (контракт)")
+        knowledge_page.search_line_by_technologies(contract_data_dict)
 
     # Поиск Юр.лицо/ИП в строке поиска поиска по короткому названию
+    def test_search_line_ulip_by_short_name(self, browser_session, login_for_knowledge):
+        ulip_data_dict = BasePage.read_json(browser_session, ulip_path_file)
+        link = browser_session.current_url
+        knowledge_page = KnowledgeSearchPage(browser_session, link)
+        knowledge_page.reset_button_knowledge()
+        knowledge_page.activate_checkbox_need_to_find("Юр.лицо/ИП")
+        knowledge_page.search_line_ulip_by_name(ulip_data_dict)
+
     # Поиск Юр.лицо/ИП в строке поиска по отрасль
+    def test_search_line_ulip_by_industry(self, browser_session, login_for_knowledge):
+        ulip_data_dict = BasePage.read_json(browser_session, ulip_path_file)
+        link = browser_session.current_url
+        knowledge_page = KnowledgeSearchPage(browser_session, link)
+        knowledge_page.reset_button_knowledge()
+        knowledge_page.activate_checkbox_need_to_find("Юр.лицо/ИП")
+        knowledge_page.search_line_by_industry(ulip_data_dict)
+
     # Поиск Юр.лицо/ИП в строке поиска по огрн
+    @pytest.mark.xfail(reason='Значение в поле ОГРН разделено пробелом по 3 знака /KSUP-1088')
+    def test_search_line_ulip_by_ogrn(self, browser_session, login_for_knowledge):
+        ulip_data_dict = BasePage.read_json(browser_session, ulip_path_file)
+        link = browser_session.current_url
+        knowledge_page = KnowledgeSearchPage(browser_session, link)
+        knowledge_page.reset_button_knowledge()
+        knowledge_page.activate_checkbox_need_to_find("Юр.лицо/ИП")
+        knowledge_page.search_line_by_ogrn(ulip_data_dict)
+
     # Поиск Юр.лицо/ИП в строке поиска по ИНН
-    # Поиск Юр.лицо/ИП в строке поиска по ККП
+    @pytest.mark.xfail(reason='Значение в поле ИНН разделено пробелом по 3 знака /KSUP-1088')
+    def test_search_line_ulip_by_inn(self, browser_session, login_for_knowledge):
+        ulip_data_dict = BasePage.read_json(browser_session, ulip_path_file)
+        if len(str(ulip_data_dict["ogrn"])) == 13:
+            link = browser_session.current_url
+            knowledge_page = KnowledgeSearchPage(browser_session, link)
+            knowledge_page.reset_button_knowledge()
+            knowledge_page.activate_checkbox_need_to_find("Юр.лицо/ИП")
+            knowledge_page.search_line_by_inn(ulip_data_dict)
+        else:
+            print("Проверка отображения и поиска по ИНН осущеставляется только для Юр.лиц, где ОГРН = 13 символам")
+
+    # Поиск Юр.лицо/ИП в строке поиска по КПП
+    @pytest.mark.xfail(reason='Значение в поле КПП разделено пробелом по 3 знака /KSUP-1088')
+    def test_search_line_ulip_by_kpp(self, browser_session, login_for_knowledge):
+        ulip_data_dict = BasePage.read_json(browser_session, ulip_path_file)
+        if len(str(ulip_data_dict["ogrn"])) == 13:
+            link = browser_session.current_url
+            knowledge_page = KnowledgeSearchPage(browser_session, link)
+            knowledge_page.reset_button_knowledge()
+            knowledge_page.activate_checkbox_need_to_find("Юр.лицо/ИП")
+            knowledge_page.search_line_by_inn(ulip_data_dict)
+        else:
+            print("Проверка отображения и поиска по КПП осущеставляется только для Юр.лиц, где ОГРН = 13 символам")
 
     # Поиск Подразделение в строке поиска поиска по названию
-    def test_search_line_by_executiveunit_element(self, browser_session, login_for_knowledge):
+    def test_search_line_department_by_name(self, browser_session, login_for_knowledge):
         department_dict = BasePage.read_json(browser_session, department_path_file)
         link = browser_session.current_url
         knowledge_page = KnowledgeSearchPage(browser_session, link)
         knowledge_page.reset_button_knowledge()
-        knowledge_page.search_line_by_customer(department_dict["fullName"])
+        knowledge_page.activate_checkbox_need_to_find("Подразделение")
+        knowledge_page.search_line_by_name(department_dict["fullName"])
 
     # Поиск проекта с блоком фильтрации "Заказчик"
     def test_search_project_with_customer_block_filter(self, browser_session, login_for_knowledge):

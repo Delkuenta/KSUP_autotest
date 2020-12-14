@@ -573,7 +573,7 @@ class TestSeparateSaleFullBusinessCyclePaZpDk:
         contract_list_page.go_to_contract_element(user_data_dict)
         contract_element_page = ContractElementPage(browser_function, browser_function.current_url)
         contract_element_page.approval_contract_fin()
-        contract_element_page.verify_contract_successfully_status_approval_fin()
+        contract_element_page.verify_contract_successfully_status_approval_fin(user_data_dict)
         if user_data_dict["groupTypeWork"] == "Software" and user_data_dict["priceCategory"] != "C":
             contract_element_page.verify_contract_waiting_status_approval_udprpo()
         elif user_data_dict["groupTypeWork"] == "Other" \
@@ -597,7 +597,7 @@ class TestSeparateSaleFullBusinessCyclePaZpDk:
             contract_list_page.go_to_contract_element(user_data_dict)
             contract_element_page = ContractElementPage(browser_function, browser_function.current_url)
             contract_element_page.approval_contract_udprpo()
-            contract_element_page.verify_contract_successfully_status_approval_udprpo()
+            contract_element_page.verify_contract_successfully_status_approval_udprpo(user_data_dict)
             if user_data_dict["contractorType"] != "Тендерная заявка" \
                     and user_data_dict["priceCategory"] == "A":
                 contract_element_page.verify_contract_waiting_status_approval_kkp()
@@ -620,7 +620,7 @@ class TestSeparateSaleFullBusinessCyclePaZpDk:
             contract_list_page.go_to_contract_element(user_data_dict)
             contract_element_page = ContractElementPage(browser_function, browser_function.current_url)
             contract_element_page.approval_contract_kkp()
-            contract_element_page.verify_contract_successfully_status_approval_kkp()
+            contract_element_page.verify_contract_successfully_status_approval_kkp(user_data_dict)
             login_page.logout()
         else:
             print("\nВнутреннее согласование контракта со службой ККП не требуется")

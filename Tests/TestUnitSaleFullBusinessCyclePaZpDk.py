@@ -79,7 +79,7 @@ UnitSale\Seller2
 
 # До первой ошибки --maxfail=1
 # Браузер для запуска --browser_name=firefox
-@pytest.mark.parametrize('path_data_file', [r"TPAC\UnitSale\Seller\7_[Аtest_Seller] PA+ZP+DK, CommercialOffer, categoryA, softwareDev, UnitSale.json"])
+@pytest.mark.parametrize('path_data_file', [r"TPAC\UnitSale\Seller\2_[Atest_Seller] PA+ZP+DK,Tender, categoryB, softwareDev, UnitSale.json"])
 class TestUnitSaleFullBusinessCyclePaZpDk:
 
     @pytest.mark.xfail(reason="Баг https://jira.lanit.ru/browse/KSUP-1041")
@@ -408,7 +408,7 @@ class TestUnitSaleFullBusinessCyclePaZpDk:
         contract_list_page.go_to_contract_element(user_data_dict)
         contract_element_page = ContractElementPage(browser_function, browser_function.current_url)
         contract_element_page.approval_contract_fin()
-        contract_element_page.verify_contract_successfully_status_approval_fin()
+        contract_element_page.verify_contract_successfully_status_approval_fin(user_data_dict)
         if user_data_dict["groupTypeWork"] == "Software" and user_data_dict["priceCategory"] != "C":
             contract_element_page.verify_contract_waiting_status_approval_udprpo()
         elif user_data_dict["groupTypeWork"] == "Other" \
@@ -436,7 +436,7 @@ class TestUnitSaleFullBusinessCyclePaZpDk:
             contract_list_page.go_to_contract_element(user_data_dict)
             contract_element_page = ContractElementPage(browser_function, browser_function.current_url)
             contract_element_page.approval_contract_udprpo()
-            contract_element_page.verify_contract_successfully_status_approval_udprpo()
+            contract_element_page.verify_contract_successfully_status_approval_udprpo(user_data_dict)
             if user_data_dict["contractorType"] != "Тендерная заявка" and user_data_dict["priceCategory"] == "A":
                 contract_element_page.verify_contract_waiting_status_approval_kkp()
             login_page.go_to_contract_list(link)
@@ -463,7 +463,7 @@ class TestUnitSaleFullBusinessCyclePaZpDk:
             contract_list_page.go_to_contract_element(user_data_dict)
             contract_element_page = ContractElementPage(browser_function, browser_function.current_url)
             contract_element_page.approval_contract_kkp()
-            contract_element_page.verify_contract_successfully_status_approval_kkp()
+            contract_element_page.verify_contract_successfully_status_approval_kkp(user_data_dict)
             login_page.go_to_contract_list(link)
             contract_list_page.go_to_approved_elements_tab()
             contract_list_page.should_be_element_on_contract_list(user_data_dict)

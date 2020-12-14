@@ -4,7 +4,7 @@
 		"eisPriceLink": "example@link.com",
         "customer": ["ХАБАРОВ СЕРГЕЙ ВЛАДИМИРОВИЧ"],
 		"industry": ["IT-сектор", "Автопром"],
-		"typeOfWorkServices": ["Разработка заказного ПО", "Тестирование ПО"],
+		"typeOfWorkServices": ["Прочие работы и услуги в части ПО"],
 		"executiveUnitLegal": "ООО \"ЗЛЫЕ МАРСИАНЕ\"",
         "executiveUnit": "Департамент корпоративных систем",
         "salesUnit": ["НОРБИТ"],

@@ -953,7 +953,7 @@ class KnowledgeSearchLocators:
     LEGAL_VALUE_IN_RESULT = (By.XPATH, "//*[text() ='Исполнитель']/following::p[1]")
 
     # Значение в поле "Категория"
-    CATEGORY_VALUE_IN_RESULT = (By.XPATH, "//*[text() ='Исполнитель']/following::p[1]")
+    CATEGORY_VALUE_IN_RESULT = (By.XPATH, "//*[text() ='Категория']/following::p[1]")
 
     # Значение в поле "Сумма контракта (руб.)"
     SUM_VALUE_IN_RESULT = (By.XPATH, "//*[text() ='Сумма контракта (руб.)']/following::p[1]")
@@ -968,7 +968,19 @@ class KnowledgeSearchLocators:
     END_DATE_VALUE_IN_RESULT = (By.XPATH, "//*[text() ='Дата завершения']/following::p[1]")
 
     # Значение в поле "Номер контракта"
-    CONTRACT_NUMBER_VALE_IN_RESULT = (By.XPATH, "//*[text() ='Номер контракта']/following::p[1]")
+    CONTRACT_NUMBER_VALUE_IN_RESULT = (By.XPATH, "//*[text() ='Номер контракта']/following::p[1]")
+
+    # Значение в поле "Отрасль"
+    INDUSTRY_VALUE_IN_RESULT = (By.XPATH, "//*[text() ='Отрасль']/following::p[1]")
+
+    # Значение в поле "ОГРН"
+    OGRN_VALUE_IN_RESULT = (By.XPATH, "//*[text() ='ОГРН']/following::p[1]")
+
+    # Значение в поле "ИНН"
+    INN_VALUE_IN_RESULT = (By.XPATH, "//*[text() ='ИНН']/following::p[1]")
+
+    # Значение в поле "КПП"
+    KPP_VALUE_IN_RESULT = (By.XPATH, "//*[text() ='КПП']/following::p[1]")
 
     # Кнопка "загрузить еще" в результатах поиска
     LOAD_MORE_BUTTON = (By.XPATH, "//a[contains(text(),'Загрузить еще')]")

@@ -30,6 +30,14 @@ class KnowledgeSearchPage(BasePage):
             f'Ожидаемый результат: {name}\n ' \
             f'Фактические результаты: {set(list_name_found)}'
 
+    # Вспомогательный метод: Удаление пробелов из значений списка.
+    def delete_spaces(self, raw_list):
+        new_list = []
+        for element in raw_list:
+            new_element = element.replace[" ", ""]
+            new_list = new_list.append(new_element)
+        return new_list
+
     def activate_checkbox_need_to_find(self, name):
         # Активируем чек-бокс в блоке "Нужно найти"
         how, what = KnowledgeSearchLocators.TEMPLATE_CHECKBOX
@@ -213,19 +221,16 @@ class KnowledgeSearchPage(BasePage):
         time.sleep(3)
         # Проверяем названия найденных сущностей по целому названию
         list_name_found = self.item_text_collector(*KnowledgeSearchLocators.NAMES_OF_ALL_FOUND_ELEMENT)
-        if len(list_name_found) > 0:
-            if list_name_found.count(name) == 0:
-                assert list_name_found.count(name) == 1, \
-                    f'Не найдено сущности "{name}" по поиску значения {name}'
-        else:
-            print("Не найдено результатов удовлетворяющих запросу")
+        assert len(list_name_found) > 0, f'Не найдено сущностей по вводу в строку поиска значение {name}'
+        assert name in list_name_found, f'Не найдено сущности "{name}" по вводу значения в строку поиска - {name}. ' \
+                                        f'Отображенные сущности: {list_name_found}'
 
         # Сбрасываем все настройки нажатием кнопки "Сбросить"
         self.browser.find_element(*KnowledgeSearchLocators.CLEAR_LINE_BUTTON).click()
 
-    def search_line_by_department(self, project_data_dict):
+    def search_line_by_department(self, data_dict):
         # Вводим в строку значение подразделение
-        self.browser.find_element(*KnowledgeSearchLocators.SEARCH_LINE).send_keys(project_data_dict["executiveUnit"])
+        self.browser.find_element(*KnowledgeSearchLocators.SEARCH_LINE).send_keys(data_dict["executiveUnit"])
         time.sleep(3)
 
         # Подгружаем весь список найденных сущностей
@@ -234,21 +239,21 @@ class KnowledgeSearchPage(BasePage):
         # Проверяем найденные по названию
         list_name_found = self.item_text_collector(*KnowledgeSearchLocators.NAMES_OF_ALL_FOUND_ELEMENT)
         assert len(list_name_found) > 0, f'Не отображено найденных проектов при вводе " \
-                                         f"в строку поиска значение Подразделение - {project_data_dict["executiveUnit"]}'
-        assert project_data_dict["fullName"] in list_name_found, \
-            f'Не найдена сущность по поиску значения Подразделение - "{project_data_dict["executiveUnit"]}"  в строке поиска'
+                                         f"в строку поиска значение Подразделение - {data_dict["executiveUnit"]}'
+        assert data_dict["fullName"] in list_name_found, \
+            f'Не найдена сущность по поиску значения Подразделение - "{data_dict["executiveUnit"]}"  в строке поиска'
 
         # Проверяем отображение поля "Подразделение" и значение в нем
         list_department_found = self.item_text_collector(*KnowledgeSearchLocators.DEPARTMENT_VALUE_IN_RESULT)
         assert len(list_department_found) > 0, 'Не отображено поле "Подразделение" или ' \
                                                'значение в поле карточки сущности'
         for element in set(list_department_found):
-            assert project_data_dict["executiveUnit"] in element, \
-                f'Отображены сущности без значения "{project_data_dict["executiveUnit"]}" ' \
+            assert data_dict["executiveUnit"] in element, \
+                f'Отображены сущности без значения "{data_dict["executiveUnit"]}" ' \
                 f'в поле Подразделение при вводе в строку поиска.'
 
-    def search_line_by_executive_unit_legal(self, project_data_dict):
-        exec_unit_legal = project_data_dict["executiveUnitLegal"]
+    def search_line_by_executive_unit_legal(self, data_dict):
+        exec_unit_legal = data_dict["executiveUnitLegal"]
         exec_unit_legal = exec_unit_legal.replace('"', "")
         # Вводим в строку значение юр.лицо-исполнитель
         self.browser.find_element(*KnowledgeSearchLocators.SEARCH_LINE).send_keys(exec_unit_legal)
@@ -261,7 +266,7 @@ class KnowledgeSearchPage(BasePage):
         list_name_found = self.item_text_collector(*KnowledgeSearchLocators.NAMES_OF_ALL_FOUND_ELEMENT)
         assert len(list_name_found) > 0, f'Не отображено найденных проектов при вводе " \
                                          f"в строку поиска значение Юр.лицо-исполнитель - {exec_unit_legal}'
-        assert project_data_dict["fullName"] in list_name_found, \
+        assert data_dict["fullName"] in list_name_found, \
             f'Не найдена сущность по поиску значения Исполнитель - "{exec_unit_legal}" в строке поиска'
 
         # Проверяем отображение поля "Юр.лицо-исполнитель" и значение в нем
@@ -269,8 +274,8 @@ class KnowledgeSearchPage(BasePage):
         assert len(list_department_found) > 0, 'Не отображено значений или не отображено поле Юр.лицо-Исполнитель ' \
                                                'в карточке сущности'
         for element in set(list_department_found):
-            assert project_data_dict["executiveUnitLegal"] in element, \
-                f'Отображены сущности без значения "{project_data_dict["executiveUnitLegal"]}" в поле Подразделение при вводе в строку поиска. ' \
+            assert data_dict["executiveUnitLegal"] in element, \
+                f'Отображены сущности без значения "{data_dict["executiveUnitLegal"]}" в поле Подразделение при вводе в строку поиска. ' \
                 f'Искомое значение отсутствует в сущности: "{element}"'
 
     def search_line_by_customer(self, data_dict):
@@ -300,8 +305,8 @@ class KnowledgeSearchPage(BasePage):
                 f'Отображены сущности без значения "{name_customer}" в поле Заказчик при вводе в строку поиска. ' \
                 f'Искомое значение отсутствует в сущности: "{element}"'
 
-    def search_line_by_type_works_and_services(self, project_data_dict):
-        name_type_work = project_data_dict["typeOfWorkServices"][0]
+    def search_line_by_type_works_and_services(self, data_dict):
+        name_type_work = data_dict["typeOfWorkServices"][0]
         # Вводим в строку значение тип работ и услуг
         self.browser.find_element(*KnowledgeSearchLocators.SEARCH_LINE).send_keys(name_type_work)
         time.sleep(3)
@@ -313,20 +318,20 @@ class KnowledgeSearchPage(BasePage):
         list_name_found = self.item_text_collector(*KnowledgeSearchLocators.NAMES_OF_ALL_FOUND_ELEMENT)
         assert len(list_name_found) > 0, f"Не отображено найденных проектов при вводе " \
                                          f"в строку поиска значение Тип работ и услуг - {name_type_work}"
-        assert project_data_dict["fullName"] in list_name_found, \
+        assert data_dict["fullName"] in list_name_found, \
             f'Не найдена сущность по поиску значения Тип работ и услуг - "{name_type_work}" в строке поиска'
 
         # Проверяем отображение поля "Тип работ и услуг" и значение в нем
         list_type_work_found = self.item_text_collector(*KnowledgeSearchLocators.TYPE_WORKS_VALUE_IN_RESULT)
         assert len(list_type_work_found) > 0, 'Не отображено поле "Тип работ и услуг" ' \
-                                              'или значение в поле в карточке сущности Проект'
+                                              'или значение в поле в карточке сущности'
         for element in list_type_work_found:
             assert name_type_work in element, \
                 f'Отображены сущности без значения "{name_type_work}" в поле Тип работ и услуг при вводе в строку поиска. ' \
                 f'Искомое значение отсутствует в значении: "{element}"'
 
-    def search_line_by_technologies(self, project_data_dict):
-        name_technologies = project_data_dict["technologies"][0]
+    def search_line_by_technologies(self, data_dict):
+        name_technologies = data_dict["technologies"][0]
         # Вводим в строку значение технологии
         self.browser.find_element(*KnowledgeSearchLocators.SEARCH_LINE).send_keys(name_technologies)
         time.sleep(3)
@@ -338,12 +343,12 @@ class KnowledgeSearchPage(BasePage):
         list_name_found = self.item_text_collector(*KnowledgeSearchLocators.NAMES_OF_ALL_FOUND_ELEMENT)
         assert len(list_name_found) > 0, f"Не отображено найденных проектов при вводе " \
                                          f"в строку поиска значение Технология - {name_technologies}"
-        assert project_data_dict["fullName"] in list_name_found, \
+        assert data_dict["fullName"] in list_name_found, \
             f'Не найдена сущность по поиску значения Технология - "{name_technologies}" в строке поиска'
 
         # Проверяем отображение поля "Технология" и значение в нем
         list_tecnologies_found = self.item_text_collector(*KnowledgeSearchLocators.TECHNOLOGIES_VALUE_IN_RESULT)
-        assert len(list_tecnologies_found) > 0, 'Не отображено поле "Технологии" или значение в поле в карточке сущности Проект'
+        assert len(list_tecnologies_found) > 0, 'Не отображено поле "Технологии" или значение в поле в карточке сущности'
         for element in list_tecnologies_found:
             assert name_technologies in element, \
                 f'Отображены сущности без значения "{list_tecnologies_found}" в поле Технологии при вводе в строку поиска. ' \
@@ -372,6 +377,145 @@ class KnowledgeSearchPage(BasePage):
             assert name_category in element, \
                 f'Отображены сущности без значения "{list_categories_found}" в поле Категория при вводе в строку поиска. ' \
                 f'Искомое значение отсутствует в сущности: "{element}"'
+
+    def search_line_by_number(self, contract_data_dict):
+        number_contract = contract_data_dict["numberContract"]
+        # Вводим в строку значение номер контракта
+        self.browser.find_element(*KnowledgeSearchLocators.SEARCH_LINE).send_keys(number_contract)
+        time.sleep(3)
+
+        # Подгружаем весь список найденных сущностей
+        self.load_all_result()
+
+        # Проверяем найденные по названию
+        list_name_found = self.item_text_collector(*KnowledgeSearchLocators.NAMES_OF_ALL_FOUND_ELEMENT)
+        assert len(list_name_found) > 0, f"Не отображено найденных договор/контрактов при вводе " \
+                                         f"в строку поиска значение Номер контракта - {number_contract}"
+        assert contract_data_dict["fullName"] in list_name_found, \
+            f'Не найдена сущность по поиску значения Номер контракта - "{number_contract}" в строке поиска'
+
+        # Проверяем отображение поля "Номер" и значение в нем
+        list_number_found = self.item_text_collector(*KnowledgeSearchLocators.CONTRACT_NUMBER_VALUE_IN_RESULT)
+        assert len(list_number_found) > 0, 'Не отображено поле "Номер" или значение в поле в карточке сущности Договор/контракт'
+        assert number_contract in list_number_found, \
+                f'Отображены сущности без значения "{number_contract}" в поле Номер при вводе в строку поиска. ' \
+                f'Список найденных значений: "{list_number_found}"'
+
+    def search_line_ulip_by_name(self, data_dict):
+        # Удаляем спецсимволы из переменной
+        short_name = data_dict["shortName"].replace('"', "")
+        # Вводим полное название
+        self.browser.find_element(*KnowledgeSearchLocators.SEARCH_LINE).send_keys(short_name)
+        time.sleep(3)
+        # Проверяем названия найденных сущностей по целому названию
+        list_name_found = self.item_text_collector(*KnowledgeSearchLocators.NAMES_OF_ALL_FOUND_ELEMENT)
+        assert len(list_name_found) > 0, f'Не найдено сущностей по вводу в строку поиска значение {short_name}'
+        new_list_name_found = []
+        for element in list_name_found:
+            new_element = element.replace('"', "")
+            new_list_name_found.append(new_element)
+        assert short_name in new_list_name_found, f'Не найдено сущности "{data_dict["shortName"]}" по вводу значения в строку поиска - {short_name}. ' \
+                                        f'Отображенные сущности: {new_list_name_found}'
+
+        # Сбрасываем все настройки нажатием кнопки "Сбросить"
+        self.browser.find_element(*KnowledgeSearchLocators.CLEAR_LINE_BUTTON).click()
+
+    def search_line_by_industry(self, ulip_data_dict):
+        industry = ulip_data_dict["industry"]
+        # Вводим в строку значение отрасль
+        self.browser.find_element(*KnowledgeSearchLocators.SEARCH_LINE).send_keys(industry)
+        time.sleep(3)
+
+        # Подгружаем весь список найденных сущностей
+        self.load_all_result()
+
+        # Проверяем найденные по названию
+        list_name_found = self.item_text_collector(*KnowledgeSearchLocators.NAMES_OF_ALL_FOUND_ELEMENT)
+        assert len(list_name_found) > 0, f"Не отображено найденных Юр.лиц/ИП при вводе " \
+                                         f"в строку поиска значение Отрасль - {industry}"
+        assert ulip_data_dict["shortName"] in list_name_found, \
+            f'Не найдена сущность с названием {ulip_data_dict["shortName"]} по поиску значения ' \
+            f'Отрасль - "{industry}" в строке поиска'
+
+        # Проверяем отображение поля "Отрасль" и значение в нем
+        list_industry_found = self.item_text_collector(*KnowledgeSearchLocators.INDUSTRY_VALUE_IN_RESULT)
+        assert len(list_industry_found) > 0, 'Не отображено поле "Отрасль" или значение в поле в карточке сущности Юр.лицо/ИП'
+        assert industry in list_industry_found, \
+                f'Отображены сущности без значения "{industry}" в поле Отрасль при вводе в строку поиска. ' \
+                f'Список найденных значений: "{list_industry_found}"'
+
+    def search_line_by_ogrn(self, ulip_data_dict):
+        ogrn = ulip_data_dict["ogrn"]
+        # Вводим в строку значение ОГРН
+        self.browser.find_element(*KnowledgeSearchLocators.SEARCH_LINE).send_keys(ogrn)
+        time.sleep(3)
+
+        # Подгружаем весь список найденных сущностей
+        self.load_all_result()
+
+        # Проверяем найденные по названию
+        list_name_found = self.item_text_collector(*KnowledgeSearchLocators.NAMES_OF_ALL_FOUND_ELEMENT)
+        assert len(list_name_found) > 0, f"Не отображено найденных Юр.лиц/ИП при вводе " \
+                                         f"в строку поиска значение ОГРН - {ogrn}"
+        assert ulip_data_dict["shortName"] in list_name_found, \
+            f'Не найдена сущность с названием {ulip_data_dict["shortName"]} по поиску значения ' \
+            f'ОГРН - "{ogrn}" в строке поиска'
+
+        # Проверяем отображение поля "ОГРН" и значение в нем
+        list_ogrn_found = self.item_text_collector(*KnowledgeSearchLocators.OGRN_VALUE_IN_RESULT)
+        assert len(list_ogrn_found) > 0, 'Не отображено поле "ОГРН" или значение в поле в карточке сущности Юр.лицо/ИП'
+        assert ogrn in list_ogrn_found, \
+                f'Отображены сущности без значения(с пробелами) "{ogrn}" в поле ОГРН при вводе в строку поиска. ' \
+                f'Список найденных значений: "{list_ogrn_found}"'
+
+    def search_line_by_inn(self, ulip_data_dict):
+        inn = ulip_data_dict["inn"]
+        # Вводим в строку значение ИНН
+        self.browser.find_element(*KnowledgeSearchLocators.SEARCH_LINE).send_keys(inn)
+        time.sleep(3)
+
+        # Подгружаем весь список найденных сущностей
+        self.load_all_result()
+
+        # Проверяем найденные по названию
+        list_name_found = self.item_text_collector(*KnowledgeSearchLocators.NAMES_OF_ALL_FOUND_ELEMENT)
+        assert len(list_name_found) > 0, f"Не отображено найденных Юр.лицо при вводе " \
+                                         f"в строку поиска значение ИНН - {inn}"
+        assert ulip_data_dict["shortName"] in list_name_found, \
+            f'Не найдена сущность с названием {ulip_data_dict["shortName"]} по поиску значения ' \
+            f'ИНН - "{inn}" в строке поиска'
+
+        # Проверяем отображение поля "ИНН" и значение в нем
+        list_inn_found = self.item_text_collector(*KnowledgeSearchLocators.INN_VALUE_IN_RESULT)
+        assert len(list_inn_found) > 0, 'Не отображено поле "ИНН" или значение в поле в карточке сущности Юр.лицо'
+        assert inn in list_inn_found, \
+                f'Отображены сущности без значения(с пробелами) "{inn}" в поле ИНН при вводе в строку поиска. ' \
+                f'Список найденных значений: "{list_inn_found}"'
+
+    def search_line_by_kpp(self, ulip_data_dict):
+        kpp = ulip_data_dict["kpp"]
+        # Вводим в строку значение КПП
+        self.browser.find_element(*KnowledgeSearchLocators.SEARCH_LINE).send_keys(kpp)
+        time.sleep(3)
+
+        # Подгружаем весь список найденных сущностей
+        self.load_all_result()
+
+        # Проверяем найденные по названию
+        list_name_found = self.item_text_collector(*KnowledgeSearchLocators.NAMES_OF_ALL_FOUND_ELEMENT)
+        assert len(list_name_found) > 0, f"Не отображено найденных Юр.лицо при вводе " \
+                                         f"в строку поиска значение КПП - {kpp}"
+        assert ulip_data_dict["shortName"] in list_name_found, \
+            f'Не найдена сущность с названием {ulip_data_dict["shortName"]} по поиску значения ' \
+            f'КПП - "{kpp}" в строке поиска'
+
+        # Проверяем отображение поля "ИНН" и значение в нем
+        list_kpp_found = self.item_text_collector(*KnowledgeSearchLocators.KPP_VALUE_IN_RESULT)
+        assert len(list_kpp_found) > 0, 'Не отображено поле "КПП" или значение в поле в карточке сущности Юр.лицо'
+        assert kpp in list_kpp_found, \
+                f'Отображены сущности без значения(с пробелами) "{kpp}" в поле КПП при вводе в строку поиска. ' \
+                f'Список найденных значений: "{list_kpp_found}"'
+
 
     def search_with_customer_block_filter(self, data_dict):
         # Жмем кнопку "Весь список" в блоке "Заказчик"
