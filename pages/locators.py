@@ -512,6 +512,7 @@ class ZakupElementLocators:
     CONFIRM_REVISION_ZAKUP = (By.XPATH, "//button[@type = 'button' and (text() = 'Отправить на доработку')]")
     CANCEL_APPROVAL_ZAKUP = (By.XPATH, "//button[@type = 'button' and (text() = 'Отмена')]")
     ClOSE_ALLERT_ZAKUP = (By.CSS_SELECTOR, "#dlgTitleBtns")
+    START_WITH_ELEMENT = (By.CSS_SELECTOR, "#dialogRestartStatus")
 
     # Вкладки в карточке
     GENERAL_INFORMATION_ELEMENT = (By.XPATH, "//a[contains(@href, '#tabCommon')]")
@@ -524,6 +525,9 @@ class ZakupElementLocators:
     APPROVAL_FIN_STATUS_ELEMENT = (By.XPATH, "//*[text() ='Согласование финансовой службой']/following::span[1]")
     APPROVAL_UDPRPO_STATUS_ELEMENT = (By.XPATH, "//*[text() ='Согласование Директором по разработке ПО']/following::span[1]")
     APPROVAL_KKP_STATUS_ELEMENT = (By.XPATH, "//*[text() ='Согласование ККП']/following::span[1]")
+
+    # Все элементы со статусом согласования
+    RESULT_APPROVAL_LIST = (By.CSS_SELECTOR, "[role^= 'result']")
 
     # Элементы на вкладке "Общие сведения"
     # Поле "Статус согласования"
@@ -811,6 +815,7 @@ class ContractElementLocators:
     CONFIRM_APPROVAL_CONTRACT = (By.XPATH, "//button[@type = 'button' and (text() = 'Согласовать')]")
     CANCEL_APPROVAL_CONTRACT = (By.XPATH, "//button[@type = 'button' and (text() = 'Отмена')]")
     ClOSE_ALLERT_CONTRACT = (By.CSS_SELECTOR, "#dlgTitleBtns")
+    START_WITH_ELEMENT = (By.CSS_SELECTOR, "#dialogRestartStatus")
 
     # Элементы на вкладке "Общие сведения"
     # Поле "Статус согласования"

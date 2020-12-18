@@ -39,6 +39,5 @@ class TestUnitSaleFullBusinessCyclePaZpDk:
 
 
 def test_function_split():
-    dick = 'ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"ЗЛЫЕ МАРСИАНЕ\"'
-    dick =dick.replace('"', "")
-    print(dick)
+    dick = ["хуй"]
+    print(dick[-1])

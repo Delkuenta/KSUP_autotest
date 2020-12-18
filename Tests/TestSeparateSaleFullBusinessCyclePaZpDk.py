@@ -10,7 +10,7 @@ from pages.zakup_element_page import ZakupElementPage
 from pages.login_data import LoginData
 from pages.presale_create_form_page import PresaleFormCreate
 from pages.zakup_list_page import ZakupListPage
-
+from userdata.user_data import UserData
 
 r"""
 SeparateSale\Seller - Seller2
@@ -271,7 +271,7 @@ class TestSeparateSaleFullBusinessCyclePaZpDk:
             zakup_list_page.go_to_zakup_element(user_data_dict)
             zakup_element_page = ZakupElementPage(browser_function, browser_function.current_url)
             zakup_element_page.verify_general_information_in_zakup(user_data_dict)
-            zakup_element_page.approval_zakup_legal()
+            zakup_element_page.approval_zakup(UserData.comment_approval_legal, UserData.file_path_for_link_doc)
             zakup_element_page.verify_zakup_successfully_status_approval_legal()
             zakup_element_page.verify_zakup_waiting_status_approval_count()
             login_page.logout()
@@ -292,7 +292,7 @@ class TestSeparateSaleFullBusinessCyclePaZpDk:
             zakup_list_page.go_to_zakup_element(user_data_dict)
             zakup_element_page = ZakupElementPage(browser_function, browser_function.current_url)
             zakup_element_page.verify_general_information_in_zakup(user_data_dict)
-            zakup_element_page.approval_zakup_count()
+            zakup_element_page.approval_zakup(UserData.comment_approval_count, UserData.file_path_for_link_jpg)
             zakup_element_page.verify_zakup_successfully_status_approval_count()
             zakup_element_page.verify_zakup_waiting_status_approval_fin()
             login_page.logout()
@@ -313,7 +313,7 @@ class TestSeparateSaleFullBusinessCyclePaZpDk:
             zakup_list_page.go_to_zakup_element(user_data_dict)
             zakup_element_page = ZakupElementPage(browser_function, browser_function.current_url)
             zakup_element_page.verify_general_information_in_zakup(user_data_dict)
-            zakup_element_page.approval_zakup_fin()
+            zakup_element_page.approval_zakup(UserData.comment_approval_fin, UserData.file_path_for_link_excel)
             zakup_element_page.verify_zakup_successfully_status_approval_fin(user_data_dict)
             if user_data_dict["groupTypeWork"] == "Software" \
                     and user_data_dict["priceCategory"] != "C":
@@ -339,7 +339,7 @@ class TestSeparateSaleFullBusinessCyclePaZpDk:
             zakup_list_page = ZakupListPage(browser_function, browser_function.current_url)
             zakup_list_page.go_to_zakup_element(user_data_dict)
             zakup_element_page = ZakupElementPage(browser_function, browser_function.current_url)
-            zakup_element_page.approval_zakup_udprpo()
+            zakup_element_page.approval_zakup(UserData.comment_approval_udprpo, UserData.file_path_for_link_jpg)
             zakup_element_page.verify_zakup_successfully_status_approval_udprpo(user_data_dict)
             if user_data_dict["contractorType"] == "Тендерная заявка" \
                     and user_data_dict["priceCategory"] == "A":
@@ -362,7 +362,7 @@ class TestSeparateSaleFullBusinessCyclePaZpDk:
             zakup_list_page = ZakupListPage(browser_function, browser_function.current_url)
             zakup_list_page.go_to_zakup_element(user_data_dict)
             zakup_element_page = ZakupElementPage(browser_function, browser_function.current_url)
-            zakup_element_page.approval_zakup_kkp()
+            zakup_element_page.approval_zakup(UserData.comment_approval_kkp, UserData.file_path_for_link_doc)
             zakup_element_page.verify_zakup_successfully_status_approval_kkp(user_data_dict)
             login_page.logout()
         else:
@@ -538,7 +538,7 @@ class TestSeparateSaleFullBusinessCyclePaZpDk:
         contract_list_page = ContractPage(browser_function, browser_function.current_url)
         contract_list_page.go_to_contract_element(user_data_dict)
         contract_element_page = ContractElementPage(browser_function, browser_function.current_url)
-        contract_element_page.approval_contract_legal()
+        contract_element_page.approval_contract(UserData.comment_approval_legal, UserData.file_path_for_link_jpg)
         contract_element_page.verify_contract_successfully_status_approval_legal()
         contract_element_page.verify_contract_waiting_status_approval_count()
         login_page.logout()
@@ -555,7 +555,7 @@ class TestSeparateSaleFullBusinessCyclePaZpDk:
         contract_list_page = ContractPage(browser_function, browser_function.current_url)
         contract_list_page.go_to_contract_element(user_data_dict)
         contract_element_page = ContractElementPage(browser_function, browser_function.current_url)
-        contract_element_page.approval_contract_count()
+        contract_element_page.approval_contract(UserData.comment_approval_count, UserData.file_path_for_link_doc)
         contract_element_page.verify_contract_successfully_status_approval_count()
         contract_element_page.verify_contract_waiting_status_approval_fin()
         login_page.logout()
@@ -572,7 +572,7 @@ class TestSeparateSaleFullBusinessCyclePaZpDk:
         contract_list_page = ContractPage(browser_function, browser_function.current_url)
         contract_list_page.go_to_contract_element(user_data_dict)
         contract_element_page = ContractElementPage(browser_function, browser_function.current_url)
-        contract_element_page.approval_contract_fin()
+        contract_element_page.approval_contract(UserData.comment_approval_fin, UserData.file_path_for_link_doc)
         contract_element_page.verify_contract_successfully_status_approval_fin(user_data_dict)
         if user_data_dict["groupTypeWork"] == "Software" and user_data_dict["priceCategory"] != "C":
             contract_element_page.verify_contract_waiting_status_approval_udprpo()
@@ -596,7 +596,7 @@ class TestSeparateSaleFullBusinessCyclePaZpDk:
             contract_list_page = ContractPage(browser_function, browser_function.current_url)
             contract_list_page.go_to_contract_element(user_data_dict)
             contract_element_page = ContractElementPage(browser_function, browser_function.current_url)
-            contract_element_page.approval_contract_udprpo()
+            contract_element_page.approval_contract(UserData.comment_approval_udprpo, UserData.file_path_for_link_mp4)
             contract_element_page.verify_contract_successfully_status_approval_udprpo(user_data_dict)
             if user_data_dict["contractorType"] != "Тендерная заявка" \
                     and user_data_dict["priceCategory"] == "A":
@@ -619,7 +619,7 @@ class TestSeparateSaleFullBusinessCyclePaZpDk:
             contract_list_page = ContractPage(browser_function, browser_function.current_url)
             contract_list_page.go_to_contract_element(user_data_dict)
             contract_element_page = ContractElementPage(browser_function, browser_function.current_url)
-            contract_element_page.approval_contract_kkp()
+            contract_element_page.approval_contract(UserData.comment_approval_kkp, UserData.file_path_for_link_jpg)
             contract_element_page.verify_contract_successfully_status_approval_kkp(user_data_dict)
             login_page.logout()
         else:

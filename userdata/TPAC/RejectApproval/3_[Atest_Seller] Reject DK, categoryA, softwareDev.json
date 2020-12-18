@@ -1,6 +1,6 @@
 {
 	"main_data": {
-        "fullName": "[АТест_Seller]3_ДК,Отклонение за все службы и эскалация на ККП, категория A, разработка заказного ПО",
+        "fullName": "[АТест_Seller] Договор/контракт, Отклонение c выбором на шаг назад, категория A, разработка заказного ПО",
         "contractorType": "",
         "customer": "КАЗНАЧЕЙСТВО РОССИИ",
         "salesUnit": "Департамент корпоративных систем",
@@ -23,7 +23,7 @@
         "projectProbability": "",
         "descriptionText": "Краткое описание текст",
         "risksText": "Текст_риски_тест",
-        "purchaseNumber": "ZP/0019-AT_ESC",
+        "purchaseNumber": "ZP/0003-AT_ESC",
         "purchaseLink": "testlink_zakup_proc.com",
         "projectRiskDepartment": "",
         "priceInformationDeadline": "",
@@ -31,12 +31,12 @@
         "purchaseStartDateTo": "",
         "eisPriceNumber": "",
         "eisPriceLink": "",
-        "numberContract": "DK/0019-AT_ESC",
+        "numberContract": "DK/0003-AT_ESC",
         "eisContractLink": "test_link_eis@mail.com",
         "territory": ["Архангельская область"],
         "technologies": ["Jira"],
         "quantitativeIndicatorsProject": "тестовый текст в поле Количественные показатели реализации проекта",
-        "projectUniqueCode": "2hMuCr19_ESC",
+        "projectUniqueCode": "2hMuCr03_ESC",
 		"project": "Тестовый проект",
 		"createAccount": "Mr_KSUP_Seller",
         "payments": [

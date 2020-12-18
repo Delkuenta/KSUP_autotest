@@ -5,6 +5,7 @@ from pages.contract_create_form_page import ContractFormCreate
 from pages.contract_element_page import ContractElementPage
 from pages.contract_list_page import ContractPage
 from pages.login_data import LoginData
+from userdata.user_data import UserData
 
 r"""
 19_[Atest_Seller] DK, categoryA, softwareDev.json
@@ -77,7 +78,7 @@ class TestDkFullBusinessCycle:
         contract_list_page = ContractPage(browser_function, browser_function.current_url)
         contract_list_page.go_to_contract_element(user_data_dict)
         contract_element_page = ContractElementPage(browser_function, browser_function.current_url)
-        contract_element_page.approval_contract_legal()
+        contract_element_page.approval_contract(UserData.comment_approval_legal, UserData.file_path_for_link_doc)
         contract_element_page.verify_contract_successfully_status_approval_legal()
         contract_element_page.verify_contract_waiting_status_approval_count()
         login_page.logout()
@@ -94,7 +95,7 @@ class TestDkFullBusinessCycle:
         contract_list_page = ContractPage(browser_function, browser_function.current_url)
         contract_list_page.go_to_contract_element(user_data_dict)
         contract_element_page = ContractElementPage(browser_function, browser_function.current_url)
-        contract_element_page.approval_contract_count()
+        contract_element_page.approval_contract(UserData.comment_approval_count, UserData.file_path_for_link_jpg)
         contract_element_page.verify_contract_successfully_status_approval_count()
         contract_element_page.verify_contract_waiting_status_approval_fin()
         login_page.logout()
@@ -111,7 +112,7 @@ class TestDkFullBusinessCycle:
         contract_list_page = ContractPage(browser_function, browser_function.current_url)
         contract_list_page.go_to_contract_element(user_data_dict)
         contract_element_page = ContractElementPage(browser_function, browser_function.current_url)
-        contract_element_page.approval_contract_fin()
+        contract_element_page.approval_contract(UserData.comment_approval_fin, UserData.file_path_for_link_doc)
         contract_element_page.verify_contract_successfully_status_approval_fin(user_data_dict)
         if user_data_dict["groupTypeWork"] == "Software" and user_data_dict["priceCategory"] != "C":
             contract_element_page.verify_contract_waiting_status_approval_udprpo()
@@ -135,7 +136,7 @@ class TestDkFullBusinessCycle:
             contract_list_page = ContractPage(browser_function, browser_function.current_url)
             contract_list_page.go_to_contract_element(user_data_dict)
             contract_element_page = ContractElementPage(browser_function, browser_function.current_url)
-            contract_element_page.approval_contract_udprpo()
+            contract_element_page.approval_contract(UserData.comment_approval_udprpo, UserData.file_path_for_link_mp4)
             contract_element_page.verify_contract_successfully_status_approval_udprpo(user_data_dict)
             if user_data_dict["contractorType"] != "Тендерная заявка" \
                     and user_data_dict["priceCategory"] == "A":
@@ -158,7 +159,7 @@ class TestDkFullBusinessCycle:
             contract_list_page = ContractPage(browser_function, browser_function.current_url)
             contract_list_page.go_to_contract_element(user_data_dict)
             contract_element_page = ContractElementPage(browser_function, browser_function.current_url)
-            contract_element_page.approval_contract_kkp()
+            contract_element_page.approval_contract(UserData.comment_approval_kkp, UserData.file_path_for_link_excel)
             contract_element_page.verify_contract_successfully_status_approval_kkp(user_data_dict)
             login_page.logout()
         else:
