@@ -125,7 +125,7 @@ class BasePage:
         assert self.is_text_to_be_present_in_element(*BasePageLocators.PROJECT_TITLE, "Проекты"), \
             "Титул страницы не соответствует переходу"
 
-    def read_json(self, path_file):
+    def read_file_json(self, path_file):
         full_path_file = os.path.join(UserData.current_dir, path_file)
         with open(full_path_file, "r", encoding='utf-8') as file:
             data = json.load(file)
@@ -170,9 +170,9 @@ class BasePage:
         else:
             group_type_dict = {"groupTypeWork": "Other"}
         user_data_dict.update(group_type_dict)
-
         # Сортировка списка территорий по алфавиту
-        user_data_dict["territory"].sort()
+        if "territory" in user_data_dict:
+            user_data_dict["territory"].sort()
         return user_data_dict
 
     def select_in_frame_type_work_and_services(self, list_type_work):

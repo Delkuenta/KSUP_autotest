@@ -1,0 +1,46 @@
+{
+	"main_data": {
+        "fullName": "[АТест_Seller] измененный ПА, Тендерная заявка, категория Б, НЕразработка заказного ПО, Самостоятельная продажа",
+        "contractorType": "Тендерная заявка",
+        "customer": "КАЗНАЧЕЙСТВО РОССИИ",
+        "salesUnit": "Департамент корпоративных систем",
+        "salesManager": "Батарова Татьяна Андреевна",
+        "executiveUnit": "Департамент корпоративных систем",
+        "executiveManager": "Батарова Татьяна Андреевна",
+        "executiveUnitLegal": "ООО \"ЗЛЫЕ МАРСИАНЕ\"",
+        "saleLawType": "223-ФЗ",
+        "typeOfWorkServices": ["Сертификация"],
+        "sum": 45000000,
+        "currency": "Рубль",
+        "priceCategory": "",
+        "applicationSize": 5000,
+        "contractSize": 6000,
+        "separateSale": "Да",
+		"jointBidding": "",
+        "competitionDeadlineFrom": "17.07.2020",
+        "startDate": "02.07.2020",
+        "endDate": "02.08.2021",
+        "projectProbability": 95,
+        "descriptionText": "Краткое описание текст_измененный текст",
+        "risksText": "Текст_риски_тест_измененный",
+		"createAccount": "Mr_KSUP_Seller",
+        "payments": [
+            {
+                "sum": 20000000,
+                "year": 2020,
+                "quarter": 3
+            },
+            {
+                "sum": 15000000,
+                "year": 2020,
+                "quarter": 4
+            },
+            {
+                "sum": 10000000,
+                "year": 2021,
+                "quarter": 1
+            }
+
+        ]
+    }
+}

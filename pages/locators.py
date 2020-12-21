@@ -121,7 +121,8 @@ class FormCreatePresaleLocators:
     # Элементы во фрейме "Тип работ и услуг"
     # Строка "Тип работ и услуг"
     # //div[contains(@id,'KsupWorkServicesTypeMetadata') and contains(@class,'ms-taxonomy-writeableregion')]
-    TYPE_WORK_SERVICES_ELEMENT = (By.CSS_SELECTOR, "[id^='KsupWorkServicesType'][class^='ms-taxonomy-writeableregion']")
+    # [id^='KsupWorkServicesType'][class^='ms-taxonomy-writeableregion']
+    TYPE_WORK_SERVICES_ELEMENT = (By.XPATH, "//div[contains(@id,'KsupWorkServicesTypeMetadata') and contains(@class,'ms-taxonomy-writeableregion')]")
 
     # Сумма //input[starts-with(@id,'KsupSum')]
     SUM_ELEMENT = (By.CSS_SELECTOR, "[id^='KsupSum']")
@@ -160,9 +161,13 @@ class FormCreatePresaleLocators:
     SUMTABLE = (By.CSS_SELECTOR, ".payplan-summa-field")
     YEARTABLE = (By.CSS_SELECTOR, ".payplan-year-field")
     QUARTERTABLE = (By.CSS_SELECTOR, ".payplan-cell.table__td select")
+    DELETE_ROW_BUTTON = (By.CSS_SELECTOR, "[class*='payplan-cell-delete'][data-member='delete']")
 
     # Кнопка создания сущности пресейл
     CONFIRM_PRESALE_BUTTON = (By.CSS_SELECTOR, '[value="Создать"].ms-ButtonHeightWidth')
+
+    # Кнопка сохранения сущности после изменений
+    CONFIRM_EDIT_PRESALE_BUTTON = (By.CSS_SELECTOR, "[id$='ctl00_ctl00_diidIOSaveItem'].ms-ButtonHeightWidth")
 
     # Элементы модульного окна при отправке на согласование внутри формы создания ПА
     iframe = (By.CSS_SELECTOR, ".ms-dlgFrame")
@@ -851,6 +856,10 @@ class ContractElementLocators:
     PURCHASE_NUMBER_IN_CONTRACT = (By.CSS_SELECTOR, ".fldKsupEisPurchaseNumber #SPFieldText")
     # Поле "Статус контракта"
     CONTRACT_STATUS = (By.CSS_SELECTOR, ".fldKsupContractStatus #SPFieldChoice")
+    # Поле "Пресейловые активности"
+    RELATED_PRESALE = (By.CSS_SELECTOR, ".fldKsupSales #SPFieldWcfLookup")
+    # Поле "Закупочная процедура"
+    RELATED_ZAKUP = (By.CSS_SELECTOR, ".fldKsupPresaleActivity #SPFieldWcfLookup")
     # Поле "Территория применения"
     TERRITORY_IN_CONTRACT = (By.CSS_SELECTOR, ".fldKsupApplicationTerritory #SPFieldTaxonomyFieldType")
     # Поле "Ключевые технологии"

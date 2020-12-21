@@ -1,0 +1,70 @@
+{
+	"main_data": {
+        "fullName": "19[АТест_Seller]ДК,категория A, разработка заказного ПО,",
+        "contractorType": "",
+        "customer": "КАЗНАЧЕЙСТВО РОССИИ",
+        "salesUnit": "Тестовый департамент",
+        "salesManager": "Бравосов Андрей Игоревич",
+        "executiveUnit": "Тестовый департамент",
+        "executiveManager": "Бравосов Андрей Игоревич",
+        "executiveUnitLegal": "ООО \"ЗЛЫЕ МАРСИАНЕ\"",
+        "saleLawType": "",
+        "typeOfWorkServices": ["Разработка заказного ПО", "Тестирование ПО"],
+        "sum": 52000000,
+        "currency": "Рубль",
+        "priceCategory": "",
+        "applicationSize": "",
+        "contractSize": "",
+        "separateSale": "",
+		"jointBidding": "",
+        "competitionDeadlineFrom": "15.07.2020",
+        "startDate": "1.07.2020",
+        "endDate": "01.07.2021",
+        "projectProbability": "",
+        "descriptionText": "Краткое описание текст",
+        "risksText": "Текст_риски_тест",
+        "purchaseNumber": "",
+        "purchaseLink": "",
+        "projectRiskDepartment": "",
+        "priceInformationDeadline": "",
+        "purchaseStartDateFrom": "",
+        "purchaseStartDateTo": "",
+        "eisPriceNumber": "",
+        "eisPriceLink": "",
+        "numberContract": "DK/0019-AT",
+        "eisContractLink": "",
+        "territory": ["Архангельская область"],
+        "technologies": ["Jira"],
+        "quantitativeIndicatorsProject": "",
+        "projectUniqueCode": "",
+		"project": "Тестовый проект",
+				"createAccount": "Mr_KSUP_Seller",
+        "payments": [
+            {
+                "sum": 20000000,
+                "year": 2020,
+                "quarter": 3
+            },
+            {
+                "sum": 15000000,
+                "year": 2020,
+                "quarter": 4
+            },
+            {
+                "sum": 10000000,
+                "year": 2021,
+                "quarter": 1
+            },
+            {
+                "sum": 5000000,
+                "year": 2021,
+                "quarter": 2
+            },
+            {
+                "sum": 2000000,
+                "year": 2021,
+                "quarter": 3
+            }
+        ]
+    }
+}

@@ -11,7 +11,7 @@ class CustomerPage(BasePage):
         how, what = CustomerListLocators.FIND_ELEMENT_IN_CUSTOMER_LIST
         what = what.replace("Test_name", user_data_dict["shortName"])
         assert self.is_visibility_of_element_located(how, what, 5), \
-            f'Пресейловая активность с именем "{user_data_dict["fullName"]}" не найдена в списке'
+            f'Сущность "Заказчики и исполнители" с именем "{user_data_dict["fullName"]}" не найдена в списке'
 
     # Зайти внутрь сущности пресейла по названию.имя берется из файла или user_data.
     def go_to_customer_element(self, user_data_dict):

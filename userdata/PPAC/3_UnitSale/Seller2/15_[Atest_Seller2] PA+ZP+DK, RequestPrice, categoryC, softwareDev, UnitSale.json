@@ -1,0 +1,70 @@
+{
+	"main_data": {
+        "fullName": "15[АТест_Seller2] ПА+ЗП+ДК, Запрос цен товаров, работ, услуг, категория C, разработка заказного ПО, Самостоятельная продажа",
+        "contractorType": "Запрос цен товаров, работ, услуг",
+        "customer": "ООО \"ТУМУТУК\"",
+        "salesUnit": "Тестовая дирекция",
+        "salesManager": "Чоулз Николай Дирекциевич",
+        "executiveUnit": "Тестовая дирекция",
+        "executiveManager": "Чоулз Николай Дирекциевич",
+        "executiveUnitLegal": "ООО \"ЗЛЫЕ МАРСИАНЕ\"",
+        "saleLawType": "44-ФЗ",
+        "typeOfWorkServices": ["Тестирование ПО"],
+        "sum": 310000,
+        "currency": "Евро",
+        "priceCategory": "",
+        "applicationSize": 5000,
+        "contractSize": 2000,
+        "separateSale": "Да",
+		"jointBidding": "Нет",
+        "competitionDeadlineFrom": "15.07.2020",
+        "startDate": "1.07.2020",
+        "endDate": "01.07.2021",
+        "projectProbability": 100,
+        "descriptionText": "Краткое описание текст",
+        "risksText": "Текст_риски_тест",
+        "purchaseNumber": "ZP/0015-AT_S2",
+        "purchaseLink": "testlink_zakup_proc.com",
+        "projectRiskDepartment": "тестовое сообщение_Риски проекта с точки зрения Департамента",
+        "priceInformationDeadline": "16.07.2020",
+        "purchaseStartDateFrom": "17.07.2020",
+        "purchaseStartDateTo": "18.07.2020",
+        "eisPriceNumber": "ZP/0015-AT-Price_S2",
+        "eisPriceLink": "example@link.com",
+        "numberContract": "DK/0015-AT_S2",
+        "eisContractLink": "test_link_eis@mail.com",
+        "territory": ["Зарубежный"],
+        "technologies": ["Microsoft Azure"],
+        "quantitativeIndicatorsProject": "тестовый текст в поле Количественные показатели реализации проекта",
+        "projectUniqueCode": "2hMuCr15_S2",
+		"project": "Тестовый проект",
+		"createAccount": "Mr_KSUP_Seller2",
+        "payments": [
+            {
+                "sum": 130000,
+                "year": 2020,
+                "quarter": 3
+            },
+            {
+                "sum": 70000,
+                "year": 2020,
+                "quarter": 4
+            },
+            {
+                "sum": 50000,
+                "year": 2021,
+                "quarter": 1
+            },
+            {
+                "sum": 40000,
+                "year": 2021,
+                "quarter": 2
+            },
+            {
+                "sum": 20000,
+                "year": 2021,
+                "quarter": 3
+            }
+        ]
+    }
+}

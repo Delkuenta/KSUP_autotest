@@ -14,7 +14,7 @@ from pages.zakup_list_page import ZakupListPage
 @pytest.mark.parametrize('path_data_file', [r"TPAC\UnitSale\Seller\1_[Atest_Seller] PA+ZP+DK,Tender, categoryA, softwareDev, UnitSale.json"])
 class TestUnitSaleFullBusinessCyclePaZpDk:
     def test_login(self, browser_session, path_data_file):
-        user_data_dict = BasePage.read_json(browser_session, path_data_file)
+        user_data_dict = BasePage.read_file_json(browser_session, path_data_file)
         user_data_dict = BasePage.dict_preparation(browser_session, user_data_dict)
         link = LoginData.link
         presale_list_page = PresalePage(browser_session, link)
@@ -27,7 +27,7 @@ class TestUnitSaleFullBusinessCyclePaZpDk:
     @pytest.mark.repeat(200)
     @pytest.mark.xfail(reason="Баг https://jira.lanit.ru/browse/KSUP-1041")
     def test_create_presale(self, browser_session, path_data_file):
-        user_data_dict = BasePage.read_json(browser_session, path_data_file)
+        user_data_dict = BasePage.read_file_json(browser_session, path_data_file)
         user_data_dict = BasePage.dict_preparation(browser_session, user_data_dict)
         print(user_data_dict)
         link = LoginData.link
@@ -38,6 +38,9 @@ class TestUnitSaleFullBusinessCyclePaZpDk:
         create_presale_page.form_create_presale_all_type(user_data_dict)
 
 
-def test_function_split():
-    dick = ["хуй"]
-    print(dick[-1])
+
+
+def test_get():
+    dict = {"one": 1, "two": 2}
+    if "one" in dict:
+        print("Такой ключ существует в словаре")

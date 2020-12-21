@@ -48,8 +48,8 @@ class ContractFormCreate(BasePage):
             *FormCreateContractLocators.PRESALE_SELECT), \
             "Некорректная информация в поле Пресейловые активности"
 
-        assert user_data_dict["fullName"] in self.is_element_text(*FormCreateContractLocators.ZAKUP_SELECT), \
-            "Некорректная информация в поле Связанная закупочная процедура"
+        #assert user_data_dict["fullName"] in self.is_element_text(*FormCreateContractLocators.ZAKUP_SELECT), \
+            #"Некорректная информация в поле Связанная закупочная процедура"
 
         # Заполняем поле Номер
         self.browser.find_element(*FormCreateContractLocators.NUMBER_CONTRACT_ELEMENT).send_keys(

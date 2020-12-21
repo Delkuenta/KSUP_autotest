@@ -1,0 +1,29 @@
+{
+	"main_data": {
+        "fullName": "[Атест],Проект для поиска в БЗ",
+		"eisPriceLink": "example@link.com",
+        "customer": ["ХАБАРОВ СЕРГЕЙ ВЛАДИМИРОВИЧ"],
+		"industry": ["IT-сектор", "Автопром"],
+		"typeOfWorkServices": ["Прочие работы и услуги в части ПО"],
+		"executiveUnitLegal": "ООО \"ЗЛЫЕ МАРСИАНЕ\"",
+        "executiveUnit": "Тестовый департамент",
+        "salesUnit": ["Тестовая дирекция"],
+		"projectStage": "Подготовка",
+		"contracts": [],
+        "startDate": "01.07.2020",
+		"vendors": ["ABBYY"], 
+		"tags": ["Инженерные системы", "Автоматизированные системы управления"],
+        "salesManager": ["Чоулз Николай Дирекциевич", "Ногинский Михаил"],
+		"rpLanit": "Mr_KSUP_Seller@LANIT",
+        "endDate": "01.07.2021",
+		"sum": "От 50 млн. до 100 млн. руб.",
+        "territory": ["Архангельская область", "Волгоградская область", "Владимирская область", "Воронежская область"],
+        "technologies": ["Jira", "Java"],
+		"projectCategory": "Крупный",
+        "descriptionText": "Краткое описание текст Цели и задачи",
+		"quantitativeIndicatorsProject": "тестовый текст в поле Количественные показатели реализации проекта Ожидаемые результаты проекта",
+		"interestInformation": "тестовый текст в поле Информация о заинтересованности",
+		"description": "тестовый текст в Описание",
+		"createAccount": "Mr_KSUP_Seller"
+    }
+}

@@ -61,6 +61,12 @@ class PresaleElementPage(BasePage):
             'Кнопка "Внести информацию о договор/контракте" не отображена'
         self.browser.find_element(*PresaleElementLocators.CREATE_CONTRACT_BUTTON).click()
 
+    # Кнопка редактирования пресейла
+    def go_to_edit_presale(self):
+        assert self.is_visibility_of_element_located(*PresaleElementLocators.EDIT_ITEM_BUTTON, 5), \
+            'Кнопка "Изменить элемент" не отображена'
+        self.browser.find_element(*PresaleElementLocators.EDIT_ITEM_BUTTON).click()
+
     def send_to_approval_presale(self, user_data_dict):
         if user_data_dict["createAccount"] == "Mr_KSUP_Seller" or user_data_dict["createAccount"] == "Mr_KSUP_Dir":
 
@@ -161,6 +167,13 @@ class PresaleElementPage(BasePage):
                                                      "Не согласовано"), \
             'Некорректный статус или отсутствует статус в поле "Статус согласования с подразделением".' \
             '\nОжидаемый результат: "Не согласовано"'
+
+    def verify_presale_not_require_status_approval(self):
+        assert self.is_text_to_be_present_in_element(*PresaleElementLocators.PRESALE_APPROVAL_STATUS,
+                                                     "Не требуется согласование"), \
+            'Некорректный статус или отсутствует статус в поле "Статус согласования с подразделением".' \
+            '\nОжидаемый результат: "Не требуется согласование"'
+
 
     def verify_general_information_in_presale(self, user_data_dict):
 

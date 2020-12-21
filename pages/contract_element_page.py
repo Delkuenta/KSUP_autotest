@@ -232,6 +232,20 @@ class ContractElementPage(BasePage):
                 'Отображено пустое поле "Количественные показатели реализации проекта"'
             print('Пустое поле "Количественные показатели реализации проекта" успешно не отображено')
 
+    def verify_related_presale(self, user_data_dict):
+        # Проверяем отображение значения связанной пресейловой активности в поле "Пресейловые активности"
+        assert self.is_element_text(*ContractElementLocators.RELATED_PRESALE) == user_data_dict["fullName"],\
+            f'Значение в поле "Пресейловые активности" не корректно.\n ' \
+            f'Ожидаемый результат: "{user_data_dict["fullName"]}"'
+        print('Значение в поле  "Пресейловые активности" успешно проверено')
+
+    def verify_related_zakup(self, user_data_dict):
+        # Проверяем отображение значения связанной пресейловой активности в поле "Пресейловые активности"
+        assert self.is_element_text(*ContractElementLocators.RELATED_ZAKUP) == user_data_dict["fullName"],\
+            f'Значение в поле "Связанная закупочная процедура" не корректно.\n ' \
+            f'Ожидаемый результат: "{user_data_dict["fullName"]}"'
+        print('Значение в поле  "Связанная закупочная процедура" успешно проверено')
+
     def verify_joint_bidding_inform_contract(self, user_data_dict):
         # Переходим на вкладку "Заключенные договоры/контракты"
         self.browser.find_element(*ContractElementLocators.JOINT_BIDDING_CONTRACT_TABS).click()
