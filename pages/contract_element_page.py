@@ -141,9 +141,14 @@ class ContractElementPage(BasePage):
             print('Пустое поле "Номер закупки" успешно не отображено')
 
         # Проверяем поле "Статус контракта"
-        assert "Проект" in self.is_element_text(*ContractElementLocators.CONTRACT_STATUS), \
-            f'\nНекорректное значение в поле "Статус контракта".' \
-            f'\nОжидаемый результат: Проект'
+        if "contractStatus" in user_data_dict:
+            assert user_data_dict["contractStatus"] in self.is_element_text(*ContractElementLocators.CONTRACT_STATUS),\
+                f'\nНекорректное значение в поле "Статус контракта".' \
+                f'\nОжидаемый результат: {user_data_dict["contractStatus"]}'
+        else:
+            assert "Проект" in self.is_element_text(*ContractElementLocators.CONTRACT_STATUS), \
+                f'\nНекорректное значение в поле "Статус контракта".' \
+                f'\nОжидаемый результат: Проект'
         print('Значение в поле "Статус контракта" успешно проверено')
 
         # Проверяем поле "Территория применения"
@@ -813,3 +818,9 @@ class ContractElementPage(BasePage):
         self.browser.find_element(*ContractElementLocators.CONFIRM_REVISION_CONTRACT).click()
         self.is_visibility_of_element_located(*ContractElementLocators.ClOSE_ALLERT_CONTRACT, 5)
         self.browser.find_element(*ContractElementLocators.ClOSE_ALLERT_CONTRACT).click()
+
+    # Кнопка изменения элемента
+    def go_to_edit_contract(self):
+        assert self.is_element_clickable(*ContractElementLocators.EDIT_ITEM_BUTTON), \
+            'Кнопка "Изменить элемент" не доступна для нажатия'
+        self.browser.find_element(*ContractElementLocators.EDIT_ITEM_BUTTON).click()

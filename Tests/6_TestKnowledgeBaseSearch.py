@@ -1,7 +1,7 @@
 import delayed_assert
 import pytest
 
-from Tests import TestDkFullBusinessCycle
+
 from pages.base_page import BasePage
 from pages.contract_create_form_page import ContractFormCreate
 from pages.contract_element_page import ContractElementPage
@@ -12,10 +12,10 @@ from pages.project_create_form_page import ProjectFormCreate
 from pages.project_element_page import ProjectElementPage
 from pages.project_list_page import ProjectPage
 
-project_path_file = r"TPAC\KnowledgeElementSearch\1[Atest_Seller] Project, categoryA, softwareDev.json"
-contract_path_file = r"TPAC\KnowledgeElementSearch\2[Atest_Seller] DK, categoryA, softwareDev.json"
-department_path_file = r"TPAC\KnowledgeElementSearch\3[Atest] Department, DKS.json"
-ulip_path_file = r"TPAC\Customer\[Atest]Customer, OOO.json"
+project_path_file = r"TPAC\6_KnowledgeElementSearch\1[Atest_Seller] Project, categoryA, softwareDev.json"
+contract_path_file = r"TPAC\6_KnowledgeElementSearch\2[Atest_Seller] DK, categoryA, softwareDev.json"
+department_path_file = r"TPAC\6_KnowledgeElementSearch\3[Atest] Department, DKS.json"
+ulip_path_file = r"TPAC\1_Customer\[Atest]Customer, OOO.json"
 
 
 

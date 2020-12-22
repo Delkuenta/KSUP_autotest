@@ -548,7 +548,7 @@ class KnowledgeSearchPage(BasePage):
             # Проверяем результаты фильтрации по полю "Заказчик"
             list_customer_found = self.item_text_collector(*KnowledgeSearchLocators.CUSTOMER_VALUE_IN_RESULT)
             result = 0
-            for found_value in set(list_customer_found):
+            for found_value in list_customer_found:
                 if element in found_value:
                     result += 1
             assert result > 1, \

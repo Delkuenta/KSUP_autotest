@@ -118,11 +118,11 @@ class FormCreatePresaleLocators:
     # //div[contains(@id,'KsupWorkServicesTypeMetadata')]/img[@class='ms-taxonomy-browser-button']
     SEARCH_VALID_OPTION_ELEMENT = (By.CSS_SELECTOR, "[id^='KsupWorkServicesType']>[class='ms-taxonomy-browser-button']")
 
-    # Элементы во фрейме "Тип работ и услуг"
     # Строка "Тип работ и услуг"
     # //div[contains(@id,'KsupWorkServicesTypeMetadata') and contains(@class,'ms-taxonomy-writeableregion')]
     # [id^='KsupWorkServicesType'][class^='ms-taxonomy-writeableregion']
     TYPE_WORK_SERVICES_ELEMENT = (By.XPATH, "//div[contains(@id,'KsupWorkServicesTypeMetadata') and contains(@class,'ms-taxonomy-writeableregion')]")
+
 
     # Сумма //input[starts-with(@id,'KsupSum')]
     SUM_ELEMENT = (By.CSS_SELECTOR, "[id^='KsupSum']")
@@ -610,6 +610,7 @@ class FormCreateContractLocators:
 
     # Заказчик
     CUSTOMER_CONTRACT_ELEMENT = (By.CSS_SELECTOR, "#div-wcfLookupControl_KsupEgr_Customer")
+    CUSTOMER_SEARCH_FIELD = (By.XPATH, "//*[@class='select2-search select2-search--dropdown']//input[@class='select2-search__field']")
     CUSTOMER_DROPDOWN_CONTRACT_ELEMENT = (By.XPATH, f"//li[contains(text(), 'customer_name')]")
 
     # Подразделение-продавец //li[normalize-space()='salesUnit_name']
@@ -637,6 +638,11 @@ class FormCreateContractLocators:
     # Кнопка поиск допустимого варианта в категории "Тип работ и услуг"
     # //div[contains(@id,'KsupWorkServicesTypeMetadata')]/img[@class='ms-taxonomy-browser-button']
     SEARCH_TYPE_AND_SERVICES_ELEMENT = (By.CSS_SELECTOR, "[id^='KsupWorkServicesType']>[class='ms-taxonomy-browser-button']")
+
+    # Строка "Тип работ и услуг"
+    # //div[contains(@id,'KsupWorkServicesTypeMetadata') and contains(@class,'ms-taxonomy-writeableregion')]
+    # [id^='KsupWorkServicesType'][class^='ms-taxonomy-writeableregion']
+    TYPE_WORK_SERVICES_ELEMENT = (By.XPATH, "//div[contains(@id,'KsupWorkServicesTypeMetadata') and contains(@class,'ms-taxonomy-writeableregion')]")
 
     # Сумма //input[starts-with(@id,'KsupSum')]
     SUM_ELEMENT = (By.CSS_SELECTOR, "[id^='KsupSum']")
@@ -673,13 +679,16 @@ class FormCreateContractLocators:
     # Ссылка на договор/контракт на Официальном сайте ЕИС //textarea[starts-with(@id,'KsupEisContractLink')]
     EIS_CONTRACT_LINK = (By.CSS_SELECTOR, "[id^='KsupEisContractLink']")
 
+    # Статус контракта
+    CONTRACT_STATUS_ELEMENT = (By.CSS_SELECTOR, "[id^='KsupContractStatus']")
+
     # Кнопка поиск вариантов у поля "Территория применения"
     # //div[contains(@id,'KsupApplicationTerritory')]/img[@class='ms-taxonomy-browser-button']
     SEARCH_TERRITORY_ELEMENT = (By.CSS_SELECTOR, "[id^='KsupApplicationTerritory']>[class='ms-taxonomy-browser-button']")
 
     # Строка Территория применения
     # //div[contains(@id,'KsupApplicationTerritory') and contains(@class,'ms-taxonomy-writeableregion')]
-    TYPE_TERRITORY_ELEMENT = (By.CSS_SELECTOR, "[id^='KsupApplicationTerritory'][class^='ms-taxonomy-writeableregion']")
+    TERRITORY_ELEMENT = (By.XPATH, "//div[contains(@id,'KsupApplicationTerritory') and contains(@class,'ms-taxonomy-writeableregion')]")
 
     # Кнопка поиск вариантов у поля "Технологии"
     # //div[contains(@id,'KsupKeyTechnologies')]/img[@class='ms-taxonomy-browser-button']
@@ -687,7 +696,7 @@ class FormCreateContractLocators:
 
     # Строка Ключевые технологии
     # //div[contains(@id,'KsupKeyTechnologies') and contains(@class,'ms-taxonomy-writeableregion')]
-    TYPE_TECHNOLOGIES_ELEMENT = (By.CSS_SELECTOR, "[id^='KsupKeyTechnologies'][class*='ms-taxonomy-writeableregion']")
+    TECHNOLOGIES_ELEMENT = (By.XPATH, "//div[contains(@id,'KsupKeyTechnologies') and contains(@class,'ms-taxonomy-writeableregion')]")
 
     # Поле Цели и задачи //textarea[starts-with(@id,'KsupDescriptionPlainText')]
     DESCRIPTION_PLAIN_TEXT_ELEMENT = (By.CSS_SELECTOR, "[id^='KsupDescriptionPlainText']")
@@ -709,6 +718,7 @@ class FormCreateContractLocators:
     SUMTABLE = (By.CSS_SELECTOR, ".payplan-summa-field")
     YEARTABLE = (By.CSS_SELECTOR, ".payplan-year-field")
     QUARTERTABLE = (By.CSS_SELECTOR, ".payplan-cell.table__td select")
+    DELETE_ROW_BUTTON = (By.CSS_SELECTOR, "[class*='payplan-cell-delete'][data-member='delete']")
 
     # поле для вставки файла Контракт //div[@id='File_Contract']/div/input
     FILE_CONTRACT = (By.CSS_SELECTOR, "[id='File_Contract']>div>input")
@@ -732,6 +742,9 @@ class FormCreateContractLocators:
 
     # Кнопка создания ДК
     CONFIRM_CONTRACT_BUTTON = (By.CSS_SELECTOR, "[id*='diidIOSaveItem'][value='Создать']")
+
+    # Кнопка сохранения сущности после изменений
+    CONFIRM_EDIT_CONTRACT_BUTTON = (By.CSS_SELECTOR, "[id$='ctl00_ctl00_diidIOSaveItem'].ms-ButtonHeightWidth")
 
     # Кнопка подтверждения внесения правок в Связанный проект
     CONFIRM_CHANGE_PROJECT_BUTTON = (By.XPATH, "//input[@value='OK']")
@@ -787,11 +800,14 @@ class ContractElementLocators:
     CONFIRM_ESCALATE_CONTRACT = (By.XPATH, "//button[@type = 'button' and (text() = 'Эскалировать')]")
     CONFIRM_REVISION_CONTRACT = (By.XPATH, "//button[@type = 'button' and (text() = 'Отправить на доработку')]")
 
-    # Кнопка согласования и отклонения закупочной процедуры
+    # Кнопка согласования и отклонения контракта
     APPROVAL_CONTRACT = (By.CSS_SELECTOR, "[id^='Approve.Approve']")
     REJECT_CONTRACT = (By.CSS_SELECTOR, "[id^='Approve.Reject']")
     ESCALATE_CONTRACT = (By.CSS_SELECTOR, "[id^='Approve.Escalate']")
     REVISION_CONTRACT = (By.CSS_SELECTOR, "[id^='Approve.Revision']")
+
+    # Кнопка изменения элемента
+    EDIT_ITEM_BUTTON = (By.CSS_SELECTOR, "[id='Ribbon.ListForm.Display.Manage.EditItem-Large']")
 
     # Вкладка "Общие сведения"
     GENERAL_INFORMATION_ELEMENT = (By.XPATH, "//a[contains(@href, '#tabCommon')]")

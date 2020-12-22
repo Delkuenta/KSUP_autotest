@@ -17,7 +17,7 @@ from userdata.user_data import UserData
 """
 # До первой ошибки --maxfail=1
 @pytest.mark.parametrize('path_data_file', [
-    r"TPAC\RejectApproval\1_[Atest_Seller] Reject ZP,Tender, categoryA, softwareDev, UnitSale.json"])
+    r"TPAC\7_RejectApproval\1_[Atest_Seller] Reject ZP,Tender, categoryA, softwareDev, UnitSale.json"])
 class TestRejectStepBackZakup:
 
     def test_create_presale(self, browser_function, path_data_file):
@@ -537,7 +537,7 @@ class TestRejectStepBackZakup:
         login_page.logout()
 
 @pytest.mark.parametrize('path_data_file', [
-    r"TPAC\RejectApproval\2_[Atest_Dir] Reject ZP,Tender, categoryA, softwareDev, UnitSale.json"])
+    r"TPAC\7_RejectApproval\2_[Atest_Dir] Reject ZP,Tender, categoryA, softwareDev, UnitSale.json"])
 class TestRejectCurrentStepAndEscalationZakup:
 
     def test_create_presale(self, browser_function, path_data_file):

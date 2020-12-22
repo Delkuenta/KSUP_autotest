@@ -14,7 +14,7 @@ from userdata.user_data import UserData
 # 4_[Atest_Dir] Reject DK, categoryA, softwareDev.json
 
 @pytest.mark.parametrize('path_data_file',
-                         [r"TPAC\RejectApproval\3_[Atest_Seller] Reject DK, categoryA, softwareDev.json"])
+                         [r"TPAC\7_RejectApproval\3_[Atest_Seller] Reject DK, categoryA, softwareDev.json"])
 class TestRejectStepBackContract:
 
     def test_create_contract(self, browser_function, path_data_file):
@@ -484,7 +484,7 @@ class TestRejectStepBackContract:
 
 
 @pytest.mark.parametrize('path_data_file',
-                         [r"TPAC\RejectApproval\4_[Atest_Dir] Reject DK, categoryA, softwareDev.json"])
+                         [r"TPAC\7_RejectApproval\4_[Atest_Dir] Reject DK, categoryA, softwareDev.json"])
 class TestRejectCurrentStepAndEscalationContract:
 
     def test_create_contract(self, browser_function, path_data_file):

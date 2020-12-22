@@ -2,25 +2,28 @@ import delayed_assert
 import pytest
 
 from pages.base_page import BasePage
+from pages.contract_create_form_page import ContractFormCreate
+from pages.contract_element_page import ContractElementPage
+from pages.contract_list_page import ContractPage
 from pages.login_data import LoginData
 from pages.presale_create_form_page import PresaleFormCreate
 from pages.presale_element_page import PresaleElementPage
 from pages.presale_list_page import PresalePage
 
 
-class TestCreatePresaleAndEdit:
-    def test_login(self, browser_session):
-        link = LoginData.link
-        presale_list_page = PresalePage(browser_session, link)
-        login_page = LoginData(browser_session, link)
-        login_page.open()
-        login_page.login("Mr_KSUP_Seller")
-        login_page.verify_username("Mr_KSUP_Seller")
-        presale_list_page.go_to_presale_list(link)
+@pytest.fixture(scope="session")
+def test_login(browser_session):
+    link = LoginData.link
+    login_page = LoginData(browser_session, link)
+    login_page.open()
+    login_page.login("Mr_KSUP_Dir2") # Mr_KSUP_Seller
+    login_page.verify_username("Mr_KSUP_Dir2")
 
+
+class TestCreatePresaleAndEdit:
     @pytest.mark.xfail(reason="Баг https://jira.lanit.ru/browse/KSUP-1041")
-    def test_create_presale(self, browser_session):
-        user_data_dict = BasePage.read_file_json(browser_session, "TPAC\Edit_PA_DK\[Atest_Seller] PA,Tender, categoryA, softwareDev, UnitSale.json")
+    def test_create_presale(self, browser_session, test_login):
+        user_data_dict = BasePage.read_file_json(browser_session, r"TPAC\11_Edit_PA_DK\[Atest_Seller] PA,Tender, categoryA, softwareDev, UnitSale.json")
         user_data_dict = BasePage.dict_preparation(browser_session, user_data_dict)
         print(user_data_dict)
         link = LoginData.link
@@ -40,12 +43,12 @@ class TestCreatePresaleAndEdit:
 
         delayed_assert.assert_expectations()
 
-    def test_edit_presale(self, browser_session):
+    def test_edit_presale(self, browser_session, test_login):
         old_user_data_dict = BasePage.read_file_json(browser_session,
-                                                "TPAC\Edit_PA_DK\[Atest_Seller] PA,Tender, categoryA, softwareDev, UnitSale.json")
+                                                r"TPAC\11_Edit_PA_DK\[Atest_Seller] PA,Tender, categoryA, softwareDev, UnitSale.json")
         old_user_data_dict = BasePage.dict_preparation(browser_session, old_user_data_dict)
         new_user_data_dict = BasePage.read_file_json(browser_session,
-                                                "TPAC\Edit_PA_DK\[Atest_Seller] editorPA,Tender, categoryA, softwareDev, UnitSale.json")
+                                                r"TPAC\11_Edit_PA_DK\[Atest_Seller] editorPA,Tender, categoryA, softwareDev, UnitSale.json")
         new_user_data_dict = BasePage.dict_preparation(browser_session, new_user_data_dict)
 
         link = LoginData.link
@@ -62,3 +65,43 @@ class TestCreatePresaleAndEdit:
         presale_list_page.go_to_presale_element(new_user_data_dict)
         presale_element_page.verify_general_information_in_presale(new_user_data_dict)
         presale_element_page.verify_presale_not_require_status_approval()
+
+
+class TestCreateContractAndEdit:
+
+    def test_create_contract(self, browser_session, test_login):
+        user_data_dict = BasePage.read_file_json(browser_session, r"TPAC\12_Op_department\3_[Atest_Dir2] DK, categoryA, softwareDev.json")
+        user_data_dict = BasePage.dict_preparation(browser_session, user_data_dict)
+        print(user_data_dict)
+        link = LoginData.link
+        login_page = LoginData(browser_session, link)
+
+        login_page.go_to_contract_list(link)
+        contract_page = ContractPage(browser_session, browser_session.current_url)
+        contract_page.go_to_create_contract()
+        create_contract_page = ContractFormCreate(browser_session, link)
+        create_contract_page.form_create_contract(user_data_dict)
+        contract_page.go_to_contract_element(user_data_dict)
+        contract_element_page = ContractElementPage(browser_session, link)
+        contract_element_page.verify_general_information_contract(user_data_dict)
+        login_page.logout()
+
+    def test_edit_contract(self, browser_session, test_login):
+        old_user_data_dict = BasePage.read_file_json(browser_session,
+                                                r"TPAC\12_Op_department\3_[Atest_Dir2] DK, categoryA, softwareDev.json")
+        old_user_data_dict = BasePage.dict_preparation(browser_session, old_user_data_dict)
+        new_user_data_dict = BasePage.read_file_json(browser_session,
+                                                r"TPAC\12_Op_department\3_[Atest_Dir2] DKedited, categoryA, softwareDev.json")
+        new_user_data_dict = BasePage.dict_preparation(browser_session, new_user_data_dict)
+
+        link = LoginData.link
+        contract_list_page = ContractPage(browser_session, link)
+        create_contract_page = ContractFormCreate(browser_session, link)
+        contract_element_page = ContractElementPage(browser_session, link)
+
+        contract_list_page.go_to_contract_list(link)
+        contract_list_page.go_to_contract_element(old_user_data_dict)
+        contract_element_page.go_to_edit_contract()
+        create_contract_page.form_edit_contract(old_user_data_dict, new_user_data_dict)
+        contract_list_page.go_to_contract_element(new_user_data_dict)
+        contract_element_page.verify_general_information_contract(new_user_data_dict)

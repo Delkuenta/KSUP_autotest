@@ -10,8 +10,8 @@ from pages.login_data import LoginData
 Customer\[Atest]Customer, OOO.json
 Customer\[Atest]Customer, IP.json
 """
-@pytest.mark.parametrize('path_data_file', [r"TPAC\Customer\[Atest]Customer, IP.json",
-                                            r"TPAC\Customer\[Atest]Customer, OOO.json"])
+@pytest.mark.parametrize('path_data_file', [r"TPAC\1_Customer\[Atest]Customer, IP.json",
+                                            r"TPAC\1_Customer\[Atest]Customer, OOO.json"])
 class TestCustomer:
 
     def test_create_customer(self, browser_function, path_data_file):
@@ -21,7 +21,7 @@ class TestCustomer:
         login_page = LoginData(browser_function, link)
         login_page.open()
         login_page.login(user_data_dict["createAccount"])
-        login_page.verify_username(user_data_dict["createAccount"])
+        # login_page.verify_username(user_data_dict["createAccount"])
         login_page.go_to_customer_list(link)
         customer_page = CustomerPage(browser_function, link)
         customer_page.go_to_create_customer()

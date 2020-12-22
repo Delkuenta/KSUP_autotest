@@ -32,7 +32,7 @@ SeparateSale\Dir - Dir2
 
 # До первой ошибки --maxfail=1
 @pytest.mark.parametrize('path_data_file', [
-    r"TPAC\SeparateSale\Seller - Seller2\1[Atest_Seller] PA+ZP+DK, Tender, categoryA,  SoftwareDev, SeparateSale.json"])
+    r"TPAC\4_SeparateSale\Seller - Seller2\1[Atest_Seller] PA+ZP+DK, Tender, categoryA,  SoftwareDev, SeparateSale.json"])
 class TestSeparateSaleFullBusinessCyclePaZpDk:
 
     def test_create_presale(self, browser_function, path_data_file):
@@ -73,8 +73,8 @@ class TestSeparateSaleFullBusinessCyclePaZpDk:
             login_page.verify_username("Mr_KSUP_Dir")
         presale_list_page = PresalePage(browser_function, link)
         presale_list_page.go_to_presale_list(link)
-        presale_list_page.go_to_approval_elements_tabs()
-        presale_list_page.verify_approval_status_in_presale_list()
+        # presale_list_page.go_to_approval_elements_tabs()
+        # presale_list_page.verify_approval_status_in_presale_list()
         presale_list_page.go_to_presale_element(user_data_dict)
         presale_element_page = PresaleElementPage(browser_function, link)
         presale_element_page.approval_presale(user_data_dict)

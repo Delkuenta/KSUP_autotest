@@ -22,9 +22,8 @@ class TestDkBasedOnPresale:
         presale_list_page.go_to_presale_list(link)
 
     @pytest.mark.xfail(reason="Баг https://jira.lanit.ru/browse/KSUP-1041")
-    @pytest.mark.skip
     def test_create_presale(self, browser_session):
-        user_data_dict = BasePage.read_file_json(browser_session, r"TPAC\10_DKbasedOnPresale\[Atest_Seller] PA+DK,Tender, categoryA, softwareDev, UnitSale.json")
+        user_data_dict = BasePage.read_file_json(browser_session, r"TPAC\10_DKbasedOnPresale\[Atest_Seller] PA+DK,Tender, categoryA, softwareDev, UnitSale .json")
         user_data_dict = BasePage.dict_preparation(browser_session, user_data_dict)
         print(user_data_dict)
         link = LoginData.link
@@ -46,7 +45,7 @@ class TestDkBasedOnPresale:
         delayed_assert.assert_expectations()
 
     def test_create_contract_based_on_presale(self, browser_session):
-        user_data_dict = BasePage.read_file_json(browser_session, r"TPAC\10_DKbasedOnPresale\[Atest_Seller] PA+DK,Tender, categoryA, softwareDev, UnitSale.json")
+        user_data_dict = BasePage.read_file_json(browser_session, r"TPAC\10_DKbasedOnPresale\[Atest_Seller] PA+DK,Tender, categoryA, softwareDev, UnitSale .json")
         user_data_dict = BasePage.dict_preparation(browser_session, user_data_dict)
         link = LoginData.link
 

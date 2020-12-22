@@ -144,8 +144,3 @@ class ProjectFormCreate(BasePage):
         # Ждем пока исчезнет надпись "Мы работаем над этим"
         time.sleep(2)
         self.is_disappeared(*FormCreateProjectLocators.CREATE_WAITING_TITLE)
-
-
-
-
-

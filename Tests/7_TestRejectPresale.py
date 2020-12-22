@@ -8,7 +8,7 @@ from pages.presale_element_page import PresaleElementPage
 from pages.presale_list_page import PresalePage
 
 @pytest.mark.parametrize('path_data_file', [
-    r"TPAC\SeparateSale\Seller - Seller2\1[Atest_Seller] PA+ZP+DK, Tender, categoryA,  SoftwareDev, SeparateSale.json"])
+    r"TPAC\7_RejectApproval\5_[Atest_Seller] Reject PA, Tender, categoryA,  SoftwareDev, SeparateSale.json"])
 class TestRejectPresale:
 
     def test_create_presale(self, browser_function, path_data_file):

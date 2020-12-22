@@ -1,7 +1,12 @@
+import time
+
 import pytest
 import delayed_assert
 
 from pages.base_page import BasePage
+from pages.contract_create_form_page import ContractFormCreate
+from pages.contract_element_page import ContractElementPage
+from pages.contract_list_page import ContractPage
 from pages.presale_element_page import PresaleElementPage
 from pages.presale_list_page import PresalePage
 
@@ -36,11 +41,3 @@ class TestUnitSaleFullBusinessCyclePaZpDk:
         presale_list_page.should_be_clickable_create_button()
         presale_list_page.go_to_create_presale()
         create_presale_page.form_create_presale_all_type(user_data_dict)
-
-
-
-
-def test_get():
-    dict = {"one": 1, "two": 2}
-    if "one" in dict:
-        print("Такой ключ существует в словаре")

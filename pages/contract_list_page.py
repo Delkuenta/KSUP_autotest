@@ -22,7 +22,7 @@ class ContractPage(BasePage):
             f'Cущность с названием {user_data_dict["fullName"]} не найдена'
         self.browser.find_element(how, what).click()
 
-    # Кнопка создания пресейла на странице пресейла
+    # Кнопка создания контракта
     def go_to_create_contract(self):
         assert self.is_element_clickable(
             *ContractListLocators.CONTRACT_CREATE_BUTTON), 'Кнопка "Создать" не доступна для нажатия'
