@@ -1,0 +1,50 @@
+{
+	"main_data": {
+        "fullName": "[АТест_Seller]ДК, добавление нового ДК в ОП(зеленый цвет в ОП), категория C, НЕразработка заказного ПО",
+        "contractorType": "",
+        "customer": "КАЗНАЧЕЙСТВО РОССИИ",
+        "salesUnit": "Дирекция по работе с государственным сектором",
+        "salesManager": "Ногинский Михаил Владимирович",
+        "executiveUnit": "Дирекция по работе с государственным сектором",
+        "executiveManager": "Ногинский Михаил Владимирович",
+        "executiveUnitLegal": "ООО \"ЗЛЫЕ МАРСИАНЕ\"",
+        "typeOfWorkServices": ["Оптовая и розничная продажа товаров"],
+        "sum": 29000000,
+        "currency": "Рубль",
+        "priceCategory": "",
+        "competitionDeadlineFrom": "15.07.2020",
+        "startDate": "01.07.2020",
+        "endDate": "01.07.2021",
+        "projectProbability": "100",
+        "descriptionText": "Краткое описание текст",
+        "risksText": "Текст_риски_тест",
+        "purchaseNumber": "ZP/0024-AT",
+        "purchaseLink": "testlink_zakup_proc.com",
+        "numberContract": "DK/0024-AT",
+        "eisContractLink": "test_link_eis@mail.com",
+        "territory": ["Владимирская область"],
+        "technologies": ["LAN-4Tap"],
+        "quantitativeIndicatorsProject": "тестовый текст в поле Количественные показатели реализации проекта",
+        "projectUniqueCode": "2hMuCr24",
+		"project": "Тестовый проект",
+		"createAccount": "Mr_KSUP_Seller",
+        "payments": [
+            {
+                "sum": 20000000,
+                "year": 2020,
+                "quarter": 3
+            },
+            {
+                "sum": 7000000,
+                "year": 2020,
+                "quarter": 4
+            },
+            {
+                "sum": 2000000,
+                "year": 2021,
+                "quarter": 1
+            }
+
+        ]
+    }
+}

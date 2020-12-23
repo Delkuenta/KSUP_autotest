@@ -1,0 +1,55 @@
+{
+	"main_data": {
+        "fullName": "[АТест_Dir2] ПА, добавление нового ПА в ОП(зеленый цвет в ОП), Коммерческое предложение, категория A, разработка заказного ПО, Самостоятельная продажа",
+        "contractorType": "Коммерческое предложение",
+        "customer": "АО \"ЛАНИТ\"",
+        "salesUnit": "Дирекция по работе с государственным сектором",
+        "salesManager": "Ногинский Михаил Владимирович",
+        "executiveUnit": "Дирекция по работе с государственным сектором",
+        "executiveManager": "Ногинский Михаил Владимирович",
+        "executiveUnitLegal": "ООО \"ЗЛЫЕ МАРСИАНЕ\"",
+        "saleLawType": "44-ФЗ",
+        "typeOfWorkServices": ["Аутсорсинг разработки (включая аутстаффинг)", "Внедрение готовых программных продуктов и решений (типа CRM, PLM)"],
+        "sum": 720000,
+        "currency": "Доллар",
+        "priceCategory": "",
+        "applicationSize": 5000,
+        "contractSize": 10000,
+        "separateSale": "Да",
+		"jointBidding": "Нет",
+        "competitionDeadlineFrom": "15.07.2020",
+        "startDate": "01.07.2020",
+        "endDate": "01.07.2021",
+        "projectProbability": 25,
+        "descriptionText": "Краткое описание текст",
+        "risksText": "Текст_риски_тест",
+		"createAccount": "Mr_KSUP_Dir2",
+        "payments": [
+            {
+                "sum": 400000,
+                "year": 2020,
+                "quarter": 3
+            },
+            {
+                "sum": 200000,
+                "year": 2020,
+                "quarter": 4
+            },
+            {
+                "sum": 70000,
+                "year": 2021,
+                "quarter": 1
+            },
+            {
+                "sum": 30000,
+                "year": 2021,
+                "quarter": 2
+            },
+            {
+                "sum": 20000,
+                "year": 2021,
+                "quarter": 3
+            }
+        ]
+    }
+}
