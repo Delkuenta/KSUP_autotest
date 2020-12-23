@@ -22,6 +22,11 @@ class BasePageLocators:
     PROJECT_TITLE = (By.CSS_SELECTOR, "#DeltaPlaceHolderPageTitleInTitleArea a")
     CUSTOMER_LIST_LINK = "/KnowledgeBase/Lists/Egrul/All.aspx"
     CUSTOMER_TITLE = (By.CSS_SELECTOR, "#DeltaPlaceHolderPageTitleInTitleArea a")
+    OPERPLAN_DEPARTMENT_LINK = "/SalesManagement/Lists/OperationalPlanDivision/All.aspx"
+    OPERPLAN_DEPARTMENT_TITLE = (By.CSS_SELECTOR, "#DeltaPlaceHolderPageTitleInTitleArea a")
+    OPERPLAN_DIRECTION_LINK = "/SalesManagement/Lists/OperationalPlanDirectorate/All.aspx"
+    OPERPLAN_DIRECTION_TITLE = (By.CSS_SELECTOR, "#DeltaPlaceHolderPageTitleInTitleArea a")
+
 
     # Локаторы во фрейме "Тип работ и услуг"
     # Группы категорий
@@ -1215,7 +1220,56 @@ class ProjectElementLocators:
 
 
 class OpListLocators:
+    OPERPLAN_CREATE_BUTTON = (By.CSS_SELECTOR, "#idHomePageNewItem")
+    CREATE_IFRAME = (By.CSS_SELECTOR, "[id^='DlgFrame']")
+    YEAR_ELEMENT = (By.CSS_SELECTOR, "[id^='KsupYear']")
+    CONFIRM_CREATE_OPERPLAN = (By.CSS_SELECTOR, "[id$='ctl00_ctl00_diidIOSaveItem']")
+    CANCEL_CREATE_OPERPLAN = (By.CSS_SELECTOR, "[id$='ctl01_ctl00_diidIOGoBack']")
     CREATE_WAITING_TITLE = (By.XPATH, "//h2[contains(text(), 'Пожалуйста, подождите')]")
+
+    FIND_ELEMENT_IN_OPERPLAN_LIST = (By.XPATH, f"//a[contains(text(),'Test_name')]")
+
+    YEAR_DROPDOWN_FILTER = (By.XPATH, "//*[contains(@class, 'colKsupYear ms-vh2')]//a[@class='ms-headerSortArrowLink']")
+    YEAR_CLEAR_FILTER = (By.CSS_SELECTOR, "[id='fmi_clr']")
+    YEAR_CLOSE_FILTER = (By.CSS_SELECTOR, "[id='fmi_cls']")
+
+
+class OpElementLocators:
+    ROW_ELEMENT_IN_OPERPLAN = (By.XPATH, "//*[contains(text(), 'fullName')]/ancestor::tr[contains(@class, 'ms-itmHoverEnabled ms-itmhover')]")
+    CUSTOMER_VALUE_IN_ROW = (By.CSS_SELECTOR, "[id='idElementInOpp']>[class^='colKsupEgr_Customer']")
+    EXECUTIVE_UNIT_IN_ROW = (By.CSS_SELECTOR, "[id='idElementInOpp']>[class^='colKsupDepartment']>a")
+    START_DATE_IN_ROW = (By.CSS_SELECTOR, "[id='idElementInOpp']>[class^='colKsupDateStart']")
+    END_DATE_IN_ROW = (By.CSS_SELECTOR, "[id='idElementInOpp']>[class^='colKsupDateEnd']")
+    SUM_IN_ROW = (By.CSS_SELECTOR, "[id='idElementInOpp']>[class^='colKsupSumYear']")
+    PROBABILITY_IN_ROW = (By.CSS_SELECTOR, "[id='idElementInOpp']>[class^='colKsupProjectProbability']")
+    SUM_PROBABILITY_IN_ROW = (By.CSS_SELECTOR, "[id='idElementInOpp']>[class^='colKsupSumProbabilityYear']")
+    CONTRACT_NUMBER_IN_ROW = (By.CSS_SELECTOR, "[id='idElementInOpp']>[class^='colKsupContractNumber']")
+
+    # Отправить на согласование
+    SEND_TO_APPROVAL = (By.CSS_SELECTOR, "a[id*='OpPlanApprovalButtonsGroup']")
+
+    # Обновить оперплан
+    UPDATE_OPERPLAN_BUTTON = (By.CSS_SELECTOR, "a[id*='OpPlanRefreshButtonsGroup']")
+
+    # Выбрать все элементы в обновлении(множественный результат)
+    ADD_ALL_ELEMENT = (By.CSS_SELECTOR, "[class='checkbox checkbox--light']")
+    # Элементы в окне обновления НОВЫЕ ЭЛЕМЕНТЫ
+    CHECKBOX_NEW_ELEMENT_IN_UPDATE = (By.XPATH, "//span[contains(text(), 'fullName')]/preceding::label[1]")
+    CUSTOMER_NEW_ELEMENT_IN_UPDATE = (By.XPATH, "//span[contains(text(), 'fullName')]/following::td[1]")
+    PROBABILITY_NEW_ELEMENT_IN_UPDATE = (By.XPATH, "//span[contains(text(), 'fullName')]/following::td[2]")
+    SUM_NEW_ELEMENT_IN_UPDATE = (By.XPATH, "//*[contains(text(), 'fullName')]/following::td[3]/div")
+    SUM_YEAR_NEW_ELEMENT_IN_UPDATE = (By.XPATH, "//*[contains(text(), 'fullName')]/following::td[4]/div")
+    SUM_WITH_PROBABILITY_NEW_ELEMNT_IN_UPDATE = (By.XPATH, "//*[contains(text(), 'fullName')]/following::td[5]/div")
+    CREATOR_NEW_ELEMENT_IN_UPDATE = (By.XPATH, "//*[contains(text(), 'fullName')]/following::td[6]/div/p")
+
+    OLD_STATUS_CONTRACT_UPDATE_ELEMENT = (By.XPATH,
+                                          "//span[contains(text(), 'statusContract')]/../following::td[contains(text(), 'Статус контракта')]/following::td[1]")
+    NEW_STATUS_CONTRACT_UPDATE_ELEMENT = (By.XPATH,
+                                          "//span[contains(text(), 'statusContract')]/../following::td[contains(text(), 'Статус контракта')]/following::td[2]")
+
+    CANCEL_BUTTON = (By.CSS_SELECTOR, "[class='btn btn--bordered']")
+    CONFIRM_UPDATE_OPERPLAN = (By.CSS_SELECTOR, "[class='btn']")
+
 
 
 class CustomerListLocators:

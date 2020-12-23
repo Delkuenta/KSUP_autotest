@@ -3,20 +3,19 @@ import pytest
 
 
 from pages.base_page import BasePage
-from pages.contract_create_form_page import ContractFormCreate
-from pages.contract_element_page import ContractElementPage
-from pages.contract_list_page import ContractPage
-from pages.knowledge_search_page import KnowledgeSearchPage
+from pages.Contract.contract_create_form_page import ContractFormCreate
+from pages.Contract.contract_element_page import ContractElementPage
+from pages.Contract.contract_list_page import ContractPage
+from pages.KnowledgeBase.knowledge_search_page import KnowledgeSearchPage
 from pages.login_data import LoginData
-from pages.project_create_form_page import ProjectFormCreate
-from pages.project_element_page import ProjectElementPage
-from pages.project_list_page import ProjectPage
+from pages.Project.project_create_form_page import ProjectFormCreate
+from pages.Project.project_element_page import ProjectElementPage
+from pages.Project.project_list_page import ProjectPage
 
 project_path_file = r"TPAC\6_KnowledgeElementSearch\1[Atest_Seller] Project, categoryA, softwareDev.json"
 contract_path_file = r"TPAC\6_KnowledgeElementSearch\2[Atest_Seller] DK, categoryA, softwareDev.json"
 department_path_file = r"TPAC\6_KnowledgeElementSearch\3[Atest] Department, DKS.json"
 ulip_path_file = r"TPAC\1_Customer\[Atest]Customer, OOO.json"
-
 
 
 @pytest.fixture(scope="session")

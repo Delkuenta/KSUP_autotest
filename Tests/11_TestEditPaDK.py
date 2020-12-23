@@ -2,13 +2,13 @@ import delayed_assert
 import pytest
 
 from pages.base_page import BasePage
-from pages.contract_create_form_page import ContractFormCreate
-from pages.contract_element_page import ContractElementPage
-from pages.contract_list_page import ContractPage
+from pages.Contract.contract_create_form_page import ContractFormCreate
+from pages.Contract.contract_element_page import ContractElementPage
+from pages.Contract.contract_list_page import ContractPage
 from pages.login_data import LoginData
-from pages.presale_create_form_page import PresaleFormCreate
-from pages.presale_element_page import PresaleElementPage
-from pages.presale_list_page import PresalePage
+from pages.Presale.presale_create_form_page import PresaleFormCreate
+from pages.Presale.presale_element_page import PresaleElementPage
+from pages.Presale.presale_list_page import PresalePage
 
 
 @pytest.fixture(scope="session")
@@ -34,6 +34,8 @@ class TestCreatePresaleAndEdit:
         presale_list_page.go_to_presale_list(link)
         presale_list_page.should_be_clickable_create_button()
         presale_list_page.go_to_create_presale()
+        # Проверяем предзаполнения менеджеров Баг https://jira.lanit.ru/browse/KSUP-1041
+        # create_presale_page.verify_prefill_department_manager(user_data_dict)
         create_presale_page.form_create_presale_all_type(user_data_dict)
         presale_list_page.go_to_mine_elements_tabs()
         presale_list_page.should_be_element_on_presale_list(user_data_dict)
@@ -80,6 +82,8 @@ class TestCreateContractAndEdit:
         contract_page = ContractPage(browser_session, browser_session.current_url)
         contract_page.go_to_create_contract()
         create_contract_page = ContractFormCreate(browser_session, link)
+        # Проверяем предзаполнения менеджеров Баг https://jira.lanit.ru/browse/KSUP-1041
+        # create_contract_page.verify_prefill_department_manager(user_data_dict)
         create_contract_page.form_create_contract(user_data_dict)
         contract_page.go_to_contract_element(user_data_dict)
         contract_element_page = ContractElementPage(browser_session, link)

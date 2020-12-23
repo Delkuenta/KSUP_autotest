@@ -1,12 +1,12 @@
 import pytest
 from pages.base_page import BasePage
-from pages.presale_element_page import PresaleElementPage
-from pages.presale_list_page import PresalePage
-from pages.zakup_create_form_page import ZakupFormCreate
-from pages.zakup_element_page import ZakupElementPage
+from pages.Presale.presale_element_page import PresaleElementPage
+from pages.Presale.presale_list_page import PresalePage
+from pages.Zakup.zakup_create_form_page import ZakupFormCreate
+from pages.Zakup.zakup_element_page import ZakupElementPage
 from pages.login_data import LoginData
-from pages.presale_create_form_page import PresaleFormCreate
-from pages.zakup_list_page import ZakupListPage
+from pages.Presale.presale_create_form_page import PresaleFormCreate
+from pages.Zakup.zakup_list_page import ZakupListPage
 
 # RejectApproval
 from userdata.user_data import UserData

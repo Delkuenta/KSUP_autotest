@@ -2,9 +2,9 @@ import pytest
 
 from pages.base_page import BasePage
 from pages.login_data import LoginData
-from pages.project_create_form_page import ProjectFormCreate
-from pages.project_element_page import ProjectElementPage
-from pages.project_list_page import ProjectPage
+from pages.Project.project_create_form_page import ProjectFormCreate
+from pages.Project.project_element_page import ProjectElementPage
+from pages.Project.project_list_page import ProjectPage
 
 
 # 2_[Atest_Dir] Project_required fields, categoryA, softwareDev.json

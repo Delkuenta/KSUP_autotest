@@ -2,16 +2,16 @@ import pytest
 import delayed_assert
 
 from pages.base_page import BasePage
-from pages.contract_create_form_page import ContractFormCreate
-from pages.contract_element_page import ContractElementPage
-from pages.contract_list_page import ContractPage
-from pages.presale_element_page import PresaleElementPage
-from pages.presale_list_page import PresalePage
-from pages.zakup_create_form_page import ZakupFormCreate
-from pages.zakup_element_page import ZakupElementPage
+from pages.Contract.contract_create_form_page import ContractFormCreate
+from pages.Contract.contract_element_page import ContractElementPage
+from pages.Contract.contract_list_page import ContractPage
+from pages.Presale.presale_element_page import PresaleElementPage
+from pages.Presale.presale_list_page import PresalePage
+from pages.Zakup.zakup_create_form_page import ZakupFormCreate
+from pages.Zakup.zakup_element_page import ZakupElementPage
 from pages.login_data import LoginData
-from pages.presale_create_form_page import PresaleFormCreate
-from pages.zakup_list_page import ZakupListPage
+from pages.Presale.presale_create_form_page import PresaleFormCreate
+from pages.Zakup.zakup_list_page import ZakupListPage
 from userdata.user_data import UserData
 
 
@@ -80,10 +80,9 @@ UnitSale\Seller2
 
 # До первой ошибки --maxfail=1
 # Браузер для запуска --browser_name=firefox
-@pytest.mark.parametrize('path_data_file', [r"TPAC\3_UnitSale\Seller\13_[Atest_Seller] PA+ZP+DK, RequestPrice, categoryA, softwareDev, UnitSale.json"])
+@pytest.mark.parametrize('path_data_file', [r"TPAC\3_UnitSale\Seller2\2_[Atest_Seller2] PA+ZP+DK,Tender, categoryB, softwareDev, UnitSale.json"])
 class TestUnitSaleFullBusinessCyclePaZpDk:
 
-    @pytest.mark.xfail(reason="Баг https://jira.lanit.ru/browse/KSUP-1041")
     def test_create_presale(self, browser_function, path_data_file):
         user_data_dict = BasePage.read_file_json(browser_function, path_data_file)
         user_data_dict = BasePage.dict_preparation(browser_function, user_data_dict)
@@ -99,6 +98,8 @@ class TestUnitSaleFullBusinessCyclePaZpDk:
         presale_list_page.go_to_presale_list(link)
         presale_list_page.should_be_clickable_create_button()
         presale_list_page.go_to_create_presale()
+        # Проверяем предзаполнения менеджеров Баг https://jira.lanit.ru/browse/KSUP-1041
+        # create_presale_page.verify_prefill_department_manager(user_data_dict)
         create_presale_page.form_create_presale_all_type(user_data_dict)
         presale_list_page.go_to_mine_elements_tabs()
         presale_list_page.should_be_element_on_presale_list(user_data_dict)

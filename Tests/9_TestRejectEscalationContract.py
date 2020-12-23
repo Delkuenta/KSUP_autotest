@@ -1,8 +1,8 @@
 import pytest
 from pages.base_page import BasePage
-from pages.contract_create_form_page import ContractFormCreate
-from pages.contract_element_page import ContractElementPage
-from pages.contract_list_page import ContractPage
+from pages.Contract.contract_create_form_page import ContractFormCreate
+from pages.Contract.contract_element_page import ContractElementPage
+from pages.Contract.contract_list_page import ContractPage
 from pages.login_data import LoginData
 import delayed_assert
 

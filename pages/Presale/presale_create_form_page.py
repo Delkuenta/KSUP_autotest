@@ -10,32 +10,6 @@ class PresaleFormCreate(BasePage):
     # Форма создания пресейла
     def form_create_presale_all_type(self, user_data_dict):
         time.sleep(2)
-        # Проверяем предзаполнение полей:
-        # "Ответственный менеджер подразделения-продавца" и "Ответственный менеджер подразделения-исполнителя" для УЗ продавца
-        if user_data_dict["createAccount"] == "Mr_KSUP_Seller":
-            delayed_assert.expect(self.is_element_text(*FormCreatePresaleLocators.SALES_MANAGER_ELEMENT_VALUE) ==
-                                  user_data_dict["executiveManager"],
-                                  f'Для роли {user_data_dict["createAccount"]} '
-                                  f'поле "Ответственный менеджер подразделения-продавца" '
-                                  f'должно быть предзаполненно значением: "{user_data_dict["executiveManager"]}"')
-            # Баг https://jira.lanit.ru/browse/KSUP-1041
-            delayed_assert.expect(self.is_element_text(*FormCreatePresaleLocators.EXECUTIVE_MANAGER_ELEMENT_VALUE) ==
-                                  user_data_dict["executiveManager"],
-                                  f'Для роли {user_data_dict["createAccount"]} '
-                                  f'поле "Ответственный менеджер подразделения-исполнителя" '
-                                  f'должно быть предзаполненно значением: "{user_data_dict["executiveManager"]}"')
-        elif user_data_dict["createAccount"] == "Mr_KSUP_Seller2":
-            delayed_assert.expect(self.is_element_text(*FormCreatePresaleLocators.SALES_MANAGER_ELEMENT_VALUE) ==
-                                  user_data_dict["salesManager"],
-                                  f'Для роли {user_data_dict["createAccount"]} '
-                                  f'поле "Ответственный менеджер подразделения-продавца" '
-                                  f'должно быть предзаполненно значением: "{user_data_dict["salesManager"]}"')
-            # Баг https://jira.lanit.ru/browse/KSUP-1041
-            delayed_assert.expect(self.is_element_text(*FormCreatePresaleLocators.EXECUTIVE_MANAGER_ELEMENT_VALUE) ==
-                                  user_data_dict["salesManager"],
-                                  f'Для роли {user_data_dict["createAccount"]} '
-                                  f'поле "Ответственный менеджер подразделения-исполнителя" '
-                                  f'должно быть предзаполненно значением: "{user_data_dict["salesManager"]}"')
 
         # Ищем поле "Предмет контракта" и заполняем
         self.browser.find_element(*FormCreatePresaleLocators.NAME_PRESALE_ELEMENT).send_keys(
@@ -460,3 +434,31 @@ class PresaleFormCreate(BasePage):
 
         # Жмем кнопку "Сохранить"
         self.browser.find_element(*FormCreatePresaleLocators.CONFIRM_EDIT_PRESALE_BUTTON).click()
+
+    def verify_prefill_department_manager(self, user_data_dict):
+        # Проверяем предзаполнение полей:
+        # "Ответственный менеджер подразделения-продавца" и "Ответственный менеджер подразделения-исполнителя" для УЗ продавца
+        if user_data_dict["createAccount"] == "Mr_KSUP_Seller":
+            delayed_assert.expect(self.is_element_text(*FormCreatePresaleLocators.SALES_MANAGER_ELEMENT_VALUE) ==
+                                  user_data_dict["executiveManager"],
+                                  f'Для роли {user_data_dict["createAccount"]} '
+                                  f'поле "Ответственный менеджер подразделения-продавца" '
+                                  f'должно быть предзаполненно значением: "{user_data_dict["executiveManager"]}"')
+            # Баг https://jira.lanit.ru/browse/KSUP-1041
+            delayed_assert.expect(self.is_element_text(*FormCreatePresaleLocators.EXECUTIVE_MANAGER_ELEMENT_VALUE) ==
+                                  user_data_dict["executiveManager"],
+                                  f'Для роли {user_data_dict["createAccount"]} '
+                                  f'поле "Ответственный менеджер подразделения-исполнителя" '
+                                  f'должно быть предзаполненно значением: "{user_data_dict["executiveManager"]}"')
+        elif user_data_dict["createAccount"] == "Mr_KSUP_Seller2":
+            delayed_assert.expect(self.is_element_text(*FormCreatePresaleLocators.SALES_MANAGER_ELEMENT_VALUE) ==
+                                  user_data_dict["salesManager"],
+                                  f'Для роли {user_data_dict["createAccount"]} '
+                                  f'поле "Ответственный менеджер подразделения-продавца" '
+                                  f'должно быть предзаполненно значением: "{user_data_dict["salesManager"]}"')
+            # Баг https://jira.lanit.ru/browse/KSUP-1041
+            delayed_assert.expect(self.is_element_text(*FormCreatePresaleLocators.EXECUTIVE_MANAGER_ELEMENT_VALUE) ==
+                                  user_data_dict["salesManager"],
+                                  f'Для роли {user_data_dict["createAccount"]} '
+                                  f'поле "Ответственный менеджер подразделения-исполнителя" '
+                                  f'должно быть предзаполненно значением: "{user_data_dict["salesManager"]}"')

@@ -2,8 +2,8 @@ import delayed_assert
 import pytest
 
 from pages.base_page import BasePage
-from pages.customer_create_form import CustomerFormCreate
-from pages.customer_list_page import CustomerPage
+from pages.Customer.customer_create_form import CustomerFormCreate
+from pages.Customer.customer_list_page import CustomerPage
 from pages.login_data import LoginData
 
 """

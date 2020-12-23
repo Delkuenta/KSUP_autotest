@@ -56,9 +56,9 @@ class BasePage:
         return False
 
     # is_disappeared: будет ждать до тех пор, пока элемент не исчезнет
-    def is_disappeared(self, how, what, timeout=10):
+    def is_disappeared(self, how, what, timeout=50):
         try:
-            WebDriverWait(self.browser, timeout, 1, TimeoutException).until_not(
+            WebDriverWait(self.browser, timeout, 0.5, TimeoutException).until_not(
                 ec.presence_of_element_located((how, what)))
         except TimeoutException:
             return False
@@ -124,6 +124,20 @@ class BasePage:
         self.browser.get(project_link)
         assert self.is_text_to_be_present_in_element(*BasePageLocators.PROJECT_TITLE, "Проекты"), \
             "Титул страницы не соответствует переходу"
+
+    def go_to_operplan_department(self, link):
+        operplan_link = link + BasePageLocators.OPERPLAN_DEPARTMENT_LINK
+        self.browser.get(operplan_link)
+        assert self.is_element_text(*BasePageLocators.OPERPLAN_DEPARTMENT_TITLE) == "Оперпланы департаментов", \
+            "Не корректный титул на странице оперпланы департамента.\n" \
+            "Ожидаемый результат: Оперпланы департаментов"
+
+    def go_to_operplan_direction(self, link):
+        operplan_link = link + BasePageLocators.OPERPLAN_DIRECTION_LINK
+        self.browser.get(operplan_link)
+        assert self.is_element_text(*BasePageLocators.OPERPLAN_DEPARTMENT_TITLE) == "Оперпланы дирекции", \
+            "Не корректный титул на странице оперпланы дирекции.\n" \
+            "Ожидаемый результат: Оперпланы дирекции"
 
     def read_file_json(self, path_file):
         full_path_file = os.path.join(UserData.current_dir, path_file)

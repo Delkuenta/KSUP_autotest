@@ -3,9 +3,9 @@ import delayed_assert
 
 from pages.base_page import BasePage
 from pages.login_data import LoginData
-from pages.presale_create_form_page import PresaleFormCreate
-from pages.presale_element_page import PresaleElementPage
-from pages.presale_list_page import PresalePage
+from pages.Presale.presale_create_form_page import PresaleFormCreate
+from pages.Presale.presale_element_page import PresaleElementPage
+from pages.Presale.presale_list_page import PresalePage
 
 @pytest.mark.parametrize('path_data_file', [
     r"TPAC\7_RejectApproval\5_[Atest_Seller] Reject PA, Tender, categoryA,  SoftwareDev, SeparateSale.json"])
@@ -24,6 +24,8 @@ class TestRejectPresale:
         presale_list_page.should_be_clickable_create_button()
         presale_list_page.go_to_create_presale()
         create_presale_page = PresaleFormCreate(browser_function, link)
+        # Проверяем предзаполнения менеджеров Баг https://jira.lanit.ru/browse/KSUP-1041
+        # create_presale_page.verify_prefill_department_manager(user_data_dict)
         create_presale_page.form_create_presale_all_type(user_data_dict)
         presale_list_page.should_be_element_on_presale_list(user_data_dict)
         presale_list_page.go_to_presale_element(user_data_dict)

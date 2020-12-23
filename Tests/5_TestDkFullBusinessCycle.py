@@ -1,9 +1,10 @@
+import delayed_assert
 import pytest
 
 from pages.base_page import BasePage
-from pages.contract_create_form_page import ContractFormCreate
-from pages.contract_element_page import ContractElementPage
-from pages.contract_list_page import ContractPage
+from pages.Contract.contract_create_form_page import ContractFormCreate
+from pages.Contract.contract_element_page import ContractElementPage
+from pages.Contract.contract_list_page import ContractPage
 from pages.login_data import LoginData
 from userdata.user_data import UserData
 
@@ -27,7 +28,7 @@ UnitSale\Seller2
 
 # До первой ошибки --maxfail=1
 @pytest.mark.parametrize('path_data_file', [
-    r"TPAC\3_UnitSale\Seller\19_[Atest_Seller] DK, categoryA, softwareDev.json"
+    r"TPAC\3_UnitSale\Seller2\19_[Atest_Seller2] DK, categoryA, softwareDev.json"
 ])
 class TestDkFullBusinessCycle:
 
@@ -44,11 +45,14 @@ class TestDkFullBusinessCycle:
         contract_page = ContractPage(browser_function, browser_function.current_url)
         contract_page.go_to_create_contract()
         create_contract_page = ContractFormCreate(browser_function, link)
+        # Проверяем предзаполнения менеджеров Баг https://jira.lanit.ru/browse/KSUP-1041
+        # create_contract_page.verify_prefill_department_manager(user_data_dict)
         create_contract_page.form_create_contract(user_data_dict)
         contract_page.go_to_contract_element(user_data_dict)
         contract_element_page = ContractElementPage(browser_function, browser_function.current_url)
         contract_element_page.verify_general_information_contract(user_data_dict)
         login_page.logout()
+        delayed_assert.assert_expectations()
 
     def test_send_contract_for_approval(self, browser_function, path_data_file):
         user_data_dict = BasePage.read_file_json(browser_function, path_data_file)

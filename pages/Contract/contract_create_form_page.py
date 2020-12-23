@@ -48,8 +48,8 @@ class ContractFormCreate(BasePage):
             *FormCreateContractLocators.PRESALE_SELECT), \
             "Некорректная информация в поле Пресейловые активности"
 
-        #assert user_data_dict["fullName"] in self.is_element_text(*FormCreateContractLocators.ZAKUP_SELECT), \
-            #"Некорректная информация в поле Связанная закупочная процедура"
+        # assert user_data_dict["fullName"] in self.is_element_text(*FormCreateContractLocators.ZAKUP_SELECT), \
+        # "Некорректная информация в поле Связанная закупочная процедура"
 
         # Заполняем поле Номер
         self.browser.find_element(*FormCreateContractLocators.NUMBER_CONTRACT_ELEMENT).send_keys(
@@ -156,7 +156,8 @@ class ContractFormCreate(BasePage):
             current_row = 0
             while current_row < count_joint_contracts_row:
                 # Заполняем поле "Заказчик"
-                customer_field = self.browser.find_elements(*FormCreateContractLocators.JOINT_BIDDING_CUSTOMER)[current_row]
+                customer_field = self.browser.find_elements(*FormCreateContractLocators.JOINT_BIDDING_CUSTOMER)[
+                    current_row]
                 customer_field.click()
                 how, what = FormCreateContractLocators.JOINT_BIDDING_CUSTOMER_DROPDOWN
                 what = what.replace('customer_name', user_data_dict["jointBiddingContracts"][current_row]["customer"])
@@ -167,11 +168,13 @@ class ContractFormCreate(BasePage):
                 number_field.send_keys(user_data_dict["jointBiddingContracts"][current_row]["number"])
 
                 # Заполняем поле "Дата заключения"
-                startDate_field = self.browser.find_elements(*FormCreateContractLocators.JOINT_BIDDING_START_DATE)[current_row]
+                startDate_field = self.browser.find_elements(*FormCreateContractLocators.JOINT_BIDDING_START_DATE)[
+                    current_row]
                 startDate_field.send_keys(user_data_dict["jointBiddingContracts"][current_row]["startDate"])
 
                 # Заполняем поле "Дата окончания"
-                endDate_field = self.browser.find_elements(*FormCreateContractLocators.JOINT_BIDDING_END_DATE)[current_row]
+                endDate_field = self.browser.find_elements(*FormCreateContractLocators.JOINT_BIDDING_END_DATE)[
+                    current_row]
                 endDate_field.send_keys(user_data_dict["jointBiddingContracts"][current_row]["endDate"])
 
                 # Заполняем поле "Сумма"
@@ -187,32 +190,6 @@ class ContractFormCreate(BasePage):
 
     def form_create_contract(self, user_data_dict):
         time.sleep(3)
-
-        # Проверяем предзаполнение полей:
-        # "Ответственный менеджер подразделения-продавца" и "Ответственный менеджер подразделения-исполнителя" для УЗ продавца
-        if user_data_dict["createAccount"] == "Mr_KSUP_Seller":
-            delayed_assert.expect(self.is_element_text(*FormCreateContractLocators.SALES_MANAGER_ELEMENT_VALUE) ==
-                                  user_data_dict["executiveManager"],
-                                  f'Для роли {user_data_dict["createAccount"]} '
-                                  f'поле "Ответственный менеджер подразделения-продавца" '
-                                  f'должно быть предзаполненно значением: "{user_data_dict["executiveManager"]}"')
-            delayed_assert.expect(
-                self.is_element_text(*FormCreateContractLocators.EXECUTIVE_MANAGER_ELEMENT_VALUE) ==
-                user_data_dict["executiveManager"],
-                f'Для роли {user_data_dict["createAccount"]} '
-                f'поле "Ответственный менеджер подразделения-исполнителя" '
-                f'должно быть предзаполненно значением: "{user_data_dict["executiveManager"]}"')
-        elif user_data_dict["createAccount"] == "Mr_KSUP_Seller2":
-            delayed_assert.expect(self.is_element_text(*FormCreateContractLocators.SALES_MANAGER_ELEMENT_VALUE) ==
-                                  user_data_dict["salesManager"],
-                                  f'Для роли {user_data_dict["createAccount"]} '
-                                  f'поле "Ответственный менеджер подразделения-продавца" '
-                                  f'должно быть предзаполненно значением: "{user_data_dict["salesManager"]}"')
-            delayed_assert.expect(self.is_element_text(*FormCreateContractLocators.EXECUTIVE_MANAGER_ELEMENT_VALUE) ==
-                                  user_data_dict["salesManager"],
-                                  f'Для роли {user_data_dict["createAccount"]} '
-                                  f'поле "Ответственный менеджер подразделения-исполнителя" '
-                                  f'должно быть предзаполненно значением: "{user_data_dict["salesManager"]}"')
 
         # Заполняем поле "Предмет контракта"
         self.browser.find_element(*FormCreateContractLocators.NAME_CONTRACT_ELEMENT).send_keys(
@@ -581,3 +558,30 @@ class ContractFormCreate(BasePage):
 
         # Жмем кнопку сохранить
         self.browser.find_element(*FormCreateContractLocators.CONFIRM_EDIT_CONTRACT_BUTTON).click()
+
+    def verify_prefill_department_manager(self, user_data_dict):
+        # Проверяем предзаполнение полей:
+        # "Ответственный менеджер подразделения-продавца" и "Ответственный менеджер подразделения-исполнителя" для УЗ продавца
+        if user_data_dict["createAccount"] == "Mr_KSUP_Seller":
+            delayed_assert.expect(self.is_element_text(*FormCreateContractLocators.SALES_MANAGER_ELEMENT_VALUE) ==
+                                  user_data_dict["executiveManager"],
+                                  f'Для роли {user_data_dict["createAccount"]} '
+                                  f'поле "Ответственный менеджер подразделения-продавца" '
+                                  f'должно быть предзаполненно значением: "{user_data_dict["executiveManager"]}"')
+            delayed_assert.expect(
+                self.is_element_text(*FormCreateContractLocators.EXECUTIVE_MANAGER_ELEMENT_VALUE) ==
+                user_data_dict["executiveManager"],
+                f'Для роли {user_data_dict["createAccount"]} '
+                f'поле "Ответственный менеджер подразделения-исполнителя" '
+                f'должно быть предзаполненно значением: "{user_data_dict["executiveManager"]}"')
+        elif user_data_dict["createAccount"] == "Mr_KSUP_Seller2":
+            delayed_assert.expect(self.is_element_text(*FormCreateContractLocators.SALES_MANAGER_ELEMENT_VALUE) ==
+                                  user_data_dict["salesManager"],
+                                  f'Для роли {user_data_dict["createAccount"]} '
+                                  f'поле "Ответственный менеджер подразделения-продавца" '
+                                  f'должно быть предзаполненно значением: "{user_data_dict["salesManager"]}"')
+            delayed_assert.expect(self.is_element_text(*FormCreateContractLocators.EXECUTIVE_MANAGER_ELEMENT_VALUE) ==
+                                  user_data_dict["salesManager"],
+                                  f'Для роли {user_data_dict["createAccount"]} '
+                                  f'поле "Ответственный менеджер подразделения-исполнителя" '
+                                  f'должно быть предзаполненно значением: "{user_data_dict["salesManager"]}"')
