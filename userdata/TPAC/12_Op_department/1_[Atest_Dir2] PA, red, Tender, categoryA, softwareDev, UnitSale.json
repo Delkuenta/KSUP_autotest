@@ -20,7 +20,7 @@
         "competitionDeadlineFrom": "15.07.2020",
         "startDate": "01.07.2020",
         "endDate": "01.07.2021",
-        "projectProbability": 70,
+        "projectProbability": 100,
         "descriptionText": "Краткое описание текст",
         "risksText": "Текст_риски_тест",
 		"createAccount": "Mr_KSUP_Dir2",

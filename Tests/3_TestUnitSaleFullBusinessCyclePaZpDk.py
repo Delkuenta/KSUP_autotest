@@ -80,7 +80,7 @@ UnitSale\Seller2
 
 # До первой ошибки --maxfail=1
 # Браузер для запуска --browser_name=firefox
-@pytest.mark.parametrize('path_data_file', [r"TPAC\3_UnitSale\Seller2\2_[Atest_Seller2] PA+ZP+DK,Tender, categoryB, softwareDev, UnitSale.json"])
+@pytest.mark.parametrize('path_data_file', [r"TPAC\3_UnitSale\Seller\1_[Atest_Seller] PA+ZP+DK,Tender, categoryA, softwareDev, UnitSale.json"])
 class TestUnitSaleFullBusinessCyclePaZpDk:
 
     def test_create_presale(self, browser_function, path_data_file):
@@ -101,7 +101,8 @@ class TestUnitSaleFullBusinessCyclePaZpDk:
         # Проверяем предзаполнения менеджеров Баг https://jira.lanit.ru/browse/KSUP-1041
         # create_presale_page.verify_prefill_department_manager(user_data_dict)
         create_presale_page.form_create_presale_all_type(user_data_dict)
-        presale_list_page.go_to_mine_elements_tabs()
+        if user_data_dict["createAccount"] == "Mr_KSUP_Seller" or user_data_dict["createAccount"] == "Mr_KSUP_Seller2":
+            presale_list_page.go_to_mine_elements_tabs()
         presale_list_page.should_be_element_on_presale_list(user_data_dict)
         presale_list_page.go_to_presale_element(user_data_dict)
         presale_element_page.verify_general_information_in_presale(user_data_dict)
@@ -131,7 +132,8 @@ class TestUnitSaleFullBusinessCyclePaZpDk:
         presale_list_page.go_to_presale_element(user_data_dict)
         presale_element_page.go_to_create_zp_based_on_presale(user_data_dict)
         zakup_form_create_page.form_create_zakup_all_type_based_on_presale(user_data_dict)
-        zakup_list_page.go_to_mine_elements_tabs()
+        if user_data_dict["createAccount"] == "Mr_KSUP_Seller" or user_data_dict["createAccount"] == "Mr_KSUP_Seller2":
+            zakup_list_page.go_to_mine_elements_tabs()
         zakup_list_page.should_be_element_on_zakup_list(user_data_dict)
         zakup_list_page.go_to_zakup_element(user_data_dict)
         zakup_element_page.verify_general_information_in_zakup(user_data_dict)
@@ -325,7 +327,8 @@ class TestUnitSaleFullBusinessCyclePaZpDk:
         contract_form_create = ContractFormCreate(browser_function, browser_function.current_url)
         contract_form_create.form_create_contract_based_on_zakup(user_data_dict)
         contract_list_page = ContractPage(browser_function, browser_function.current_url)
-        contract_list_page.go_to_mine_elements_tab()
+        if user_data_dict["createAccount"] == "Mr_KSUP_Seller" or user_data_dict["createAccount"] == "Mr_KSUP_Seller2":
+            contract_list_page.go_to_mine_elements_tab()
         contract_list_page.should_be_element_on_contract_list(user_data_dict)
         contract_list_page.go_to_contract_element(user_data_dict)
         contract_element_page = ContractElementPage(browser_function, browser_function.current_url)
@@ -346,7 +349,8 @@ class TestUnitSaleFullBusinessCyclePaZpDk:
         login_page.verify_username(user_data_dict["createAccount"])
         login_page.go_to_contract_list(link)
         contract_list = ContractPage(browser_function, browser_function.current_url)
-        contract_list.go_to_mine_elements_tab()
+        if user_data_dict["createAccount"] == "Mr_KSUP_Seller" or user_data_dict["createAccount"] == "Mr_KSUP_Seller2":
+            contract_list.go_to_mine_elements_tab()
         contract_list.should_be_element_on_contract_list(user_data_dict)
         contract_list.go_to_contract_element(user_data_dict)
         contract_element_page = ContractElementPage(browser_function, browser_function.current_url)

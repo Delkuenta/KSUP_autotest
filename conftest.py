@@ -26,6 +26,7 @@ def browser_function(request):
         options = webdriver.ChromeOptions()
         options.add_argument("ignore-certificate-errors")
         options.add_argument("start-maximized")
+        options.add_argument("--disable-notifications")
         print("\nstart chrome browser for test..")
         browser = webdriver.Chrome(options=options)
 
@@ -63,7 +64,7 @@ def browser_session(request):
         #options.add_argument("start-maximized")
         print("\nstart chrome browser for test..")
         browser = webdriver.Chrome(options=options)
-        # browser.maximize_window()
+        browser.maximize_window()
 
     elif browser_name == "firefox":
         print("\nstart firefox browser for test..")

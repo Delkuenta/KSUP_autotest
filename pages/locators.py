@@ -1236,6 +1236,7 @@ class OpListLocators:
 
 class OpElementLocators:
     ROW_ELEMENT_IN_OPERPLAN = (By.XPATH, "//*[contains(text(), 'fullName')]/ancestor::tr[contains(@class, 'ms-itmHoverEnabled ms-itmhover')]")
+    ALL_FIELD_IN_ROW = (By.CSS_SELECTOR, "[id='idElementInOpp']>td")
     CUSTOMER_VALUE_IN_ROW = (By.CSS_SELECTOR, "[id='idElementInOpp']>[class^='colKsupEgr_Customer']")
     EXECUTIVE_UNIT_IN_ROW = (By.CSS_SELECTOR, "[id='idElementInOpp']>[class^='colKsupDepartment']>a")
     START_DATE_IN_ROW = (By.CSS_SELECTOR, "[id='idElementInOpp']>[class^='colKsupDateStart']")
@@ -1250,6 +1251,9 @@ class OpElementLocators:
 
     # Обновить оперплан
     UPDATE_OPERPLAN_BUTTON = (By.CSS_SELECTOR, "a[id*='OpPlanRefreshButtonsGroup']")
+
+    # Ожидание поиск обновленных элементов
+    FIND_UPDATED_ELEMENT = (By.XPATH, "//p[contains(text(), 'Выполняется загрузка...')]")
 
     # Выбрать все элементы в обновлении(множественный результат)
     ADD_ALL_ELEMENT = (By.CSS_SELECTOR, "[class='checkbox checkbox--light']")
@@ -1269,7 +1273,6 @@ class OpElementLocators:
 
     CANCEL_BUTTON = (By.CSS_SELECTOR, "[class='btn btn--bordered']")
     CONFIRM_UPDATE_OPERPLAN = (By.CSS_SELECTOR, "[class='btn']")
-
 
 
 class CustomerListLocators:

@@ -86,11 +86,13 @@ class ZakupFormCreate(BasePage):
                 UserData.file_path_for_link_excel)
             self.is_text_to_be_present_in_element(*FormCreateZakupLocators.FILE_TENDER_DOCS_NAME_LINK,
                                                   UserData.name_excel_to_link)
+            """
             # Добавляем файл в поле "Бюджет проекта"
             self.browser.find_element(*FormCreateZakupLocators.FILE_BUDGET_OF_PROJECT).send_keys(
                 UserData.file_path_for_link_jpg)
             self.is_text_to_be_present_in_element(*FormCreateZakupLocators.FILE_BUDGET_OF_PROJECT_NAME_LINK,
                                                   UserData.name_jpg_to_link)
+                        """
             # Добавляем файл в поле "Пояснительная служебная записка"
             self.browser.find_element(*FormCreateZakupLocators.FILE_EXPLANATORY_MEMORANUM).send_keys(
                 UserData.file_path_for_link_doc)
@@ -125,11 +127,13 @@ class ZakupFormCreate(BasePage):
                 UserData.file_path_for_link_excel)
             self.is_text_to_be_present_in_element(*FormCreateZakupLocators.FILE_OFFER_BY_REQUEST_NAME_LINK,
                                                   UserData.name_excel_to_link)
+            """
             # Добавляем файл в поле "Бюджет проекта"
             self.browser.find_element(*FormCreateZakupLocators.FILE_BUDGET_OF_PROJECT).send_keys(
                 UserData.file_path_for_link_jpg)
             self.is_text_to_be_present_in_element(*FormCreateZakupLocators.FILE_BUDGET_OF_PROJECT_NAME_LINK,
                                                   UserData.name_jpg_to_link)
+                        """
             # Добавляем файл в поле "Пояснительная служебная записка"
             self.browser.find_element(*FormCreateZakupLocators.FILE_EXPLANATORY_MEMORANUM).send_keys(
                 UserData.file_path_for_link_doc)

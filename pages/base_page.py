@@ -58,7 +58,7 @@ class BasePage:
     # is_disappeared: будет ждать до тех пор, пока элемент не исчезнет
     def is_disappeared(self, how, what, timeout=50):
         try:
-            WebDriverWait(self.browser, timeout, 0.5, TimeoutException).until_not(
+            WebDriverWait(self.browser, timeout, 1, TimeoutException).until_not(
                 ec.presence_of_element_located((how, what)))
         except TimeoutException:
             return False
