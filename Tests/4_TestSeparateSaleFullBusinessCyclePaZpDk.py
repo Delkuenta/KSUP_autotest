@@ -32,7 +32,7 @@ SeparateSale\Dir - Dir2
 
 # До первой ошибки --maxfail=1
 @pytest.mark.parametrize('path_data_file', [
-    r"TPAC\4_SeparateSale\Seller - Seller2\1[Atest_Seller] PA+ZP+DK, Tender, categoryA,  SoftwareDev, SeparateSale.json"])
+    r"TPAC\4_SeparateSale\Seller - Seller2\2[Atest_Seller] PA+ZP+DK, CommercialOffer, categoryA, SoftwareDev, SeparateSale.json"])
 class TestSeparateSaleFullBusinessCyclePaZpDk:
 
     def test_create_presale(self, browser_function, path_data_file):
@@ -84,7 +84,7 @@ class TestSeparateSaleFullBusinessCyclePaZpDk:
         presale_element_page.verify_general_information_in_presale(user_data_dict)
         login_page.logout()
 
-    def test_verify_visibility_zakup_button_salesManager(self, browser_function, path_data_file):
+    def test_visibility_zakup_button_salesManager(self, browser_function, path_data_file):
         user_data_dict = BasePage.read_file_json(browser_function, path_data_file)
         user_data_dict = BasePage.dict_preparation(browser_function, user_data_dict)
         link = LoginData.link
@@ -100,7 +100,7 @@ class TestSeparateSaleFullBusinessCyclePaZpDk:
         presale_element_page.verify_visibility_button_create_zp_presale_act_based_on_presale()
         presale_element_page.verify_visibility_button_create_zp_tender_based_on_presale()
 
-    def test_verify_visibility_zakup_button_salesUnit(self, browser_function, path_data_file):
+    def test_visibility_zakup_button_salesUnit(self, browser_function, path_data_file):
         user_data_dict = BasePage.read_file_json(browser_function, path_data_file)
         user_data_dict = BasePage.dict_preparation(browser_function, user_data_dict)
         link = LoginData.link
@@ -117,7 +117,7 @@ class TestSeparateSaleFullBusinessCyclePaZpDk:
         presale_element_page.verify_visibility_button_create_zp_tender_based_on_presale()
         login_page.logout()
 
-    def test_verify_visibility_zakup_button_executiveUnit(self, browser_function, path_data_file):
+    def test_visibility_zakup_button_executiveUnit(self, browser_function, path_data_file):
         user_data_dict = BasePage.read_file_json(browser_function, path_data_file)
         user_data_dict = BasePage.dict_preparation(browser_function, user_data_dict)
         link = LoginData.link
@@ -134,7 +134,7 @@ class TestSeparateSaleFullBusinessCyclePaZpDk:
         presale_element_page.verify_visibility_button_create_zp_tender_based_on_presale()
         login_page.logout()
 
-    def test_verify_visibility_zakup_button_executiveManager(self, browser_function, path_data_file):
+    def test_visibility_zakup_button_executiveManager(self, browser_function, path_data_file):
         user_data_dict = BasePage.read_file_json(browser_function, path_data_file)
         user_data_dict = BasePage.dict_preparation(browser_function, user_data_dict)
         link = LoginData.link
@@ -175,7 +175,7 @@ class TestSeparateSaleFullBusinessCyclePaZpDk:
         zakup_element_page.verify_draft_status_zakup()
         login_page.logout()
 
-    def test_verify_visibility_zp_approval_button_salesManager(self, browser_function, path_data_file):
+    def test_visibility_zp_approval_button_salesManager(self, browser_function, path_data_file):
         user_data_dict = BasePage.read_file_json(browser_function, path_data_file)
         user_data_dict = BasePage.dict_preparation(browser_function, user_data_dict)
         link = LoginData.link
@@ -190,7 +190,7 @@ class TestSeparateSaleFullBusinessCyclePaZpDk:
         zakup_element_page.verify_visibility_approval_button_zp()
         login_page.logout()
 
-    def test_verify_visibility_zp_approval_button_salesUnit(self, browser_function, path_data_file):
+    def test_visibility_zp_approval_button_salesUnit(self, browser_function, path_data_file):
         user_data_dict = BasePage.read_file_json(browser_function, path_data_file)
         user_data_dict = BasePage.dict_preparation(browser_function, user_data_dict)
         link = LoginData.link
@@ -205,7 +205,7 @@ class TestSeparateSaleFullBusinessCyclePaZpDk:
         zakup_element_page.verify_visibility_approval_button_zp()
         login_page.logout()
 
-    def test_verify_visibility_zp_approval_button_executiveUnit(self, browser_function, path_data_file):
+    def test_visibility_zp_approval_button_executiveUnit(self, browser_function, path_data_file):
         user_data_dict = BasePage.read_file_json(browser_function, path_data_file)
         user_data_dict = BasePage.dict_preparation(browser_function, user_data_dict)
         link = LoginData.link
@@ -220,7 +220,7 @@ class TestSeparateSaleFullBusinessCyclePaZpDk:
         zakup_element_page.verify_visibility_approval_button_zp()
         login_page.logout()
 
-    def test_verify_visibility_zp_approval_button_executiveManager(self, browser_function, path_data_file):
+    def test_visibility_zp_approval_button_executiveManager(self, browser_function, path_data_file):
         user_data_dict = BasePage.read_file_json(browser_function, path_data_file)
         user_data_dict = BasePage.dict_preparation(browser_function, user_data_dict)
         link = LoginData.link
@@ -258,6 +258,78 @@ class TestSeparateSaleFullBusinessCyclePaZpDk:
         else:
             zakup_element_page.verify_zakup_not_require_status_approval()
         login_page.logout()
+
+    def test_visibility_zp_budget_button_salesManager(self, browser_function, path_data_file):
+        user_data_dict = BasePage.read_file_json(browser_function, path_data_file)
+        user_data_dict = BasePage.dict_preparation(browser_function, user_data_dict)
+        if user_data_dict["contractorType"] == "Тендерная заявка":
+            link = LoginData.link
+            login_page = LoginData(browser_function, link)
+            login_page.open()
+            login_page.login("Mr_KSUP_Seller2")
+            zakup_list_page = ZakupListPage(browser_function, link)
+            zakup_list_page.go_to_zakup_list(link)
+            zakup_list_page.go_to_zakup_element(user_data_dict)
+            zakup_element_page = ZakupElementPage(browser_function, link)
+            zakup_element_page.verify_general_information_in_zakup(user_data_dict)
+            zakup_element_page.verify_visibility_budget_button()
+            login_page.logout()
+        else:
+            print("\nПроверка кнопки бюджета не требуется")
+
+    def test_visibility_zp_budget_button_salesUnit(self, browser_function, path_data_file):
+        user_data_dict = BasePage.read_file_json(browser_function, path_data_file)
+        user_data_dict = BasePage.dict_preparation(browser_function, user_data_dict)
+        if user_data_dict["contractorType"] == "Тендерная заявка":
+            link = LoginData.link
+            login_page = LoginData(browser_function, link)
+            login_page.open()
+            login_page.login("Mr_KSUP_Dir2")
+            zakup_list_page = ZakupListPage(browser_function, link)
+            zakup_list_page.go_to_zakup_list(link)
+            zakup_list_page.go_to_zakup_element(user_data_dict)
+            zakup_element_page = ZakupElementPage(browser_function, link)
+            zakup_element_page.verify_general_information_in_zakup(user_data_dict)
+            zakup_element_page.verify_visibility_budget_button()
+            login_page.logout()
+        else:
+            print("\nПроверка кнопки бюджета не требуется")
+
+    def test_visibility_zp_budget_button_executiveUnit(self, browser_function, path_data_file):
+        user_data_dict = BasePage.read_file_json(browser_function, path_data_file)
+        user_data_dict = BasePage.dict_preparation(browser_function, user_data_dict)
+        if user_data_dict["contractorType"] == "Тендерная заявка":
+            link = LoginData.link
+            login_page = LoginData(browser_function, link)
+            login_page.open()
+            login_page.login("Mr_KSUP_Dir")
+            zakup_list_page = ZakupListPage(browser_function, link)
+            zakup_list_page.go_to_zakup_list(link)
+            zakup_list_page.go_to_zakup_element(user_data_dict)
+            zakup_element_page = ZakupElementPage(browser_function, link)
+            zakup_element_page.verify_general_information_in_zakup(user_data_dict)
+            zakup_element_page.verify_visibility_budget_button()
+            login_page.logout()
+        else:
+            print("\nПроверка кнопки бюджета не требуется")
+
+    def test_visibility_zp_approval_budget_executiveManager(self, browser_function, path_data_file):
+        user_data_dict = BasePage.read_file_json(browser_function, path_data_file)
+        user_data_dict = BasePage.dict_preparation(browser_function, user_data_dict)
+        if user_data_dict["contractorType"] == "Тендерная заявка":
+            link = LoginData.link
+            login_page = LoginData(browser_function, link)
+            login_page.open()
+            login_page.login("Mr_KSUP_Seller")
+            zakup_list_page = ZakupListPage(browser_function, link)
+            zakup_list_page.go_to_zakup_list(link)
+            zakup_list_page.go_to_zakup_element(user_data_dict)
+            zakup_element_page = ZakupElementPage(browser_function, link)
+            zakup_element_page.verify_general_information_in_zakup(user_data_dict)
+            zakup_element_page.verify_visibility_budget_button()
+            login_page.logout()
+        else:
+            print("\nПроверка кнопки бюджета не требуется")
 
     def test_approval_zakup_for_legal(self, browser_function, path_data_file):
         user_data_dict = BasePage.read_file_json(browser_function, path_data_file)
@@ -370,7 +442,7 @@ class TestSeparateSaleFullBusinessCyclePaZpDk:
         else:
             print("\nВнутреннее согласование закупочной процедуры со службой ККП не требуется")
 
-    def test_verify_visibility_create_contract_button_salesManager(self, browser_function, path_data_file):
+    def test_visibility_create_contract_button_salesManager(self, browser_function, path_data_file):
         user_data_dict = BasePage.read_file_json(browser_function, path_data_file)
         user_data_dict = BasePage.dict_preparation(browser_function, user_data_dict)
         link = LoginData.link
@@ -385,7 +457,7 @@ class TestSeparateSaleFullBusinessCyclePaZpDk:
         zakup_element_page.verify_visibility_button_create_contract()
         login_page.logout()
 
-    def test_verify_visibility_create_contract_button_salesUnit(self, browser_function, path_data_file):
+    def test_visibility_create_contract_button_salesUnit(self, browser_function, path_data_file):
         user_data_dict = BasePage.read_file_json(browser_function, path_data_file)
         user_data_dict = BasePage.dict_preparation(browser_function, user_data_dict)
         link = LoginData.link
@@ -400,7 +472,7 @@ class TestSeparateSaleFullBusinessCyclePaZpDk:
         zakup_element_page.verify_visibility_button_create_contract()
         login_page.logout()
 
-    def test_verify_visibility_create_contract_button_executiveUnit(self, browser_function, path_data_file):
+    def test_visibility_create_contract_button_executiveUnit(self, browser_function, path_data_file):
         user_data_dict = BasePage.read_file_json(browser_function, path_data_file)
         user_data_dict = BasePage.dict_preparation(browser_function, user_data_dict)
         link = LoginData.link
@@ -415,7 +487,7 @@ class TestSeparateSaleFullBusinessCyclePaZpDk:
         zakup_element_page.verify_visibility_button_create_contract()
         login_page.logout()
 
-    def test_verify_visibility_create_contract_button_executiveManager(self, browser_function, path_data_file):
+    def test_visibility_create_contract_button_executiveManager(self, browser_function, path_data_file):
         user_data_dict = BasePage.read_file_json(browser_function, path_data_file)
         user_data_dict = BasePage.dict_preparation(browser_function, user_data_dict)
         link = LoginData.link
@@ -452,7 +524,7 @@ class TestSeparateSaleFullBusinessCyclePaZpDk:
         contract_element_page.verify_general_information_contract(user_data_dict)
         login_page.logout()
 
-    def test_verify_visibility_contract_approval_button_salesManager(self, browser_function, path_data_file):
+    def test_visibility_contract_approval_button_salesManager(self, browser_function, path_data_file):
         user_data_dict = BasePage.read_file_json(browser_function, path_data_file)
         user_data_dict = BasePage.dict_preparation(browser_function, user_data_dict)
         link = LoginData.link
@@ -467,7 +539,7 @@ class TestSeparateSaleFullBusinessCyclePaZpDk:
         contract_element_page.verify_visibility_button_send_to_approval_contract()
         login_page.logout()
 
-    def test_verify_visibility_contract_approval_button_salesUnit(self, browser_function, path_data_file):
+    def test_visibility_contract_approval_button_salesUnit(self, browser_function, path_data_file):
         user_data_dict = BasePage.read_file_json(browser_function, path_data_file)
         user_data_dict = BasePage.dict_preparation(browser_function, user_data_dict)
         link = LoginData.link
@@ -482,7 +554,7 @@ class TestSeparateSaleFullBusinessCyclePaZpDk:
         contract_element_page.verify_visibility_button_send_to_approval_contract()
         login_page.logout()
 
-    def test_verify_visibility_contract_approval_button_executiveUnit(self, browser_function, path_data_file):
+    def test_visibility_contract_approval_button_executiveUnit(self, browser_function, path_data_file):
         user_data_dict = BasePage.read_file_json(browser_function, path_data_file)
         user_data_dict = BasePage.dict_preparation(browser_function, user_data_dict)
         link = LoginData.link
@@ -497,7 +569,7 @@ class TestSeparateSaleFullBusinessCyclePaZpDk:
         contract_element_page.verify_visibility_button_send_to_approval_contract()
         login_page.logout()
 
-    def test_verify_visibility_contract_approval_button_executiveManager(self, browser_function, path_data_file):
+    def test_visibility_contract_approval_button_executiveManager(self, browser_function, path_data_file):
         user_data_dict = BasePage.read_file_json(browser_function, path_data_file)
         user_data_dict = BasePage.dict_preparation(browser_function, user_data_dict)
         link = LoginData.link
@@ -526,6 +598,66 @@ class TestSeparateSaleFullBusinessCyclePaZpDk:
         contract_element_page = ContractElementPage(browser_function, browser_function.current_url)
         contract_element_page.send_contract_for_approval()
         contract_element_page.verify_contract_waiting_status_approval_legal()
+        login_page.logout()
+
+    def test_visibility_contract_budget_button_salesManager(self, browser_function, path_data_file):
+        user_data_dict = BasePage.read_file_json(browser_function, path_data_file)
+        user_data_dict = BasePage.dict_preparation(browser_function, user_data_dict)
+        link = LoginData.link
+        login_page = LoginData(browser_function, link)
+        login_page.open()
+        login_page.login("Mr_KSUP_Seller2")
+        contract_list_page = ContractPage(browser_function, link)
+        contract_list_page.go_to_contract_list(link)
+        contract_list_page.go_to_contract_element(user_data_dict)
+        contract_element_page = ContractElementPage(browser_function, link)
+        contract_element_page.verify_general_information_contract(user_data_dict)
+        contract_element_page.verify_visibility_budget_button()
+        login_page.logout()
+
+    def test_visibility_contract_budget_button_salesUnit(self, browser_function, path_data_file):
+        user_data_dict = BasePage.read_file_json(browser_function, path_data_file)
+        user_data_dict = BasePage.dict_preparation(browser_function, user_data_dict)
+        link = LoginData.link
+        login_page = LoginData(browser_function, link)
+        login_page.open()
+        login_page.login("Mr_KSUP_Dir2")
+        contract_list_page = ContractPage(browser_function, link)
+        contract_list_page.go_to_contract_list(link)
+        contract_list_page.go_to_contract_element(user_data_dict)
+        contract_element_page = ContractElementPage(browser_function, link)
+        contract_element_page.verify_general_information_contract(user_data_dict)
+        contract_element_page.verify_visibility_budget_button()
+        login_page.logout()
+
+    def test_visibility_contract_budget_button_executiveUnit(self, browser_function, path_data_file):
+        user_data_dict = BasePage.read_file_json(browser_function, path_data_file)
+        user_data_dict = BasePage.dict_preparation(browser_function, user_data_dict)
+        link = LoginData.link
+        login_page = LoginData(browser_function, link)
+        login_page.open()
+        login_page.login("Mr_KSUP_Dir")
+        contract_list_page = ContractPage(browser_function, link)
+        contract_list_page.go_to_contract_list(link)
+        contract_list_page.go_to_contract_element(user_data_dict)
+        contract_element_page = ContractElementPage(browser_function, link)
+        contract_element_page.verify_general_information_contract(user_data_dict)
+        contract_element_page.verify_visibility_budget_button()
+        login_page.logout()
+
+    def test_visibility_contract_budget_button_executiveManager(self, browser_function, path_data_file):
+        user_data_dict = BasePage.read_file_json(browser_function, path_data_file)
+        user_data_dict = BasePage.dict_preparation(browser_function, user_data_dict)
+        link = LoginData.link
+        login_page = LoginData(browser_function, link)
+        login_page.open()
+        login_page.login("Mr_KSUP_Seller")
+        contract_list_page = ContractPage(browser_function, link)
+        contract_list_page.go_to_contract_list(link)
+        contract_list_page.go_to_contract_element(user_data_dict)
+        contract_element_page = ContractElementPage(browser_function, link)
+        contract_element_page.verify_general_information_contract(user_data_dict)
+        contract_element_page.verify_visibility_budget_button()
         login_page.logout()
 
     def test_approval_contract_for_legal(self, browser_function, path_data_file):

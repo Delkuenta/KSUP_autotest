@@ -279,7 +279,3 @@ class TestCreateAndUpdateOp:
         operplan_element_page.verify_color_element(green_dk_dict, "green")
         operplan_element_page.verify_color_element(gray_dk_dict, "gray")
 
-
-
-
-

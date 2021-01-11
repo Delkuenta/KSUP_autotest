@@ -497,6 +497,18 @@ class ZakupElementLocators:
     # Кнопка создания Контракта на основе закупочной процедуры //a[starts-with(@id, 'CreateContractBasedOnPresaleActivity')]
     CREATE_CONTRACT_BASED_ON_ZAKUP = (By.CSS_SELECTOR, "[id^='CreateContractBasedOnPresaleActivity']")
 
+    # Кнопка Добавить бюджет проекта
+    BUDGET_ZAKUP_BUTTON = (By.CSS_SELECTOR, "[id^='AddFileBudget']")
+
+    # Элементы в модульном окне добавления файла бюджета
+    # Титул модульного окна добавления файла бюджета
+    TITLE_BUDGET_ELEMENT = (By.CSS_SELECTOR, "[class='ui-dialog-title']")
+    # Текст в окне добавления файла бюджета
+    TEXT_BUDGET_ELEMENT = (By.CSS_SELECTOR, "[class^='ui-dialog-content']")
+    FILE_BUDGET_FIELD = (By.CSS_SELECTOR, "input[type='file']")
+    ADD_BUDGET_FILE_BUTTON = (By.XPATH, "//button[text() = 'Добавить']")
+    CANCEL_BUDGET_FILE_BUTTON = (By.XPATH, "//button[text() = 'Отмена']")
+
     # Кнопка Отправить на согласование ЗП  //a[contains(@id, 'ApprovePresaleActivity.ToApprove')]
     SEND_APPROVAL_BUTTON = (By.CSS_SELECTOR, "[id^='ApprovePresaleActivity.ToApprove']")
     # Всплывающее окно подтверждения/отмены отправки закупочной процедуры
@@ -512,7 +524,7 @@ class ZakupElementLocators:
     # Кнопка Отзыв с внутренного согласования
     WITHDRAW_FROM_APPROVAL_BUTTON = (By.CSS_SELECTOR, "[id^='Approve.Cancel']")
 
-    # элементы внутри окна подтверждения/отклонения //textarea[@id ='dialogComment']
+    # Элементы внутри окна подтверждения/отклонения //textarea[@id ='dialogComment']
     COMMENT_TO_APPROVAL_ZAKUP = (By.CSS_SELECTOR, "[id='dialogComment']")
     # //input[@name='filefield']
     FILE_TO_APPROVAL_ZAKUP = (By.CSS_SELECTOR, "[name='filefield']")
@@ -606,6 +618,33 @@ class ZakupElementLocators:
     PROJECT_RISKS_DEPARTMENT_IN_ZP = (By.CSS_SELECTOR, ".fldKsupProjectRiskDepartmentPerspec #SPFieldNote")
     # Значение в Поле "Ссылка на запрос на Официальном сайте ЕИС"
     EIS_PRICE_LINK_IN_ZP = (By.CSS_SELECTOR, ".fldKsupEisPriceLink #SPFieldNote")
+
+    # Элементы на вкладке "Прикрепленные файлы"
+    # Тендерная заявка
+    TENDER_REQUEST_FIELD = (By.CSS_SELECTOR, "[class*='TenderRequest']>[id='SPFieldFileField']")
+    # Тендерная документация
+    TENDER_DOCS_FROM_CUSTOMER_FIELD = (By.CSS_SELECTOR, "[class*='TenderDocsFromCustomer']>[id='SPFieldFileField']")
+    # Пояснительная служебная записка
+    EXPLANATORY_MEMORANUM_FIELD = (By.CSS_SELECTOR, "[class*='ExplanatoryMemoranum']>[id='SPFieldFileField']")
+    # Проект контракта
+    PROJECT_OF_CONTRACT_FIELD = (By.CSS_SELECTOR, "[class*='ProjectOfContract']>[id='SPFieldFileField']")
+    # Документы с описанием рисков
+    RISK_MAP_AND_REGISTRY_FIELD = (By.CSS_SELECTOR, "[class*='RiskMapAndRegistry']>[id='SPFieldFileField']")
+    # Разное
+    OTHER_FIELD = (By.CSS_SELECTOR, "[class*='Other']>[id='SPFieldFileField']")
+    # Официальный запрос от Заказчика на КП
+    KP_REQUEST_FROM_CUSTOMER_FIELD = (By.CSS_SELECTOR, "[class*='KPRequestFromCustomer']>[id='SPFieldFileField']")
+    # Коммерческое предложение по официальному запросу
+    OFFER_BY_REQUEST_FIELD = (By.CSS_SELECTOR, "[class*='OfferByRequest']>[id='SPFieldFileField']")
+    # Запрос НМЦК
+    NMCK_REQUEST_FIELD = (By.CSS_SELECTOR, "[class*='NMCKRequest']>[id='SPFieldFileField']")
+    # Ответ на запрос НМЦК
+    NMCK_RESPONSE_FIELD = (By.CSS_SELECTOR, "[class*='NMCKResponse']>[id='SPFieldFileField']")
+
+    # Бюджет проекта
+    BUDGET_OF_PROJECT_FIELD = (By.CSS_SELECTOR, "[class*='BudgetOfProject']>[id='SPFieldFileField']")
+
+
 
 
 class FormCreateContractLocators:
@@ -814,6 +853,18 @@ class ContractElementLocators:
     # Кнопка изменения элемента
     EDIT_ITEM_BUTTON = (By.CSS_SELECTOR, "[id='Ribbon.ListForm.Display.Manage.EditItem-Large']")
 
+    # Кнопка Добавить бюджет проекта
+    BUDGET_CONTRACT_BUTTON = (By.CSS_SELECTOR, "[id^='AddFileBudget']")
+
+    # Элементы в модульном окне добавления файла бюджета
+    # Титул модульного окна добавления файла бюджета
+    TITLE_BUDGET_ELEMENT = (By.CSS_SELECTOR, "[class='ui-dialog-title']")
+    # Текст в окне добавления файла бюджета
+    TEXT_BUDGET_ELEMENT = (By.CSS_SELECTOR, "[class^='ui-dialog-content']")
+    FILE_BUDGET_FIELD = (By.CSS_SELECTOR, "input[type='file']")
+    ADD_BUDGET_FILE_BUTTON = (By.XPATH, "//button[text() = 'Добавить']")
+    CANCEL_BUDGET_FILE_BUTTON = (By.XPATH, "//button[text() = 'Отмена']")
+
     # Вкладка "Общие сведения"
     GENERAL_INFORMATION_ELEMENT = (By.XPATH, "//a[contains(@href, '#tabCommon')]")
 
@@ -898,8 +949,8 @@ class ContractElementLocators:
     # Поле "Количественные показатели реализации проекта"
     QUANTITATIVE_INDICATORS_PROJECT = (By.CSS_SELECTOR, ".fldKsupQuantitativeIndicatorsProjec #SPFieldNote")
 
-    # Вкладка "Заключенные договоры/контракты"
-    # Значнеие в поле "Заказчик" Множественный результат
+    # Элементы на Вкладке "Заключенные договоры/контракты"
+    # Значение в поле "Заказчик" Множественный результат
     JOINT_BIDDING_CUSTOMER_VALUE = (By.CSS_SELECTOR, "[data-member='customer'][class^='jointbidding']")
 
     # Значение в поле "Номер" Множественный результат

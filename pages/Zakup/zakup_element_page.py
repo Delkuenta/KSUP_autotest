@@ -1,3 +1,5 @@
+import time
+
 from selenium.webdriver.support.select import Select
 
 from pages.base_page import BasePage
@@ -5,11 +7,15 @@ from pages.locators import ZakupElementLocators
 from userdata.user_data import UserData
 from selenium.webdriver.support.color import Color
 from pages.locators import BasePageLocators
+import delayed_assert
 
 
 class ZakupElementPage(BasePage):
 
     def verify_general_information_in_zakup(self, user_data_dict):
+        # Переходим на вкладку "Общие сведения"
+        self.browser.find_element(*ZakupElementLocators.GENERAL_INFORMATION_ELEMENT).click()
+        time.sleep(1)
 
         # Проверяем титул карточки который соответствует названию сущности
         assert self.is_element_text(*ZakupElementLocators.TITLE_IN_ZP) == user_data_dict["fullName"], \
@@ -833,3 +839,137 @@ class ZakupElementPage(BasePage):
         assert self.is_visibility_of_element_located(*ZakupElementLocators.CREATE_CONTRACT_BASED_ON_ZAKUP, 5), \
             'Кнопка "Внести информацию о конкурсе" не отображена'
         self.browser.find_element(*ZakupElementLocators.CREATE_CONTRACT_BASED_ON_ZAKUP).click()
+
+    def verify_visibility_budget_button(self):
+        assert self.is_visibility_of_element_located(*ZakupElementLocators.BUDGET_ZAKUP_BUTTON, 5), \
+            'Кнопка "Внести информацию о договоре/контракте" не отобрежена'
+
+    def verify_attached_files_information(self, user_data_dict):
+        self.browser.find_element(*ZakupElementLocators.ATTACHED_FILES_ELEMENT).click()
+        time.sleep(2)
+        if user_data_dict["contractorType"] == "Тендерная заявка":
+            # Проверяем текст в поле "Тендерная заявка"
+            actual_text = self.is_element_text(*ZakupElementLocators.TENDER_REQUEST_FIELD)
+            expected_text = UserData.name_doc_to_link
+            delayed_assert.expect(actual_text == expected_text,
+                                  'Не корректное название файла в поле "Тендерная заявка" на вкладке "Прикрепленные файлы"\n'
+                                  f'Ожидаемый результат: {expected_text}\n'
+                                  f'Фактический результат: {actual_text}')
+
+            # Проверяем текст в поле "Тендерная документация"
+            actual_text = self.is_element_text(*ZakupElementLocators.TENDER_DOCS_FROM_CUSTOMER_FIELD)
+            expected_text = UserData.name_excel_to_link
+            delayed_assert.expect(actual_text == expected_text,
+                                  'Не корректное название файла в поле "Тендерная документация" на вкладке "Прикрепленные файлы"\n'
+                                  f'Ожидаемый результат: {expected_text}\n'
+                                  f'Фактический результат: {actual_text}')
+
+        elif user_data_dict["contractorType"] == "Коммерческое предложение":
+            # Проверяем текст в поле "Официальный запрос от Заказчика на КП"
+            actual_text = self.is_element_text(*ZakupElementLocators.KP_REQUEST_FROM_CUSTOMER_FIELD)
+            expected_text = UserData.name_doc_to_link
+            delayed_assert.expect(actual_text == expected_text,
+                                  'Не корректное название файла в поле "Официальный запрос от Заказчика на КП" '
+                                  'на вкладке "Прикрепленные файлы"\n'
+                                  f'Ожидаемый результат: {expected_text}\n'
+                                  f'Фактический результат: {actual_text}')
+
+            # Проверяем текст в поле "Коммерческое предложение по официальному запросу"
+            actual_text = self.is_element_text(*ZakupElementLocators.OFFER_BY_REQUEST_FIELD)
+            expected_text = UserData.name_excel_to_link
+            delayed_assert.expect(actual_text == expected_text,
+                                  'Не корректное название файла в поле "Коммерческое предложение по официальному запросу" '
+                                  'на вкладке "Прикрепленные файлы"\n'
+                                  f'Ожидаемый результат: {expected_text}\n'
+                                  f'Фактический результат: {actual_text}')
+        else:
+            # Проверяем текст в поле "Запрос НМЦК"
+            actual_text = self.is_element_text(*ZakupElementLocators.NMCK_REQUEST_FIELD)
+            expected_text = UserData.name_doc_to_link
+            delayed_assert.expect(actual_text == expected_text,
+                                  'Не корректное название файла в поле "Запрос НМЦК" '
+                                  'на вкладке "Прикрепленные файлы"\n'
+                                  f'Ожидаемый результат: {expected_text}\n'
+                                  f'Фактический результат: {actual_text}')
+
+            # Проверяем текст в поле "Ответ на запрос НМЦК"
+            actual_text = self.is_element_text(*ZakupElementLocators.NMCK_RESPONSE_FIELD)
+            expected_text = UserData.name_jpg_to_link
+            delayed_assert.expect(actual_text == expected_text,
+                                  'Не корректное название файла в поле "Ответ на запрос НМЦК" '
+                                  'на вкладке "Прикрепленные файлы"\n'
+                                  f'Ожидаемый результат: {expected_text}\n'
+                                  f'Фактический результат: {actual_text}')
+
+        if user_data_dict["contractorType"] == "Коммерческое предложение" or user_data_dict["contractorType"] == "Тендерная заявка":
+            # Проверяем текст в поле "Пояснительная служебная записка"
+            actual_text = self.is_element_text(*ZakupElementLocators.EXPLANATORY_MEMORANUM_FIELD)
+            expected_text = UserData.name_doc_to_link
+            delayed_assert.expect(actual_text == expected_text,
+                                  'Не корректное название файла в поле "Пояснительная служебная записка" '
+                                  'на вкладке "Прикрепленные файлы"\n'
+                                  f'Ожидаемый результат: {expected_text}\n'
+                                  f'Фактический результат: {actual_text}')
+
+            # Проверяем текст в поле "Проект контракта"
+            actual_text = self.is_element_text(*ZakupElementLocators.PROJECT_OF_CONTRACT_FIELD)
+            expected_text = UserData.name_excel_to_link
+            delayed_assert.expect(actual_text == expected_text,
+                                  'Не корректное название файла в поле "Проект контракта" '
+                                  'на вкладке "Прикрепленные файлы"\n'
+                                  f'Ожидаемый результат: {expected_text}\n'
+                                  f'Фактический результат: {actual_text}')
+
+        # Проверяем текст в поле "Документы с описанием рисков"
+        actual_text = self.is_element_text(*ZakupElementLocators.RISK_MAP_AND_REGISTRY_FIELD)
+        expected_text = UserData.name_jpg_to_link
+        delayed_assert.expect(actual_text == expected_text,
+                              'Не корректное название файла в поле "Документы с описанием рисков" '
+                              'на вкладке "Прикрепленные файлы"\n'
+                              f'Ожидаемый результат: {expected_text}\n'
+                              f'Фактический результат: {actual_text}')
+
+        # Проверяем текст в поле "Иное"
+        actual_text = self.is_element_text(*ZakupElementLocators.OTHER_FIELD)
+        expected_text = UserData.name_doc_to_link
+        delayed_assert.expect(actual_text == expected_text,
+                              'Не корректное название файла в поле "Иное" '
+                              'на вкладке "Прикрепленные файлы"\n'
+                              f'Ожидаемый результат: {expected_text}\n'
+                              f'Фактический результат: {actual_text}')
+
+    def add_file_of_budget(self):
+        self.browser.find_element(*ZakupElementLocators.BUDGET_ZAKUP_BUTTON).click()
+
+        # Проверяем текст заголовка модульного окна
+        actual_text = self.is_element_text(*ZakupElementLocators.TITLE_BUDGET_ELEMENT)
+        expected_text = "Добавить файл бюджета проекта в закупочную процедуру?"
+        delayed_assert.expect(actual_text == expected_text,
+                              f'Не корректный текст заголовка в модульном окне добавления файла бюджета\n'
+                              f'Ожидаемый результат: {expected_text}\n'
+                              f'Фактический результат: {actual_text}')
+
+        # Проверяем основной текст модульного окна
+        actual_text = self.is_element_text(*ZakupElementLocators.TEXT_BUDGET_ELEMENT)
+        expected_text = "Если файл бюджета проекта был ранее добавлен в закупочную процедуру, то он будет перезаписан"
+        delayed_assert.expect(actual_text == expected_text,
+                              f'Не корректный основной текст в модульном окне добавления файла бюджета\n'
+                              f'Ожидаемый результат: {expected_text}\n'
+                              f'Фактический результат: {actual_text}')
+
+        # Добавляем файл бюджета
+        self.browser.find_element(*ZakupElementLocators.FILE_BUDGET_FIELD).send_keys(UserData.file_path_for_link_doc)
+        time.sleep(2)
+        # Жмем кнопку "Добавить"
+        self.browser.find_element(*ZakupElementLocators.ADD_BUDGET_FILE_BUTTON).click()
+
+        # Переходим на вкладку "Прикрепленные файлы"
+        self.browser.find_element(*ZakupElementLocators.ATTACHED_FILES_ELEMENT).click()
+
+        # Проверяем отображение добавленного файла бюджета
+        actual_text = self.is_element_text(*ZakupElementLocators.BUDGET_OF_PROJECT_FIELD)
+        expected_text = UserData.name_doc_to_link
+        delayed_assert.expect(actual_text == expected_text,
+                              'Не корректное название файла в поле "Бюджет проекта" на вкладке "Прикрепленные файлы"\n'
+                              f'Ожидаемый результат: {expected_text}\n'
+                              f'Фактический результат: {actual_text}')

@@ -320,6 +320,10 @@ class ContractElementPage(BasePage):
         assert self.is_visibility_of_element_located(*ContractElementLocators.SEND_APPROVAL_CONTRACT_CONTRACT, 3), \
             'Кнопка "Отправить на согласование(Договор/контракт)" не отобрежена'
 
+    def verify_visibility_budget_button(self):
+        assert self.is_visibility_of_element_located(*ContractElementLocators.BUDGET_CONTRACT_BUTTON, 5), \
+            'Кнопка "Внести информацию о договоре/контракте" не отобрежена'
+
     def verify_contract_waiting_status_approval_legal(self):
         # Проверяем поле статуса на вкладке "Общие сведения"
         self.browser.find_element(*ContractElementLocators.GENERAL_INFORMATION_ELEMENT).click()

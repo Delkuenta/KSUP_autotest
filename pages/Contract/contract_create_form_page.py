@@ -134,9 +134,9 @@ class ContractFormCreate(BasePage):
         """
         # прикрепляем файл Пояснительная служебная записка
         self.browser.find_element(*FormCreateContractLocators.FILE_EXPLANATORY_MEMORANUM).send_keys(
-            UserData.file_path_for_link_excel)
+            UserData.file_path_for_link_doc)
         self.is_text_to_be_present_in_element(
-            *FormCreateContractLocators.FILE_EXPLANATORY_MEMORANUM_NAME, UserData.name_excel_to_link)
+            *FormCreateContractLocators.FILE_EXPLANATORY_MEMORANUM_NAME, UserData.name_doc_to_link)
 
         # прикрепляем файл Реестр рисков, Карта рисков
         self.browser.find_element(*FormCreateContractLocators.FILE_RISK_MAP_AND_REGISTERY).send_keys(
@@ -145,8 +145,8 @@ class ContractFormCreate(BasePage):
             *FormCreateContractLocators.FILE_RISK_MAP_AND_REGISTERY_NAME, UserData.name_jpg_to_link)
 
         # прикрепляем файл Иное
-        self.browser.find_element(*FormCreateContractLocators.FILE_OTHER).send_keys(UserData.file_path_for_link_mp4)
-        self.is_text_to_be_present_in_element(*FormCreateContractLocators.FILE_OTHER_NAME, UserData.name_mp4_to_link)
+        self.browser.find_element(*FormCreateContractLocators.FILE_OTHER).send_keys(UserData.file_path_for_link_doc)
+        self.is_text_to_be_present_in_element(*FormCreateContractLocators.FILE_OTHER_NAME, UserData.name_doc_to_link)
 
         if user_data_dict["jointBidding"] == "Да":
             # Заполняем таблицу "Добавленные договоры/контракты"
@@ -346,9 +346,9 @@ class ContractFormCreate(BasePage):
         """
         # прикрепляем файл Пояснительная служебная записка
         self.browser.find_element(*FormCreateContractLocators.FILE_EXPLANATORY_MEMORANUM).send_keys(
-            UserData.file_path_for_link_excel)
+            UserData.file_path_for_link_doc)
         self.is_text_to_be_present_in_element(
-            *FormCreateContractLocators.FILE_EXPLANATORY_MEMORANUM_NAME, UserData.name_excel_to_link)
+            *FormCreateContractLocators.FILE_EXPLANATORY_MEMORANUM_NAME, UserData.name_doc_to_link)
 
         # прикрепляем файл Реестр рисков, Карта рисков
         self.browser.find_element(*FormCreateContractLocators.FILE_RISK_MAP_AND_REGISTERY).send_keys(
@@ -357,8 +357,8 @@ class ContractFormCreate(BasePage):
             *FormCreateContractLocators.FILE_RISK_MAP_AND_REGISTERY_NAME, UserData.name_jpg_to_link)
 
         # прикрепляем файл Иное
-        self.browser.find_element(*FormCreateContractLocators.FILE_OTHER).send_keys(UserData.file_path_for_link_mp4)
-        self.is_text_to_be_present_in_element(*FormCreateContractLocators.FILE_OTHER_NAME, UserData.name_mp4_to_link)
+        self.browser.find_element(*FormCreateContractLocators.FILE_OTHER).send_keys(UserData.file_path_for_link_doc)
+        self.is_text_to_be_present_in_element(*FormCreateContractLocators.FILE_OTHER_NAME, UserData.name_doc_to_link)
 
         # Жмем кнопку создать
         self.browser.find_element(*FormCreateContractLocators.CONFIRM_CONTRACT_BUTTON).click()

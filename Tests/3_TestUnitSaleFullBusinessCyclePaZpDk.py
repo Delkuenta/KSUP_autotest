@@ -138,8 +138,10 @@ class TestUnitSaleFullBusinessCyclePaZpDk:
         zakup_list_page.go_to_zakup_element(user_data_dict)
         zakup_element_page.verify_general_information_in_zakup(user_data_dict)
         zakup_element_page.verify_draft_status_zakup()
+        zakup_element_page.verify_attached_files_information(user_data_dict)
 
         login_page.logout()
+        delayed_assert.assert_expectations()
 
     def test_send_zakup_for_approval(self, browser_function, path_data_file):
         user_data_dict = BasePage.read_file_json(browser_function, path_data_file)
@@ -163,9 +165,13 @@ class TestUnitSaleFullBusinessCyclePaZpDk:
         # Отправка сущности на внутреннее согласование
         zakup_element_page.send_zakup_for_approval()
         # На основе: Типа закупочной процедуры, Ценовой категории, Типа работ и услуг
-        # проверка обновления статуса согласовани
+        # проверка обновления статуса согласования
         if user_data_dict["contractorType"] == "Тендерная заявка":
             zakup_element_page.verify_zakup_waiting_status_approval_legal()
+            zakup_element_page.verify_visibility_budget_button()
+            # Добавление файла бюджета
+            zakup_element_page.add_file_of_budget()
+            zakup_element_page.verify_general_information_in_zakup(user_data_dict)
         elif user_data_dict["contractorType"] != "Тендерная заявка" \
                 and user_data_dict["priceCategory"] != "C" \
                 and user_data_dict["groupTypeWork"] == "Software":
@@ -174,6 +180,7 @@ class TestUnitSaleFullBusinessCyclePaZpDk:
             zakup_element_page.verify_zakup_not_require_status_approval()
 
         login_page.logout()
+        delayed_assert.assert_expectations()
 
     def test_approval_zakup_for_legal(self, browser_function, path_data_file):
         user_data_dict = BasePage.read_file_json(browser_function, path_data_file)
@@ -356,6 +363,7 @@ class TestUnitSaleFullBusinessCyclePaZpDk:
         contract_element_page = ContractElementPage(browser_function, browser_function.current_url)
         contract_element_page.send_contract_for_approval()
         contract_element_page.verify_contract_waiting_status_approval_legal()
+        contract_element_page.verify_visibility_budget_button()
         login_page.logout()
 
     def test_approval_contract_for_legal(self, browser_function, path_data_file):

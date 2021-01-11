@@ -76,6 +76,7 @@ class ZakupFormCreate(BasePage):
             # Заполняем поле "Риски проекта с точки зрения Департамента"
             self.browser.find_element(*FormCreateZakupLocators.PROJECT_RISK_DEPARTMENT_PERSPEC). \
                 send_keys(user_data_dict["projectRiskDepartment"])
+
             # Добавляем файл в поле "Тендерная заявка"
             self.browser.find_element(*FormCreateZakupLocators.FILE_TENDER_REQUEST).send_keys(
                 UserData.file_path_for_link_doc)
@@ -98,20 +99,22 @@ class ZakupFormCreate(BasePage):
                 UserData.file_path_for_link_doc)
             self.is_text_to_be_present_in_element(*FormCreateZakupLocators.FILE_EXPLANATORY_MEMORANUM_NAME_LINK,
                                                   UserData.name_doc_to_link)
+
             # Добавляем файл в поле "Проект контракта"
             self.browser.find_element(*FormCreateZakupLocators.FILE_PROJECT_OF_CONTRACT).send_keys(
                 UserData.file_path_for_link_excel)
             self.is_text_to_be_present_in_element(*FormCreateZakupLocators.FILE_PROJECT_OF_CONTRACT_NAME_LINK,
                                                   UserData.name_excel_to_link)
+
             # Добавляем файл в поле "Документы с описанием рисков"
             self.browser.find_element(*FormCreateZakupLocators.FILE_RISK_MAP_AND_REGISTRY).send_keys(
-                UserData.file_path_for_link_doc)
+                UserData.file_path_for_link_jpg)
             self.is_text_to_be_present_in_element(*FormCreateZakupLocators.FILE_RISK_MAP_AND_REGISTRY_NAME_LINK,
-                                                  UserData.name_doc_to_link)
+                                                  UserData.name_jpg_to_link)
             # Добавляем файл в поле "Иное"
-            self.browser.find_element(*FormCreateZakupLocators.FILE_OTHER).send_keys(UserData.file_path_for_link_mp4)
+            self.browser.find_element(*FormCreateZakupLocators.FILE_OTHER).send_keys(UserData.file_path_for_link_doc)
             self.is_text_to_be_present_in_element(*FormCreateZakupLocators.FILE_OTHER_NAME_LINK,
-                                                  UserData.name_mp4_to_link)
+                                                  UserData.name_doc_to_link)
 
         elif user_data_dict["contractorType"] == "Коммерческое предложение":
             # Заполняем поле "Риски проекта с точки зрения Департамента"
@@ -146,13 +149,13 @@ class ZakupFormCreate(BasePage):
                                                   UserData.name_excel_to_link)
             # Добавляем файл в поле "Документы с описанием рисков"
             self.browser.find_element(*FormCreateZakupLocators.FILE_RISK_MAP_AND_REGISTRY).send_keys(
-                UserData.file_path_for_link_doc)
+                UserData.file_path_for_link_jpg)
             self.is_text_to_be_present_in_element(*FormCreateZakupLocators.FILE_RISK_MAP_AND_REGISTRY_NAME_LINK,
-                                                  UserData.name_doc_to_link)
+                                                  UserData.name_jpg_to_link)
             # Добавляем файл в поле "Иное"
-            self.browser.find_element(*FormCreateZakupLocators.FILE_OTHER).send_keys(UserData.file_path_for_link_mp4)
+            self.browser.find_element(*FormCreateZakupLocators.FILE_OTHER).send_keys(UserData.file_path_for_link_doc)
             self.is_text_to_be_present_in_element(*FormCreateZakupLocators.FILE_OTHER_NAME_LINK,
-                                                  UserData.name_mp4_to_link)
+                                                  UserData.name_doc_to_link)
 
         else:
             # Заполняем поле "Порядок проведения закупочной процедуры"
@@ -213,13 +216,13 @@ class ZakupFormCreate(BasePage):
 
             # Добавляем файл в поле "Документы с описанием рисков"
             self.browser.find_element(*FormCreateZakupLocators.FILE_RISK_MAP_AND_REGISTRY).send_keys(
-                UserData.file_path_for_link_doc)
+                UserData.file_path_for_link_jpg)
             self.is_text_to_be_present_in_element(*FormCreateZakupLocators.FILE_RISK_MAP_AND_REGISTRY_NAME_LINK,
-                                                  UserData.name_doc_to_link)
+                                                  UserData.name_jpg_to_link)
             # Добавляем файл в поле "Иное"
-            self.browser.find_element(*FormCreateZakupLocators.FILE_OTHER).send_keys(UserData.file_path_for_link_mp4)
+            self.browser.find_element(*FormCreateZakupLocators.FILE_OTHER).send_keys(UserData.file_path_for_link_doc)
             self.is_text_to_be_present_in_element(*FormCreateZakupLocators.FILE_OTHER_NAME_LINK,
-                                                  UserData.name_mp4_to_link)
+                                                  UserData.name_doc_to_link)
 
         # Нажимаем кнопку "Создать"
         self.browser.find_element(*FormCreateZakupLocators.CONFIRM_ZP_BUTTON).click()
