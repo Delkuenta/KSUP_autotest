@@ -479,7 +479,7 @@ class TestRejectStepBackContract:
         contract_list = ContractPage(browser_function, browser_function.current_url)
         contract_list.go_to_contract_element(user_data_dict)
         contract_element_page = ContractElementPage(browser_function, browser_function.current_url)
-        contract_element_page.verify_unvisibility_approval_button()
+        contract_element_page.verify_unvisibility_send_approval_button()
         login_page.logout()
 
 
@@ -819,5 +819,5 @@ class TestRejectCurrentStepAndEscalationContract:
         contract_list = ContractPage(browser_function, browser_function.current_url)
         contract_list.go_to_contract_element(user_data_dict)
         contract_element_page = ContractElementPage(browser_function, browser_function.current_url)
-        contract_element_page.verify_unvisibility_approval_button()
+        contract_element_page.verify_unvisibility_send_approval_button()
         login_page.logout()

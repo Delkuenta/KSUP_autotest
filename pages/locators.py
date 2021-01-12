@@ -645,8 +645,6 @@ class ZakupElementLocators:
     BUDGET_OF_PROJECT_FIELD = (By.CSS_SELECTOR, "[class*='BudgetOfProject']>[id='SPFieldFileField']")
 
 
-
-
 class FormCreateContractLocators:
     CONTRACT_TITLE = (By.CSS_SELECTOR, "#DeltaPlaceHolderPageTitleInTitleArea .die")
     # Предмет контракта //textarea[starts-with(@id, 'KsupFullName')]
@@ -882,9 +880,6 @@ class ContractElementLocators:
     # Строка согласование с ККП
     APPROVAL_KKP_STATUS_ELEMENT = (By.XPATH, "//*[text() ='Согласование ККП']/following::span[1]")
 
-    # Вкладка "Заключенные договоры/контракты"
-    JOINT_BIDDING_CONTRACT_TABS = (By.CSS_SELECTOR, "a[href='#tabJointBidding']")
-
     # Элементы внутри окна подтверждения/отклонения //textarea[@id='dialogComment']
     COMMENT_TO_APPROVAL_CONTRACT = (By.CSS_SELECTOR, "[id='dialogComment']")
     # Прикрепление файла  //input[@name='filefield']
@@ -949,6 +944,9 @@ class ContractElementLocators:
     # Поле "Количественные показатели реализации проекта"
     QUANTITATIVE_INDICATORS_PROJECT = (By.CSS_SELECTOR, ".fldKsupQuantitativeIndicatorsProjec #SPFieldNote")
 
+    # Вкладка "Заключенные договоры/контракты"
+    JOINT_BIDDING_CONTRACT_TABS = (By.CSS_SELECTOR, "a[href='#tabJointBidding']")
+
     # Элементы на Вкладке "Заключенные договоры/контракты"
     # Значение в поле "Заказчик" Множественный результат
     JOINT_BIDDING_CUSTOMER_VALUE = (By.CSS_SELECTOR, "[data-member='customer'][class^='jointbidding']")
@@ -966,6 +964,22 @@ class ContractElementLocators:
     JOINT_BIDDING_SUM_VALUE = (By.CSS_SELECTOR, "[data-member='summa'][class^='jointbidding']")
 
     JOINT_BIDDING_TOTAL_SUM_VALUE = (By.CSS_SELECTOR, "[class^='payplan-cell']>span")
+
+    # Вкладка "Заключенные договоры/контракты"
+    ATTACHED_FILES_ELEMENT = (By.XPATH, "//a[contains(@href, '#tabFiles')]")
+
+    # Элементы на вкладке "Прикрепленные файлы"
+    # Контракт
+    CONTRACT_FIELD = (By.CSS_SELECTOR, "[class*='Contract']>[id='SPFieldFileField']")
+    # Пояснительная служебная записка
+    EXPLANATORY_MEMORANUM_FIELD = (By.CSS_SELECTOR, "[class*='ExplanatoryMemoranum']>[id='SPFieldFileField']")
+    # Документы с описанием рисков
+    RISK_MAP_AND_REGISTRY_FIELD = (By.CSS_SELECTOR, "[class*='RiskMapAndRegistry']>[id='SPFieldFileField']")
+    # Разное
+    OTHER_FIELD = (By.CSS_SELECTOR, "[class*='Other']>[id='SPFieldFileField']")
+
+    # Бюджет проекта
+    BUDGET_OF_PROJECT_FIELD = (By.CSS_SELECTOR, "[class*='BudgetOfProject']>[id='SPFieldFileField']")
 
 
 class KnowledgeSearchLocators:

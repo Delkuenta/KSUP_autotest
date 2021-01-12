@@ -1,5 +1,6 @@
 import time
 
+import delayed_assert
 from selenium.webdriver.support.select import Select
 
 from pages.base_page import BasePage
@@ -9,7 +10,12 @@ from selenium.webdriver.support.color import Color
 
 
 class ContractElementPage(BasePage):
+    # Проверка информации на вкладке "Общие сведения"
     def verify_general_information_contract(self, user_data_dict):
+        # Переходим на вкладку "Общие сведения"
+        self.browser.find_element(*ContractElementLocators.GENERAL_INFORMATION_ELEMENT).click()
+        time.sleep(1)
+
         # Проверяем титул карточки который соответствует названию сущности
         assert self.is_element_text(*ContractElementLocators.TITLE_IN_CONTRACT) == user_data_dict["fullName"], \
             'Название карточки "Договор/контракт" не соответствует входным данным'
@@ -237,6 +243,47 @@ class ContractElementPage(BasePage):
                 'Отображено пустое поле "Количественные показатели реализации проекта"'
             print('Пустое поле "Количественные показатели реализации проекта" успешно не отображено')
 
+    # Проверка информации на вкладке "Прикрепленные файлы"
+    def verify_attached_files_information(self):
+        self.browser.find_element(*ContractElementLocators.ATTACHED_FILES_ELEMENT).click()
+        time.sleep(2)
+
+        # Проверяем текст в поле "Контракт"
+        actual_text = self.is_element_text(*ContractElementLocators.CONTRACT_FIELD)
+        expected_text = UserData.name_doc_to_link
+        delayed_assert.expect(actual_text == expected_text,
+                              'Не корректное название файла в поле "Контракт" на вкладке "Прикрепленные файлы"\n'
+                              f'Ожидаемый результат: {expected_text}\n'
+                              f'Фактический результат: {actual_text}')
+
+        # Проверяем текст в поле "Пояснительная служебная записка"
+        actual_text = self.is_element_text(*ContractElementLocators.EXPLANATORY_MEMORANUM_FIELD)
+        expected_text = UserData.name_doc_to_link
+        delayed_assert.expect(actual_text == expected_text,
+                              'Не корректное название файла в поле "Пояснительная служебная записка" '
+                              'на вкладке "Прикрепленные файлы"\n'
+                              f'Ожидаемый результат: {expected_text}\n'
+                              f'Фактический результат: {actual_text}')
+
+        # Проверяем текст в поле "Реестр рисков, Карта рисков"
+        actual_text = self.is_element_text(*ContractElementLocators.RISK_MAP_AND_REGISTRY_FIELD)
+        expected_text = UserData.name_jpg_to_link
+        delayed_assert.expect(actual_text == expected_text,
+                              'Не корректное название файла в поле "Реестр рисков, Карта рисков" '
+                              'на вкладке "Прикрепленные файлы"\n'
+                              f'Ожидаемый результат: {expected_text}\n'
+                              f'Фактический результат: {actual_text}')
+
+        # Проверяем текст в поле "Иное"
+        actual_text = self.is_element_text(*ContractElementLocators.OTHER_FIELD)
+        expected_text = UserData.name_doc_to_link
+        delayed_assert.expect(actual_text == expected_text,
+                              'Не корректное название файла в поле "Иное" '
+                              'на вкладке "Прикрепленные файлы"\n'
+                              f'Ожидаемый результат: {expected_text}\n'
+                              f'Фактический результат: {actual_text}')
+
+    # Проверка значения в поле "Связанная пресейловая активность"
     def verify_related_presale(self, user_data_dict):
         # Проверяем отображение значения связанной пресейловой активности в поле "Пресейловые активности"
         assert self.is_element_text(*ContractElementLocators.RELATED_PRESALE) == user_data_dict["fullName"],\
@@ -244,13 +291,15 @@ class ContractElementPage(BasePage):
             f'Ожидаемый результат: "{user_data_dict["fullName"]}"'
         print('Значение в поле  "Пресейловые активности" успешно проверено')
 
+    # Проверка значения в поле "Связанная закупочная процедура"
     def verify_related_zakup(self, user_data_dict):
-        # Проверяем отображение значения связанной пресейловой активности в поле "Пресейловые активности"
+        # Проверяем отображение значения связанной закупочной процедуры в поле "Связанная закупочная процедура"
         assert self.is_element_text(*ContractElementLocators.RELATED_ZAKUP) == user_data_dict["fullName"],\
             f'Значение в поле "Связанная закупочная процедура" не корректно.\n ' \
             f'Ожидаемый результат: "{user_data_dict["fullName"]}"'
         print('Значение в поле  "Связанная закупочная процедура" успешно проверено')
 
+    # Проверка информации на вкладке "Заключенные договоры/контракты"
     def verify_joint_bidding_inform_contract(self, user_data_dict):
         # Переходим на вкладку "Заключенные договоры/контракты"
         self.browser.find_element(*ContractElementLocators.JOINT_BIDDING_CONTRACT_TABS).click()
@@ -305,25 +354,30 @@ class ContractElementPage(BasePage):
             f'\nОжидаемый результат: {sum_joint_bidding_exception}' \
             f'\nФактический результат: {total_sum_joint_bidding}'
 
+    # Отправка контракта на согласования
     def send_contract_for_approval(self):
         self.is_element_clickable(*ContractElementLocators.SEND_APPROVAL_CONTRACT_CONTRACT)
         self.browser.find_element(*ContractElementLocators.SEND_APPROVAL_CONTRACT_CONTRACT).click()
         self.is_visibility_of_element_located(*ContractElementLocators.CONFIRM_SEND_APPROVAL_CONTRACT, 5)
         self.browser.find_element(*ContractElementLocators.CONFIRM_SEND_APPROVAL_CONTRACT).click()
 
-    def verify_unvisibility_approval_button(self):
+    # Проверка НЕ отображения кнопки "Отправить на согласования"
+    def verify_unvisibility_send_approval_button(self):
         assert self.is_element_clickable(*ContractElementLocators.SEND_APPROVAL_CONTRACT_CONTRACT) is False, \
             'Кнопка "Отправить на согласование" доступна для нажатия после отклонения ККП'
 
+    # Проверка отображения кнопки "Отправить на согласования"
     def verify_visibility_button_send_to_approval_contract(self):
 
         assert self.is_visibility_of_element_located(*ContractElementLocators.SEND_APPROVAL_CONTRACT_CONTRACT, 3), \
             'Кнопка "Отправить на согласование(Договор/контракт)" не отобрежена'
 
+    # Проверка отображения кнопки "Добавить бюджет проекта"
     def verify_visibility_budget_button(self):
         assert self.is_visibility_of_element_located(*ContractElementLocators.BUDGET_CONTRACT_BUTTON, 5), \
             'Кнопка "Внести информацию о договоре/контракте" не отобрежена'
 
+    # Проверка отображения статуса "На согласовании с юридической службой"
     def verify_contract_waiting_status_approval_legal(self):
         # Проверяем поле статуса на вкладке "Общие сведения"
         self.browser.find_element(*ContractElementLocators.GENERAL_INFORMATION_ELEMENT).click()
@@ -351,6 +405,7 @@ class ContractElementPage(BasePage):
         assert color_in_element == waiting_color, \
             'Некорректный цвет статуса "Согласуется" в строке согласования с юридической службой'
 
+    # Проверка отображения статуса "Согласовано юридической службой"
     def verify_contract_successfully_status_approval_legal(self):
         self.is_visibility_of_element_located(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_TABS, 3)
         self.browser.find_element(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_TABS).click()
@@ -370,6 +425,7 @@ class ContractElementPage(BasePage):
         assert color_in_element == successfully_color, \
             'Некорректный цвет статуса "Согласовано юридической службой" в строке согласования с юридической службой'
 
+    # Проверка отображения статуса "Не согласовано с юридической службой"
     def verify_contract_reject_status_approval_legal(self):
         # Проверяем статус "Отклонено" на вкладке "Общие сведения"
         self.browser.find_element(*ContractElementLocators.GENERAL_INFORMATION_ELEMENT).click()
@@ -398,6 +454,7 @@ class ContractElementPage(BasePage):
         assert color_in_element == reject_color, \
             'Некорректный цвет статуса "Отклонено" в строке согласования с юридической службой'
 
+    # Проверка отображения статуса "На согласовании с бухгалтерией"
     def verify_contract_waiting_status_approval_count(self):
         # Проверяем поле статуса на вкладке "Общие сведения"
         self.browser.find_element(*ContractElementLocators.GENERAL_INFORMATION_ELEMENT).click()
@@ -427,6 +484,7 @@ class ContractElementPage(BasePage):
         assert color_in_element == waiting_color, \
             'Некорректный цвет статуса "Согласуется" в строке согласования с бухгалтерией'
 
+    # Проверка отображения статуса "Согласовано с бухгалтерией"
     def verify_contract_successfully_status_approval_count(self):
         self.is_visibility_of_element_located(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_TABS, 3)
         self.browser.find_element(*ContractElementLocators.APPROVAL_HISTORY_CONTRACT_TABS).click()
@@ -448,6 +506,7 @@ class ContractElementPage(BasePage):
         assert color_in_element == successfully_color, \
             'Некорректный цвет статуса "Согласовано" в строке согласования с бухгалтерией'
 
+    # Проверка отображения статуса "Не согласовано бухгалтерией"
     def verify_contract_reject_status_approval_count(self):
         # Проверяем статус "Отклонено" на вкладке "Общие сведения"
         self.browser.find_element(*ContractElementLocators.GENERAL_INFORMATION_ELEMENT).click()
@@ -478,6 +537,7 @@ class ContractElementPage(BasePage):
         assert color_in_element == reject_color, \
             'Некорректный цвет статуса "Отклонено" в строке согласования с бухгалтерией'
 
+    # Проверка отображения статуса "На согласовании с финансовой службой"
     def verify_contract_waiting_status_approval_fin(self):
         # Проверяем поле статуса на вкладке "Общие сведения"
         self.browser.find_element(*ContractElementLocators.GENERAL_INFORMATION_ELEMENT).click()
@@ -506,6 +566,7 @@ class ContractElementPage(BasePage):
         assert color_in_element == waiting_color, \
             'Некорректный цвет статуса "Согласуется" в строке согласования с финансовой службой'
 
+    # Проверка отображения статуса "Согласовано с финансовой службой"
     def verify_contract_successfully_status_approval_fin(self, user_data_dict):
         # Проверяем успешный статус согласования во вкладке "Общие сведения"
         if (user_data_dict["priceCategory"] == "C") or \
@@ -537,6 +598,7 @@ class ContractElementPage(BasePage):
         assert color_in_element == successfully_color, \
             'Некорректный цвет статуса "Согласовано" в строке согласования с финансовой службой'
 
+    # Проверка отображения статуса "Не согласовано с финансовой службой"
     def verify_contract_reject_status_approval_fin(self):
         # Проверяем статус "Отклонено" на вкладке "Общие сведения"
         self.browser.find_element(*ContractElementLocators.GENERAL_INFORMATION_ELEMENT).click()
@@ -565,6 +627,7 @@ class ContractElementPage(BasePage):
         assert color_in_element == reject_color, \
             'Некорректный цвет статуса "Отклонено" в строке согласования с финансовой службой'
 
+    # Проверка отображения статуса "На согласовании Директором по разработке ПО"
     def verify_contract_waiting_status_approval_udprpo(self):
         # Проверяем поле статуса на вкладке "Общие сведения"
         self.browser.find_element(*ContractElementLocators.GENERAL_INFORMATION_ELEMENT).click()
@@ -594,6 +657,7 @@ class ContractElementPage(BasePage):
         assert color_in_element == waiting_color, \
             'Некорректный цвет статуса "Согласуется" в строке согласования со службой Директором по разработке ПО'
 
+    # Проверка отображения статуса "Согласовано Директором по разработке ПО"
     def verify_contract_successfully_status_approval_udprpo(self, user_data_dict):
         # Проверяем успешный статус согласования во вкладке "Общие сведения"
         if user_data_dict["groupTypeWork"] == "Software" and user_data_dict["priceCategory"] == "B":
@@ -624,6 +688,7 @@ class ContractElementPage(BasePage):
         assert color_in_element == successfully_color, \
             'Некорректный цвет статуса "Согласовано" в строке согласования с Директором по разработке ПО'
 
+    # Проверка отображения статуса "Не согласовано Директором по разработке ПО"
     def verify_contract_reject_status_approval_udprpo(self):
         # Проверяем статус "Отклонено" на вкладке "Общие сведения"
         self.browser.find_element(*ContractElementLocators.GENERAL_INFORMATION_ELEMENT).click()
@@ -653,6 +718,7 @@ class ContractElementPage(BasePage):
         assert color_in_element == reject_color, \
             'Некорректный цвет статуса "Отклонено" в строке согласования со службой Директором по разработке ПО'
 
+    # Проверка отображения статуса "На согласовании в ККП"
     def verify_contract_waiting_status_approval_kkp(self):
         # Проверяем поле статуса на вкладке "Общие сведения"
         self.browser.find_element(*ContractElementLocators.GENERAL_INFORMATION_ELEMENT).click()
@@ -682,6 +748,7 @@ class ContractElementPage(BasePage):
         assert color_in_element == waiting_color, \
             'Некорректный цвет статуса "Согласуется" в строке согласования со службой ККП'
 
+    # Проверка отображения статуса "Участие в проекте согласовано в ККП"
     def verify_contract_successfully_status_approval_kkp(self, user_data_dict):
         # Проверяем успешный статус согласования во вкладке "Общие сведения"
         if user_data_dict["priceCategory"] != "A":
@@ -712,6 +779,7 @@ class ContractElementPage(BasePage):
         assert color_in_element == successfully_color, \
             'Некорректный цвет статуса "Согласовано" в строке согласования со службой ККП'
 
+    # Проверка отображения статуса "Участие в проекте не согласовано в ККП"
     def verify_contract_reject_status_approval_kkp(self):
         # Проверяем статус "Отклонено" на вкладке "Общие сведения"
         self.browser.find_element(*ContractElementLocators.GENERAL_INFORMATION_ELEMENT).click()
@@ -742,6 +810,7 @@ class ContractElementPage(BasePage):
         assert color_in_element == reject_color, \
             'Некорректный цвет статуса "Отклонено" в строке согласования со службой ККП'
 
+    # Проверка отображения статуса "Отправлено на доработку ККП"
     def verify_contract_revision_status_approval_kkp(self):
         # Проверяем статус "Отправлено на доработку" на вкладке "Общие сведения"
         self.browser.find_element(*ContractElementLocators.GENERAL_INFORMATION_ELEMENT).click()
@@ -772,6 +841,7 @@ class ContractElementPage(BasePage):
         assert color_in_element == reject_color, \
             'Некорректный цвет статуса "Отправлено на доработку" в строке согласования со службой ККП'
 
+    # Успешное согласование контракта
     def approval_contract(self, comment, file):
         self.is_element_clickable(*ContractElementLocators.APPROVAL_CONTRACT)
         self.browser.find_element(*ContractElementLocators.APPROVAL_CONTRACT).click()
@@ -782,6 +852,7 @@ class ContractElementPage(BasePage):
         self.browser.find_element(*ContractElementLocators.ClOSE_ALLERT_CONTRACT).click()
         self.browser.refresh()
 
+    # Отклонение контракта с выбором этапа
     def reject_contract(self, comment, file, start_with):
         self.is_element_clickable(*ContractElementLocators.REJECT_CONTRACT)
         self.browser.find_element(*ContractElementLocators.REJECT_CONTRACT).click()
@@ -794,6 +865,7 @@ class ContractElementPage(BasePage):
         self.browser.find_element(*ContractElementLocators.ClOSE_ALLERT_CONTRACT).click()
         self.browser.refresh()
 
+    # Отклонение контракта за ККП
     def reject_contract_kkp(self, comment, file):
         self.is_element_clickable(*ContractElementLocators.REJECT_CONTRACT)
         self.browser.find_element(*ContractElementLocators.REJECT_CONTRACT).click()
@@ -804,6 +876,7 @@ class ContractElementPage(BasePage):
         self.browser.find_element(*ContractElementLocators.ClOSE_ALLERT_CONTRACT).click()
         self.browser.refresh()
 
+    # Эскалация контракта на ККП
     def escalate_contract_on_kkp(self):
         self.is_element_clickable(*ContractElementLocators.ESCALATE_CONTRACT)
         self.browser.find_element(*ContractElementLocators.ESCALATE_CONTRACT).click()
@@ -813,6 +886,7 @@ class ContractElementPage(BasePage):
         self.is_visibility_of_element_located(*ContractElementLocators.ClOSE_ALLERT_CONTRACT, 5)
         self.browser.find_element(*ContractElementLocators.ClOSE_ALLERT_CONTRACT).click()
 
+    # Отправка на доработку от ККП
     def revision_contract_from_kkp(self, comment, start_with):
         self.is_element_clickable(*ContractElementLocators.REVISION_CONTRACT)
         self.browser.find_element(*ContractElementLocators.REVISION_CONTRACT).click()
@@ -828,3 +902,41 @@ class ContractElementPage(BasePage):
         assert self.is_element_clickable(*ContractElementLocators.EDIT_ITEM_BUTTON), \
             'Кнопка "Изменить элемент" не доступна для нажатия'
         self.browser.find_element(*ContractElementLocators.EDIT_ITEM_BUTTON).click()
+
+    # Добавление файла бюджета проекта
+    def add_file_of_budget(self):
+        self.browser.find_element(*ContractElementLocators.BUDGET_CONTRACT_BUTTON).click()
+
+        # Проверяем текст заголовка модульного окна
+        actual_text = self.is_element_text(*ContractElementLocators.TITLE_BUDGET_ELEMENT)
+        expected_text = "Добавить файл бюджета проекта в договор/контракт?"
+        delayed_assert.expect(actual_text == expected_text,
+                              f'Не корректный текст заголовка в модульном окне добавления файла бюджета\n'
+                              f'Ожидаемый результат: {expected_text}\n'
+                              f'Фактический результат: {actual_text}')
+
+        # Проверяем основной текст модульного окна
+        actual_text = self.is_element_text(*ContractElementLocators.TEXT_BUDGET_ELEMENT)
+        expected_text = "Если файл бюджета проекта был ранее добавлен в договор/контракт, то он будет перезаписан"
+        delayed_assert.expect(actual_text == expected_text,
+                              f'Не корректный основной текст в модульном окне добавления файла бюджета\n'
+                              f'Ожидаемый результат: {expected_text}\n'
+                              f'Фактический результат: {actual_text}')
+
+        # Добавляем файл бюджета
+        self.browser.find_element(*ContractElementLocators.FILE_BUDGET_FIELD).send_keys(UserData.file_path_for_link_doc)
+        time.sleep(2)
+        # Жмем кнопку "Добавить"
+        self.browser.find_element(*ContractElementLocators.ADD_BUDGET_FILE_BUTTON).click()
+
+        # Переходим на вкладку "Прикрепленные файлы"
+        self.browser.find_element(*ContractElementLocators.ATTACHED_FILES_ELEMENT).click()
+
+        # Проверяем отображение добавленного файла бюджета
+        actual_text = self.is_element_text(*ContractElementLocators.BUDGET_OF_PROJECT_FIELD)
+        expected_text = UserData.name_doc_to_link
+        delayed_assert.expect(actual_text == expected_text,
+                              'Не корректное название файла в поле "Бюджет проекта" на вкладке "Прикрепленные файлы"\n'
+                              f'Ожидаемый результат: {expected_text}\n'
+                              f'Фактический результат: {actual_text}')
+

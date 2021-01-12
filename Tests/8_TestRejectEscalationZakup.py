@@ -533,7 +533,7 @@ class TestRejectStepBackZakup:
         zakup_list_page.go_to_zakup_element(user_data_dict)
         zakup_element_page = ZakupElementPage(browser_function, browser_function.current_url)
         zakup_element_page.verify_general_information_in_zakup(user_data_dict)
-        zakup_element_page.verify_unvisibility_approval_button()
+        zakup_element_page.verify_unvisibility_approval_send_button()
         login_page.logout()
 
 @pytest.mark.parametrize('path_data_file', [
@@ -909,6 +909,6 @@ class TestRejectCurrentStepAndEscalationZakup:
         zakup_list_page.go_to_zakup_element(user_data_dict)
         zakup_element_page = ZakupElementPage(browser_function, browser_function.current_url)
         zakup_element_page.verify_general_information_in_zakup(user_data_dict)
-        zakup_element_page.verify_unvisibility_approval_button()
+        zakup_element_page.verify_unvisibility_approval_send_button()
         login_page.logout()
 

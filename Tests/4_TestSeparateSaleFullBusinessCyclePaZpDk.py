@@ -187,7 +187,7 @@ class TestSeparateSaleFullBusinessCyclePaZpDk:
         zakup_list_page.go_to_zakup_element(user_data_dict)
         zakup_element_page = ZakupElementPage(browser_function, link)
         zakup_element_page.verify_general_information_in_zakup(user_data_dict)
-        zakup_element_page.verify_visibility_approval_button_zp()
+        zakup_element_page.verify_visibility_approval_send_button_zp()
         login_page.logout()
 
     def test_visibility_zp_approval_button_salesUnit(self, browser_function, path_data_file):
@@ -202,7 +202,7 @@ class TestSeparateSaleFullBusinessCyclePaZpDk:
         zakup_list_page.go_to_zakup_element(user_data_dict)
         zakup_element_page = ZakupElementPage(browser_function, link)
         zakup_element_page.verify_general_information_in_zakup(user_data_dict)
-        zakup_element_page.verify_visibility_approval_button_zp()
+        zakup_element_page.verify_visibility_approval_send_button_zp()
         login_page.logout()
 
     def test_visibility_zp_approval_button_executiveUnit(self, browser_function, path_data_file):
@@ -217,7 +217,7 @@ class TestSeparateSaleFullBusinessCyclePaZpDk:
         zakup_list_page.go_to_zakup_element(user_data_dict)
         zakup_element_page = ZakupElementPage(browser_function, link)
         zakup_element_page.verify_general_information_in_zakup(user_data_dict)
-        zakup_element_page.verify_visibility_approval_button_zp()
+        zakup_element_page.verify_visibility_approval_send_button_zp()
         login_page.logout()
 
     def test_visibility_zp_approval_button_executiveManager(self, browser_function, path_data_file):
@@ -232,7 +232,7 @@ class TestSeparateSaleFullBusinessCyclePaZpDk:
         zakup_list_page.go_to_zakup_element(user_data_dict)
         zakup_element_page = ZakupElementPage(browser_function, link)
         zakup_element_page.verify_general_information_in_zakup(user_data_dict)
-        zakup_element_page.verify_visibility_approval_button_zp()
+        zakup_element_page.verify_visibility_approval_send_button_zp()
         login_page.logout()
 
     def test_send_zakup_for_approval(self, browser_function, path_data_file):
