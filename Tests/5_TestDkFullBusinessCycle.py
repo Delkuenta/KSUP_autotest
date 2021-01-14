@@ -28,7 +28,7 @@ UnitSale\Seller2
 
 # До первой ошибки --maxfail=1
 @pytest.mark.parametrize('path_data_file', [
-    r"TPAC\3_UnitSale\Seller\19_[Atest_Seller] DK, categoryA, softwareDev.json"
+    r"TPAC\3_UnitSale\Seller2\19_[Atest_Seller2] DK, categoryA, softwareDev.json"
 ])
 class TestDkFullBusinessCycle:
 
@@ -73,7 +73,9 @@ class TestDkFullBusinessCycle:
         contract_element_page.verify_visibility_budget_button()
         contract_element_page.add_file_of_budget()
         contract_element_page.verify_general_information_contract(user_data_dict)
+        contract_element_page.verify_attached_files_information()
         login_page.logout()
+        delayed_assert.assert_expectations()
 
     def test_approval_contract_for_legal(self, browser_function, path_data_file):
         user_data_dict = BasePage.read_file_json(browser_function, path_data_file)

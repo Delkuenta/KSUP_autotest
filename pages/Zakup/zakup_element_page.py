@@ -15,7 +15,7 @@ class ZakupElementPage(BasePage):
     # Проверка информации на вкладке "Общие сведения"
     def verify_general_information_in_zakup(self, user_data_dict):
         # Переходим на вкладку "Общие сведения"
-        self.browser.find_element(*ZakupElementLocators.GENERAL_INFORMATION_ELEMENT).click()
+        self.browser.find_element(*ZakupElementLocators.GENERAL_INFORMATION_TAB).click()
         time.sleep(1)
 
         # Проверяем титул карточки который соответствует названию сущности
@@ -320,7 +320,7 @@ class ZakupElementPage(BasePage):
 
     # Проверка информации на вкладке "Прикрепленные файлы"
     def verify_attached_files_information(self, user_data_dict):
-        self.browser.find_element(*ZakupElementLocators.ATTACHED_FILES_ELEMENT).click()
+        self.browser.find_element(*ZakupElementLocators.ATTACHED_FILES_TAB).click()
         time.sleep(2)
         if user_data_dict["contractorType"] == "Тендерная заявка":
             # Проверяем текст в поле "Тендерная заявка"
@@ -415,6 +415,7 @@ class ZakupElementPage(BasePage):
 
     # Проверка отображения статуса "Черновик"
     def verify_draft_status_zakup(self):
+        self.browser.find_element(*ZakupElementLocators.GENERAL_INFORMATION_TAB).click()
         self.is_visibility_of_element_located(*ZakupElementLocators.APPROVAL_MAIN_STATUS_IN_ZP, 5)
         assert self.is_text_to_be_present_in_element(*ZakupElementLocators.APPROVAL_MAIN_STATUS_IN_ZP,
                                                      "Черновик"), \
@@ -445,15 +446,15 @@ class ZakupElementPage(BasePage):
     # Проверка отображения статуса "На согласовании с юридической службой"
     def verify_zakup_waiting_status_approval_legal(self):
         # Проверяем поле статуса на вкладке "Общие сведения"
-        self.browser.find_element(*ZakupElementLocators.GENERAL_INFORMATION_ELEMENT).click()
+        self.browser.find_element(*ZakupElementLocators.GENERAL_INFORMATION_TAB).click()
         self.is_visibility_of_element_located(*ZakupElementLocators.APPROVAL_MAIN_STATUS_IN_ZP, 5)
         assert self.is_text_to_be_present_in_element(*ZakupElementLocators.APPROVAL_MAIN_STATUS_IN_ZP,
                                                      "На согласовании с юридической службой"), \
             'Некорректный статус или отсутствует статус в поле "Статус согласования" на вкладке "Общие сведения"'
 
         # Проверяем статус на вкладке "Статус согласования"
-        self.is_visibility_of_element_located(*ZakupElementLocators.APPROVAL_HISTORY_ELEMENT, 5)
-        self.browser.find_element(*ZakupElementLocators.APPROVAL_HISTORY_ELEMENT).click()
+        self.is_visibility_of_element_located(*ZakupElementLocators.APPROVAL_HISTORY_TAB, 5)
+        self.browser.find_element(*ZakupElementLocators.APPROVAL_HISTORY_TAB).click()
         """
         # Проверяем статус "Согласуется" по имени службы согласования
         assert self.is_text_to_be_present_in_element(*ZakupElementLocators.APPROVAL_LEGAL_STATUS_ELEMENT,
@@ -475,8 +476,8 @@ class ZakupElementPage(BasePage):
     def verify_zakup_successfully_status_approval_legal(self):
 
         # Проверяем статус "Согласовано" на вкладке "Статус согласования"
-        self.is_visibility_of_element_located(*ZakupElementLocators.APPROVAL_HISTORY_ELEMENT, 5)
-        self.browser.find_element(*ZakupElementLocators.APPROVAL_HISTORY_ELEMENT).click()
+        self.is_visibility_of_element_located(*ZakupElementLocators.APPROVAL_HISTORY_TAB, 5)
+        self.browser.find_element(*ZakupElementLocators.APPROVAL_HISTORY_TAB).click()
         """
         assert self.is_text_to_be_present_in_element(*ZakupElementLocators.APPROVAL_LEGAL_STATUS_ELEMENT,
                                                      "Согласовано"), \
@@ -496,7 +497,7 @@ class ZakupElementPage(BasePage):
     # Проверка отображения статуса "Не согласовано юридической службой"
     def verify_zakup_reject_status_approval_legal(self):
         # Проверяем статус "Отклонено" на вкладке "Общие сведения"
-        self.browser.find_element(*ZakupElementLocators.GENERAL_INFORMATION_ELEMENT).click()
+        self.browser.find_element(*ZakupElementLocators.GENERAL_INFORMATION_TAB).click()
         self.is_visibility_of_element_located(*ZakupElementLocators.APPROVAL_MAIN_STATUS_IN_ZP, 5)
         assert self.is_text_to_be_present_in_element(*ZakupElementLocators.APPROVAL_MAIN_STATUS_IN_ZP,
                                                      "Не согласовано с юридической службой"), \
@@ -504,8 +505,8 @@ class ZakupElementPage(BasePage):
             '\n Ожидаемый результат: Отображен статус "Не согласовано с финансовой службой"'
 
         # Проверяем статус "Отклонено" на вкладке "Статус согласования"
-        self.is_visibility_of_element_located(*ZakupElementLocators.APPROVAL_HISTORY_ELEMENT, 5)
-        self.browser.find_element(*ZakupElementLocators.APPROVAL_HISTORY_ELEMENT).click()
+        self.is_visibility_of_element_located(*ZakupElementLocators.APPROVAL_HISTORY_TAB, 5)
+        self.browser.find_element(*ZakupElementLocators.APPROVAL_HISTORY_TAB).click()
         """
         assert self.is_text_to_be_present_in_element(*ZakupElementLocators.APPROVAL_LEGAL_STATUS_ELEMENT,
                                                      "Отклонено"), \
@@ -525,14 +526,14 @@ class ZakupElementPage(BasePage):
     # Проверка отображения статуса "На согласовании с бухгалтерией"
     def verify_zakup_waiting_status_approval_count(self):
         # Проверяем поле статуса на вкладке "Общие сведения"
-        self.browser.find_element(*ZakupElementLocators.GENERAL_INFORMATION_ELEMENT).click()
+        self.browser.find_element(*ZakupElementLocators.GENERAL_INFORMATION_TAB).click()
         self.is_visibility_of_element_located(*ZakupElementLocators.APPROVAL_MAIN_STATUS_IN_ZP, 5)
         assert self.is_text_to_be_present_in_element(*ZakupElementLocators.APPROVAL_MAIN_STATUS_IN_ZP,
                                                      "На согласовании с бухгалтерией"), \
             'Некорректный статус или отсутствует статус в поле "Статус согласования" на вкладке "Общие сведения"'
 
-        self.is_visibility_of_element_located(*ZakupElementLocators.APPROVAL_HISTORY_ELEMENT, 5)
-        self.browser.find_element(*ZakupElementLocators.APPROVAL_HISTORY_ELEMENT).click()
+        self.is_visibility_of_element_located(*ZakupElementLocators.APPROVAL_HISTORY_TAB, 5)
+        self.browser.find_element(*ZakupElementLocators.APPROVAL_HISTORY_TAB).click()
         """
         # Проверяем статус "Согласуется" по имени службы
         assert self.is_text_to_be_present_in_element(*ZakupElementLocators.APPROVAL_COUNT_STATUS_ELEMENT,
@@ -553,8 +554,8 @@ class ZakupElementPage(BasePage):
     # Проверка отображения статуса "Согласовано с бухгалтерией"
     def verify_zakup_successfully_status_approval_count(self):
         # Проверяем статус "Согласовано" на вкладке "Статус согласования"
-        self.is_visibility_of_element_located(*ZakupElementLocators.APPROVAL_HISTORY_ELEMENT, 5)
-        self.browser.find_element(*ZakupElementLocators.APPROVAL_HISTORY_ELEMENT).click()
+        self.is_visibility_of_element_located(*ZakupElementLocators.APPROVAL_HISTORY_TAB, 5)
+        self.browser.find_element(*ZakupElementLocators.APPROVAL_HISTORY_TAB).click()
         """
         assert self.is_text_to_be_present_in_element(*ZakupElementLocators.APPROVAL_COUNT_STATUS_ELEMENT,
                                                      "Согласовано"), \
@@ -574,7 +575,7 @@ class ZakupElementPage(BasePage):
     # Проверка отображения статуса "Не согласовано с бухгалтерией"
     def verify_zakup_reject_status_approval_count(self):
         # Проверяем статус "Отклонено" на вкладке "Общие сведения"
-        self.browser.find_element(*ZakupElementLocators.GENERAL_INFORMATION_ELEMENT).click()
+        self.browser.find_element(*ZakupElementLocators.GENERAL_INFORMATION_TAB).click()
         self.is_visibility_of_element_located(*ZakupElementLocators.APPROVAL_MAIN_STATUS_IN_ZP, 5)
         assert self.is_text_to_be_present_in_element(*ZakupElementLocators.APPROVAL_MAIN_STATUS_IN_ZP,
                                                      "Не согласовано бухгалтерией"), \
@@ -582,8 +583,8 @@ class ZakupElementPage(BasePage):
             '\n Ожидаемый результат: Отображен статус "Не согласовано с бухгалтерией"'
 
         # Проверяем статус "Отклонено" на вкладке "Статус согласования"
-        self.is_visibility_of_element_located(*ZakupElementLocators.APPROVAL_HISTORY_ELEMENT, 5)
-        self.browser.find_element(*ZakupElementLocators.APPROVAL_HISTORY_ELEMENT).click()
+        self.is_visibility_of_element_located(*ZakupElementLocators.APPROVAL_HISTORY_TAB, 5)
+        self.browser.find_element(*ZakupElementLocators.APPROVAL_HISTORY_TAB).click()
         """
         assert self.is_text_to_be_present_in_element(*ZakupElementLocators.APPROVAL_COUNT_STATUS_ELEMENT,
                                                      "Отклонено"), \
@@ -603,14 +604,14 @@ class ZakupElementPage(BasePage):
     # Проверка отображения статуса "На согласовании с финансовой службой"
     def verify_zakup_waiting_status_approval_fin(self):
         # Проверяем поле статуса на вкладке "Общие сведения"
-        self.browser.find_element(*ZakupElementLocators.GENERAL_INFORMATION_ELEMENT).click()
+        self.browser.find_element(*ZakupElementLocators.GENERAL_INFORMATION_TAB).click()
         self.is_visibility_of_element_located(*ZakupElementLocators.APPROVAL_MAIN_STATUS_IN_ZP, 5)
         assert self.is_text_to_be_present_in_element(*ZakupElementLocators.APPROVAL_MAIN_STATUS_IN_ZP,
                                                      "На согласовании с финансовой службой"), \
             'Некорректный статус или отсутствует статус в поле "Статус согласования" на вкладке "Общие сведения"'
 
-        self.is_visibility_of_element_located(*ZakupElementLocators.APPROVAL_HISTORY_ELEMENT, 5)
-        self.browser.find_element(*ZakupElementLocators.APPROVAL_HISTORY_ELEMENT).click()
+        self.is_visibility_of_element_located(*ZakupElementLocators.APPROVAL_HISTORY_TAB, 5)
+        self.browser.find_element(*ZakupElementLocators.APPROVAL_HISTORY_TAB).click()
         """
         # Проверяем статус "Согласуется"
         assert self.is_text_to_be_present_in_element(*ZakupElementLocators.APPROVAL_FIN_STATUS_ELEMENT,
@@ -635,14 +636,14 @@ class ZakupElementPage(BasePage):
                 (user_data_dict["contractorType"] == "Тендерная заявка"
                  and user_data_dict["priceCategory"] == "B"
                  and user_data_dict["groupTypeWork"] == "Other"):
-            self.browser.find_element(*ZakupElementLocators.GENERAL_INFORMATION_ELEMENT).click()
+            self.browser.find_element(*ZakupElementLocators.GENERAL_INFORMATION_TAB).click()
             self.is_visibility_of_element_located(*ZakupElementLocators.APPROVAL_MAIN_STATUS_IN_ZP, 5)
             assert self.is_text_to_be_present_in_element(*ZakupElementLocators.APPROVAL_MAIN_STATUS_IN_ZP,
                                                          "Согласовано с финансовой службой"), \
                 'Некорректный статус или отсутствует статус в поле "Статус согласования" на вкладке "Общие сведения"'
 
-        self.is_visibility_of_element_located(*ZakupElementLocators.APPROVAL_HISTORY_ELEMENT, 5)
-        self.browser.find_element(*ZakupElementLocators.APPROVAL_HISTORY_ELEMENT).click()
+        self.is_visibility_of_element_located(*ZakupElementLocators.APPROVAL_HISTORY_TAB, 5)
+        self.browser.find_element(*ZakupElementLocators.APPROVAL_HISTORY_TAB).click()
         """
         # Проверка статуса по имени службы(необходим один элемент этой службы)
         assert self.is_text_to_be_present_in_element(*ZakupElementLocators.APPROVAL_FIN_STATUS_ELEMENT,
@@ -663,7 +664,7 @@ class ZakupElementPage(BasePage):
     # Проверка отображения статуса "Не согласовано с финансовой службой"
     def verify_zakup_reject_status_approval_fin(self):
         # Проверяем статус "Отклонено" на вкладке "Общие сведения"
-        self.browser.find_element(*ZakupElementLocators.GENERAL_INFORMATION_ELEMENT).click()
+        self.browser.find_element(*ZakupElementLocators.GENERAL_INFORMATION_TAB).click()
         self.is_visibility_of_element_located(*ZakupElementLocators.APPROVAL_MAIN_STATUS_IN_ZP, 5)
         assert self.is_text_to_be_present_in_element(*ZakupElementLocators.APPROVAL_MAIN_STATUS_IN_ZP,
                                                      "Не согласовано с финансовой службой"), \
@@ -671,8 +672,8 @@ class ZakupElementPage(BasePage):
             '\n Ожидаемый результат: Отображен статус "Не согласовано с финансовой службой"'
 
         # Проверяем статус "Отклонено" на вкладке "Статус согласования"
-        self.is_visibility_of_element_located(*ZakupElementLocators.APPROVAL_HISTORY_ELEMENT, 5)
-        self.browser.find_element(*ZakupElementLocators.APPROVAL_HISTORY_ELEMENT).click()
+        self.is_visibility_of_element_located(*ZakupElementLocators.APPROVAL_HISTORY_TAB, 5)
+        self.browser.find_element(*ZakupElementLocators.APPROVAL_HISTORY_TAB).click()
         """
         assert self.is_text_to_be_present_in_element(*ZakupElementLocators.APPROVAL_FIN_STATUS_ELEMENT,
                                                      "Отклонено"), \
@@ -692,15 +693,15 @@ class ZakupElementPage(BasePage):
     # Проверка отображения статуса "На согласовании Директором по разработке ПО"
     def verify_zakup_waiting_status_approval_udprpo(self):
         # Проверяем поле статуса на вкладке "Общие сведения"
-        self.browser.find_element(*ZakupElementLocators.GENERAL_INFORMATION_ELEMENT).click()
+        self.browser.find_element(*ZakupElementLocators.GENERAL_INFORMATION_TAB).click()
         self.is_visibility_of_element_located(*ZakupElementLocators.APPROVAL_MAIN_STATUS_IN_ZP, 5)
         assert self.is_text_to_be_present_in_element(*ZakupElementLocators.APPROVAL_MAIN_STATUS_IN_ZP,
                                                      "На согласовании Директором по разработке ПО"), \
             'Некорректный статус или отсутствует статус в поле "Статус согласования" на вкладке "Общие сведения"'
 
         # Проверяем статус "Согласуется"
-        self.is_visibility_of_element_located(*ZakupElementLocators.APPROVAL_HISTORY_ELEMENT, 5)
-        self.browser.find_element(*ZakupElementLocators.APPROVAL_HISTORY_ELEMENT).click()
+        self.is_visibility_of_element_located(*ZakupElementLocators.APPROVAL_HISTORY_TAB, 5)
+        self.browser.find_element(*ZakupElementLocators.APPROVAL_HISTORY_TAB).click()
         """
         assert self.is_text_to_be_present_in_element(*ZakupElementLocators.APPROVAL_UDPRPO_STATUS_ELEMENT,
                                                      "Согласуется"), \
@@ -726,15 +727,15 @@ class ZakupElementPage(BasePage):
                 or (user_data_dict["contractorType"] != "Тендерная заявка"
                     and user_data_dict["groupTypeWork"] == "Software"
                     and user_data_dict["priceCategory"] != "C"):
-            self.browser.find_element(*ZakupElementLocators.GENERAL_INFORMATION_ELEMENT).click()
+            self.browser.find_element(*ZakupElementLocators.GENERAL_INFORMATION_TAB).click()
             self.is_visibility_of_element_located(*ZakupElementLocators.APPROVAL_MAIN_STATUS_IN_ZP, 5)
             assert self.is_text_to_be_present_in_element(*ZakupElementLocators.APPROVAL_MAIN_STATUS_IN_ZP,
                                                          "Согласовано Директором по разработке ПО"), \
                 'Некорректный статус или отсутствует статус в поле "Статус согласования" на вкладке "Общие сведения"'
 
         # Проверяем статус "Согласовано" на вкладке "Статус согласования"
-        self.is_visibility_of_element_located(*ZakupElementLocators.APPROVAL_HISTORY_ELEMENT, 5)
-        self.browser.find_element(*ZakupElementLocators.APPROVAL_HISTORY_ELEMENT).click()
+        self.is_visibility_of_element_located(*ZakupElementLocators.APPROVAL_HISTORY_TAB, 5)
+        self.browser.find_element(*ZakupElementLocators.APPROVAL_HISTORY_TAB).click()
         """
         assert self.is_text_to_be_present_in_element(*ZakupElementLocators.APPROVAL_UDPRPO_STATUS_ELEMENT,
                                                      "Согласовано"), \
@@ -754,7 +755,7 @@ class ZakupElementPage(BasePage):
     # Проверка отображения статуса "Не согласовано Директором по разработке ПО"
     def verify_zakup_reject_status_approval_udprpo(self):
         # Проверяем статус "Отклонено" на вкладке "Общие сведения"
-        self.browser.find_element(*ZakupElementLocators.GENERAL_INFORMATION_ELEMENT).click()
+        self.browser.find_element(*ZakupElementLocators.GENERAL_INFORMATION_TAB).click()
         self.is_visibility_of_element_located(*ZakupElementLocators.APPROVAL_MAIN_STATUS_IN_ZP, 5)
         assert self.is_text_to_be_present_in_element(*ZakupElementLocators.APPROVAL_MAIN_STATUS_IN_ZP,
                                                      "Не согласовано Директором по разработке ПО"), \
@@ -762,8 +763,8 @@ class ZakupElementPage(BasePage):
             '\n Ожидаемый результат: Отображен статус "Не согласовано Директором по разработке ПО"'
 
         # Проверяем статус "Отклонено" на вкладке "Статус согласования"
-        self.is_visibility_of_element_located(*ZakupElementLocators.APPROVAL_HISTORY_ELEMENT, 5)
-        self.browser.find_element(*ZakupElementLocators.APPROVAL_HISTORY_ELEMENT).click()
+        self.is_visibility_of_element_located(*ZakupElementLocators.APPROVAL_HISTORY_TAB, 5)
+        self.browser.find_element(*ZakupElementLocators.APPROVAL_HISTORY_TAB).click()
         """
         assert self.is_text_to_be_present_in_element(*ZakupElementLocators.APPROVAL_UDPRPO_STATUS_ELEMENT,
                                                      "Отклонено"), \
@@ -783,15 +784,15 @@ class ZakupElementPage(BasePage):
     # Проверка отображения статуса "На согласовании в ККП"
     def verify_zakup_waiting_status_approval_kkp(self):
         # Проверяем поле статуса на вкладке "Общие сведения"
-        self.browser.find_element(*ZakupElementLocators.GENERAL_INFORMATION_ELEMENT).click()
+        self.browser.find_element(*ZakupElementLocators.GENERAL_INFORMATION_TAB).click()
         self.is_visibility_of_element_located(*ZakupElementLocators.APPROVAL_MAIN_STATUS_IN_ZP, 5)
         assert self.is_text_to_be_present_in_element(*ZakupElementLocators.APPROVAL_MAIN_STATUS_IN_ZP,
                                                      "На согласовании в ККП"), \
             'Некорректный статус или отсутствует статус в поле "Статус согласования" на вкладке "Общие сведения"'
 
         # Проверяем статус "Согласуется"
-        self.is_visibility_of_element_located(*ZakupElementLocators.APPROVAL_HISTORY_ELEMENT, 5)
-        self.browser.find_element(*ZakupElementLocators.APPROVAL_HISTORY_ELEMENT).click()
+        self.is_visibility_of_element_located(*ZakupElementLocators.APPROVAL_HISTORY_TAB, 5)
+        self.browser.find_element(*ZakupElementLocators.APPROVAL_HISTORY_TAB).click()
         """
         assert self.is_text_to_be_present_in_element(*ZakupElementLocators.APPROVAL_KKP_STATUS_ELEMENT,
                                                      "Согласуется"), \
@@ -813,15 +814,15 @@ class ZakupElementPage(BasePage):
         # Проверяем успешный статус согласования во вкладке "Общие сведения"
         if (user_data_dict["contractorType"] == "Тендерная заявка"
                 and user_data_dict["priceCategory"] != "A"):
-            self.browser.find_element(*ZakupElementLocators.GENERAL_INFORMATION_ELEMENT).click()
+            self.browser.find_element(*ZakupElementLocators.GENERAL_INFORMATION_TAB).click()
             self.is_visibility_of_element_located(*ZakupElementLocators.APPROVAL_MAIN_STATUS_IN_ZP, 5)
             assert self.is_text_to_be_present_in_element(*ZakupElementLocators.APPROVAL_MAIN_STATUS_IN_ZP,
                                                          "Участие в проекте согласовано в ККП"), \
                 'Некорректный статус или отсутствует статус в поле "Статус согласования" на вкладке "Общие сведения"'
 
         # Проверяем статус "Согласовано" на вкладке "Статус согласования"
-        self.is_visibility_of_element_located(*ZakupElementLocators.APPROVAL_HISTORY_ELEMENT, 5)
-        self.browser.find_element(*ZakupElementLocators.APPROVAL_HISTORY_ELEMENT).click()
+        self.is_visibility_of_element_located(*ZakupElementLocators.APPROVAL_HISTORY_TAB, 5)
+        self.browser.find_element(*ZakupElementLocators.APPROVAL_HISTORY_TAB).click()
         """
         assert self.is_text_to_be_present_in_element(*ZakupElementLocators.APPROVAL_KKP_STATUS_ELEMENT,
                                                      "Согласовано"), \
@@ -841,7 +842,7 @@ class ZakupElementPage(BasePage):
     # Проверка отображения статуса "Участие в проекте не согласовано в ККП"
     def verify_zakup_reject_status_approval_kkp(self):
         # Проверяем статус "Отклонено" на вкладке "Общие сведения"
-        self.browser.find_element(*ZakupElementLocators.GENERAL_INFORMATION_ELEMENT).click()
+        self.browser.find_element(*ZakupElementLocators.GENERAL_INFORMATION_TAB).click()
         self.is_visibility_of_element_located(*ZakupElementLocators.APPROVAL_MAIN_STATUS_IN_ZP, 5)
         assert self.is_text_to_be_present_in_element(*ZakupElementLocators.APPROVAL_MAIN_STATUS_IN_ZP,
                                                      "Участие в проекте не согласовано в ККП"), \
@@ -849,8 +850,8 @@ class ZakupElementPage(BasePage):
             '\n Ожидаемый результат: Отображен статус "Участие в проекте не согласовано в ККП"'
 
         # Проверяем статус на вкладке "Статус согласования"
-        self.is_visibility_of_element_located(*ZakupElementLocators.APPROVAL_HISTORY_ELEMENT, 5)
-        self.browser.find_element(*ZakupElementLocators.APPROVAL_HISTORY_ELEMENT).click()
+        self.is_visibility_of_element_located(*ZakupElementLocators.APPROVAL_HISTORY_TAB, 5)
+        self.browser.find_element(*ZakupElementLocators.APPROVAL_HISTORY_TAB).click()
         """
         assert self.is_text_to_be_present_in_element(*ZakupElementLocators.APPROVAL_KKP_STATUS_ELEMENT,
                                                      "Отклонено"), \
@@ -877,7 +878,7 @@ class ZakupElementPage(BasePage):
     # Проверка отображения статуса "Отправлено на доработку ККП"
     def verify_zakup_revision_status_approval(self):
         # Проверяем статус "Отправлено на доработку" на вкладке "Общие сведения"
-        self.browser.find_element(*ZakupElementLocators.GENERAL_INFORMATION_ELEMENT).click()
+        self.browser.find_element(*ZakupElementLocators.GENERAL_INFORMATION_TAB).click()
         self.is_visibility_of_element_located(*ZakupElementLocators.APPROVAL_MAIN_STATUS_IN_ZP, 5)
         assert self.is_text_to_be_present_in_element(*ZakupElementLocators.APPROVAL_MAIN_STATUS_IN_ZP,
                                                      "Отправлено на доработку ККП"), \
@@ -885,8 +886,8 @@ class ZakupElementPage(BasePage):
             '\n Ожидаемый результат: Отображен статус "Отправлено на доработку ККП"'
 
         # Проверяем статус на вкладке "Статус согласования"
-        self.is_visibility_of_element_located(*ZakupElementLocators.APPROVAL_HISTORY_ELEMENT, 5)
-        self.browser.find_element(*ZakupElementLocators.APPROVAL_HISTORY_ELEMENT).click()
+        self.is_visibility_of_element_located(*ZakupElementLocators.APPROVAL_HISTORY_TAB, 5)
+        self.browser.find_element(*ZakupElementLocators.APPROVAL_HISTORY_TAB).click()
         """
         assert self.is_text_to_be_present_in_element(*ZakupElementLocators.APPROVAL_KKP_STATUS_ELEMENT,
                                                      "Отправлено на доработку"), \
@@ -996,7 +997,7 @@ class ZakupElementPage(BasePage):
         self.browser.find_element(*ZakupElementLocators.ADD_BUDGET_FILE_BUTTON).click()
 
         # Переходим на вкладку "Прикрепленные файлы"
-        self.browser.find_element(*ZakupElementLocators.ATTACHED_FILES_ELEMENT).click()
+        self.browser.find_element(*ZakupElementLocators.ATTACHED_FILES_TAB).click()
 
         # Проверяем отображение добавленного файла бюджета
         actual_text = self.is_element_text(*ZakupElementLocators.BUDGET_OF_PROJECT_FIELD)

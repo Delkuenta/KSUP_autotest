@@ -160,6 +160,7 @@ class TestUnitSaleFullBusinessCyclePaZpDk:
         zakup_list_page.go_to_zakup_element(user_data_dict)
         # Проверка корректности заполненных полей и статуса созданной сущности
         zakup_element_page.verify_general_information_in_zakup(user_data_dict)
+        zakup_element_page.verify_attached_files_information(user_data_dict)
         zakup_element_page.verify_draft_status_zakup()
 
         # Отправка сущности на внутреннее согласование
@@ -172,6 +173,7 @@ class TestUnitSaleFullBusinessCyclePaZpDk:
             # Добавление файла бюджета
             zakup_element_page.add_file_of_budget()
             zakup_element_page.verify_general_information_in_zakup(user_data_dict)
+            zakup_element_page.verify_attached_files_information(user_data_dict)
         elif user_data_dict["contractorType"] != "Тендерная заявка" \
                 and user_data_dict["priceCategory"] != "C" \
                 and user_data_dict["groupTypeWork"] == "Software":
@@ -370,6 +372,7 @@ class TestUnitSaleFullBusinessCyclePaZpDk:
         contract_element_page.verify_general_information_contract(user_data_dict)
 
         login_page.logout()
+        delayed_assert.assert_expectations()
 
     def test_approval_contract_for_legal(self, browser_function, path_data_file):
         user_data_dict = BasePage.read_file_json(browser_function, path_data_file)

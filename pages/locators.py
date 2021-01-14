@@ -537,9 +537,9 @@ class ZakupElementLocators:
     START_WITH_ELEMENT = (By.CSS_SELECTOR, "#dialogRestartStatus")
 
     # Вкладки в карточке
-    GENERAL_INFORMATION_ELEMENT = (By.XPATH, "//a[contains(@href, '#tabCommon')]")
-    ATTACHED_FILES_ELEMENT = (By.XPATH, "//a[contains(@href, '#tabFiles')]")
-    APPROVAL_HISTORY_ELEMENT = (By.XPATH, "//a[contains(@href, '#tabApprovingHistory')]")
+    GENERAL_INFORMATION_TAB = (By.XPATH, "//a[contains(@href, '#tabCommon')]")
+    ATTACHED_FILES_TAB = (By.XPATH, "//a[contains(@href, '#tabFiles')]")
+    APPROVAL_HISTORY_TAB = (By.XPATH, "//a[contains(@href, '#tabApprovingHistory')]")
 
     # Строки статус согласования
     APPROVAL_LEGAL_STATUS_ELEMENT = (By.XPATH, "//*[text() ='Согласование юридической службой']/following::span[1]")

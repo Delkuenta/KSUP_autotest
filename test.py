@@ -13,7 +13,7 @@ from pages.login_data import LoginData
 from pages.Presale.presale_create_form_page import PresaleFormCreate
 
 
-@pytest.mark.parametrize('path_data_file', [r"TPAC\UnitSale\Seller\1_[Atest_Seller] PA+ZP+DK,Tender, categoryA, softwareDev, UnitSale.json"])
+@pytest.mark.parametrize('path_data_file', [r"TPAC\3_UnitSale\Seller2\7_[Аtest_Seller2] PA+ZP+DK, CommercialOffer, categoryA, softwareDev, UnitSale.json"])
 class TestUnitSaleFullBusinessCyclePaZpDk:
     def test_login(self, browser_session, path_data_file):
         user_data_dict = BasePage.read_file_json(browser_session, path_data_file)
@@ -26,8 +26,7 @@ class TestUnitSaleFullBusinessCyclePaZpDk:
         login_page.verify_username(user_data_dict["createAccount"])
         presale_list_page.go_to_presale_list(link)
 
-    @pytest.mark.repeat(200)
-    @pytest.mark.xfail(reason="Баг https://jira.lanit.ru/browse/KSUP-1041")
+    @pytest.mark.repeat(50)
     def test_create_presale(self, browser_session, path_data_file):
         user_data_dict = BasePage.read_file_json(browser_session, path_data_file)
         user_data_dict = BasePage.dict_preparation(browser_session, user_data_dict)

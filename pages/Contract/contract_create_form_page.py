@@ -1,7 +1,5 @@
 import time
 
-import pytest_check as check
-from selenium.webdriver.common.by import By
 from selenium.webdriver.support.select import Select
 
 from pages.base_page import BasePage
@@ -125,13 +123,13 @@ class ContractFormCreate(BasePage):
         # прикрепляем файл Контракт
         self.browser.find_element(*FormCreateContractLocators.FILE_CONTRACT).send_keys(UserData.file_path_for_link_doc)
         self.is_text_to_be_present_in_element(*FormCreateContractLocators.FILE_CONTRACT_NAME, UserData.name_doc_to_link)
-        """
+
         # прикрепляем файл Бюджет проекта
         self.browser.find_element(*FormCreateContractLocators.FILE_BUDGET_OF_PROJECT).send_keys(
             UserData.file_path_for_link_jpg)
         self.is_text_to_be_present_in_element(
             *FormCreateContractLocators.FILE_BUDGET_OF_PROJECT_NAME, UserData.name_jpg_to_link)
-        """
+
         # прикрепляем файл Пояснительная служебная записка
         self.browser.find_element(*FormCreateContractLocators.FILE_EXPLANATORY_MEMORANUM).send_keys(
             UserData.file_path_for_link_doc)
@@ -337,13 +335,12 @@ class ContractFormCreate(BasePage):
         self.browser.find_element(*FormCreateContractLocators.FILE_CONTRACT).send_keys(UserData.file_path_for_link_doc)
         self.is_text_to_be_present_in_element(*FormCreateContractLocators.FILE_CONTRACT_NAME, UserData.name_doc_to_link)
 
-        """
         # прикрепляем файл Бюджет проекта
         self.browser.find_element(*FormCreateContractLocators.FILE_BUDGET_OF_PROJECT).send_keys(
             UserData.file_path_for_link_jpg)
         self.is_text_to_be_present_in_element(
             *FormCreateContractLocators.FILE_BUDGET_OF_PROJECT_NAME, UserData.name_jpg_to_link)
-        """
+
         # прикрепляем файл Пояснительная служебная записка
         self.browser.find_element(*FormCreateContractLocators.FILE_EXPLANATORY_MEMORANUM).send_keys(
             UserData.file_path_for_link_doc)

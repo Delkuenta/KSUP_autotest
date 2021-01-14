@@ -1,9 +1,10 @@
+import datetime
 import time
-import pytest_check as check
 from selenium.webdriver.support.select import Select
 from pages.base_page import BasePage
 from pages.locators import FormCreatePresaleLocators
 import delayed_assert
+from datetime import datetime
 
 
 class PresaleFormCreate(BasePage):
@@ -12,8 +13,8 @@ class PresaleFormCreate(BasePage):
         time.sleep(2)
 
         # Ищем поле "Предмет контракта" и заполняем
-        self.browser.find_element(*FormCreatePresaleLocators.NAME_PRESALE_ELEMENT).send_keys(
-            user_data_dict["fullName"])
+        current_time = str(datetime.now().time().strftime("%H:%M:%S"))
+        self.browser.find_element(*FormCreatePresaleLocators.NAME_PRESALE_ELEMENT).send_keys(user_data_dict["fullName"]) #current_time, ' ',
 
         # Ищем поле "Способ определения поставщика" и выбираем значение
         Select(self.browser.find_element(*FormCreatePresaleLocators.CONTRACTOR_TYPE_ELEMENT)).select_by_value(

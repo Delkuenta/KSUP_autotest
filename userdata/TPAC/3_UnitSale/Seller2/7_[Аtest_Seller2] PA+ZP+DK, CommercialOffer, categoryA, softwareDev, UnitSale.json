@@ -18,7 +18,7 @@
         "separateSale": "Да",
 		"jointBidding": "Нет",
         "competitionDeadlineFrom": "15.07.2020",
-        "startDate": "1.07.2020",
+        "startDate": "01.01.2021",
         "endDate": "01.07.2021",
         "projectProbability": 100,
         "descriptionText": "Краткое описание текст",
@@ -41,27 +41,17 @@
 		"createAccount": "Mr_KSUP_Seller2",
         "payments": [
             {
-                "sum": 400000,
-                "year": 2020,
-                "quarter": 3
-            },
-            {
-                "sum": 200000,
-                "year": 2020,
-                "quarter": 4
-            },
-            {
-                "sum": 70000,
+                "sum": 700000,
                 "year": 2021,
                 "quarter": 1
             },
             {
-                "sum": 30000,
+                "sum": 15000,
                 "year": 2021,
                 "quarter": 2
             },
             {
-                "sum": 20000,
+                "sum": 5000,
                 "year": 2021,
                 "quarter": 3
             }
