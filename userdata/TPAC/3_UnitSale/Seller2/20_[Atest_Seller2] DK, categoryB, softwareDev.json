@@ -37,8 +37,8 @@
         "technologies": ["Jira"],
         "quantitativeIndicatorsProject": "тестовый текст в поле Количественные показатели реализации проекта",
         "projectUniqueCode": "2hMuCr20S2",
-		"project": "Тестовый проект",
-				"createAccount": "Mr_KSUP_Seller2",
+		"project": "Тестовый проект_Dir2",
+		"createAccount": "Mr_KSUP_Seller2",
         "payments": [
             {
                 "sum": 20000000,

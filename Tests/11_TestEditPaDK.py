@@ -21,7 +21,6 @@ def test_login(browser_session):
 
 
 class TestCreatePresaleAndEdit:
-    @pytest.mark.xfail(reason="Баг https://jira.lanit.ru/browse/KSUP-1041")
     def test_create_presale(self, browser_session, test_login):
         user_data_dict = BasePage.read_file_json(browser_session, r"TPAC\11_Edit_PA_DK\[Atest_Seller] PA,Tender, categoryA, softwareDev, UnitSale.json")
         user_data_dict = BasePage.dict_preparation(browser_session, user_data_dict)
@@ -62,7 +61,6 @@ class TestCreatePresaleAndEdit:
         presale_list_page.go_to_presale_element(old_user_data_dict)
         presale_element_page.go_to_edit_presale()
         create_presale_page.form_edit_presale(old_user_data_dict, new_user_data_dict)
-        presale_list_page.go_to_mine_elements_tabs()
         presale_list_page.should_be_element_on_presale_list(new_user_data_dict)
         presale_list_page.go_to_presale_element(new_user_data_dict)
         presale_element_page.verify_general_information_in_presale(new_user_data_dict)

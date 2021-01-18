@@ -791,6 +791,7 @@ class TestRejectCurrentStepAndEscalationContract:
         else:
             print("\nВнутреннее согласование контракта со службой УДПР ПО не требуется")
 
+    # Цикл 7
     def test_reject_contract_for_kkp_cycle7(self, browser_function, path_data_file):
         user_data_dict = BasePage.read_file_json(browser_function, path_data_file)
         user_data_dict = BasePage.dict_preparation(browser_function, user_data_dict)

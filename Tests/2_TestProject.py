@@ -9,10 +9,11 @@ from pages.Project.project_list_page import ProjectPage
 
 # 2_[Atest_Dir] Project_required fields, categoryA, softwareDev.json
 # 1_[Atest_Dir] Project, categoryA, softwareDev.json
-#Тестовый проект.json
+# TestProject.json
+# TestProject2.json
 
 @pytest.mark.parametrize('path_data_file',
-                         [r"TPAC\2_Project\Тестовый проект.json"])
+                         [r"TPAC\2_Project\TestProject.json"])
 class TestProject:
 
     def test_create_project(self, browser_function, path_data_file):

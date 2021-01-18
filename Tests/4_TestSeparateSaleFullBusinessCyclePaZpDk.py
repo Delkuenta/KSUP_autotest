@@ -32,7 +32,7 @@ SeparateSale\Dir - Dir2
 
 # До первой ошибки --maxfail=1
 @pytest.mark.parametrize('path_data_file', [
-    r"TPAC\4_SeparateSale\Seller - Seller2\2[Atest_Seller] PA+ZP+DK, CommercialOffer, categoryA, SoftwareDev, SeparateSale.json"])
+    r"TPAC\4_SeparateSale\Seller - Seller2\1[Atest_Seller] PA+ZP+DK, Tender, categoryA,  SoftwareDev, SeparateSale.json"])
 class TestSeparateSaleFullBusinessCyclePaZpDk:
 
     def test_create_presale(self, browser_function, path_data_file):

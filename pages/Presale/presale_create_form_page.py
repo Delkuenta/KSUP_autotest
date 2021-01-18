@@ -387,7 +387,6 @@ class PresaleFormCreate(BasePage):
             # Ищем поле "Вероятность заключения договора/контракта" и вводим значение
             project_probability_field = self.browser.find_element(*FormCreatePresaleLocators.PROJECT_PROBABILITY_ELEMENT)
             project_probability_field.clear()
-            breakpoint()
             project_probability_field.send_keys(new_user_data_dict["projectProbability"])
 
         if old_user_data_dict["descriptionText"] != new_user_data_dict["descriptionText"]:
