@@ -151,9 +151,9 @@ class BasePage:
         # Определяем валюту и переводим в рубли
         raw_sum = user_data_dict["sum"]
         if user_data_dict["currency"] == "Доллар":
-            sum_in_rub = raw_sum * 70
+            sum_in_rub = raw_sum * 65
         elif user_data_dict["currency"] == "Евро":
-            sum_in_rub = raw_sum * 80
+            sum_in_rub = raw_sum * 75
         else:
             sum_in_rub = raw_sum
 
