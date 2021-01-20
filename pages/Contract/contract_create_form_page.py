@@ -143,8 +143,8 @@ class ContractFormCreate(BasePage):
             *FormCreateContractLocators.FILE_RISK_MAP_AND_REGISTERY_NAME, UserData.name_jpg_to_link)
 
         # прикрепляем файл Иное
-        self.browser.find_element(*FormCreateContractLocators.FILE_OTHER).send_keys(UserData.file_path_for_link_excel)
-        self.is_text_to_be_present_in_element(*FormCreateContractLocators.FILE_OTHER_NAME, UserData.name_excel_to_link)
+        self.browser.find_element(*FormCreateContractLocators.FILE_OTHER).send_keys(UserData.file_path_for_link_doc)
+        self.is_text_to_be_present_in_element(*FormCreateContractLocators.FILE_OTHER_NAME, UserData.name_doc_to_link)
 
         if user_data_dict["jointBidding"] == "Да":
             # Заполняем таблицу "Добавленные договоры/контракты"
