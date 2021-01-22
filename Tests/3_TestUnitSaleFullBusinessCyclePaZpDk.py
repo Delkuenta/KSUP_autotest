@@ -80,7 +80,8 @@ UnitSale\Seller2
 
 # До первой ошибки --maxfail=1
 # Браузер для запуска --browser_name=firefox
-@pytest.mark.parametrize('path_data_file', [r"TPAC\3_UnitSale\Seller\1_[Atest_Seller] PA+ZP+DK,Tender, categoryA, softwareDev, UnitSale.json"])
+@pytest.mark.parametrize('path_data_file', [
+    r"TPAC\3_UnitSale\Seller\1_[Atest_Seller] PA+ZP+DK,Tender, categoryA, softwareDev, UnitSale.json"])
 class TestUnitSaleFullBusinessCyclePaZpDk:
 
     def test_create_presale(self, browser_function, path_data_file):
@@ -164,7 +165,7 @@ class TestUnitSaleFullBusinessCyclePaZpDk:
         zakup_element_page.verify_draft_status_zakup()
 
         # Отправка сущности на внутреннее согласование
-        zakup_element_page.send_zakup_for_approval()
+        zakup_element_page.send_zakup_for_approval(user_data_dict)
         # На основе: Типа закупочной процедуры, Ценовой категории, Типа работ и услуг
         # проверка обновления статуса согласования
         if user_data_dict["contractorType"] == "Тендерная заявка":

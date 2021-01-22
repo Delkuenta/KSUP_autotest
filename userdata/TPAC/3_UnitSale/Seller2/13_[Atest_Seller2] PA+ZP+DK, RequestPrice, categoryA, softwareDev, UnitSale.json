@@ -7,10 +7,10 @@
         "salesManager": "Ногинский Михаил Владимирович",
         "executiveUnit": "Дирекция по работе с государственным сектором",
         "executiveManager": "Ногинский Михаил Владимирович",
-        "executiveUnitLegal": "ООО \"ЗЛЫЕ МАРСИАНЕ\"",
+        "executiveUnitLegal": "ООО \"НУЖНО БОЛЬШЕ ЗОЛОТА\"",
         "saleLawType": "44-ФЗ",
         "typeOfWorkServices": ["Разработка заказного ПО", "Техническая поддержка ПО"],
-        "sum": 625000,
+        "sum": 740000,
         "currency": "Евро",
         "priceCategory": "",
         "applicationSize": 10000,
@@ -46,12 +46,12 @@
                 "quarter": 3
             },
             {
-                "sum": 200000,
+                "sum": 300000,
                 "year": 2020,
                 "quarter": 4
             },
             {
-                "sum": 70000,
+                "sum": 100000,
                 "year": 2021,
                 "quarter": 1
             },
@@ -61,7 +61,7 @@
                 "quarter": 2
             },
             {
-                "sum": 25000,
+                "sum": 10000,
                 "year": 2021,
                 "quarter": 3
             }

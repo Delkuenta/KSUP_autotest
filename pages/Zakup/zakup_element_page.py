@@ -436,10 +436,32 @@ class ZakupElementPage(BasePage):
         assert self.is_element_clickable(*ZakupElementLocators.SEND_APPROVAL_BUTTON) is False, \
             'Кнопка "Отправить на согласование" отображена и доступна для нажатия'
 
-    # Отправка на согласования контракта
-    def send_zakup_for_approval(self):
+    # Отправка на согласования закупки
+    def send_zakup_for_approval(self, user_data_dict):
         self.is_element_clickable(*ZakupElementLocators.SEND_APPROVAL_BUTTON)
         self.browser.find_element(*ZakupElementLocators.SEND_APPROVAL_BUTTON).click()
+        if user_data_dict["contractorType"] == "Тендерная заявка":
+            # Выбираем сотрудника из юридической службы
+            self.browser.find_element(*ZakupElementLocators.EMPLOYEE_LEGAL_FIELD).click()
+            how, what = ZakupElementLocators.EMPLOYEE_LEGAL_DROPDOWN_ELEMENT
+            what = what.replace("employee_legal", "Mr_KSUP_Legal")
+            self.browser.find_element(how, what).click()
+
+            # Выбираем сотрудника из бухгалтерии
+            self.browser.find_element(*ZakupElementLocators.EMPLOYEE_COUNT_FIELD).click()
+            how, what = ZakupElementLocators.EMPLOYEE_COUNT_DROPDOWN_ELEMENT
+            what = what.replace("employee_count", "Mr_KSUP_Count")
+            self.browser.find_element(how, what).click()
+
+            # Выбираем сотрудника из финансовой службы
+            self.browser.find_element(*ZakupElementLocators.EMPLOYEE_FIN_FIELD).click()
+            how, what = ZakupElementLocators.EMPLOYEE_FIN_DROPDOWN_ELEMENT
+            what = what.replace("employee_fin", "Mr_KSUP_Fin")
+            self.browser.find_element(how, what).click()
+
+            # Жмем кнопку отправить
+            self.browser.find_element(*ZakupElementLocators.CONFIRM_SELECT_EMPLOYEE_BUTTON).click()
+
         self.is_visibility_of_element_located(*ZakupElementLocators.CONFIRM_SEND_APPROVAL_BUTTON, 5)
         self.browser.find_element(*ZakupElementLocators.CONFIRM_SEND_APPROVAL_BUTTON).click()
 

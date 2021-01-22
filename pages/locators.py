@@ -511,9 +511,33 @@ class ZakupElementLocators:
 
     # Кнопка Отправить на согласование ЗП  //a[contains(@id, 'ApprovePresaleActivity.ToApprove')]
     SEND_APPROVAL_BUTTON = (By.CSS_SELECTOR, "[id^='ApprovePresaleActivity.ToApprove']")
-    # Всплывающее окно подтверждения/отмены отправки закупочной процедуры
+
+    # Модульное окно выбора ответственных из юр, бух и фин
+    # Выпадающий список "Согласующий с юридической службы"
+    EMPLOYEE_LEGAL_FIELD = (By.CSS_SELECTOR, "[id*='divChooseServiceEmployeeLegal']>[class*='select2 select2-container']")
+    EMPLOYEE_LEGAL_DROPDOWN_ELEMENT = (
+        By.XPATH, "//*[contains(@id, 'selectChooseServiceEmployeeLegal-results')]//li[contains(text(), 'employee_legal')]")
+
+    # Выпадающий список "Согласующий с бухгалтерии"
+    EMPLOYEE_COUNT_FIELD = (By.CSS_SELECTOR, "[id*='divChooseServiceEmployeeCount']>[class*='select2 select2-container']")
+    EMPLOYEE_COUNT_DROPDOWN_ELEMENT = (
+        By.XPATH, "//*[contains(@id, 'selectChooseServiceEmployeeCount-results')]//li[contains(text(), 'employee_count')]")
+
+    # Выпадающий список "Согласующий с финансовой службы"
+    EMPLOYEE_FIN_FIELD = (By.CSS_SELECTOR, "[id*='divChooseServiceEmployeeFin']>[class*='select2 select2-container']")
+    EMPLOYEE_FIN_DROPDOWN_ELEMENT = (
+        By.XPATH, "//*[contains(@id, 'selectChooseServiceEmployeeFin-results')]//li[contains(text(), 'employee_fin')]")
+
+    # Выпадающий список "Согласующий со стороны финансовой службы"
+    CONFIRM_SELECT_EMPLOYEE_BUTTON = (By.XPATH, "//input[@type = 'button' and @value = 'Отправить']")
+    CANCEL_SELECT_EMPLOYEE_BUTTON = (By.XPATH, "//input[@type = 'button' and @value = 'Отмена']")
+
+    # Всплывающее окно подтверждения/отмены отправки закупочной процедуры кроме тендера
     CONFIRM_SEND_APPROVAL_BUTTON = (By.XPATH, "//button[@type = 'button' and (text() = 'Отправить')]")
     CANCEL_SEND_APPROVAL_BUTTON = (By.XPATH, "//button[@type = 'button' and (text() = 'Отмена')]")
+
+
+
     # Кнопка согласования и отклонения закупочной процедуры //a[starts-with(@id, 'ApprovePresaleActivity.Approve')]
     APPROVAL_ZAKUP_BUTTON = (By.CSS_SELECTOR, "[id^='ApprovePresaleActivity.Approve']")
     REJECT_ZAKUP_BUTTON = (By.CSS_SELECTOR, "[id^='ApprovePresaleActivity.Reject']")
@@ -1432,6 +1456,19 @@ class FormCreateCustomerLocators:
     NOTIFY_ABOUT_FIELD =(By.CSS_SELECTOR, "[class^='fldKsupEgrHead_NotifyAbout']")
     # Чек-боксы в блоке "Уведомлять о" (отображено только под Admin)
     NOTIFY_ABOUT_CHECKBOX = (By.XPATH, "//*[contains(@for, 'KsupEgrHead_NotifyAbout') and normalize-space(.)= 'name']")
+
+    # Поле "Сотрудники юридической службы" (отображено только под Admin)
+    EMPLOYEE_LEGAL_FIELD = (By.CSS_SELECTOR, "input[id^='KsupServiceEmployee_Legal'][class*='editorInput']")
+    EMPLOYEE_LEGAL_DROPDOWN_ELEMENT = (By.XPATH, "//a[@class='ms-core-menu-link']//div[contains(text(), 'name')]")
+
+    # Поле "Сотрудники бухгалтерии" (отображено только под Admin)
+    EMPLOYEE_COUNT_FIELD = (By.CSS_SELECTOR, "input[id^='KsupServiceEmployee_Count'][class*='editorInput']")
+    EMPLOYEE_COUNT_DROPDOWN_ELEMENT = (By.XPATH, "//a[@class='ms-core-menu-link']//div[contains(text(), 'name')]")
+
+    # Поле "Сотрудники финансовой службы" (отображено только под Admin)
+    EMPLOYEE_FIN_FIELD = (By.CSS_SELECTOR, "input[id^='KsupServiceEmployee_Fin'][class*='editorInput']")
+    EMPLOYEE_FIN_DROPDOWN_ELEMENT = (By.XPATH, "//a[@class='ms-core-menu-link']//div[contains(text(), 'name')]")
+
 
     # Кнопка создания
     CONFIRM_CREATE_BUTTON = (By.XPATH, "//*[contains(@id, 'diidIOSaveItem') and @value='Создать']")

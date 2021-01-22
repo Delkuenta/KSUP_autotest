@@ -10,7 +10,7 @@
         "executiveUnitLegal": "ООО \"ЗЛЫЕ МАРСИАНЕ\"",
         "saleLawType": "",
         "typeOfWorkServices": ["Поставка лицензий на ПО"],
-        "sum": 45000000,
+        "sum": 49000000,
         "currency": "Рубль",
         "priceCategory": "",
         "applicationSize": "",
@@ -51,7 +51,7 @@
                 "quarter": 4
             },
             {
-                "sum": 10000000,
+                "sum": 14000000,
                 "year": 2021,
                 "quarter": 1
             }

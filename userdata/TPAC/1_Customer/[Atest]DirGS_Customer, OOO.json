@@ -1,0 +1,27 @@
+{
+	"main_data": {
+		"ogrn": 1174027001114,
+        "fullName": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"НУЖНО БОЛЬШЕ ЗОЛОТА\"",
+		"shortName": "ООО \"НУЖНО БОЛЬШЕ ЗОЛОТА\"",
+		"inn": "4029056067",
+		"kpp": "402901001",
+		"address": "248016 ОБЛ КАЛУЖСКАЯ Г КАЛУГА УЛ ЧИЖЕВСКОГО ДОМ 9",
+		"industry": "Торговля",
+		"significance": "Малый",
+		"description": "Контора жадных людей",
+		"сontactPersons": "Жадные люди",
+		"сompetitors": "Добрые люди",
+		"site": "https://worldofwarcraft.com/en-gb/guild/eu/%D0%BF%D0%BE%D0%B4%D0%B7%D0%B5%D0%BC%D1%8C%D0%B5/%D0%BD%D1%83%D0%B6%D0%BD%D0%BE-%D0%B1%D0%BE%D0%BB%D1%8C%D1%88%D0%B5-%D0%B7%D0%BE%D0%BB%D0%BE%D1%82%D0%B0",
+		"interactionStatus": "Потерянный",
+		"direction": "Дирекция по работе с государственным сектором",
+		"department": ["Департамент корпоративных систем"],
+		"gklanit": 1,
+		"egrulHead": ["Mr_KSUP_LegalDir@LANIT"],
+		"notifyHead": 1,
+		"notifyAbout": ["Тендерная заявка", "Коммерческое предложение", "Запрос цен товаров, работ, услуг", "Договор (контракт)"],
+		"ServiceEmployeeLegal":["Mr_KSUP_Legal@LANIT"],
+		"ServiceEmployeeCount":["Mr_KSUP_Count@LANIT"],
+		"ServiceEmployeeFin":["Mr_KSUP_Fin@LANIT"],
+		"createAccount": "Mr_KSUP_Admin"
+    }
+}

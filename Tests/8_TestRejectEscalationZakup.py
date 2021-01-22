@@ -76,7 +76,7 @@ class TestRejectStepBackZakup:
         zakup_list_page.go_to_zakup_element(user_data_dict)
         zakup_element_page = ZakupElementPage(browser_function, browser_function.current_url)
         zakup_element_page.verify_general_information_in_zakup(user_data_dict)
-        zakup_element_page.send_zakup_for_approval()
+        zakup_element_page.send_zakup_for_approval(user_data_dict)
         zakup_element_page.verify_zakup_waiting_status_approval_legal()
         login_page.logout()
 
@@ -110,7 +110,7 @@ class TestRejectStepBackZakup:
         zakup_list_page.go_to_zakup_element(user_data_dict)
         zakup_element_page = ZakupElementPage(browser_function, browser_function.current_url)
         zakup_element_page.verify_general_information_in_zakup(user_data_dict)
-        zakup_element_page.send_zakup_for_approval()
+        zakup_element_page.send_zakup_for_approval(user_data_dict)
         zakup_element_page.verify_zakup_waiting_status_approval_legal()
         login_page.logout()
 
@@ -170,7 +170,7 @@ class TestRejectStepBackZakup:
         zakup_list_page.go_to_zakup_element(user_data_dict)
         zakup_element_page = ZakupElementPage(browser_function, browser_function.current_url)
         zakup_element_page.verify_general_information_in_zakup(user_data_dict)
-        zakup_element_page.send_zakup_for_approval()
+        zakup_element_page.send_zakup_for_approval(user_data_dict)
         zakup_element_page.verify_zakup_waiting_status_approval_legal()
         login_page.logout()
 
@@ -256,7 +256,7 @@ class TestRejectStepBackZakup:
         zakup_list_page.go_to_zakup_element(user_data_dict)
         zakup_element_page = ZakupElementPage(browser_function, browser_function.current_url)
         zakup_element_page.verify_general_information_in_zakup(user_data_dict)
-        zakup_element_page.send_zakup_for_approval()
+        zakup_element_page.send_zakup_for_approval(user_data_dict)
         zakup_element_page.verify_zakup_waiting_status_approval_count()
         login_page.logout()
 
@@ -347,7 +347,7 @@ class TestRejectStepBackZakup:
         zakup_list_page.go_to_zakup_element(user_data_dict)
         zakup_element_page = ZakupElementPage(browser_function, browser_function.current_url)
         zakup_element_page.verify_general_information_in_zakup(user_data_dict)
-        zakup_element_page.send_zakup_for_approval()
+        zakup_element_page.send_zakup_for_approval(user_data_dict)
         zakup_element_page.verify_zakup_waiting_status_approval_fin()
         login_page.logout()
 
@@ -439,7 +439,7 @@ class TestRejectStepBackZakup:
         zakup_list_page.go_to_zakup_element(user_data_dict)
         zakup_element_page = ZakupElementPage(browser_function, browser_function.current_url)
         zakup_element_page.verify_general_information_in_zakup(user_data_dict)
-        zakup_element_page.send_zakup_for_approval()
+        zakup_element_page.send_zakup_for_approval(user_data_dict)
         zakup_element_page.verify_zakup_waiting_status_approval_udprpo()
         login_page.logout()
 
@@ -500,7 +500,7 @@ class TestRejectStepBackZakup:
         zakup_list_page.go_to_zakup_element(user_data_dict)
         zakup_element_page = ZakupElementPage(browser_function, browser_function.current_url)
         zakup_element_page.verify_general_information_in_zakup(user_data_dict)
-        zakup_element_page.send_zakup_for_approval()
+        zakup_element_page.send_zakup_for_approval(user_data_dict)
         zakup_element_page.verify_zakup_waiting_status_approval_kkp()
         login_page.logout()
 
@@ -535,6 +535,7 @@ class TestRejectStepBackZakup:
         zakup_element_page.verify_general_information_in_zakup(user_data_dict)
         zakup_element_page.verify_unvisibility_approval_send_button()
         login_page.logout()
+
 
 @pytest.mark.parametrize('path_data_file', [
     r"TPAC\7_RejectApproval\2_[Atest_Dir] Reject ZP,Tender, categoryA, softwareDev, UnitSale.json"])
@@ -596,7 +597,7 @@ class TestRejectCurrentStepAndEscalationZakup:
         zakup_list_page.go_to_zakup_element(user_data_dict)
         zakup_element_page = ZakupElementPage(browser_function, browser_function.current_url)
         zakup_element_page.verify_general_information_in_zakup(user_data_dict)
-        zakup_element_page.send_zakup_for_approval()
+        zakup_element_page.send_zakup_for_approval(user_data_dict)
         zakup_element_page.verify_zakup_waiting_status_approval_legal()
         login_page.logout()
 
@@ -630,7 +631,7 @@ class TestRejectCurrentStepAndEscalationZakup:
         zakup_list_page.go_to_zakup_element(user_data_dict)
         zakup_element_page = ZakupElementPage(browser_function, browser_function.current_url)
         zakup_element_page.verify_general_information_in_zakup(user_data_dict)
-        zakup_element_page.send_zakup_for_approval()
+        zakup_element_page.send_zakup_for_approval(user_data_dict)
         zakup_element_page.verify_zakup_waiting_status_approval_legal()
         login_page.logout()
 
@@ -690,7 +691,7 @@ class TestRejectCurrentStepAndEscalationZakup:
         zakup_list_page.go_to_zakup_element(user_data_dict)
         zakup_element_page = ZakupElementPage(browser_function, browser_function.current_url)
         zakup_element_page.verify_general_information_in_zakup(user_data_dict)
-        zakup_element_page.send_zakup_for_approval()
+        zakup_element_page.send_zakup_for_approval(user_data_dict)
         zakup_element_page.verify_zakup_waiting_status_approval_count()
         login_page.logout()
 
@@ -750,7 +751,7 @@ class TestRejectCurrentStepAndEscalationZakup:
         zakup_list_page.go_to_zakup_element(user_data_dict)
         zakup_element_page = ZakupElementPage(browser_function, browser_function.current_url)
         zakup_element_page.verify_general_information_in_zakup(user_data_dict)
-        zakup_element_page.send_zakup_for_approval()
+        zakup_element_page.send_zakup_for_approval(user_data_dict)
         zakup_element_page.verify_zakup_waiting_status_approval_fin()
         login_page.logout()
 
@@ -849,7 +850,7 @@ class TestRejectCurrentStepAndEscalationZakup:
         zakup_list_page.go_to_zakup_element(user_data_dict)
         zakup_element_page = ZakupElementPage(browser_function, browser_function.current_url)
         zakup_element_page.verify_general_information_in_zakup(user_data_dict)
-        zakup_element_page.send_zakup_for_approval()
+        zakup_element_page.send_zakup_for_approval(user_data_dict)
         zakup_element_page.verify_zakup_waiting_status_approval_udprpo()
         login_page.logout()
 
@@ -911,4 +912,3 @@ class TestRejectCurrentStepAndEscalationZakup:
         zakup_element_page.verify_general_information_in_zakup(user_data_dict)
         zakup_element_page.verify_unvisibility_approval_send_button()
         login_page.logout()
-

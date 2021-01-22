@@ -7,10 +7,10 @@
         "salesManager": "Ногинский Михаил Владимирович",
         "executiveUnit": "Дирекция по работе с государственным сектором",
         "executiveManager": "Ногинский Михаил Владимирович",
-        "executiveUnitLegal": "ООО \"ЗЛЫЕ МАРСИАНЕ\"",
+        "executiveUnitLegal": "ООО \"НУЖНО БОЛЬШЕ ЗОЛОТА\"",
         "saleLawType": "44-ФЗ",
         "typeOfWorkServices": ["Аутсорсинг разработки (включая аутстаффинг)", "Внедрение готовых программных продуктов и решений (типа CRM, PLM)"],
-        "sum": 720000,
+        "sum": 850000,
         "currency": "Доллар",
         "priceCategory": "",
         "applicationSize": 5000,
@@ -41,17 +41,17 @@
 		"createAccount": "Mr_KSUP_Seller2",
         "payments": [
             {
-                "sum": 700000,
+                "sum": 800000,
                 "year": 2021,
                 "quarter": 1
             },
             {
-                "sum": 15000,
+                "sum": 25000,
                 "year": 2021,
                 "quarter": 2
             },
             {
-                "sum": 5000,
+                "sum": 25000,
                 "year": 2021,
                 "quarter": 3
             }

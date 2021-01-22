@@ -160,13 +160,14 @@ class CustomerFormCreate(BasePage):
                     self.browser.find_element(*FormCreateCustomerLocators.NOTIFY_ABOUT_FIELD).is_displayed() is False,
                     'Отображено поле с чек-боксами "Уведомлять о". '
                     'Данный чек-бокс отображается только под ролью Admin')
-
                 # Заполняем поле "Руководители"
-                for element in user_data_dict["egrulHead"]:
-                    self.browser.find_element(*FormCreateCustomerLocators.CUSTOMER_HEAD_FIELD).send_keys(element)
-                    how, what = FormCreateCustomerLocators.CUSTOMER_HEAD_DROPDOWN_ELEMENT
-                    what = what.replace("name", element)
-                    self.browser.find_element(how, what).click()
+
+                if len(user_data_dict["egrulHead"]) > 0:
+                    for element in user_data_dict["egrulHead"]:
+                        self.browser.find_element(*FormCreateCustomerLocators.CUSTOMER_HEAD_FIELD).send_keys(element)
+                        how, what = FormCreateCustomerLocators.CUSTOMER_HEAD_DROPDOWN_ELEMENT
+                        what = what.replace("name", element)
+                        self.browser.find_element(how, what).click()
 
                 if user_data_dict["notifyHead"] == 1:
                     # Активируем чек-бокс "Уведомлять руководителя"
@@ -179,6 +180,30 @@ class CustomerFormCreate(BasePage):
                     # Активируем чек-боксы в поле "Уведомлять о"
                     for element in user_data_dict["notifyAbout"]:
                         how, what = FormCreateCustomerLocators.NOTIFY_ABOUT_CHECKBOX
+                        what = what.replace("name", element)
+                        self.browser.find_element(how, what).click()
+
+                # Заполняем поле "Сотрудники юридической службы"
+                if len(user_data_dict["ServiceEmployeeLegal"]) > 0:
+                    for element in user_data_dict["ServiceEmployeeLegal"]:
+                        self.browser.find_element(*FormCreateCustomerLocators.EMPLOYEE_LEGAL_FIELD).send_keys(element)
+                        how, what = FormCreateCustomerLocators.EMPLOYEE_LEGAL_DROPDOWN_ELEMENT
+                        what = what.replace("name", element)
+                        self.browser.find_element(how, what).click()
+
+                # Заполняем поле "Сотрудники бухгалтерии"
+                if len(user_data_dict["ServiceEmployeeCount"]) > 0:
+                    for element in user_data_dict["ServiceEmployeeCount"]:
+                        self.browser.find_element(*FormCreateCustomerLocators.EMPLOYEE_COUNT_FIELD).send_keys(element)
+                        how, what = FormCreateCustomerLocators.EMPLOYEE_COUNT_DROPDOWN_ELEMENT
+                        what = what.replace("name", element)
+                        self.browser.find_element(how, what).click()
+
+                # Заполняем поле "Сотрудники финансовой службы"
+                if len(user_data_dict["ServiceEmployeeFin"]) > 0:
+                    for element in user_data_dict["ServiceEmployeeFin"]:
+                        self.browser.find_element(*FormCreateCustomerLocators.EMPLOYEE_FIN_FIELD).send_keys(element)
+                        how, what = FormCreateCustomerLocators.EMPLOYEE_FIN_DROPDOWN_ELEMENT
                         what = what.replace("name", element)
                         self.browser.find_element(how, what).click()
 

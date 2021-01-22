@@ -248,7 +248,7 @@ class TestSeparateSaleFullBusinessCyclePaZpDk:
         zakup_list_page.go_to_zakup_element(user_data_dict)
         zakup_element_page = ZakupElementPage(browser_function, browser_function.current_url)
         zakup_element_page.verify_general_information_in_zakup(user_data_dict)
-        zakup_element_page.send_zakup_for_approval()
+        zakup_element_page.send_zakup_for_approval(user_data_dict)
         if user_data_dict["contractorType"] == "Тендерная заявка":
             zakup_element_page.verify_zakup_waiting_status_approval_legal()
         elif user_data_dict["contractorType"] != "Тендерная заявка" \
