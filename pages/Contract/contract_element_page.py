@@ -358,8 +358,28 @@ class ContractElementPage(BasePage):
     def send_contract_for_approval(self):
         self.is_element_clickable(*ContractElementLocators.SEND_APPROVAL_CONTRACT_CONTRACT)
         self.browser.find_element(*ContractElementLocators.SEND_APPROVAL_CONTRACT_CONTRACT).click()
-        self.is_visibility_of_element_located(*ContractElementLocators.CONFIRM_SEND_APPROVAL_CONTRACT, 5)
-        self.browser.find_element(*ContractElementLocators.CONFIRM_SEND_APPROVAL_CONTRACT).click()
+
+        # Выбираем сотрудника из юридической службы
+        self.browser.find_element(*ContractElementLocators.EMPLOYEE_LEGAL_FIELD).click()
+        how, what = ContractElementLocators.EMPLOYEE_LEGAL_DROPDOWN_ELEMENT
+        what = what.replace("employee_legal", "Mr_KSUP_Legal")
+        self.browser.find_element(how, what).click()
+
+        # Выбираем сотрудника из бухгалтерии
+        self.browser.find_element(*ContractElementLocators.EMPLOYEE_COUNT_FIELD).click()
+        how, what = ContractElementLocators.EMPLOYEE_COUNT_DROPDOWN_ELEMENT
+        what = what.replace("employee_count", "Mr_KSUP_Count")
+        self.browser.find_element(how, what).click()
+
+        # Выбираем сотрудника из финансовой службы
+        self.browser.find_element(*ContractElementLocators.EMPLOYEE_FIN_FIELD).click()
+        how, what = ContractElementLocators.EMPLOYEE_FIN_DROPDOWN_ELEMENT
+        what = what.replace("employee_fin", "Mr_KSUP_Fin")
+        self.browser.find_element(how, what).click()
+
+        # Жмем кнопку отправить
+        self.browser.find_element(*ContractElementLocators.CONFIRM_SELECT_EMPLOYEE_BUTTON).click()
+        breakpoint()
 
     # Проверка НЕ отображения кнопки "Отправить на согласования"
     def verify_unvisibility_send_approval_button(self):

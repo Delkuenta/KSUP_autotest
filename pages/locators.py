@@ -513,6 +513,9 @@ class ZakupElementLocators:
     SEND_APPROVAL_BUTTON = (By.CSS_SELECTOR, "[id^='ApprovePresaleActivity.ToApprove']")
 
     # Модульное окно выбора ответственных из юр, бух и фин
+    CONFIRM_SEND_APPROVAL_BUTTON = (By.XPATH, "//button[@type = 'button' and (text() = 'Отправить')]")
+    CANCEL_SEND_APPROVAL_BUTTON = (By.XPATH, "//button[@type = 'button' and (text() = 'Отмена')]")
+
     # Выпадающий список "Согласующий с юридической службы"
     EMPLOYEE_LEGAL_FIELD = (By.CSS_SELECTOR, "[id*='divChooseServiceEmployeeLegal']>[class*='select2 select2-container']")
     EMPLOYEE_LEGAL_DROPDOWN_ELEMENT = (
@@ -528,15 +531,9 @@ class ZakupElementLocators:
     EMPLOYEE_FIN_DROPDOWN_ELEMENT = (
         By.XPATH, "//*[contains(@id, 'selectChooseServiceEmployeeFin-results')]//li[contains(text(), 'employee_fin')]")
 
-    # Выпадающий список "Согласующий со стороны финансовой службы"
+    # Кнопки подтверждения в модульном окне выбора ответственных
     CONFIRM_SELECT_EMPLOYEE_BUTTON = (By.XPATH, "//input[@type = 'button' and @value = 'Отправить']")
     CANCEL_SELECT_EMPLOYEE_BUTTON = (By.XPATH, "//input[@type = 'button' and @value = 'Отмена']")
-
-    # Всплывающее окно подтверждения/отмены отправки закупочной процедуры кроме тендера
-    CONFIRM_SEND_APPROVAL_BUTTON = (By.XPATH, "//button[@type = 'button' and (text() = 'Отправить')]")
-    CANCEL_SEND_APPROVAL_BUTTON = (By.XPATH, "//button[@type = 'button' and (text() = 'Отмена')]")
-
-
 
     # Кнопка согласования и отклонения закупочной процедуры //a[starts-with(@id, 'ApprovePresaleActivity.Approve')]
     APPROVAL_ZAKUP_BUTTON = (By.CSS_SELECTOR, "[id^='ApprovePresaleActivity.Approve']")
@@ -857,20 +854,44 @@ class ContractElementLocators:
     # Титул в карточке "Пресейловая активность"
     TITLE_IN_CONTRACT = (By.CSS_SELECTOR, "#pageTitle")
 
-    # Кнопки на риббоне SP
+    # Кнопка отправить на согласование
     # Отправить на согласование //a[starts-with(@id, 'Approve.ToApprove')]
     SEND_APPROVAL_CONTRACT_CONTRACT = (By.CSS_SELECTOR, "[id^='Approve.ToApprove']")
-    CONFIRM_SEND_APPROVAL_CONTRACT = (By.XPATH, "//button[@type = 'button' and (text() = 'Отправить')]")
-    CANCEL_SEND_APPROVAL_CONTRACT = (By.XPATH, "//button[@type = 'button' and (text() = 'Отмена')]")
-    CONFIRM_REJECT_CONTRACT = (By.XPATH, "//button[@type = 'button' and (text() = 'Отклонить')]")
-    CONFIRM_ESCALATE_CONTRACT = (By.XPATH, "//button[@type = 'button' and (text() = 'Эскалировать')]")
-    CONFIRM_REVISION_CONTRACT = (By.XPATH, "//button[@type = 'button' and (text() = 'Отправить на доработку')]")
+
+    # Модульное окно выбора ответственных из юр, бух и фин
+    # Кнопки подтверждения в модульном окне выбора ответственных
+    CONFIRM_SELECT_EMPLOYEE_BUTTON = (By.XPATH, "//input[@type = 'button' and @value = 'Отправить']")
+    CANCEL_SELECT_EMPLOYEE_BUTTON = (By.XPATH, "//input[@type = 'button' and @value = 'Отмена']")
+
+    # Выпадающий список "Согласующий с юридической службы"
+    EMPLOYEE_LEGAL_FIELD = (
+    By.CSS_SELECTOR, "[id*='divChooseServiceEmployeeLegal']>[class*='select2 select2-container']")
+    EMPLOYEE_LEGAL_DROPDOWN_ELEMENT = (
+        By.XPATH,
+        "//*[contains(@id, 'selectChooseServiceEmployeeLegal-results')]//li[contains(text(), 'employee_legal')]")
+
+    # Выпадающий список "Согласующий с бухгалтерии"
+    EMPLOYEE_COUNT_FIELD = (
+        By.CSS_SELECTOR, "[id*='divChooseServiceEmployeeCount']>[class*='select2 select2-container']")
+    EMPLOYEE_COUNT_DROPDOWN_ELEMENT = (
+        By.XPATH,
+        "//*[contains(@id, 'selectChooseServiceEmployeeCount-results')]//li[contains(text(), 'employee_count')]")
+
+    # Выпадающий список "Согласующий с финансовой службы"
+    EMPLOYEE_FIN_FIELD = (By.CSS_SELECTOR, "[id*='divChooseServiceEmployeeFin']>[class*='select2 select2-container']")
+    EMPLOYEE_FIN_DROPDOWN_ELEMENT = (
+        By.XPATH, "//*[contains(@id, 'selectChooseServiceEmployeeFin-results')]//li[contains(text(), 'employee_fin')]")
 
     # Кнопка согласования и отклонения контракта
     APPROVAL_CONTRACT = (By.CSS_SELECTOR, "[id^='Approve.Approve']")
     REJECT_CONTRACT = (By.CSS_SELECTOR, "[id^='Approve.Reject']")
     ESCALATE_CONTRACT = (By.CSS_SELECTOR, "[id^='Approve.Escalate']")
     REVISION_CONTRACT = (By.CSS_SELECTOR, "[id^='Approve.Revision']")
+
+    # Кнопки подтверждения отклонения, эскалации, отправки на доработку внутри модульных окон
+    CONFIRM_REJECT_CONTRACT = (By.XPATH, "//button[@type = 'button' and (text() = 'Отклонить')]")
+    CONFIRM_ESCALATE_CONTRACT = (By.XPATH, "//button[@type = 'button' and (text() = 'Эскалировать')]")
+    CONFIRM_REVISION_CONTRACT = (By.XPATH, "//button[@type = 'button' and (text() = 'Отправить на доработку')]")
 
     # Кнопка изменения элемента
     EDIT_ITEM_BUTTON = (By.CSS_SELECTOR, "[id='Ribbon.ListForm.Display.Manage.EditItem-Large']")
