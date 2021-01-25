@@ -16,8 +16,8 @@ def test_login(browser_session):
     link = LoginData.link
     login_page = LoginData(browser_session, link)
     login_page.open()
-    login_page.login("Mr_KSUP_Dir2") # Mr_KSUP_Seller
-    login_page.verify_username("Mr_KSUP_Dir2")
+    login_page.login("Mr_KSUP_Seller") # Mr_KSUP_Seller
+    login_page.verify_username("Mr_KSUP_Seller")
 
 
 class TestCreatePresaleAndEdit:

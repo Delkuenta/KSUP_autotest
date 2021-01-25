@@ -1,3 +1,5 @@
+import time
+
 from pages.base_page import BasePage
 from pages.locators import ZakupListLocators
 
@@ -40,12 +42,12 @@ class ZakupListPage(BasePage):
 
     # Перейти на вкладку "Отклонено"
     def go_to_rejected_elements_tabs(self):
-        self.is_visibility_of_element_located(*ZakupListLocators.REJECTED_ELEMENTS_TAB, 5)
+        self.is_element_clickable(*ZakupListLocators.REJECTED_ELEMENTS_TAB, 5)
         self.browser.find_element(*ZakupListLocators.REJECTED_ELEMENTS_TAB).click()
 
     # Перейти на вкладку "Согласовано"
     def go_to_approved_elements_tabs(self):
-        self.is_visibility_of_element_located(*ZakupListLocators.APPROVED_ELEMENTS_TAB, 5)
+        self.is_element_clickable(*ZakupListLocators.APPROVED_ELEMENTS_TAB, 5)
         self.browser.find_element(*ZakupListLocators.APPROVED_ELEMENTS_TAB).click()
 
     def verify_element_status_in_approval_tab(self, approval_status="На согласовании с юридической службой"):

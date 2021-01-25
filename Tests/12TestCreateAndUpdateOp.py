@@ -1,5 +1,4 @@
 import pytest
-
 from pages.Contract.contract_create_form_page import ContractFormCreate
 from pages.Contract.contract_element_page import ContractElementPage
 from pages.Contract.contract_list_page import ContractPage
@@ -32,14 +31,15 @@ def test_login(browser_session):
     link = LoginData.link
     login_page = LoginData(browser_session, link)
     login_page.open()
-    login_page.login("Mr_KSUP_Dir2") # Mr_KSUP_Seller
+    login_page.login("Mr_KSUP_Dir2")
     login_page.verify_username("Mr_KSUP_Dir2")
 
 
 class TestCreateAndUpdateOp:
+
     # Создание пресейлов которые войдут в оперплан 2020
     @pytest.mark.parametrize('path_data_file', [old_red_pa_dict, old_orange_pa_dict, gray_pa_dk_dict])
-    def test_create_presale(self, browser_session, test_login, path_data_file):
+    def test_createpresale(self, browser_session, test_login, path_data_file):
         user_data_dict = BasePage.read_file_json(browser_session, path_data_file)
         user_data_dict = BasePage.dict_preparation(browser_session, user_data_dict)
         link = LoginData.link
@@ -57,7 +57,7 @@ class TestCreateAndUpdateOp:
 
     # Создание контракта который войдет в оперплан 2020
     @pytest.mark.parametrize('path_data_file', [old_red_dk_dict])
-    def test_create_contract(self, browser_session, test_login, path_data_file):
+    def test_createcontract(self, browser_session, test_login, path_data_file):
         user_data_dict = BasePage.read_file_json(browser_session, path_data_file)
         user_data_dict = BasePage.dict_preparation(browser_session, user_data_dict)
         link = LoginData.link
@@ -88,7 +88,7 @@ class TestCreateAndUpdateOp:
         link = LoginData.link
         operplan_list_page = OppListPage(browser_session, link)
         operplan_list_page.go_to_operplan_direction(link)
-        operplan_list_page.create_opp("2020")
+        operplan_list_page.create_opp("Дирекция по работе с государственным сектором", "2020")
         operplan_list_page.should_be_element_on_operplan_list("Дирекция по работе с государственным сектором", "2020")
         operplan_list_page.go_to_operplan_element("Дирекция по работе с государственным сектором", "2020")
         operplan_element_page = OppElementPage(browser_session, link)

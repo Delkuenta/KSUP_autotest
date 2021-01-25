@@ -7,8 +7,6 @@ from pages.Zakup.zakup_element_page import ZakupElementPage
 from pages.login_data import LoginData
 from pages.Presale.presale_create_form_page import PresaleFormCreate
 from pages.Zakup.zakup_list_page import ZakupListPage
-
-# RejectApproval
 from userdata.user_data import UserData
 
 """
@@ -211,7 +209,7 @@ class TestRejectStepBackZakup:
             login_page.verify_username("Mr_KSUP_Count")
             login_page.go_to_zakup_list(link)
             zakup_list_page = ZakupListPage(browser_function, browser_function.current_url)
-            # zakup_list_page.go_to_approval_elements_tabs()
+            zakup_list_page.go_to_approval_elements_tabs()
             zakup_list_page.should_be_element_on_zakup_list(user_data_dict)
             zakup_list_page.go_to_zakup_element(user_data_dict)
             zakup_element_page = ZakupElementPage(browser_function, browser_function.current_url)
@@ -219,9 +217,9 @@ class TestRejectStepBackZakup:
             zakup_element_page.approval_zakup(UserData.comment_approval_count, UserData.file_path_for_link_jpg)
             zakup_element_page.verify_zakup_successfully_status_approval_count()
             zakup_element_page.verify_zakup_waiting_status_approval_fin()
-            # login_page.go_to_zakup_list(link)
-            # zakup_list_page.go_to_approved_elements_tabs()
-            # zakup_list_page.should_be_element_on_zakup_list(user_data_dict)
+            login_page.go_to_zakup_list(link)
+            zakup_list_page.go_to_approved_elements_tabs()
+            zakup_list_page.should_be_element_on_zakup_list(user_data_dict)
             login_page.logout()
         else:
             print("\nВнутреннее согласование закупочной процедуры за Бухгалтерию не требуется")
@@ -271,7 +269,7 @@ class TestRejectStepBackZakup:
             login_page.verify_username("Mr_KSUP_Count")
             login_page.go_to_zakup_list(link)
             zakup_list_page = ZakupListPage(browser_function, browser_function.current_url)
-            # zakup_list_page.go_to_approval_elements_tabs()
+            zakup_list_page.go_to_approval_elements_tabs()
             zakup_list_page.should_be_element_on_zakup_list(user_data_dict)
             zakup_list_page.go_to_zakup_element(user_data_dict)
             zakup_element_page = ZakupElementPage(browser_function, browser_function.current_url)
@@ -279,9 +277,9 @@ class TestRejectStepBackZakup:
             zakup_element_page.approval_zakup(UserData.comment_approval_count, UserData.file_path_for_link_jpg)
             zakup_element_page.verify_zakup_successfully_status_approval_count()
             zakup_element_page.verify_zakup_waiting_status_approval_fin()
-            # login_page.go_to_zakup_list(link)
-            # zakup_list_page.go_to_approved_elements_tabs()
-            # zakup_list_page.should_be_element_on_zakup_list(user_data_dict)
+            login_page.go_to_zakup_list(link)
+            zakup_list_page.go_to_approved_elements_tabs()
+            zakup_list_page.should_be_element_on_zakup_list(user_data_dict)
             login_page.logout()
         else:
             print("\nВнутреннее согласование закупочной процедуры за Бухгалтерию не требуется")
@@ -706,7 +704,7 @@ class TestRejectCurrentStepAndEscalationZakup:
             login_page.verify_username("Mr_KSUP_Count")
             login_page.go_to_zakup_list(link)
             zakup_list_page = ZakupListPage(browser_function, browser_function.current_url)
-            # zakup_list_page.go_to_approval_elements_tabs()
+            zakup_list_page.go_to_approval_elements_tabs()
             zakup_list_page.should_be_element_on_zakup_list(user_data_dict)
             zakup_list_page.go_to_zakup_element(user_data_dict)
             zakup_element_page = ZakupElementPage(browser_function, browser_function.current_url)
@@ -714,9 +712,9 @@ class TestRejectCurrentStepAndEscalationZakup:
             zakup_element_page.approval_zakup(UserData.comment_approval_count, UserData.file_path_for_link_jpg)
             zakup_element_page.verify_zakup_successfully_status_approval_count()
             zakup_element_page.verify_zakup_waiting_status_approval_fin()
-            # login_page.go_to_zakup_list(link)
-            # zakup_list_page.go_to_approved_elements_tabs()
-            # zakup_list_page.should_be_element_on_zakup_list(user_data_dict)
+            login_page.go_to_zakup_list(link)
+            zakup_list_page.go_to_approved_elements_tabs()
+            zakup_list_page.should_be_element_on_zakup_list(user_data_dict)
             login_page.logout()
         else:
             print("\nВнутреннее согласование закупочной процедуры за Бухгалтерию не требуется")

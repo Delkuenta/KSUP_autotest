@@ -183,8 +183,22 @@ class ContractFormCreate(BasePage):
                 current_row += 1
         # Жмем кнопку создать
         self.browser.find_element(*FormCreateContractLocators.CONFIRM_CONTRACT_BUTTON).click()
+
         # Подтверждаем внесение изменений  в связанный проект
         self.browser.find_element(*FormCreateContractLocators.CONFIRM_CHANGE_PROJECT_BUTTON).click()
+
+        # Проверяем сумму платежей
+        payments_sum = 0
+        count_payments_line = len(user_data_dict["payments"])
+        current_line = 0
+        while current_line < count_payments_line:
+            payments_sum += user_data_dict["payments"][current_line]["sum"]
+            current_line += 1
+
+        # Если сумма платежей не совпадает появляется алерт, при подтверждении сущность создается
+        if payments_sum != user_data_dict["sum"]:
+            alert = self.browser.switch_to.alert
+            alert.accept()
 
     def form_create_contract(self, user_data_dict):
         time.sleep(3)

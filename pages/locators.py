@@ -479,9 +479,9 @@ class ZakupListLocators:
     # Вкладки на листе сущности "Закупочная процедура"
     ALL_ELEMENTS_TAB = (By.CSS_SELECTOR, "a[class^='viewAll']")
     MINE_ELEMENTS_TAB = (By.CSS_SELECTOR, "a[class^='viewMy']")
-    APPROVAL_ELEMENTS_TAB = (By.CSS_SELECTOR, "a[class^='viewApproval']")
-    REJECTED_ELEMENTS_TAB = (By.CSS_SELECTOR, "a[class^='viewRejected']")
-    APPROVED_ELEMENTS_TAB = (By.CSS_SELECTOR, "a[class^='viewApproved']")
+    APPROVAL_ELEMENTS_TAB = (By.CSS_SELECTOR, "a[class^='viewApproval ms-pivotControl-surfacedOpt']")
+    REJECTED_ELEMENTS_TAB = (By.CSS_SELECTOR, "a[class='viewRejected ms-pivotControl-surfacedOpt']")
+    APPROVED_ELEMENTS_TAB = (By.CSS_SELECTOR, "a[class^='viewApproved ms-pivotControl-surfacedOpt']")
 
     # Поле "Статус согласования" множественный результат
     APPROVAL_STATUS_VALUES = (By.CSS_SELECTOR, "[class^='colKsupPresaleApproveStatus ms-cellstyle ms-vb2']")
@@ -842,9 +842,9 @@ class ContractListLocators:
     # Вкладки на листе сущности "Договор/контракт"
     ALL_ELEMENTS_TAB = (By.CSS_SELECTOR, "a[class^='viewAll']")
     MINE_ELEMENTS_TAB = (By.CSS_SELECTOR, "a[class^='viewMy']")
-    APPROVAL_ELEMENTS_TAB = (By.CSS_SELECTOR, "a[class^='viewApproval']")
-    REJECTED_ELEMENTS_TAB = (By.CSS_SELECTOR, "a[class^='viewRejected']")
-    APPROVED_ELEMENTS_TAB = (By.CSS_SELECTOR, "a[class^='viewApproved']")
+    APPROVAL_ELEMENTS_TAB = (By.CSS_SELECTOR, "a[class^='viewApproval ms-pivotControl-surfacedOpt']")
+    REJECTED_ELEMENTS_TAB = (By.CSS_SELECTOR, "a[class='viewRejected ms-pivotControl-surfacedOpt']")
+    APPROVED_ELEMENTS_TAB = (By.CSS_SELECTOR, "a[class^='viewApproved ms-pivotControl-surfacedOpt']")
 
     # Поле "Статус согласования" множественный результат
     APPROVAL_STATUS_VALUES = (By.CSS_SELECTOR, "[class^='colKsupContractApproveStatus ms-cellstyle ms-vb2']")
@@ -1333,6 +1333,8 @@ class OpListLocators:
     OPERPLAN_CREATE_BUTTON = (By.CSS_SELECTOR, "#idHomePageNewItem")
     CREATE_IFRAME = (By.CSS_SELECTOR, "[id^='DlgFrame']")
     YEAR_ELEMENT = (By.CSS_SELECTOR, "[id^='KsupYear']")
+    DEPARTMENT_ELEMENT = (By.CSS_SELECTOR, "#div-wcfLookupControl_KsupDivisions")
+    DEPARTMENT_DROPDOWN_ELEMENT = (By.XPATH, "//*[contains(@id, 'KsupDivisions')]//li[contains(text(), 'department_name')]")
     CONFIRM_CREATE_OPERPLAN = (By.CSS_SELECTOR, "[id$='ctl00_ctl00_diidIOSaveItem']")
     CANCEL_CREATE_OPERPLAN = (By.CSS_SELECTOR, "[id$='ctl01_ctl00_diidIOGoBack']")
     CREATE_WAITING_TITLE = (By.XPATH, "//h2[contains(text(), 'Пожалуйста, подождите')]")

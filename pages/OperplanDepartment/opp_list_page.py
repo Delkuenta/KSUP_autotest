@@ -22,12 +22,21 @@ class OppListPage(BasePage):
             f'Сущность "Заказчики и исполнители" с именем "{name}" не найдена в списке'
 
     # Кнопка создания пресейла на странице пресейла
-    def create_opp(self, year):
+    def create_opp(self, department, year):
         self.browser.implicitly_wait(2)
         assert self.is_element_clickable(*OpListLocators.OPERPLAN_CREATE_BUTTON), 'Кнопка "Создать" не доступна для нажатия'
         self.browser.find_element(*OpListLocators.OPERPLAN_CREATE_BUTTON).click()
         self.browser.switch_to.frame(self.browser.find_element(*OpListLocators.CREATE_IFRAME))
+        # Выбираем год
         Select(self.browser.find_element(*OpListLocators.YEAR_ELEMENT)).select_by_value(year)
+
+        # Выбираем подразделение из выпадающего списка
+        self.browser.find_element(*OpListLocators.DEPARTMENT_ELEMENT).click()
+        how, what = OpListLocators.DEPARTMENT_DROPDOWN_ELEMENT
+        what = what.replace("department_name", department)
+        self.browser.find_element(how, what).click()
+
+        # Подветрждаем создание
         self.browser.find_element(*OpListLocators.CONFIRM_CREATE_OPERPLAN).click()
         self.is_disappeared(*OpListLocators.CREATE_WAITING_TITLE)
         self.is_frame_to_parent()

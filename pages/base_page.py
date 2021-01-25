@@ -98,6 +98,7 @@ class BasePage:
         self.browser.get(zakup_link)
         assert self.is_text_to_be_present_in_element(*BasePageLocators.ZAKUP_LIST_TITLE, "Закупочные процедуры"), \
             "Титул страницы не соответствует переходу"
+        time.sleep(1)
 
     # Переход на страницу "Договор/контракт"
     def go_to_contract_list(self, link):
@@ -105,6 +106,7 @@ class BasePage:
         self.browser.get(contract_link)
         assert self.is_text_to_be_present_in_element(*BasePageLocators.CONTRACT_LIST_TITLE, "Договоры (контракты)"), \
             "Титул страницы не соответствует переходу"
+        time.sleep(1)
 
     def go_to_customer_list(self, link):
         customer_link = link + BasePageLocators.CUSTOMER_LIST_LINK

@@ -461,9 +461,9 @@ class ZakupElementPage(BasePage):
 
             # Жмем кнопку отправить
             self.browser.find_element(*ZakupElementLocators.CONFIRM_SELECT_EMPLOYEE_BUTTON).click()
-
-        self.is_visibility_of_element_located(*ZakupElementLocators.CONFIRM_SEND_APPROVAL_BUTTON, 5)
-        self.browser.find_element(*ZakupElementLocators.CONFIRM_SEND_APPROVAL_BUTTON).click()
+        else:
+            self.is_visibility_of_element_located(*ZakupElementLocators.CONFIRM_SEND_APPROVAL_BUTTON, 5)
+            self.browser.find_element(*ZakupElementLocators.CONFIRM_SEND_APPROVAL_BUTTON).click()
 
     # Проверка отображения статуса "На согласовании с юридической службой"
     def verify_zakup_waiting_status_approval_legal(self):

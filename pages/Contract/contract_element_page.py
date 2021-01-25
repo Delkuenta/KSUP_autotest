@@ -379,7 +379,6 @@ class ContractElementPage(BasePage):
 
         # Жмем кнопку отправить
         self.browser.find_element(*ContractElementLocators.CONFIRM_SELECT_EMPLOYEE_BUTTON).click()
-        breakpoint()
 
     # Проверка НЕ отображения кнопки "Отправить на согласования"
     def verify_unvisibility_send_approval_button(self):

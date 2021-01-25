@@ -81,7 +81,7 @@ UnitSale\Seller2
 # До первой ошибки --maxfail=1
 # Браузер для запуска --browser_name=firefox
 @pytest.mark.parametrize('path_data_file', [
-    r"TPAC\3_UnitSale\Seller\1_[Atest_Seller] PA+ZP+DK,Tender, categoryA, softwareDev, UnitSale.json"])
+    r"TPAC\3_UnitSale\Seller\13_[Atest_Seller] PA+ZP+DK, RequestPrice, categoryA, softwareDev, UnitSale.json"])
 class TestUnitSaleFullBusinessCyclePaZpDk:
 
     def test_create_presale(self, browser_function, path_data_file):
@@ -407,7 +407,7 @@ class TestUnitSaleFullBusinessCyclePaZpDk:
         login_page.verify_username("Mr_KSUP_Count")
         login_page.go_to_contract_list(link)
         contract_list_page = ContractPage(browser_function, browser_function.current_url)
-        # contract_list_page.go_to_approval_elements_tab()
+        contract_list_page.go_to_approval_elements_tab()
         contract_list_page.should_be_element_on_contract_list(user_data_dict)
         contract_list_page.go_to_contract_element(user_data_dict)
         contract_element_page = ContractElementPage(browser_function, browser_function.current_url)
@@ -415,7 +415,7 @@ class TestUnitSaleFullBusinessCyclePaZpDk:
         contract_element_page.verify_contract_successfully_status_approval_count()
         contract_element_page.verify_contract_waiting_status_approval_fin()
         login_page.go_to_contract_list(link)
-        # contract_list_page.go_to_approved_elements_tab()
+        contract_list_page.go_to_approved_elements_tab()
         contract_list_page.should_be_element_on_contract_list(user_data_dict)
         login_page.logout()
 
