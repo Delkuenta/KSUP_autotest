@@ -183,29 +183,30 @@ class CustomerFormCreate(BasePage):
                         what = what.replace("name", element)
                         self.browser.find_element(how, what).click()
 
-                # Заполняем поле "Сотрудники юридической службы"
-                if len(user_data_dict["ServiceEmployeeLegal"]) > 0:
-                    for element in user_data_dict["ServiceEmployeeLegal"]:
-                        self.browser.find_element(*FormCreateCustomerLocators.EMPLOYEE_LEGAL_FIELD).send_keys(element)
-                        how, what = FormCreateCustomerLocators.EMPLOYEE_LEGAL_DROPDOWN_ELEMENT
-                        what = what.replace("name", element)
-                        self.browser.find_element(how, what).click()
+                if len(str(user_data_dict["ogrn"])) == 13:
+                    # Заполняем поле "Сотрудники юридической службы"
+                    if len(user_data_dict["ServiceEmployeeLegal"]) > 0:
+                        for element in user_data_dict["ServiceEmployeeLegal"]:
+                            self.browser.find_element(*FormCreateCustomerLocators.EMPLOYEE_LEGAL_FIELD).send_keys(element)
+                            how, what = FormCreateCustomerLocators.EMPLOYEE_LEGAL_DROPDOWN_ELEMENT
+                            what = what.replace("name", element)
+                            self.browser.find_element(how, what).click()
 
-                # Заполняем поле "Сотрудники бухгалтерии"
-                if len(user_data_dict["ServiceEmployeeCount"]) > 0:
-                    for element in user_data_dict["ServiceEmployeeCount"]:
-                        self.browser.find_element(*FormCreateCustomerLocators.EMPLOYEE_COUNT_FIELD).send_keys(element)
-                        how, what = FormCreateCustomerLocators.EMPLOYEE_COUNT_DROPDOWN_ELEMENT
-                        what = what.replace("name", element)
-                        self.browser.find_element(how, what).click()
+                    # Заполняем поле "Сотрудники бухгалтерии"
+                    if len(user_data_dict["ServiceEmployeeCount"]) > 0:
+                        for element in user_data_dict["ServiceEmployeeCount"]:
+                            self.browser.find_element(*FormCreateCustomerLocators.EMPLOYEE_COUNT_FIELD).send_keys(element)
+                            how, what = FormCreateCustomerLocators.EMPLOYEE_COUNT_DROPDOWN_ELEMENT
+                            what = what.replace("name", element)
+                            self.browser.find_element(how, what).click()
 
-                # Заполняем поле "Сотрудники финансовой службы"
-                if len(user_data_dict["ServiceEmployeeFin"]) > 0:
-                    for element in user_data_dict["ServiceEmployeeFin"]:
-                        self.browser.find_element(*FormCreateCustomerLocators.EMPLOYEE_FIN_FIELD).send_keys(element)
-                        how, what = FormCreateCustomerLocators.EMPLOYEE_FIN_DROPDOWN_ELEMENT
-                        what = what.replace("name", element)
-                        self.browser.find_element(how, what).click()
+                    # Заполняем поле "Сотрудники финансовой службы"
+                    if len(user_data_dict["ServiceEmployeeFin"]) > 0:
+                        for element in user_data_dict["ServiceEmployeeFin"]:
+                            self.browser.find_element(*FormCreateCustomerLocators.EMPLOYEE_FIN_FIELD).send_keys(element)
+                            how, what = FormCreateCustomerLocators.EMPLOYEE_FIN_DROPDOWN_ELEMENT
+                            what = what.replace("name", element)
+                            self.browser.find_element(how, what).click()
 
         # Жмем кнопку "Создать"
         self.browser.find_element(*FormCreateCustomerLocators.CONFIRM_CREATE_BUTTON).click()

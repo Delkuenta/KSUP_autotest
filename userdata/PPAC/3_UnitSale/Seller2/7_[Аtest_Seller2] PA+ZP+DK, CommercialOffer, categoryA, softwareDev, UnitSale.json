@@ -7,10 +7,10 @@
         "salesManager": "Чоулз Николай Дирекциевич",
         "executiveUnit": "Тестовая дирекция",
         "executiveManager": "Чоулз Николай Дирекциевич",
-        "executiveUnitLegal": "ООО \"ЗЛЫЕ МАРСИАНЕ\"",
+        "executiveUnitLegal": "ООО \"НУЖНО БОЛЬШЕ ЗОЛОТА\"",
         "saleLawType": "44-ФЗ",
         "typeOfWorkServices": ["Аутсорсинг разработки (включая аутстаффинг)", "Внедрение готовых программных продуктов и решений (типа CRM, PLM)"],
-        "sum": 720000,
+        "sum": 850000,
         "currency": "Доллар",
         "priceCategory": "",
         "applicationSize": 5000,
@@ -18,7 +18,7 @@
         "separateSale": "Да",
 		"jointBidding": "Нет",
         "competitionDeadlineFrom": "15.07.2020",
-        "startDate": "1.07.2020",
+        "startDate": "01.01.2021",
         "endDate": "01.07.2021",
         "projectProbability": 100,
         "descriptionText": "Краткое описание текст",
@@ -41,27 +41,17 @@
 		"createAccount": "Mr_KSUP_Seller2",
         "payments": [
             {
-                "sum": 400000,
-                "year": 2020,
-                "quarter": 3
-            },
-            {
-                "sum": 200000,
-                "year": 2020,
-                "quarter": 4
-            },
-            {
-                "sum": 70000,
+                "sum": 800000,
                 "year": 2021,
                 "quarter": 1
             },
             {
-                "sum": 30000,
+                "sum": 25000,
                 "year": 2021,
                 "quarter": 2
             },
             {
-                "sum": 20000,
+                "sum": 25000,
                 "year": 2021,
                 "quarter": 3
             }

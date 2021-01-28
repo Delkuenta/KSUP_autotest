@@ -10,7 +10,7 @@
         "executiveUnitLegal": "ООО \"ЗЛЫЕ МАРСИАНЕ\"",
         "saleLawType": "44-ФЗ",
         "typeOfWorkServices": ["Аутсорсинг разработки (включая аутстаффинг)", "Внедрение готовых программных продуктов и решений (типа CRM, PLM)"],
-        "sum": 720000,
+        "sum": 770000,
         "currency": "Доллар",
         "priceCategory": "",
         "applicationSize": 5000,
@@ -56,12 +56,12 @@
                 "quarter": 1
             },
             {
-                "sum": 30000,
+                "sum": 50000,
                 "year": 2021,
                 "quarter": 2
             },
             {
-                "sum": 20000,
+                "sum": 50000,
                 "year": 2021,
                 "quarter": 3
             }

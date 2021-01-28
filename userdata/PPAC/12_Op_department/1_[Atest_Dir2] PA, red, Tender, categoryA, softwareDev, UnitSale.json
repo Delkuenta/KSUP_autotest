@@ -1,0 +1,45 @@
+{
+	"main_data": {
+        "fullName": "[АТест_Dir2] ПА изменение вероятности заключения на 0%(красный цвет в ОП), Тендерная заявка, категория A, разработка заказного ПО, Самостоятельная продажа",
+        "contractorType": "Тендерная заявка",
+        "customer": "КАЗНАЧЕЙСТВО РОССИИ",
+        "salesUnit": "Тестовая дирекция",
+        "salesManager": "Чоулз Николай Дирекциевич",
+        "executiveUnit": "Тестовая дирекция",
+        "executiveManager": "Чоулз Николай Дирекциевич",
+        "executiveUnitLegal": "ООО \"ЗЛЫЕ МАРСИАНЕ\"",
+        "saleLawType": "44-ФЗ",
+        "typeOfWorkServices": ["Разработка заказного ПО", "Тестирование ПО"],
+        "sum": 52000000,
+        "currency": "Рубль",
+        "priceCategory": "",
+        "applicationSize": 1000,
+        "contractSize": 2000,
+        "separateSale": "Да",
+		"jointBidding": "Нет",
+        "competitionDeadlineFrom": "15.07.2020",
+        "startDate": "01.07.2020",
+        "endDate": "01.07.2021",
+        "projectProbability": 100,
+        "descriptionText": "Краткое описание текст",
+        "risksText": "Текст_риски_тест",
+		"createAccount": "Mr_KSUP_Dir2",
+        "payments": [
+            {
+                "sum": 27000000,
+                "year": 2020,
+                "quarter": 3
+            },
+            {
+                "sum": 15000000,
+                "year": 2020,
+                "quarter": 4
+            },
+            {
+                "sum": 10000000,
+                "year": 2021,
+                "quarter": 1
+            }
+        ]
+    }
+}

@@ -10,6 +10,9 @@ from pages.Presale.presale_list_page import PresalePage
 from pages.base_page import BasePage
 from pages.login_data import LoginData
 
+yearOP = "2020"
+departmentOP = "Тестовая дирекция"
+
 old_red_pa_dict = r"TPAC\12_Op_department\1_[Atest_Dir2] PA, red, Tender, categoryA, softwareDev, UnitSale.json"
 new_red_pa_dict = r"TPAC\12_Op_department\1_[Atest_Dir2] PAedited, red, Tender, categoryA, softwareDev, UnitSale.json"
 
@@ -88,9 +91,9 @@ class TestCreateAndUpdateOp:
         link = LoginData.link
         operplan_list_page = OppListPage(browser_session, link)
         operplan_list_page.go_to_operplan_direction(link)
-        operplan_list_page.create_opp("Дирекция по работе с государственным сектором", "2020")
-        operplan_list_page.should_be_element_on_operplan_list("Дирекция по работе с государственным сектором", "2020")
-        operplan_list_page.go_to_operplan_element("Дирекция по работе с государственным сектором", "2020")
+        operplan_list_page.create_opp(departmentOP, yearOP)
+        operplan_list_page.should_be_element_on_operplan_list(departmentOP, yearOP)
+        operplan_list_page.go_to_operplan_element(departmentOP, yearOP)
         operplan_element_page = OppElementPage(browser_session, link)
         operplan_element_page.verify_element_in_operplan(2020, "presale", user_data_dict1)
         operplan_element_page.verify_element_in_operplan(2020, "presale", user_data_dict2)
@@ -225,8 +228,8 @@ class TestCreateAndUpdateOp:
         link = LoginData.link
         operplan_list_page = OppListPage(browser_session, link)
         operplan_list_page.go_to_operplan_direction(link)
-        operplan_list_page.should_be_element_on_operplan_list("Дирекция по работе с государственным сектором", "2020")
-        operplan_list_page.go_to_operplan_element("Дирекция по работе с государственным сектором", "2020")
+        operplan_list_page.should_be_element_on_operplan_list(departmentOP, yearOP)
+        operplan_list_page.go_to_operplan_element(departmentOP, yearOP)
         operplan_element_page = OppElementPage(browser_session, link)
         operplan_element_page.go_to_update_operplan()
 
@@ -241,8 +244,8 @@ class TestCreateAndUpdateOp:
         link = LoginData.link
         operplan_list_page = OppListPage(browser_session, link)
         operplan_list_page.go_to_operplan_direction(link)
-        operplan_list_page.should_be_element_on_operplan_list("Дирекция по работе с государственным сектором", "2020")
-        operplan_list_page.go_to_operplan_element("Дирекция по работе с государственным сектором", "2020")
+        operplan_list_page.should_be_element_on_operplan_list("Тестовая дирекция", "2020")
+        operplan_list_page.go_to_operplan_element("Тестовая дирекция", "2020")
         operplan_element_page = OppElementPage(browser_session, link)
         operplan_element_page.verify_color_element(red_pa_dict, "red")
         operplan_element_page.verify_color_element(red_dk_dict, "red")
