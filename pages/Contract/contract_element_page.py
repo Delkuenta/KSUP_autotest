@@ -923,7 +923,8 @@ class ContractElementPage(BasePage):
         self.browser.find_element(*ContractElementLocators.EDIT_ITEM_BUTTON).click()
 
     # Добавление файла бюджета проекта
-    def add_file_of_budget(self):
+    def add_file_of_budget(self, file_name):
+
         self.browser.find_element(*ContractElementLocators.BUDGET_CONTRACT_BUTTON).click()
 
         # Проверяем текст заголовка модульного окна
@@ -942,8 +943,19 @@ class ContractElementPage(BasePage):
                               f'Ожидаемый результат: {expected_text}\n'
                               f'Фактический результат: {actual_text}')
 
+        file_link = ""
+        # Определение пути к файлу по названию
+        if file_name == "test_jpg.jpg":
+            file_link = UserData.file_path_for_link_jpg
+        elif file_name == "test_doc.docx":
+            file_link = UserData.file_path_for_link_doc
+        elif file_name == "test_excel.xlsx":
+            file_link = UserData.file_path_for_link_excel
+        elif file_name == "test_video.mp4":
+            file_link = UserData.file_path_for_link_mp4
+
         # Добавляем файл бюджета
-        self.browser.find_element(*ContractElementLocators.FILE_BUDGET_FIELD).send_keys(UserData.file_path_for_link_doc)
+        self.browser.find_element(*ContractElementLocators.FILE_BUDGET_FIELD).send_keys(file_link)
         time.sleep(2)
         # Жмем кнопку "Добавить"
         self.browser.find_element(*ContractElementLocators.ADD_BUDGET_FILE_BUTTON).click()
@@ -953,9 +965,20 @@ class ContractElementPage(BasePage):
 
         # Проверяем отображение добавленного файла бюджета
         actual_text = self.is_element_text(*ContractElementLocators.BUDGET_OF_PROJECT_FIELD)
-        expected_text = UserData.name_doc_to_link
+        expected_text = file_name
         delayed_assert.expect(actual_text == expected_text,
                               'Не корректное название файла в поле "Бюджет проекта" на вкладке "Прикрепленные файлы"\n'
                               f'Ожидаемый результат: {expected_text}\n'
                               f'Фактический результат: {actual_text}')
 
+    # Проверка отображения файла "Бюджет проекта" на вкладке "Прикрепленные файлы"
+    def verify_attached_budget_files(self, file_name):
+        self.browser.find_element(*ContractElementLocators.ATTACHED_FILES_ELEMENT).click()
+        time.sleep(2)
+        # Проверяем текст в поле "Тендерная заявка"
+        actual_text = self.is_element_text(*ContractElementLocators.BUDGET_OF_PROJECT_FIELD)
+        expected_text = file_name
+        delayed_assert.expect(actual_text == expected_text,
+                              'Не корректное название файла в поле "Бюджет проекта" на вкладке "Прикрепленные файлы"\n'
+                              f'Ожидаемый результат: {expected_text}\n'
+                              f'Фактический результат: {actual_text}')

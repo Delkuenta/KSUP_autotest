@@ -23,11 +23,14 @@ class UserData:
     name_doc_to_link = 'test_doc.docx'
     name_excel_to_link = 'test_excel.xlsx'
     name_mp4_to_link = 'test_video.mp4'
+    name_pdf_to_link = 'test_pdf.pdf'
     # Путь для добавления файла в прикрепленные
     file_path_for_link_jpg = os.path.join(current_dir, name_jpg_to_link)
     file_path_for_link_doc = os.path.join(current_dir, name_doc_to_link)
     file_path_for_link_excel = os.path.join(current_dir, name_excel_to_link)
     file_path_for_link_mp4 = os.path.join(current_dir, name_mp4_to_link)
+    file_path_for_link_pdf = os.path.join(current_dir, name_pdf_to_link)
+
 
     # Список категорий которые входят в группу "Программное обеспечение"
     group_software = ["Аутсорсинг разработки (включая аутстаффинг)",

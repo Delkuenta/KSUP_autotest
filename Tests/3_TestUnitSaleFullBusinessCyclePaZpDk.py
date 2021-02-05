@@ -81,7 +81,7 @@ UnitSale\Seller2
 # До первой ошибки --maxfail=1
 # Браузер для запуска --browser_name=firefox
 @pytest.mark.parametrize('path_data_file', [
-    r"TPAC\3_UnitSale\Seller\13_[Atest_Seller] PA+ZP+DK, RequestPrice, categoryA, softwareDev, UnitSale.json"])
+    r"TPAC\3_UnitSale\Seller\1_[Atest_Seller] PA+ZP+DK,Tender, categoryA, softwareDev, UnitSale.json"])
 class TestUnitSaleFullBusinessCyclePaZpDk:
 
     def test_create_presale(self, browser_function, path_data_file):
@@ -140,7 +140,6 @@ class TestUnitSaleFullBusinessCyclePaZpDk:
         zakup_element_page.verify_general_information_in_zakup(user_data_dict)
         zakup_element_page.verify_draft_status_zakup()
         zakup_element_page.verify_attached_files_information(user_data_dict)
-
         login_page.logout()
         delayed_assert.assert_expectations()
 
@@ -162,7 +161,7 @@ class TestUnitSaleFullBusinessCyclePaZpDk:
         # Проверка корректности заполненных полей и статуса созданной сущности
         zakup_element_page.verify_general_information_in_zakup(user_data_dict)
         zakup_element_page.verify_attached_files_information(user_data_dict)
-        zakup_element_page.verify_draft_status_zakup()
+        # zakup_element_page.verify_draft_status_zakup()
 
         # Отправка сущности на внутреннее согласование
         zakup_element_page.send_zakup_for_approval(user_data_dict)
@@ -171,10 +170,11 @@ class TestUnitSaleFullBusinessCyclePaZpDk:
         if user_data_dict["contractorType"] == "Тендерная заявка":
             zakup_element_page.verify_zakup_waiting_status_approval_legal()
             zakup_element_page.verify_visibility_budget_button()
-            # Добавление файла бюджета
-            zakup_element_page.add_file_of_budget()
+            # Добавление файла бюджета возможные названия файла test_jpg.jpg, test_doc.docx, test_excel.xlsx, test_video.mp4, test_pdf.pdf
+            zakup_element_page.add_file_of_budget("test_doc.docx")
             zakup_element_page.verify_general_information_in_zakup(user_data_dict)
             zakup_element_page.verify_attached_files_information(user_data_dict)
+            zakup_element_page.verify_attached_budget_files("test_doc.docx")
         elif user_data_dict["contractorType"] != "Тендерная заявка" \
                 and user_data_dict["priceCategory"] != "C" \
                 and user_data_dict["groupTypeWork"] == "Software":
@@ -253,6 +253,12 @@ class TestUnitSaleFullBusinessCyclePaZpDk:
             zakup_list_page.go_to_zakup_element(user_data_dict)
             zakup_element_page = ZakupElementPage(browser_function, browser_function.current_url)
             zakup_element_page.verify_general_information_in_zakup(user_data_dict)
+            zakup_element_page.verify_visibility_budget_button()
+            # Добавление файла бюджета возможные названия файла test_jpg.jpg, test_doc.docx, test_excel.xlsx, test_video.mp4, test_pdf.pdf
+            zakup_element_page.add_file_of_budget("test_excel.xlsx")
+            zakup_element_page.verify_general_information_in_zakup(user_data_dict)
+            zakup_element_page.verify_attached_files_information(user_data_dict)
+            zakup_element_page.verify_attached_budget_files("test_excel.xlsx")
             zakup_element_page.approval_zakup(UserData.comment_approval_fin, UserData.file_path_for_link_excel)
             zakup_element_page.verify_zakup_successfully_status_approval_fin(user_data_dict)
             if user_data_dict["groupTypeWork"] == "Software" \
@@ -368,10 +374,12 @@ class TestUnitSaleFullBusinessCyclePaZpDk:
         contract_element_page.verify_general_information_contract(user_data_dict)
         contract_element_page.verify_attached_files_information()
         contract_element_page.verify_contract_waiting_status_approval_legal()
+        # Добавление файла бюджета возможные названия файла test_jpg.jpg, test_doc.docx, test_excel.xlsx, test_video.mp4, test_pdf.pdf
         contract_element_page.verify_visibility_budget_button()
-        contract_element_page.add_file_of_budget()
+        contract_element_page.add_file_of_budget("test_jpg.jpg")
         contract_element_page.verify_general_information_contract(user_data_dict)
-
+        contract_element_page.verify_attached_files_information()
+        contract_element_page.verify_attached_budget_files("test_jpg.jpg")
         login_page.logout()
         delayed_assert.assert_expectations()
 
@@ -433,6 +441,12 @@ class TestUnitSaleFullBusinessCyclePaZpDk:
         contract_list_page.should_be_element_on_contract_list(user_data_dict)
         contract_list_page.go_to_contract_element(user_data_dict)
         contract_element_page = ContractElementPage(browser_function, browser_function.current_url)
+        # Добавление файла бюджета возможные названия файла test_jpg.jpg, test_doc.docx, test_excel.xlsx, test_video.mp4, test_pdf.pdf
+        contract_element_page.verify_visibility_budget_button()
+        contract_element_page.add_file_of_budget("test_pdf.pdf")
+        contract_element_page.verify_general_information_contract(user_data_dict)
+        contract_element_page.verify_attached_files_information()
+        contract_element_page.verify_attached_budget_files("test_pdf.pdf")
         contract_element_page.approval_contract(UserData.comment_approval_fin, UserData.file_path_for_link_excel)
         contract_element_page.verify_contract_successfully_status_approval_fin(user_data_dict)
         if user_data_dict["groupTypeWork"] == "Software" and user_data_dict["priceCategory"] != "C":

@@ -124,11 +124,13 @@ class ContractFormCreate(BasePage):
         self.browser.find_element(*FormCreateContractLocators.FILE_CONTRACT).send_keys(UserData.file_path_for_link_doc)
         self.is_text_to_be_present_in_element(*FormCreateContractLocators.FILE_CONTRACT_NAME, UserData.name_doc_to_link)
 
+        """
         # прикрепляем файл Бюджет проекта
         self.browser.find_element(*FormCreateContractLocators.FILE_BUDGET_OF_PROJECT).send_keys(
             UserData.file_path_for_link_jpg)
         self.is_text_to_be_present_in_element(
             *FormCreateContractLocators.FILE_BUDGET_OF_PROJECT_NAME, UserData.name_jpg_to_link)
+        """
 
         # прикрепляем файл Пояснительная служебная записка
         self.browser.find_element(*FormCreateContractLocators.FILE_EXPLANATORY_MEMORANUM).send_keys(
@@ -349,11 +351,13 @@ class ContractFormCreate(BasePage):
         self.browser.find_element(*FormCreateContractLocators.FILE_CONTRACT).send_keys(UserData.file_path_for_link_doc)
         self.is_text_to_be_present_in_element(*FormCreateContractLocators.FILE_CONTRACT_NAME, UserData.name_doc_to_link)
 
+        """
         # прикрепляем файл Бюджет проекта
         self.browser.find_element(*FormCreateContractLocators.FILE_BUDGET_OF_PROJECT).send_keys(
             UserData.file_path_for_link_jpg)
         self.is_text_to_be_present_in_element(
             *FormCreateContractLocators.FILE_BUDGET_OF_PROJECT_NAME, UserData.name_jpg_to_link)
+        """
 
         # прикрепляем файл Пояснительная служебная записка
         self.browser.find_element(*FormCreateContractLocators.FILE_EXPLANATORY_MEMORANUM).send_keys(
@@ -368,8 +372,8 @@ class ContractFormCreate(BasePage):
             *FormCreateContractLocators.FILE_RISK_MAP_AND_REGISTERY_NAME, UserData.name_jpg_to_link)
 
         # прикрепляем файл Иное
-        self.browser.find_element(*FormCreateContractLocators.FILE_OTHER).send_keys(UserData.file_path_for_link_excel)
-        self.is_text_to_be_present_in_element(*FormCreateContractLocators.FILE_OTHER_NAME, UserData.name_excel_to_link)
+        self.browser.find_element(*FormCreateContractLocators.FILE_OTHER).send_keys(UserData.file_path_for_link_doc)
+        self.is_text_to_be_present_in_element(*FormCreateContractLocators.FILE_OTHER_NAME, UserData.name_doc_to_link)
 
         # Жмем кнопку создать
         self.browser.find_element(*FormCreateContractLocators.CONFIRM_CONTRACT_BUTTON).click()
