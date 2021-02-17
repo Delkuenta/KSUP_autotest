@@ -11,7 +11,7 @@ from pages.base_page import BasePage
 from pages.login_data import LoginData
 
 yearOP = "2020"
-departmentOP = "Тестовая дирекция"
+departmentOP = "Дирекция по работе с государственным сектором"
 
 old_red_pa_dict = r"TPAC\12_Op_department\1_[Atest_Dir2] PA, red, Tender, categoryA, softwareDev, UnitSale.json"
 new_red_pa_dict = r"TPAC\12_Op_department\1_[Atest_Dir2] PAedited, red, Tender, categoryA, softwareDev, UnitSale.json"
@@ -222,7 +222,7 @@ class TestCreateAndUpdateOp:
         contract_page.go_to_contract_element(user_data_dict)
         contract_element_page = ContractElementPage(browser_session, browser_session.current_url)
         contract_element_page.verify_general_information_contract(user_data_dict)
-
+    """
     # Обновление ОП
     def test_update_op(self, browser_session, test_login):
         link = LoginData.link
@@ -253,3 +253,4 @@ class TestCreateAndUpdateOp:
         operplan_element_page.verify_color_element(green_pa_dict, "green")
         operplan_element_page.verify_color_element(green_dk_dict, "green")
         operplan_element_page.verify_color_element(gray_dk_dict, "gray")
+    """

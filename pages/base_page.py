@@ -1,4 +1,5 @@
 import json
+import math
 import os
 import time
 from selenium.webdriver import Remote as RemoteWebDriver
@@ -40,7 +41,7 @@ class BasePage:
         return True
 
     # Проверка, доступен ли элемент к нажатию
-    def is_element_clickable(self, how, what, timeout=5):
+    def is_element_clickable(self, how, what, timeout=10):
         try:
             WebDriverWait(self.browser, timeout).until(ec.element_to_be_clickable((how, what)))
         except TimeoutException:
@@ -295,3 +296,31 @@ class BasePage:
         for item in web_elements:
             list_text_element.append(item.text)
         return list_text_element
+
+    # Вспомогательный метод: преобразует числовое значение под маску с тысячным разделением + знаком валюты
+    def to_human_string_sum(self, number, currency):
+        sum_value = ""
+        if math.modf(number)[0] > 0:
+            # Отделяем целую часть числа
+            integer_part = int(math.modf(number)[1])
+            # Преобразование числа в строку с тысячным разделением
+            integer_string = ('{:,d}'.format(integer_part)).replace(",", " ")
+            # Отделяем дробную часть числа и преобразуем в целочисленное число
+            decimal_part = '{:02}'.format(int(round(math.modf(number)[0], 2) * 100))
+            # конкатенируем целую и дробную часть + добавляем знак валюты
+            sum_value = f'{integer_string}' + ',' + f'{decimal_part}'
+            if currency == "Доллар":
+                sum_value = sum_value + ' $'
+            elif currency == "Евро":
+                sum_value = sum_value + ' €'
+            else:
+                sum_value = sum_value + ' ₽'
+        else:
+            # Преобразование целого значения с разделителями пробелами и припиской валюты
+            if currency == "Доллар":
+                sum_value = ('{:,d}'.format(number)).replace(",", " ") + ',00 $'
+            elif currency == "Евро":
+                sum_value = ('{:,d}'.format(number)).replace(",", " ") + ',00 €'
+            else:
+                sum_value = ('{:,d}'.format(number)).replace(",", " ") + ',00 ₽'
+        return sum_value

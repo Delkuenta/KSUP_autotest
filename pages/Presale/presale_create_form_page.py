@@ -1,4 +1,5 @@
 import datetime
+import math
 import time
 from selenium.webdriver.support.select import Select
 from pages.base_page import BasePage
@@ -104,19 +105,30 @@ class PresaleFormCreate(BasePage):
         self.select_in_frame_type_work_and_services(user_data_dict["typeOfWorkServices"])
 
         # Ищем поле "Сумма" и вводим значение
-        self.browser.find_element(*FormCreatePresaleLocators.SUM_ELEMENT).send_keys(user_data_dict["sum"])
+        sum_value = ""
+        if math.modf(user_data_dict["sum"])[0] > 0:
+            sum_value = str(user_data_dict["sum"]).replace(".", ",")
+        else:
+            sum_value = user_data_dict["sum"]
+        self.browser.find_element(*FormCreatePresaleLocators.SUM_ELEMENT).send_keys(sum_value)
 
         # Ищем поле "Валюта" и выбираем значение
         Select(self.browser.find_element(*FormCreatePresaleLocators.CURRENCY_ELEMENT)).select_by_value(
             user_data_dict["currency"])
 
         # Ищем поле "Размер обеспечения заявки" и вводим значение
-        self.browser.find_element(*FormCreatePresaleLocators.APPLICATION_SIZE_ELEMENT).send_keys(
-            user_data_dict["applicationSize"])
+        if math.modf(user_data_dict["applicationSize"])[0] > 0:
+            applicationSize = str(user_data_dict["applicationSize"]).replace(".", ",")
+        else:
+            applicationSize = user_data_dict["applicationSize"]
+        self.browser.find_element(*FormCreatePresaleLocators.APPLICATION_SIZE_ELEMENT).send_keys(applicationSize)
 
         # Ищем поле "Размер обеспечения договора/контракта" и заполняем его
-        self.browser.find_element(*FormCreatePresaleLocators.CONTRACT_SIZE_ELEMENT).send_keys(
-            user_data_dict["contractSize"])
+        if math.modf(user_data_dict["contractSize"])[0] > 0:
+            contractSize = str(user_data_dict["contractSize"]).replace(".", ",")
+        else:
+            contractSize = user_data_dict["contractSize"]
+        self.browser.find_element(*FormCreatePresaleLocators.CONTRACT_SIZE_ELEMENT).send_keys(contractSize)
 
         # Ищем поле "Самостоятельная продажа" и выбираем значение
         Select(self.browser.find_element(*FormCreatePresaleLocators.SEPARATE_SALE_ELEMENT)).select_by_value(
@@ -156,9 +168,14 @@ class PresaleFormCreate(BasePage):
         print(f'\nКоличество строчек плановых платежей: {count_payments_line}')
         current_line = 0
         while current_line < count_payments_line:
+            sum_value = ""
             # Заполняем поле "Сумма" в текущей строке
             sum_field = self.browser.find_elements(*FormCreatePresaleLocators.SUMTABLE)[current_line]
-            sum_field.send_keys(user_data_dict["payments"][current_line]["sum"])
+            if math.modf(user_data_dict["payments"][current_line]["sum"])[0] > 0:
+                sum_value = str(user_data_dict["payments"][current_line]["sum"]).replace(".", ",")
+            else:
+                sum_value = user_data_dict["payments"][current_line]["sum"]
+            sum_field.send_keys(sum_value)
 
             # Заполняем поле "Год" в текущей строке
             year_field = self.browser.find_elements(*FormCreatePresaleLocators.YEARTABLE)[current_line]
@@ -174,7 +191,7 @@ class PresaleFormCreate(BasePage):
 
         # Если сумма платежей не совпадает появляется алерт, при подтверждении сущность создается
         # Баг - отображено два одинаковых алерта, убрать один после фикса
-        if payments_sum != user_data_dict["sum"]:
+        if round(payments_sum, 2) != user_data_dict["sum"]:
             confirm_presale_button = self.browser.find_element(*FormCreatePresaleLocators.CONFIRM_PRESALE_BUTTON)
             confirm_presale_button.click()
             time.sleep(1)

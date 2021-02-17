@@ -51,6 +51,7 @@ class TestDkFullBusinessCycle:
         contract_page.go_to_contract_element(user_data_dict)
         contract_element_page = ContractElementPage(browser_function, browser_function.current_url)
         contract_element_page.verify_general_information_contract(user_data_dict)
+        contract_element_page.verify_payments_information_in_presale(user_data_dict)
         login_page.logout()
         delayed_assert.assert_expectations()
 
@@ -71,7 +72,7 @@ class TestDkFullBusinessCycle:
         contract_element_page.verify_attached_files_information()
         contract_element_page.verify_contract_waiting_status_approval_legal()
         contract_element_page.verify_visibility_budget_button()
-        contract_element_page.add_file_of_budget()
+        contract_element_page.add_file_of_budget("test_doc.docx")
         contract_element_page.verify_general_information_contract(user_data_dict)
         contract_element_page.verify_attached_files_information()
         login_page.logout()

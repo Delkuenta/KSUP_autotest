@@ -81,7 +81,7 @@ UnitSale\Seller2
 # До первой ошибки --maxfail=1
 # Браузер для запуска --browser_name=firefox
 @pytest.mark.parametrize('path_data_file', [
-    r"TPAC\3_UnitSale\Seller\1_[Atest_Seller] PA+ZP+DK,Tender, categoryA, softwareDev, UnitSale.json"])
+    r"TPAC\3_UnitSale\Seller\2_[Atest_Seller] PA+ZP+DK,Tender, categoryB, softwareDev, UnitSale.json"])
 class TestUnitSaleFullBusinessCyclePaZpDk:
 
     def test_create_presale(self, browser_function, path_data_file):
@@ -103,12 +103,14 @@ class TestUnitSaleFullBusinessCyclePaZpDk:
         # create_presale_page.verify_prefill_department_manager(user_data_dict)
         create_presale_page.form_create_presale_all_type(user_data_dict)
         if user_data_dict["createAccount"] == "Mr_KSUP_Seller" or user_data_dict["createAccount"] == "Mr_KSUP_Seller2":
-            presale_list_page.go_to_mine_elements_tabs()
+            presale_list_page.go_to_mine_elements_tab()
+        else:
+            presale_list_page.go_to_allmydepartment_tab()
         presale_list_page.should_be_element_on_presale_list(user_data_dict)
         presale_list_page.go_to_presale_element(user_data_dict)
         presale_element_page.verify_general_information_in_presale(user_data_dict)
         presale_element_page.verify_presale_not_require_status_approval()
-
+        presale_element_page.verify_payments_information_in_presale(user_data_dict)
         login_page.logout()
         delayed_assert.assert_expectations()
 
@@ -128,17 +130,24 @@ class TestUnitSaleFullBusinessCyclePaZpDk:
         login_page.verify_username(user_data_dict["createAccount"])
 
         presale_list_page.go_to_presale_list(link)
-        presale_list_page.go_to_mine_elements_tabs()
+        if user_data_dict["createAccount"] == "Mr_KSUP_Seller" or user_data_dict["createAccount"] == "Mr_KSUP_Seller2":
+            presale_list_page.go_to_mine_elements_tab()
+        else:
+            presale_list_page.go_to_allmydepartment_tab()
         presale_list_page.should_be_element_on_presale_list(user_data_dict)
         presale_list_page.go_to_presale_element(user_data_dict)
         presale_element_page.go_to_create_zp_based_on_presale(user_data_dict)
         zakup_form_create_page.form_create_zakup_all_type_based_on_presale(user_data_dict)
         if user_data_dict["createAccount"] == "Mr_KSUP_Seller" or user_data_dict["createAccount"] == "Mr_KSUP_Seller2":
-            zakup_list_page.go_to_mine_elements_tabs()
+            zakup_list_page.go_to_mine_elements_tab()
+        else:
+            zakup_list_page.go_to_allmydepartment_tab()
         zakup_list_page.should_be_element_on_zakup_list(user_data_dict)
         zakup_list_page.go_to_zakup_element(user_data_dict)
+        # Проверка вкладки "Общие сведения"
         zakup_element_page.verify_general_information_in_zakup(user_data_dict)
         zakup_element_page.verify_draft_status_zakup()
+        # Проверка вкладки "Прикрепленные файлы"
         zakup_element_page.verify_attached_files_information(user_data_dict)
         login_page.logout()
         delayed_assert.assert_expectations()
@@ -196,7 +205,7 @@ class TestUnitSaleFullBusinessCyclePaZpDk:
             login_page.verify_username("Mr_KSUP_Legal")
             login_page.go_to_zakup_list(link)
             zakup_list_page = ZakupListPage(browser_function, browser_function.current_url)
-            zakup_list_page.go_to_approval_elements_tabs()
+            zakup_list_page.go_to_approval_elements_tab()
             zakup_list_page.should_be_element_on_zakup_list(user_data_dict)
             zakup_list_page.go_to_zakup_element(user_data_dict)
             zakup_element_page = ZakupElementPage(browser_function, browser_function.current_url)
@@ -205,7 +214,7 @@ class TestUnitSaleFullBusinessCyclePaZpDk:
             zakup_element_page.verify_zakup_successfully_status_approval_legal()
             zakup_element_page.verify_zakup_waiting_status_approval_count()
             login_page.go_to_zakup_list(link)
-            zakup_list_page.go_to_approved_elements_tabs()
+            zakup_list_page.go_to_approved_elements_tab()
             zakup_list_page.should_be_element_on_zakup_list(user_data_dict)
             login_page.logout()
         else:
@@ -248,7 +257,7 @@ class TestUnitSaleFullBusinessCyclePaZpDk:
             login_page.verify_username("Mr_KSUP_Fin")
             login_page.go_to_zakup_list(link)
             zakup_list_page = ZakupListPage(browser_function, browser_function.current_url)
-            zakup_list_page.go_to_approval_elements_tabs()
+            zakup_list_page.go_to_approval_elements_tab()
             zakup_list_page.should_be_element_on_zakup_list(user_data_dict)
             zakup_list_page.go_to_zakup_element(user_data_dict)
             zakup_element_page = ZakupElementPage(browser_function, browser_function.current_url)
@@ -268,7 +277,7 @@ class TestUnitSaleFullBusinessCyclePaZpDk:
                     and user_data_dict["priceCategory"] == "A":
                 zakup_element_page.verify_zakup_waiting_status_approval_kkp()
             login_page.go_to_zakup_list(link)
-            zakup_list_page.go_to_approved_elements_tabs()
+            zakup_list_page.go_to_approved_elements_tab()
             zakup_list_page.should_be_element_on_zakup_list(user_data_dict)
             login_page.logout()
         else:
@@ -285,7 +294,7 @@ class TestUnitSaleFullBusinessCyclePaZpDk:
             login_page.verify_username("Mr_KSUP_UDPRPO")
             login_page.go_to_zakup_list(link)
             zakup_list_page = ZakupListPage(browser_function, browser_function.current_url)
-            zakup_list_page.go_to_approval_elements_tabs()
+            zakup_list_page.go_to_approval_elements_tab()
             zakup_list_page.should_be_element_on_zakup_list(user_data_dict)
             zakup_list_page.go_to_zakup_element(user_data_dict)
             zakup_element_page = ZakupElementPage(browser_function, browser_function.current_url)
@@ -295,7 +304,7 @@ class TestUnitSaleFullBusinessCyclePaZpDk:
                     and user_data_dict["priceCategory"] == "A":
                 zakup_element_page.verify_zakup_waiting_status_approval_kkp()
             login_page.go_to_zakup_list(link)
-            zakup_list_page.go_to_approved_elements_tabs()
+            zakup_list_page.go_to_approved_elements_tab()
             zakup_list_page.should_be_element_on_zakup_list(user_data_dict)
             login_page.logout()
         else:
@@ -312,14 +321,14 @@ class TestUnitSaleFullBusinessCyclePaZpDk:
             login_page.verify_username("Mr_KSUP_KKP")
             login_page.go_to_zakup_list(link)
             zakup_list_page = ZakupListPage(browser_function, browser_function.current_url)
-            zakup_list_page.go_to_approval_elements_tabs()
+            zakup_list_page.go_to_approval_elements_tab()
             zakup_list_page.should_be_element_on_zakup_list(user_data_dict)
             zakup_list_page.go_to_zakup_element(user_data_dict)
             zakup_element_page = ZakupElementPage(browser_function, browser_function.current_url)
             zakup_element_page.approval_zakup(UserData.comment_approval_kkp, UserData.file_path_for_link_doc)
             zakup_element_page.verify_zakup_successfully_status_approval_kkp(user_data_dict)
             login_page.go_to_zakup_list(link)
-            zakup_list_page.go_to_approved_elements_tabs()
+            zakup_list_page.go_to_approved_elements_tab()
             zakup_list_page.should_be_element_on_zakup_list(user_data_dict)
             login_page.logout()
         else:
@@ -335,7 +344,10 @@ class TestUnitSaleFullBusinessCyclePaZpDk:
         login_page.verify_username(user_data_dict["createAccount"])
         login_page.go_to_zakup_list(link)
         zakup_list_page = ZakupListPage(browser_function, browser_function.current_url)
-        zakup_list_page.go_to_mine_elements_tabs()
+        if user_data_dict["createAccount"] == "Mr_KSUP_Seller" or user_data_dict["createAccount"] == "Mr_KSUP_Seller2":
+            zakup_list_page.go_to_mine_elements_tab()
+        else:
+            zakup_list_page.go_to_allmydepartment_tab()
         zakup_list_page.should_be_element_on_zakup_list(user_data_dict)
         zakup_list_page.go_to_zakup_element(user_data_dict)
         zakup_element_page = ZakupElementPage(browser_function, browser_function.current_url)
@@ -345,6 +357,8 @@ class TestUnitSaleFullBusinessCyclePaZpDk:
         contract_list_page = ContractPage(browser_function, browser_function.current_url)
         if user_data_dict["createAccount"] == "Mr_KSUP_Seller" or user_data_dict["createAccount"] == "Mr_KSUP_Seller2":
             contract_list_page.go_to_mine_elements_tab()
+        else:
+            contract_list_page.go_to_allmydepartment_tab()
         contract_list_page.should_be_element_on_contract_list(user_data_dict)
         contract_list_page.go_to_contract_element(user_data_dict)
         contract_element_page = ContractElementPage(browser_function, browser_function.current_url)
@@ -367,6 +381,8 @@ class TestUnitSaleFullBusinessCyclePaZpDk:
         contract_list = ContractPage(browser_function, browser_function.current_url)
         if user_data_dict["createAccount"] == "Mr_KSUP_Seller" or user_data_dict["createAccount"] == "Mr_KSUP_Seller2":
             contract_list.go_to_mine_elements_tab()
+        else:
+            contract_list.go_to_allmydepartment_tab()
         contract_list.should_be_element_on_contract_list(user_data_dict)
         contract_list.go_to_contract_element(user_data_dict)
         contract_element_page = ContractElementPage(browser_function, browser_function.current_url)

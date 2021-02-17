@@ -13,8 +13,8 @@ class ContractElementPage(BasePage):
     # Проверка информации на вкладке "Общие сведения"
     def verify_general_information_contract(self, user_data_dict):
         # Переходим на вкладку "Общие сведения"
-        self.browser.find_element(*ContractElementLocators.GENERAL_INFORMATION_ELEMENT).click()
-        time.sleep(1)
+        self.browser.find_element(*ContractElementLocators.GENERAL_INFORMATION_TAB).click()
+        time.sleep(2)
 
         # Проверяем титул карточки который соответствует названию сущности
         assert self.is_element_text(*ContractElementLocators.TITLE_IN_CONTRACT) == user_data_dict["fullName"], \
@@ -245,7 +245,7 @@ class ContractElementPage(BasePage):
 
     # Проверка информации на вкладке "Прикрепленные файлы"
     def verify_attached_files_information(self):
-        self.browser.find_element(*ContractElementLocators.ATTACHED_FILES_ELEMENT).click()
+        self.browser.find_element(*ContractElementLocators.ATTACHED_FILES_TAB).click()
         time.sleep(2)
 
         # Проверяем текст в поле "Контракт"
@@ -302,7 +302,7 @@ class ContractElementPage(BasePage):
     # Проверка информации на вкладке "Заключенные договоры/контракты"
     def verify_joint_bidding_inform_contract(self, user_data_dict):
         # Переходим на вкладку "Заключенные договоры/контракты"
-        self.browser.find_element(*ContractElementLocators.JOINT_BIDDING_CONTRACT_TABS).click()
+        self.browser.find_element(*ContractElementLocators.JOINT_BIDDING_CONTRACT_TAB).click()
         time.sleep(2)
         # Проверяем заполнение информации в таблице
         sum_joint_bidding = 0
@@ -399,7 +399,7 @@ class ContractElementPage(BasePage):
     # Проверка отображения статуса "На согласовании с юридической службой"
     def verify_contract_waiting_status_approval_legal(self):
         # Проверяем поле статуса на вкладке "Общие сведения"
-        self.browser.find_element(*ContractElementLocators.GENERAL_INFORMATION_ELEMENT).click()
+        self.browser.find_element(*ContractElementLocators.GENERAL_INFORMATION_TAB).click()
         self.is_visibility_of_element_located(*ContractElementLocators.APPROVAL_MAIN_STATUS_IN_CONTRACT, 5)
         assert self.is_text_to_be_present_in_element(*ContractElementLocators.APPROVAL_MAIN_STATUS_IN_CONTRACT,
                                                      "На согласовании с юридической службой"), \
@@ -447,7 +447,7 @@ class ContractElementPage(BasePage):
     # Проверка отображения статуса "Не согласовано с юридической службой"
     def verify_contract_reject_status_approval_legal(self):
         # Проверяем статус "Отклонено" на вкладке "Общие сведения"
-        self.browser.find_element(*ContractElementLocators.GENERAL_INFORMATION_ELEMENT).click()
+        self.browser.find_element(*ContractElementLocators.GENERAL_INFORMATION_TAB).click()
         self.is_visibility_of_element_located(*ContractElementLocators.APPROVAL_MAIN_STATUS_IN_CONTRACT, 5)
         assert self.is_text_to_be_present_in_element(*ContractElementLocators.APPROVAL_MAIN_STATUS_IN_CONTRACT,
                                                      "Не согласовано с юридической службой"), \
@@ -476,7 +476,7 @@ class ContractElementPage(BasePage):
     # Проверка отображения статуса "На согласовании с бухгалтерией"
     def verify_contract_waiting_status_approval_count(self):
         # Проверяем поле статуса на вкладке "Общие сведения"
-        self.browser.find_element(*ContractElementLocators.GENERAL_INFORMATION_ELEMENT).click()
+        self.browser.find_element(*ContractElementLocators.GENERAL_INFORMATION_TAB).click()
         self.is_visibility_of_element_located(*ContractElementLocators.APPROVAL_MAIN_STATUS_IN_CONTRACT, 5)
         assert self.is_text_to_be_present_in_element(*ContractElementLocators.APPROVAL_MAIN_STATUS_IN_CONTRACT,
                                                      "На согласовании с бухгалтерией"), \
@@ -528,7 +528,7 @@ class ContractElementPage(BasePage):
     # Проверка отображения статуса "Не согласовано бухгалтерией"
     def verify_contract_reject_status_approval_count(self):
         # Проверяем статус "Отклонено" на вкладке "Общие сведения"
-        self.browser.find_element(*ContractElementLocators.GENERAL_INFORMATION_ELEMENT).click()
+        self.browser.find_element(*ContractElementLocators.GENERAL_INFORMATION_TAB).click()
         self.is_visibility_of_element_located(*ContractElementLocators.APPROVAL_MAIN_STATUS_IN_CONTRACT, 5)
 
         assert self.is_text_to_be_present_in_element(*ContractElementLocators.APPROVAL_MAIN_STATUS_IN_CONTRACT,
@@ -559,7 +559,7 @@ class ContractElementPage(BasePage):
     # Проверка отображения статуса "На согласовании с финансовой службой"
     def verify_contract_waiting_status_approval_fin(self):
         # Проверяем поле статуса на вкладке "Общие сведения"
-        self.browser.find_element(*ContractElementLocators.GENERAL_INFORMATION_ELEMENT).click()
+        self.browser.find_element(*ContractElementLocators.GENERAL_INFORMATION_TAB).click()
         self.is_visibility_of_element_located(*ContractElementLocators.APPROVAL_MAIN_STATUS_IN_CONTRACT, 5)
         assert self.is_text_to_be_present_in_element(*ContractElementLocators.APPROVAL_MAIN_STATUS_IN_CONTRACT,
                                                      "На согласовании с финансовой службой"), \
@@ -591,7 +591,7 @@ class ContractElementPage(BasePage):
         if (user_data_dict["priceCategory"] == "C") or \
                 (user_data_dict["priceCategory"] == "B"
                  and user_data_dict["groupTypeWork"] == "Other"):
-            self.browser.find_element(*ContractElementLocators.GENERAL_INFORMATION_ELEMENT).click()
+            self.browser.find_element(*ContractElementLocators.GENERAL_INFORMATION_TAB).click()
             self.is_visibility_of_element_located(*ContractElementLocators.APPROVAL_MAIN_STATUS_IN_CONTRACT, 5)
             assert self.is_text_to_be_present_in_element(*ContractElementLocators.APPROVAL_MAIN_STATUS_IN_CONTRACT,
                                                          "Согласовано с финансовой службой"), \
@@ -620,7 +620,7 @@ class ContractElementPage(BasePage):
     # Проверка отображения статуса "Не согласовано с финансовой службой"
     def verify_contract_reject_status_approval_fin(self):
         # Проверяем статус "Отклонено" на вкладке "Общие сведения"
-        self.browser.find_element(*ContractElementLocators.GENERAL_INFORMATION_ELEMENT).click()
+        self.browser.find_element(*ContractElementLocators.GENERAL_INFORMATION_TAB).click()
         self.is_visibility_of_element_located(*ContractElementLocators.APPROVAL_MAIN_STATUS_IN_CONTRACT, 5)
         assert self.is_text_to_be_present_in_element(*ContractElementLocators.APPROVAL_MAIN_STATUS_IN_CONTRACT,
                                                      "Не согласовано с финансовой службой"), \
@@ -649,7 +649,7 @@ class ContractElementPage(BasePage):
     # Проверка отображения статуса "На согласовании Директором по разработке ПО"
     def verify_contract_waiting_status_approval_udprpo(self):
         # Проверяем поле статуса на вкладке "Общие сведения"
-        self.browser.find_element(*ContractElementLocators.GENERAL_INFORMATION_ELEMENT).click()
+        self.browser.find_element(*ContractElementLocators.GENERAL_INFORMATION_TAB).click()
         self.is_visibility_of_element_located(*ContractElementLocators.APPROVAL_MAIN_STATUS_IN_CONTRACT, 5)
         assert self.is_text_to_be_present_in_element(*ContractElementLocators.APPROVAL_MAIN_STATUS_IN_CONTRACT,
                                                      "На согласовании Директором по разработке ПО"), \
@@ -680,7 +680,7 @@ class ContractElementPage(BasePage):
     def verify_contract_successfully_status_approval_udprpo(self, user_data_dict):
         # Проверяем успешный статус согласования во вкладке "Общие сведения"
         if user_data_dict["groupTypeWork"] == "Software" and user_data_dict["priceCategory"] == "B":
-            self.browser.find_element(*ContractElementLocators.GENERAL_INFORMATION_ELEMENT).click()
+            self.browser.find_element(*ContractElementLocators.GENERAL_INFORMATION_TAB).click()
             self.is_visibility_of_element_located(*ContractElementLocators.APPROVAL_MAIN_STATUS_IN_CONTRACT, 5)
             assert self.is_text_to_be_present_in_element(*ContractElementLocators.APPROVAL_MAIN_STATUS_IN_CONTRACT,
                                                          "Согласовано Директором по разработке ПО"), \
@@ -710,7 +710,7 @@ class ContractElementPage(BasePage):
     # Проверка отображения статуса "Не согласовано Директором по разработке ПО"
     def verify_contract_reject_status_approval_udprpo(self):
         # Проверяем статус "Отклонено" на вкладке "Общие сведения"
-        self.browser.find_element(*ContractElementLocators.GENERAL_INFORMATION_ELEMENT).click()
+        self.browser.find_element(*ContractElementLocators.GENERAL_INFORMATION_TAB).click()
         self.is_visibility_of_element_located(*ContractElementLocators.APPROVAL_MAIN_STATUS_IN_CONTRACT, 5)
         assert self.is_text_to_be_present_in_element(*ContractElementLocators.APPROVAL_MAIN_STATUS_IN_CONTRACT,
                                                      "Не согласовано Директором по разработке ПО"), \
@@ -740,7 +740,7 @@ class ContractElementPage(BasePage):
     # Проверка отображения статуса "На согласовании в ККП"
     def verify_contract_waiting_status_approval_kkp(self):
         # Проверяем поле статуса на вкладке "Общие сведения"
-        self.browser.find_element(*ContractElementLocators.GENERAL_INFORMATION_ELEMENT).click()
+        self.browser.find_element(*ContractElementLocators.GENERAL_INFORMATION_TAB).click()
         self.is_visibility_of_element_located(*ContractElementLocators.APPROVAL_MAIN_STATUS_IN_CONTRACT, 5)
         assert self.is_text_to_be_present_in_element(*ContractElementLocators.APPROVAL_MAIN_STATUS_IN_CONTRACT,
                                                      "На согласовании в ККП"), \
@@ -771,7 +771,7 @@ class ContractElementPage(BasePage):
     def verify_contract_successfully_status_approval_kkp(self, user_data_dict):
         # Проверяем успешный статус согласования во вкладке "Общие сведения"
         if user_data_dict["priceCategory"] != "A":
-            self.browser.find_element(*ContractElementLocators.GENERAL_INFORMATION_ELEMENT).click()
+            self.browser.find_element(*ContractElementLocators.GENERAL_INFORMATION_TAB).click()
             self.is_visibility_of_element_located(*ContractElementLocators.APPROVAL_MAIN_STATUS_IN_CONTRACT, 5)
             assert self.is_text_to_be_present_in_element(*ContractElementLocators.APPROVAL_MAIN_STATUS_IN_CONTRACT,
                                                          "Участие в проекте согласовано в ККП"), \
@@ -801,7 +801,7 @@ class ContractElementPage(BasePage):
     # Проверка отображения статуса "Участие в проекте не согласовано в ККП"
     def verify_contract_reject_status_approval_kkp(self):
         # Проверяем статус "Отклонено" на вкладке "Общие сведения"
-        self.browser.find_element(*ContractElementLocators.GENERAL_INFORMATION_ELEMENT).click()
+        self.browser.find_element(*ContractElementLocators.GENERAL_INFORMATION_TAB).click()
         self.is_visibility_of_element_located(*ContractElementLocators.APPROVAL_MAIN_STATUS_IN_CONTRACT, 5)
         assert self.is_text_to_be_present_in_element(*ContractElementLocators.APPROVAL_MAIN_STATUS_IN_CONTRACT,
                                                      "Участие в проекте не согласовано в ККП"), \
@@ -832,7 +832,7 @@ class ContractElementPage(BasePage):
     # Проверка отображения статуса "Отправлено на доработку ККП"
     def verify_contract_revision_status_approval_kkp(self):
         # Проверяем статус "Отправлено на доработку" на вкладке "Общие сведения"
-        self.browser.find_element(*ContractElementLocators.GENERAL_INFORMATION_ELEMENT).click()
+        self.browser.find_element(*ContractElementLocators.GENERAL_INFORMATION_TAB).click()
         self.is_visibility_of_element_located(*ContractElementLocators.APPROVAL_MAIN_STATUS_IN_CONTRACT, 5)
         assert self.is_text_to_be_present_in_element(*ContractElementLocators.APPROVAL_MAIN_STATUS_IN_CONTRACT,
                                                      "Отправлено на доработку ККП"), \
@@ -953,6 +953,8 @@ class ContractElementPage(BasePage):
             file_link = UserData.file_path_for_link_excel
         elif file_name == "test_video.mp4":
             file_link = UserData.file_path_for_link_mp4
+        elif file_name == "test_pdf.pdf":
+            file_link = UserData.file_path_for_link_pdf
 
         # Добавляем файл бюджета
         self.browser.find_element(*ContractElementLocators.FILE_BUDGET_FIELD).send_keys(file_link)
@@ -961,7 +963,7 @@ class ContractElementPage(BasePage):
         self.browser.find_element(*ContractElementLocators.ADD_BUDGET_FILE_BUTTON).click()
 
         # Переходим на вкладку "Прикрепленные файлы"
-        self.browser.find_element(*ContractElementLocators.ATTACHED_FILES_ELEMENT).click()
+        self.browser.find_element(*ContractElementLocators.ATTACHED_FILES_TAB).click()
 
         # Проверяем отображение добавленного файла бюджета
         actual_text = self.is_element_text(*ContractElementLocators.BUDGET_OF_PROJECT_FIELD)
@@ -973,7 +975,7 @@ class ContractElementPage(BasePage):
 
     # Проверка отображения файла "Бюджет проекта" на вкладке "Прикрепленные файлы"
     def verify_attached_budget_files(self, file_name):
-        self.browser.find_element(*ContractElementLocators.ATTACHED_FILES_ELEMENT).click()
+        self.browser.find_element(*ContractElementLocators.ATTACHED_FILES_TAB).click()
         time.sleep(2)
         # Проверяем текст в поле "Тендерная заявка"
         actual_text = self.is_element_text(*ContractElementLocators.BUDGET_OF_PROJECT_FIELD)
@@ -982,3 +984,64 @@ class ContractElementPage(BasePage):
                               'Не корректное название файла в поле "Бюджет проекта" на вкладке "Прикрепленные файлы"\n'
                               f'Ожидаемый результат: {expected_text}\n'
                               f'Фактический результат: {actual_text}')
+
+    def verify_payments_information_in_presale(self, user_data_dict):
+        # Переходим на вкладку "График платежей"
+        self.browser.find_element(*ContractElementLocators.PAYMENTS_TAB).click()
+
+        # Проверяем титул таблицы плановых платежей
+        delayed_assert.expect(
+            self.is_element_text(*ContractElementLocators.PLAN_PAYMENTS_TITLE) == "ПЛАНОВЫЕ ПОСТУПЛЕНИЯ",
+            'Некорректное название статуса Таблицы плановых платежей'
+            f'\nОжидаемый результат: "ПЛАНОВЫЕ ПОСТУПЛЕНИЯ"'
+            f'\nФактический результат: {self.is_element_text(*ContractElementLocators.PLAN_PAYMENTS_TITLE)}')
+
+        # Проверяем таблицу плановых платежей
+        payments_sum = 0
+        count_payments_line = len(user_data_dict["payments"])
+        current_line = 0
+        while current_line < count_payments_line:
+            # Проверяем значение в поле "Сумма в валюте контракта" в текущей строке
+            sum_fact_value = self.browser.find_elements(*ContractElementLocators.SUM_VALUE_ROWS)[current_line].text
+            sum_expect = BasePage.to_human_string_sum(self, user_data_dict["payments"][current_line]["sum"],
+                                                      user_data_dict["currency"])
+            assert sum_expect == sum_fact_value, \
+                f'Некорректное значение суммы в строке "{current_line + 1}"' \
+                f'\nОР: {sum_expect}' \
+                f'\nФР: {sum_fact_value}'
+
+            # Проверяем значение в поле "Год" в текущей строке
+            year_fact_value = self.browser.find_elements(*ContractElementLocators.YEAR_VALUE_ROWS)[current_line].text
+            year_expect = str(user_data_dict["payments"][current_line]["year"])
+            assert year_expect == year_fact_value, \
+                f'Некорректное значение года в строке "{current_line + 1}"' \
+                f'\nОР: {year_expect}' \
+                f'\nФР: {year_fact_value}'
+
+            # Проверяем значение в поле "Квартал" в текущей строке
+            quarter_fact_value = self.browser.find_elements(*ContractElementLocators.QUARTER_VALUE_ROWS)[
+                current_line].text
+            quarter_expect = f'{user_data_dict["payments"][current_line]["quarter"]} квартал'
+            assert quarter_expect == quarter_fact_value, \
+                f'Некорректное значение квартала в строке "{current_line + 1}"' \
+                f'\nОР: {quarter_expect}' \
+                f'\nФР: {quarter_fact_value}'
+
+            payments_sum += user_data_dict["payments"][current_line]["sum"]
+            current_line += 1
+
+        # Проверяем значение в поле "Плановая сумма"
+        plan_sum_fact_value = self.browser.find_element(*ContractElementLocators.SUM_IN_PAYMENTS).text
+        plan_sum_expect = BasePage.to_human_string_sum(self, user_data_dict["sum"], user_data_dict["currency"])
+        assert plan_sum_expect == plan_sum_fact_value, \
+            f'Некорректное значение суммы в строке "{current_line + 1}"' \
+            f'\nОР: {plan_sum_expect}' \
+            f'\nФР: {plan_sum_fact_value}'
+
+        # Проверяем значение в поле "Итого"
+        summary_fact_value = self.browser.find_element(*ContractElementLocators.SUMMARY_IN_PAYMENTS).text
+        summary_expect = BasePage.to_human_string_sum(self, payments_sum, user_data_dict["currency"])
+        assert summary_expect == summary_fact_value, \
+            f'Некорректное значение суммы в строке "{current_line + 1}"' \
+            f'\nОР: {summary_expect}' \
+            f'\nФР: {summary_fact_value}'

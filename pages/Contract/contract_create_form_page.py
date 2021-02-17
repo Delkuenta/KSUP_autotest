@@ -1,3 +1,4 @@
+import math
 import time
 
 from selenium.webdriver.support.select import Select
@@ -110,8 +111,8 @@ class ContractFormCreate(BasePage):
 
         # Выбираем связанный проект
         self.browser.find_element(*FormCreateContractLocators.PROJECT_ELEMENT).click()
-        # self.browser.find_element(*FormCreateContractLocators.PROJECT_FIND_ELEMENT).send_keys(
-        # user_data_dict["project"])
+        self.browser.find_element(*FormCreateContractLocators.PROJECT_FIND_ELEMENT).send_keys(
+            user_data_dict["project"])
         how, what = FormCreateContractLocators.PROJECT_DROPDOWN_ELEMENT
         what = what.replace("project_name", user_data_dict["project"])
         self.browser.find_element(how, what).click()
@@ -259,7 +260,12 @@ class ContractFormCreate(BasePage):
         self.select_in_frame_type_work_and_services(user_data_dict["typeOfWorkServices"])
 
         # Заполняем поле "Сумма договора/контракта"
-        self.browser.find_element(*FormCreateContractLocators.SUM_ELEMENT).send_keys(user_data_dict["sum"])
+        sum_value = ""
+        if math.modf(user_data_dict["sum"])[0] > 0:
+            sum_value = str(user_data_dict["sum"]).replace(".", ",")
+        else:
+            sum_value = user_data_dict["sum"]
+        self.browser.find_element(*FormCreateContractLocators.SUM_ELEMENT).send_keys(sum_value)
 
         # Заполняем поле "Валюта договора/контракта "
         Select(self.browser.find_element(*FormCreateContractLocators.CURRENCY_ELEMENT)).select_by_value(
@@ -315,8 +321,8 @@ class ContractFormCreate(BasePage):
 
         # Выбираем связанный проект
         self.browser.find_element(*FormCreateContractLocators.PROJECT_ELEMENT).click()
-        # self.browser.find_element(*FormCreateContractLocators.PROJECT_FIND_ELEMENT).send_keys(
-        # user_data_dict["project"])
+        self.browser.find_element(*FormCreateContractLocators.PROJECT_FIND_ELEMENT).send_keys(
+            user_data_dict["project"])
         how, what = FormCreateContractLocators.PROJECT_DROPDOWN_ELEMENT
         what = what.replace("project_name", user_data_dict["project"])
         self.browser.find_element(how, what).click()
@@ -329,7 +335,11 @@ class ContractFormCreate(BasePage):
         while current_line < count_payments_line:
             # Заполняем поле "Сумма"
             sum_field = self.browser.find_elements(*FormCreateContractLocators.SUMTABLE)[current_line]
-            sum_field.send_keys(user_data_dict["payments"][current_line]["sum"])
+            if math.modf(user_data_dict["payments"][current_line]["sum"])[0] > 0:
+                sum_value = str(user_data_dict["payments"][current_line]["sum"]).replace(".", ",")
+            else:
+                sum_value = user_data_dict["payments"][current_line]["sum"]
+            sum_field.send_keys(sum_value)
 
             # Заполняем поле "Год"
             year_field = self.browser.find_elements(*FormCreateContractLocators.YEARTABLE)[current_line]
@@ -382,7 +392,7 @@ class ContractFormCreate(BasePage):
         self.browser.find_element(*FormCreateContractLocators.CONFIRM_CHANGE_PROJECT_BUTTON).click()
 
         # Если сумма платежей не совпадает появляется алерт, при подтверждении сущность создается
-        if payments_sum != user_data_dict["sum"]:
+        if round(payments_sum, 2) != user_data_dict["sum"]:
             alert = self.browser.switch_to.alert
             alert.accept()
 
@@ -455,7 +465,12 @@ class ContractFormCreate(BasePage):
         if old_user_data_dict["sum"] != new_user_data_dict["sum"]:
             self.browser.find_element(*FormCreateContractLocators.SUM_ELEMENT).clear()
             # Заполняем новым значением поле "Сумма"
-            self.browser.find_element(*FormCreateContractLocators.SUM_ELEMENT).send_keys(new_user_data_dict["sum"])
+            sum_value = ""
+            if math.modf(new_user_data_dict["sum"])[0] > 0:
+                sum_value = str(new_user_data_dict["sum"]).replace(".", ",")
+            else:
+                sum_value = new_user_data_dict["sum"]
+            self.browser.find_element(*FormCreateContractLocators.SUM_ELEMENT).send_keys(sum_value)
 
         # Ищем поле "Валюта" и выбираем значение
         if old_user_data_dict["currency"] != new_user_data_dict["currency"]:
@@ -558,7 +573,11 @@ class ContractFormCreate(BasePage):
         while current_line < count_payments_line:
             # Заполняем поле "Сумма"
             sum_field = self.browser.find_elements(*FormCreateContractLocators.SUMTABLE)[current_line]
-            sum_field.send_keys(new_user_data_dict["payments"][current_line]["sum"])
+            if math.modf(new_user_data_dict["payments"][current_line]["sum"])[0] > 0:
+                sum_value = str(new_user_data_dict["payments"][current_line]["sum"]).replace(".", ",")
+            else:
+                sum_value = new_user_data_dict["payments"][current_line]["sum"]
+            sum_field.send_keys(sum_value)
 
             # Заполняем поле "Год"
             year_field = self.browser.find_elements(*FormCreateContractLocators.YEARTABLE)[current_line]

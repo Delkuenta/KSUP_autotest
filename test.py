@@ -1,3 +1,5 @@
+import math
+
 import pytest
 
 from pages.Contract.contract_create_form_page import ContractFormCreate
@@ -40,5 +42,10 @@ class TestUnitSaleFullBusinessCyclePaZpDk:
         create_presale_page.form_create_presale_all_type(user_data_dict)
 
 
-def test_row():
-    row1 = 'На согласовании с юридической службой'
+def test_number():
+    number = 55000000.33
+    integer_part = int(math.modf(number)[1])
+    decimal_part = int(round(math.modf(number)[0], 2) * 100)
+    integer_string = ('{:,d}'.format(integer_part)).replace(",", " ")
+    sum_value = f'{integer_string}' + ',' + f'{decimal_part}'
+    print(sum_value)

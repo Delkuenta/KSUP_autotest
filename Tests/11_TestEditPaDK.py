@@ -36,7 +36,7 @@ class TestCreatePresaleAndEdit:
         # Проверяем предзаполнения менеджеров Баг https://jira.lanit.ru/browse/KSUP-1041
         # create_presale_page.verify_prefill_department_manager(user_data_dict)
         create_presale_page.form_create_presale_all_type(user_data_dict)
-        presale_list_page.go_to_mine_elements_tabs()
+        presale_list_page.go_to_mine_elements_tab()
         presale_list_page.should_be_element_on_presale_list(user_data_dict)
         presale_list_page.go_to_presale_element(user_data_dict)
         presale_element_page.verify_general_information_in_presale(user_data_dict)

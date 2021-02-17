@@ -30,20 +30,30 @@ class ContractPage(BasePage):
 
     # Перейти на вкладку "Мои"
     def go_to_mine_elements_tab(self):
-        self.is_visibility_of_element_located(*ContractListLocators.MINE_ELEMENTS_TAB, 5)
+        assert self.is_visibility_of_element_located(*ContractListLocators.MINE_ELEMENTS_TAB, 5), \
+            'Не отображена вкладка "Мои"'
         self.browser.find_element(*ContractListLocators.MINE_ELEMENTS_TAB).click()
 
     # Перейти на вкладку "На согласовании"
     def go_to_approval_elements_tab(self):
-        self.is_visibility_of_element_located(*ContractListLocators.APPROVAL_ELEMENTS_TAB, 5)
+        assert self.is_visibility_of_element_located(*ContractListLocators.APPROVAL_ELEMENTS_TAB, 5), \
+            'Не отображена вкладка "На согласовании"'
         self.browser.find_element(*ContractListLocators.APPROVAL_ELEMENTS_TAB).click()
 
     # Перейти на вкладку "Отклонено"
     def go_to_rejected_elements_tab(self):
-        self.is_visibility_of_element_located(*ContractListLocators.REJECTED_ELEMENTS_TAB, 5)
+        assert self.is_visibility_of_element_located(*ContractListLocators.REJECTED_ELEMENTS_TAB, 5), \
+            'Не отображена вкладка "Отклонено"'
         self.browser.find_element(*ContractListLocators.REJECTED_ELEMENTS_TAB).click()
 
     # Перейти на вкладку "Согласовано"
     def go_to_approved_elements_tab(self):
-        self.is_visibility_of_element_located(*ContractListLocators.APPROVED_ELEMENTS_TAB, 5)
+        assert self.is_visibility_of_element_located(*ContractListLocators.APPROVED_ELEMENTS_TAB, 5), \
+            'Не отображена вкладка "Согласовано"'
         self.browser.find_element(*ContractListLocators.APPROVED_ELEMENTS_TAB).click()
+
+    # Перейти на вкладку "Все моего подразделения"
+    def go_to_allmydepartment_tab(self):
+        assert self.is_visibility_of_element_located(*ContractListLocators.ALL_IN_MY_DEPARTMENT_TAB, 5), \
+            'Не отображена вкладка "Все моего подразделения"'
+        self.browser.find_element(*ContractListLocators.ALL_IN_MY_DEPARTMENT_TAB).click()

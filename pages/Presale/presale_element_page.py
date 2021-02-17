@@ -174,7 +174,6 @@ class PresaleElementPage(BasePage):
             'Некорректный статус или отсутствует статус в поле "Статус согласования с подразделением".' \
             '\nОжидаемый результат: "Не требуется согласование"'
 
-
     def verify_general_information_in_presale(self, user_data_dict):
 
         # Проверяем титул карточки который соответствует названию сущности
@@ -274,22 +273,11 @@ class PresaleElementPage(BasePage):
         print('Значение в поле "Тип работ и услуг" успешно проверено')
 
         # Проверяем поле "Плановая сумма договора/контракт"
-        sum_value = str(user_data_dict["sum"])
-        if sum_value.find('.') > 0:
-            # Преобразование значения с плавающей точкой под необходимый шаблон
-            print("Заглушка")
-        else:
-            # Преобразование целого значения с разделителями пробелами и припиской валюты
-            if user_data_dict["currency"] == "Доллар":
-                sum_value = ('{:,d}'.format(user_data_dict["sum"])).replace(",", " ") + ',00 $'
-            elif user_data_dict["currency"] == "Евро":
-                sum_value = ('{:,d}'.format(user_data_dict["sum"])).replace(",", " ") + ',00 €'
-            else:
-                sum_value = ('{:,d}'.format(user_data_dict["sum"])).replace(",", " ") + ',00 ₽'
-            assert self.is_element_text(*PresaleElementLocators.SUM_IN_PRESALE) == sum_value, \
-                f'\nНекорректное значение в поле "Начальная (максимальная) цена контракта" ' \
-                f'\nОжидаемый результат: {sum_value}"'
-            print('Значение в поле "Сумма договора/контракта" успешно проверено')
+        sum_value = BasePage.to_human_string_sum(self, user_data_dict["sum"], user_data_dict["currency"])
+        assert self.is_element_text(*PresaleElementLocators.SUM_IN_PRESALE) == sum_value, \
+            f'\nНекорректное значение в поле "Начальная (максимальная) цена контракта" ' \
+            f'\nОжидаемый результат: {sum_value}"'
+        print('Значение в поле "Сумма договора/контракта" успешно проверено')
 
         # Проверяем поле "Валюта договора/контракта"
         assert self.is_element_text(*PresaleElementLocators.CURRENCY_IN_PRESALE) == user_data_dict["currency"], \
@@ -300,42 +288,22 @@ class PresaleElementPage(BasePage):
         # Проверяем поле "Размер обеспечения заявки"
         if user_data_dict["contractorType"] != "Коммерческое предложение" and \
                 len(str(user_data_dict["applicationSize"])) > 0:
-            application_size = str(user_data_dict["applicationSize"])
-            if application_size.find('.') > 0:
-                # Преобразование значения с плавающей точкой под необходимый шаблон
-                print("Заглушка")
-            else:
-                # Преобразование целого значения с разделителями пробелами и припиской валюты
-                if user_data_dict["currency"] == "Доллар":
-                    application_size = ('{:,d}'.format(user_data_dict["applicationSize"])).replace(",", " ") + ',00 $'
-                elif user_data_dict["currency"] == "Евро":
-                    application_size = ('{:,d}'.format(user_data_dict["applicationSize"])).replace(",", " ") + ',00 €'
-                else:
-                    application_size = ('{:,d}'.format(user_data_dict["applicationSize"])).replace(",", " ") + ',00 ₽'
-                assert self.is_element_text(*PresaleElementLocators.APPLICATION_SIZE_IN_PRESALE) == application_size, \
-                    f'\nНекорректное значение в поле "Размер обеспечения заявки" ' \
-                    f'\nОжидаемый результат: {application_size}"'
-                print('Значение в поле "Размер обеспечения заявки" успешно проверено')
+            application_size = BasePage.to_human_string_sum(self, user_data_dict["applicationSize"],
+                                                            user_data_dict["currency"])
+            assert self.is_element_text(*PresaleElementLocators.APPLICATION_SIZE_IN_PRESALE) == application_size, \
+                f'\nНекорректное значение в поле "Размер обеспечения заявки" ' \
+                f'\nОжидаемый результат: {application_size}"'
+            print('Значение в поле "Размер обеспечения заявки" успешно проверено')
 
         # Проверяем поле "Размер обеспечения договора/контракта"
         if user_data_dict["contractorType"] != "Коммерческое предложение" and \
                 len(str(user_data_dict["contractSize"])) > 0:
-            contract_size = str(user_data_dict["contractSize"])
-            if contract_size.find('.') > 0:
-                # Преобразование значения с плавающей точкой под необходимый шаблон
-                print("Заглушка")
-            else:
-                # Преобразование целого значения с разделителями пробелами и припиской валюты
-                if user_data_dict["currency"] == "Доллар":
-                    contract_size = ('{:,d}'.format(user_data_dict["contractSize"])).replace(",", " ") + ',00 $'
-                elif user_data_dict["currency"] == "Евро":
-                    contract_size = ('{:,d}'.format(user_data_dict["contractSize"])).replace(",", " ") + ',00 €'
-                else:
-                    contract_size = ('{:,d}'.format(user_data_dict["contractSize"])).replace(",", " ") + ',00 ₽'
-                assert self.is_element_text(*PresaleElementLocators.CONTRACT_SIZE_IN_PRESALE) == contract_size, \
-                    f'\nНекорректное значение в поле "Размер обеспечения договора/контракта" ' \
-                    f'\nОжидаемый результат: {contract_size}"'
-                print('Значение в поле "Размер обеспечения договора/контракта" успешно проверено')
+            contract_size = BasePage.to_human_string_sum(self, user_data_dict["contractSize"],
+                                                         user_data_dict["currency"])
+            assert self.is_element_text(*PresaleElementLocators.CONTRACT_SIZE_IN_PRESALE) == contract_size, \
+                f'\nНекорректное значение в поле "Размер обеспечения договора/контракта" ' \
+                f'\nОжидаемый результат: {contract_size}"'
+            print('Значение в поле "Размер обеспечения договора/контракта" успешно проверено')
 
         # Проверяем поле "Статус продажи"
         assert self.is_element_text(*PresaleElementLocators.PRESALE_STATUS) == "В работе", \
@@ -402,3 +370,64 @@ class PresaleElementPage(BasePage):
                 f'\nНекорректное значение в поле "Риски".' \
                 f'\nОжидаемый результат:{user_data_dict["risksText"]}'
             print('Значение в поле "Риски" успешно проверено')
+
+    def verify_payments_information_in_presale(self, user_data_dict):
+        # Переходим на вкладку "График платежей"
+        self.browser.find_element(*PresaleElementLocators.PAYMENTS_TAB).click()
+
+        # Проверяем титул таблицы плановых платежей
+        delayed_assert.expect(
+            self.is_element_text(*PresaleElementLocators.PLAN_PAYMENTS_TITLE) == "ПЛАНОВЫЕ ПОСТУПЛЕНИЯ",
+            'Некорректное название статуса Таблицы плановых платежей'
+            f'\nОжидаемый результат: "ПЛАНОВЫЕ ПОСТУПЛЕНИЯ"'
+            f'\nФактический результат: {self.is_element_text(*PresaleElementLocators.PLAN_PAYMENTS_TITLE)}')
+
+        # Проверяем таблицу плановых платежей
+        payments_sum = 0
+        count_payments_line = len(user_data_dict["payments"])
+        current_line = 0
+        while current_line < count_payments_line:
+            # Проверяем значение в поле "Сумма в валюте контракта" в текущей строке
+            sum_fact_value = self.browser.find_elements(*PresaleElementLocators.SUM_VALUE_ROWS)[current_line].text
+            sum_expect = BasePage.to_human_string_sum(self, user_data_dict["payments"][current_line]["sum"],
+                                                      user_data_dict["currency"])
+            assert sum_expect == sum_fact_value, \
+                f'Некорректное значение суммы в строке "{current_line + 1}"' \
+                f'\nОР: {sum_expect}' \
+                f'\nФР: {sum_fact_value}'
+
+            # Проверяем значение в поле "Год" в текущей строке
+            year_fact_value = self.browser.find_elements(*PresaleElementLocators.YEAR_VALUE_ROWS)[current_line].text
+            year_expect = str(user_data_dict["payments"][current_line]["year"])
+            assert year_expect == year_fact_value, \
+                f'Некорректное значение года в строке "{current_line + 1}"' \
+                f'\nОР: {year_expect}' \
+                f'\nФР: {year_fact_value}'
+
+            # Проверяем значение в поле "Квартал" в текущей строке
+            quarter_fact_value = self.browser.find_elements(*PresaleElementLocators.QUARTER_VALUE_ROWS)[
+                current_line].text
+            quarter_expect = f'{user_data_dict["payments"][current_line]["quarter"]} квартал'
+            assert quarter_expect == quarter_fact_value, \
+                f'Некорректное значение квартала в строке "{current_line + 1}"' \
+                f'\nОР: {quarter_expect}' \
+                f'\nФР: {quarter_fact_value}'
+
+            payments_sum += user_data_dict["payments"][current_line]["sum"]
+            current_line += 1
+
+        # Проверяем значение в поле "Плановая сумма"
+        plan_sum_fact_value = self.browser.find_element(*PresaleElementLocators.SUM_IN_PAYMENTS).text
+        plan_sum_expect = BasePage.to_human_string_sum(self, user_data_dict["sum"], user_data_dict["currency"])
+        assert plan_sum_expect == plan_sum_fact_value, \
+            f'Некорректное значение суммы в строке "{current_line + 1}"' \
+            f'\nОР: {plan_sum_expect}' \
+            f'\nФР: {plan_sum_fact_value}'
+
+        # Проверяем значение в поле "Итого"
+        summary_fact_value = self.browser.find_element(*PresaleElementLocators.SUMMARY_IN_PAYMENTS).text
+        summary_expect = BasePage.to_human_string_sum(self, payments_sum, user_data_dict["currency"])
+        assert summary_expect == summary_fact_value, \
+            f'Некорректное значение суммы в строке "{current_line + 1}"' \
+            f'\nОР: {summary_expect}' \
+            f'\nФР: {summary_fact_value}'

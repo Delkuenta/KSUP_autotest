@@ -24,6 +24,7 @@ class OppListPage(BasePage):
     # Кнопка создания пресейла на странице пресейла
     def create_opp(self, department, year):
         self.browser.implicitly_wait(2)
+        time.sleep(2)
         assert self.is_element_clickable(*OpListLocators.OPERPLAN_CREATE_BUTTON), 'Кнопка "Создать" не доступна для нажатия'
         self.browser.find_element(*OpListLocators.OPERPLAN_CREATE_BUTTON).click()
         self.browser.switch_to.frame(self.browser.find_element(*OpListLocators.CREATE_IFRAME))

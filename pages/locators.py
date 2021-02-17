@@ -63,7 +63,7 @@ class BasePageLocators:
 
 
 class PresaleListLocators:
-    PRESALE_CREATE_BUTTON = (By.CSS_SELECTOR, "#idHomePageNewItem")
+    PRESALE_CREATE_BUTTON = (By.XPATH, "//a[@id='idHomePageNewItem']")
     FIND_ELEMENT_IN_PRESALE_LIST = (By.XPATH, f"//a[@class= 'ms-listlink' and contains(text(),'Test_name')]")
 
     # Вкладки на листе сущности "Пресейловая активность"
@@ -73,6 +73,7 @@ class PresaleListLocators:
     APPROVAL_ELEMENTS_TAB = (By.CSS_SELECTOR, "a[class^='viewApproval']")
     IN_OP_ELEMENTS_TAB = (By.CSS_SELECTOR, "a[class^='viewInOp']")
     OUT_OP_ELEMENTS_TAB = (By.CSS_SELECTOR, "a[class^='viewOutOp']")
+    ALL_IN_MY_DEPARTMENT_TAB = (By.CSS_SELECTOR, "a[class^='viewAllInMyDepartment']")
 
     # Поле "Статус согласования" множественный результат
     APPROVAL_STATUS_VALUES = (By.CSS_SELECTOR, "[class^='colKsupSaleApproveStatus ms-cellstyle ms-vb2']")
@@ -214,6 +215,11 @@ class PresaleElementLocators:
     # Кнопка "Отправить исполнителю/продавцу" //a[contains(@id, 'Approve.ToDepartment')]
     SEND_APPROVE_TO_DEPARTMENT_BUTTON = (By.CSS_SELECTOR, "[id^='Approve.ToDepartment']")
 
+    # Вкладки
+    GENERAL_INFORMATION_TAB = (By.XPATH, "//a[contains(@href, '#tabCommon')]")
+    PAYMENTS_TAB = (By.XPATH, "//a[contains(@href, '#tabPayments')]")
+    RISK_TAB = (By.CSS_SELECTOR, "")
+
     # Элементы модульного окна при отправке на согласование
     # Название(титул фрейма)
     TITLE_APPROVAL_FRAME_PRESALE = (By.CSS_SELECTOR, "#dialogTitleSpan")
@@ -302,6 +308,14 @@ class PresaleElementLocators:
     DESCRIPTION_TEXT_IN_PRESALE = (By.CSS_SELECTOR, ".fldKsupDescriptionPlainText #SPFieldNote")
     # Поле "Риски"
     RISKS_IN_PRESALE = (By.CSS_SELECTOR, ".fldKsupRisks #SPFieldNote")
+
+    # Элементы на вкладке "График платежей"
+    PLAN_PAYMENTS_TITLE = (By.CSS_SELECTOR, "[data-plan-type='plan'] [class='title-group__main']")
+    SUM_VALUE_ROWS = (By.CSS_SELECTOR, "[data-member = 'summa']")
+    YEAR_VALUE_ROWS = (By.CSS_SELECTOR, "[data-member = 'year']")
+    QUARTER_VALUE_ROWS = (By.CSS_SELECTOR, "[data-member = 'quarter']")
+    SUM_IN_PAYMENTS = (By.CSS_SELECTOR, "[data-member = 'plan-sum']")
+    SUMMARY_IN_PAYMENTS = (By.CSS_SELECTOR, "[data-member = 'summary']")
 
 
 class FormCreateZakupLocators:
@@ -482,6 +496,7 @@ class ZakupListLocators:
     APPROVAL_ELEMENTS_TAB = (By.CSS_SELECTOR, "a[class^='viewApproval ms-pivotControl-surfacedOpt']")
     REJECTED_ELEMENTS_TAB = (By.CSS_SELECTOR, "a[class='viewRejected ms-pivotControl-surfacedOpt']")
     APPROVED_ELEMENTS_TAB = (By.CSS_SELECTOR, "a[class^='viewApproved ms-pivotControl-surfacedOpt']")
+    ALL_IN_MY_DEPARTMENT_TAB = (By.CSS_SELECTOR, "a[class^='viewAllInMyDepartment']")
 
     # Поле "Статус согласования" множественный результат
     APPROVAL_STATUS_VALUES = (By.CSS_SELECTOR, "[class^='colKsupPresaleApproveStatus ms-cellstyle ms-vb2']")
@@ -845,6 +860,7 @@ class ContractListLocators:
     APPROVAL_ELEMENTS_TAB = (By.CSS_SELECTOR, "a[class^='viewApproval ms-pivotControl-surfacedOpt']")
     REJECTED_ELEMENTS_TAB = (By.CSS_SELECTOR, "a[class='viewRejected ms-pivotControl-surfacedOpt']")
     APPROVED_ELEMENTS_TAB = (By.CSS_SELECTOR, "a[class^='viewApproved ms-pivotControl-surfacedOpt']")
+    ALL_IN_MY_DEPARTMENT_TAB = (By.CSS_SELECTOR, "a[class^='viewAllInMyDepartment']")
 
     # Поле "Статус согласования" множественный результат
     APPROVAL_STATUS_VALUES = (By.CSS_SELECTOR, "[class^='colKsupContractApproveStatus ms-cellstyle ms-vb2']")
@@ -853,6 +869,15 @@ class ContractListLocators:
 class ContractElementLocators:
     # Титул в карточке "Пресейловая активность"
     TITLE_IN_CONTRACT = (By.CSS_SELECTOR, "#pageTitle")
+
+    # Вкладка "Общие сведения"
+    GENERAL_INFORMATION_TAB = (By.XPATH, "//a[contains(@href, '#tabCommon')]")
+    # Вкладка "Заключенные договоры/контракты"
+    JOINT_BIDDING_CONTRACT_TAB = (By.CSS_SELECTOR, "a[href='#tabJointBidding']")
+    # Вкладка "Заключенные договоры/контракты"
+    ATTACHED_FILES_TAB = (By.XPATH, "//a[contains(@href, '#tabFiles')]")
+    PAYMENTS_TAB = (By.XPATH, "//a[contains(@href, '#tabPayments')]")
+    RISK_TAB = (By.CSS_SELECTOR, "")
 
     # Кнопка отправить на согласование
     # Отправить на согласование //a[starts-with(@id, 'Approve.ToApprove')]
@@ -865,7 +890,7 @@ class ContractElementLocators:
 
     # Выпадающий список "Согласующий с юридической службы"
     EMPLOYEE_LEGAL_FIELD = (
-    By.CSS_SELECTOR, "[id*='divChooseServiceEmployeeLegal']>[class*='select2 select2-container']")
+        By.CSS_SELECTOR, "[id*='divChooseServiceEmployeeLegal']>[class*='select2 select2-container']")
     EMPLOYEE_LEGAL_DROPDOWN_ELEMENT = (
         By.XPATH,
         "//*[contains(@id, 'selectChooseServiceEmployeeLegal-results')]//li[contains(text(), 'employee_legal')]")
@@ -907,9 +932,6 @@ class ContractElementLocators:
     FILE_BUDGET_FIELD = (By.CSS_SELECTOR, "input[type='file']")
     ADD_BUDGET_FILE_BUTTON = (By.XPATH, "//button[text() = 'Добавить']")
     CANCEL_BUDGET_FILE_BUTTON = (By.XPATH, "//button[text() = 'Отмена']")
-
-    # Вкладка "Общие сведения"
-    GENERAL_INFORMATION_ELEMENT = (By.XPATH, "//a[contains(@href, '#tabCommon')]")
 
     # Элементы на вкладке "Статус Согласования"
     # Вкладка "Статус согласования"
@@ -989,9 +1011,6 @@ class ContractElementLocators:
     # Поле "Количественные показатели реализации проекта"
     QUANTITATIVE_INDICATORS_PROJECT = (By.CSS_SELECTOR, ".fldKsupQuantitativeIndicatorsProjec #SPFieldNote")
 
-    # Вкладка "Заключенные договоры/контракты"
-    JOINT_BIDDING_CONTRACT_TABS = (By.CSS_SELECTOR, "a[href='#tabJointBidding']")
-
     # Элементы на Вкладке "Заключенные договоры/контракты"
     # Значение в поле "Заказчик" Множественный результат
     JOINT_BIDDING_CUSTOMER_VALUE = (By.CSS_SELECTOR, "[data-member='customer'][class^='jointbidding']")
@@ -1010,9 +1029,6 @@ class ContractElementLocators:
 
     JOINT_BIDDING_TOTAL_SUM_VALUE = (By.CSS_SELECTOR, "[class^='payplan-cell']>span")
 
-    # Вкладка "Заключенные договоры/контракты"
-    ATTACHED_FILES_ELEMENT = (By.XPATH, "//a[contains(@href, '#tabFiles')]")
-
     # Элементы на вкладке "Прикрепленные файлы"
     # Контракт
     CONTRACT_FIELD = (By.CSS_SELECTOR, "[class*='Contract']>[id='SPFieldFileField']")
@@ -1025,6 +1041,14 @@ class ContractElementLocators:
 
     # Бюджет проекта
     BUDGET_OF_PROJECT_FIELD = (By.CSS_SELECTOR, "[class*='BudgetOfProject']>[id='SPFieldFileField']")
+
+    # Элементы на вкладке "График платежей"
+    PLAN_PAYMENTS_TITLE = (By.CSS_SELECTOR, "[data-plan-type='plan'] [class='title-group__main']")
+    SUM_VALUE_ROWS = (By.CSS_SELECTOR, "[data-plan-type = 'plan'] [data-member = 'summa']")
+    YEAR_VALUE_ROWS = (By.CSS_SELECTOR, "[data-plan-type = 'plan'] [data-member = 'year']")
+    QUARTER_VALUE_ROWS = (By.CSS_SELECTOR, "[data-plan-type = 'plan'] [data-member = 'quarter']")
+    SUM_IN_PAYMENTS = (By.CSS_SELECTOR, "[data-plan-type = 'plan'] [data-member = 'plan-sum']")
+    SUMMARY_IN_PAYMENTS = (By.CSS_SELECTOR, "[data-plan-type = 'plan'] [data-member = 'summary']")
 
 
 class KnowledgeSearchLocators:

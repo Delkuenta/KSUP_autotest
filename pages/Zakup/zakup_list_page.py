@@ -31,24 +31,34 @@ class ZakupListPage(BasePage):
         self.browser.find_element(how, what).click()
 
     # Перейти на вкладку "Мои"
-    def go_to_mine_elements_tabs(self):
-        self.is_visibility_of_element_located(*ZakupListLocators.MINE_ELEMENTS_TAB, 5)
+    def go_to_mine_elements_tab(self):
+        assert self.is_visibility_of_element_located(*ZakupListLocators.MINE_ELEMENTS_TAB, 5), \
+            'Не отображена вкладка "Мои"'
         self.browser.find_element(*ZakupListLocators.MINE_ELEMENTS_TAB).click()
 
     # Перейти на вкладку "На согласовании"
-    def go_to_approval_elements_tabs(self):
-        self.is_visibility_of_element_located(*ZakupListLocators.APPROVAL_ELEMENTS_TAB, 5)
+    def go_to_approval_elements_tab(self):
+        assert self.is_visibility_of_element_located(*ZakupListLocators.APPROVAL_ELEMENTS_TAB, 5), \
+            'Не отображена вкладка "На согласовании"'
         self.browser.find_element(*ZakupListLocators.APPROVAL_ELEMENTS_TAB).click()
 
     # Перейти на вкладку "Отклонено"
-    def go_to_rejected_elements_tabs(self):
-        self.is_element_clickable(*ZakupListLocators.REJECTED_ELEMENTS_TAB, 5)
+    def go_to_rejected_elements_tab(self):
+        assert self.is_visibility_of_element_located(*ZakupListLocators.REJECTED_ELEMENTS_TAB, 5), \
+            'Не отображена вкладка "Отклонено"'
         self.browser.find_element(*ZakupListLocators.REJECTED_ELEMENTS_TAB).click()
 
     # Перейти на вкладку "Согласовано"
-    def go_to_approved_elements_tabs(self):
-        self.is_element_clickable(*ZakupListLocators.APPROVED_ELEMENTS_TAB, 5)
+    def go_to_approved_elements_tab(self):
+        assert self.is_visibility_of_element_located(*ZakupListLocators.APPROVED_ELEMENTS_TAB, 5), \
+            'Не отображена вкладка "Согласовано"'
         self.browser.find_element(*ZakupListLocators.APPROVED_ELEMENTS_TAB).click()
+
+    # Перейти на вкладку "Все моего подразделения"
+    def go_to_allmydepartment_tab(self):
+        assert self.is_visibility_of_element_located(*ZakupListLocators.ALL_IN_MY_DEPARTMENT_TAB, 5), \
+            'Не отображена вкладка "Все моего подразделения"'
+        self.browser.find_element(*ZakupListLocators.ALL_IN_MY_DEPARTMENT_TAB).click()
 
     def verify_element_status_in_approval_tab(self, approval_status="На согласовании с юридической службой"):
         self.browser.implicitly_wait(1)
