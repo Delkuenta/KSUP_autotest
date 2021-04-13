@@ -1,3 +1,5 @@
+import os
+
 import pytest
 from selenium import webdriver
 from msedge.selenium_tools import Edge, EdgeOptions
@@ -55,6 +57,9 @@ def browser_function(request):
 
     print("\nquit browser..")
     browser.quit()
+    if browser_name == "ie11":
+        os.system("taskkill /f /im  IEDriverServer.exe")
+        os.system("taskkill /f /im  iexplore.exe")
 
 
 @pytest.fixture(scope="session")
@@ -83,9 +88,19 @@ def browser_session(request):
         options.add_argument("start-maximized")
         browser = Edge(options=options)
 
+    elif browser_name == "ie11":
+        options = webdriver.IeOptions()
+        options.IntroduceInstabilityByIgnoringProtectedModeSettings = True
+        options.ensure_clean_session = True
+        print('\nstart "Internet Explorer 11" browser for test..')
+        browser = webdriver.Ie(options=options)
+        browser.delete_all_cookies()
     else:
         raise pytest.UsageError("--browser_name should be chrome or firefox")
     yield browser
     print("\nquit browser..")
     browser.quit()
+    if browser_name == "ie11":
+        os.system("taskkill /f /im  IEDriverServer.exe")
+        os.system("taskkill /f /im  iexplore.exe")
 

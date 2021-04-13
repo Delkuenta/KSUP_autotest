@@ -3,11 +3,13 @@ import math
 import os
 import time
 from selenium.webdriver import Remote as RemoteWebDriver
+from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
 from selenium.common.exceptions import NoSuchElementException, TimeoutException
+
 from userdata.user_data import UserData
-from pages.locators import BasePageLocators
+from pages.locators import BasePageLocators, UserInformationLocatros
 
 
 class BasePage:
@@ -142,6 +144,10 @@ class BasePage:
             "Не корректный титул на странице оперпланы дирекции.\n" \
             "Ожидаемый результат: Оперпланы дирекции"
 
+    def go_to_request_support(self):
+        self.is_visibility_of_element_located(*BasePageLocators.SUPPORT_REQUEST_ELEMENT, 5)
+        self.browser.find_element(*BasePageLocators.SUPPORT_REQUEST_ELEMENT).click()
+
     def read_file_json(self, path_file):
         full_path_file = os.path.join(UserData.current_dir, path_file)
         with open(full_path_file, "r", encoding='utf-8') as file:
@@ -154,9 +160,9 @@ class BasePage:
         # Определяем валюту и переводим в рубли
         raw_sum = user_data_dict["sum"]
         if user_data_dict["currency"] == "Доллар":
-            sum_in_rub = raw_sum * 65
-        elif user_data_dict["currency"] == "Евро":
             sum_in_rub = raw_sum * 75
+        elif user_data_dict["currency"] == "Евро":
+            sum_in_rub = raw_sum * 90
         else:
             sum_in_rub = raw_sum
 
@@ -324,3 +330,18 @@ class BasePage:
             else:
                 sum_value = ('{:,d}'.format(number)).replace(",", " ") + ',00 ₽'
         return sum_value
+
+    # Вспомогательный метод: заходит в профиль пользователя и проверяет почту
+    def mail_in_user_profile(self, url):
+        # Открываем новую вкладку
+        self.browser.execute_script("window.open('');")
+        # Switch to the new window
+        self.browser.switch_to.window(self.browser.window_handles[1])
+        self.browser.get(url)
+        self.browser.find_element(*BasePageLocators.USER_NAME).click()
+        time.sleep(1)
+        self.browser.find_element(*BasePageLocators.PERSONAL_INFORMATION_BUTTON).click()
+        work_email = self.browser.find_element(*UserInformationLocatros.WORK_MAIL).text
+        self.browser.close()
+        self.browser.switch_to.window(self.browser.window_handles[0])
+        return work_email

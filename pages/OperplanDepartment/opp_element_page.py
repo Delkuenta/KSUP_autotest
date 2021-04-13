@@ -52,10 +52,10 @@ class OppElementPage(BasePage):
         while current_line < count_payments_line:
             if user_data_dict["payments"][current_line]["year"] == year:
                 if user_data_dict["currency"] == "Доллар":
-                    sum_in_rub = user_data_dict["payments"][current_line]["sum"] * 70
+                    sum_in_rub = user_data_dict["payments"][current_line]["sum"] * 75
                     sum_per_year += sum_in_rub
                 elif user_data_dict["currency"] == "Евро":
-                    sum_in_rub = user_data_dict["payments"][current_line]["sum"] * 80
+                    sum_in_rub = user_data_dict["payments"][current_line]["sum"] * 95
                     sum_per_year += sum_in_rub
                 else:
                     sum_per_year += user_data_dict["payments"][current_line]["sum"]

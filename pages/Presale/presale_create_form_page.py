@@ -31,6 +31,7 @@ class PresaleFormCreate(BasePage):
         how, what = FormCreatePresaleLocators.SALES_UNIT_DROPDOWN_ELEMENT
         what = what.replace("salesUnit_name", user_data_dict["salesUnit"])
         self.browser.find_element(*FormCreatePresaleLocators.SALES_UNIT_ELEMENT).click()
+        self.browser.find_element(*FormCreatePresaleLocators.SALES_UNIT_SEARCH_FIELD).send_keys(user_data_dict["salesUnit"])
         self.browser.find_element(how, what).click()
 
         # Ищем поле "Ответственный менеджер подразделения-продавца" и выбираем значение
@@ -51,9 +52,10 @@ class PresaleFormCreate(BasePage):
                 self.browser.find_element(how, what).click()
 
         # Ищем поле "Подразделение-исполнитель" и выбираем значение
-        self.browser.find_element(*FormCreatePresaleLocators.EXECUTIVE_UNIT_ELEMENT).click()
         how, what = FormCreatePresaleLocators.EXECUTIVE_UNIT_DROPDOWN_ELEMENT
         what = what.replace("executiveUnit_name", user_data_dict["executiveUnit"])
+        self.browser.find_element(*FormCreatePresaleLocators.EXECUTIVE_UNIT_ELEMENT).click()
+        self.browser.find_element(*FormCreatePresaleLocators.EXECUTIVE_UNIT_SEARCH_FIELD).send_keys(user_data_dict["executiveUnit"])
         self.browser.find_element(how, what).click()
 
         # Ищем поле "Ответственный менеджер подразделения-исполнителя" и выбираем значение
@@ -129,11 +131,12 @@ class PresaleFormCreate(BasePage):
         else:
             contractSize = user_data_dict["contractSize"]
         self.browser.find_element(*FormCreatePresaleLocators.CONTRACT_SIZE_ELEMENT).send_keys(contractSize)
-
+        """
+        Убрано на версии 3.42.9
         # Ищем поле "Самостоятельная продажа" и выбираем значение
         Select(self.browser.find_element(*FormCreatePresaleLocators.SEPARATE_SALE_ELEMENT)).select_by_value(
             user_data_dict["separateSale"])
-
+        """
         # Ищем поле "Плановый срок подачи на конкурс" и вводим значение
         competition_deadline_from_element = self.browser.find_element(
             *FormCreatePresaleLocators.COMPETITION_DEADLINE_FROM_ELEMENT)

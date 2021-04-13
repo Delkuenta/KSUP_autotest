@@ -9,8 +9,8 @@
         "executiveManager": "Ногинский Михаил Владимирович",
         "executiveUnitLegal": "ООО \"ЗЛЫЕ МАРСИАНЕ\"",
         "typeOfWorkServices": ["Оптовая и розничная продажа товаров"],
-        "sum": 29000000,
-        "currency": "Рубль",
+        "sum": 1000,
+        "currency": "Доллар",
         "priceCategory": "",
         "competitionDeadlineFrom": "15.07.2020",
         "startDate": "01.07.2020",
@@ -30,17 +30,17 @@
 		"createAccount": "Mr_KSUP_Seller",
         "payments": [
             {
-                "sum": 20000000,
+                "sum": 500,
                 "year": 2020,
                 "quarter": 3
             },
             {
-                "sum": 7000000,
+                "sum": 150,
                 "year": 2020,
                 "quarter": 4
             },
             {
-                "sum": 2000000,
+                "sum": 350,
                 "year": 2021,
                 "quarter": 1
             }

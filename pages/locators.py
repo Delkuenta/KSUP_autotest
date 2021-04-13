@@ -10,6 +10,7 @@ class LoginPageLocators:
 class BasePageLocators:
     USER_NAME = (By.CSS_SELECTOR, "span[class*='me-tile-nophoto-username']")
     LOGOUT_BUTTON = (By.CSS_SELECTOR, "[id$='SubLink_ShellSignout']")
+    PERSONAL_INFORMATION_BUTTON = (By.XPATH, "//a[contains(@id, 'PersonalInformation')]")
     PRESALE_LIST_LINK = "/SalesManagement/Lists/Sale/All.aspx"
     PRESALE_LIST_TITLE = (By.CSS_SELECTOR, "#DeltaPlaceHolderPageTitleInTitleArea a")
     ZAKUP_LIST_LINK = "/SalesManagement/Lists/PresaleActivity/All.aspx"
@@ -61,10 +62,13 @@ class BasePageLocators:
     # Выбор технологии //*[normalize-space(text()) and normalize-space(.)='name']
     ELEMENT_IN_FRAME = (By.XPATH, "//*[contains(text(), 'name')]")
 
+    # Кнопка "Отправить обращение в поддержку"
+    SUPPORT_REQUEST_ELEMENT = (By.CSS_SELECTOR, "[class$='report-link']")
+
 
 class PresaleListLocators:
     PRESALE_CREATE_BUTTON = (By.XPATH, "//a[@id='idHomePageNewItem']")
-    FIND_ELEMENT_IN_PRESALE_LIST = (By.XPATH, f"//a[@class= 'ms-listlink' and contains(text(),'Test_name')]")
+    FIND_ELEMENT_IN_PRESALE_LIST = (By.XPATH, f"//a[@class= 'ms-listlink' and text() = 'Test_name']")
 
     # Вкладки на листе сущности "Пресейловая активность"
     ALL_ELEMENTS_TAB = (By.CSS_SELECTOR, "a[class^='viewAll']")
@@ -95,6 +99,7 @@ class FormCreatePresaleLocators:
 
     # Подразделение-продавец *f"//li[normalize-space(.)='salesUnit_name']"
     SALES_UNIT_ELEMENT = (By.CSS_SELECTOR, "#div-wcfLookupControl_KsupDivisions")
+    SALES_UNIT_SEARCH_FIELD =(By.XPATH, "//*[@id='div-wcfLookupControl_KsupDivisions']//input[@type='search']")
     SALES_UNIT_DROPDOWN_ELEMENT = (By.XPATH, "//*[contains(@id, 'KsupDivisions')]//li[contains(text(), 'salesUnit_name')]")
 
     # Ответственный менеджер подразделения-продавца * //li[normalize-space(.)='salesManager_name']
@@ -104,6 +109,7 @@ class FormCreatePresaleLocators:
 
     # Подразделение-исполнитель  //li[contains(text(), 'executiveUnit_name')]
     EXECUTIVE_UNIT_ELEMENT = (By.CSS_SELECTOR, "#div-wcfLookupControl_KsupDivisionPerformer")
+    EXECUTIVE_UNIT_SEARCH_FIELD = (By.XPATH, "//*[@class='select2-dropdown select2-dropdown--below']//input[@type='search']")
     # //li[contains(text(), '')]
     EXECUTIVE_UNIT_DROPDOWN_ELEMENT = (
         By.XPATH, "//*[contains(@id, 'KsupDivisionPerformer')]//li[contains(text(), 'executiveUnit_name')]")
@@ -497,6 +503,7 @@ class ZakupListLocators:
     REJECTED_ELEMENTS_TAB = (By.CSS_SELECTOR, "a[class='viewRejected ms-pivotControl-surfacedOpt']")
     APPROVED_ELEMENTS_TAB = (By.CSS_SELECTOR, "a[class^='viewApproved ms-pivotControl-surfacedOpt']")
     ALL_IN_MY_DEPARTMENT_TAB = (By.CSS_SELECTOR, "a[class^='viewAllInMyDepartment']")
+    ALL_IN_MY_EGRUL_TAB = (By.CSS_SELECTOR, "[class^='viewAllInMyEgrul']")
 
     # Поле "Статус согласования" множественный результат
     APPROVAL_STATUS_VALUES = (By.CSS_SELECTOR, "[class^='colKsupPresaleApproveStatus ms-cellstyle ms-vb2']")
@@ -561,15 +568,16 @@ class ZakupElementLocators:
     WITHDRAW_FROM_APPROVAL_BUTTON = (By.CSS_SELECTOR, "[id^='Approve.Cancel']")
 
     # Элементы внутри окна подтверждения/отклонения //textarea[@id ='dialogComment']
-    COMMENT_TO_APPROVAL_ZAKUP = (By.CSS_SELECTOR, "[id='dialogComment']")
+    COMMENT_TO_APPROVAL_ZAKUP_FIELD = (By.CSS_SELECTOR, "[id='dialogComment']")
     # //input[@name='filefield']
     FILE_TO_APPROVAL_ZAKUP = (By.CSS_SELECTOR, "[name='filefield']")
-    CONFIRM_APPROVAL_ZAKUP = (By.XPATH, "//button[@type = 'button' and (text() = 'Согласовать')]")
-    CONFIRM_REJECT_ZAKUP = (By.XPATH, "//button[@type = 'button' and (text() = 'Отклонить')]")
-    CONFIRM_ESCALATE_ZAKUP = (By.XPATH, "//button[@type = 'button' and (text() = 'Эскалировать')]")
-    CONFIRM_REVISION_ZAKUP = (By.XPATH, "//button[@type = 'button' and (text() = 'Отправить на доработку')]")
-    CANCEL_APPROVAL_ZAKUP = (By.XPATH, "//button[@type = 'button' and (text() = 'Отмена')]")
-    ClOSE_ALLERT_ZAKUP = (By.CSS_SELECTOR, "#dlgTitleBtns")
+    CONFIRM_APPROVAL_ZAKUP_BUTTON = (By.XPATH, "//button[@type = 'button' and (text() = 'Согласовать')]")
+    CONFIRM_REJECT_ZAKUP_BUTTON = (By.XPATH, "//button[@type = 'button' and (text() = 'Отклонить')]")
+    WITHDWRAW_ZAKUP_BUTTON = (By.XPATH, "//button[@type = 'button' and (text() = 'Отозвать')]")
+    CONFIRM_ESCALATE_ZAKUP_BUTTON = (By.XPATH, "//button[@type = 'button' and (text() = 'Эскалировать')]")
+    CONFIRM_REVISION_ZAKUP_BUTTON = (By.XPATH, "//button[@type = 'button' and (text() = 'Отправить на доработку')]")
+    CANCEL_APPROVAL_ZAKUP_BUTTON = (By.XPATH, "//button[@type = 'button' and (text() = 'Отмена')]")
+    ClOSE_ALLERT_ZAKUP_BUTTON = (By.CSS_SELECTOR, "#dlgTitleBtns")
     START_WITH_ELEMENT = (By.CSS_SELECTOR, "#dialogRestartStatus")
 
     # Вкладки в карточке
@@ -578,11 +586,14 @@ class ZakupElementLocators:
     APPROVAL_HISTORY_TAB = (By.XPATH, "//a[contains(@href, '#tabApprovingHistory')]")
 
     # Строки статус согласования
+    APPROVAL_DEP_HEAD_STATUS_ELEMENT = (By.XPATH, "//*[text() ='Согласование с руководителем подразделения']/following::span[1]")
+    APPROVAL_EGRUL_HEAD_STATUS_ELEMENT = (By.XPATH, "//*[text() ='Согласование с руководителем юр. лица/ИП']/following::span[1]")
     APPROVAL_LEGAL_STATUS_ELEMENT = (By.XPATH, "//*[text() ='Согласование юридической службой']/following::span[1]")
     APPROVAL_COUNT_STATUS_ELEMENT = (By.XPATH, "//*[text() ='Согласование бухгалтерией']/following::span[1]")
     APPROVAL_FIN_STATUS_ELEMENT = (By.XPATH, "//*[text() ='Согласование финансовой службой']/following::span[1]")
     APPROVAL_UDPRPO_STATUS_ELEMENT = (By.XPATH, "//*[text() ='Согласование Директором по разработке ПО']/following::span[1]")
     APPROVAL_KKP_STATUS_ELEMENT = (By.XPATH, "//*[text() ='Согласование ККП']/following::span[1]")
+    APPROVAL_AUDIT_STATUS_ELEMENT = (By.XPATH, "//*[text() ='Согласование службой внутреннего аудита и контроля']/following::span[1]")
 
     # Все элементы со статусом согласования
     RESULT_APPROVAL_LIST = (By.CSS_SELECTOR, "[role^= 'result']")
@@ -654,6 +665,8 @@ class ZakupElementLocators:
     PROJECT_RISKS_DEPARTMENT_IN_ZP = (By.CSS_SELECTOR, ".fldKsupProjectRiskDepartmentPerspec #SPFieldNote")
     # Значение в Поле "Ссылка на запрос на Официальном сайте ЕИС"
     EIS_PRICE_LINK_IN_ZP = (By.CSS_SELECTOR, ".fldKsupEisPriceLink #SPFieldNote")
+    # Значение в поле "Статус согласования с службой внутреннего аудита и контроля"
+    APPROVAL_AUDIT_STATUS_IN_ZP = (By.CSS_SELECTOR, ".fldKsupAuditStatus #SPFieldChoice")
 
     # Элементы на вкладке "Прикрепленные файлы"
     # Тендерная заявка
@@ -693,6 +706,7 @@ class FormCreateContractLocators:
 
     # Подразделение-продавец //li[normalize-space()='salesUnit_name']
     SALES_UNIT_CONTRACT_ELEMENT = (By.CSS_SELECTOR, "#div-wcfLookupControl_KsupDivisions")
+    SALES_UNIT_SEARCH_FIELD =(By.XPATH, "//*[@id='div-wcfLookupControl_KsupDivisions']//input[@type='search']")
     SALES_UNIT_DROPDOWN_CONTRACT_ELEMENT = (By.XPATH, "//*[contains(@id, 'KsupDivisions')]//li[contains(text(), 'salesUnit_name')]")
 
     # Ответственный менеджер подразделения-продавца
@@ -702,6 +716,7 @@ class FormCreateContractLocators:
 
     # Подразделение-исполнитель
     EXECUTIVE_UNIT_CONTRACT_ELEMENT = (By.CSS_SELECTOR, "#div-wcfLookupControl_KsupDivisionPerformer")
+    EXECUTIVE_UNIT_SEARCH_FIELD = (By.XPATH, "//*[@class='select2-dropdown select2-dropdown--below']//input[@type='search']")
     EXECUTIVE_UNIT_CONTRACT_DROPDOWN_ELEMENT = (By.XPATH, "//*[contains(@id, 'KsupDivisionPerformer')]//li[contains(text(), 'executiveUnit_name')]")
 
     # Ответственный менеджер подразделения-исполнителя
@@ -861,6 +876,7 @@ class ContractListLocators:
     REJECTED_ELEMENTS_TAB = (By.CSS_SELECTOR, "a[class='viewRejected ms-pivotControl-surfacedOpt']")
     APPROVED_ELEMENTS_TAB = (By.CSS_SELECTOR, "a[class^='viewApproved ms-pivotControl-surfacedOpt']")
     ALL_IN_MY_DEPARTMENT_TAB = (By.CSS_SELECTOR, "a[class^='viewAllInMyDepartment']")
+    ALL_IN_MY_EGRUL_TAB = (By.CSS_SELECTOR, "[class^='viewAllInMyEgrul']")
 
     # Поле "Статус согласования" множественный результат
     APPROVAL_STATUS_VALUES = (By.CSS_SELECTOR, "[class^='colKsupContractApproveStatus ms-cellstyle ms-vb2']")
@@ -912,11 +928,15 @@ class ContractElementLocators:
     REJECT_CONTRACT = (By.CSS_SELECTOR, "[id^='Approve.Reject']")
     ESCALATE_CONTRACT = (By.CSS_SELECTOR, "[id^='Approve.Escalate']")
     REVISION_CONTRACT = (By.CSS_SELECTOR, "[id^='Approve.Revision']")
+    # Кнопка Отзыв с внутренного согласования
+    WITHDRAW_FROM_APPROVAL_BUTTON = (By.CSS_SELECTOR, "[id^='Approve.Cancel']")
+
 
     # Кнопки подтверждения отклонения, эскалации, отправки на доработку внутри модульных окон
     CONFIRM_REJECT_CONTRACT = (By.XPATH, "//button[@type = 'button' and (text() = 'Отклонить')]")
     CONFIRM_ESCALATE_CONTRACT = (By.XPATH, "//button[@type = 'button' and (text() = 'Эскалировать')]")
     CONFIRM_REVISION_CONTRACT = (By.XPATH, "//button[@type = 'button' and (text() = 'Отправить на доработку')]")
+
 
     # Кнопка изменения элемента
     EDIT_ITEM_BUTTON = (By.CSS_SELECTOR, "[id='Ribbon.ListForm.Display.Manage.EditItem-Large']")
@@ -935,7 +955,11 @@ class ContractElementLocators:
 
     # Элементы на вкладке "Статус Согласования"
     # Вкладка "Статус согласования"
-    APPROVAL_HISTORY_CONTRACT_TABS = (By.XPATH, "//a[contains(@href, '#tabApprovingHistory')]")
+    APPROVAL_HISTORY_CONTRACT_TAB = (By.XPATH, "//a[contains(@href, '#tabApprovingHistory')]")
+    # Строка согласование с руководителем подразделения
+    APPROVAL_DEP_HEAD_STATUS_ELEMENT = (By.XPATH, "//*[text() ='Согласование с руководителем подразделения']/following::span[1]")
+    # Строка согласование с руководителем юр.лица
+    APPROVAL_EGRUL_HEAD_STATUS_ELEMENT = (By.XPATH, "//*[text() ='Согласование с руководителем юр. лица/ИП']/following::span[1]")
     # Строка согласование с юридической службой
     APPROVAL_LEGAL_STATUS_ELEMENT = (By.XPATH, "//*[text() ='Согласование юридической службой']/following::span[1]")
     # Строка согласование с бухгалтерией
@@ -946,6 +970,8 @@ class ContractElementLocators:
     APPROVAL_UDPRPO_STATUS_ELEMENT = (By.XPATH, "//*[text() ='Согласование Директором по разработке ПО']/following::span[1]")
     # Строка согласование с ККП
     APPROVAL_KKP_STATUS_ELEMENT = (By.XPATH, "//*[text() ='Согласование ККП']/following::span[1]")
+    # Строка согласование со службой внутреннего аудита и контроля
+    APPROVAL_AUDIT_STATUS_ELEMENT = (By.XPATH, "//*[text() ='Согласование службой внутреннего аудита и контроля']/following::span[1]")
 
     # Элементы внутри окна подтверждения/отклонения //textarea[@id='dialogComment']
     COMMENT_TO_APPROVAL_CONTRACT = (By.CSS_SELECTOR, "[id='dialogComment']")
@@ -953,6 +979,7 @@ class ContractElementLocators:
     FILE_TO_APPROVAL_CONTRACT = (By.CSS_SELECTOR, "[name='filefield']")
     CONFIRM_APPROVAL_CONTRACT = (By.XPATH, "//button[@type = 'button' and (text() = 'Согласовать')]")
     CANCEL_APPROVAL_CONTRACT = (By.XPATH, "//button[@type = 'button' and (text() = 'Отмена')]")
+    WITHDWRAW_ZAKUP_BUTTON = (By.XPATH, "//button[@type = 'button' and (text() = 'Отозвать')]")
     ClOSE_ALLERT_CONTRACT = (By.CSS_SELECTOR, "#dlgTitleBtns")
     START_WITH_ELEMENT = (By.CSS_SELECTOR, "#dialogRestartStatus")
 
@@ -1010,23 +1037,20 @@ class ContractElementLocators:
     DESCRIPTION_TEXT_IN_CONTRACT = (By.CSS_SELECTOR, ".fldKsupDescriptionPlainText #SPFieldNote")
     # Поле "Количественные показатели реализации проекта"
     QUANTITATIVE_INDICATORS_PROJECT = (By.CSS_SELECTOR, ".fldKsupQuantitativeIndicatorsProjec #SPFieldNote")
+    # Значение в поле "Статус согласования с службой внутреннего аудита и контроля"
+    APPROVAL_AUDIT_STATUS_IN_CONTRACT = (By.CSS_SELECTOR, ".fldKsupAuditStatus #SPFieldChoice")
 
     # Элементы на Вкладке "Заключенные договоры/контракты"
     # Значение в поле "Заказчик" Множественный результат
     JOINT_BIDDING_CUSTOMER_VALUE = (By.CSS_SELECTOR, "[data-member='customer'][class^='jointbidding']")
-
     # Значение в поле "Номер" Множественный результат
     JOINT_BIDDING_NUMBER_VALUE = (By.CSS_SELECTOR, "[data-member='number'][class^='jointbidding']")
-
     # Значение в поле "Дата заключения" Множественный результат
     JOINT_BIDDING_START_DATE_VALUE = (By.CSS_SELECTOR, "[data-member='imprisonmentDate'][class^='jointbidding']")
-
     # Значение в поле "Дата окончания" Множественный результат
     JOINT_BIDDING_END_DATE_VALUE = (By.CSS_SELECTOR, "[data-member=''][class^='jointbidding']")
-
     # Значение в поле "Дата окончания" Множественный результат
     JOINT_BIDDING_SUM_VALUE = (By.CSS_SELECTOR, "[data-member='summa'][class^='jointbidding']")
-
     JOINT_BIDDING_TOTAL_SUM_VALUE = (By.CSS_SELECTOR, "[class^='payplan-cell']>span")
 
     # Элементы на вкладке "Прикрепленные файлы"
@@ -1519,3 +1543,48 @@ class FormCreateCustomerLocators:
 
     # Кнопка создания
     CONFIRM_CREATE_BUTTON = (By.XPATH, "//*[contains(@id, 'diidIOSaveItem') and @value='Создать']")
+
+
+class FormCreateRequestSupportLocators:
+    # Титул в форме создания "Запрос в техподдержку"
+    TITLE_IN_CUSTOMER_FORM = (By.CSS_SELECTOR, "#pageTitle")
+
+    # Поле email
+    EMAIL_FIELD = (By.CSS_SELECTOR, "[id$='email']")
+
+    # Поле "Личный телефон"
+    PERSONAL_NUBMER_FIELD = (By.CSS_SELECTOR, "[id$='pNumber']")
+
+    # Поле "Рабочий телефон"
+    WORK_NUMBER_FIELD = (By.CSS_SELECTOR, "[id$='wNumber']")
+
+    # Поле "Тип запроса"
+    TYPE_REQUEST_SELECT = (By.CSS_SELECTOR, "[id$='requestType']")
+
+    # Поле "Классификация" группа
+    CLASSIFICATION_GROUP_SELECT = (By.CSS_SELECTOR, "[id$='classificationGroup']")
+
+    # Поле "Классификация" тип
+    CLASSIFICATION_TYPE_SELECT = (By.CSS_SELECTOR, "[id$='classificationType']")
+
+    # Поле "Роль"
+    ROLE_FIELD = (By.CSS_SELECTOR, "[id$='roleTextBox']")
+
+    # Поле "Тема"
+    THEME_FIELD = (By.CSS_SELECTOR, "[id$='theme']")
+
+    # Поле "Описание"
+    DESCRIPTION_FIELD = (By.CSS_SELECTOR, "[id$='description']")
+
+    # Поле "Вложения"
+    FILES_FIELD = (By.CSS_SELECTOR, "[id$='Attachment']")
+
+    # Кнопка "Отправить"
+    SEND_BUTTON = (By.CSS_SELECTOR, "[id$='SendRequest']")
+
+    TITLE_SEND_SUCCESS = (By.CSS_SELECTOR, "h1[id='pageTitle']")
+    TEXT_SEND_SUCCESS = (By.CSS_SELECTOR, "[id$='MainMsg']")
+    LINK_SEND_SUCCESS = (By.CSS_SELECTOR, "[id$='IssueLink']")
+
+class UserInformationLocatros:
+    WORK_MAIL = (By.CSS_SELECTOR, "[class='fldEMail ']>[id='SPFieldText']")

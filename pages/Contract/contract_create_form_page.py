@@ -199,7 +199,7 @@ class ContractFormCreate(BasePage):
             current_line += 1
 
         # Если сумма платежей не совпадает появляется алерт, при подтверждении сущность создается
-        if payments_sum != user_data_dict["sum"]:
+        if round(payments_sum, 2) != user_data_dict["sum"]:
             alert = self.browser.switch_to.alert
             alert.accept()
 
@@ -219,12 +219,14 @@ class ContractFormCreate(BasePage):
             customer = user_data_dict["customer"]
         what = what.replace("customer_name", customer)
         self.browser.find_element(*FormCreateContractLocators.CUSTOMER_SEARCH_FIELD).send_keys(customer)
+        time.sleep(1)
         self.browser.find_element(how, what).click()
 
         # Заполняем поле "Подразделение-продавец"
-        self.browser.find_element(*FormCreateContractLocators.SALES_UNIT_CONTRACT_ELEMENT).click()
         how, what = FormCreateContractLocators.SALES_UNIT_DROPDOWN_CONTRACT_ELEMENT
         what = what.replace("salesUnit_name", user_data_dict["salesUnit"])
+        self.browser.find_element(*FormCreateContractLocators.SALES_UNIT_CONTRACT_ELEMENT).click()
+        self.browser.find_element(*FormCreateContractLocators.SALES_UNIT_SEARCH_FIELD).send_keys(user_data_dict["salesUnit"])
         self.browser.find_element(how, what).click()
 
         # Заполняем поле "Ответственный менеджер подразделения-продавца"
@@ -238,6 +240,7 @@ class ContractFormCreate(BasePage):
         time.sleep(1)
         how, what = FormCreateContractLocators.EXECUTIVE_UNIT_CONTRACT_DROPDOWN_ELEMENT
         what = what.replace("executiveUnit_name", user_data_dict["executiveUnit"])
+        self.browser.find_element(*FormCreateContractLocators.EXECUTIVE_UNIT_SEARCH_FIELD).send_keys(user_data_dict["executiveUnit"])
         self.browser.find_element(how, what).click()
 
         # Заполняем поле "Ответственный менеджер подразделения-исполнителя"

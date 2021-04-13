@@ -10,8 +10,8 @@
         "executiveUnitLegal": "ООО \"ЗЛЫЕ МАРСИАНЕ\"",
         "saleLawType": "",
         "typeOfWorkServices": ["Разработка заказного ПО", "Тестирование ПО"],
-        "sum": 52000000,
-        "currency": "Рубль",
+        "sum": 2000000,
+        "currency": "Доллар",
         "priceCategory": "",
         "applicationSize": "",
         "contractSize": "",
@@ -41,27 +41,27 @@
 		"createAccount": "Mr_KSUP_Dir2",
         "payments": [
             {
-                "sum": 20000000,
+                "sum": 1000000,
                 "year": 2020,
                 "quarter": 3
             },
             {
-                "sum": 15000000,
+                "sum": 500000,
                 "year": 2020,
                 "quarter": 4
             },
             {
-                "sum": 10000000,
+                "sum": 200000,
                 "year": 2021,
                 "quarter": 1
             },
             {
-                "sum": 5000000,
+                "sum": 200000,
                 "year": 2021,
                 "quarter": 2
             },
             {
-                "sum": 2000000,
+                "sum": 100000,
                 "year": 2021,
                 "quarter": 3
             }

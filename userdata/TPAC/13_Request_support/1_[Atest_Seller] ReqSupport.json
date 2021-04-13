@@ -1,0 +1,14 @@
+{
+	"main_data": {
+		"email": "Seller_mail@lanit.ru",
+		"personalNumber": "+7 999 555 44 33",
+		"workNumber": "88005553535",
+		"typeRequest": "Вопрос",
+		"classificationGroup": "Пресейловые активности",
+		"classificationType": "Создание",
+		"role": "Продавцы",
+		"theme": "[ТЕСТ] Тестовый запрос в техподдержку_3",
+		"description": "Тестовое описание запроса в техподдержку, роль Mr_KSUP_Seller, почта: Seller_mail@lanit.ru, стенд: ТПАК",
+		"createAccount": "Mr_KSUP_Seller"
+    }
+}

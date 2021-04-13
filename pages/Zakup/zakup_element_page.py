@@ -376,7 +376,8 @@ class ZakupElementPage(BasePage):
                                   f'Ожидаемый результат: {expected_text}\n'
                                   f'Фактический результат: {actual_text}')
 
-        if user_data_dict["contractorType"] == "Коммерческое предложение" or user_data_dict["contractorType"] == "Тендерная заявка":
+        if user_data_dict["contractorType"] == "Коммерческое предложение" or user_data_dict[
+            "contractorType"] == "Тендерная заявка":
             # Проверяем текст в поле "Пояснительная служебная записка"
             actual_text = self.is_element_text(*ZakupElementLocators.EXPLANATORY_MEMORANUM_FIELD)
             expected_text = UserData.name_doc_to_link
@@ -465,6 +466,146 @@ class ZakupElementPage(BasePage):
             self.is_visibility_of_element_located(*ZakupElementLocators.CONFIRM_SEND_APPROVAL_BUTTON, 5)
             self.browser.find_element(*ZakupElementLocators.CONFIRM_SEND_APPROVAL_BUTTON).click()
 
+    # Проверка отображения статуса "На согласовании в руководителем подразделения"
+    def verify_zakup_waiting_status_approval_department_head(self):
+        # Проверяем поле статуса на вкладке "Общие сведения"
+        self.browser.find_element(*ZakupElementLocators.GENERAL_INFORMATION_TAB).click()
+        self.is_visibility_of_element_located(*ZakupElementLocators.APPROVAL_MAIN_STATUS_IN_ZP, 5)
+        assert self.is_text_to_be_present_in_element(*ZakupElementLocators.APPROVAL_MAIN_STATUS_IN_ZP,
+                                                     "На согласовании с руководителем подразделения"), \
+            'Некорректный статус или отсутствует статус в поле "Статус согласования" на вкладке "Общие сведения"'
+
+        # Проверяем статус "Согласуется"
+        self.is_visibility_of_element_located(*ZakupElementLocators.APPROVAL_HISTORY_TAB, 5)
+        self.browser.find_element(*ZakupElementLocators.APPROVAL_HISTORY_TAB).click()
+        last_result = self.browser.find_elements(*ZakupElementLocators.APPROVAL_DEP_HEAD_STATUS_ELEMENT)[-1]
+        last_result_text = last_result.text
+        assert last_result_text == "Согласуется", 'Некорректный статус или отсутствует статус в последней строке. ' \
+                                                  'Ожидаемый результат: "На согласовании с руководителем подразделения" - "Согласуется"'
+
+        # Проверяем цвет статуса "Согласуется"
+        waiting_color = "#f5b300"
+        color_in_element = (Color.from_string(last_result.value_of_css_property('color'))).hex
+        assert color_in_element == waiting_color, \
+            'Некорректный цвет статуса "Согласуется" в строке согласования с руководителем подразделения'
+
+    # Проверка отображения статуса "Согласовано с руководителем подразделения"
+    def verify_zakup_successfully_status_approval_department_head(self):
+
+        # Проверяем статус "Согласовано" на вкладке "Статус согласования"
+        self.is_visibility_of_element_located(*ZakupElementLocators.APPROVAL_HISTORY_TAB, 5)
+        self.browser.find_element(*ZakupElementLocators.APPROVAL_HISTORY_TAB).click()
+
+        last_result = self.browser.find_elements(*ZakupElementLocators.APPROVAL_DEP_HEAD_STATUS_ELEMENT)[-1]
+        last_result_text = last_result.text
+        assert last_result_text == "Согласовано", 'Некорректный статус или отсутствует статус в последней строке. ' \
+                                                  'Ожидаемый результат: "Согласование юридической службой" - "Согласовано"'
+
+        # Проверяем цвет статуса "Согласовано"
+        successfully_color = Color.from_string('green')
+        color_in_element = Color.from_string(last_result.value_of_css_property('color'))
+        assert color_in_element == successfully_color, \
+            'Некорректный цвет статуса "Согласовано c руководителем подразделения" в строке согласования с руководителем подразделения'
+
+    # Проверка отображения статуса "Не согласовано с руководителем подразделения"
+    def verify_zakup_reject_status_approval_department_head(self):
+        # Проверяем статус "Отклонено" на вкладке "Общие сведения"
+        self.browser.find_element(*ZakupElementLocators.GENERAL_INFORMATION_TAB).click()
+        self.is_visibility_of_element_located(*ZakupElementLocators.APPROVAL_MAIN_STATUS_IN_ZP, 5)
+        assert self.is_text_to_be_present_in_element(*ZakupElementLocators.APPROVAL_MAIN_STATUS_IN_ZP,
+                                                     "Не согласовано с руководителем подразделения"), \
+            '\nНекорректный статус или отсутствует статус в поле "Статус согласования" на вкладке "Общие сведения" ' \
+            '\n Ожидаемый результат: Отображен статус "Не согласовано с руководителем подразделения"'
+
+        # Проверяем статус "Отклонено" на вкладке "Статус согласования"
+        self.is_visibility_of_element_located(*ZakupElementLocators.APPROVAL_HISTORY_TAB, 5)
+        self.browser.find_element(*ZakupElementLocators.APPROVAL_HISTORY_TAB).click()
+
+        last_result = self.browser.find_elements(*ZakupElementLocators.APPROVAL_DEP_HEAD_STATUS_ELEMENT)[-1]
+        last_result_text = last_result.text
+        assert last_result_text == "Отклонено", 'Некорректный статус или отсутствует статус в последней строке. ' \
+                                                'Ожидаемый результат: "Согласование юридической службой" - "Отклонено"'
+
+        # Проверяем цвет статуса "Отклонено"
+        reject_color = Color.from_string('red')
+        color_in_element = Color.from_string(last_result.value_of_css_property('color'))
+        assert color_in_element == reject_color, \
+            'Некорректный цвет статуса "Отклонено" в строке согласования с руководителем подразделения'
+
+    # Проверка отображения статуса "На согласовании с руководителем юр.лица/ИП"
+    def verify_zakup_waiting_status_approval_egrulhead(self):
+        # Проверяем поле статуса на вкладке "Общие сведения"
+        self.browser.find_element(*ZakupElementLocators.GENERAL_INFORMATION_TAB).click()
+        self.is_visibility_of_element_located(*ZakupElementLocators.APPROVAL_MAIN_STATUS_IN_ZP, 5)
+        assert self.is_text_to_be_present_in_element(*ZakupElementLocators.APPROVAL_MAIN_STATUS_IN_ZP,
+                                                     "На согласовании с руководителем юридического лица/ИП"), \
+            'Некорректный статус или отсутствует статус в поле "Статус согласования" на вкладке "Общие сведения"'
+
+        # Проверяем статус "Согласуется"
+        self.is_visibility_of_element_located(*ZakupElementLocators.APPROVAL_HISTORY_TAB, 5)
+        self.browser.find_element(*ZakupElementLocators.APPROVAL_HISTORY_TAB).click()
+        last_result = self.browser.find_elements(*ZakupElementLocators.APPROVAL_EGRUL_HEAD_STATUS_ELEMENT)[-1]
+        last_result_text = last_result.text
+        assert last_result_text == "Согласуется", 'Некорректный статус или отсутствует статус в последней строке. ' \
+                                                  'Ожидаемый результат: "Согласование с руководителем юр. лица/ИП" - "Согласуется"'
+
+        # Проверяем цвет статуса "Согласуется"
+        waiting_color = "#f5b300"
+        color_in_element = (Color.from_string(last_result.value_of_css_property('color'))).hex
+        assert color_in_element == waiting_color, \
+            'Некорректный цвет статуса "Согласуется" в строке согласования с руководителем юр. лица/ИП'
+
+    # Проверка отображения статуса "Согласовано с руководителем юр.лица/ИП"
+    def verify_zakup_successfully_status_approval_egrulhead(self, user_data_dict):
+        # Проверяем успешный статус согласования во вкладке "Общие сведения"
+        if (user_data_dict["contractorType"] != "Тендерная заявка" and user_data_dict["priceCategory"] == "C") or \
+                (user_data_dict["contractorType"] != "Тендерная заявка" and user_data_dict["groupTypeWork"] == "Other"):
+            self.browser.find_element(*ZakupElementLocators.GENERAL_INFORMATION_TAB).click()
+            self.is_visibility_of_element_located(*ZakupElementLocators.APPROVAL_MAIN_STATUS_IN_ZP, 5)
+            assert self.is_text_to_be_present_in_element(*ZakupElementLocators.APPROVAL_MAIN_STATUS_IN_ZP,
+                                                         "Согласовано c руководителем юридического лица/ИП"), \
+                'Некорректный статус или отсутствует статус в поле "Статус согласования" на вкладке "Общие сведения"' \
+                '\nОР: отображен статус "Согласовано c руководителем юридического лица/ИП"' \
+                f'\nФР: отображен статус "{self.is_element_text(*ZakupElementLocators.APPROVAL_MAIN_STATUS_IN_ZP)}"'
+
+        self.is_visibility_of_element_located(*ZakupElementLocators.APPROVAL_HISTORY_TAB, 5)
+        self.browser.find_element(*ZakupElementLocators.APPROVAL_HISTORY_TAB).click()
+        last_result = self.browser.find_elements(*ZakupElementLocators.APPROVAL_EGRUL_HEAD_STATUS_ELEMENT)[-1]
+        last_result_text = last_result.text
+        assert last_result_text == "Согласовано", 'Некорректный статус или отсутствует статус в последней строке. ' \
+                                                  'Ожидаемый результат: "Согласование c руководителем юр.лица/ИП" - "Согласовано"'
+
+        # Проверяем цвет статуса "Согласовано"
+        successfully_color = Color.from_string('green')
+        color_in_element = Color.from_string(last_result.value_of_css_property('color'))
+        assert color_in_element == successfully_color, \
+            'Некорректный цвет статуса "Согласовано" в строке согласования с руководителем юр.лица/ИП'
+
+    # Проверка отображения статуса "Не согласовано с юр.лица/ИП"
+    def verify_zakup_reject_status_approval_egrulhead(self):
+        # Проверяем статус "Отклонено" на вкладке "Общие сведения"
+        self.browser.find_element(*ZakupElementLocators.GENERAL_INFORMATION_TAB).click()
+        self.is_visibility_of_element_located(*ZakupElementLocators.APPROVAL_MAIN_STATUS_IN_ZP, 5)
+        assert self.is_text_to_be_present_in_element(*ZakupElementLocators.APPROVAL_MAIN_STATUS_IN_ZP,
+                                                     "Не согласовано с руководителем юридического лица/ИП"), \
+            '\nНекорректный статус или отсутствует статус в поле "Статус согласования" на вкладке "Общие сведения" ' \
+            '\n Ожидаемый результат: Отображен статус "Не согласовано с руководителем юридического лица/ИП"'
+
+        # Проверяем статус "Отклонено" на вкладке "Статус согласования"
+        self.is_visibility_of_element_located(*ZakupElementLocators.APPROVAL_HISTORY_TAB, 5)
+        self.browser.find_element(*ZakupElementLocators.APPROVAL_HISTORY_TAB).click()
+
+        last_result = self.browser.find_elements(*ZakupElementLocators.APPROVAL_EGRUL_HEAD_STATUS_ELEMENT)[-1]
+        last_result_text = last_result.text
+        assert last_result_text == "Отклонено", 'Некорректный статус или отсутствует статус в последней строке. ' \
+                                                'Ожидаемый результат: "Согласование с руководителем юр. лица/ИП" - "Отклонено"'
+
+        # Проверяем цвет статуса "Отклонено"
+        reject_color = Color.from_string('red')
+        color_in_element = Color.from_string(last_result.value_of_css_property('color'))
+        assert color_in_element == reject_color, \
+            'Некорректный цвет статуса "Отклонено" в строке согласования с руководителем юр.лица/ИП'
+
     # Проверка отображения статуса "На согласовании с юридической службой"
     def verify_zakup_waiting_status_approval_legal(self):
         # Проверяем поле статуса на вкладке "Общие сведения"
@@ -486,7 +627,7 @@ class ZakupElementPage(BasePage):
         last_result = self.browser.find_elements(*ZakupElementLocators.APPROVAL_LEGAL_STATUS_ELEMENT)[-1]
         last_result_text = last_result.text
         assert last_result_text == "Согласуется", 'Некорректный статус или отсутствует статус в последней строке. ' \
-                                             'Ожидаемый результат: "Согласование юридической службой" - "Согласуется"'
+                                                  'Ожидаемый результат: "Согласование юридической службой" - "Согласуется"'
 
         # Проверяем цвет статуса "Согласуется"
         waiting_color = "#f5b300"
@@ -508,7 +649,7 @@ class ZakupElementPage(BasePage):
         last_result = self.browser.find_elements(*ZakupElementLocators.APPROVAL_LEGAL_STATUS_ELEMENT)[-1]
         last_result_text = last_result.text
         assert last_result_text == "Согласовано", 'Некорректный статус или отсутствует статус в последней строке. ' \
-                                                'Ожидаемый результат: "Согласование юридической службой" - "Согласовано"'
+                                                  'Ожидаемый результат: "Согласование юридической службой" - "Согласовано"'
 
         # Проверяем цвет статуса "Согласовано"
         successfully_color = Color.from_string('green')
@@ -524,7 +665,7 @@ class ZakupElementPage(BasePage):
         assert self.is_text_to_be_present_in_element(*ZakupElementLocators.APPROVAL_MAIN_STATUS_IN_ZP,
                                                      "Не согласовано с юридической службой"), \
             '\nНекорректный статус или отсутствует статус в поле "Статус согласования" на вкладке "Общие сведения" ' \
-            '\n Ожидаемый результат: Отображен статус "Не согласовано с финансовой службой"'
+            '\n Ожидаемый результат: Отображен статус "Не согласовано с юридической службой"'
 
         # Проверяем статус "Отклонено" на вкладке "Статус согласования"
         self.is_visibility_of_element_located(*ZakupElementLocators.APPROVAL_HISTORY_TAB, 5)
@@ -537,7 +678,7 @@ class ZakupElementPage(BasePage):
         last_result = self.browser.find_elements(*ZakupElementLocators.APPROVAL_LEGAL_STATUS_ELEMENT)[-1]
         last_result_text = last_result.text
         assert last_result_text == "Отклонено", 'Некорректный статус или отсутствует статус в последней строке. ' \
-                                             'Ожидаемый результат: "Согласование юридической службой" - "Отклонено"'
+                                                'Ожидаемый результат: "Согласование юридической службой" - "Отклонено"'
 
         # Проверяем цвет статуса "Отклонено"
         reject_color = Color.from_string('red')
@@ -565,7 +706,7 @@ class ZakupElementPage(BasePage):
         last_result = self.browser.find_elements(*ZakupElementLocators.APPROVAL_COUNT_STATUS_ELEMENT)[-1]
         last_result_text = last_result.text
         assert last_result_text == "Согласуется", 'Некорректный статус или отсутствует статус в последней строке. ' \
-                                             'Ожидаемый результат: "Согласование бухгалтерией" - "Согласуется"'
+                                                  'Ожидаемый результат: "Согласование бухгалтерией" - "Согласуется"'
 
         # Проверяем цвет статуса "Согласуется"
         waiting_color = "#f5b300"
@@ -586,7 +727,7 @@ class ZakupElementPage(BasePage):
         last_result = self.browser.find_elements(*ZakupElementLocators.APPROVAL_COUNT_STATUS_ELEMENT)[-1]
         last_result_text = last_result.text
         assert last_result_text == "Согласовано", 'Некорректный статус или отсутствует статус в последней строке. ' \
-                                             'Ожидаемый результат: "Согласование бухгалтерией" - "Согласовано"'
+                                                  'Ожидаемый результат: "Согласование бухгалтерией" - "Согласовано"'
 
         # Проверяем цвет статуса "Согласовано"
         successfully_color = Color.from_string('green')
@@ -615,7 +756,7 @@ class ZakupElementPage(BasePage):
         last_result = self.browser.find_elements(*ZakupElementLocators.APPROVAL_COUNT_STATUS_ELEMENT)[-1]
         last_result_text = last_result.text
         assert last_result_text == "Отклонено", 'Некорректный статус или отсутствует статус в последней строке. ' \
-                                           'Ожидаемый результат: "Согласование бухгалтерией" - "Отклонено"'
+                                                'Ожидаемый результат: "Согласование бухгалтерией" - "Отклонено"'
 
         # Проверяем цвет статуса "Отклонено"
         reject_color = Color.from_string('red')
@@ -643,7 +784,7 @@ class ZakupElementPage(BasePage):
         last_result = self.browser.find_elements(*ZakupElementLocators.APPROVAL_FIN_STATUS_ELEMENT)[-1]
         last_result_text = last_result.text
         assert last_result_text == "Согласуется", 'Некорректный статус или отсутствует статус в последней строке. ' \
-                                           'Ожидаемый результат: "Согласование финансовой службой" - "Согласуется"'
+                                                  'Ожидаемый результат: "Согласование финансовой службой" - "Согласуется"'
 
         # Проверяем цвет статуса "Согласуется"
         waiting_color = "#f5b300"
@@ -675,7 +816,7 @@ class ZakupElementPage(BasePage):
         last_result = self.browser.find_elements(*ZakupElementLocators.APPROVAL_FIN_STATUS_ELEMENT)[-1]
         last_result_text = last_result.text
         assert last_result_text == "Согласовано", 'Некорректный статус или отсутствует статус в последней строке. ' \
-                                           'Ожидаемый результат: "Согласование финансовой службой" - "Согласовано"'
+                                                  'Ожидаемый результат: "Согласование финансовой службой" - "Согласовано"'
 
         # Проверяем цвет статуса "Согласовано"
         successfully_color = Color.from_string('green')
@@ -704,7 +845,7 @@ class ZakupElementPage(BasePage):
         last_result = self.browser.find_elements(*ZakupElementLocators.APPROVAL_FIN_STATUS_ELEMENT)[-1]
         last_result_text = last_result.text
         assert last_result_text == "Отклонено", 'Некорректный статус или отсутствует статус в последней строке. ' \
-                                           'Ожидаемый результат: "Согласование финансовой службой" - "Отклонено"'
+                                                'Ожидаемый результат: "Согласование финансовой службой" - "Отклонено"'
 
         # Проверяем цвет статуса "Отклонено"
         reject_color = Color.from_string('red')
@@ -732,7 +873,7 @@ class ZakupElementPage(BasePage):
         last_result = self.browser.find_elements(*ZakupElementLocators.APPROVAL_UDPRPO_STATUS_ELEMENT)[-1]
         last_result_text = last_result.text
         assert last_result_text == "Согласуется", 'Некорректный статус или отсутствует статус в последней строке. ' \
-                                           'Ожидаемый результат: "Согласование Директором по разработке ПО" - "Согласуется"'
+                                                  'Ожидаемый результат: "Согласование Директором по разработке ПО" - "Согласуется"'
 
         # Проверяем цвет статуса "Согласуется"
         waiting_color = "#f5b300"
@@ -766,7 +907,7 @@ class ZakupElementPage(BasePage):
         last_result = self.browser.find_elements(*ZakupElementLocators.APPROVAL_UDPRPO_STATUS_ELEMENT)[-1]
         last_result_text = last_result.text
         assert last_result_text == "Согласовано", 'Некорректный статус или отсутствует статус в последней строке. ' \
-                                           'Ожидаемый результат: "Согласование Директором по разработке ПО" - "Согласовано"'
+                                                  'Ожидаемый результат: "Согласование Директором по разработке ПО" - "Согласовано"'
 
         # Проверяем цвет статуса "Согласовано" на вкладке "Статус согласования"
         successfully_color = Color.from_string('green')
@@ -795,7 +936,7 @@ class ZakupElementPage(BasePage):
         last_result = self.browser.find_elements(*ZakupElementLocators.APPROVAL_UDPRPO_STATUS_ELEMENT)[-1]
         last_result_text = last_result.text
         assert last_result_text == "Отклонено", 'Некорректный статус или отсутствует статус в последней строке. ' \
-                                           'Ожидаемый результат: "Согласование Директором по разработке ПО" - "Отклонено"'
+                                                'Ожидаемый результат: "Согласование Директором по разработке ПО" - "Отклонено"'
 
         # Проверяем цвет статуса "Отклонено"
         reject_color = Color.from_string('red')
@@ -823,7 +964,7 @@ class ZakupElementPage(BasePage):
         last_result = self.browser.find_elements(*ZakupElementLocators.APPROVAL_KKP_STATUS_ELEMENT)[-1]
         last_result_text = last_result.text
         assert last_result_text == "Согласуется", 'Некорректный статус или отсутствует статус в последней строке. ' \
-                                           'Ожидаемый результат: "Согласование ККП" - "Согласуется"'
+                                                  'Ожидаемый результат: "Согласование ККП" - "Согласуется"'
 
         # Проверяем цвет статуса "Согласуется"
         waiting_color = "#f5b300"
@@ -853,7 +994,7 @@ class ZakupElementPage(BasePage):
         last_result = self.browser.find_elements(*ZakupElementLocators.APPROVAL_KKP_STATUS_ELEMENT)[-1]
         last_result_text = last_result.text
         assert last_result_text == "Согласовано", 'Некорректный статус или отсутствует статус в последней строке. ' \
-                                           'Ожидаемый результат: "Согласование ККП" - "Согласовано"'
+                                                  'Ожидаемый результат: "Согласование ККП" - "Согласовано"'
 
         # Проверяем цвет статуса "Согласовано" на вкладке "Статус согласования"
         successfully_color = Color.from_string('green')
@@ -882,7 +1023,7 @@ class ZakupElementPage(BasePage):
         last_result = self.browser.find_elements(*ZakupElementLocators.APPROVAL_KKP_STATUS_ELEMENT)[-1]
         last_result_text = last_result.text
         assert last_result_text == "Прекращено", 'Некорректный статус или отсутствует статус в последней строке. ' \
-                                           'Ожидаемый результат: "Согласование ККП" - "Прекращено"'
+                                                 'Ожидаемый результат: "Согласование ККП" - "Прекращено"'
 
         # Проверяем цвет статуса "Прекращено"
         reject_color = Color.from_string('red')
@@ -895,7 +1036,9 @@ class ZakupElementPage(BasePage):
         self.is_visibility_of_element_located(*ZakupElementLocators.APPROVAL_MAIN_STATUS_IN_ZP, 5)
         assert self.is_text_to_be_present_in_element(*ZakupElementLocators.APPROVAL_MAIN_STATUS_IN_ZP,
                                                      "Внутреннее согласование не требуется"), \
-            'Некорректный статус или отсутствует статус в поле "Статус согласования" на вкладке "Общие сведения"'
+            'Некорректный статус или отсутствует статус в поле "Статус согласования" на вкладке "Общие сведения"' \
+            'ОР: Отображен статус "Внутреннее согласование не требуется"' \
+            f'ФР: Отображен статус "{self.is_element_text(*ZakupElementLocators.APPROVAL_MAIN_STATUS_IN_ZP)}"'
 
     # Проверка отображения статуса "Отправлено на доработку ККП"
     def verify_zakup_revision_status_approval(self):
@@ -918,7 +1061,7 @@ class ZakupElementPage(BasePage):
         last_result = self.browser.find_elements(*ZakupElementLocators.APPROVAL_KKP_STATUS_ELEMENT)[-1]
         last_result_text = last_result.text
         assert last_result_text == "Отклонено", 'Некорректный статус или отсутствует статус в последней строке. ' \
-                                           'Ожидаемый результат: "Согласование ККП" - "Отправлено на доработку"'
+                                                'Ожидаемый результат: "Согласование ККП" - "Отправлено на доработку"'
 
         # Проверяем цвет статуса "Отправлено на доработку"
         reject_color = Color.from_string('red')
@@ -926,15 +1069,25 @@ class ZakupElementPage(BasePage):
         assert color_in_element == reject_color, \
             'Некорректный цвет статуса "Отправлено на доработку" в строке согласования со службой ККП'
 
+    # Проверка отображения статуса "Отозвано с внутреннего согласования"
+    def verify_zakup_withdraw_status_approval(self):
+        # Проверяем статус "Отправлено на доработку" на вкладке "Общие сведения"
+        self.browser.find_element(*ZakupElementLocators.GENERAL_INFORMATION_TAB).click()
+        self.is_visibility_of_element_located(*ZakupElementLocators.APPROVAL_MAIN_STATUS_IN_ZP, 5)
+        assert self.is_text_to_be_present_in_element(*ZakupElementLocators.APPROVAL_MAIN_STATUS_IN_ZP,
+                                                     "Отозвано с внутреннего согласования"), \
+            '\nНекорректный статус или отсутствует статус в поле "Статус согласования" на вкладке "Общие сведения" ' \
+            '\n Ожидаемый результат: Отображен статус "Отозвано с внутреннего согласования"'
+
     # Успешное согласование закупочной процедуры
     def approval_zakup(self, comment, file):
         self.is_element_clickable(*ZakupElementLocators.APPROVAL_ZAKUP_BUTTON)
         self.browser.find_element(*ZakupElementLocators.APPROVAL_ZAKUP_BUTTON).click()
-        self.browser.find_element(*ZakupElementLocators.COMMENT_TO_APPROVAL_ZAKUP).send_keys(comment)
+        self.browser.find_element(*ZakupElementLocators.COMMENT_TO_APPROVAL_ZAKUP_FIELD).send_keys(comment)
         self.browser.find_element(*ZakupElementLocators.FILE_TO_APPROVAL_ZAKUP).send_keys(file)
-        self.browser.find_element(*ZakupElementLocators.CONFIRM_APPROVAL_ZAKUP).click()
-        self.is_visibility_of_element_located(*ZakupElementLocators.ClOSE_ALLERT_ZAKUP, 5)
-        self.browser.find_element(*ZakupElementLocators.ClOSE_ALLERT_ZAKUP).click()
+        self.browser.find_element(*ZakupElementLocators.CONFIRM_APPROVAL_ZAKUP_BUTTON).click()
+        self.is_visibility_of_element_located(*ZakupElementLocators.ClOSE_ALLERT_ZAKUP_BUTTON, 5)
+        self.browser.find_element(*ZakupElementLocators.ClOSE_ALLERT_ZAKUP_BUTTON).click()
         self.browser.refresh()
 
     # Отклонение закупочной процедуры с выбором этапа
@@ -943,11 +1096,21 @@ class ZakupElementPage(BasePage):
         self.browser.find_element(*ZakupElementLocators.REJECT_ZAKUP_BUTTON).click()
         # Выбираем значение в выпадающем списке "При повторном согласовании начать с шага:"
         Select(self.browser.find_element(*ZakupElementLocators.START_WITH_ELEMENT)).select_by_value(start_with)
-        self.browser.find_element(*ZakupElementLocators.COMMENT_TO_APPROVAL_ZAKUP).send_keys(comment + ". Начать с: " + start_with)
+        self.browser.find_element(*ZakupElementLocators.COMMENT_TO_APPROVAL_ZAKUP_FIELD).send_keys(
+            comment + ". Начать с: " + start_with)
         self.browser.find_element(*ZakupElementLocators.FILE_TO_APPROVAL_ZAKUP).send_keys(file)
-        self.browser.find_element(*ZakupElementLocators.CONFIRM_REJECT_ZAKUP).click()
-        self.is_visibility_of_element_located(*ZakupElementLocators.ClOSE_ALLERT_ZAKUP, 5)
-        self.browser.find_element(*ZakupElementLocators.ClOSE_ALLERT_ZAKUP).click()
+        self.browser.find_element(*ZakupElementLocators.CONFIRM_REJECT_ZAKUP_BUTTON).click()
+        self.is_visibility_of_element_located(*ZakupElementLocators.ClOSE_ALLERT_ZAKUP_BUTTON, 5)
+        self.browser.find_element(*ZakupElementLocators.ClOSE_ALLERT_ZAKUP_BUTTON).click()
+        self.browser.refresh()
+
+    def withdraw_zakup(self, comment):
+        self.is_element_clickable(*ZakupElementLocators.WITHDRAW_FROM_APPROVAL_BUTTON)
+        self.browser.find_element(*ZakupElementLocators.WITHDRAW_FROM_APPROVAL_BUTTON).click()
+        self.browser.find_element(*ZakupElementLocators.COMMENT_TO_APPROVAL_ZAKUP_FIELD).send_keys(comment)
+        self.browser.find_element(*ZakupElementLocators.WITHDWRAW_ZAKUP_BUTTON).click()
+        self.is_visibility_of_element_located(*ZakupElementLocators.ClOSE_ALLERT_ZAKUP_BUTTON, 5)
+        self.browser.find_element(*ZakupElementLocators.ClOSE_ALLERT_ZAKUP_BUTTON).click()
         self.browser.refresh()
 
     # Отклонение закупочной процедуры за ККП
@@ -955,10 +1118,10 @@ class ZakupElementPage(BasePage):
         self.is_element_clickable(*ZakupElementLocators.REJECT_ZAKUP_BUTTON)
         self.browser.find_element(*ZakupElementLocators.REJECT_ZAKUP_BUTTON).click()
 
-        self.browser.find_element(*ZakupElementLocators.COMMENT_TO_APPROVAL_ZAKUP).send_keys(comment)
-        self.browser.find_element(*ZakupElementLocators.CONFIRM_REJECT_ZAKUP).click()
-        self.is_visibility_of_element_located(*ZakupElementLocators.ClOSE_ALLERT_ZAKUP, 5)
-        self.browser.find_element(*ZakupElementLocators.ClOSE_ALLERT_ZAKUP).click()
+        self.browser.find_element(*ZakupElementLocators.COMMENT_TO_APPROVAL_ZAKUP_FIELD).send_keys(comment)
+        self.browser.find_element(*ZakupElementLocators.CONFIRM_REJECT_ZAKUP_BUTTON).click()
+        self.is_visibility_of_element_located(*ZakupElementLocators.ClOSE_ALLERT_ZAKUP_BUTTON, 5)
+        self.browser.find_element(*ZakupElementLocators.ClOSE_ALLERT_ZAKUP_BUTTON).click()
         self.browser.refresh()
 
     # Отправка на доработку от ККП с выбором этапа
@@ -966,20 +1129,90 @@ class ZakupElementPage(BasePage):
         self.is_element_clickable(*ZakupElementLocators.REVISION_ZAKUP_BUTTON)
         self.browser.find_element(*ZakupElementLocators.REVISION_ZAKUP_BUTTON).click()
         Select(self.browser.find_element(*ZakupElementLocators.START_WITH_ELEMENT)).select_by_value(start_with)
-        self.browser.find_element(*ZakupElementLocators.COMMENT_TO_APPROVAL_ZAKUP).send_keys(comment + ". Начать с: " + start_with)
-        self.browser.find_element(*ZakupElementLocators.CONFIRM_REVISION_ZAKUP).click()
-        self.is_visibility_of_element_located(*ZakupElementLocators.ClOSE_ALLERT_ZAKUP, 5)
-        self.browser.find_element(*ZakupElementLocators.ClOSE_ALLERT_ZAKUP).click()
+        self.browser.find_element(*ZakupElementLocators.COMMENT_TO_APPROVAL_ZAKUP_FIELD).send_keys(
+            comment + ". Начать с: " + start_with)
+        self.browser.find_element(*ZakupElementLocators.CONFIRM_REVISION_ZAKUP_BUTTON).click()
+        self.is_visibility_of_element_located(*ZakupElementLocators.ClOSE_ALLERT_ZAKUP_BUTTON, 5)
+        self.browser.find_element(*ZakupElementLocators.ClOSE_ALLERT_ZAKUP_BUTTON).click()
 
     # Эскалация на ККП
     def escalate_on_kkp(self):
         self.is_element_clickable(*ZakupElementLocators.ESCALATE_ZAKUP_BUTTON)
         self.browser.find_element(*ZakupElementLocators.ESCALATE_ZAKUP_BUTTON).click()
-        self.browser.find_element(*ZakupElementLocators.COMMENT_TO_APPROVAL_ZAKUP).send_keys(
+        self.browser.find_element(*ZakupElementLocators.COMMENT_TO_APPROVAL_ZAKUP_FIELD).send_keys(
             UserData.comment_escalation_kkp)
-        self.browser.find_element(*ZakupElementLocators.CONFIRM_ESCALATE_ZAKUP).click()
-        self.is_visibility_of_element_located(*ZakupElementLocators.ClOSE_ALLERT_ZAKUP, 5)
-        self.browser.find_element(*ZakupElementLocators.ClOSE_ALLERT_ZAKUP).click()
+        self.browser.find_element(*ZakupElementLocators.CONFIRM_ESCALATE_ZAKUP_BUTTON).click()
+        self.is_visibility_of_element_located(*ZakupElementLocators.ClOSE_ALLERT_ZAKUP_BUTTON, 5)
+        self.browser.find_element(*ZakupElementLocators.ClOSE_ALLERT_ZAKUP_BUTTON).click()
+
+    # Проверка отображения статуса "На согласовании со службой аудита и контроля"
+    def verify_zakup_waiting_status_approval_audit(self):
+        # Проверяем поле статуса на вкладке "Общие сведения"
+        self.browser.find_element(*ZakupElementLocators.GENERAL_INFORMATION_TAB).click()
+        self.is_visibility_of_element_located(*ZakupElementLocators.APPROVAL_AUDIT_STATUS_IN_ZP, 5)
+        assert self.is_text_to_be_present_in_element(*ZakupElementLocators.APPROVAL_AUDIT_STATUS_IN_ZP,
+                                                     "На согласовании со службой внутреннего аудита и контроля"), \
+            'Некорректный статус или отсутствует статус в поле ' \
+            '"Статус согласования со службой внутреннего аудита и контроля" на вкладке "Общие сведения"'
+
+        # Проверяем статус "Согласуется"
+        self.is_visibility_of_element_located(*ZakupElementLocators.APPROVAL_HISTORY_TAB, 5)
+        self.browser.find_element(*ZakupElementLocators.APPROVAL_HISTORY_TAB).click()
+        last_result = self.browser.find_elements(*ZakupElementLocators.APPROVAL_AUDIT_STATUS_ELEMENT)[-1]
+        last_result_text = last_result.text
+        assert last_result_text == "Согласуется", 'Некорректный статус или отсутствует статус в последней строке. ' \
+                                                  'Ожидаемый результат: "Согласование службой ВАиК" - "Согласуется"'
+
+        # Проверяем цвет статуса "Согласуется"
+        waiting_color = "#f5b300"
+        color_in_element = (Color.from_string(last_result.value_of_css_property('color'))).hex
+        assert color_in_element == waiting_color, \
+            'Некорректный цвет статуса "Согласуется" в строке согласования с службой внутреннего аудита и контроля'
+
+    # Проверка отображения статуса "Согласовано со службой аудита и контроля"
+    def verify_zakup_successfully_status_approval_audit(self):
+
+        # Проверяем статус "Согласовано" на вкладке "Статус согласования"
+        self.is_visibility_of_element_located(*ZakupElementLocators.APPROVAL_HISTORY_TAB, 5)
+        self.browser.find_element(*ZakupElementLocators.APPROVAL_HISTORY_TAB).click()
+
+        last_result = self.browser.find_elements(*ZakupElementLocators.APPROVAL_AUDIT_STATUS_ELEMENT)[-1]
+        last_result_text = last_result.text
+        assert last_result_text == "Согласовано", 'Некорректный статус или отсутствует статус в последней строке. ' \
+                                                  'Ожидаемый результат: "Согласование службой ВАиК" - "Согласовано"'
+
+        # Проверяем цвет статуса "Согласовано"
+        successfully_color = Color.from_string('green')
+        color_in_element = Color.from_string(last_result.value_of_css_property('color'))
+        assert color_in_element == successfully_color, \
+            'Некорректный цвет статуса "Согласование службой ВАиК" в строке согласования со службой ВАиК'
+
+    # Проверка отображения статуса "Не согласовано со службой аудита и контроля"
+    def verify_zakup_reject_status_approval_audit(self):
+        # Проверяем статус "Отклонено" на вкладке "Общие сведения"
+        self.browser.find_element(*ZakupElementLocators.GENERAL_INFORMATION_TAB).click()
+        self.is_visibility_of_element_located(*ZakupElementLocators.APPROVAL_AUDIT_STATUS_IN_ZP, 5)
+        assert self.is_text_to_be_present_in_element(*ZakupElementLocators.APPROVAL_AUDIT_STATUS_IN_ZP,
+                                                     "Не согласовано со службой внутреннего аудита и контроля"), \
+            '\nНекорректный статус или отсутствует статус в поле ' \
+            '"Статус согласования со службой внутреннего аудита и контроля" на вкладке "Общие сведения" ' \
+            '\n Ожидаемый результат: Отображен статус "Не согласовано со службой внутреннего аудита и контроля"'
+
+        # Проверяем статус "Отклонено" на вкладке "Статус согласования"
+        self.is_visibility_of_element_located(*ZakupElementLocators.APPROVAL_HISTORY_TAB, 5)
+        self.browser.find_element(*ZakupElementLocators.APPROVAL_HISTORY_TAB).click()
+
+        last_result = self.browser.find_elements(*ZakupElementLocators.APPROVAL_AUDIT_STATUS_ELEMENT)[-1]
+        last_result_text = last_result.text
+        assert last_result_text == "Отклонено", 'Некорректный статус или отсутствует статус в последней строке. ' \
+                                                'Ожидаемый результат: "Согласование со службой аудита" - "Отклонено"'
+
+        # Проверяем цвет статуса "Отклонено"
+        reject_color = Color.from_string('red')
+        color_in_element = Color.from_string(last_result.value_of_css_property('color'))
+        assert color_in_element == reject_color, \
+            'Некорректный цвет статуса "Отклонено" в строке согласования со службой аудита'
+
 
     # Создание контракта на основе закупочной процедуры
     def go_to_create_contract_based_on_zp(self):

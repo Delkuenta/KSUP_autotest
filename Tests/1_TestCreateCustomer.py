@@ -7,11 +7,13 @@ from pages.Customer.customer_list_page import CustomerPage
 from pages.login_data import LoginData
 
 """
-Customer\[Atest]Customer, OOO.json
-Customer\[Atest]Customer, IP.json
+1_Customer\[Atest]EvilMartians_Customer, OOO.json
+1_Customer\[Atest]NeedGold_Customer, OOO.json
 """
-@pytest.mark.parametrize('path_data_file', [r"TPAC\1_Customer\[Atest]Customer, IP.json",
-                                            r"TPAC\1_Customer\[Atest]Customer, OOO.json"])
+@pytest.mark.parametrize('path_data_file', [#r"TPAC\1_Customer\[Atest]Customer, IP.json",
+                                            #r"TPAC\1_Customer\[Atest]NeedGold_Customer, OOO.json"
+                                            r"PPAC\1_Customer\[Atest]EvilMartians_Customer, OOO.json"
+])
 class TestCustomer:
 
     def test_create_customer(self, browser_function, path_data_file):

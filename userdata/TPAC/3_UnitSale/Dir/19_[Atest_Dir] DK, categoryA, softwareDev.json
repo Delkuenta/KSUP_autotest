@@ -1,6 +1,6 @@
 {
 	"main_data": {
-        "fullName": "19[АТест_Seller]ДК,категория A, разработка заказного ПО,",
+        "fullName": "19[АТест_Dir]ДК,категория A, разработка заказного ПО,",
         "contractorType": "",
         "customer": "КАЗНАЧЕЙСТВО РОССИИ",
         "salesUnit": "Департамент корпоративных систем",
@@ -38,7 +38,7 @@
         "quantitativeIndicatorsProject": "",
         "projectUniqueCode": "",
 		"project": "Тестовый проект",
-				"createAccount": "Mr_KSUP_Seller",
+				"createAccount": "Mr_KSUP_Dir",
         "payments": [
             {
                 "sum": 20000000,

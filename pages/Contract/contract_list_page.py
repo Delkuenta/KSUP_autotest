@@ -57,3 +57,9 @@ class ContractPage(BasePage):
         assert self.is_visibility_of_element_located(*ContractListLocators.ALL_IN_MY_DEPARTMENT_TAB, 5), \
             'Не отображена вкладка "Все моего подразделения"'
         self.browser.find_element(*ContractListLocators.ALL_IN_MY_DEPARTMENT_TAB).click()
+
+    def go_to_allmyegrul_tab(self):
+        time.sleep(2)
+        assert self.is_visibility_of_element_located(*ContractListLocators.ALL_IN_MY_EGRUL_TAB, 5), \
+            'Не отображена вкладка "Все моего юр.лица"'
+        self.browser.find_element(*ContractListLocators.ALL_IN_MY_EGRUL_TAB).click()

@@ -10,7 +10,7 @@
         "executiveUnitLegal": "ООО \"ЗЛЫЕ МАРСИАНЕ\"",
         "saleLawType": "44-ФЗ",
         "typeOfWorkServices": ["Прочие работы и услуги в части ПО"],
-        "sum": 400000,
+        "sum": 300000,
         "currency": "Доллар",
         "priceCategory": "",
         "applicationSize": 5000,
@@ -41,7 +41,7 @@
 		"createAccount": "Mr_KSUP_Dir",
         "payments": [
             {
-                "sum": 200000,
+                "sum": 100000,
                 "year": 2020,
                 "quarter": 3
             },

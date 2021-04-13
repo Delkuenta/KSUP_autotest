@@ -7,7 +7,7 @@
         "salesManager": "Ногинский Михаил Владимирович",
         "executiveUnit": "Дирекция по работе с государственным сектором",
         "executiveManager": "Ногинский Михаил Владимирович",
-        "executiveUnitLegal": "ООО \"НУЖНО БОЛЬШЕ ЗОЛОТА\"",
+        "executiveUnitLegal": "ООО \"ЗЛЫЕ МАРСИАНЕ\"",
         "saleLawType": "",
         "typeOfWorkServices": ["Разработка заказного ПО", "Тестирование ПО"],
         "sum": 52000000,
@@ -37,7 +37,7 @@
         "technologies": ["Jira"],
         "quantitativeIndicatorsProject": "тестовый текст в поле Количественные показатели реализации проекта",
         "projectUniqueCode": "2hMuCr19S2",
-		"project": "Тестовый проект_Dir2",
+		"project": "Тестовый проект",
 				"createAccount": "Mr_KSUP_Seller2",
         "payments": [
             {

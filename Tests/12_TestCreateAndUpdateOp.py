@@ -222,9 +222,20 @@ class TestCreateAndUpdateOp:
         contract_page.go_to_contract_element(user_data_dict)
         contract_element_page = ContractElementPage(browser_session, browser_session.current_url)
         contract_element_page.verify_general_information_contract(user_data_dict)
-    """
+
     # Обновление ОП
     def test_update_op(self, browser_session, test_login):
+        user_data_dict1 = BasePage.read_file_json(browser_session, new_red_pa_dict)
+        user_data_dict1 = BasePage.dict_preparation(browser_session, user_data_dict1)
+
+        user_data_dict2 = BasePage.read_file_json(browser_session, new_orange_pa_dict)
+        user_data_dict2 = BasePage.dict_preparation(browser_session, user_data_dict2)
+
+        user_data_dict3 = BasePage.read_file_json(browser_session, gray_pa_dk_dict)
+        user_data_dict3 = BasePage.dict_preparation(browser_session, user_data_dict3)
+
+        user_data_dict4 = BasePage.read_file_json(browser_session, new_red_dk_dict)
+        user_data_dict4 = BasePage.dict_preparation(browser_session, user_data_dict4)
         link = LoginData.link
         operplan_list_page = OppListPage(browser_session, link)
         operplan_list_page.go_to_operplan_direction(link)
@@ -232,6 +243,11 @@ class TestCreateAndUpdateOp:
         operplan_list_page.go_to_operplan_element(departmentOP, yearOP)
         operplan_element_page = OppElementPage(browser_session, link)
         operplan_element_page.go_to_update_operplan()
+        operplan_element_page = OppElementPage(browser_session, link)
+        operplan_element_page.verify_element_in_operplan(2020, "presale", user_data_dict1)
+        operplan_element_page.verify_element_in_operplan(2020, "presale", user_data_dict2)
+        operplan_element_page.verify_element_in_operplan(2020, "presale", user_data_dict3)
+        operplan_element_page.verify_element_in_operplan(2020, "contract", user_data_dict4)
 
     # Проверка выделения сущности цветом в ОП
     def test_color_row(self, browser_session, test_login):
@@ -253,4 +269,3 @@ class TestCreateAndUpdateOp:
         operplan_element_page.verify_color_element(green_pa_dict, "green")
         operplan_element_page.verify_color_element(green_dk_dict, "green")
         operplan_element_page.verify_color_element(gray_dk_dict, "gray")
-    """

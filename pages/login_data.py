@@ -15,21 +15,25 @@ class LoginData(BasePage):
     def login(self, login):
         autoit.auto_it_set_option("WinTitleMatchMode", 1)
         autoit.opt("SendKeyDelay", 0)
+        if login.find("sa_dks") != -1:
+            domain = "Lan"
+        else:
+            domain = "Lanit"
         if self.browser.name == "chrome":
             autoit.win_wait_active("[TITLE:https://adfs.lan.lanit.ru/; CLASS:Chrome_WidgetWin_1]", 10)
-            autoit.send("Lanit" + "\\" + login)
+            autoit.send(domain + "\\" + login)
             pyautogui.press("tab")
             autoit.send(UserData.user_account[login])
             pyautogui.press("enter")
         elif self.browser.name == "msedge" or self.browser.capabilities['browserName'] == "internet explorer":
             autoit.win_wait_active("[TITLE:Безопасность Windows; CLASS:Credential Dialog Xaml Host]", 10)
             time.sleep(1)
-            autoit.send("Lanit" + "\\" + login)
+            autoit.send(domain + "\\" + login)
             pyautogui.press("tab")
             autoit.send(UserData.user_account[login])
             pyautogui.press("enter")
         elif self.browser.name == "firefox":
-            self.browser.find_element(*LoginPageLocators.USER_NAME_ELEMENT).send_keys("Lanit" + "\\" + login)
+            self.browser.find_element(*LoginPageLocators.USER_NAME_ELEMENT).send_keys(domain + "\\" + login)
             self.browser.find_element(*LoginPageLocators.PASSWORD_ELEMENT).send_keys(UserData.user_account[login])
             self.browser.find_element(*LoginPageLocators.SUBMIT_BUTTON).click()
         else:

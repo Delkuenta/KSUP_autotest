@@ -60,6 +60,12 @@ class ZakupListPage(BasePage):
             'Не отображена вкладка "Все моего подразделения"'
         self.browser.find_element(*ZakupListLocators.ALL_IN_MY_DEPARTMENT_TAB).click()
 
+    def go_to_allmyegrul_tab(self):
+        time.sleep(2)
+        assert self.is_visibility_of_element_located(*ZakupListLocators.ALL_IN_MY_EGRUL_TAB, 5), \
+            'Не отображена вкладка "Все моего юр.лица"'
+        self.browser.find_element(*ZakupListLocators.ALL_IN_MY_EGRUL_TAB).click()
+
     def verify_element_status_in_approval_tab(self, approval_status="На согласовании с юридической службой"):
         self.browser.implicitly_wait(1)
         exception_set = {approval_status}

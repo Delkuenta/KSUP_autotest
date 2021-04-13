@@ -10,7 +10,7 @@
         "executiveUnitLegal": "ООО \"ЗЛЫЕ МАРСИАНЕ\"",
         "saleLawType": "44-ФЗ",
         "typeOfWorkServices": ["Разработка проектной документации для строительства (как отдельный предмет)", "Оптовая и розничная продажа мебели"],
-        "sum": 700000,
+        "sum": 600000,
         "currency": "Доллар",
         "priceCategory": "",
         "applicationSize": 5000,
@@ -41,7 +41,7 @@
 		"createAccount": "Mr_KSUP_Seller",
         "payments": [
             {
-                "sum": 400000,
+                "sum": 300000,
                 "year": 2020,
                 "quarter": 3
             },

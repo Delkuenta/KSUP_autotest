@@ -65,6 +65,7 @@ class PresalePage(BasePage):
 
     # Перейти на вкладку "Все моего подразделения"
     def go_to_allmydepartment_tab(self):
+        time.sleep(1)
         assert self.is_visibility_of_element_located(*PresaleListLocators.ALL_IN_MY_DEPARTMENT_TAB, 5), \
             'Не отображена вкладка "Все моего подразделения"'
         self.browser.find_element(*PresaleListLocators.ALL_IN_MY_DEPARTMENT_TAB).click()

@@ -7,7 +7,7 @@
         "salesManager": "Батарова Татьяна Андреевна",
         "executiveUnit": "Департамент корпоративных систем",
         "executiveManager": "Батарова Татьяна Андреевна",
-        "executiveUnitLegal": "ООО \"ЛАНИТ-ТЕХНОЛОГИИ\"",
+        "executiveUnitLegal": "ООО \"ЗЛЫЕ МАРСИАНЕ\"",
         "saleLawType": "",
         "typeOfWorkServices": ["Разработка заказного ПО", "Тестирование ПО"],
         "sum": 52000000,
@@ -38,7 +38,7 @@
         "quantitativeIndicatorsProject": "тестовый текст в поле Количественные показатели реализации проекта",
         "projectUniqueCode": "2hMuCr04_ESC",
 		"project": "Тестовый проект",
-		"createAccount": "Mr_KSUP_Seller",
+		"createAccount": "Mr_KSUP_Dir",
         "payments": [
             {
                 "sum": 20000000,
