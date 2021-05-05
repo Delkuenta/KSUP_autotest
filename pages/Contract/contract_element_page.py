@@ -429,7 +429,7 @@ class ContractElementPage(BasePage):
         last_result = self.browser.find_elements(*ContractElementLocators.APPROVAL_DEP_HEAD_STATUS_ELEMENT)[-1]
         last_result_text = last_result.text
         assert last_result_text == "Согласовано", 'Некорректный статус или отсутствует статус в последней строке. ' \
-                                                  'Ожидаемый результат: "Согласование юридической службой" - "Согласовано"'
+                                                  'Ожидаемый результат: "Согласование c руководителем подразделения" - "Согласовано"'
 
         # Проверяем цвет статуса "Согласовано"
         successfully_color = Color.from_string('green')

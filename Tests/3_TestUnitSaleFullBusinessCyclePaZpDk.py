@@ -81,7 +81,8 @@ UnitSale\Seller2
 # До первой ошибки --maxfail=1
 # Браузер для запуска --browser_name=firefox
 @pytest.mark.parametrize('path_data_file', [
-    r"TPAC\3_UnitSale\Seller2\1_[Atest_Seller2] PA+ZP+DK,Tender, categoryA, softwareDev, UnitSale.json"])
+    r"TPAC\3_UnitSale\Seller\1_[Atest_Seller] PA+ZP+DK,Tender, categoryA, softwareDev, UnitSale.json"
+])
 class TestUnitSaleFullBusinessCyclePaZpDk:
 
     def test_create_presale(self, browser_function, path_data_file):
@@ -171,30 +172,22 @@ class TestUnitSaleFullBusinessCyclePaZpDk:
         zakup_element_page.verify_general_information_in_zakup(user_data_dict)
         zakup_element_page.verify_attached_files_information(user_data_dict)
         # zakup_element_page.verify_draft_status_zakup()
-
+        user_data_dict = zakup_element_page.attribute_approval_with_dept_head(user_data_dict)
+        BasePage.load_file_json(browser_function, path_data_file, user_data_dict)
         # Отправка сущности на внутреннее согласование
         zakup_element_page.send_zakup_for_approval(user_data_dict)
         # На основе: Типа закупочной процедуры, Ценовой категории, Типа работ и услуг
         # проверка обновления статуса согласования
         if user_data_dict["contractorType"] == "Тендерная заявка":
             # Отправка на согласование с правами Руководителя подразделения + руководитель юр.лица
-            if (user_data_dict["createAccount"] == "Mr_KSUP_Dir" or user_data_dict[
-                "createAccount"] == "Mr_KSUP_Dir2") and \
-                    user_data_dict["executiveUnitLegal"] == UserData.egrulHead[user_data_dict["createAccount"]]:
-                zakup_element_page.verify_zakup_successfully_status_approval_department_head()
-                zakup_element_page.verify_zakup_successfully_status_approval_egrulhead(user_data_dict)
+            if user_data_dict["createAccount"] == "Mr_KSUP_Dir" or user_data_dict["createAccount"] == "Mr_KSUP_Dir2":
+                if user_data_dict["divisionHeadApproves"] == "Да":
+                    zakup_element_page.verify_zakup_successfully_status_approval_department_head()
                 zakup_element_page.verify_zakup_waiting_status_approval_legal()
                 zakup_element_page.verify_zakup_waiting_status_approval_audit()
-
-            # Отправка на согласование с правами только Руководителя подразделения
-            elif (user_data_dict["createAccount"] == "Mr_KSUP_Dir" or user_data_dict[
-                "createAccount"] == "Mr_KSUP_Dir2") and \
-                    user_data_dict["executiveUnitLegal"] != UserData.egrulHead[user_data_dict["createAccount"]]:
-                zakup_element_page.verify_zakup_successfully_status_approval_department_head()
-                zakup_element_page.verify_zakup_waiting_status_approval_egrulhead()
             else:
-                zakup_element_page.verify_zakup_waiting_status_approval_department_head()
-
+                if user_data_dict["divisionHeadApproves"] == "Да":
+                    zakup_element_page.verify_zakup_waiting_status_approval_department_head()
             zakup_element_page.verify_visibility_budget_button()
             # Добавление файла бюджета возможные названия файла test_jpg.jpg, test_doc.docx, test_excel.xlsx, test_video.mp4, test_pdf.pdf
             zakup_element_page.add_file_of_budget("test_doc.docx")
@@ -204,37 +197,21 @@ class TestUnitSaleFullBusinessCyclePaZpDk:
 
         elif user_data_dict["contractorType"] != "Тендерная заявка" and user_data_dict["priceCategory"] != "C" and \
                 user_data_dict["groupTypeWork"] == "Software":
-
-            # Отправка на согласование с правами Руководителя подразделения + руководитель юр.лица
-            if (user_data_dict["createAccount"] == "Mr_KSUP_Dir" or user_data_dict[
-                "createAccount"] == "Mr_KSUP_Dir2") and \
-                    user_data_dict["executiveUnitLegal"] == UserData.egrulHead[user_data_dict["createAccount"]]:
-                zakup_element_page.verify_zakup_successfully_status_approval_department_head()
-                zakup_element_page.verify_zakup_successfully_status_approval_egrulhead(user_data_dict)
+            # Отправка на согласование с правами Руководителя подразделения
+            if user_data_dict["createAccount"] == "Mr_KSUP_Dir" or user_data_dict["createAccount"] == "Mr_KSUP_Dir2":
+                if user_data_dict["divisionHeadApproves"] == "Да":
+                    zakup_element_page.verify_zakup_successfully_status_approval_department_head()
                 zakup_element_page.verify_zakup_waiting_status_approval_udprpo()
-
-            # Отправка на согласование с правами только Руководителя подразделения
-            elif (user_data_dict["createAccount"] == "Mr_KSUP_Dir" or user_data_dict[
-                "createAccount"] == "Mr_KSUP_Dir2") and \
-                    user_data_dict["executiveUnitLegal"] != UserData.egrulHead[user_data_dict["createAccount"]]:
-                zakup_element_page.verify_zakup_successfully_status_approval_department_head()
-                zakup_element_page.verify_zakup_waiting_status_approval_egrulhead()
             else:
-                zakup_element_page.verify_zakup_waiting_status_approval_department_head()
+                if user_data_dict["divisionHeadApproves"] == "Да":
+                    zakup_element_page.verify_zakup_waiting_status_approval_department_head()
         else:
-
-            # Отправка на согласование с правами Руководителя подразделения + руководитель юр.лица
-            if (user_data_dict["createAccount"] == "Mr_KSUP_Dir" or user_data_dict[
-                "createAccount"] == "Mr_KSUP_Dir2") and \
-                    user_data_dict["executiveUnitLegal"] == UserData.egrulHead[user_data_dict["createAccount"]]:
+            # Отправка на согласование с правами Руководителя подразделения
+            if user_data_dict["createAccount"] == "Mr_KSUP_Dir" or user_data_dict["createAccount"] == "Mr_KSUP_Dir2":
                 zakup_element_page.verify_zakup_not_require_status_approval()
-            # Отправка на согласование только с правами Руководителя подразделения
-            elif (user_data_dict["createAccount"] == "Mr_KSUP_Dir" or user_data_dict[
-                "createAccount"] == "Mr_KSUP_Dir2") and \
-                    user_data_dict["executiveUnitLegal"] != UserData.egrulHead[user_data_dict["createAccount"]]:
-                zakup_element_page.verify_zakup_waiting_status_approval_egrulhead()
             else:
-                zakup_element_page.verify_zakup_waiting_status_approval_department_head()
+                if user_data_dict["divisionHeadApproves"] == "Да":
+                    zakup_element_page.verify_zakup_waiting_status_approval_department_head()
 
         login_page.logout()
         delayed_assert.assert_expectations()
@@ -242,40 +219,45 @@ class TestUnitSaleFullBusinessCyclePaZpDk:
     def test_approval_zakup_for_department_head(self, browser_function, path_data_file):
         user_data_dict = BasePage.read_file_json(browser_function, path_data_file)
         user_data_dict = BasePage.dict_preparation(browser_function, user_data_dict)
-        if user_data_dict["createAccount"] == "Mr_KSUP_Seller" or user_data_dict["createAccount"] == "Mr_KSUP_Seller2":
-            link = LoginData.link
-            login_page = LoginData(browser_function, link)
-            login_page.open()
-            if user_data_dict["createAccount"] == "Mr_KSUP_Seller":
-                login_page.login("Mr_KSUP_Dir")
-                login_page.verify_username("Mr_KSUP_Dir")
-                department_head = "Mr_KSUP_Dir"
-            else:
-                login_page.login("Mr_KSUP_Dir2")
-                login_page.verify_username("Mr_KSUP_Dir2")
-                department_head = "Mr_KSUP_Dir2"
-            login_page.go_to_zakup_list(link)
-            zakup_list_page = ZakupListPage(browser_function, browser_function.current_url)
-            zakup_list_page.go_to_approval_elements_tab()
-            zakup_list_page.go_to_allmydepartment_tab()
-            zakup_list_page.should_be_element_on_zakup_list(user_data_dict)
-            zakup_list_page.go_to_zakup_element(user_data_dict)
-            zakup_element_page = ZakupElementPage(browser_function, browser_function.current_url)
-            zakup_element_page.verify_general_information_in_zakup(user_data_dict)
-            zakup_element_page.approval_zakup(UserData.comment_approval_depatment_head, UserData.file_path_for_link_pdf)
-            zakup_element_page.verify_zakup_successfully_status_approval_department_head()
-            if UserData.egrulHead[department_head] == user_data_dict["executiveUnitLegal"]:
-                zakup_element_page.verify_zakup_successfully_status_approval_egrulhead(user_data_dict)
+        if user_data_dict["divisionHeadApproves"] == "Да":
+            if user_data_dict["createAccount"] == "Mr_KSUP_Seller" or user_data_dict["createAccount"] == "Mr_KSUP_Seller2":
+                link = LoginData.link
+                login_page = LoginData(browser_function, link)
+                login_page.open()
+                if user_data_dict["createAccount"] == "Mr_KSUP_Seller":
+                    login_page.login("Mr_KSUP_Dir")
+                    login_page.verify_username("Mr_KSUP_Dir")
+                    department_head = "Mr_KSUP_Dir"
+                else:
+                    login_page.login("Mr_KSUP_Dir2")
+                    login_page.verify_username("Mr_KSUP_Dir2")
+                    department_head = "Mr_KSUP_Dir2"
+                login_page.go_to_zakup_list(link)
+                zakup_list_page = ZakupListPage(browser_function, browser_function.current_url)
+                zakup_list_page.go_to_approval_head_dept_tab()
+                # zakup_list_page.go_to_allmydepartment_tab()
+                zakup_list_page.should_be_element_on_zakup_list(user_data_dict)
+                zakup_list_page.go_to_zakup_element(user_data_dict)
+                zakup_element_page = ZakupElementPage(browser_function, browser_function.current_url)
+                zakup_element_page.verify_general_information_in_zakup(user_data_dict)
+                zakup_element_page.approval_zakup(UserData.comment_approval_depatment_head, UserData.file_path_for_link_pdf)
                 if user_data_dict["contractorType"] == "Тендерная заявка":
+                    zakup_element_page.verify_zakup_successfully_status_approval_department_head()
                     zakup_element_page.verify_zakup_waiting_status_approval_legal()
+                    zakup_element_page.verify_zakup_waiting_status_approval_audit()
                 elif user_data_dict["contractorType"] != "Тендерная заявка" and user_data_dict["priceCategory"] != "C" and \
                         user_data_dict["groupTypeWork"] == "Software":
                     zakup_element_page.verify_zakup_waiting_status_approval_udprpo()
+                else:
+                    zakup_element_page.verify_zakup_successfully_status_approval_department_head()
             else:
-                zakup_element_page.verify_zakup_waiting_status_approval_egrulhead()
+                print("\nВнутреннее согласование закупочной процедуры за Руководителя подразделения не требуется")
         else:
-            print("\nВнутреннее согласование закупочной процедуры за Руководителя подразделения не требуется")
+            print("\nВнутреннее согласование закупочной процедуры за Руководителя подразделения не требуется "
+                  "из-за отключения этапа согласования с руководителем подразделения")
 
+    """
+    Этап убран перенесется в конец цикла согласования
     def test_approval_zakup_for_egrulhead(self, browser_function, path_data_file):
         user_data_dict = BasePage.read_file_json(browser_function, path_data_file)
         user_data_dict = BasePage.dict_preparation(browser_function, user_data_dict)
@@ -293,10 +275,10 @@ class TestUnitSaleFullBusinessCyclePaZpDk:
             login_page.login(account_name)
             login_page.verify_username(account_name)
 
-            login_page.go_to_zakup_list(link)
+            login_page.go_to_zakup_egrul_list(link)
             zakup_list_page = ZakupListPage(browser_function, browser_function.current_url)
-            zakup_list_page.go_to_approval_elements_tab()
-            zakup_list_page.go_to_allmydepartment_tab()
+            zakup_list_page.go_to_approval_head_egrul_tab()
+            # zakup_list_page.go_to_allmydepartment_tab()
             zakup_list_page.should_be_element_on_zakup_list(user_data_dict)
             zakup_list_page.go_to_zakup_element(user_data_dict)
             zakup_element_page = ZakupElementPage(browser_function, browser_function.current_url)
@@ -310,6 +292,7 @@ class TestUnitSaleFullBusinessCyclePaZpDk:
                 zakup_element_page.verify_zakup_waiting_status_approval_udprpo()
         else:
             print("\nВнутреннее согласование закупочной процедуры за Руководителя юр.лица/ИП не требуется")
+    """
 
     def test_approval_zakup_for_legal(self, browser_function, path_data_file):
         user_data_dict = BasePage.read_file_json(browser_function, path_data_file)
@@ -348,7 +331,7 @@ class TestUnitSaleFullBusinessCyclePaZpDk:
             login_page.verify_username("Mr_KSUP_Count")
             login_page.go_to_zakup_list(link)
             zakup_list_page = ZakupListPage(browser_function, browser_function.current_url)
-            # zakup_list_page.go_to_approval_elements_tabs()
+            zakup_list_page.go_to_approval_elements_tab()
             zakup_list_page.should_be_element_on_zakup_list(user_data_dict)
             zakup_list_page.go_to_zakup_element(user_data_dict)
             zakup_element_page = ZakupElementPage(browser_function, browser_function.current_url)
@@ -432,7 +415,7 @@ class TestUnitSaleFullBusinessCyclePaZpDk:
             login_page = LoginData(browser_function, link)
             login_page.open()
             login_page.login("sa_dks_ksup_audit")
-            login_page.verify_username("Mr_KSUP_Audit")
+            # login_page.verify_username("Mr_KSUP_Audit")
             login_page.go_to_zakup_list(link)
             zakup_list_page = ZakupListPage(browser_function, browser_function.current_url)
             zakup_list_page.go_to_approval_elements_tab()
@@ -526,10 +509,20 @@ class TestUnitSaleFullBusinessCyclePaZpDk:
         contract_list.should_be_element_on_contract_list(user_data_dict)
         contract_list.go_to_contract_element(user_data_dict)
         contract_element_page = ContractElementPage(browser_function, browser_function.current_url)
+        user_data_dict = contract_element_page.attribute_approval_with_dept_head(user_data_dict)
+        BasePage.load_file_json(browser_function, path_data_file, user_data_dict)
         contract_element_page.send_contract_for_approval()
         contract_element_page.verify_general_information_contract(user_data_dict)
         contract_element_page.verify_attached_files_information()
-        contract_element_page.verify_contract_waiting_status_approval_legal()
+        if user_data_dict["createAccount"] == "Mr_KSUP_Dir" or user_data_dict["createAccount"] == "Mr_KSUP_Dir2":
+            if user_data_dict["divisionHeadApproves"] == "Да":
+                contract_element_page.verify_contract_successfully_status_approval_department_head()
+            contract_element_page.verify_contract_waiting_status_approval_legal()
+            contract_element_page.verify_contract_waiting_status_approval_audit()
+        else:
+            if user_data_dict["divisionHeadApproves"] == "Да":
+                contract_element_page.verify_contract_waiting_status_approval_department_head()
+
         # Добавление файла бюджета возможные названия файла test_jpg.jpg, test_doc.docx, test_excel.xlsx, test_video.mp4, test_pdf.pdf
         contract_element_page.verify_visibility_budget_button()
         contract_element_page.add_file_of_budget("test_jpg.jpg")
@@ -542,64 +535,71 @@ class TestUnitSaleFullBusinessCyclePaZpDk:
     def test_approval_contract_for_department_head(self, browser_function, path_data_file):
         user_data_dict = BasePage.read_file_json(browser_function, path_data_file)
         user_data_dict = BasePage.dict_preparation(browser_function, user_data_dict)
-        if user_data_dict["createAccount"] == "Mr_KSUP_Seller" or user_data_dict["createAccount"] == "Mr_KSUP_Seller2":
-            link = LoginData.link
-            login_page = LoginData(browser_function, link)
-            login_page.open()
-            if user_data_dict["createAccount"] == "Mr_KSUP_Seller":
-                login_page.login("Mr_KSUP_Dir")
-                login_page.verify_username("Mr_KSUP_Dir")
-                department_head = "Mr_KSUP_Dir"
+        if user_data_dict["divisionHeadApproves"] == "Да":
+            if user_data_dict["createAccount"] == "Mr_KSUP_Seller" or user_data_dict["createAccount"] == "Mr_KSUP_Seller2":
+                link = LoginData.link
+                login_page = LoginData(browser_function, link)
+                login_page.open()
+                if user_data_dict["createAccount"] == "Mr_KSUP_Seller":
+                    login_page.login("Mr_KSUP_Dir")
+                    login_page.verify_username("Mr_KSUP_Dir")
+                    department_head = "Mr_KSUP_Dir"
+                else:
+                    login_page.login("Mr_KSUP_Dir2")
+                    login_page.verify_username("Mr_KSUP_Dir2")
+                    department_head = "Mr_KSUP_Dir2"
+                login_page.go_to_contract_list(link)
+                contract_list_page = ContractPage(browser_function, browser_function.current_url)
+                contract_list_page.go_to_approval_head_dept_tab()
+                # contract_list_page.go_to_allmydepartment_tab()
+                contract_list_page.should_be_element_on_contract_list(user_data_dict)
+                contract_list_page.go_to_contract_element(user_data_dict)
+                contract_element_page = ContractElementPage(browser_function, browser_function.current_url)
+                contract_element_page.approval_contract(UserData.comment_approval_legal, UserData.file_path_for_link_jpg)
+                contract_element_page.verify_general_information_contract(user_data_dict)
+                contract_element_page.verify_contract_successfully_status_approval_department_head()
+                contract_element_page.verify_contract_waiting_status_approval_legal()
+                contract_element_page.verify_contract_waiting_status_approval_audit()
             else:
-                login_page.login("Mr_KSUP_Dir2")
-                login_page.verify_username("Mr_KSUP_Dir2")
-                department_head = "Mr_KSUP_Dir2"
-            login_page.go_to_contract_list(link)
-            contract_list_page = ContractPage(browser_function, browser_function.current_url)
-            contract_list_page.go_to_approval_elements_tab()
-            contract_list_page.go_to_allmydepartment_tab()
-            contract_list_page.should_be_element_on_contract_list(user_data_dict)
-            contract_list_page.go_to_contract_element(user_data_dict)
-            contract_element_page = ContractElementPage(browser_function, browser_function.current_url)
-            contract_element_page.approval_contract(UserData.comment_approval_legal, UserData.file_path_for_link_jpg)
-            contract_element_page.verify_general_information_contract(user_data_dict)
-            contract_element_page.verify_contract_successfully_status_approval_department_head()
-            if UserData.egrulHead[department_head] == user_data_dict["executiveUnitLegal"]:
-                contract_element_page.verify_contract_successfully_status_approval_egrulhead()
-            else:
-                contract_element_page.verify_contract_waiting_status_approval_egrulhead()
+                print("\nВнутреннее согласование договор/контракта за Руководителя подразделения не требуется")
         else:
-            print("\nВнутреннее согласование договор/контракта за Руководителя подразделения не требуется")
+            print("\nВнутреннее согласование договор/контракта за Руководителя подразделения не требуется "
+                  "из-за отключения этапа согласования с руководителем подразделения")
 
+    """
     def test_approval_contract_for_egrulhead(self, browser_function, path_data_file):
         user_data_dict = BasePage.read_file_json(browser_function, path_data_file)
         user_data_dict = BasePage.dict_preparation(browser_function, user_data_dict)
 
         if ((user_data_dict["createAccount"] == "Mr_KSUP_Seller" or user_data_dict["createAccount"] == "Mr_KSUP_Dir")
             and UserData.egrulHead["Mr_KSUP_Dir"] != user_data_dict["executiveUnitLegal"]) or \
-            ((user_data_dict["createAccount"] == "Mr_KSUP_Seller2" or user_data_dict["createAccount"] == "Mr_KSUP_Dir2")
-             and UserData.egrulHead["Mr_KSUP_Dir2"] != user_data_dict["executiveUnitLegal"]):
+                ((user_data_dict["createAccount"] == "Mr_KSUP_Seller2" or user_data_dict[
+                    "createAccount"] == "Mr_KSUP_Dir2")
+                 and UserData.egrulHead["Mr_KSUP_Dir2"] != user_data_dict["executiveUnitLegal"]):
 
             link = LoginData.link
             login_page = LoginData(browser_function, link)
             login_page.open()
             # Определяем руководителя по значению юр.лица-исполнителя в словаре
-            account_name = {value: key for key, value in UserData.egrulHead.items()}[user_data_dict["executiveUnitLegal"]]
+            account_name = {value: key for key, value in UserData.egrulHead.items()}[
+                user_data_dict["executiveUnitLegal"]]
             login_page.login(account_name)
             login_page.verify_username(account_name)
-            login_page.go_to_contract_list(link)
+            login_page.go_to_contract_egrul_list(link)
             contract_list_page = ContractPage(browser_function, browser_function.current_url)
-            contract_list_page.go_to_approval_elements_tab()
-            contract_list_page.go_to_allmyegrul_tab()
+            contract_list_page.go_to_approval_head_egrul_tab()
+            # contract_list_page.go_to_allmyegrul_tab()
             contract_list_page.should_be_element_on_contract_list(user_data_dict)
             contract_list_page.go_to_contract_element(user_data_dict)
             contract_element_page = ContractElementPage(browser_function, browser_function.current_url)
-            contract_element_page.approval_contract(UserData.comment_approval_depatment_head, UserData.file_path_for_link_pdf)
+            contract_element_page.approval_contract(UserData.comment_approval_depatment_head,
+                                                    UserData.file_path_for_link_pdf)
             contract_element_page.verify_general_information_contract(user_data_dict)
             contract_element_page.verify_contract_successfully_status_approval_egrulhead()
             contract_element_page.verify_contract_waiting_status_approval_legal()
         else:
             print("\nВнутреннее согласование договор/контракта за Руководителя юр.лица/ИП не требуется")
+    """
 
     def test_approval_contract_for_legal(self, browser_function, path_data_file):
         user_data_dict = BasePage.read_file_json(browser_function, path_data_file)
@@ -711,7 +711,7 @@ class TestUnitSaleFullBusinessCyclePaZpDk:
         login_page = LoginData(browser_function, link)
         login_page.open()
         login_page.login("sa_dks_ksup_audit")
-        login_page.verify_username("Mr_KSUP_Audit")
+        # login_page.verify_username("Mr_KSUP_Audit")
         login_page.go_to_contract_list(link)
         contract_list_page = ContractPage(browser_function, browser_function.current_url)
         contract_list_page.go_to_approval_elements_tab()

@@ -14,7 +14,7 @@ from userdata.user_data import UserData
 # 4_[Atest_Dir] Reject DK, categoryA, softwareDev.json
 
 @pytest.mark.parametrize('path_data_file',
-                         [r"TPAC\7_RejectApproval\3_[Atest_Seller] Reject DK, categoryA, softwareDev.json"])
+                         [r"TPAC\7_RejectApproval\3_[Atest_Seller2] Reject DK, categoryA, softwareDev.json"])
 class TestRejectStepBackContract:
 
     def test_create_contract(self, browser_function, path_data_file):
@@ -88,8 +88,8 @@ class TestRejectStepBackContract:
                 login_page.verify_username("Mr_KSUP_Dir2")
             login_page.go_to_contract_list(link)
             contract_list_page = ContractPage(browser_function, browser_function.current_url)
-            # contract_list_page.go_to_approval_elements_tab()
-            contract_list_page.go_to_allmydepartment_tab()
+            contract_list_page.go_to_approval_head_dept_tab()
+            # contract_list_page.go_to_allmydepartment_tab()
             contract_list_page.should_be_element_on_contract_list(user_data_dict)
             contract_list_page.go_to_contract_element(user_data_dict)
             contract_element_page = ContractElementPage(browser_function, browser_function.current_url)
@@ -135,53 +135,34 @@ class TestRejectStepBackContract:
                 department_head = "Mr_KSUP_Dir2"
             login_page.go_to_contract_list(link)
             contract_list_page = ContractPage(browser_function, browser_function.current_url)
-            contract_list_page.go_to_approval_elements_tab()
-            contract_list_page.go_to_allmydepartment_tab()
+            contract_list_page.go_to_approval_head_dept_tab()
+            # contract_list_page.go_to_allmydepartment_tab()
             contract_list_page.should_be_element_on_contract_list(user_data_dict)
             contract_list_page.go_to_contract_element(user_data_dict)
             contract_element_page = ContractElementPage(browser_function, browser_function.current_url)
             contract_element_page.approval_contract(UserData.comment_approval_legal, UserData.file_path_for_link_jpg)
             contract_element_page.verify_general_information_contract(user_data_dict)
             contract_element_page.verify_contract_successfully_status_approval_department_head()
-            if UserData.egrulHead[department_head] == user_data_dict["executiveUnitLegal"]:
-                contract_element_page.verify_contract_successfully_status_approval_egrulhead()
-            else:
-                contract_element_page.verify_contract_waiting_status_approval_egrulhead()
+            contract_element_page.verify_contract_waiting_status_approval_legal()
         else:
             print("\nВнутреннее согласование договор/контракта за Руководителя подразделения не требуется")
 
-    def test_reject_contract_for_egrulhead_cycle2(self, browser_function, path_data_file):
+    def test_reject_contract_for_legal_cycle2(self, browser_function, path_data_file):
         user_data_dict = BasePage.read_file_json(browser_function, path_data_file)
         user_data_dict = BasePage.dict_preparation(browser_function, user_data_dict)
-
-        if ((user_data_dict["createAccount"] == "Mr_KSUP_Seller" or user_data_dict["createAccount"] == "Mr_KSUP_Dir")
-            and UserData.egrulHead["Mr_KSUP_Dir"] != user_data_dict["executiveUnitLegal"]) or \
-                ((user_data_dict["createAccount"] == "Mr_KSUP_Seller2" or user_data_dict[
-                    "createAccount"] == "Mr_KSUP_Dir2")
-                 and UserData.egrulHead["Mr_KSUP_Dir2"] != user_data_dict["executiveUnitLegal"]):
-
-            link = LoginData.link
-            login_page = LoginData(browser_function, link)
-            login_page.open()
-            # Определяем руководителя по значению юр.лица-исполнителя в словаре
-            account_name = {value: key for key, value in UserData.egrulHead.items()}[
-                user_data_dict["executiveUnitLegal"]]
-            login_page.login(account_name)
-            login_page.verify_username(account_name)
-
-            login_page.go_to_contract_list(link)
-            contract_list_page = ContractPage(browser_function, browser_function.current_url)
-            contract_list_page.go_to_approval_elements_tab()
-            contract_list_page.go_to_allmydepartment_tab()
-            contract_list_page.should_be_element_on_contract_list(user_data_dict)
-            contract_list_page.go_to_contract_element(user_data_dict)
-            contract_element_page = ContractElementPage(browser_function, browser_function.current_url)
-            contract_element_page.verify_general_information_contract(user_data_dict)
-            contract_element_page.reject_contract(UserData.comment_reject_egrul_head, UserData.file_path_for_link_pdf,
-                                            "Согласование с руководителем подразделения")
-            contract_element_page.verify_contract_reject_status_approval_egrulhead()
-        else:
-            print("\nВнутреннее согласование закупочной процедуры за Руководителя юр.лица/ИП не требуется")
+        link = LoginData.link
+        login_page = LoginData(browser_function, link)
+        login_page.open()
+        login_page.login("Mr_KSUP_Legal")
+        login_page.verify_username("Mr_KSUP_Legal")
+        login_page.go_to_contract_list(link)
+        contract_list = ContractPage(browser_function, browser_function.current_url)
+        contract_list.go_to_contract_element(user_data_dict)
+        contract_element_page = ContractElementPage(browser_function, browser_function.current_url)
+        contract_element_page.reject_contract(UserData.comment_reject_legal, UserData.file_path_for_link_excel,
+                                              "Согласование с руководителем подразделения")
+        contract_element_page.verify_contract_reject_status_approval_legal()
+        login_page.logout()
 
     # Цикл 3
     def test_send_contract_for_approval_cycle3(self, browser_function, path_data_file):
@@ -217,53 +198,19 @@ class TestRejectStepBackContract:
                 department_head = "Mr_KSUP_Dir2"
             login_page.go_to_contract_list(link)
             contract_list_page = ContractPage(browser_function, browser_function.current_url)
-            contract_list_page.go_to_approval_elements_tab()
-            contract_list_page.go_to_allmydepartment_tab()
+            contract_list_page.go_to_approval_head_dept_tab()
+            # contract_list_page.go_to_allmydepartment_tab()
             contract_list_page.should_be_element_on_contract_list(user_data_dict)
             contract_list_page.go_to_contract_element(user_data_dict)
             contract_element_page = ContractElementPage(browser_function, browser_function.current_url)
             contract_element_page.approval_contract(UserData.comment_approval_legal, UserData.file_path_for_link_jpg)
             contract_element_page.verify_general_information_contract(user_data_dict)
             contract_element_page.verify_contract_successfully_status_approval_department_head()
-            if UserData.egrulHead[department_head] == user_data_dict["executiveUnitLegal"]:
-                contract_element_page.verify_contract_successfully_status_approval_egrulhead()
-            else:
-                contract_element_page.verify_contract_waiting_status_approval_egrulhead()
+            contract_element_page.verify_contract_waiting_status_approval_legal()
         else:
             print("\nВнутреннее согласование договор/контракта за Руководителя подразделения не требуется")
 
-    def test_approval_contract_for_egrulhead_cycle3(self, browser_function, path_data_file):
-        user_data_dict = BasePage.read_file_json(browser_function, path_data_file)
-        user_data_dict = BasePage.dict_preparation(browser_function, user_data_dict)
-
-        if ((user_data_dict["createAccount"] == "Mr_KSUP_Seller" or user_data_dict["createAccount"] == "Mr_KSUP_Dir")
-            and UserData.egrulHead["Mr_KSUP_Dir"] != user_data_dict["executiveUnitLegal"]) or \
-            ((user_data_dict["createAccount"] == "Mr_KSUP_Seller2" or user_data_dict["createAccount"] == "Mr_KSUP_Dir2")
-             and UserData.egrulHead["Mr_KSUP_Dir2"] != user_data_dict["executiveUnitLegal"]):
-
-            link = LoginData.link
-            login_page = LoginData(browser_function, link)
-            login_page.open()
-            # Определяем руководителя по значению юр.лица-исполнителя в словаре
-            account_name = {value: key for key, value in UserData.egrulHead.items()}[user_data_dict["executiveUnitLegal"]]
-            login_page.login(account_name)
-            login_page.verify_username(account_name)
-            login_page.go_to_contract_list(link)
-            contract_list_page = ContractPage(browser_function, browser_function.current_url)
-            contract_list_page.go_to_approval_elements_tab()
-            contract_list_page.go_to_allmyegrul_tab()
-            contract_list_page.should_be_element_on_contract_list(user_data_dict)
-            contract_list_page.go_to_contract_element(user_data_dict)
-            contract_element_page = ContractElementPage(browser_function, browser_function.current_url)
-            contract_element_page.approval_contract(UserData.comment_approval_depatment_head, UserData.file_path_for_link_pdf)
-            contract_element_page.verify_general_information_contract(user_data_dict)
-            contract_element_page.verify_contract_successfully_status_approval_egrulhead()
-            contract_element_page.verify_contract_waiting_status_approval_legal()
-            contract_element_page.verify_contract_waiting_status_approval_audit()
-        else:
-            print("\nВнутреннее согласование договор/контракта за Руководителя юр.лица/ИП не требуется")
-
-    def test_reject_contract_for_legal_cycle3(self, browser_function, path_data_file):
+    def test_approval_contract_for_legal_cycle3(self, browser_function, path_data_file):
         user_data_dict = BasePage.read_file_json(browser_function, path_data_file)
         user_data_dict = BasePage.dict_preparation(browser_function, user_data_dict)
         link = LoginData.link
@@ -272,12 +219,35 @@ class TestRejectStepBackContract:
         login_page.login("Mr_KSUP_Legal")
         login_page.verify_username("Mr_KSUP_Legal")
         login_page.go_to_contract_list(link)
+        contract_list_page = ContractPage(browser_function, browser_function.current_url)
+        contract_list_page.go_to_approval_elements_tab()
+        contract_list_page.should_be_element_on_contract_list(user_data_dict)
+        contract_list_page.go_to_contract_element(user_data_dict)
+        contract_element_page = ContractElementPage(browser_function, browser_function.current_url)
+        contract_element_page.approval_contract(UserData.comment_approval_legal, UserData.file_path_for_link_jpg)
+        contract_element_page.verify_contract_successfully_status_approval_legal()
+        contract_element_page.verify_contract_waiting_status_approval_count()
+        contract_element_page.verify_contract_waiting_status_approval_audit()
+        login_page.go_to_contract_list(link)
+        contract_list_page.go_to_approved_elements_tab()
+        contract_list_page.should_be_element_on_contract_list(user_data_dict)
+        login_page.logout()
+
+    def test_reject_contract_for_count_cycle3(self, browser_function, path_data_file):
+        user_data_dict = BasePage.read_file_json(browser_function, path_data_file)
+        user_data_dict = BasePage.dict_preparation(browser_function, user_data_dict)
+        link = LoginData.link
+        login_page = LoginData(browser_function, link)
+        login_page.open()
+        login_page.login("Mr_KSUP_Count")
+        login_page.verify_username("Mr_KSUP_Count")
+        login_page.go_to_contract_list(link)
         contract_list = ContractPage(browser_function, browser_function.current_url)
         contract_list.go_to_contract_element(user_data_dict)
         contract_element_page = ContractElementPage(browser_function, browser_function.current_url)
-        contract_element_page.reject_contract(UserData.comment_reject_legal, UserData.file_path_for_link_excel,
-                                              "Согласование с руководителем юр. лица/ИП")
-        contract_element_page.verify_contract_reject_status_approval_legal()
+        contract_element_page.reject_contract(UserData.comment_reject_count, UserData.file_path_for_link_jpg,
+                                              "Согласование юридической службой")
+        contract_element_page.verify_contract_reject_status_approval_count()
         login_page.logout()
 
     # Цикл 4
@@ -294,39 +264,8 @@ class TestRejectStepBackContract:
         contract_list.go_to_contract_element(user_data_dict)
         contract_element_page = ContractElementPage(browser_function, browser_function.current_url)
         contract_element_page.send_contract_for_approval()
-        contract_element_page.verify_contract_waiting_status_approval_egrulhead()
+        contract_element_page.verify_contract_waiting_status_approval_legal()
         login_page.logout()
-
-    def test_approval_contract_for_egrulhead_cycle4(self, browser_function, path_data_file):
-        user_data_dict = BasePage.read_file_json(browser_function, path_data_file)
-        user_data_dict = BasePage.dict_preparation(browser_function, user_data_dict)
-
-        if ((user_data_dict["createAccount"] == "Mr_KSUP_Seller" or user_data_dict["createAccount"] == "Mr_KSUP_Dir")
-            and UserData.egrulHead["Mr_KSUP_Dir"] != user_data_dict["executiveUnitLegal"]) or \
-            ((user_data_dict["createAccount"] == "Mr_KSUP_Seller2" or user_data_dict["createAccount"] == "Mr_KSUP_Dir2")
-             and UserData.egrulHead["Mr_KSUP_Dir2"] != user_data_dict["executiveUnitLegal"]):
-
-            link = LoginData.link
-            login_page = LoginData(browser_function, link)
-            login_page.open()
-            # Определяем руководителя по значению юр.лица-исполнителя в словаре
-            account_name = {value: key for key, value in UserData.egrulHead.items()}[user_data_dict["executiveUnitLegal"]]
-            login_page.login(account_name)
-            login_page.verify_username(account_name)
-            login_page.go_to_contract_list(link)
-            contract_list_page = ContractPage(browser_function, browser_function.current_url)
-            contract_list_page.go_to_approval_elements_tab()
-            contract_list_page.go_to_allmyegrul_tab()
-            contract_list_page.should_be_element_on_contract_list(user_data_dict)
-            contract_list_page.go_to_contract_element(user_data_dict)
-            contract_element_page = ContractElementPage(browser_function, browser_function.current_url)
-            contract_element_page.approval_contract(UserData.comment_approval_depatment_head, UserData.file_path_for_link_pdf)
-            contract_element_page.verify_general_information_contract(user_data_dict)
-            contract_element_page.verify_contract_successfully_status_approval_egrulhead()
-            contract_element_page.verify_contract_waiting_status_approval_legal()
-            contract_element_page.verify_contract_waiting_status_approval_audit()
-        else:
-            print("\nВнутреннее согласование договор/контракта за Руководителя юр.лица/ИП не требуется")
 
     def test_approval_contract_for_legal_cycle4(self, browser_function, path_data_file):
         user_data_dict = BasePage.read_file_json(browser_function, path_data_file)
@@ -351,7 +290,7 @@ class TestRejectStepBackContract:
         contract_list_page.should_be_element_on_contract_list(user_data_dict)
         login_page.logout()
 
-    def test_reject_contract_for_count_cycle4(self, browser_function, path_data_file):
+    def test_approval_contract_for_count_cycle4(self, browser_function, path_data_file):
         user_data_dict = BasePage.read_file_json(browser_function, path_data_file)
         user_data_dict = BasePage.dict_preparation(browser_function, user_data_dict)
         link = LoginData.link
@@ -360,12 +299,35 @@ class TestRejectStepBackContract:
         login_page.login("Mr_KSUP_Count")
         login_page.verify_username("Mr_KSUP_Count")
         login_page.go_to_contract_list(link)
+        contract_list_page = ContractPage(browser_function, browser_function.current_url)
+        # contract_list_page.go_to_approval_elements_tab()
+        contract_list_page.should_be_element_on_contract_list(user_data_dict)
+        contract_list_page.go_to_contract_element(user_data_dict)
+        contract_element_page = ContractElementPage(browser_function, browser_function.current_url)
+        contract_element_page.approval_contract(UserData.comment_approval_count, UserData.file_path_for_link_doc)
+        contract_element_page.verify_contract_successfully_status_approval_count()
+        contract_element_page.verify_contract_waiting_status_approval_fin()
+        contract_element_page.verify_contract_waiting_status_approval_audit()
+        # login_page.go_to_contract_list(link)
+        # contract_list_page.go_to_approved_elements_tab()
+        # contract_list_page.should_be_element_on_contract_list(user_data_dict)
+        login_page.logout()
+
+    def test_reject_contract_for_fin_cycle4(self, browser_function, path_data_file):
+        user_data_dict = BasePage.read_file_json(browser_function, path_data_file)
+        user_data_dict = BasePage.dict_preparation(browser_function, user_data_dict)
+        link = LoginData.link
+        login_page = LoginData(browser_function, link)
+        login_page.open()
+        login_page.login("Mr_KSUP_Fin")
+        login_page.verify_username("Mr_KSUP_Fin")
+        login_page.go_to_contract_list(link)
         contract_list = ContractPage(browser_function, browser_function.current_url)
         contract_list.go_to_contract_element(user_data_dict)
         contract_element_page = ContractElementPage(browser_function, browser_function.current_url)
-        contract_element_page.reject_contract(UserData.comment_reject_count, UserData.file_path_for_link_jpg,
-                                              "Согласование юридической службой")
-        contract_element_page.verify_contract_reject_status_approval_count()
+        contract_element_page.reject_contract(UserData.comment_reject_fin, UserData.file_path_for_link_excel,
+                                              "Согласование бухгалтерией")
+        contract_element_page.verify_contract_reject_status_approval_fin()
         login_page.logout()
 
     # Цикл 5
@@ -382,30 +344,7 @@ class TestRejectStepBackContract:
         contract_list.go_to_contract_element(user_data_dict)
         contract_element_page = ContractElementPage(browser_function, browser_function.current_url)
         contract_element_page.send_contract_for_approval()
-        contract_element_page.verify_contract_waiting_status_approval_legal()
-        login_page.logout()
-
-    def test_approval_contract_for_legal_cycle5(self, browser_function, path_data_file):
-        user_data_dict = BasePage.read_file_json(browser_function, path_data_file)
-        user_data_dict = BasePage.dict_preparation(browser_function, user_data_dict)
-        link = LoginData.link
-        login_page = LoginData(browser_function, link)
-        login_page.open()
-        login_page.login("Mr_KSUP_Legal")
-        login_page.verify_username("Mr_KSUP_Legal")
-        login_page.go_to_contract_list(link)
-        contract_list_page = ContractPage(browser_function, browser_function.current_url)
-        contract_list_page.go_to_approval_elements_tab()
-        contract_list_page.should_be_element_on_contract_list(user_data_dict)
-        contract_list_page.go_to_contract_element(user_data_dict)
-        contract_element_page = ContractElementPage(browser_function, browser_function.current_url)
-        contract_element_page.approval_contract(UserData.comment_approval_legal, UserData.file_path_for_link_jpg)
-        contract_element_page.verify_contract_successfully_status_approval_legal()
         contract_element_page.verify_contract_waiting_status_approval_count()
-        contract_element_page.verify_contract_waiting_status_approval_audit()
-        login_page.go_to_contract_list(link)
-        contract_list_page.go_to_approved_elements_tab()
-        contract_list_page.should_be_element_on_contract_list(user_data_dict)
         login_page.logout()
 
     def test_approval_contract_for_count_cycle5(self, browser_function, path_data_file):
@@ -425,13 +364,12 @@ class TestRejectStepBackContract:
         contract_element_page.approval_contract(UserData.comment_approval_count, UserData.file_path_for_link_doc)
         contract_element_page.verify_contract_successfully_status_approval_count()
         contract_element_page.verify_contract_waiting_status_approval_fin()
-        contract_element_page.verify_contract_waiting_status_approval_audit()
         # login_page.go_to_contract_list(link)
         # contract_list_page.go_to_approved_elements_tab()
         # contract_list_page.should_be_element_on_contract_list(user_data_dict)
         login_page.logout()
 
-    def test_reject_contract_for_fin_cycle5(self, browser_function, path_data_file):
+    def test_approval_contract_for_fin_cycle5(self, browser_function, path_data_file):
         user_data_dict = BasePage.read_file_json(browser_function, path_data_file)
         user_data_dict = BasePage.dict_preparation(browser_function, user_data_dict)
         link = LoginData.link
@@ -440,15 +378,42 @@ class TestRejectStepBackContract:
         login_page.login("Mr_KSUP_Fin")
         login_page.verify_username("Mr_KSUP_Fin")
         login_page.go_to_contract_list(link)
+        contract_list_page = ContractPage(browser_function, browser_function.current_url)
+        contract_list_page.go_to_approval_elements_tab()
+        contract_list_page.should_be_element_on_contract_list(user_data_dict)
+        contract_list_page.go_to_contract_element(user_data_dict)
+        contract_element_page = ContractElementPage(browser_function, browser_function.current_url)
+        contract_element_page.approval_contract(UserData.comment_approval_fin, UserData.file_path_for_link_excel)
+        contract_element_page.verify_contract_successfully_status_approval_fin(user_data_dict)
+        if user_data_dict["groupTypeWork"] == "Software" and user_data_dict["priceCategory"] != "C":
+            contract_element_page.verify_contract_waiting_status_approval_udprpo()
+        elif user_data_dict["groupTypeWork"] == "Other" \
+                and user_data_dict["priceCategory"] == "A" \
+                and user_data_dict["contractorType"] != "Тендерная заявка":
+            contract_element_page.verify_contract_waiting_status_approval_kkp()
+        login_page.go_to_contract_list(link)
+        contract_list_page.go_to_approved_elements_tab()
+        contract_list_page.should_be_element_on_contract_list(user_data_dict)
+        login_page.logout()
+
+    def test_reject_contract_for_udprpo_cycle5(self, browser_function, path_data_file):
+        user_data_dict = BasePage.read_file_json(browser_function, path_data_file)
+        user_data_dict = BasePage.dict_preparation(browser_function, user_data_dict)
+        link = LoginData.link
+        login_page = LoginData(browser_function, link)
+        login_page.open()
+        login_page.login("Mr_KSUP_UDPRPO")
+        login_page.verify_username("Mr_KSUP_UDPRPO")
+        login_page.go_to_contract_list(link)
         contract_list = ContractPage(browser_function, browser_function.current_url)
         contract_list.go_to_contract_element(user_data_dict)
         contract_element_page = ContractElementPage(browser_function, browser_function.current_url)
-        contract_element_page.reject_contract(UserData.comment_reject_fin, UserData.file_path_for_link_excel,
-                                              "Согласование бухгалтерией")
-        contract_element_page.verify_contract_reject_status_approval_fin()
+        contract_element_page.reject_contract(UserData.comment_reject_udprpo, UserData.file_path_for_link_excel,
+                                              "Согласование финансовой службой")
+        contract_element_page.verify_contract_reject_status_approval_udprpo()
         login_page.logout()
 
-    # Цикл 6
+    # Цикл 7
     def test_send_contract_for_approval_cycle6(self, browser_function, path_data_file):
         user_data_dict = BasePage.read_file_json(browser_function, path_data_file)
         user_data_dict = BasePage.dict_preparation(browser_function, user_data_dict)
@@ -462,29 +427,8 @@ class TestRejectStepBackContract:
         contract_list.go_to_contract_element(user_data_dict)
         contract_element_page = ContractElementPage(browser_function, browser_function.current_url)
         contract_element_page.send_contract_for_approval()
-        contract_element_page.verify_contract_waiting_status_approval_count()
-        login_page.logout()
-
-    def test_approval_contract_for_count_cycle6(self, browser_function, path_data_file):
-        user_data_dict = BasePage.read_file_json(browser_function, path_data_file)
-        user_data_dict = BasePage.dict_preparation(browser_function, user_data_dict)
-        link = LoginData.link
-        login_page = LoginData(browser_function, link)
-        login_page.open()
-        login_page.login("Mr_KSUP_Count")
-        login_page.verify_username("Mr_KSUP_Count")
-        login_page.go_to_contract_list(link)
-        contract_list_page = ContractPage(browser_function, browser_function.current_url)
-        # contract_list_page.go_to_approval_elements_tab()
-        contract_list_page.should_be_element_on_contract_list(user_data_dict)
-        contract_list_page.go_to_contract_element(user_data_dict)
-        contract_element_page = ContractElementPage(browser_function, browser_function.current_url)
-        contract_element_page.approval_contract(UserData.comment_approval_count, UserData.file_path_for_link_doc)
-        contract_element_page.verify_contract_successfully_status_approval_count()
         contract_element_page.verify_contract_waiting_status_approval_fin()
-        # login_page.go_to_contract_list(link)
-        # contract_list_page.go_to_approved_elements_tab()
-        # contract_list_page.should_be_element_on_contract_list(user_data_dict)
+        contract_element_page.verify_contract_waiting_status_approval_audit()
         login_page.logout()
 
     def test_approval_contract_for_fin_cycle6(self, browser_function, path_data_file):
@@ -503,68 +447,6 @@ class TestRejectStepBackContract:
         contract_element_page = ContractElementPage(browser_function, browser_function.current_url)
         contract_element_page.approval_contract(UserData.comment_approval_fin, UserData.file_path_for_link_excel)
         contract_element_page.verify_contract_successfully_status_approval_fin(user_data_dict)
-        if user_data_dict["groupTypeWork"] == "Software" and user_data_dict["priceCategory"] != "C":
-            contract_element_page.verify_contract_waiting_status_approval_udprpo()
-        elif user_data_dict["groupTypeWork"] == "Other" \
-                and user_data_dict["priceCategory"] == "A" \
-                and user_data_dict["contractorType"] != "Тендерная заявка":
-            contract_element_page.verify_contract_waiting_status_approval_kkp()
-        login_page.go_to_contract_list(link)
-        contract_list_page.go_to_approved_elements_tab()
-        contract_list_page.should_be_element_on_contract_list(user_data_dict)
-        login_page.logout()
-
-    def test_reject_contract_for_udprpo_cycle6(self, browser_function, path_data_file):
-        user_data_dict = BasePage.read_file_json(browser_function, path_data_file)
-        user_data_dict = BasePage.dict_preparation(browser_function, user_data_dict)
-        link = LoginData.link
-        login_page = LoginData(browser_function, link)
-        login_page.open()
-        login_page.login("Mr_KSUP_UDPRPO")
-        login_page.verify_username("Mr_KSUP_UDPRPO")
-        login_page.go_to_contract_list(link)
-        contract_list = ContractPage(browser_function, browser_function.current_url)
-        contract_list.go_to_contract_element(user_data_dict)
-        contract_element_page = ContractElementPage(browser_function, browser_function.current_url)
-        contract_element_page.reject_contract(UserData.comment_reject_udprpo, UserData.file_path_for_link_excel,
-                                              "Согласование финансовой службой")
-        contract_element_page.verify_contract_reject_status_approval_udprpo()
-        login_page.logout()
-
-    # Цикл 7
-    def test_send_contract_for_approval_cycle7(self, browser_function, path_data_file):
-        user_data_dict = BasePage.read_file_json(browser_function, path_data_file)
-        user_data_dict = BasePage.dict_preparation(browser_function, user_data_dict)
-        link = LoginData.link
-        login_page = LoginData(browser_function, link)
-        login_page.open()
-        login_page.login(user_data_dict["createAccount"])
-        login_page.verify_username(user_data_dict["createAccount"])
-        login_page.go_to_contract_list(link)
-        contract_list = ContractPage(browser_function, browser_function.current_url)
-        contract_list.go_to_contract_element(user_data_dict)
-        contract_element_page = ContractElementPage(browser_function, browser_function.current_url)
-        contract_element_page.send_contract_for_approval()
-        contract_element_page.verify_contract_waiting_status_approval_fin()
-        contract_element_page.verify_contract_waiting_status_approval_audit()
-        login_page.logout()
-
-    def test_approval_contract_for_fin_cycle7(self, browser_function, path_data_file):
-        user_data_dict = BasePage.read_file_json(browser_function, path_data_file)
-        user_data_dict = BasePage.dict_preparation(browser_function, user_data_dict)
-        link = LoginData.link
-        login_page = LoginData(browser_function, link)
-        login_page.open()
-        login_page.login("Mr_KSUP_Fin")
-        login_page.verify_username("Mr_KSUP_Fin")
-        login_page.go_to_contract_list(link)
-        contract_list_page = ContractPage(browser_function, browser_function.current_url)
-        contract_list_page.go_to_approval_elements_tab()
-        contract_list_page.should_be_element_on_contract_list(user_data_dict)
-        contract_list_page.go_to_contract_element(user_data_dict)
-        contract_element_page = ContractElementPage(browser_function, browser_function.current_url)
-        contract_element_page.approval_contract(UserData.comment_approval_fin, UserData.file_path_for_link_excel)
-        contract_element_page.verify_contract_successfully_status_approval_fin(user_data_dict)
         contract_element_page.verify_contract_waiting_status_approval_audit()
         if user_data_dict["groupTypeWork"] == "Software" and user_data_dict["priceCategory"] != "C":
             contract_element_page.verify_contract_waiting_status_approval_udprpo()
@@ -577,7 +459,7 @@ class TestRejectStepBackContract:
         contract_list_page.should_be_element_on_contract_list(user_data_dict)
         login_page.logout()
 
-    def test_approval_contract_for_udprpo_cycle7(self, browser_function, path_data_file):
+    def test_approval_contract_for_udprpo_cycle6(self, browser_function, path_data_file):
         user_data_dict = BasePage.read_file_json(browser_function, path_data_file)
         user_data_dict = BasePage.dict_preparation(browser_function, user_data_dict)
         if user_data_dict["groupTypeWork"] == "Software" and user_data_dict["priceCategory"] != "C":
@@ -603,7 +485,7 @@ class TestRejectStepBackContract:
         else:
             print("\nВнутреннее согласование контракта со службой УДПР ПО не требуется")
 
-    def test_reject_contract_for_audit_cycle7(self, browser_function, path_data_file):
+    def test_reject_contract_for_audit_cycle6(self, browser_function, path_data_file):
         user_data_dict = BasePage.read_file_json(browser_function, path_data_file)
         user_data_dict = BasePage.dict_preparation(browser_function, user_data_dict)
         link = LoginData.link
@@ -624,8 +506,8 @@ class TestRejectStepBackContract:
         contract_list_page.should_be_element_on_contract_list(user_data_dict)
         login_page.logout()
 
-    # Цикл 8
-    def test_send_contract_for_approval_cycle8(self, browser_function, path_data_file):
+    # Цикл 7
+    def test_send_contract_for_approval_cycle7(self, browser_function, path_data_file):
         user_data_dict = BasePage.read_file_json(browser_function, path_data_file)
         user_data_dict = BasePage.dict_preparation(browser_function, user_data_dict)
         link = LoginData.link
@@ -641,7 +523,7 @@ class TestRejectStepBackContract:
         contract_element_page.verify_contract_waiting_status_approval_udprpo()
         login_page.logout()
 
-    def test_approval_contract_for_udprpo_cycle8(self, browser_function, path_data_file):
+    def test_approval_contract_for_udprpo_cycle7(self, browser_function, path_data_file):
         user_data_dict = BasePage.read_file_json(browser_function, path_data_file)
         user_data_dict = BasePage.dict_preparation(browser_function, user_data_dict)
         if user_data_dict["groupTypeWork"] == "Software" and user_data_dict["priceCategory"] != "C":
@@ -666,6 +548,61 @@ class TestRejectStepBackContract:
         else:
             print("\nВнутреннее согласование контракта со службой УДПР ПО не требуется")
 
+    def test_approval_contract_for_audit_cycle7(self, browser_function, path_data_file):
+        user_data_dict = BasePage.read_file_json(browser_function, path_data_file)
+        user_data_dict = BasePage.dict_preparation(browser_function, user_data_dict)
+        link = LoginData.link
+        login_page = LoginData(browser_function, link)
+        login_page.open()
+        login_page.login("sa_dks_ksup_audit")
+        login_page.verify_username("Mr_KSUP_Audit")
+        login_page.go_to_contract_list(link)
+        contract_list_page = ContractPage(browser_function, browser_function.current_url)
+        contract_list_page.go_to_approval_elements_tab()
+        contract_list_page.should_be_element_on_contract_list(user_data_dict)
+        contract_list_page.go_to_contract_element(user_data_dict)
+        contract_element_page = ContractElementPage(browser_function, browser_function.current_url)
+        contract_element_page.approval_contract(UserData.comment_approval_audit, UserData.file_path_for_link_jpg)
+        contract_element_page.verify_contract_successfully_status_approval_audit()
+        if user_data_dict["contractorType"] != "Тендерная заявка" and user_data_dict["priceCategory"] == "A":
+            contract_element_page.verify_contract_waiting_status_approval_kkp()
+        login_page.go_to_contract_list(link)
+        contract_list_page.go_to_approved_elements_tab()
+        contract_list_page.should_be_element_on_contract_list(user_data_dict)
+        login_page.logout()
+
+    def test_revision_contract_for_kkp_cycle7(self, browser_function, path_data_file):
+        user_data_dict = BasePage.read_file_json(browser_function, path_data_file)
+        user_data_dict = BasePage.dict_preparation(browser_function, user_data_dict)
+        link = LoginData.link
+        login_page = LoginData(browser_function, link)
+        login_page.open()
+        login_page.login("Mr_KSUP_KKP")
+        login_page.verify_username("Mr_KSUP_KKP")
+        login_page.go_to_contract_list(link)
+        contract_list = ContractPage(browser_function, browser_function.current_url)
+        contract_list.go_to_contract_element(user_data_dict)
+        contract_element_page = ContractElementPage(browser_function, browser_function.current_url)
+        contract_element_page.revision_contract_from_kkp(UserData.comment_revision_kkp, "Согласование ККП")
+        contract_element_page.verify_contract_revision_status_approval_kkp()
+        login_page.logout()
+
+    # Цикл 8
+    def test_send_contract_for_approval_cycle8(self, browser_function, path_data_file):
+        user_data_dict = BasePage.read_file_json(browser_function, path_data_file)
+        user_data_dict = BasePage.dict_preparation(browser_function, user_data_dict)
+        link = LoginData.link
+        login_page = LoginData(browser_function, link)
+        login_page.open()
+        login_page.login(user_data_dict["createAccount"])
+        login_page.verify_username(user_data_dict["createAccount"])
+        login_page.go_to_contract_list(link)
+        contract_list = ContractPage(browser_function, browser_function.current_url)
+        contract_list.go_to_contract_element(user_data_dict)
+        contract_element_page = ContractElementPage(browser_function, browser_function.current_url)
+        contract_element_page.send_contract_for_approval()
+        contract_element_page.verify_contract_waiting_status_approval_audit()
+
     def test_approval_contract_for_audit_cycle8(self, browser_function, path_data_file):
         user_data_dict = BasePage.read_file_json(browser_function, path_data_file)
         user_data_dict = BasePage.dict_preparation(browser_function, user_data_dict)
@@ -689,62 +626,7 @@ class TestRejectStepBackContract:
         contract_list_page.should_be_element_on_contract_list(user_data_dict)
         login_page.logout()
 
-    def test_revision_contract_for_kkp_cycle8(self, browser_function, path_data_file):
-        user_data_dict = BasePage.read_file_json(browser_function, path_data_file)
-        user_data_dict = BasePage.dict_preparation(browser_function, user_data_dict)
-        link = LoginData.link
-        login_page = LoginData(browser_function, link)
-        login_page.open()
-        login_page.login("Mr_KSUP_KKP")
-        login_page.verify_username("Mr_KSUP_KKP")
-        login_page.go_to_contract_list(link)
-        contract_list = ContractPage(browser_function, browser_function.current_url)
-        contract_list.go_to_contract_element(user_data_dict)
-        contract_element_page = ContractElementPage(browser_function, browser_function.current_url)
-        contract_element_page.revision_contract_from_kkp(UserData.comment_revision_kkp, "Согласование ККП")
-        contract_element_page.verify_contract_revision_status_approval_kkp()
-        login_page.logout()
-
-    # Цикл 9
-    def test_send_contract_for_approval_cycle9(self, browser_function, path_data_file):
-        user_data_dict = BasePage.read_file_json(browser_function, path_data_file)
-        user_data_dict = BasePage.dict_preparation(browser_function, user_data_dict)
-        link = LoginData.link
-        login_page = LoginData(browser_function, link)
-        login_page.open()
-        login_page.login(user_data_dict["createAccount"])
-        login_page.verify_username(user_data_dict["createAccount"])
-        login_page.go_to_contract_list(link)
-        contract_list = ContractPage(browser_function, browser_function.current_url)
-        contract_list.go_to_contract_element(user_data_dict)
-        contract_element_page = ContractElementPage(browser_function, browser_function.current_url)
-        contract_element_page.send_contract_for_approval()
-        contract_element_page.verify_contract_waiting_status_approval_audit()
-
-    def test_approval_contract_for_audit_cycle9(self, browser_function, path_data_file):
-        user_data_dict = BasePage.read_file_json(browser_function, path_data_file)
-        user_data_dict = BasePage.dict_preparation(browser_function, user_data_dict)
-        link = LoginData.link
-        login_page = LoginData(browser_function, link)
-        login_page.open()
-        login_page.login("sa_dks_ksup_audit")
-        login_page.verify_username("Mr_KSUP_Audit")
-        login_page.go_to_contract_list(link)
-        contract_list_page = ContractPage(browser_function, browser_function.current_url)
-        contract_list_page.go_to_approval_elements_tab()
-        contract_list_page.should_be_element_on_contract_list(user_data_dict)
-        contract_list_page.go_to_contract_element(user_data_dict)
-        contract_element_page = ContractElementPage(browser_function, browser_function.current_url)
-        contract_element_page.approval_contract(UserData.comment_approval_audit, UserData.file_path_for_link_jpg)
-        contract_element_page.verify_contract_successfully_status_approval_audit()
-        if user_data_dict["contractorType"] != "Тендерная заявка" and user_data_dict["priceCategory"] == "A":
-            contract_element_page.verify_contract_waiting_status_approval_kkp()
-        login_page.go_to_contract_list(link)
-        contract_list_page.go_to_approved_elements_tab()
-        contract_list_page.should_be_element_on_contract_list(user_data_dict)
-        login_page.logout()
-
-    def test_reject_contract_for_kkp_cycle9(self, browser_function, path_data_file):
+    def test_reject_contract_for_kkp_cycle8(self, browser_function, path_data_file):
         user_data_dict = BasePage.read_file_json(browser_function, path_data_file)
         user_data_dict = BasePage.dict_preparation(browser_function, user_data_dict)
         link = LoginData.link

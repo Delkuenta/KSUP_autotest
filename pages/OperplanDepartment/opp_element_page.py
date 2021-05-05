@@ -75,7 +75,9 @@ class OppElementPage(BasePage):
         what = what.replace("idElementInOpp", user_data_dict["idElementInOpp"])
         if type_element == "presale":
             assert self.is_element_text(how, what) == str(user_data_dict["projectProbability"]) + "%", \
-                f'Не корректная информация в поле "Вероятность" в строке сущности: "{user_data_dict["fullName"]}"'
+                f'Не корректная информация в поле "Вероятность" в строке сущности: "{user_data_dict["fullName"]}"' \
+                f'ОР - {user_data_dict["projectProbability"]}' \
+                f'ФР - "{self.is_element_text(how, what)}"'
         else:
             assert self.is_element_text(how, what) == "100%", \
                 f'Не корректная информация в поле "Вероятность" в строке сущности: "{user_data_dict["fullName"]}"'

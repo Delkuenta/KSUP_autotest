@@ -63,3 +63,13 @@ class ContractPage(BasePage):
         assert self.is_visibility_of_element_located(*ContractListLocators.ALL_IN_MY_EGRUL_TAB, 5), \
             'Не отображена вкладка "Все моего юр.лица"'
         self.browser.find_element(*ContractListLocators.ALL_IN_MY_EGRUL_TAB).click()
+
+    def go_to_approval_head_dept_tab(self):
+        assert self.is_visibility_of_element_located(*ContractListLocators.APPROVEMENT_OF_HEAD_DEPT_TAB, 5), \
+            'Не отображена вкладка "На согласовании руководителя подразделения"'
+        self.browser.find_element(*ContractListLocators.APPROVEMENT_OF_HEAD_DEPT_TAB).click()
+
+    def go_to_approval_head_egrul_tab(self):
+        assert self.is_visibility_of_element_located(*ContractListLocators.APPROVEMENT_OF_HEAD_EGRUL_TAB, 5), \
+            'Не отображена вкладка "На согласовании руководителя юр.лица"'
+        self.browser.find_element(*ContractListLocators.APPROVEMENT_OF_HEAD_EGRUL_TAB).click()

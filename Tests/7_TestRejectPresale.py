@@ -50,12 +50,14 @@ class TestRejectPresale:
             login_page.verify_username("Mr_KSUP_Dir")
         presale_list_page = PresalePage(browser_function, link)
         presale_list_page.go_to_presale_list(link)
+        presale_list_page.go_to_approval_elements_tab()
         presale_list_page.go_to_presale_element(user_data_dict)
         presale_element_page = PresaleElementPage(browser_function, link)
         presale_element_page.reject_approval_presale(user_data_dict)
         # Баг (https://jira.lanit.ru/browse/KSUP-1107) после отклонения выкидывает на страницу по умолчанию, а не остается в карточке
         # убрать две строки после фикса
         presale_list_page.go_to_presale_list(link)
+        presale_list_page.go_to_allmydepartment_tab()
         presale_list_page.go_to_presale_element(user_data_dict)
         # -------------------------------------------------------
         presale_element_page = PresaleElementPage(browser_function, link)
@@ -93,12 +95,14 @@ class TestRejectPresale:
             login_page.verify_username("Mr_KSUP_Dir")
         presale_list_page = PresalePage(browser_function, link)
         presale_list_page.go_to_presale_list(link)
+        presale_list_page.go_to_approval_elements_tab()
         presale_list_page.go_to_presale_element(user_data_dict)
         presale_element_page = PresaleElementPage(browser_function, link)
         presale_element_page.reject_approval_presale(user_data_dict)
         # Баг (https://jira.lanit.ru/browse/KSUP-1107) после отклонения выкидывает на страницу по умолчанию, а не остается в карточке
         # убрать две строки после фикса
         presale_list_page.go_to_presale_list(link)
+        presale_list_page.go_to_allmydepartment_tab()
         presale_list_page.go_to_presale_element(user_data_dict)
         # -------------------------------------------------------
         presale_element_page = PresaleElementPage(browser_function, link)
@@ -136,6 +140,7 @@ class TestRejectPresale:
             login_page.verify_username("Mr_KSUP_Dir")
         presale_list_page = PresalePage(browser_function, link)
         presale_list_page.go_to_presale_list(link)
+        presale_list_page.go_to_approval_elements_tab()
         presale_list_page.go_to_presale_element(user_data_dict)
         presale_element_page = PresaleElementPage(browser_function, link)
         presale_element_page.approval_presale(user_data_dict)

@@ -74,9 +74,3 @@ class UserData:
                  "Mr_KSUP_Dir2": "",
                  "Mr_KSUP_LegalDir": 'ООО \"НУЖНО БОЛЬШЕ ЗОЛОТА\"'}
 
-
-
-
-
-
-

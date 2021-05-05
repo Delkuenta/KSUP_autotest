@@ -1213,7 +1213,6 @@ class ZakupElementPage(BasePage):
         assert color_in_element == reject_color, \
             'Некорректный цвет статуса "Отклонено" в строке согласования со службой аудита'
 
-
     # Создание контракта на основе закупочной процедуры
     def go_to_create_contract_based_on_zp(self):
         assert self.is_visibility_of_element_located(*ZakupElementLocators.CREATE_CONTRACT_BASED_ON_ZAKUP, 5), \

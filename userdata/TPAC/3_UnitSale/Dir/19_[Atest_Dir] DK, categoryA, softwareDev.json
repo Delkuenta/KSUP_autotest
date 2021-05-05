@@ -31,7 +31,7 @@
         "purchaseStartDateTo": "",
         "eisPriceNumber": "",
         "eisPriceLink": "",
-        "numberContract": "DK/0019-AT",
+        "numberContract": "DK/0019-AT_Dir",
         "eisContractLink": "",
         "territory": ["Архангельская область"],
         "technologies": ["Jira"],

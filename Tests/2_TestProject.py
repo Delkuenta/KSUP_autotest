@@ -13,7 +13,7 @@ from pages.Project.project_list_page import ProjectPage
 # TestProject2.json
 
 @pytest.mark.parametrize('path_data_file',
-                         [r"PPAC\2_Project\TestProject.json"])
+                         [r"TPAC\2_Project\TestProject.json"])
 class TestProject:
 
     def test_create_project(self, browser_function, path_data_file):

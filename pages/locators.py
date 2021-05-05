@@ -15,8 +15,10 @@ class BasePageLocators:
     PRESALE_LIST_TITLE = (By.CSS_SELECTOR, "#DeltaPlaceHolderPageTitleInTitleArea a")
     ZAKUP_LIST_LINK = "/SalesManagement/Lists/PresaleActivity/All.aspx"
     ZAKUP_LIST_TITLE = (By.CSS_SELECTOR, "#DeltaPlaceHolderPageTitleInTitleArea a")
+    ZAKUP_LIST_EGRUL_LINK = "/SalesManagement/Lists/PresaleActivity/OnApprovementOfHeadEgrul.aspx"
     CONTRACT_LIST_LINK = "/SalesManagement/Lists/Contract/All.aspx"
     CONTRACT_LIST_TITLE = (By.CSS_SELECTOR, "#DeltaPlaceHolderPageTitleInTitleArea a")
+    CONTRACT_LIST_EGRUL_LINK = "/SalesManagement/Lists/Contract/OnApprovementOfHeadEgrul.aspx"
     KNOWLEDGE_SEARCH_LINK = "/Pages/KnowledgeBaseSearch.aspx"
     KNOWLEDGE_SEARCH_TITLE = (By.CSS_SELECTOR, ".title.title--main")
     PROJECT_LIST_LINK = "/KnowledgeBase/Project/Forms/All.aspx"
@@ -65,6 +67,12 @@ class BasePageLocators:
     # Кнопка "Отправить обращение в поддержку"
     SUPPORT_REQUEST_ELEMENT = (By.CSS_SELECTOR, "[class$='report-link']")
 
+    # Значение в поле "Подразделение-исполнитель" ПА-ЗП-ДК
+    EXECUTIVE_UNIT_FIELD = (By.CSS_SELECTOR, ".fldKsupDivisionPerformer #SPFieldWcfLookup a")
+
+    # Значение в поле "Согласование с руководителем подразделения"
+    DIVISION_HEAD_APPROVES_FIELD = (By.CSS_SELECTOR, ".fldKsupDivisionHeadApproves #SPFieldBoolean")
+
 
 class PresaleListLocators:
     PRESALE_CREATE_BUTTON = (By.XPATH, "//a[@id='idHomePageNewItem']")
@@ -99,7 +107,7 @@ class FormCreatePresaleLocators:
 
     # Подразделение-продавец *f"//li[normalize-space(.)='salesUnit_name']"
     SALES_UNIT_ELEMENT = (By.CSS_SELECTOR, "#div-wcfLookupControl_KsupDivisions")
-    SALES_UNIT_SEARCH_FIELD =(By.XPATH, "//*[@id='div-wcfLookupControl_KsupDivisions']//input[@type='search']")
+    SALES_UNIT_SEARCH_FIELD =(By.XPATH, "//*[@class='select2-dropdown select2-dropdown--below']//input[@type='search']")
     SALES_UNIT_DROPDOWN_ELEMENT = (By.XPATH, "//*[contains(@id, 'KsupDivisions')]//li[contains(text(), 'salesUnit_name')]")
 
     # Ответственный менеджер подразделения-продавца * //li[normalize-space(.)='salesManager_name']
@@ -504,6 +512,9 @@ class ZakupListLocators:
     APPROVED_ELEMENTS_TAB = (By.CSS_SELECTOR, "a[class^='viewApproved ms-pivotControl-surfacedOpt']")
     ALL_IN_MY_DEPARTMENT_TAB = (By.CSS_SELECTOR, "a[class^='viewAllInMyDepartment']")
     ALL_IN_MY_EGRUL_TAB = (By.CSS_SELECTOR, "[class^='viewAllInMyEgrul']")
+    APPROVEMENT_OF_HEAD_EGRUL_TAB = (By.CSS_SELECTOR, "[class^='viewOnApprovementOfHeadEgrul']")
+    APPROVEMENT_OF_HEAD_DEPT_TAB = (By.CSS_SELECTOR, "[class^='viewOnApprovementOfHeadDept']")
+
 
     # Поле "Статус согласования" множественный результат
     APPROVAL_STATUS_VALUES = (By.CSS_SELECTOR, "[class^='colKsupPresaleApproveStatus ms-cellstyle ms-vb2']")
@@ -706,7 +717,7 @@ class FormCreateContractLocators:
 
     # Подразделение-продавец //li[normalize-space()='salesUnit_name']
     SALES_UNIT_CONTRACT_ELEMENT = (By.CSS_SELECTOR, "#div-wcfLookupControl_KsupDivisions")
-    SALES_UNIT_SEARCH_FIELD =(By.XPATH, "//*[@id='div-wcfLookupControl_KsupDivisions']//input[@type='search']")
+    SALES_UNIT_SEARCH_FIELD =(By.XPATH, "//*[@class='select2-dropdown select2-dropdown--below']//input[@type='search']")
     SALES_UNIT_DROPDOWN_CONTRACT_ELEMENT = (By.XPATH, "//*[contains(@id, 'KsupDivisions')]//li[contains(text(), 'salesUnit_name')]")
 
     # Ответственный менеджер подразделения-продавца
@@ -877,6 +888,8 @@ class ContractListLocators:
     APPROVED_ELEMENTS_TAB = (By.CSS_SELECTOR, "a[class^='viewApproved ms-pivotControl-surfacedOpt']")
     ALL_IN_MY_DEPARTMENT_TAB = (By.CSS_SELECTOR, "a[class^='viewAllInMyDepartment']")
     ALL_IN_MY_EGRUL_TAB = (By.CSS_SELECTOR, "[class^='viewAllInMyEgrul']")
+    APPROVEMENT_OF_HEAD_EGRUL_TAB = (By.CSS_SELECTOR, "[class^='viewOnApprovementOfHeadEgrul']")
+    APPROVEMENT_OF_HEAD_DEPT_TAB = (By.CSS_SELECTOR, "[class^='viewOnApprovementOfHeadDept']")
 
     # Поле "Статус согласования" множественный результат
     APPROVAL_STATUS_VALUES = (By.CSS_SELECTOR, "[class^='colKsupContractApproveStatus ms-cellstyle ms-vb2']")

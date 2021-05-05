@@ -103,9 +103,25 @@ class BasePage:
             "Титул страницы не соответствует переходу"
         time.sleep(1)
 
+    # Переход на страницу "Закупочная процедура" руководитель юр.лица
+    def go_to_zakup_egrul_list(self, link):
+        zakup_link = link + BasePageLocators.ZAKUP_LIST_EGRUL_LINK
+        self.browser.get(zakup_link)
+        assert self.is_text_to_be_present_in_element(*BasePageLocators.ZAKUP_LIST_TITLE, "Закупочные процедуры"), \
+            "Титул страницы не соответствует переходу"
+        time.sleep(1)
+
     # Переход на страницу "Договор/контракт"
     def go_to_contract_list(self, link):
         contract_link = link + BasePageLocators.CONTRACT_LIST_LINK
+        self.browser.get(contract_link)
+        assert self.is_text_to_be_present_in_element(*BasePageLocators.CONTRACT_LIST_TITLE, "Договоры (контракты)"), \
+            "Титул страницы не соответствует переходу"
+        time.sleep(1)
+
+    # Переход на страницу "Договор/контракт" руководитель юр.лица
+    def go_to_contract_egrul_list(self, link):
+        contract_link = link + BasePageLocators.CONTRACT_LIST_EGRUL_LINK
         self.browser.get(contract_link)
         assert self.is_text_to_be_present_in_element(*BasePageLocators.CONTRACT_LIST_TITLE, "Договоры (контракты)"), \
             "Титул страницы не соответствует переходу"
@@ -154,6 +170,12 @@ class BasePage:
             data = json.load(file)
         user_data_dict = dict(data['main_data'])
         return user_data_dict
+
+    def load_file_json(self, path_data_file, user_data_dict):
+        full_path_file = os.path.join(UserData.current_dir, path_data_file)
+        user_data_dict = {"main_data": user_data_dict}
+        with open(full_path_file, "w", encoding='utf-8') as file:
+            json.dump(user_data_dict, file, ensure_ascii=False)
 
     def dict_preparation(self, user_data_dict):
 
@@ -345,3 +367,21 @@ class BasePage:
         self.browser.close()
         self.browser.switch_to.window(self.browser.window_handles[0])
         return work_email
+
+    # Вспомогательный метод: заходит в подразделение-исполнитель
+    # и проверяет атрибут согласование с руководителем подразделения
+    def attribute_approval_with_dept_head(self, user_data_dict):
+        # Получаем ссылку из значения в поле "подразделение-исполнитель"
+        department_link = self.browser.find_element(*BasePageLocators.EXECUTIVE_UNIT_FIELD).get_attribute("href")
+        # Открываем новую вкладку
+        self.browser.execute_script("window.open('');")
+        # Switch to the new window
+        self.browser.switch_to.window(self.browser.window_handles[1])
+        self.browser.get(department_link)
+        if self.browser.find_element(*BasePageLocators.DIVISION_HEAD_APPROVES_FIELD).is_displayed():
+            user_data_dict.update({'divisionHeadApproves': 'Да'})
+        else:
+            user_data_dict.update({'divisionHeadApproves': 'Нет'})
+        self.browser.close()
+        self.browser.switch_to.window(self.browser.window_handles[0])
+        return user_data_dict

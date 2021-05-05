@@ -46,6 +46,7 @@ class PresalePage(BasePage):
 
     # Перейти на вкладку "На согласовании"
     def go_to_approval_elements_tab(self):
+        time.sleep(2)
         assert self.is_visibility_of_element_located(*PresaleListLocators.APPROVAL_ELEMENTS_TAB, 10), \
             'Не отображена вкладка "На согласовании"'
         self.is_element_clickable(*PresaleListLocators.APPROVAL_ELEMENTS_TAB)

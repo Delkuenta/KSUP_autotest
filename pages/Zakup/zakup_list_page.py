@@ -60,6 +60,16 @@ class ZakupListPage(BasePage):
             'Не отображена вкладка "Все моего подразделения"'
         self.browser.find_element(*ZakupListLocators.ALL_IN_MY_DEPARTMENT_TAB).click()
 
+    def go_to_approval_head_dept_tab(self):
+        assert self.is_visibility_of_element_located(*ZakupListLocators.APPROVEMENT_OF_HEAD_DEPT_TAB, 5), \
+            'Не отображена вкладка "На согласовании руководителя подразделения"'
+        self.browser.find_element(*ZakupListLocators.APPROVEMENT_OF_HEAD_DEPT_TAB).click()
+
+    def go_to_approval_head_egrul_tab(self):
+        assert self.is_visibility_of_element_located(*ZakupListLocators.APPROVEMENT_OF_HEAD_EGRUL_TAB, 5), \
+            'Не отображена вкладка "На согласовании руководителя юр.лица"'
+        self.browser.find_element(*ZakupListLocators.APPROVEMENT_OF_HEAD_EGRUL_TAB).click()
+
     def go_to_allmyegrul_tab(self):
         time.sleep(2)
         assert self.is_visibility_of_element_located(*ZakupListLocators.ALL_IN_MY_EGRUL_TAB, 5), \

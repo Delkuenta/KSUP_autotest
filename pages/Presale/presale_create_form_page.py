@@ -375,11 +375,11 @@ class PresaleFormCreate(BasePage):
             # Ищем поле "Размер обеспечения договора/контракта" и заполняем его
             self.browser.find_element(*FormCreatePresaleLocators.CONTRACT_SIZE_ELEMENT).send_keys(
                 new_user_data_dict["contractSize"])
-
+        """
         # Ищем поле "Самостоятельная продажа" и выбираем значение
         Select(self.browser.find_element(*FormCreatePresaleLocators.SEPARATE_SALE_ELEMENT)).select_by_value(
             new_user_data_dict["separateSale"])
-
+        """
         if old_user_data_dict["competitionDeadlineFrom"] != new_user_data_dict["competitionDeadlineFrom"]:
             # Ищем поле "Плановый срок подачи на конкурс"
             competition_deadline_from_field = self.browser.find_element(
