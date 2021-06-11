@@ -308,7 +308,7 @@ class ContractFormCreate(BasePage):
         self.browser.find_element(*FormCreateContractLocators.SEARCH_TECHNOLOGIES_ELEMENT).click()
         time.sleep(2)
         # Работаем во фрейме "Ключевые технологии"
-        self.select_elements_in_frame(user_data_dict["technologies"], 3)
+        self.select_elements_in_frame(user_data_dict["technologies"], 5)
 
         # Заполняем поле "Цели и задачи"
         self.browser.find_element(*FormCreateContractLocators.DESCRIPTION_PLAIN_TEXT_ELEMENT).send_keys(

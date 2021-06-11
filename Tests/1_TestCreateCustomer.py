@@ -11,14 +11,13 @@ from pages.login_data import LoginData
 1_Customer\[Atest]NeedGold_Customer, OOO.json
 """
 @pytest.mark.parametrize('path_data_file', [#r"TPAC\1_Customer\[Atest]Customer, IP.json",
-                                            #r"TPAC\1_Customer\[Atest]NeedGold_Customer, OOO.json"
+                                            r"PPAC\1_Customer\[Atest]NeedGold_Customer, OOO.json",
                                             r"PPAC\1_Customer\[Atest]EvilMartians_Customer, OOO.json"
 ])
 class TestCustomer:
 
     def test_create_customer(self, browser_function, path_data_file):
         user_data_dict = BasePage.read_file_json(browser_function, path_data_file)
-        print(user_data_dict)
         link = LoginData.link
         login_page = LoginData(browser_function, link)
         login_page.open()

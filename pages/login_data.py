@@ -10,12 +10,13 @@ import pyautogui
 class LoginData(BasePage):
     # ППАК https://ksup.lanit.ru
     # ТПАК https://ksup-test.lanit.ru
-    link = "https://ksup-test.lanit.ru"
+    # LAN ТПАК https://ksup-test.lan.lanit.ru
+    link = "https://ksup.lanit.ru"
 
     def login(self, login):
         autoit.auto_it_set_option("WinTitleMatchMode", 1)
         autoit.opt("SendKeyDelay", 0)
-        if login.find("sa_dks") != -1:
+        if login.find("sa") != -1:
             domain = "Lan"
         else:
             domain = "Lanit"

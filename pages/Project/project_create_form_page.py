@@ -76,13 +76,13 @@ class ProjectFormCreate(BasePage):
         if len(user_data_dict["vendors"]) > 0:
             self.browser.find_element(*FormCreateProjectLocators.SEARCH_VENDORS_BUTTON).click()
             time.sleep(2)
-            self.select_elements_in_frame(user_data_dict["vendors"], 3)
+            self.select_elements_in_frame(user_data_dict["vendors"], 6)
 
         # Выбираем значение в поле "Теги"
         if len(user_data_dict["tags"]) > 0:
             self.browser.find_element(*FormCreateProjectLocators.SEARCH_TAGS_BUTTON).click()
             time.sleep(2)
-            self.select_elements_in_frame(user_data_dict["tags"], 1)
+            self.select_elements_in_frame(user_data_dict["tags"], 2)
 
         # Ищем поле "Менеджеры проекта *" и заполняем его
         for manager in user_data_dict["salesManager"]:
@@ -113,7 +113,7 @@ class ProjectFormCreate(BasePage):
         # Выбираем значение в поле "Ключевые технологии"
         self.browser.find_element(*FormCreateProjectLocators.SEARCH_TECHNOLOGIES_ELEMENT).click()
         time.sleep(2)
-        self.select_elements_in_frame(user_data_dict["technologies"], 1)
+        self.select_elements_in_frame(user_data_dict["technologies"], 5)
 
         # Ищем поле "Категория" и выбираем значение
         Select(self.browser.find_element(*FormCreateProjectLocators.PROJECT_CATEGORY_ELEMENT)).select_by_value(

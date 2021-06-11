@@ -81,7 +81,7 @@ UnitSale\Seller2
 # До первой ошибки --maxfail=1
 # Браузер для запуска --browser_name=firefox
 @pytest.mark.parametrize('path_data_file', [
-    r"TPAC\3_UnitSale\Seller\1_[Atest_Seller] PA+ZP+DK,Tender, categoryA, softwareDev, UnitSale.json"
+    r"PPAC\3_UnitSale\Seller\1_[Atest_Seller] PA+ZP+DK,Tender, categoryA, softwareDev, UnitSale.json"
 ])
 class TestUnitSaleFullBusinessCyclePaZpDk:
 

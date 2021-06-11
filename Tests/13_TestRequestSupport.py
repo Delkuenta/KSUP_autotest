@@ -9,7 +9,7 @@ from pages.login_data import LoginData
 # Браузер для запуска --browser_name=firefox
 
 
-@pytest.mark.parametrize('path_data_file', [r"TPAC\13_Request_support\1_[Atest_Seller] ReqSupport.json"])
+@pytest.mark.parametrize('path_data_file', [r"PPAC\13_Request_support\1_[Atest_Seller] ReqSupport.json"])
 class TestUnitSaleFullBusinessCyclePaZpDk:
     def test_create_reqsupport(self, browser_function, path_data_file):
         user_data_dict = BasePage.read_file_json(browser_function, path_data_file)

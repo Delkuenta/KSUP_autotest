@@ -15,8 +15,9 @@ from userdata.user_data import UserData
 """
 # До первой ошибки --maxfail=1
 @pytest.mark.parametrize('path_data_file', [
-    r"TPAC\7_RejectApproval\1_[Atest_Seller2] Reject ZP,Tender, categoryA, softwareDev, UnitSale.json"])
+    r"PPAC\7_RejectApproval\1_[Atest_Seller2] Reject ZP,Tender, categoryA, softwareDev, UnitSale.json"])
 class TestRejectStepBackZakup:
+
 
     def test_create_presale(self, browser_function, path_data_file):
         user_data_dict = BasePage.read_file_json(browser_function, path_data_file)
@@ -737,9 +738,9 @@ class TestRejectStepBackZakup:
 
 
 @pytest.mark.parametrize('path_data_file', [
-    r"PPAC\7_RejectApproval\2_[Atest_Dir] Reject ZP,Tender, categoryA, softwareDev, UnitSale.json"])
+    r"TPAC\7_RejectApproval\2_[Atest_Dir] Reject ZP,Tender, categoryA, softwareDev, UnitSale.json"])
 class TestRejectCurrentStepAndEscalationZakup:
-
+    """
     def test_create_presale(self, browser_function, path_data_file):
         user_data_dict = BasePage.read_file_json(browser_function, path_data_file)
         user_data_dict = BasePage.dict_preparation(browser_function, user_data_dict)
@@ -757,7 +758,7 @@ class TestRejectCurrentStepAndEscalationZakup:
         create_presale_page.form_create_presale_all_type(user_data_dict)
         presale_list_page.should_be_element_on_presale_list(user_data_dict)
         login_page.logout()
-
+    """
     def test_create_zakup_based_on_presale(self, browser_function, path_data_file):
         user_data_dict = BasePage.read_file_json(browser_function, path_data_file)
         user_data_dict = BasePage.dict_preparation(browser_function, user_data_dict)

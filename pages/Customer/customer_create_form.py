@@ -61,7 +61,8 @@ class CustomerFormCreate(BasePage):
         Select(self.browser.find_element(*FormCreateCustomerLocators.INTERACTION_STATUS_FIELD)).select_by_value(
             user_data_dict["interactionStatus"])
 
-        if user_data_dict["createAccount"] != "Mr_KSUP_Admin":
+        # user_data_dict["createAccount"] != "Mr_KSUP_Admin"
+        if "Admin" not in user_data_dict["createAccount"]:
             # Проверяем отображение поля "Дирекция, ответственная за взаимодействие"
             delayed_assert.expect(
                 self.browser.find_element(*FormCreateCustomerLocators.DIRECTION_ELEMENT).is_displayed() is False,

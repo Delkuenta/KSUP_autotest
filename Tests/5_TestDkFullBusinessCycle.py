@@ -28,7 +28,7 @@ UnitSale\Seller2
 
 # До первой ошибки --maxfail=1
 @pytest.mark.parametrize('path_data_file', [
-    r"TPAC\3_UnitSale\Dir\19_[Atest_Dir] DK, categoryA, softwareDev.json"
+    r"PPAC\3_UnitSale\Dir\19_[Atest_Dir] DK, categoryA, softwareDev.json"
 
 ])
 class TestDkFullBusinessCycle:

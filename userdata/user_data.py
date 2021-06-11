@@ -16,6 +16,7 @@ class UserData:
                     r"Mr_KSUP_Admin": "AsdGhj-2038-dAm",
                     r"Mr_KSUP_LegalDir": "D7udLkntip{!}8tav",
                     r"sa_dks_ksup_audit": "zTpILFRgPyVFP{!}e",
+                    r"sa_KSUP_Admin": "erNui-72004ixghi",
                     r"Mr_KSUP_Res": "AsdGhj-5681-Rse"}
 
     # Группа файлов и их путей для прикрепления
